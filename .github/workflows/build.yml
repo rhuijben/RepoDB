@@ -54,13 +54,13 @@ jobs:
             8.0.x
 
       - name: build
-        run: dotnet build -c release RepoDb.Core/RepoDb.All.sln
+        run: dotnet build -c release
         
       - name: test for .Net 8.0
-        run: dotnet test -c release -f net8.0 --no-build -p:TestingPlatformShowTestsFailure=true -p:TestingPlatformCaptureOutput=false RepoDb.Core/RepoDb.All.sln
+        run: dotnet test -c release -f net8.0 --no-build -p:TestingPlatformShowTestsFailure=true -p:TestingPlatformCaptureOutput=false
 
       - name: pack packages
-        run: dotnet pack -c release -p Version="1.14.0-dev-${{ github.run_number }}" -o release RepoDb.Core/RepoDb.All.sln
+        run: dotnet pack -c release -p Version="1.14.0-dev-${{ github.run_number }}" -o release
 
       - name: Package nupkg files
         uses: actions/upload-artifact@v3
