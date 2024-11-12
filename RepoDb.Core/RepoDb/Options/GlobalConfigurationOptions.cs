@@ -1,6 +1,6 @@
-﻿using RepoDb.Enumerations;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
+using RepoDb.Enumerations;
 
 namespace RepoDb.Options
 {
@@ -12,7 +12,7 @@ namespace RepoDb.Options
         /// <summary>
         /// Gets or sets the value that defines the conversion logic when converting an instance of <see cref="DbDataReader"/> into a .NET CLR class.
         /// </summary>
-        public ConversionType ConversionType { get; set; } = ConversionType.Default;
+        public ConversionType ConversionType { get; set; } = ConversionType.Automatic;
 
         /// <summary>
         /// Gets or sets the default value of the batch operation size. The value defines on this property mainly affects the batch size of the InsertAll, MergeAll and UpdateAll operations.
