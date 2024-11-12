@@ -12,7 +12,12 @@ namespace RepoDb.Options
         /// <summary>
         /// Gets or sets the value that defines the conversion logic when converting an instance of <see cref="DbDataReader"/> into a .NET CLR class.
         /// </summary>
-        public ConversionType ConversionType { get; set; } = ConversionType.Automatic;
+        public ConversionType ConversionType { get; set; } = ConversionType.Default;
+
+        /// <summary>
+        /// Gets or sets the handling of invalid enum values when converting an instance of <see cref="DbDataReader"/> into .NET enum values
+        /// </summary>
+        public EnumHandling EnumHandling { get; set; } = EnumHandling.ThrowError;
 
         /// <summary>
         /// Gets or sets the default value of the batch operation size. The value defines on this property mainly affects the batch size of the InsertAll, MergeAll and UpdateAll operations.

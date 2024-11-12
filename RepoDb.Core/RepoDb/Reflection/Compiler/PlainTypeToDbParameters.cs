@@ -83,12 +83,7 @@ namespace RepoDb.Reflection
 
                     // DbType
                     var dbType = (DbType?)null;
-                    if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic && dbField?.Type != null)
-                    {
-                        valueExpression = ConvertExpressionWithAutomaticConversion(valueExpression, dbField.TypeNullable());
-                        dbType = default;
-                    }
-                    else if (valueType.IsEnum)
+                    if (valueType.IsEnum)
                     {
                         /*
                          * Note: The other data provider can coerce the Enum into its destination data type in the DB by default,
@@ -101,17 +96,16 @@ namespace RepoDb.Reflection
                                 valueType.GetDbType() ??
                                 (dbField != null ? new ClientTypeToDbTypeResolver().Resolve(dbField.Type) : null) ??
                                 (DbType?)GlobalConfiguration.Options.EnumDefaultDatabaseType;
-
-                            if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic)
-                            {
-                                var toType = dbType.HasValue ? new DbTypeToClientTypeResolver().Resolve(dbType.Value) : TypeCache.Get(valueType)?.GetUnderlyingType();
-                                valueExpression = ConvertEnumExpressionToTypeExpression(valueExpression, toType);
-                            }
                         }
                         else
                         {
                             dbType = default;
                         }
+                    }
+                    else if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic && dbField?.Type != null)
+                    {
+                        valueExpression = ConvertExpressionWithAutomaticConversion(valueExpression, dbField.TypeNullable());
+                        dbType = default;
                     }
                     else
                     {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
@@ -523,13 +524,6 @@ namespace RepoDb.Reflection
         ///
         /// </summary>
         /// <returns></returns>
-        internal static MethodInfo GetEnumParseMethod() =>
-            StaticType.Enum.GetMethod("Parse", new[] { StaticType.Type, StaticType.String, StaticType.Boolean });
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
         internal static MethodInfo GetEnumGetNameMethod() =>
             StaticType.Enum.GetMethod("GetName", new[] { StaticType.Type, StaticType.Object });
 
@@ -539,6 +533,29 @@ namespace RepoDb.Reflection
         /// <returns></returns>
         internal static MethodInfo GetEnumIsDefinedMethod() =>
             StaticType.Enum.GetMethod("IsDefined", new[] { StaticType.Type, StaticType.Object });
+
+
+        internal static MethodInfo GetEnumParseNullMethod() =>
+            typeof(Compiler).GetMethod(nameof(EnumParseNull), BindingFlags.Static | BindingFlags.NonPublic);
+
+        private static TEnum? EnumParseNull<TEnum>(string value) where TEnum : struct, System.Enum
+        {
+            if (Enum.TryParse<TEnum>(value, true, out var r))
+                return r;
+            else
+                return null;
+        }
+
+        internal static MethodInfo GetEnumParseNullDefinedMethod() =>
+            typeof(Compiler).GetMethod(nameof(EnumParseNullDefined), BindingFlags.Static | BindingFlags.NonPublic);
+
+        private static TEnum? EnumParseNullDefined<TEnum>(string value) where TEnum : struct, System.Enum
+        {
+            if (Enum.TryParse<TEnum>(value, true, out var r) && Enum.IsDefined(typeof(TEnum), r))
+                return r;
+            else
+                return null;
+        }
 
         /// <summary>
         ///
@@ -794,20 +811,21 @@ namespace RepoDb.Reflection
         internal static Expression ConvertExpressionToEnumExpressionForString(Expression expression,
             Type toEnumType)
         {
-            var trueExpression = GetEnumParseExpression(expression, toEnumType, true);
+            var checkMethod = (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || GlobalConfiguration.Options.EnumHandling == EnumHandling.Cast || toEnumType.GetCustomAttribute<FlagsAttribute>() != null)
+                ? GetEnumParseNullMethod()
+                : GetEnumParseNullDefinedMethod();
 
-            if (GlobalConfiguration.Options.ConversionType == ConversionType.Default)
-            {
-                // If the value is not defined, a defined value is explicitly used
-                var isDefinedExpression = GetEnumIsDefinedExpression(expression, toEnumType);
-                var falseExpression = ConvertExpressionToTypeExpression(Expression.Default(toEnumType), StaticType.Object);
-                return Expression.Condition(isDefinedExpression, trueExpression, falseExpression);
-            }
-            else
-            {
-                // The value is used anyway
-                return trueExpression;
-            }
+            return Expression.Coalesce(
+                        Expression.Call(checkMethod.MakeGenericMethod(toEnumType), expression),
+
+                        (GlobalConfiguration.Options.EnumHandling == EnumHandling.UseDefault)
+                        ? Expression.Default(toEnumType)
+                        : Expression.Throw(Expression.New(
+                            typeof(ArgumentOutOfRangeException).GetConstructor(new[] { StaticType.String, StaticType.Object, StaticType.String }),
+                            Expression.Constant("value"),
+                            expression,
+                            Expression.Constant($"Invalid value for {toEnumType.Name}")),
+                            toEnumType));
         }
 
         /// <summary>
@@ -819,7 +837,7 @@ namespace RepoDb.Reflection
         internal static Expression ConvertExpressionToEnumExpressionForNonString(Expression expression,
             Type toEnumType)
         {
-            if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic)
+            if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || GlobalConfiguration.Options.EnumHandling == EnumHandling.Cast)
             {
                 return Expression.Convert(expression, toEnumType);
             }
@@ -829,8 +847,18 @@ namespace RepoDb.Reflection
                 if (expression.Type != Enum.GetUnderlyingType(toEnumType))
                     expression = Expression.Convert(expression, Enum.GetUnderlyingType(toEnumType));
 
-                return ConvertExpressionToEnumExpressionForString(
-                    GetEnumGetNameExpression(expression, toEnumType), toEnumType);
+                return Expression.Condition(
+                    GetEnumIsDefinedExpression(expression, toEnumType), // Check if the value is defined
+                    Expression.Convert(expression, toEnumType), // Cast to enum
+                    GlobalConfiguration.Options.EnumHandling switch
+                    {
+                        EnumHandling.UseDefault => Expression.Default(toEnumType),
+                        EnumHandling.ThrowError => Expression.Throw(Expression.New(typeof(InvalidEnumArgumentException).GetConstructor(new[] { StaticType.String, StaticType.Int32, StaticType.Type }),
+                                                                    new Expression[] { Expression.Constant("value"), Expression.Convert(expression, StaticType.Int32), Expression.Constant(toEnumType) }),
+                            toEnumType
+                        ),
+                        _ => throw new InvalidEnumArgumentException("EnumHandling set to invalid value")
+                    }); // Default value for undefined
             }
         }
 
@@ -1192,26 +1220,6 @@ namespace RepoDb.Reflection
         #endregion
 
         #region Common
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="enumType"></param>
-        /// <param name="ignoreCase"></param>
-        /// <returns></returns>
-        internal static Expression GetEnumParseExpression(Expression expression,
-            Type enumType,
-            bool ignoreCase)
-        {
-            var parameters = new Expression[]
-            {
-                Expression.Constant(enumType),
-                expression,
-                Expression.Constant(ignoreCase)
-            };
-            return Expression.Call(GetEnumParseMethod(), parameters);
-        }
 
         /// <summary>
         ///
