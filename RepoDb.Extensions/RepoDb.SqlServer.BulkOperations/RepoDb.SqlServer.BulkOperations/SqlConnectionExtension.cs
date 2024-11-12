@@ -1,8 +1,4 @@
-﻿using RepoDb.Exceptions;
-using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using RepoDb.SqlServer.BulkOperations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -12,6 +8,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using RepoDb.Exceptions;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
+using RepoDb.SqlServer.BulkOperations;
 
 namespace RepoDb
 {
@@ -606,6 +606,7 @@ namespace RepoDb
         /// <param name="hints"></param>
         /// <param name="dbSetting"></param>
         /// <param name="isReturnIdentity"></param>
+        /// <param name="keepIdentity"></param>
         /// <returns></returns>
         private static string GetBulkInsertSqlText(string tableName,
             string tempTableName,
