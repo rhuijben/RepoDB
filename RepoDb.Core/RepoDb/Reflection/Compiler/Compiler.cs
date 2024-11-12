@@ -561,6 +561,7 @@ namespace RepoDb.Reflection
         ///
         /// </summary>
         /// <param name="expression"></param>
+        /// 
         /// <returns></returns>
         internal static Expression ConvertExpressionToNullableValue(Expression expression)
         {
@@ -1709,7 +1710,21 @@ namespace RepoDb.Reflection
             {
                 try
                 {
+                    var origExpression = expression;
                     expression = ConvertExpressionWithAutomaticConversion(expression, targetType);
+
+                    if (dbField?.IsIdentity == true
+                        && targetType.IsValueType && TypeCache.Get(targetType).GetUnderlyingType() == targetType
+                        && TypeCache.Get(origExpression.Type).GetUnderlyingType() != origExpression.Type)
+                    {
+                        var nullableType = typeof(Nullable<>).MakeGenericType(expression.Type);
+
+                        // Don't set '0' in the identity output property
+                        expression = Expression.Condition(
+                            Expression.Property(origExpression, nameof(Nullable<int>.HasValue)),
+                            Expression.Convert(expression, nullableType),
+                            Expression.Constant(null, nullableType));
+                    }
                 }
                 catch (Exception ex)
                 {
