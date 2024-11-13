@@ -31,9 +31,9 @@ namespace RepoDb
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -81,9 +81,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             object where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -132,9 +132,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             Expression<Func<TEntity, bool>> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
 
@@ -182,11 +182,11 @@ namespace RepoDb
             int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryField where = null,
+            QueryField? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -235,9 +235,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             IEnumerable<QueryField> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -284,11 +284,11 @@ namespace RepoDb
             int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryGroup where = null,
+            QueryGroup? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -333,9 +333,9 @@ namespace RepoDb
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -380,9 +380,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             IEnumerable<Field> fields = null,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -428,9 +428,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             Expression<Func<TEntity, bool>> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -474,11 +474,11 @@ namespace RepoDb
         public IEnumerable<TEntity> BatchQuery<TEntity>(int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryField where = null,
+            QueryField? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -524,9 +524,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             IEnumerable<QueryField> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -570,11 +570,11 @@ namespace RepoDb
         public IEnumerable<TEntity> BatchQuery<TEntity>(int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryGroup where = null,
+            QueryGroup? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -624,9 +624,9 @@ namespace RepoDb
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -677,9 +677,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             object where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -731,9 +731,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             Expression<Func<TEntity, bool>> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -784,11 +784,11 @@ namespace RepoDb
             int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryField where = null,
+            QueryField? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -840,9 +840,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             IEnumerable<QueryField> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -890,9 +890,9 @@ namespace RepoDb
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -940,9 +940,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             object where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -992,9 +992,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             Expression<Func<TEntity, bool>> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1042,11 +1042,11 @@ namespace RepoDb
         public async Task<IEnumerable<TEntity>> BatchQueryAsync<TEntity>(int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryField where = null,
+            QueryField? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1096,9 +1096,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             IEnumerable<QueryField> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1146,11 +1146,11 @@ namespace RepoDb
         public async Task<IEnumerable<TEntity>> BatchQueryAsync<TEntity>(int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryGroup where = null,
+            QueryGroup? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1202,9 +1202,9 @@ namespace RepoDb
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1250,9 +1250,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             object where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1297,11 +1297,11 @@ namespace RepoDb
             int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryField where = null,
+            QueryField? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1348,9 +1348,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             IEnumerable<QueryField> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1395,11 +1395,11 @@ namespace RepoDb
             int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryGroup where = null,
+            QueryGroup? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1449,9 +1449,9 @@ namespace RepoDb
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -1500,9 +1500,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             object where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -1551,11 +1551,11 @@ namespace RepoDb
             int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryField where = null,
+            QueryField? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -1606,9 +1606,9 @@ namespace RepoDb
             IEnumerable<OrderField> orderBy,
             IEnumerable<QueryField> where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -1657,11 +1657,11 @@ namespace RepoDb
             int page,
             int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
-            QueryGroup where = null,
+            QueryGroup? where = null,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.BatchQuery,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection

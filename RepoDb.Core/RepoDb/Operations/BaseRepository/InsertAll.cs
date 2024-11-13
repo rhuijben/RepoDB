@@ -23,9 +23,9 @@ namespace RepoDb
         public int InsertAll(IEnumerable<TEntity> entities,
             int batchSize = Constant.DefaultBatchOperationSize,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.InsertAll,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.InsertAll<TEntity>(entities: entities,
                 batchSize: batchSize,
@@ -53,9 +53,9 @@ namespace RepoDb
         public Task<int> InsertAllAsync(IEnumerable<TEntity> entities,
             int batchSize = Constant.DefaultBatchOperationSize,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.InsertAll,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.InsertAllAsync<TEntity>(entities: entities,

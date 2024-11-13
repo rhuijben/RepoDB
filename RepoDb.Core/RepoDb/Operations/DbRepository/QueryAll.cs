@@ -27,10 +27,10 @@ namespace RepoDb
         public IEnumerable<TEntity> QueryAll<TEntity>(string tableName,
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
-            string hints = null,
-			string cacheKey = null,
+            string? hints = null,
+			string? cacheKey = null,
 			string traceKey = TraceKeys.QueryAll,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -72,10 +72,10 @@ namespace RepoDb
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> QueryAll<TEntity>(IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
-            string hints = null,
-			string cacheKey = null,
+            string? hints = null,
+			string? cacheKey = null,
 			string traceKey = TraceKeys.QueryAll,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -123,10 +123,10 @@ namespace RepoDb
         public async Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(string tableName,
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
-            string hints = null,
-			string cacheKey = null,
+            string? hints = null,
+			string? cacheKey = null,
 			string traceKey = TraceKeys.QueryAll,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -171,10 +171,10 @@ namespace RepoDb
         /// <returns>An enumerable list of data entity objects.</returns>
         public async Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
-            string hints = null,
-			string cacheKey = null,
+            string? hints = null,
+			string? cacheKey = null,
 			string traceKey = TraceKeys.QueryAll,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -222,10 +222,10 @@ namespace RepoDb
         public IEnumerable<dynamic> QueryAll(string tableName,
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
-            string hints = null,
-			string cacheKey = null,
+            string? hints = null,
+			string? cacheKey = null,
 			string traceKey = TraceKeys.QueryAll,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -272,10 +272,10 @@ namespace RepoDb
         public async Task<IEnumerable<dynamic>> QueryAllAsync(string tableName,
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
-            string hints = null,
-			string cacheKey = null,
+            string? hints = null,
+			string? cacheKey = null,
 			string traceKey = TraceKeys.QueryAll,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection

@@ -28,10 +28,10 @@ namespace RepoDb.Requests
             IDbConnection connection,
             IDbTransaction transaction,
             IEnumerable<Field> fields = null,
-            IEnumerable<Field> qualifiers = null,
+            IEnumerable<Field>? qualifiers = null,
             int batchSize = Constant.DefaultBatchOperationSize,
-            string hints = null,
-            IStatementBuilder statementBuilder = null)
+            string? hints = null,
+            IStatementBuilder? statementBuilder = null)
             : this(ClassMappedNameCache.Get(type),
                 connection,
                 transaction,
@@ -59,10 +59,10 @@ namespace RepoDb.Requests
             IDbConnection connection,
             IDbTransaction transaction,
             IEnumerable<Field> fields = null,
-            IEnumerable<Field> qualifiers = null,
+            IEnumerable<Field>? qualifiers = null,
             int batchSize = Constant.DefaultBatchOperationSize,
-            string hints = null,
-            IStatementBuilder statementBuilder = null)
+            string? hints = null,
+            IStatementBuilder? statementBuilder = null)
             : base(name,
                 connection,
                 transaction,
