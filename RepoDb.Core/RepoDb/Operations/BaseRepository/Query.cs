@@ -29,10 +29,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(tableName: tableName,
                 what: what,
@@ -64,10 +64,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity, TWhat>(tableName: tableName,
                 what: what,
@@ -98,10 +98,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(tableName: tableName,
                 where: where,
@@ -132,10 +132,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(tableName: tableName,
                 where: where,
@@ -166,10 +166,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(tableName: tableName,
                 where: where,
@@ -200,10 +200,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(tableName: tableName,
                 where: where,
@@ -232,10 +232,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(what: what,
                 fields: fields,
@@ -264,10 +264,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity, TWhat>(what: what,
                 fields: fields,
@@ -295,10 +295,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(where: where,
                 fields: fields,
@@ -326,10 +326,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(where: where,
                 fields: fields,
@@ -357,10 +357,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(where: where,
                 fields: fields,
@@ -388,10 +388,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Query<TEntity>(where: where,
                 fields: fields,
@@ -426,10 +426,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(tableName: tableName,
@@ -464,10 +464,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity, TWhat>(tableName: tableName,
@@ -501,10 +501,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(tableName: tableName,
@@ -538,10 +538,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(tableName: tableName,
@@ -575,10 +575,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(tableName: tableName,
@@ -612,10 +612,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(tableName: tableName,
@@ -647,10 +647,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(what: what,
@@ -682,10 +682,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity, TWhat>(what: what,
@@ -716,10 +716,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(where: where,
@@ -750,10 +750,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(where: where,
@@ -784,10 +784,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(where: where,
@@ -818,10 +818,10 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             IEnumerable<OrderField> orderBy = null,
             int? top = 0,
-            string hints = null,
-            string cacheKey = null,
+            string? hints = null,
+            string? cacheKey = null,
             string traceKey = TraceKeys.Query,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.QueryAsync<TEntity>(where: where,

@@ -19,9 +19,9 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The min value of the target field.</returns>
         public object MinAll(Field field,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.MinAll,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.MinAll<TEntity>(field: field,
                 hints: hints,
@@ -38,9 +38,9 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The min value of the target field.</returns>
         public object MinAll(Expression<Func<TEntity, object>> field,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.MinAll,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.MinAll<TEntity>(field: field,
                 hints: hints,
@@ -58,9 +58,9 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The min value of the target field.</returns>
         public TResult MinAll<TResult>(Field field,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.MinAll,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.MinAll<TEntity, TResult>(field: field,
                 hints: hints,
@@ -78,9 +78,9 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The min value of the target field.</returns>
         public TResult MinAll<TResult>(Expression<Func<TEntity, TResult>> field,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.MinAll,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.MinAll<TEntity, TResult>(field: field,
                 hints: hints,
@@ -102,9 +102,9 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The min value of the target field.</returns>
         public Task<object> MinAllAsync(Field field,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.MinAll,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MinAllAsync<TEntity>(field: field,
@@ -124,9 +124,9 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The min value of the target field.</returns>
         public Task<object> MinAllAsync(Expression<Func<TEntity, object>> field,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.MinAll,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MinAllAsync<TEntity>(field: field,
@@ -147,9 +147,9 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The min value of the target field.</returns>
         public Task<TResult> MinAllAsync<TResult>(Field field,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.MinAll,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MinAllAsync<TEntity, TResult>(field: field,
@@ -170,9 +170,9 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The min value of the target field.</returns>
         public Task<TResult> MinAllAsync<TResult>(Expression<Func<TEntity, TResult>> field,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.MinAll,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MinAllAsync<TEntity, TResult>(field: field,

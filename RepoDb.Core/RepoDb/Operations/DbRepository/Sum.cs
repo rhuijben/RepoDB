@@ -25,9 +25,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -64,9 +64,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Field field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -102,10 +102,10 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -142,9 +142,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -180,10 +180,10 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -220,9 +220,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Expression<Func<TEntity, object>> field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -259,9 +259,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Expression<Func<TEntity, object>> field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -297,10 +297,10 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Expression<Func<TEntity, object>> field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -337,9 +337,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Expression<Func<TEntity, object>> field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -375,10 +375,10 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public object Sum<TEntity>(Expression<Func<TEntity, object>> field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -416,9 +416,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -456,9 +456,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Field field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -495,10 +495,10 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -536,9 +536,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -575,10 +575,10 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -616,9 +616,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -656,9 +656,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -695,10 +695,10 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -736,9 +736,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -775,10 +775,10 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
             where TEntity : class
         {
             // Create a connection
@@ -820,9 +820,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -862,9 +862,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Field field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -903,10 +903,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -946,9 +946,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -987,10 +987,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1030,9 +1030,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Expression<Func<TEntity, object>> field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1072,9 +1072,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Expression<Func<TEntity, object>> field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1113,10 +1113,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Expression<Func<TEntity, object>> field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1156,9 +1156,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Expression<Func<TEntity, object>> field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1197,10 +1197,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync<TEntity>(Expression<Func<TEntity, object>> field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1241,9 +1241,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1284,9 +1284,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Field field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1326,10 +1326,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1370,9 +1370,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1412,10 +1412,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1456,9 +1456,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1499,9 +1499,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1541,10 +1541,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1585,9 +1585,9 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1627,10 +1627,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
         {
@@ -1674,9 +1674,9 @@ namespace RepoDb
         public object Sum(string tableName,
             Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1713,10 +1713,10 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public object Sum(string tableName,
             Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1754,9 +1754,9 @@ namespace RepoDb
         public object Sum(string tableName,
             Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1793,10 +1793,10 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public object Sum(string tableName,
             Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1835,9 +1835,9 @@ namespace RepoDb
         public TResult Sum<TResult>(string tableName,
             Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1875,10 +1875,10 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TResult>(string tableName,
             Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1917,9 +1917,9 @@ namespace RepoDb
         public TResult Sum<TResult>(string tableName,
             Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -1957,10 +1957,10 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public TResult Sum<TResult>(string tableName,
             Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -2003,9 +2003,9 @@ namespace RepoDb
         public async Task<object> SumAsync(string tableName,
             Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -2045,10 +2045,10 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync(string tableName,
             Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -2089,9 +2089,9 @@ namespace RepoDb
         public async Task<object> SumAsync(string tableName,
             Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -2131,10 +2131,10 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<object> SumAsync(string tableName,
             Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -2176,9 +2176,9 @@ namespace RepoDb
         public async Task<TResult> SumAsync<TResult>(string tableName,
             Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -2219,10 +2219,10 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TResult>(string tableName,
             Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -2264,9 +2264,9 @@ namespace RepoDb
         public async Task<TResult> SumAsync<TResult>(string tableName,
             Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -2307,10 +2307,10 @@ namespace RepoDb
         /// <returns>The sum value of the target field.</returns>
         public async Task<TResult> SumAsync<TResult>(string tableName,
             Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
 			string traceKey = TraceKeys.Sum,
-            IDbTransaction transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection

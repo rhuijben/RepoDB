@@ -22,9 +22,9 @@ namespace RepoDb
         /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
         public object Merge(TEntity entity,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Merge<TEntity>(entity: entity,
                 fields: fields,
@@ -46,9 +46,9 @@ namespace RepoDb
         public object Merge(TEntity entity,
             Field qualifier,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Merge<TEntity>(entity: entity,
                 qualifier: qualifier,
@@ -71,9 +71,9 @@ namespace RepoDb
         public object Merge(TEntity entity,
             IEnumerable<Field> qualifiers,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Merge<TEntity>(entity: entity,
                 qualifiers: qualifiers,
@@ -96,9 +96,9 @@ namespace RepoDb
         public object Merge(TEntity entity,
             Expression<Func<TEntity, object>> qualifiers,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Merge<TEntity>(entity: entity,
                 qualifiers: qualifiers,
@@ -120,9 +120,9 @@ namespace RepoDb
         /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
         public TResult Merge<TResult>(TEntity entity,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Merge<TEntity, TResult>(entity: entity,
                 fields: fields,
@@ -145,9 +145,9 @@ namespace RepoDb
         public TResult Merge<TResult>(TEntity entity,
             Field qualifier,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Merge<TEntity, TResult>(entity: entity,
                 qualifier: qualifier,
@@ -171,9 +171,9 @@ namespace RepoDb
         public TResult Merge<TResult>(TEntity entity,
             IEnumerable<Field> qualifiers,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Merge<TEntity, TResult>(entity: entity,
                 qualifiers: qualifiers,
@@ -197,9 +197,9 @@ namespace RepoDb
         public TResult Merge<TResult>(TEntity entity,
             Expression<Func<TEntity, object>> qualifiers,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Merge<TEntity, TResult>(entity: entity,
                 qualifiers: qualifiers,
@@ -225,9 +225,9 @@ namespace RepoDb
         /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
         public Task<object> MergeAsync(TEntity entity,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MergeAsync<TEntity>(entity: entity,
@@ -252,9 +252,9 @@ namespace RepoDb
         public Task<object> MergeAsync(TEntity entity,
             Field qualifier,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MergeAsync<TEntity>(entity: entity,
@@ -280,9 +280,9 @@ namespace RepoDb
         public Task<object> MergeAsync(TEntity entity,
             IEnumerable<Field> qualifiers,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MergeAsync<TEntity>(entity: entity,
@@ -308,9 +308,9 @@ namespace RepoDb
         public Task<object> MergeAsync(TEntity entity,
             Expression<Func<TEntity, object>> qualifiers,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MergeAsync<TEntity>(entity: entity,
@@ -335,9 +335,9 @@ namespace RepoDb
         /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
         public Task<TResult> MergeAsync<TResult>(TEntity entity,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MergeAsync<TEntity, TResult>(entity: entity,
@@ -363,9 +363,9 @@ namespace RepoDb
         public Task<TResult> MergeAsync<TResult>(TEntity entity,
             Field qualifier,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MergeAsync<TEntity, TResult>(entity: entity,
@@ -392,9 +392,9 @@ namespace RepoDb
         public Task<TResult> MergeAsync<TResult>(TEntity entity,
             IEnumerable<Field> qualifiers,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MergeAsync<TEntity, TResult>(entity: entity,
@@ -421,9 +421,9 @@ namespace RepoDb
         public Task<TResult> MergeAsync<TResult>(TEntity entity,
             Expression<Func<TEntity, object>> qualifiers,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Merge,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.MergeAsync<TEntity, TResult>(entity: entity,

@@ -22,9 +22,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public object Average(Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -44,9 +44,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public object Average(Field field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -65,10 +65,10 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public object Average(Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -88,9 +88,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public object Average(Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -109,10 +109,10 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public object Average(Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -132,9 +132,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public object Average(Expression<Func<TEntity, object>> field,
             object where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -154,9 +154,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public object Average(Expression<Func<TEntity, object>> field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -175,10 +175,10 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public object Average(Expression<Func<TEntity, object>> field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -198,9 +198,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public object Average(Expression<Func<TEntity, object>> field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -219,10 +219,10 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public object Average(Expression<Func<TEntity, object>> field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity>(field: field,
                 where: where,
@@ -242,9 +242,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -264,9 +264,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Field field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -285,10 +285,10 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -308,9 +308,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -329,10 +329,10 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -352,9 +352,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Expression<Func<TEntity, TResult>> field,
             object where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -374,9 +374,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Expression<Func<TEntity, TResult>> field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -395,10 +395,10 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Expression<Func<TEntity, TResult>> field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -418,9 +418,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Expression<Func<TEntity, TResult>> field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -439,10 +439,10 @@ namespace RepoDb
 		/// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public TResult Average<TResult>(Expression<Func<TEntity, TResult>> field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Average<TEntity, TResult>(field: field,
                 where: where,
@@ -467,9 +467,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -492,9 +492,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Field field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -516,10 +516,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -542,9 +542,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -566,10 +566,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -592,9 +592,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Expression<Func<TEntity, object>> field,
             object where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -617,9 +617,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Expression<Func<TEntity, object>> field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -641,10 +641,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Expression<Func<TEntity, object>> field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -667,9 +667,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Expression<Func<TEntity, object>> field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -691,10 +691,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public Task<object> AverageAsync(Expression<Func<TEntity, object>> field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity>(field: field,
@@ -717,9 +717,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Field field,
             object where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -742,9 +742,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Field field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -766,10 +766,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Field field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -792,9 +792,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Field field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -816,10 +816,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Field field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -842,9 +842,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Expression<Func<TEntity, TResult>> field,
             object where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -867,9 +867,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Expression<Func<TEntity, TResult>> field,
             Expression<Func<TEntity, bool>> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -891,10 +891,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Expression<Func<TEntity, TResult>> field,
-            QueryField where = null,
-            string hints = null,
+            QueryField? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -917,9 +917,9 @@ namespace RepoDb
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Expression<Func<TEntity, TResult>> field,
             IEnumerable<QueryField> where = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,
@@ -941,10 +941,10 @@ namespace RepoDb
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public Task<TResult> AverageAsync<TResult>(Expression<Func<TEntity, TResult>> field,
-            QueryGroup where = null,
-            string hints = null,
+            QueryGroup? where = null,
+            string? hints = null,
             string traceKey = TraceKeys.Average,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.AverageAsync<TEntity, TResult>(field: field,

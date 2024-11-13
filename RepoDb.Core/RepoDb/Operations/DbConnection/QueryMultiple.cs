@@ -64,10 +64,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -135,10 +135,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -206,10 +206,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -277,10 +277,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -348,10 +348,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -419,10 +419,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -509,10 +509,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -600,10 +600,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -691,10 +691,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -782,10 +782,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -873,10 +873,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -964,10 +964,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1076,10 +1076,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1188,10 +1188,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1300,10 +1300,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1412,10 +1412,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1524,10 +1524,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1636,10 +1636,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1769,10 +1769,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1901,10 +1901,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2033,10 +2033,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2165,10 +2165,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2297,10 +2297,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2429,10 +2429,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2583,10 +2583,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2735,10 +2735,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2887,10 +2887,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3039,10 +3039,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3191,10 +3191,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3343,10 +3343,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3518,10 +3518,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3690,10 +3690,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3862,10 +3862,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -4034,10 +4034,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -4206,10 +4206,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -4378,10 +4378,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -4500,10 +4500,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4574,10 +4574,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4648,10 +4648,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4722,10 +4722,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4796,10 +4796,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4870,10 +4870,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4963,10 +4963,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5057,10 +5057,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5151,10 +5151,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5245,10 +5245,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5339,10 +5339,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5433,10 +5433,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5548,10 +5548,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5663,10 +5663,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5778,10 +5778,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5893,10 +5893,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6008,10 +6008,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6123,10 +6123,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6259,10 +6259,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6394,10 +6394,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6529,10 +6529,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6664,10 +6664,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6799,10 +6799,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6934,10 +6934,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7091,10 +7091,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7246,10 +7246,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7401,10 +7401,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7556,10 +7556,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7711,10 +7711,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7866,10 +7866,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -8044,10 +8044,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -8219,10 +8219,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -8394,10 +8394,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -8569,10 +8569,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -8744,10 +8744,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -8919,10 +8919,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -9048,10 +9048,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -9125,10 +9125,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -9202,10 +9202,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -9279,10 +9279,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -9356,10 +9356,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -9433,10 +9433,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
         {
@@ -9498,7 +9498,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -9627,10 +9627,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9727,10 +9727,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9827,10 +9827,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9927,10 +9927,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10027,10 +10027,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10127,10 +10127,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10215,7 +10215,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -10372,10 +10372,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10496,10 +10496,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10620,10 +10620,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10744,10 +10744,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10868,10 +10868,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10992,10 +10992,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -11103,7 +11103,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -11286,10 +11286,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -11433,10 +11433,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -11580,10 +11580,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -11727,10 +11727,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -11874,10 +11874,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -12021,10 +12021,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -12155,7 +12155,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -12364,10 +12364,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -12534,10 +12534,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -12704,10 +12704,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -12874,10 +12874,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -13044,10 +13044,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -13214,10 +13214,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -13371,7 +13371,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -13606,10 +13606,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -13799,10 +13799,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -13992,10 +13992,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -14185,10 +14185,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -14378,10 +14378,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -14571,10 +14571,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -14751,7 +14751,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -14923,10 +14923,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -14996,10 +14996,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -15069,10 +15069,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -15142,10 +15142,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -15215,10 +15215,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             // Variables
             var commandType = CommandType.Text;
@@ -15278,7 +15278,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -15404,10 +15404,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -15498,10 +15498,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -15592,10 +15592,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -15686,10 +15686,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -15780,10 +15780,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             // Variables
             var commandType = CommandType.Text;
@@ -15865,7 +15865,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -16018,10 +16018,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -16134,10 +16134,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -16250,10 +16250,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -16366,10 +16366,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -16482,10 +16482,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             // Variables
             var commandType = CommandType.Text;
@@ -16589,7 +16589,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -16766,10 +16766,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -16903,10 +16903,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -17040,10 +17040,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -17177,10 +17177,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -17314,10 +17314,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             // Variables
             var commandType = CommandType.Text;
@@ -17443,7 +17443,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -17646,10 +17646,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -17804,10 +17804,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -17962,10 +17962,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -18120,10 +18120,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -18278,10 +18278,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             // Variables
             var commandType = CommandType.Text;
@@ -18429,7 +18429,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -18657,10 +18657,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -18836,10 +18836,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -19015,10 +19015,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -19194,10 +19194,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             return QueryMultipleInternal(connection: connection,
                 tableName1: tableName1,
@@ -19373,10 +19373,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null)
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null)
         {
             // Variables
             var commandType = CommandType.Text;
@@ -19546,7 +19546,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             var beforeExecutionCallback = new Func<DbCommand, TraceResult>(command =>
@@ -19725,10 +19725,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -19805,10 +19805,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -19885,10 +19885,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -19965,10 +19965,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20045,10 +20045,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20125,10 +20125,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20193,7 +20193,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -20326,10 +20326,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20429,10 +20429,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20532,10 +20532,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20635,10 +20635,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20738,10 +20738,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20841,10 +20841,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -20933,7 +20933,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -21094,10 +21094,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -21221,10 +21221,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -21348,10 +21348,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -21475,10 +21475,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -21602,10 +21602,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -21729,10 +21729,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -21845,7 +21845,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -22033,10 +22033,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -22183,10 +22183,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -22333,10 +22333,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -22483,10 +22483,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -22633,10 +22633,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -22783,10 +22783,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -22923,7 +22923,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -23138,10 +23138,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -23311,10 +23311,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -23484,10 +23484,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -23657,10 +23657,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -23830,10 +23830,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -24003,10 +24003,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -24167,7 +24167,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -24409,10 +24409,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -24605,10 +24605,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -24801,10 +24801,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -24997,10 +24997,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -25193,10 +25193,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -25389,10 +25389,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -25577,7 +25577,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -25757,10 +25757,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return await QueryMultipleAsyncInternal(connection: connection,
@@ -25833,10 +25833,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -25909,10 +25909,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -25985,10 +25985,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -26061,10 +26061,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             // Variables
@@ -26127,7 +26127,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -26257,10 +26257,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return await QueryMultipleAsyncInternal(connection: connection,
@@ -26354,10 +26354,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -26451,10 +26451,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -26548,10 +26548,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -26645,10 +26645,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             // Variables
@@ -26734,7 +26734,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -26891,10 +26891,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return await QueryMultipleAsyncInternal(connection: connection,
@@ -27010,10 +27010,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -27129,10 +27129,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -27248,10 +27248,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -27367,10 +27367,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             // Variables
@@ -27479,7 +27479,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -27662,10 +27662,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return await QueryMultipleAsyncInternal(connection: connection,
@@ -27802,10 +27802,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -27942,10 +27942,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -28082,10 +28082,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -28222,10 +28222,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             // Variables
@@ -28357,7 +28357,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -28566,10 +28566,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return await QueryMultipleAsyncInternal(connection: connection,
@@ -28727,10 +28727,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -28888,10 +28888,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -29049,10 +29049,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -29210,10 +29210,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             // Variables
@@ -29368,7 +29368,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -29603,10 +29603,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return await QueryMultipleAsyncInternal(connection: connection,
@@ -29785,10 +29785,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -29967,10 +29967,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -30149,10 +30149,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             return QueryMultipleAsyncInternal(connection: connection,
@@ -30331,10 +30331,10 @@ namespace RepoDb
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
             int? commandTimeout = null,
             string traceKey = TraceKeys.QueryMultiple,
-            IDbTransaction transaction = null,
-            ICache cache = null,
-            ITrace trace = null,
-            IStatementBuilder statementBuilder = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
+            ITrace? trace = null,
+            IStatementBuilder? statementBuilder = null,
             CancellationToken cancellationToken = default)
         {
             // Variables
@@ -30512,7 +30512,7 @@ namespace RepoDb
             var commandText = string.Join(" ", commandTexts);
             var param = QueryGroup.AsMappedObject(maps.ToArray(), false);
             Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> result;
-            TraceResult traceResult = null;
+            TraceResult? traceResult = null;
 
             // Before Execution
             async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
@@ -30722,11 +30722,11 @@ namespace RepoDb
         private static IEnumerable<T> QueryMultipleInternal<T>(IDbConnection connection,
             DbDataReader reader,
             IEnumerable<T> items,
-            string cacheKey = null,
+            string? cacheKey = null,
             IDbSetting dbSetting = null,
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-            IDbTransaction transaction = null,
-            ICache cache = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
             bool forwardToNextResult = true)
         {
             if (forwardToNextResult)
@@ -30828,11 +30828,11 @@ namespace RepoDb
         private static async Task<IEnumerable<T>> QueryMultipleAsyncInternal<T>(IDbConnection connection,
             DbDataReader reader,
             IEnumerable<T> items,
-            string cacheKey = null,
+            string? cacheKey = null,
             IDbSetting dbSetting = null,
             int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-            IDbTransaction transaction = null,
-            ICache cache = null,
+            IDbTransaction? transaction = null,
+            ICache? cache = null,
             bool forwardToNextResult = true,
             CancellationToken cancellationToken = default)
         {

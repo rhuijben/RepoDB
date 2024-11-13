@@ -22,9 +22,9 @@ namespace RepoDb
         /// <returns>The number of affected rows during the update process.</returns>
         public int Update(TEntity entity,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Update<TEntity>(entity: entity,
                 fields: fields,
@@ -47,9 +47,9 @@ namespace RepoDb
         public int Update<TWhat>(TEntity entity,
             TWhat what,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Update<TEntity, TWhat>(entity: entity,
                 what: what,
@@ -72,9 +72,9 @@ namespace RepoDb
         public int Update(TEntity entity,
             object what,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Update<TEntity>(entity: entity,
                 what: what,
@@ -97,9 +97,9 @@ namespace RepoDb
         public int Update(TEntity entity,
             Expression<Func<TEntity, bool>> where,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Update<TEntity>(entity: entity,
                 where: where,
@@ -122,9 +122,9 @@ namespace RepoDb
         public int Update(TEntity entity,
             QueryField where,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Update<TEntity>(entity: entity,
                 where: where,
@@ -147,9 +147,9 @@ namespace RepoDb
         public int Update(TEntity entity,
             IEnumerable<QueryField> where,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Update<TEntity>(entity: entity,
                 where: where,
@@ -172,9 +172,9 @@ namespace RepoDb
         public int Update(TEntity entity,
             QueryGroup where,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null)
+			IDbTransaction? transaction = null)
         {
             return DbRepository.Update<TEntity>(entity: entity,
                 where: where,
@@ -200,9 +200,9 @@ namespace RepoDb
         /// <returns>The number of affected rows during the update process.</returns>
         public Task<int> UpdateAsync(TEntity entity,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.UpdateAsync<TEntity>(entity: entity,
@@ -228,9 +228,9 @@ namespace RepoDb
         public Task<int> UpdateAsync<TWhat>(TEntity entity,
             TWhat what,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.UpdateAsync<TEntity, TWhat>(entity: entity,
@@ -256,9 +256,9 @@ namespace RepoDb
         public Task<int> UpdateAsync(TEntity entity,
             object what,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.UpdateAsync<TEntity>(entity: entity,
@@ -284,9 +284,9 @@ namespace RepoDb
         public Task<int> UpdateAsync(TEntity entity,
             Expression<Func<TEntity, bool>> where,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.UpdateAsync<TEntity>(entity: entity,
@@ -312,9 +312,9 @@ namespace RepoDb
         public Task<int> UpdateAsync(TEntity entity,
             QueryField where,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.UpdateAsync<TEntity>(entity: entity,
@@ -340,9 +340,9 @@ namespace RepoDb
         public Task<int> UpdateAsync(TEntity entity,
             IEnumerable<QueryField> where,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.UpdateAsync<TEntity>(entity: entity,
@@ -368,9 +368,9 @@ namespace RepoDb
         public Task<int> UpdateAsync(TEntity entity,
             QueryGroup where,
             IEnumerable<Field> fields = null,
-            string hints = null,
+            string? hints = null,
             string traceKey = TraceKeys.Update,
-			IDbTransaction transaction = null,
+			IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.UpdateAsync<TEntity>(entity: entity,
