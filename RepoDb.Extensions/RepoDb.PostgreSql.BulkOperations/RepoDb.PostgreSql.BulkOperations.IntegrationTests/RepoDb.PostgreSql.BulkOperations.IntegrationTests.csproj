@@ -7,9 +7,6 @@
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Models\BulkOperationIdentityTable.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="MSTest" />
     <PackageReference Include="coverlet.collector">
       <PrivateAssets>all</PrivateAssets>

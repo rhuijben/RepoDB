@@ -9,11 +9,6 @@
     <PackageReleaseNotes>http://repodb.net/release/sqlserverbulk</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="System.Data.SqlClient\**" />
-    <EmbeddedResource Remove="System.Data.SqlClient\**" />
-    <None Remove="System.Data.SqlClient\**" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.Linq.Async" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
