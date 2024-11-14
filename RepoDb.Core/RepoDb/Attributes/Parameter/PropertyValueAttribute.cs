@@ -1,13 +1,14 @@
-﻿using RepoDb.Extensions;
-using System;
+﻿using System;
 using System.Data;
 using System.Reflection;
+using RepoDb.Extensions;
 
 namespace RepoDb.Attributes.Parameter
 {
     /// <summary>
     /// An attribute that is being used to set a value to any property of the <see cref="IDbDataParameter"/> object.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class PropertyValueAttribute : Attribute, IEquatable<PropertyValueAttribute>
     {
         private int? hashCode = null;

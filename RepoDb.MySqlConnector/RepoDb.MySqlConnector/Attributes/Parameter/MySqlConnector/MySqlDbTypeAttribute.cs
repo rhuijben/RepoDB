@@ -1,4 +1,5 @@
-﻿using MySqlConnector;
+﻿using System;
+using MySqlConnector;
 
 namespace RepoDb.Attributes.Parameter.MySqlConnector
 {
@@ -6,6 +7,7 @@ namespace RepoDb.Attributes.Parameter.MySqlConnector
     /// An attribute used to define a value to the <see cref="MySqlParameter.MySqlDbType"/>
     /// property via an entity property before the actual execution.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class MySqlDbTypeAttribute : PropertyValueAttribute
     {
         /// <summary>

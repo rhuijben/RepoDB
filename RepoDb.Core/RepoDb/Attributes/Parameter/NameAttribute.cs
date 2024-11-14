@@ -1,5 +1,6 @@
-﻿using RepoDb.Extensions;
+﻿using System;
 using System.Data.Common;
+using RepoDb.Extensions;
 
 namespace RepoDb.Attributes.Parameter
 {
@@ -7,6 +8,7 @@ namespace RepoDb.Attributes.Parameter
     /// An attribute that is being used to define a value to the <see cref="DbParameter.ParameterName"/>
     /// property via a class property mapping.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class NameAttribute : PropertyValueAttribute
     {
         /// <summary>

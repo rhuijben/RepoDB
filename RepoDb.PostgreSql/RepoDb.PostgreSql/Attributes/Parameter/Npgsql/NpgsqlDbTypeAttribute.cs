@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using System;
+using Npgsql;
 using NpgsqlTypes;
 
 namespace RepoDb.Attributes.Parameter.Npgsql
@@ -7,6 +8,7 @@ namespace RepoDb.Attributes.Parameter.Npgsql
     /// An attribute used to define a value to the <see cref="NpgsqlParameter.NpgsqlDbType"/>
     /// property via an entity property before the actual execution.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class NpgsqlDbTypeAttribute : PropertyValueAttribute
     {
         /// <summary>
