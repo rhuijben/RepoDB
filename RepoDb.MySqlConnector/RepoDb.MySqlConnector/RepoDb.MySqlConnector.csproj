@@ -10,9 +10,6 @@
     <PackageProjectUrl>https://repodb.net/tutorial/get-started-mysql</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Attributes\MySqlConnectorTypeMapAttribute.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="MySqlConnector" />
   </ItemGroup>
   <ItemGroup>

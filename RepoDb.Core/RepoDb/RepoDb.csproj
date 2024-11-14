@@ -14,12 +14,6 @@
     <NoWarn Condition="'$(TargetFramework)' == 'netstandard2.0'">$(NoWarn);CS8604</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Reflection\DataCommand.cs" />
-    <Compile Remove="Reflection\DelegateCache.cs" />
-    <Compile Remove="Reflection\DelegateFactory.cs" />
-    <Compile Remove="Reflection\Delegates.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" />
     <PackageReference Include="System.Data.Common" />
     <PackageReference Include="System.Dynamic.Runtime" />

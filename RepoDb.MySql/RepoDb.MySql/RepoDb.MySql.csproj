@@ -10,9 +10,6 @@
     <PackageProjectUrl>https://repodb.net/tutorial/get-started-mysql</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Attributes\MySqlTypeMapAttribute.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" />
     <PackageReference Include="MySql.Data" />
   </ItemGroup>
