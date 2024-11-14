@@ -5,6 +5,7 @@ namespace RepoDb.Attributes
     /// <summary>
     /// An attribute that is used to define a mapping of the class/property into its equivalent object/field name in the database.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
     public class MapAttribute : Attribute
     {
         /// <summary>

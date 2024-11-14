@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using System;
+using System.Data.SQLite;
 
 namespace RepoDb.Attributes.Parameter.SQLite
 {
@@ -6,6 +7,7 @@ namespace RepoDb.Attributes.Parameter.SQLite
     /// An attribute used to define a value to the <see cref="SQLiteParameter.TypeName"/>
     /// property via an entity property before the actual execution.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class TypeNameAttribute : PropertyValueAttribute
     {
         /// <summary>

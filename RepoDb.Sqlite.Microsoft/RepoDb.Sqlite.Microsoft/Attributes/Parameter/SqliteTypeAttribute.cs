@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System;
+using Microsoft.Data.Sqlite;
 
 namespace RepoDb.Attributes.Parameter.Sqlite
 {
@@ -6,6 +7,7 @@ namespace RepoDb.Attributes.Parameter.Sqlite
     /// An attribute used to define a value to the <see cref="SqliteParameter.SqliteType"/>
     /// property via an entity property before the actual execution.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class SqliteTypeAttribute : PropertyValueAttribute
     {
         /// <summary>

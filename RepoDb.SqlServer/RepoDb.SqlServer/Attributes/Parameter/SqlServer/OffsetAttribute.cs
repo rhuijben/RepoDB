@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System;
+using Microsoft.Data.SqlClient;
 
 namespace RepoDb.Attributes.Parameter.SqlServer
 {
@@ -6,6 +7,7 @@ namespace RepoDb.Attributes.Parameter.SqlServer
     /// An attribute used to define a value to the <see cref="SqlParameter.Offset"/> property via an entity property
     /// before the actual execution.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class OffsetAttribute : PropertyValueAttribute
     {
         /// <summary>

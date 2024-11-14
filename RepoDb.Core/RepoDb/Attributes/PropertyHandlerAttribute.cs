@@ -1,12 +1,13 @@
-﻿using RepoDb.Exceptions;
+﻿using System;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
-using System;
 
 namespace RepoDb.Attributes
 {
     /// <summary>
     /// An attribute that is used to define a handler for the property transformation.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class PropertyHandlerAttribute : Attribute
     {
         /// <summary>

@@ -1,12 +1,13 @@
-﻿using RepoDb.Attributes.Parameter;
-using System;
+﻿using System;
 using System.Data;
+using RepoDb.Attributes.Parameter;
 
 namespace RepoDb.Attributes
 {
     /// <summary>
     /// An attribute that is used to define a mapping between the .NET CLR <see cref="Type"/> and the <see cref="System.Data.DbType"/>.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class TypeMapAttribute : DbTypeAttribute
     {
         /// <summary>

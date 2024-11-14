@@ -1,4 +1,4 @@
-﻿using System.Data;
+﻿using System;
 using System.Data.Common;
 
 namespace RepoDb.Attributes.Parameter
@@ -7,6 +7,7 @@ namespace RepoDb.Attributes.Parameter
     /// An attribute that is being used to define a value to the <see cref="DbParameter.IsNullable"/>
     /// property via a class property mapping.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
     public class IsNullableAttribute : PropertyValueAttribute
     {
         /// <summary>
