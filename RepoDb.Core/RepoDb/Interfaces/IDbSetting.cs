@@ -67,5 +67,10 @@ namespace RepoDb.Interfaces
         /// Gets the character (or string) used for dot notation.
         /// </summary>
         string SchemaSeparator { get; }
+
+        /// <summary>
+        /// This database provider required automatic conversions, because it uses some form of duck-typing
+        /// </summary>
+        bool ForceAutomaticConversions { get; }
     }
 }

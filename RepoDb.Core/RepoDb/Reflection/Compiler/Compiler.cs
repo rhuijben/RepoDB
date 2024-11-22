@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -736,9 +737,23 @@ namespace RepoDb.Reflection
                 else
                     return result; // Will fail
             }
+            else if (toType == StaticType.String && fromType == StaticType.DateTime)
+            {
+                result = Expression.Call(GetStaticMethodInfo(() => StrictToString(DateTime.MinValue)), result);
+            }
+            else if (toType == StaticType.String && fromType == StaticType.DateTimeOffset)
+            {
+                result = Expression.Call(GetStaticMethodInfo(() => StrictToString(DateTimeOffset.MinValue)), result);
+            }
+#if NET
+            else if (toType == StaticType.String && fromType == StaticType.DateOnly)
+            {
+                result = Expression.Call(GetStaticMethodInfo(() => StrictToString(DateOnly.MinValue)), result);
+            }
+#endif
             else if (GetSystemConvertToTypeMethod(underlyingFromType, underlyingToType) is { } methodInfo)
             {
-                result = Expression.Call(methodInfo, result);
+                result = Expression.Call(methodInfo, Expression.Convert(result, methodInfo.GetParameters()[0].ParameterType));
             }
             else if (GetSystemConvertChangeTypeMethod(underlyingToType) is { } systemChangeType)
             {
@@ -747,6 +762,29 @@ namespace RepoDb.Reflection
                     ConvertExpressionToTypeExpression(result, StaticType.Object),
                     Expression.Constant(TypeCache.Get(underlyingToType).GetUnderlyingType())
                 });
+            }
+            else if (underlyingFromType == StaticType.String)
+            {
+                if (underlyingToType == StaticType.Decimal)
+                {
+                    result = Expression.Call(GetStaticMethodInfo(() => StrictParseDecimal(null)), expression);
+                }
+                else if (underlyingToType == StaticType.DateTime)
+                {
+                    result = Expression.Call(GetStaticMethodInfo(() => StrictParseDateTime(null)), expression);
+                }
+                else if (underlyingToType == StaticType.DateTimeOffset)
+                {
+                    result = Expression.Call(GetStaticMethodInfo(() => StrictParseDateTimeOffset(null)), expression);
+                }
+#if NET
+                else if (underlyingToType == typeof(DateOnly))
+                {
+                    result = Expression.Call(GetStaticMethodInfo(() => StrictParseDateOnly(null)), expression);
+                }
+#endif
+                else
+                    return null;
             }
             else
             {
@@ -779,6 +817,48 @@ namespace RepoDb.Reflection
             return result;
         }
 
+        static MethodInfo GetStaticMethodInfo(Expression<Action> call)
+        {
+            return (call.Body as MethodCallExpression)?.Method;
+        }
+
+        static decimal StrictParseDecimal(string value)
+        {
+            return decimal.Parse(value, CultureInfo.InvariantCulture);
+        }
+
+        static DateTime StrictParseDateTime(string value)
+        {
+            return DateTime.Parse(value, CultureInfo.InvariantCulture);
+        }
+
+        static string StrictToString(DateTime value)
+        {
+            return value.ToString("u");
+        }
+
+        static string StrictToString(DateTimeOffset value)
+        {
+            return value.ToString("u");
+        }
+
+        static DateTimeOffset StrictParseDateTimeOffset(string value)
+        {
+            return DateTimeOffset.Parse(value, CultureInfo.InvariantCulture);
+        }
+
+#if NET
+        static DateOnly StrictParseDateOnly(string value)
+        {
+            return DateOnly.Parse(value, CultureInfo.InvariantCulture);
+        }
+
+        static string StrictToString(DateOnly value)
+        {
+            return value.ToString("d", CultureInfo.InvariantCulture);
+        }
+#endif
+
         /// <summary>
         ///
         /// </summary>
@@ -795,13 +875,15 @@ namespace RepoDb.Reflection
         /// <param name="expression"></param>
         /// <param name="fromType"></param>
         /// <param name="toEnumType"></param>
+        /// <param name="dbSetting"></param>
         /// <returns></returns>
         internal static Expression ConvertExpressionToEnumExpression(Expression expression,
             Type fromType,
-            Type toEnumType) =>
+            Type toEnumType,
+            IDbSetting dbSetting) =>
             (fromType == StaticType.String) ?
-                ConvertExpressionToEnumExpressionForString(expression, toEnumType) :
-                    ConvertExpressionToEnumExpressionForNonString(expression, toEnumType);
+                ConvertExpressionToEnumExpressionForString(expression, toEnumType, dbSetting) :
+                    ConvertExpressionToEnumExpressionForNonString(expression, toEnumType, dbSetting);
 
         /// <summary>
         ///
@@ -810,7 +892,8 @@ namespace RepoDb.Reflection
         /// <param name="toEnumType"></param>
         /// <returns></returns>
         internal static Expression ConvertExpressionToEnumExpressionForString(Expression expression,
-            Type toEnumType)
+            Type toEnumType,
+            IDbSetting dbSetting)
         {
             var checkMethod = (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || GlobalConfiguration.Options.EnumHandling == EnumHandling.Cast || toEnumType.GetCustomAttribute<FlagsAttribute>() != null)
                 ? GetEnumParseNullMethod()
@@ -836,7 +919,8 @@ namespace RepoDb.Reflection
         /// <param name="toEnumType"></param>
         /// <returns></returns>
         internal static Expression ConvertExpressionToEnumExpressionForNonString(Expression expression,
-            Type toEnumType)
+            Type toEnumType,
+            IDbSetting dbSetting)
         {
             if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || GlobalConfiguration.Options.EnumHandling == EnumHandling.Cast)
             {
@@ -1265,11 +1349,11 @@ namespace RepoDb.Reflection
         /// <returns></returns>
         internal static Expression GetClassPropertyParameterInfoValueExpression(ParameterExpression readerParameterExpression,
             ClassPropertyParameterInfo classPropertyParameterInfo,
-            DataReaderField readerField)
+            DataReaderField readerField, IDbSetting dbSetting)
         {
             // False expression
             var falseExpression = GetClassPropertyParameterInfoIsDbNullFalseValueExpression(readerParameterExpression,
-                classPropertyParameterInfo, readerField);
+                classPropertyParameterInfo, readerField, dbSetting);
 
             // Skip if possible
             if (readerField?.DbField?.IsNullable == false)
@@ -1295,6 +1379,7 @@ namespace RepoDb.Reflection
         /// <param name="readerExpression"></param>
         /// <param name="classPropertyParameterInfo"></param>
         /// <param name="readerField"></param>
+        /// 
         /// <returns></returns>
         internal static Expression GetClassPropertyParameterInfoIsDbNullTrueValueExpression(Expression readerExpression,
             ClassPropertyParameterInfo classPropertyParameterInfo,
@@ -1344,10 +1429,12 @@ namespace RepoDb.Reflection
         /// <param name="readerParameterExpression"></param>
         /// <param name="classPropertyParameterInfo"></param>
         /// <param name="readerField"></param>
+        /// <param name="dbSetting"></param>
         /// <returns></returns>
         internal static Expression GetClassPropertyParameterInfoIsDbNullFalseValueExpression(ParameterExpression readerParameterExpression,
             ClassPropertyParameterInfo classPropertyParameterInfo,
-            DataReaderField readerField)
+            DataReaderField readerField,
+            IDbSetting dbSetting)
         {
             var parameterType = GetPropertyHandlerGetParameter(classPropertyParameterInfo)?.ParameterType;
             var classPropertyParameterInfoType = classPropertyParameterInfo.GetTargetType();
@@ -1362,7 +1449,8 @@ namespace RepoDb.Reflection
                 targetTypeUnderlyingType == StaticType.DateOnly ||
 #endif
                 /* SQLite: Guid/String (Vice-Versa) : Enforce automatic conversion for the Primary/Identity fields */
-                readerField.DbField?.IsPrimary == true || readerField.DbField?.IsIdentity == true;
+                readerField.DbField?.IsPrimary == true || readerField.DbField?.IsIdentity == true
+                || dbSetting.ForceAutomaticConversions;
 
             // get handler on class property or type level
             var handlerInstance = GetHandlerInstance(classPropertyParameterInfo, readerField) ?? PropertyHandlerCache.Get<object>(classPropertyParameterInfo.GetTargetType());
@@ -1381,7 +1469,7 @@ namespace RepoDb.Reflection
                 {
                     try
                     {
-                        valueExpression = ConvertExpressionToEnumExpression(valueExpression, readerField.Type, targetTypeUnderlyingType);
+                        valueExpression = ConvertExpressionToEnumExpression(valueExpression, readerField.Type, targetTypeUnderlyingType, dbSetting);
                     }
                     catch (Exception ex)
                     {
@@ -1547,7 +1635,7 @@ namespace RepoDb.Reflection
                 // Get the value expression
                 var readerField = readerFields.First(f => string.Equals(f.Name.AsUnquoted(true, dbSetting), mappedName.AsUnquoted(true, dbSetting), StringComparison.OrdinalIgnoreCase));
                 var expression = GetClassPropertyParameterInfoValueExpression(readerParameterExpression,
-                    classPropertyParameterInfo, readerField);
+                    classPropertyParameterInfo, readerField, dbSetting);
 
                 try
                 {

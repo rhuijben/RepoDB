@@ -1,5 +1,5 @@
-﻿using RepoDb.Interfaces;
-using System;
+﻿using System;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers
 {
@@ -44,7 +44,8 @@ namespace RepoDb.Resolvers
                 "bigint" or "decimal" or "int" or "integer" or "numeric" => typeof(long),
                 "blob" => typeof(byte[]),
                 "double" or "real" => typeof(double),
-                "boolean" or "char" or "date" or "datetime" or "none" or "string" or "text" or "time" or "varchar" => typeof(string),
+                "date" or "datetime" => typeof(DateTime),
+                "boolean" or "char" or "none" or "string" or "text" or "time" or "varchar" => typeof(string),
                 _ => typeof(object),
             };
         }

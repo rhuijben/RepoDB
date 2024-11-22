@@ -1,6 +1,6 @@
-﻿using RepoDb.Interfaces;
-using System;
+﻿using System;
 using System.Data.Common;
+using RepoDb.Interfaces;
 
 namespace RepoDb.DbSettings
 {
@@ -100,6 +100,11 @@ namespace RepoDb.DbSettings
         [Obsolete("This will be removed in the future releases. The schema separator will be defaulted to a 'period' character.")]
         public string SchemaSeparator { get; protected set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool ForceAutomaticConversions { get; protected set; }
+
         #endregion
 
         #region Equality and comparers
@@ -178,7 +183,7 @@ namespace RepoDb.DbSettings
         public override bool Equals(object obj)
         {
             if (obj is null) return false;
-            
+
             return obj.GetHashCode() == GetHashCode();
         }
 
@@ -190,7 +195,7 @@ namespace RepoDb.DbSettings
         public bool Equals(BaseDbSetting other)
         {
             if (other is null) return false;
-            
+
             return other.GetHashCode() == GetHashCode();
         }
 

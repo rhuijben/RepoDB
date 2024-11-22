@@ -1,10 +1,9 @@
 using System;
 using System.Data.Common;
-using System.Linq.Expressions;
 using System.Linq;
-using System.Collections.Generic;
-using RepoDb.Interfaces;
+using System.Linq.Expressions;
 using RepoDb.Extensions;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection
 {
@@ -63,7 +62,7 @@ namespace RepoDb.Reflection
             var readerField = GetDataReaderFields(reader, dbSetting).First();
             var classPropertyParameterInfo = new ClassPropertyParameterInfo { TargetType = typeOfResult };
             var expression = GetClassPropertyParameterInfoValueExpression(readerParameterExpression,
-                classPropertyParameterInfo, readerField);
+                classPropertyParameterInfo, readerField, dbSetting);
 
             // Return
             return Expression
