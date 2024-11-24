@@ -366,6 +366,14 @@ namespace RepoDb.Extensions
                 (DbType?)GlobalConfiguration.Options.EnumDefaultDatabaseType;
 
             // Create the parameter
+            if (dbType == DbType.String
+                && (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || command.Connection?.GetDbSetting().ForceAutomaticConversions == true))
+            {
+                // The database needs the value as string for an operation
+
+                value = value?.ToString();
+            }
+
             var parameter = command.CreateParameter(name, value, dbType, parameterDirection);
 
             // Property handler
@@ -375,7 +383,8 @@ namespace RepoDb.Extensions
             parameter.Value = (value ?? DBNull.Value);
 
             // Set the size
-            parameter.Size = GetSize(size, dbField);
+            if (size is { })
+                parameter.Size = size.Value;
 
             // Type map attributes
             InvokePropertyValueAttributes(parameter, GetPropertyValueAttributes(classProperty, valueType));
@@ -550,15 +559,19 @@ namespace RepoDb.Extensions
             // Iterate the filtered query fields
             foreach (var queryField in filteredQueryFields)
             {
-                if (queryField.Operation == Operation.In || queryField.Operation == Operation.NotIn)
+                if (queryField.Operation is Operation.In or Operation.NotIn)
                 {
                     var dbField = GetDbField(queryField.Field.Name, dbFields);
                     CreateParametersForInOperation(command, queryField, dbField);
                 }
-                else if (queryField.Operation == Operation.Between || queryField.Operation == Operation.NotBetween)
+                else if (queryField.Operation is Operation.Between or Operation.NotBetween)
                 {
                     var dbField = GetDbField(queryField.Field.Name, dbFields);
                     CreateParametersForBetweenOperation(command, queryField, dbField);
+                }
+                else if (queryField.Operation is Operation.IsNotNull or Operation.IsNull)
+                {
+                    // No value needed
                 }
                 else
                 {
@@ -707,7 +720,7 @@ namespace RepoDb.Extensions
         /// <param name="valueType"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        private static object InvokePropertyHandler(ClassProperty classProperty,
+        private static void InvokePropertyHandler(ClassProperty classProperty,
             IDbDataParameter parameter,
             ref Type valueType,
             ref object value)
@@ -723,8 +736,6 @@ namespace RepoDb.Extensions
                         PropertyHandlerSetOptions.Create(parameter,classProperty) });
                 valueType = TypeCache.Get(propertyHandlerSetMethod.ReturnType).GetUnderlyingType();
             }
-
-            return propertyHandler;
         }
 
         /// <summary>

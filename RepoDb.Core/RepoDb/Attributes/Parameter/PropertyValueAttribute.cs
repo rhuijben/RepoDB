@@ -215,9 +215,10 @@ namespace RepoDb.Attributes.Parameter
         /// <returns>True if the instances are equals.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is null) return false;
+            if (obj is not PropertyValueAttribute pva)
+                return false;
 
-            return obj.GetHashCode() == GetHashCode();
+            return Equals(pva);
         }
 
         /// <summary>
@@ -227,9 +228,12 @@ namespace RepoDb.Attributes.Parameter
         /// <returns>True if the instances are equal.</returns>
         public bool Equals(PropertyValueAttribute other)
         {
-            if (other is null) return false;
-
-            return other.GetHashCode() == GetHashCode();
+            return
+                other is not null
+                && other.PropertyName == PropertyName
+                && other.ParameterType == ParameterType
+                && other.IncludedInCompilation == IncludedInCompilation
+                && Equals(other.Value, Value);
         }
 
         /// <summary>

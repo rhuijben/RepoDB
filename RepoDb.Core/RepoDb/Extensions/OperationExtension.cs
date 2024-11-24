@@ -25,6 +25,8 @@ namespace RepoDb.Extensions
             Operation.NotBetween => "NOT BETWEEN",
             Operation.In => "IN",
             Operation.NotIn => "NOT IN",
+            Operation.IsNotNull => "IS NOT NULL",
+            Operation.IsNull => "IS NULL",
             _ => throw new ArgumentOutOfRangeException(nameof(operation))
         };
     }

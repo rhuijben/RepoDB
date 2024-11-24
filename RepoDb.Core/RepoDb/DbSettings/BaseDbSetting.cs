@@ -182,9 +182,10 @@ namespace RepoDb.DbSettings
         /// <returns>True if the instances are equals.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is null) return false;
+            if (obj is not BaseDbSetting dbs)
+                return false;
 
-            return obj.GetHashCode() == GetHashCode();
+            return Equals(dbs);
         }
 
         /// <summary>
@@ -196,6 +197,7 @@ namespace RepoDb.DbSettings
         {
             if (other is null) return false;
 
+            // TODO: Implement something without theoretical collisions
             return other.GetHashCode() == GetHashCode();
         }
 

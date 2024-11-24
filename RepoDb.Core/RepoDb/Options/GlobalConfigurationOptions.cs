@@ -43,5 +43,10 @@ namespace RepoDb.Options
         /// Gets or sets the default value of how the push operations (i.e.: Insert, InsertAll, Merge and MergeAll) behaves when returning the value from the key columns (i.e.: Primary and Identity).
         /// </summary>
         public KeyColumnReturnBehavior KeyColumnReturnBehavior { get; init; } = KeyColumnReturnBehavior.IdentityOrElsePrimary;
+
+        /// <summary>
+        /// Makes the <c>!=</c> operator in linq queries work like expected in C# by converting Col != 'A' into (COL <> 'A' OR COL IS NULL)
+        /// </summary>
+        public bool BooleanNotEquals { get; init; }
     }
 }

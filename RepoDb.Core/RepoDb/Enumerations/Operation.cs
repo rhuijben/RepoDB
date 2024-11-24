@@ -52,6 +52,14 @@
         /// <summary>
         /// A not-in operation. Defines the (NOT IN) keyword in SQL Statement.
         /// </summary>
-        NotIn = 277789918
+        NotIn = 277789918,
+        /// <summary>
+        /// Checks if the column is null
+        /// </summary>
+        IsNull = 198699918,
+        /// <summary>
+        /// Checks if the column is not null
+        /// </summary>
+        IsNotNull = 761683607,
     }
 }
