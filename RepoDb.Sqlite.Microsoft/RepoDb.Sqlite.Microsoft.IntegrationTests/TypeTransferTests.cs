@@ -42,7 +42,7 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests
 
 
             connection.ExecuteNonQuery(
-                    @"CREATE TABLE IF NOT EXISTS EnumTypesTests (
+                    @"CREATE TABLE IF NOT EXISTS EnumTypesData (
                         ID INTEGER PRIMARY KEY NOT NULL,
                         EnumInt             INT NOT NULL,
                         EnumIntNull         INT NULL,
@@ -90,12 +90,13 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests
 
         public enum VAT
         {
+            None,
             High,
             Low,
             Exempt
         }
 
-        public record EnumTypesTests
+        public record EnumTypesData
         {
             [Primary, Identity]
             public int ID { get; set; }
@@ -151,7 +152,7 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests
                     DecimalNull = null,
                 };
 
-                connection.Update(src, trace: new DiagnosticsTracer());
+                connection.Update(src);
 
                 var item2 = connection.QueryAll<DateTypesData>().Single();
 
@@ -166,7 +167,7 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests
             {
                 AddTables(connection);
 
-                var src = new EnumTypesTests
+                var src = new EnumTypesData
                 {
                     EnumInt = Wind.South,
                     EnumIntNull = Wind.East,
@@ -179,7 +180,7 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests
                 connection.Insert(src, trace: new DiagnosticsTracer());
 
 
-                var item = connection.QueryAll<EnumTypesTests>().Single();
+                var item = connection.QueryAll<EnumTypesData>().Single();
 
                 Assert.AreEqual(src, item);
 
@@ -192,10 +193,102 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests
 
                 connection.Update(src);
 
-                var item2 = connection.QueryAll<EnumTypesTests>().Single();
+                var item2 = connection.QueryAll<EnumTypesData>().Single();
 
                 Assert.AreEqual(src, item2);
             }
+        }
+
+        [TestMethod]
+        public void EnumCompareValue()
+        {
+            GlobalConfiguration.Setup(new Options.GlobalConfigurationOptions { ConversionType = Enumerations.ConversionType.Automatic });
+            using var connection = new SqliteConnection(Database.ConnectionStringMDS);
+            {
+                AddTables(connection);
+
+                var src = new EnumTypesData
+                {
+                    EnumInt = Wind.South,
+                    EnumIntNull = Wind.East,
+                    EnumString = Current.AC,
+                    EnumStringNull = Current.DC,
+                    EnumVarChar = VAT.High,
+                    EnumVarCharNull = VAT.Exempt
+                };
+
+                connection.Insert(src);
+
+                var item = connection.QueryAll<EnumTypesData>().Single();
+
+                Assert.IsNotNull(connection.Query<EnumTypesData>(x => x.EnumInt == Wind.South).Single());
+                Assert.IsNotNull(connection.Query<EnumTypesData>(x => x.EnumIntNull == Wind.East).Single());
+                var r = connection.Query<EnumTypesData>(x => x.EnumString == Current.AC);
+                Assert.IsNotNull(connection.Query<EnumTypesData>(x => x.EnumString == Current.AC, trace: new DiagnosticsTracer()).Single());
+                Assert.IsNotNull(connection.Query<EnumTypesData>(x => x.EnumStringNull == Current.DC).Single());
+                Assert.IsNotNull(connection.Query<EnumTypesData>(x => x.EnumVarChar == VAT.High).Single());
+                Assert.IsNotNull(connection.Query<EnumTypesData>(x => x.EnumVarCharNull == VAT.Exempt).Single());
+            }
+        }
+
+        [TestMethod]
+        public void EnumCompareNull()
+        {
+            using var connection = new SqliteConnection(Database.ConnectionStringMDS);
+            {
+                AddTables(connection);
+
+                var src = new EnumTypesData
+                {
+                    EnumInt = Wind.South,
+                    EnumString = Current.AC,
+                    EnumVarChar = VAT.High,
+                };
+
+                connection.Insert(src, trace: new DiagnosticsTracer());
+
+
+                var r = connection.Query<EnumTypesData>(where: x => x.EnumVarCharNull == null, trace: new DiagnosticsTracer());
+                Assert.AreEqual(1, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => x.EnumVarCharNull != null, trace: new DiagnosticsTracer());
+                Assert.AreEqual(0, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => (x.EnumVarCharNull ?? 0) != VAT.High, trace: new DiagnosticsTracer());
+                Assert.AreEqual(1, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => (x.EnumVarCharNull ?? VAT.None) == VAT.None, trace: new DiagnosticsTracer());
+                Assert.AreEqual(1, r.Count());
+
+
+                // Now test strict boolean implementation
+                r = connection.Query<EnumTypesData>(where: x => x.EnumVarCharNull != VAT.None, trace: new DiagnosticsTracer());
+                Assert.AreEqual(0, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => x.EnumVarCharNull != VAT.None || x.EnumIntNull != Wind.North, trace: new DiagnosticsTracer());
+                Assert.AreEqual(0, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => !(x.EnumVarCharNull == VAT.None), trace: new DiagnosticsTracer());
+                Assert.AreEqual(0, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => !(x.EnumVarCharNull == VAT.None && x.EnumIntNull == Wind.North), trace: new DiagnosticsTracer());
+                Assert.AreEqual(0, r.Count());
+
+                GlobalConfiguration.Setup(GlobalConfiguration.Options with { BooleanNotEquals = true });
+
+                r = connection.Query<EnumTypesData>(where: x => x.EnumVarCharNull != VAT.None, trace: new DiagnosticsTracer());
+                Assert.AreEqual(1, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => x.EnumVarCharNull != VAT.None || x.EnumIntNull != Wind.North, trace: new DiagnosticsTracer());
+                Assert.AreEqual(1, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => !(x.EnumVarCharNull == VAT.None), trace: new DiagnosticsTracer());
+                Assert.AreEqual(1, r.Count());
+
+                r = connection.Query<EnumTypesData>(where: x => !(x.EnumVarCharNull == VAT.None && x.EnumIntNull == Wind.North), trace: new DiagnosticsTracer());
+                Assert.AreEqual(1, r.Count());
+            }
+
         }
     }
 }

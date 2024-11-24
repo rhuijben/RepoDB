@@ -1,9 +1,9 @@
-﻿using RepoDb.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Exceptions;
 
 namespace RepoDb.Extensions
 {
@@ -67,12 +67,13 @@ namespace RepoDb.Extensions
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public static Field GetField(this BinaryExpression expression)
+        public static Field GetField(this BinaryExpression expression, out object coalesceValue)
         {
+            coalesceValue = null;
             return expression.Left switch
             {
                 MemberExpression memberExpression => memberExpression.GetField(),
-                UnaryExpression unaryExpression => unaryExpression.GetField(),
+                UnaryExpression unaryExpression => unaryExpression.GetField(out coalesceValue),
                 _ => throw new NotSupportedException($"Expression '{expression}' is currently not supported.")
             };
         }
@@ -83,12 +84,22 @@ namespace RepoDb.Extensions
         /// <param name="expression"></param>
         /// <returns></returns>
         /// <exception cref="NotSupportedException"></exception>
-        public static Field GetField(this UnaryExpression expression)
+        public static Field GetField(this UnaryExpression expression, out object coalesceValue)
         {
-            return expression.Operand switch
+            return FieldFrom(expression.Operand, out coalesceValue);
+        }
+
+        private static Field FieldFrom(Expression expression, out object coalesceValue)
+        {
+            coalesceValue = null;
+            return expression switch
             {
                 MethodCallExpression methodCallExpression => methodCallExpression.GetField(),
                 MemberExpression memberExpression => memberExpression.GetField(),
+                BinaryExpression { NodeType: ExpressionType.Coalesce } b when (
+                    FieldFrom(b.Left, out coalesceValue /* ignored */) is { } field
+                    && b.Right.GetValue() is { } value) => (coalesceValue = value) == value ? field : null,
+                UnaryExpression { NodeType: ExpressionType.Convert } un when (un.GetField(out coalesceValue) is { } cv) => cv,
                 _ => throw new NotSupportedException($"Expression '{expression}' is currently not supported.")
             };
         }
@@ -322,8 +333,26 @@ namespace RepoDb.Extensions
         /// </summary>
         /// <param name="expression">The instance of <see cref="UnaryExpression"/> object where the value is to be extracted.</param>
         /// <returns>The extracted value from <see cref="UnaryExpression"/> object.</returns>
-        public static object GetValue(this UnaryExpression expression) =>
-            expression.Operand.GetValue();
+        public static object GetValue(this UnaryExpression expression)
+        {
+            if (expression.Operand.GetValue() is { } value)
+            {
+                switch (expression.NodeType)
+                {
+                    case ExpressionType.Convert:
+                        Type toType = expression.Type;
+                        if (TypeCache.Get(expression.Type) is { } tp && tp.IsNullable())
+                        {
+                            toType = tp.GetUnderlyingType();
+                        }
+                        return Convert.ChangeType(value, toType);
+                    default:
+                        throw new NotSupportedException($"Expression '{expression}' is currently not supported.");
+                }
+            }
+            else
+                throw new NotSupportedException($"Expression '{expression}' is currently not supported.");
+        }
 
         /// <summary>
         /// Gets a value from the current instance of <see cref="MethodCallExpression"/> object.

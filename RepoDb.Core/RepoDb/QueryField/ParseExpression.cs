@@ -1,11 +1,11 @@
-﻿using RepoDb.Enumerations;
-using RepoDb.Exceptions;
-using RepoDb.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Enumerations;
+using RepoDb.Exceptions;
+using RepoDb.Extensions;
 
 namespace RepoDb
 {
@@ -142,7 +142,7 @@ namespace RepoDb
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="expression"></param>
         /// <returns></returns>
-        internal static IEnumerable<QueryField> Parse<TEntity>(BinaryExpression expression)
+        internal static QueryGroup Parse<TEntity>(BinaryExpression expression)
             where TEntity : class
         {
             // Only support the following expression type
@@ -152,7 +152,7 @@ namespace RepoDb
             }
 
             // Field
-            var field = expression.GetField();
+            var field = expression.GetField(out var coalesceValue);
             var property = GetTargetProperty<TEntity>(field);
 
             // Check
@@ -171,14 +171,49 @@ namespace RepoDb
             // Operation
             var operation = GetOperation(expression.NodeType);
 
-            // Enum
-            if (property.PropertyInfo.PropertyType.IsEnum)
+            if (value is { } && TypeCache.Get(property.PropertyInfo.PropertyType).GetUnderlyingType() is { } ut && ut.IsEnum)
             {
-                value = ToEnumValue(property.PropertyInfo.PropertyType, value);
+                value = ToEnumValue(ut, value);
+            }
+
+            var check = new QueryField(field, operation, value, null, false);
+
+            if (coalesceValue is { })
+            {
+                if (operation is Operation.Equal && Equals(value, coalesceValue) && value is { })
+                {
+                    // X = @Y OR X IS NULL
+
+                    return new QueryGroup(new[] { check, new QueryField(field, Operation.IsNull, value, null, false) }, Conjunction.Or);
+                }
+                else if (operation is Operation.NotEqual && !Equals(value, coalesceValue))
+                {
+                    // X <> @Y OR X IS NULL
+                    return new QueryGroup(new[] { check, new QueryField(field, Operation.IsNull, value, null, false) }, Conjunction.Or);
+                }
+                else
+                    throw new InvalidExpressionException($"Invalid expression '??' can only be applied in an Equals or NotEquals .");
+            }
+            else if (operation == Operation.Equal)
+            {
+                if (value == null)
+                    check = new QueryField(field, Operation.IsNull, value, null, false);
+                else if (GlobalConfiguration.Options.BooleanNotEquals)
+                    return new QueryGroup(new[] { check, new QueryField(field, Operation.IsNotNull, value, null, false) }, Conjunction.And);
+            }
+            else if (operation == Operation.NotEqual)
+            {
+                if (value == null)
+                    check = new QueryField(field, Operation.IsNotNull, value, null, false);
+                else if (GlobalConfiguration.Options.BooleanNotEquals)
+                {
+                    // X != @Y OR X is NULL
+                    return new QueryGroup(new[] { check, new QueryField(field, Operation.IsNull, value, null, false) }, Conjunction.Or);
+                }
             }
 
             // Return the value
-            return new QueryField(field, operation, value, null, false).AsEnumerable();
+            return new QueryGroup(check.AsEnumerable());
         }
 
         /// <summary>

@@ -149,13 +149,13 @@ namespace RepoDb
             IDbSetting dbSetting)
         {
             // = AND NULL
-            if (Operation == Operation.Equal && Parameter.Value == null)
+            if (Operation == Operation.IsNull || (Operation == Operation.Equal && Parameter.Value == null))
             {
                 return string.Concat(this.AsField(functionFormat, dbSetting), " IS NULL");
             }
 
             // <> AND NULL
-            else if (Operation == Operation.NotEqual && Parameter.Value == null)
+            else if (Operation == Operation.IsNotNull || (Operation == Operation.NotEqual && Parameter.Value == null))
             {
                 return string.Concat(this.AsField(functionFormat, dbSetting), " IS NOT NULL");
             }
@@ -282,9 +282,10 @@ namespace RepoDb
         /// <returns>True if the instances are equals.</returns>
         public override bool Equals(object? obj)
         {
-            if (obj is null) return false;
+            if (obj is not QueryField qf)
+                return false;
 
-            return obj.GetHashCode() == GetHashCode();
+            return Equals(qf);
         }
 
         /// <summary>
@@ -296,6 +297,7 @@ namespace RepoDb
         {
             if (other is null) return false;
 
+            // TODO: Make safe for collisions
             return other.GetHashCode() == GetHashCode();
         }
 

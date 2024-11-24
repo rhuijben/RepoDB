@@ -1803,7 +1803,7 @@ namespace RepoDb.Reflection
 
                     if (dbField?.IsIdentity == true
                         && targetType.IsValueType && TypeCache.Get(targetType).GetUnderlyingType() == targetType
-                        && TypeCache.Get(origExpression.Type).GetUnderlyingType() != origExpression.Type)
+                        && TypeCache.Get(origExpression.Type).IsNullable())
                     {
                         var nullableType = typeof(Nullable<>).MakeGenericType(expression.Type);
 
@@ -1927,8 +1927,8 @@ namespace RepoDb.Reflection
                 expression = GetEntityInstancePropertyValueExpression(entityExpression, classProperty, dbField);
             }
 
-            // Nullable
-            if (dbField?.IsNullable == true)
+            // Nullable? -> Convert to DBNull when necessary
+            if (TypeCache.Get(expression.Type) is { } returnType && (returnType.IsClassType() || expression.Type == StaticType.Object || returnType.IsNullable()))
             {
                 expression = ConvertExpressionToDbNullExpression(expression);
             }

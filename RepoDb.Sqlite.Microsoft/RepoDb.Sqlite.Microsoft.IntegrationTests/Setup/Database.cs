@@ -1,7 +1,7 @@
-﻿using Microsoft.Data.Sqlite;
-using RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.Data.Sqlite;
+using RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
 
 namespace RepoDb.Sqlite.Microsoft.IntegrationTests.Setup
 {
