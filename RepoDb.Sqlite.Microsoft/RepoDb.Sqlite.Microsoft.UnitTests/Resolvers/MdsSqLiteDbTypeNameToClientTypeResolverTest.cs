@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Resolvers;
 
 namespace RepoDb.Sqlite.Microsoft.UnitTests.Resolvers
@@ -128,7 +129,7 @@ namespace RepoDb.Sqlite.Microsoft.UnitTests.Resolvers
             var result = resolver.Resolve("DATE");
 
             // Assert
-            Assert.AreEqual(typeof(string), result);
+            Assert.AreEqual(typeof(DateTime), result);
         }
 
         [TestMethod]
@@ -141,7 +142,7 @@ namespace RepoDb.Sqlite.Microsoft.UnitTests.Resolvers
             var result = resolver.Resolve("DATETIME");
 
             // Assert
-            Assert.AreEqual(typeof(string), result);
+            Assert.AreEqual(typeof(DateTime), result);
         }
 
         [TestMethod]
