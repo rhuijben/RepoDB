@@ -160,7 +160,7 @@ namespace RepoDb
         {
             if (GetCacheItem<IEnumerable<TEntity>>(out var result) == false)
             {
-                result = DataReader.ToEnumerable<TEntity>(_reader).AsList();
+                result = DataReader.ToEnumerable<TEntity>(_reader, dbSetting: _connection?.GetDbSetting()).AsList();
                 AddToCache(result);
             }
 
@@ -183,7 +183,7 @@ namespace RepoDb
             if (GetCacheItem<IEnumerable<TEntity>>(out var result) == false)
             {
                 result = await DataReader
-                    .ToEnumerableAsync<TEntity>(_reader, cancellationToken: CancellationToken)
+                    .ToEnumerableAsync<TEntity>(_reader, dbSetting: _connection?.GetDbSetting(), cancellationToken: CancellationToken)
                     .ToListAsync(CancellationToken);
                 AddToCache(result);
             }

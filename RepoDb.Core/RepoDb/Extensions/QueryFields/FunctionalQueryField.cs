@@ -1,7 +1,7 @@
-﻿using System;
-using System.Data;
-using RepoDb.Enumerations;
+﻿using RepoDb.Enumerations;
 using RepoDb.Interfaces;
+using System;
+using System.Data;
 
 namespace RepoDb.Extensions.QueryFields
 {
@@ -103,10 +103,9 @@ namespace RepoDb.Extensions.QueryFields
         /// <returns>True if the instances are equals.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is not FunctionalQueryField fqf)
-                return false;
+            if (obj is null) return false;
 
-            return Equals(fqf);
+            return obj.GetHashCode() == GetHashCode();
         }
 
         /// <summary>
@@ -116,13 +115,9 @@ namespace RepoDb.Extensions.QueryFields
         /// <returns>True if the instances are equal.</returns>
         public bool Equals(FunctionalQueryField other)
         {
-            if (other is null)
-                return false;
-            else if (!Equals((QueryField)other))
-                return false;
+            if (other is null) return false;
 
-            return
-                other.Format == Format;
+            return other.GetHashCode() == GetHashCode();
         }
 
         /// <summary>

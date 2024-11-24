@@ -1449,7 +1449,7 @@ namespace RepoDb.Reflection
                 targetTypeUnderlyingType == StaticType.DateOnly ||
 #endif
                 /* SQLite: Guid/String (Vice-Versa) : Enforce automatic conversion for the Primary/Identity fields */
-                readerField.DbField?.IsPrimary == true || readerField.DbField?.IsIdentity == true
+                readerField?.DbField?.IsPrimary == true || readerField?.DbField?.IsIdentity == true
                 || dbSetting.ForceAutomaticConversions;
 
             // get handler on class property or type level

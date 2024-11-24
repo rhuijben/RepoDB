@@ -105,7 +105,7 @@ namespace RepoDb
             // Check directness
             if (IsDirect(expression))
             {
-                return new QueryGroup(QueryField.Parse<TEntity>(expression));
+                return QueryField.Parse<TEntity>(expression);
             }
 
             // Variables

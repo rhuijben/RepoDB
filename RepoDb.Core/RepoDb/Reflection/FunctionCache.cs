@@ -50,7 +50,7 @@ namespace RepoDb
         /// <returns></returns>
         internal static Func<DbDataReader, TResult> GetDataReaderToTypeCompiledFunction<TResult>(DbDataReader reader,
             DbFieldCollection? dbFields = null,
-            IDbSetting dbSetting = null) =>
+            IDbSetting? dbSetting = null) =>
             DataReaderToTypeCache<TResult>.Get(reader, dbFields, dbSetting);
 
         #region DataReaderToTypeCache
@@ -72,7 +72,7 @@ namespace RepoDb
             /// <returns></returns>
             internal static Func<DbDataReader, TResult> Get(DbDataReader reader,
                 DbFieldCollection? dbFields = null,
-                IDbSetting dbSetting = null)
+                IDbSetting? dbSetting = null)
             {
                 var key = GetKey(reader);
                 return cache.GetOrAdd(key, valueFactory: l => FunctionFactory.CompileDataReaderToType<TResult>(reader, dbFields, dbSetting));

@@ -9,6 +9,7 @@ foreach ($test in $tests) {
     Exit(1)
   }
 }
+$framework = 'net8.0'
 
 # SqlServer SA
 $env:REPODB_SQLSERVER_CONSTR_MASTER="Server=tcp:127.0.0.1,41433;Database=master;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;"

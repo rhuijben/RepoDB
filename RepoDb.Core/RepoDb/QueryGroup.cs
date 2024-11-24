@@ -832,10 +832,9 @@ namespace RepoDb
         /// <returns>True if the instances are equals.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is not QueryGroup qg)
-                return false;
+            if (obj is null) return false;
 
-            return Equals(qg);
+            return obj.GetHashCode() == GetHashCode();
         }
 
         /// <summary>
@@ -847,7 +846,6 @@ namespace RepoDb
         {
             if (other is null) return false;
 
-            // TODO: Make safe for collisions
             return other.GetHashCode() == GetHashCode();
         }
 

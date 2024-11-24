@@ -1,6 +1,6 @@
-﻿using System;
+﻿using RepoDb.Enumerations;
+using System;
 using System.Data;
-using RepoDb.Enumerations;
 
 namespace RepoDb
 {
@@ -297,10 +297,9 @@ namespace RepoDb
         /// <returns>True if the instances are equals.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is not DirectionalQueryField dqf)
-                return false;
+            if (obj is null) return false;
 
-            return Equals(dqf);
+            return obj.GetHashCode() == GetHashCode();
         }
 
         /// <summary>
@@ -310,15 +309,9 @@ namespace RepoDb
         /// <returns>True if the instances are equal.</returns>
         public bool Equals(DirectionalQueryField other)
         {
-            if (other is null)
-                return false;
+            if (other is null) return false;
 
-            if (!Equals((QueryField)other))
-                return false;
-
-            return
-                other.Direction == Direction
-                && other.Size == Size;
+            return other.GetHashCode() == GetHashCode();
         }
 
         /// <summary>

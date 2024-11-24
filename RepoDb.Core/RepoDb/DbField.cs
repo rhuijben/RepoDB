@@ -191,10 +191,9 @@ namespace RepoDb
         /// <returns>True if the instances are equals.</returns>
         public override bool Equals(object? obj)
         {
-            if (obj is not DbField dbf)
-                return false;
+            if (obj is null) return false;
 
-            return Equals(dbf);
+            return obj.GetHashCode() == GetHashCode();
         }
 
         /// <summary>
@@ -204,17 +203,9 @@ namespace RepoDb
         /// <returns>True if the instances are equal.</returns>
         public bool Equals(DbField? other)
         {
-            return other is not null
-                && other.Name == Name
-                && other.IsPrimary == IsPrimary
-                && other.IsIdentity == IsIdentity
-                && other.IsNullable == IsNullable
-                && other.Type == Type
-                && other.Size == Size
-                && other.Precision == Precision
-                && other.Scale == Scale
-                && other.DatabaseType == DatabaseType
-                && other.Provider == Provider;
+            if (other is null) return false;
+
+            return other.GetHashCode() == GetHashCode();
         }
 
         /// <summary>

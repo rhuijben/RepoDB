@@ -1,8 +1,8 @@
-﻿using RepoDb.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Common;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection
 {
@@ -52,15 +52,15 @@ namespace RepoDb.Reflection
         /// <returns>A list of the target result type.</returns>
         public static async IAsyncEnumerable<TResult> ToEnumerableAsync<TResult>(DbDataReader reader,
             DbFieldCollection? dbFields = null,
-            IDbSetting dbSetting = null,
+            IDbSetting? dbSetting = null,
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             if (reader?.IsClosed != false || !reader.HasRows) yield break;
-            
+
             var func = FunctionCache.GetDataReaderToTypeCompiledFunction<TResult>(reader,
                 dbFields,
                 dbSetting);
-            
+
             while (await reader.ReadAsync(cancellationToken))
             {
                 yield return func(reader);
@@ -112,11 +112,11 @@ namespace RepoDb.Reflection
             [EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
             if (reader?.IsClosed != false || !reader.HasRows) yield break;
-            
+
             var func = FunctionCache.GetDataReaderToExpandoObjectCompileFunction(reader,
                 dbFields,
                 dbSetting);
-            
+
             while (await reader.ReadAsync(cancellationToken))
             {
                 yield return func(reader);
