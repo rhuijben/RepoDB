@@ -1,12 +1,12 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using RepoDb.Requests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
+using RepoDb.Requests;
 
 namespace RepoDb
 {
@@ -108,7 +108,7 @@ namespace RepoDb
             where TEntity : class
         {
             return ExistsInternal<TEntity>(connection: connection,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -367,7 +367,7 @@ namespace RepoDb
             where TEntity : class
         {
             return ExistsAsyncInternal<TEntity>(connection: connection,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -1088,10 +1088,10 @@ namespace RepoDb
                 transaction: transaction,
                 cache: null,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: request.Type,
                 dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
-                skipCommandArrayParametersCheck: true);
+                skipCommandArrayParametersCheck: true,
+                cancellationToken: cancellationToken);
 
             // Result
             return result;

@@ -673,10 +673,10 @@ namespace RepoDb
                 cacheKey: null,
                 cacheItemExpiration: null,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 cache: null,
-				trace: trace,
+                trace: trace,
                 cancellationToken: cancellationToken,
                 tableName: tableName,
                 skipCommandArrayParametersCheck: true);

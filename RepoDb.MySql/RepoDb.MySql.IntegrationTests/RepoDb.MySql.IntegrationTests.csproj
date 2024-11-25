@@ -6,15 +6,12 @@
     <EnableMSTestRunner>true</EnableMSTestRunner>
     <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MSTest" />
     <PackageReference Include="MySql.Data" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\RepoDb.Core\RepDb.TestCore\RepoDb.TestCore.csproj" />
     <ProjectReference Include="..\..\RepoDb.Core\RepoDb\RepoDb.csproj" />
     <ProjectReference Include="..\RepoDb.MySql\RepoDb.MySql.csproj" />
   </ItemGroup>

@@ -29,14 +29,14 @@ namespace RepoDb.PostgreSql.IntegrationTests.Setup
             ConnectionStringForPostgres =
                 Environment.GetEnvironmentVariable("REPODB_POSTGRESQL_CONSTR_POSTGRESDB")
                 ?? Environment.GetEnvironmentVariable("REPODB_CONSTR_POSTGRESDB")
-                // ?? "Server=127.0.0.1;Port=45432;Database=postgres;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
+                ?? "Server=127.0.0.1;Port=45432;Database=postgres;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
                 ?? "Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=Password123;";
 
             // RepoDb connection
             ConnectionString =
                 Environment.GetEnvironmentVariable("REPODB_POSTGRESQL_CONSTR")
                 ?? Environment.GetEnvironmentVariable("REPODB_CONSTR")
-                // ?? "Server=127.0.0.1;Port=45432;Database=RepoDb;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
+                ?? "Server=127.0.0.1;Port=45432;Database=RepoDb;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
                 ?? "Server=127.0.0.1;Port=5432;Database=RepoDb;User Id=postgres;Password=Password123;";
 
             // For >= v6.0.0: To reutilize the legacy behavior

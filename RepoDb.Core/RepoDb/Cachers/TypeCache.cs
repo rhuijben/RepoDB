@@ -16,7 +16,7 @@ public static class TypeCache
     /// </summary>
     /// <param name="type">The target type.</param>
     /// <returns>The mapped <see cref="CachedType"/> object of the target type.</returns>
-    public static CachedType Get(Type type)
+    public static CachedType Get(Type? type)
     {
         if (type is null)
         {
@@ -27,7 +27,7 @@ public static class TypeCache
         {
             return result;
         }
-        
+
         result = new CachedType(type);
         cache.TryAdd(type, result);
 

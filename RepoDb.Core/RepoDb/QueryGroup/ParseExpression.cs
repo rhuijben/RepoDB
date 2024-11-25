@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using RepoDb.Enumerations;
@@ -43,7 +44,7 @@ namespace RepoDb
         /// <typeparam name="TEntity">The target entity type</typeparam>
         /// <param name="expression">The expression to be converted to a <see cref="QueryGroup"/> object.</param>
         /// <returns>An instance of the <see cref="QueryGroup"/> object that contains the parsed query expression.</returns>
-        public static QueryGroup Parse<TEntity>(Expression<Func<TEntity, bool>> expression)
+        public static QueryGroup Parse<TEntity>(Expression<Func<TEntity, bool>> expression, IDbConnection? connection = null, IDbTransaction? transaction = null, string? tableName = null)
             where TEntity : class
         {
             // Guard the presence of the expression
@@ -67,7 +68,7 @@ namespace RepoDb
             }
 
             // Return the parsed values
-            return parsed.Fix();
+            return parsed.Fix<TEntity>(connection, transaction, tableName);
         }
 
         /// <summary>

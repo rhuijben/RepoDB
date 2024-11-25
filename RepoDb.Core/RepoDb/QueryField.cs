@@ -18,6 +18,10 @@ namespace RepoDb
         private const int HASHCODE_ISNOTNULL = 256;
         private int? hashCode = null;
 
+        // For boolean handling
+        internal bool canSkip;
+        internal bool skip;
+
         #region Constructors
 
         /// <summary>

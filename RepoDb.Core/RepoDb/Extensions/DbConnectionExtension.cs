@@ -288,9 +288,9 @@ namespace RepoDb
                 transaction: transaction,
                 cache: cache,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 tableName: null,
-                skipCommandArrayParametersCheck: false);
+                skipCommandArrayParametersCheck: false,
+                cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -322,9 +322,9 @@ namespace RepoDb
             IDbTransaction? transaction = null,
             ICache? cache = null,
             ITrace? trace = null,
-            CancellationToken cancellationToken = default,
             string? tableName = null,
-            bool skipCommandArrayParametersCheck = true)
+            bool skipCommandArrayParametersCheck = true,
+            CancellationToken cancellationToken = default)
         {
             // Get Cache
             if (cache != null && cacheKey != null)
@@ -347,10 +347,10 @@ namespace RepoDb
                 commandType: commandType,
                 commandTimeout: commandTimeout,
                 transaction: transaction,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: dbFields,
-                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck);
+                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
+                cancellationToken: cancellationToken);
 
             // Variables
             IEnumerable<dynamic>? result = null;
@@ -742,9 +742,9 @@ namespace RepoDb
                 transaction: transaction,
                 cache: cache,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 tableName: ClassMappedNameCache.Get<TResult>(),
-                skipCommandArrayParametersCheck: false);
+                skipCommandArrayParametersCheck: false,
+                cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -777,9 +777,9 @@ namespace RepoDb
             IDbTransaction? transaction = null,
             ICache? cache = null,
             ITrace? trace = null,
-            CancellationToken cancellationToken = default,
             string? tableName = null,
-            bool skipCommandArrayParametersCheck = true)
+            bool skipCommandArrayParametersCheck = true,
+            CancellationToken cancellationToken = default)
         {
             // Get Cache
             if (cache != null && cacheKey != null)
@@ -861,9 +861,9 @@ namespace RepoDb
             IDbTransaction? transaction = null,
             ICache? cache = null,
             ITrace? trace = null,
-            CancellationToken cancellationToken = default,
             string? tableName = null,
-            bool skipCommandArrayParametersCheck = true)
+            bool skipCommandArrayParametersCheck = true,
+            CancellationToken cancellationToken = default)
         {
             // Get Cache
             if (cache != null && cacheKey != null)
@@ -934,9 +934,9 @@ namespace RepoDb
             IDbTransaction? transaction = null,
             ICache? cache = null,
             ITrace? trace = null,
-            CancellationToken cancellationToken = default,
             string? tableName = null,
-            bool skipCommandArrayParametersCheck = true)
+            bool skipCommandArrayParametersCheck = true,
+            CancellationToken cancellationToken = default)
         {
             // Get Cache
             if (cache != null && cacheKey != null)
@@ -959,10 +959,10 @@ namespace RepoDb
                 commandType: commandType,
                 commandTimeout: commandTimeout,
                 transaction: transaction,
-                cancellationToken: cancellationToken,
                 entityType: typeof(TResult),
                 dbFields: dbFields,
-                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck);
+                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
+                cancellationToken: cancellationToken);
 
             IEnumerable<TResult>? result = null;
 
@@ -1404,11 +1404,11 @@ namespace RepoDb
         /// <param name="traceKey"></param>
         /// <param name="transaction"></param>
         /// <param name="trace"></param>
-        /// <param name="cancellationToken"></param>
         /// <param name="entityType"></param>
         /// <param name="dbFields"></param>
         /// <param name="skipCommandArrayParametersCheck"></param>
         /// <param name="beforeExecutionCallbackAsync"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         internal static async Task<IDataReader> ExecuteReaderAsyncInternal(this IDbConnection connection,
             string commandText,
@@ -1418,11 +1418,11 @@ namespace RepoDb
             string? traceKey,
             IDbTransaction? transaction,
             ITrace? trace,
-            CancellationToken cancellationToken,
             Type? entityType,
             DbFieldCollection? dbFields,
             bool skipCommandArrayParametersCheck,
-            Func<DbCommand, CancellationToken, Task<TraceResult>>? beforeExecutionCallbackAsync = null)
+            Func<DbCommand, CancellationToken, Task<TraceResult>>? beforeExecutionCallbackAsync = null,
+            CancellationToken cancellationToken = default)
         {
             // Variables
             var setting = connection.GetDbSetting();
@@ -1432,10 +1432,10 @@ namespace RepoDb
                 commandType: commandType,
                 commandTimeout: commandTimeout,
                 transaction: transaction,
-                cancellationToken: cancellationToken,
                 entityType: entityType,
                 dbFields: dbFields,
-                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck);
+                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
+                cancellationToken: cancellationToken);
             var hasError = false;
 
             // Ensure the DbCommand disposal
@@ -1645,10 +1645,10 @@ namespace RepoDb
         /// <param name="traceKey"></param>
         /// <param name="transaction"></param>
         /// <param name="trace"></param>
-        /// <param name="cancellationToken"></param>
         /// <param name="entityType"></param>
         /// <param name="dbFields"></param>
         /// <param name="skipCommandArrayParametersCheck"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         internal static async Task<int> ExecuteNonQueryAsyncInternal(this IDbConnection connection,
             string commandText,
@@ -1658,10 +1658,10 @@ namespace RepoDb
             string? traceKey,
             IDbTransaction? transaction,
             ITrace? trace,
-            CancellationToken cancellationToken,
             Type? entityType,
             DbFieldCollection? dbFields,
-            bool skipCommandArrayParametersCheck)
+            bool skipCommandArrayParametersCheck,
+            CancellationToken cancellationToken)
         {
             using var command = await CreateDbCommandForExecutionAsync(connection: connection,
                 commandText: commandText,
@@ -1669,10 +1669,10 @@ namespace RepoDb
                 commandType: commandType,
                 commandTimeout: commandTimeout,
                 transaction: transaction,
-                cancellationToken: cancellationToken,
                 entityType: entityType,
                 dbFields: dbFields,
-                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck);
+                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
+                cancellationToken: cancellationToken);
 
             // Before Execution
             var traceResult = await Tracer
@@ -2021,10 +2021,10 @@ namespace RepoDb
         /// <param name="transaction"></param>
         /// <param name="cache"></param>
         /// <param name="trace"></param>
-        /// <param name="cancellationToken"></param>
         /// <param name="entityType"></param>
         /// <param name="dbFields"></param>
         /// <param name="skipCommandArrayParametersCheck"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         internal static async Task<TResult?> ExecuteScalarAsyncInternal<TResult>(this IDbConnection connection,
             string commandText,
@@ -2037,10 +2037,10 @@ namespace RepoDb
             IDbTransaction? transaction,
             ICache? cache,
             ITrace? trace,
-            CancellationToken cancellationToken,
             Type? entityType,
             DbFieldCollection? dbFields,
-            bool skipCommandArrayParametersCheck)
+            bool skipCommandArrayParametersCheck,
+            CancellationToken cancellationToken)
         {
             // Get Cache
             if (cache != null && cacheKey != null)
@@ -2058,10 +2058,10 @@ namespace RepoDb
                 commandType: commandType,
                 commandTimeout: commandTimeout,
                 transaction: transaction,
-                cancellationToken: cancellationToken,
                 entityType: entityType,
                 dbFields: dbFields,
-                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck);
+                skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
+                cancellationToken: cancellationToken);
 
             // Before Execution
             var traceResult = await Tracer
@@ -2808,14 +2808,14 @@ namespace RepoDb
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="where"></param>
         /// <returns></returns>
-        internal static QueryGroup? ToQueryGroup<TEntity>(Expression<Func<TEntity, bool>> where)
+        internal static QueryGroup? ToQueryGroup<TEntity>(this IDbConnection connection, Expression<Func<TEntity, bool>> where, IDbTransaction? transaction, string? tableName = null)
             where TEntity : class
         {
             if (where == null)
             {
                 return null;
             }
-            return QueryGroup.Parse<TEntity>(where);
+            return QueryGroup.Parse<TEntity>(where, connection: connection, tableName: tableName);
         }
 
         /// <summary>
@@ -3135,10 +3135,10 @@ namespace RepoDb
         /// <param name="commandType"></param>
         /// <param name="commandTimeout"></param>
         /// <param name="transaction"></param>
-        /// <param name="cancellationToken"></param>
         /// <param name="entityType"></param>
         /// <param name="dbFields"></param>
         /// <param name="skipCommandArrayParametersCheck"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         internal static async Task<DbCommand> CreateDbCommandForExecutionAsync(this IDbConnection connection,
             string commandText,
@@ -3146,10 +3146,10 @@ namespace RepoDb
             CommandType? commandType = null,
             int? commandTimeout = null,
             IDbTransaction? transaction = null,
-            CancellationToken cancellationToken = default,
             Type? entityType = null,
             DbFieldCollection? dbFields = null,
-            bool skipCommandArrayParametersCheck = true)
+            bool skipCommandArrayParametersCheck = true,
+            CancellationToken cancellationToken = default)
         {
             // Validate
             ValidateTransactionConnectionObject(connection, transaction);

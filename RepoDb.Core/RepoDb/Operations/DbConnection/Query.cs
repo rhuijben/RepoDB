@@ -1,12 +1,12 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using RepoDb.Requests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
+using RepoDb.Requests;
 
 namespace RepoDb
 {
@@ -165,7 +165,7 @@ namespace RepoDb
         {
             return QueryInternal<TEntity>(connection: connection,
                 tableName: tableName,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction, tableName),
                 fields: fields,
                 orderBy: orderBy,
                 top: top,
@@ -535,7 +535,7 @@ namespace RepoDb
         {
             return QueryInternal<TEntity>(connection: connection,
                 tableName: ClassMappedNameCache.Get<TEntity>(),
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 fields: fields,
                 orderBy: orderBy,
                 top: top,
@@ -874,7 +874,7 @@ namespace RepoDb
             return QueryAsyncInternal<TEntity>(connection: connection,
                 tableName: tableName,
                 fields: fields,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction, tableName),
                 orderBy: orderBy,
                 top: top,
                 hints: hints,
@@ -1320,7 +1320,7 @@ namespace RepoDb
         {
             return QueryAsyncInternal<TEntity>(connection: connection,
                 tableName: ClassMappedNameCache.Get<TEntity>(),
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 fields: fields,
                 orderBy: orderBy,
                 top: top,

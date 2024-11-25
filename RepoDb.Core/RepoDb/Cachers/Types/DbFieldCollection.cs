@@ -35,7 +35,7 @@ public class DbFieldCollection
         lazyMapByUnquotedName = new Lazy<Dictionary<string, DbField>>(GetDbFieldsMappedByUnquotedName);
         lazyFields = new Lazy<IEnumerable<Field>>(GetDbFieldsAsFields);
     }
-    
+
     /// <summary>
     /// Gets a value whether the current column definition is a primary column definition.
     /// </summary>
@@ -71,7 +71,7 @@ public class DbFieldCollection
     /// </summary>
     /// <param name="name">The name of the mapping that is equivalent to the column definition of the table.</param>
     /// <returns>A column definition of table.</returns>
-    public DbField GetByName(string name)
+    public DbField? GetByName(string name)
     {
         lazyMapByName.Value.TryGetValue(name, out var dbField);
 
@@ -90,7 +90,7 @@ public class DbFieldCollection
         return dbField;
     }
 
-    private Dictionary<string, DbField> GetDbFieldsMappedByName() => 
+    private Dictionary<string, DbField> GetDbFieldsMappedByName() =>
         dbFields.ToDictionary(df => df.Name, df => df, StringComparer.OrdinalIgnoreCase);
 
     private Dictionary<string, DbField> GetDbFieldsMappedByUnquotedName() =>

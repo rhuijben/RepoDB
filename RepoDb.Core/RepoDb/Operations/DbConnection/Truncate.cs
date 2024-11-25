@@ -1,8 +1,8 @@
-﻿using RepoDb.Interfaces;
-using RepoDb.Requests;
-using System.Data;
+﻿using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
+using RepoDb.Interfaces;
+using RepoDb.Requests;
 
 namespace RepoDb
 {
@@ -26,7 +26,7 @@ namespace RepoDb
         /// <returns>The number of rows affected.</returns>
         public static int Truncate<TEntity>(this IDbConnection connection,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -34,7 +34,7 @@ namespace RepoDb
         {
             return TruncateInternal<TEntity>(connection: connection,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -53,7 +53,7 @@ namespace RepoDb
         /// <returns>The number of rows affected.</returns>
         internal static int TruncateInternal<TEntity>(this IDbConnection connection,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -69,7 +69,7 @@ namespace RepoDb
             return TruncateInternalBase(connection: connection,
                 request: request,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace);
         }
@@ -92,7 +92,7 @@ namespace RepoDb
         /// <returns>The number of rows affected.</returns>
         public static Task<int> TruncateAsync<TEntity>(this IDbConnection connection,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -101,7 +101,7 @@ namespace RepoDb
         {
             return TruncateAsyncInternal<TEntity>(connection: connection,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -122,7 +122,7 @@ namespace RepoDb
         /// <returns>The number of rows affected.</returns>
         internal static Task<int> TruncateAsyncInternal<TEntity>(this IDbConnection connection,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -139,7 +139,7 @@ namespace RepoDb
             return TruncateAsyncInternalBase(connection: connection,
                 request: request,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 cancellationToken: cancellationToken);
@@ -163,7 +163,7 @@ namespace RepoDb
         public static int Truncate(this IDbConnection connection,
             string tableName,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -171,7 +171,7 @@ namespace RepoDb
             return TruncateInternal(connection: connection,
                 tableName: tableName,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -191,7 +191,7 @@ namespace RepoDb
         internal static int TruncateInternal(this IDbConnection connection,
             string tableName,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -206,7 +206,7 @@ namespace RepoDb
             return TruncateInternalBase(connection: connection,
                 request: request,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace);
         }
@@ -230,7 +230,7 @@ namespace RepoDb
         public static Task<int> TruncateAsync(this IDbConnection connection,
             string tableName,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -239,7 +239,7 @@ namespace RepoDb
             return TruncateAsyncInternal(connection: connection,
                 tableName: tableName,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -261,7 +261,7 @@ namespace RepoDb
         internal static Task<int> TruncateAsyncInternal(this IDbConnection connection,
             string tableName,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -277,7 +277,7 @@ namespace RepoDb
             return TruncateAsyncInternalBase(connection: connection,
                 request: request,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 cancellationToken: cancellationToken);
@@ -300,25 +300,25 @@ namespace RepoDb
         internal static int TruncateInternalBase(this IDbConnection connection,
             TruncateRequest request,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null)
         {
             // Variables
             var commandType = CommandType.Text;
             var commandText = CommandTextCache.GetTruncateText(request);
-            
+
             // Actual Execution
             var result = ExecuteNonQueryInternal(connection: connection,
                 commandText: commandText,
                 param: null,
                 commandType: commandType,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 entityType: request.Type,
-                dbFields: DbFieldCache.Get(connection, request.Name, transaction, true),
+                dbFields: null,
                 skipCommandArrayParametersCheck: true);
 
             // Return the result
@@ -343,7 +343,7 @@ namespace RepoDb
         internal static async Task<int> TruncateAsyncInternalBase(this IDbConnection connection,
             TruncateRequest request,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Truncate,
+            string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             CancellationToken cancellationToken = default)
@@ -351,20 +351,20 @@ namespace RepoDb
             // Variables
             var commandType = CommandType.Text;
             var commandText = CommandTextCache.GetTruncateText(request);
-            
+
             // Actual Execution
             var result = await ExecuteNonQueryAsyncInternal(connection: connection,
                 commandText: commandText,
                 param: null,
                 commandType: commandType,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: request.Type,
                 dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
-                skipCommandArrayParametersCheck: true);
+                skipCommandArrayParametersCheck: true,
+                cancellationToken: cancellationToken);
 
             // Return the result
             return result;

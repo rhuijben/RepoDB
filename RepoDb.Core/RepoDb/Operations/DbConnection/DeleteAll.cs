@@ -1084,13 +1084,13 @@ namespace RepoDb
                 param: null,
                 commandType: commandType,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: request.Type,
                 dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
-                skipCommandArrayParametersCheck: true);
+                skipCommandArrayParametersCheck: true,
+                cancellationToken: cancellationToken);
 
             // Result
             return result;

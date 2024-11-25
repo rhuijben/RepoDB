@@ -1,8 +1,4 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using RepoDb.Reflection;
-using RepoDb.Requests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -10,6 +6,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
+using RepoDb.Reflection;
+using RepoDb.Requests;
 
 namespace RepoDb
 {
@@ -143,8 +143,8 @@ namespace RepoDb
             where T2 : class
         {
             return QueryMultipleInternal<T1, T2>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -609,9 +609,9 @@ namespace RepoDb
             where T3 : class
         {
             return QueryMultipleInternal<T1, T2, T3>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -1198,10 +1198,10 @@ namespace RepoDb
             where T4 : class
         {
             return QueryMultipleInternal<T1, T2, T3, T4>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
-                where4: ToQueryGroup(where4),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
+                where4: connection.ToQueryGroup(where4, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -1912,11 +1912,11 @@ namespace RepoDb
             where T5 : class
         {
             return QueryMultipleInternal<T1, T2, T3, T4, T5>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
-                where4: ToQueryGroup(where4),
-                where5: ToQueryGroup(where5),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
+                where4: connection.ToQueryGroup(where4, transaction),
+                where5: connection.ToQueryGroup(where5, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -2747,12 +2747,12 @@ namespace RepoDb
             where T6 : class
         {
             return QueryMultipleInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
-                where4: ToQueryGroup(where4),
-                where5: ToQueryGroup(where5),
-                where6: ToQueryGroup(where6),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
+                where4: connection.ToQueryGroup(where4, transaction),
+                where5: connection.ToQueryGroup(where5, transaction),
+                where6: connection.ToQueryGroup(where6, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -3703,13 +3703,13 @@ namespace RepoDb
             where T7 : class
         {
             return QueryMultipleInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
-                where4: ToQueryGroup(where4),
-                where5: ToQueryGroup(where5),
-                where6: ToQueryGroup(where6),
-                where7: ToQueryGroup(where7),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
+                where4: connection.ToQueryGroup(where4, transaction),
+                where5: connection.ToQueryGroup(where5, transaction),
+                where6: connection.ToQueryGroup(where6, transaction),
+                where7: connection.ToQueryGroup(where7, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -4583,8 +4583,8 @@ namespace RepoDb
             where T2 : class
         {
             return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -5067,9 +5067,9 @@ namespace RepoDb
             where T3 : class
         {
             return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -5674,10 +5674,10 @@ namespace RepoDb
             where T4 : class
         {
             return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
-                where4: ToQueryGroup(where4),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
+                where4: connection.ToQueryGroup(where4, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -6406,11 +6406,11 @@ namespace RepoDb
             where T5 : class
         {
             return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
-                where4: ToQueryGroup(where4),
-                where5: ToQueryGroup(where5),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
+                where4: connection.ToQueryGroup(where4, transaction),
+                where5: connection.ToQueryGroup(where5, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -7259,12 +7259,12 @@ namespace RepoDb
             where T6 : class
         {
             return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
-                where4: ToQueryGroup(where4),
-                where5: ToQueryGroup(where5),
-                where6: ToQueryGroup(where6),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
+                where4: connection.ToQueryGroup(where4, transaction),
+                where5: connection.ToQueryGroup(where5, transaction),
+                where6: connection.ToQueryGroup(where6, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -8233,13 +8233,13 @@ namespace RepoDb
             where T7 : class
         {
             return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
-                where1: ToQueryGroup(where1),
-                where2: ToQueryGroup(where2),
-                where3: ToQueryGroup(where3),
-                where4: ToQueryGroup(where4),
-                where5: ToQueryGroup(where5),
-                where6: ToQueryGroup(where6),
-                where7: ToQueryGroup(where7),
+                where1: connection.ToQueryGroup(where1, transaction),
+                where2: connection.ToQueryGroup(where2, transaction),
+                where3: connection.ToQueryGroup(where3, transaction),
+                where4: connection.ToQueryGroup(where4, transaction),
+                where5: connection.ToQueryGroup(where5, transaction),
+                where6: connection.ToQueryGroup(where6, transaction),
+                where7: connection.ToQueryGroup(where7, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -9134,9 +9134,9 @@ namespace RepoDb
         {
             return QueryMultipleInternal<T1, T2>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -9737,11 +9737,11 @@ namespace RepoDb
         {
             return QueryMultipleInternal<T1, T2, T3>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -10507,13 +10507,13 @@ namespace RepoDb
         {
             return QueryMultipleInternal<T1, T2, T3, T4>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 tableName4: tableName4,
-                where4: ToQueryGroup(where4),
+                where4: connection.ToQueryGroup(where4, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -11445,15 +11445,15 @@ namespace RepoDb
         {
             return QueryMultipleInternal<T1, T2, T3, T4, T5>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 tableName4: tableName4,
-                where4: ToQueryGroup(where4),
+                where4: connection.ToQueryGroup(where4, transaction),
                 tableName5: tableName5,
-                where5: ToQueryGroup(where5),
+                where5: connection.ToQueryGroup(where5, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -12547,17 +12547,17 @@ namespace RepoDb
         {
             return QueryMultipleInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 tableName4: tableName4,
-                where4: ToQueryGroup(where4),
+                where4: connection.ToQueryGroup(where4, transaction),
                 tableName5: tableName5,
-                where5: ToQueryGroup(where5),
+                where5: connection.ToQueryGroup(where5, transaction),
                 tableName6: tableName6,
-                where6: ToQueryGroup(where6),
+                where6: connection.ToQueryGroup(where6, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -13813,19 +13813,19 @@ namespace RepoDb
         {
             return QueryMultipleInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 tableName4: tableName4,
-                where4: ToQueryGroup(where4),
+                where4: connection.ToQueryGroup(where4, transaction),
                 tableName5: tableName5,
-                where5: ToQueryGroup(where5),
+                where5: connection.ToQueryGroup(where5, transaction),
                 tableName6: tableName6,
-                where6: ToQueryGroup(where6),
+                where6: connection.ToQueryGroup(where6, transaction),
                 tableName7: tableName7,
-                where7: ToQueryGroup(where7),
+                where7: connection.ToQueryGroup(where7, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -19815,9 +19815,9 @@ namespace RepoDb
         {
             return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -20209,11 +20209,11 @@ namespace RepoDb
                 traceKey: null,
                 transaction: transaction,
                 trace: null,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -20440,11 +20440,11 @@ namespace RepoDb
         {
             return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -20949,11 +20949,11 @@ namespace RepoDb
                 traceKey: null,
                 transaction: transaction,
                 trace: null,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -21233,13 +21233,13 @@ namespace RepoDb
         {
             return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 tableName4: tableName4,
-                where4: ToQueryGroup(where4),
+                where4: connection.ToQueryGroup(where4, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -21861,11 +21861,11 @@ namespace RepoDb
                 traceKey: null,
                 transaction: transaction,
                 trace: null,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -22196,15 +22196,15 @@ namespace RepoDb
         {
             return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 tableName4: tableName4,
-                where4: ToQueryGroup(where4),
+                where4: connection.ToQueryGroup(where4, transaction),
                 tableName5: tableName5,
-                where5: ToQueryGroup(where5),
+                where5: connection.ToQueryGroup(where5, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -22939,11 +22939,11 @@ namespace RepoDb
                 traceKey: null,
                 transaction: transaction,
                 trace: null,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -23325,17 +23325,17 @@ namespace RepoDb
         {
             return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 tableName4: tableName4,
-                where4: ToQueryGroup(where4),
+                where4: connection.ToQueryGroup(where4, transaction),
                 tableName5: tableName5,
-                where5: ToQueryGroup(where5),
+                where5: connection.ToQueryGroup(where5, transaction),
                 tableName6: tableName6,
-                where6: ToQueryGroup(where6),
+                where6: connection.ToQueryGroup(where6, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -24183,11 +24183,11 @@ namespace RepoDb
                 traceKey: null,
                 transaction: transaction,
                 trace: null,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -24620,19 +24620,19 @@ namespace RepoDb
         {
             return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
                 tableName1: tableName1,
-                where1: ToQueryGroup(where1),
+                where1: connection.ToQueryGroup(where1, transaction),
                 tableName2: tableName2,
-                where2: ToQueryGroup(where2),
+                where2: connection.ToQueryGroup(where2, transaction),
                 tableName3: tableName3,
-                where3: ToQueryGroup(where3),
+                where3: connection.ToQueryGroup(where3, transaction),
                 tableName4: tableName4,
-                where4: ToQueryGroup(where4),
+                where4: connection.ToQueryGroup(where4, transaction),
                 tableName5: tableName5,
-                where5: ToQueryGroup(where5),
+                where5: connection.ToQueryGroup(where5, transaction),
                 tableName6: tableName6,
-                where6: ToQueryGroup(where6),
+                where6: connection.ToQueryGroup(where6, transaction),
                 tableName7: tableName7,
-                where7: ToQueryGroup(where7),
+                where7: connection.ToQueryGroup(where7, transaction),
                 fields1: fields1,
                 orderBy1: orderBy1,
                 top1: top1,
@@ -25593,11 +25593,11 @@ namespace RepoDb
                 traceKey: null,
                 transaction: transaction,
                 trace: null,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -26143,11 +26143,11 @@ namespace RepoDb
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -26750,11 +26750,11 @@ namespace RepoDb
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -27495,11 +27495,11 @@ namespace RepoDb
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -28373,11 +28373,11 @@ namespace RepoDb
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -29384,11 +29384,11 @@ namespace RepoDb
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -30528,11 +30528,11 @@ namespace RepoDb
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
-                cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
                 skipCommandArrayParametersCheck: true,
-                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync)))
+                beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
+                cancellationToken: cancellationToken)))
             {
                 // Silent cancellation
                 if (traceResult?.CancellableTraceLog?.IsCancelled == true)

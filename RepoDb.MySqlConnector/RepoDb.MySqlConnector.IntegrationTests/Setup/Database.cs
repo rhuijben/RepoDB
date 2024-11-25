@@ -28,13 +28,13 @@ namespace RepoDb.MySqlConnector.IntegrationTests.Setup
             ConnectionStringForSys =
                 Environment.GetEnvironmentVariable("REPODB_MYSQL_CONSTR_SYS")
                 ?? Environment.GetEnvironmentVariable("REPODB_CONSTR_SYS")
-                // ?? @"Server=127.0.0.1;Port=43306;Database=sys;User ID=root;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
+                ?? @"Server=127.0.0.1;Port=43306;Database=sys;User ID=root;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
                 ?? @"Server=localhost;Database=sys;Uid=user;Pwd=Password123;";
 
             ConnectionString =
                 Environment.GetEnvironmentVariable("REPODB_MYSQL_CONSTR_REPODBTEST")
                 ?? Environment.GetEnvironmentVariable("REPODB_CONSTR")
-                // ?? @"Server=127.0.0.1;Port=43306;Database=RepoDbTest;User ID=root;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
+                ?? @"Server=127.0.0.1;Port=43306;Database=RepoDbTest;User ID=root;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
                 ?? @"Server=localhost;Database=RepoDbTest;Uid=user;Pwd=Password123;";
 
             // Initialize MySql

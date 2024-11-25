@@ -11,6 +11,7 @@
     <PackageReference Include="Npgsql" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\RepoDb.Core\RepDb.TestCore\RepoDb.TestCore.csproj" />
     <ProjectReference Include="..\..\RepoDb.Core\RepoDb\RepoDb.csproj" />
     <ProjectReference Include="..\RepoDb.PostgreSql\RepoDb.PostgreSql.csproj" />
   </ItemGroup>
