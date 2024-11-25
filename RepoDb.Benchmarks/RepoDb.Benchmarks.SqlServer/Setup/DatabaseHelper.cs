@@ -21,7 +21,7 @@ namespace RepoDb.Benchmarks.SqlServer.Setup
         private static void FillData(int elementsCount)
         {
             const string commandText = @"DECLARE @i INT = 1;
-	            WHILE @i <= @elementsCount
+                WHILE @i <= @elementsCount
                 BEGIN
                     INSERT INTO [dbo].[Person] (Name, Age, CreatedDateUtc) 
                     VALUES (REPLICATE('x', 128), @i, GETDATE());
@@ -51,7 +51,7 @@ namespace RepoDb.Benchmarks.SqlServer.Setup
         {
             const string commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
                 BEGIN
-	                CREATE DATABASE [RepoDbTest];
+                    CREATE DATABASE [RepoDbTest];
                 END";
 
             using var connection = new SqlConnection(ConnectionString);
@@ -66,11 +66,11 @@ namespace RepoDb.Benchmarks.SqlServer.Setup
                 BEGIN
                     CREATE TABLE [dbo].[Person]
                     (
-	                    [Id] [bigint] IDENTITY(1,1) NOT NULL,
-	                    [Name] [nvarchar](128) NOT NULL,
-	                    [Age] [int] NOT NULL,
-	                    [CreatedDateUtc] [datetime2](5) NOT NULL,
-	                    CONSTRAINT [CRIX_Person_Id] PRIMARY KEY CLUSTERED ([Id] ASC) ON [PRIMARY]
+                        [Id] [bigint] IDENTITY(1,1) NOT NULL,
+                        [Name] [nvarchar](128) NOT NULL,
+                        [Age] [int] NOT NULL,
+                        [CreatedDateUtc] [datetime2](5) NOT NULL,
+                        CONSTRAINT [CRIX_Person_Id] PRIMARY KEY CLUSTERED ([Id] ASC) ON [PRIMARY]
                     )
                     ON [PRIMARY];
                 END";

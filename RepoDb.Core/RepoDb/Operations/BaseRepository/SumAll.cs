@@ -16,17 +16,17 @@ namespace RepoDb
         /// <param name="field">The field to be summarized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public object SumAll(Field field,
             string? hints = null,
             string traceKey = TraceKeys.SumAll,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SumAll<TEntity>(field: field,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -35,17 +35,17 @@ namespace RepoDb
         /// <param name="field">The field to be summarized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public object SumAll(Expression<Func<TEntity, object>> field,
             string? hints = null,
             string traceKey = TraceKeys.SumAll,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SumAll<TEntity>(field: field,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -55,17 +55,17 @@ namespace RepoDb
         /// <param name="field">The field to be summarized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public TResult SumAll<TResult>(Field field,
             string? hints = null,
             string traceKey = TraceKeys.SumAll,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SumAll<TEntity, TResult>(field: field,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -75,17 +75,17 @@ namespace RepoDb
         /// <param name="field">The field to be summarized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The sum value of the target field.</returns>
         public TResult SumAll<TResult>(Expression<Func<TEntity, TResult>> field,
             string? hints = null,
             string traceKey = TraceKeys.SumAll,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SumAll<TEntity, TResult>(field: field,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         #endregion
@@ -98,19 +98,19 @@ namespace RepoDb
         /// <param name="field">The field to be summarized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public Task<object> SumAllAsync(Field field,
             string? hints = null,
             string traceKey = TraceKeys.SumAll,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SumAllAsync<TEntity>(field: field,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -120,19 +120,19 @@ namespace RepoDb
         /// <param name="field">The field to be summarized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public Task<object> SumAllAsync(Expression<Func<TEntity, object>> field,
             string? hints = null,
             string traceKey = TraceKeys.SumAll,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SumAllAsync<TEntity>(field: field,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -143,19 +143,19 @@ namespace RepoDb
         /// <param name="field">The field to be summarized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public Task<TResult> SumAllAsync<TResult>(Field field,
             string? hints = null,
             string traceKey = TraceKeys.SumAll,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SumAllAsync<TEntity, TResult>(field: field,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -166,19 +166,19 @@ namespace RepoDb
         /// <param name="field">The field to be summarized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The sum value of the target field.</returns>
         public Task<TResult> SumAllAsync<TResult>(Expression<Func<TEntity, TResult>> field,
             string? hints = null,
             string traceKey = TraceKeys.SumAll,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SumAllAsync<TEntity, TResult>(field: field,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 

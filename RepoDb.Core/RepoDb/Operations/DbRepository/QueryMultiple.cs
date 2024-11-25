@@ -23,17 +23,17 @@ namespace RepoDb
         /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(object what1,
             object what2,
@@ -48,7 +48,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -73,7 +73,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -93,17 +93,17 @@ namespace RepoDb
         /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(Expression<Func<T1, bool>> where1,
             Expression<Func<T2, bool>> where2,
@@ -118,7 +118,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -143,7 +143,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -163,17 +163,17 @@ namespace RepoDb
         /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(QueryField where1,
             QueryField where2,
@@ -188,7 +188,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -213,7 +213,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -233,17 +233,17 @@ namespace RepoDb
         /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(IEnumerable<QueryField> where1,
             IEnumerable<QueryField> where2,
@@ -258,7 +258,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -283,7 +283,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -303,17 +303,17 @@ namespace RepoDb
         /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(QueryGroup where1,
             QueryGroup where2,
@@ -328,7 +328,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -353,7 +353,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -379,22 +379,22 @@ namespace RepoDb
         /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(object what1,
             object what2,
@@ -415,7 +415,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -447,7 +447,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -469,22 +469,22 @@ namespace RepoDb
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(Expression<Func<T1, bool>> where1,
             Expression<Func<T2, bool>> where2,
@@ -505,7 +505,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -537,7 +537,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -559,22 +559,22 @@ namespace RepoDb
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(QueryField where1,
             QueryField where2,
@@ -595,7 +595,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -627,7 +627,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -649,22 +649,22 @@ namespace RepoDb
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(IEnumerable<QueryField> where1,
             IEnumerable<QueryField> where2,
@@ -685,7 +685,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -717,7 +717,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -739,22 +739,22 @@ namespace RepoDb
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(QueryGroup where1,
             QueryGroup where2,
@@ -775,7 +775,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -807,7 +807,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -835,27 +835,27 @@ namespace RepoDb
         /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(object what1,
@@ -883,7 +883,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -922,7 +922,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -946,27 +946,27 @@ namespace RepoDb
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(Expression<Func<T1, bool>> where1,
@@ -994,7 +994,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1033,7 +1033,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -1057,27 +1057,27 @@ namespace RepoDb
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(QueryField where1,
@@ -1105,7 +1105,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1144,7 +1144,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -1168,27 +1168,27 @@ namespace RepoDb
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(IEnumerable<QueryField> where1,
@@ -1216,7 +1216,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1255,7 +1255,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -1279,27 +1279,27 @@ namespace RepoDb
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(QueryGroup where1,
@@ -1327,7 +1327,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1366,7 +1366,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -1396,32 +1396,32 @@ namespace RepoDb
         /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(object what1,
@@ -1455,7 +1455,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1501,7 +1501,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -1527,32 +1527,32 @@ namespace RepoDb
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(Expression<Func<T1, bool>> where1,
@@ -1586,7 +1586,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1632,7 +1632,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -1658,32 +1658,32 @@ namespace RepoDb
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(QueryField where1,
@@ -1717,7 +1717,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1763,7 +1763,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -1789,32 +1789,32 @@ namespace RepoDb
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(IEnumerable<QueryField> where1,
@@ -1848,7 +1848,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -1894,7 +1894,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -1920,32 +1920,32 @@ namespace RepoDb
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(QueryGroup where1,
@@ -1979,7 +1979,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2025,7 +2025,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -2057,37 +2057,37 @@ namespace RepoDb
         /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(object what1,
@@ -2127,7 +2127,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2180,7 +2180,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -2208,37 +2208,37 @@ namespace RepoDb
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(Expression<Func<T1, bool>> where1,
@@ -2278,7 +2278,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2331,7 +2331,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -2359,37 +2359,37 @@ namespace RepoDb
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(QueryField where1,
@@ -2429,7 +2429,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2482,7 +2482,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -2510,37 +2510,37 @@ namespace RepoDb
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(IEnumerable<QueryField> where1,
@@ -2580,7 +2580,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2633,7 +2633,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -2661,37 +2661,37 @@ namespace RepoDb
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(QueryGroup where1,
@@ -2731,7 +2731,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2784,7 +2784,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -2818,42 +2818,42 @@ namespace RepoDb
         /// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
         /// <param name="what7">The dynamic query expression or the key value to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(object what1,
@@ -2899,7 +2899,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -2959,7 +2959,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -2989,42 +2989,42 @@ namespace RepoDb
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(Expression<Func<T1, bool>> where1,
@@ -3070,7 +3070,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3130,7 +3130,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -3160,42 +3160,42 @@ namespace RepoDb
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(QueryField where1,
@@ -3241,7 +3241,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3301,7 +3301,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -3331,42 +3331,42 @@ namespace RepoDb
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(IEnumerable<QueryField> where1,
@@ -3412,7 +3412,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3472,7 +3472,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -3502,42 +3502,42 @@ namespace RepoDb
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(QueryGroup where1,
@@ -3583,7 +3583,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -3643,7 +3643,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -3671,17 +3671,17 @@ namespace RepoDb
         /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(object what1,
@@ -3697,7 +3697,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -3723,7 +3723,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -3744,17 +3744,17 @@ namespace RepoDb
         /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(Expression<Func<T1, bool>> where1,
@@ -3770,7 +3770,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -3796,7 +3796,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -3817,17 +3817,17 @@ namespace RepoDb
         /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(QueryField where1,
@@ -3843,7 +3843,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -3869,7 +3869,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -3890,17 +3890,17 @@ namespace RepoDb
         /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(IEnumerable<QueryField> where1,
@@ -3916,7 +3916,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -3942,7 +3942,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -3963,17 +3963,17 @@ namespace RepoDb
         /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(QueryGroup where1,
@@ -3989,7 +3989,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4015,7 +4015,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4042,22 +4042,22 @@ namespace RepoDb
         /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(object what1,
@@ -4079,7 +4079,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4112,7 +4112,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4135,22 +4135,22 @@ namespace RepoDb
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(Expression<Func<T1, bool>> where1,
@@ -4172,7 +4172,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4205,7 +4205,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4228,22 +4228,22 @@ namespace RepoDb
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(QueryField where1,
@@ -4265,7 +4265,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4298,7 +4298,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4321,22 +4321,22 @@ namespace RepoDb
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(IEnumerable<QueryField> where1,
@@ -4358,7 +4358,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4391,7 +4391,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4414,22 +4414,22 @@ namespace RepoDb
         /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(QueryGroup where1,
@@ -4451,7 +4451,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4484,7 +4484,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4513,27 +4513,27 @@ namespace RepoDb
         /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -4562,7 +4562,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4602,7 +4602,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4627,27 +4627,27 @@ namespace RepoDb
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -4676,7 +4676,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4716,7 +4716,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4741,27 +4741,27 @@ namespace RepoDb
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -4790,7 +4790,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4830,7 +4830,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4855,27 +4855,27 @@ namespace RepoDb
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -4904,7 +4904,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -4944,7 +4944,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -4969,27 +4969,27 @@ namespace RepoDb
         /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -5018,7 +5018,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5058,7 +5058,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -5089,32 +5089,32 @@ namespace RepoDb
         /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -5149,7 +5149,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5196,7 +5196,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -5223,32 +5223,32 @@ namespace RepoDb
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -5283,7 +5283,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5330,7 +5330,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -5357,32 +5357,32 @@ namespace RepoDb
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -5417,7 +5417,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5464,7 +5464,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -5491,32 +5491,32 @@ namespace RepoDb
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -5551,7 +5551,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5598,7 +5598,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -5625,32 +5625,32 @@ namespace RepoDb
         /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -5685,7 +5685,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5732,7 +5732,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -5765,37 +5765,37 @@ namespace RepoDb
         /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -5836,7 +5836,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -5890,7 +5890,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -5919,37 +5919,37 @@ namespace RepoDb
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -5990,7 +5990,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6044,7 +6044,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -6073,37 +6073,37 @@ namespace RepoDb
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -6144,7 +6144,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6198,7 +6198,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -6227,37 +6227,37 @@ namespace RepoDb
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -6298,7 +6298,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6352,7 +6352,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -6381,37 +6381,37 @@ namespace RepoDb
         /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -6452,7 +6452,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6506,7 +6506,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -6541,42 +6541,42 @@ namespace RepoDb
         /// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
         /// <param name="what7">The dynamic query expression or the key value to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -6623,7 +6623,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6684,7 +6684,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -6715,42 +6715,42 @@ namespace RepoDb
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -6797,7 +6797,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -6858,7 +6858,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -6889,42 +6889,42 @@ namespace RepoDb
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -6971,7 +6971,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7032,7 +7032,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -7063,42 +7063,42 @@ namespace RepoDb
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -7145,7 +7145,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7206,7 +7206,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -7237,42 +7237,42 @@ namespace RepoDb
         /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -7319,7 +7319,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -7380,7 +7380,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -7423,7 +7423,7 @@ namespace RepoDb
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(string tableName1,
             object what1,
@@ -7440,7 +7440,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -7467,7 +7467,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -7485,21 +7485,21 @@ namespace RepoDb
         /// <typeparam name="T1">The first target type.</typeparam>
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(string tableName1,
             Expression<Func<T1, bool>> where1,
@@ -7516,7 +7516,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -7543,7 +7543,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -7561,21 +7561,21 @@ namespace RepoDb
         /// <typeparam name="T1">The first target type.</typeparam>
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(string tableName1,
             QueryField where1,
@@ -7592,7 +7592,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -7619,7 +7619,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -7637,21 +7637,21 @@ namespace RepoDb
         /// <typeparam name="T1">The first target type.</typeparam>
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(string tableName1,
             IEnumerable<QueryField> where1,
@@ -7668,7 +7668,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -7695,7 +7695,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -7713,21 +7713,21 @@ namespace RepoDb
         /// <typeparam name="T1">The first target type.</typeparam>
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>> QueryMultiple<T1, T2>(string tableName1,
             QueryGroup where1,
@@ -7744,7 +7744,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
         {
@@ -7771,7 +7771,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -7794,28 +7794,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(string tableName1,
             object what1,
@@ -7839,7 +7839,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -7874,7 +7874,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -7893,28 +7893,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(string tableName1,
             Expression<Func<T1, bool>> where1,
@@ -7938,7 +7938,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -7973,7 +7973,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -7992,28 +7992,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(string tableName1,
             QueryField where1,
@@ -8037,7 +8037,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -8072,7 +8072,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -8091,28 +8091,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(string tableName1,
             IEnumerable<QueryField> where1,
@@ -8136,7 +8136,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -8171,7 +8171,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -8190,28 +8190,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>> QueryMultiple<T1, T2, T3>(string tableName1,
             QueryGroup where1,
@@ -8235,7 +8235,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -8270,7 +8270,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -8294,35 +8294,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(string tableName1,
@@ -8354,7 +8354,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -8397,7 +8397,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -8417,35 +8417,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(string tableName1,
@@ -8477,7 +8477,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -8520,7 +8520,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -8540,35 +8540,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(string tableName1,
@@ -8600,7 +8600,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -8643,7 +8643,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -8663,35 +8663,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(string tableName1,
@@ -8723,7 +8723,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -8766,7 +8766,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -8786,35 +8786,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>
             QueryMultiple<T1, T2, T3, T4>(string tableName1,
@@ -8846,7 +8846,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -8889,7 +8889,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -8914,42 +8914,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(string tableName1,
@@ -8988,7 +8988,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9039,7 +9039,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -9060,42 +9060,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(string tableName1,
@@ -9134,7 +9134,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9185,7 +9185,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -9206,42 +9206,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(string tableName1,
@@ -9280,7 +9280,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9331,7 +9331,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -9352,42 +9352,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(string tableName1,
@@ -9426,7 +9426,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9477,7 +9477,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -9498,42 +9498,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>
             QueryMultiple<T1, T2, T3, T4, T5>(string tableName1,
@@ -9572,7 +9572,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9623,7 +9623,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -9649,49 +9649,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
+        /// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(string tableName1,
@@ -9737,7 +9737,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9796,7 +9796,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -9818,49 +9818,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(string tableName1,
@@ -9906,7 +9906,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -9965,7 +9965,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -9987,49 +9987,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(string tableName1,
@@ -10075,7 +10075,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10134,7 +10134,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -10156,49 +10156,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(string tableName1,
@@ -10244,7 +10244,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10303,7 +10303,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -10325,49 +10325,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>
             QueryMultiple<T1, T2, T3, T4, T5, T6>(string tableName1,
@@ -10413,7 +10413,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10472,7 +10472,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -10499,56 +10499,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
+        /// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="what7">The dynamic query expression or the key value to be used (for T7).</param>
+        /// <param name="what7">The dynamic query expression or the key value to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(string tableName1,
@@ -10601,7 +10601,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10668,7 +10668,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -10691,56 +10691,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="where7">The query expression to be used (for T7).</param>
+        /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(string tableName1,
@@ -10793,7 +10793,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -10860,7 +10860,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -10883,56 +10883,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="where7">The query expression to be used (for T7).</param>
+        /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(string tableName1,
@@ -10985,7 +10985,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -11052,7 +11052,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11075,56 +11075,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="where7">The query expression to be used (for T7).</param>
+        /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(string tableName1,
@@ -11177,7 +11177,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -11244,7 +11244,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11267,56 +11267,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="where7">The query expression to be used (for T7).</param>
+        /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>
             QueryMultiple<T1, T2, T3, T4, T5, T6, T7>(string tableName1,
@@ -11369,7 +11369,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
             where T1 : class
             where T2 : class
             where T3 : class
@@ -11436,7 +11436,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11474,7 +11474,7 @@ namespace RepoDb
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>> QueryMultiple(string tableName1,
             object what1,
@@ -11491,7 +11491,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -11516,7 +11516,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11532,21 +11532,21 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 2 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>> QueryMultiple(string tableName1,
             QueryField where1,
@@ -11563,7 +11563,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -11588,7 +11588,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11604,21 +11604,21 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 2 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>> QueryMultiple(string tableName1,
             IEnumerable<QueryField> where1,
@@ -11635,7 +11635,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -11660,7 +11660,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11676,21 +11676,21 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 2 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>> QueryMultiple(string tableName1,
             QueryGroup where1,
@@ -11707,7 +11707,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -11732,7 +11732,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11752,28 +11752,28 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 3 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> QueryMultiple(string tableName1,
             object what1,
@@ -11797,7 +11797,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -11829,7 +11829,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11845,28 +11845,28 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 3 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> QueryMultiple(string tableName1,
             QueryField where1,
@@ -11890,7 +11890,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -11922,7 +11922,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -11938,28 +11938,28 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 3 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> QueryMultiple(string tableName1,
             IEnumerable<QueryField> where1,
@@ -11983,7 +11983,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12015,7 +12015,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -12031,28 +12031,28 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 3 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>> QueryMultiple(string tableName1,
             QueryGroup where1,
@@ -12076,7 +12076,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12108,7 +12108,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -12128,35 +12128,35 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 4 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -12188,7 +12188,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12227,7 +12227,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -12243,35 +12243,35 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 4 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -12303,7 +12303,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12342,7 +12342,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -12358,35 +12358,35 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 4 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -12418,7 +12418,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12457,7 +12457,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -12473,35 +12473,35 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 4 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -12533,7 +12533,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12572,7 +12572,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -12592,42 +12592,42 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 5 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -12666,7 +12666,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12712,7 +12712,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -12728,42 +12728,42 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 5 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -12802,7 +12802,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12848,7 +12848,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -12864,42 +12864,42 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 5 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -12938,7 +12938,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -12984,7 +12984,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -13000,42 +13000,42 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 5 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -13074,7 +13074,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -13120,7 +13120,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -13140,49 +13140,49 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 6 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="what6">The dynamic query expression or the key value to be used (for dynamic type 6).</param>
+        /// <param name="what6">The dynamic query expression or the key value to be used (for dynamic type 6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -13228,7 +13228,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -13281,7 +13281,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -13297,49 +13297,49 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 6 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -13385,7 +13385,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -13438,7 +13438,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -13454,49 +13454,49 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 6 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -13542,7 +13542,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -13595,7 +13595,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -13611,49 +13611,49 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 6 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -13699,7 +13699,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -13752,7 +13752,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -13772,56 +13772,56 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 7 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="what6">The dynamic query expression or the key value to be used (for dynamic type 6).</param>
+        /// <param name="what6">The dynamic query expression or the key value to be used (for dynamic type 6).</param>
         /// <param name="tableName7">The name of the target table (for dynamic type 7).</param>
-		/// <param name="what7">The dynamic query expression or the key value to be used (for dynamic type 7).</param>
+        /// <param name="what7">The dynamic query expression or the key value to be used (for dynamic type 7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
         /// <param name="top7">The number of rows to be returned (for dynamic type 7).</param>
         /// <param name="hints7">The table hints to be used (for dynamic type 7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -13874,7 +13874,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -13934,7 +13934,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -13950,56 +13950,56 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 7 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="tableName7">The name of the target table (for dynamic type 7).</param>
-		/// <param name="where7">The query expression to be used (for dynamic type 7).</param>
+        /// <param name="where7">The query expression to be used (for dynamic type 7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
         /// <param name="top7">The number of rows to be returned (for dynamic type 7).</param>
         /// <param name="hints7">The table hints to be used (for dynamic type 7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -14052,7 +14052,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -14112,7 +14112,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -14128,56 +14128,56 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 7 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="tableName7">The name of the target table (for dynamic type 7).</param>
-		/// <param name="where7">The query expression to be used (for dynamic type 7).</param>
+        /// <param name="where7">The query expression to be used (for dynamic type 7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
         /// <param name="top7">The number of rows to be returned (for dynamic type 7).</param>
         /// <param name="hints7">The table hints to be used (for dynamic type 7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -14230,7 +14230,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -14290,7 +14290,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -14306,56 +14306,56 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 7 target types.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="tableName7">The name of the target table (for dynamic type 7).</param>
-		/// <param name="where7">The query expression to be used (for dynamic type 7).</param>
+        /// <param name="where7">The query expression to be used (for dynamic type 7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
         /// <param name="top7">The number of rows to be returned (for dynamic type 7).</param>
         /// <param name="hints7">The table hints to be used (for dynamic type 7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>
             QueryMultiple(string tableName1,
@@ -14408,7 +14408,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             // Create a connection
             var connection = (transaction?.Connection ?? CreateConnection());
@@ -14468,7 +14468,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
@@ -14512,7 +14512,7 @@ namespace RepoDb
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(string tableName1,
@@ -14530,7 +14530,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -14558,7 +14558,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -14577,21 +14577,21 @@ namespace RepoDb
         /// <typeparam name="T1">The first target type.</typeparam>
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(string tableName1,
@@ -14609,7 +14609,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -14637,7 +14637,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -14656,21 +14656,21 @@ namespace RepoDb
         /// <typeparam name="T1">The first target type.</typeparam>
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(string tableName1,
@@ -14688,7 +14688,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -14716,7 +14716,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -14735,21 +14735,21 @@ namespace RepoDb
         /// <typeparam name="T1">The first target type.</typeparam>
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(string tableName1,
@@ -14767,7 +14767,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -14795,7 +14795,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -14814,21 +14814,21 @@ namespace RepoDb
         /// <typeparam name="T1">The first target type.</typeparam>
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(string tableName1,
@@ -14846,7 +14846,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -14874,7 +14874,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -14898,28 +14898,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(string tableName1,
@@ -14944,7 +14944,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -14980,7 +14980,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15000,28 +15000,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(string tableName1,
@@ -15046,7 +15046,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -15082,7 +15082,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15102,28 +15102,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(string tableName1,
@@ -15148,7 +15148,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -15184,7 +15184,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15204,28 +15204,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(string tableName1,
@@ -15250,7 +15250,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -15286,7 +15286,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15306,28 +15306,28 @@ namespace RepoDb
         /// <typeparam name="T2">The second target type.</typeparam>
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(string tableName1,
@@ -15352,7 +15352,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -15388,7 +15388,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15413,35 +15413,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -15474,7 +15474,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -15518,7 +15518,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15539,35 +15539,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -15600,7 +15600,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -15644,7 +15644,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15665,35 +15665,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -15726,7 +15726,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -15770,7 +15770,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15791,35 +15791,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -15852,7 +15852,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -15896,7 +15896,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -15917,35 +15917,35 @@ namespace RepoDb
         /// <typeparam name="T3">The third target type.</typeparam>
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
@@ -15978,7 +15978,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -16022,7 +16022,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -16048,42 +16048,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -16123,7 +16123,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -16175,7 +16175,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -16197,42 +16197,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -16272,7 +16272,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -16324,7 +16324,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -16346,42 +16346,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -16421,7 +16421,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -16473,7 +16473,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -16495,42 +16495,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -16570,7 +16570,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -16622,7 +16622,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -16644,42 +16644,42 @@ namespace RepoDb
         /// <typeparam name="T4">The fourth target type.</typeparam>
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
@@ -16719,7 +16719,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -16771,7 +16771,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -16798,49 +16798,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
+        /// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -16887,7 +16887,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -16947,7 +16947,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -16970,49 +16970,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -17059,7 +17059,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -17119,7 +17119,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -17142,49 +17142,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -17231,7 +17231,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -17291,7 +17291,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -17314,49 +17314,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -17403,7 +17403,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -17463,7 +17463,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -17486,49 +17486,49 @@ namespace RepoDb
         /// <typeparam name="T5">The fifth target type.</typeparam>
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
@@ -17575,7 +17575,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -17635,7 +17635,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -17663,56 +17663,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
+        /// <param name="what6">The dynamic query expression or the key value to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="what7">The dynamic query expression or the key value to be used (for T7).</param>
+        /// <param name="what7">The dynamic query expression or the key value to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -17766,7 +17766,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -17834,7 +17834,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -17858,56 +17858,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="where7">The query expression to be used (for T7).</param>
+        /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -17961,7 +17961,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -18029,7 +18029,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -18053,56 +18053,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="where7">The query expression to be used (for T7).</param>
+        /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -18156,7 +18156,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -18224,7 +18224,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -18248,56 +18248,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="where7">The query expression to be used (for T7).</param>
+        /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -18351,7 +18351,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -18419,7 +18419,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -18443,56 +18443,56 @@ namespace RepoDb
         /// <typeparam name="T6">The sixth target type.</typeparam>
         /// <typeparam name="T7">The seventh target type.</typeparam>
         /// <param name="tableName1">The name of the target table (for T1).</param>
-		/// <param name="where1">The query expression to be used (for T1).</param>
+        /// <param name="where1">The query expression to be used (for T1).</param>
         /// <param name="tableName2">The name of the target table (for T2).</param>
-		/// <param name="where2">The query expression to be used (for T2).</param>
+        /// <param name="where2">The query expression to be used (for T2).</param>
         /// <param name="tableName3">The name of the target table (for T3).</param>
-		/// <param name="where3">The query expression to be used (for T3).</param>
+        /// <param name="where3">The query expression to be used (for T3).</param>
         /// <param name="tableName4">The name of the target table (for T4).</param>
-		/// <param name="where4">The query expression to be used (for T4).</param>
+        /// <param name="where4">The query expression to be used (for T4).</param>
         /// <param name="tableName5">The name of the target table (for T5).</param>
-		/// <param name="where5">The query expression to be used (for T5).</param>
+        /// <param name="where5">The query expression to be used (for T5).</param>
         /// <param name="tableName6">The name of the target table (for T6).</param>
-		/// <param name="where6">The query expression to be used (for T6).</param>
+        /// <param name="where6">The query expression to be used (for T6).</param>
         /// <param name="tableName7">The name of the target table (for T7).</param>
-		/// <param name="where7">The query expression to be used (for T7).</param>
+        /// <param name="where7">The query expression to be used (for T7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for T1).</param>
         /// <param name="top1">The number of rows to be returned (for T1).</param>
         /// <param name="hints1">The table hints to be used (for T1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for T1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for T2).</param>
         /// <param name="top2">The number of rows to be returned (for T2).</param>
         /// <param name="hints2">The table hints to be used (for T2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for T3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for T3).</param>
         /// <param name="top3">The number of rows to be returned (for T3).</param>
         /// <param name="hints3">The table hints to be used (for T3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for T4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for T4).</param>
         /// <param name="top4">The number of rows to be returned (for T4).</param>
         /// <param name="hints4">The table hints to be used (for T4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for T5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for T5).</param>
         /// <param name="top5">The number of rows to be returned (for T5).</param>
         /// <param name="hints5">The table hints to be used (for T5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for T6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for T6).</param>
         /// <param name="top6">The number of rows to be returned (for T6).</param>
         /// <param name="hints6">The table hints to be used (for T6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for T7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for T7).</param>
         /// <param name="top7">The number of rows to be returned (for T7).</param>
         /// <param name="hints7">The table hints to be used (for T7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
@@ -18546,7 +18546,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where T1 : class
             where T2 : class
@@ -18614,7 +18614,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -18653,7 +18653,7 @@ namespace RepoDb
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(string tableName1,
@@ -18671,7 +18671,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -18697,7 +18697,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -18714,21 +18714,21 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 2 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(string tableName1,
@@ -18746,7 +18746,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -18772,7 +18772,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -18789,21 +18789,21 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 2 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(string tableName1,
@@ -18821,7 +18821,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -18847,7 +18847,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -18864,21 +18864,21 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 2 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 2 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(string tableName1,
@@ -18896,7 +18896,7 @@ namespace RepoDb
             string hints2 = null,
             string cacheKey2 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -18922,7 +18922,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -18943,28 +18943,28 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 3 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(string tableName1,
@@ -18989,7 +18989,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19022,7 +19022,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19039,28 +19039,28 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 3 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(string tableName1,
@@ -19085,7 +19085,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19118,7 +19118,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19135,28 +19135,28 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 3 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(string tableName1,
@@ -19181,7 +19181,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19214,7 +19214,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19231,28 +19231,28 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 3 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 3 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(string tableName1,
@@ -19277,7 +19277,7 @@ namespace RepoDb
             string hints3 = null,
             string cacheKey3 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19310,7 +19310,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19331,35 +19331,35 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 4 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -19392,7 +19392,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19432,7 +19432,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19449,35 +19449,35 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 4 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -19510,7 +19510,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19550,7 +19550,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19567,35 +19567,35 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 4 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -19628,7 +19628,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19668,7 +19668,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19685,35 +19685,35 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 4 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 4 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -19746,7 +19746,7 @@ namespace RepoDb
             string hints4 = null,
             string cacheKey4 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19786,7 +19786,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19807,42 +19807,42 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 5 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -19882,7 +19882,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -19929,7 +19929,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -19946,42 +19946,42 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 5 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -20021,7 +20021,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -20068,7 +20068,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -20085,42 +20085,42 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 5 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -20160,7 +20160,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -20207,7 +20207,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -20224,42 +20224,42 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 5 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 5 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -20299,7 +20299,7 @@ namespace RepoDb
             string hints5 = null,
             string cacheKey5 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -20346,7 +20346,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -20367,49 +20367,49 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 6 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="what6">The dynamic query expression or the key value to be used (for dynamic type 6).</param>
+        /// <param name="what6">The dynamic query expression or the key value to be used (for dynamic type 6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -20456,7 +20456,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -20510,7 +20510,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -20527,49 +20527,49 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 6 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -20616,7 +20616,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -20670,7 +20670,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -20687,49 +20687,49 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 6 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -20776,7 +20776,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -20830,7 +20830,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -20847,49 +20847,49 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 6 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 6 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -20936,7 +20936,7 @@ namespace RepoDb
             string hints6 = null,
             string cacheKey6 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -20990,7 +20990,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -21011,56 +21011,56 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 7 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
+        /// <param name="what1">The dynamic query expression or the key value to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
+        /// <param name="what2">The dynamic query expression or the key value to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
+        /// <param name="what3">The dynamic query expression or the key value to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
+        /// <param name="what4">The dynamic query expression or the key value to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
+        /// <param name="what5">The dynamic query expression or the key value to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="what6">The dynamic query expression or the key value to be used (for dynamic type 6).</param>
+        /// <param name="what6">The dynamic query expression or the key value to be used (for dynamic type 6).</param>
         /// <param name="tableName7">The name of the target table (for dynamic type 7).</param>
-		/// <param name="what7">The dynamic query expression or the key value to be used (for dynamic type 7).</param>
+        /// <param name="what7">The dynamic query expression or the key value to be used (for dynamic type 7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
         /// <param name="top7">The number of rows to be returned (for dynamic type 7).</param>
         /// <param name="hints7">The table hints to be used (for dynamic type 7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -21114,7 +21114,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -21175,7 +21175,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -21192,56 +21192,56 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 7 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="tableName7">The name of the target table (for dynamic type 7).</param>
-		/// <param name="where7">The query expression to be used (for dynamic type 7).</param>
+        /// <param name="where7">The query expression to be used (for dynamic type 7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
         /// <param name="top7">The number of rows to be returned (for dynamic type 7).</param>
         /// <param name="hints7">The table hints to be used (for dynamic type 7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -21295,7 +21295,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -21356,7 +21356,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -21373,56 +21373,56 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 7 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="tableName7">The name of the target table (for dynamic type 7).</param>
-		/// <param name="where7">The query expression to be used (for dynamic type 7).</param>
+        /// <param name="where7">The query expression to be used (for dynamic type 7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
         /// <param name="top7">The number of rows to be returned (for dynamic type 7).</param>
         /// <param name="hints7">The table hints to be used (for dynamic type 7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -21476,7 +21476,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -21537,7 +21537,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
@@ -21554,56 +21554,56 @@ namespace RepoDb
         /// Query the data as multiple resultsets from the table based on the given 7 target types in an asynchronous way.
         /// </summary>
         /// <param name="tableName1">The name of the target table (for dynamic type 1).</param>
-		/// <param name="where1">The query expression to be used (for dynamic type 1).</param>
+        /// <param name="where1">The query expression to be used (for dynamic type 1).</param>
         /// <param name="tableName2">The name of the target table (for dynamic type 2).</param>
-		/// <param name="where2">The query expression to be used (for dynamic type 2).</param>
+        /// <param name="where2">The query expression to be used (for dynamic type 2).</param>
         /// <param name="tableName3">The name of the target table (for dynamic type 3).</param>
-		/// <param name="where3">The query expression to be used (for dynamic type 3).</param>
+        /// <param name="where3">The query expression to be used (for dynamic type 3).</param>
         /// <param name="tableName4">The name of the target table (for dynamic type 4).</param>
-		/// <param name="where4">The query expression to be used (for dynamic type 4).</param>
+        /// <param name="where4">The query expression to be used (for dynamic type 4).</param>
         /// <param name="tableName5">The name of the target table (for dynamic type 5).</param>
-		/// <param name="where5">The query expression to be used (for dynamic type 5).</param>
+        /// <param name="where5">The query expression to be used (for dynamic type 5).</param>
         /// <param name="tableName6">The name of the target table (for dynamic type 6).</param>
-		/// <param name="where6">The query expression to be used (for dynamic type 6).</param>
+        /// <param name="where6">The query expression to be used (for dynamic type 6).</param>
         /// <param name="tableName7">The name of the target table (for dynamic type 7).</param>
-		/// <param name="where7">The query expression to be used (for dynamic type 7).</param>
+        /// <param name="where7">The query expression to be used (for dynamic type 7).</param>
         /// <param name="fields1">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
+        /// <param name="orderBy1">The order definition of the fields to be used (for dynamic type 1).</param>
         /// <param name="top1">The number of rows to be returned (for dynamic type 1).</param>
         /// <param name="hints1">The table hints to be used (for dynamic type 1).</param>
         /// <param name="cacheKey1">The key to the cache item 1. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields2">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 1).</param>
-		/// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
+        /// <param name="orderBy2">The order definition of the fields to be used (for dynamic type 2).</param>
         /// <param name="top2">The number of rows to be returned (for dynamic type 2).</param>
         /// <param name="hints2">The table hints to be used (for dynamic type 2).</param>
         /// <param name="cacheKey2">The key to the cache item 2. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields3">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 3).</param>
-		/// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
+        /// <param name="orderBy3">The order definition of the fields to be used (for dynamic type 3).</param>
         /// <param name="top3">The number of rows to be returned (for dynamic type 3).</param>
         /// <param name="hints3">The table hints to be used (for dynamic type 3).</param>
         /// <param name="cacheKey3">The key to the cache item 3. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields4">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 4).</param>
-		/// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
+        /// <param name="orderBy4">The order definition of the fields to be used (for dynamic type 4).</param>
         /// <param name="top4">The number of rows to be returned (for dynamic type 4).</param>
         /// <param name="hints4">The table hints to be used (for dynamic type 4).</param>
         /// <param name="cacheKey4">The key to the cache item 4. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields5">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 5).</param>
-		/// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
+        /// <param name="orderBy5">The order definition of the fields to be used (for dynamic type 5).</param>
         /// <param name="top5">The number of rows to be returned (for dynamic type 5).</param>
         /// <param name="hints5">The table hints to be used (for dynamic type 5).</param>
         /// <param name="cacheKey5">The key to the cache item 5. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields6">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 6).</param>
-		/// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
+        /// <param name="orderBy6">The order definition of the fields to be used (for dynamic type 6).</param>
         /// <param name="top6">The number of rows to be returned (for dynamic type 6).</param>
         /// <param name="hints6">The table hints to be used (for dynamic type 6).</param>
         /// <param name="cacheKey6">The key to the cache item 6. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="fields7">The mapping list of <see cref="Field"/> objects to be used (for dynamic type 7).</param>
-		/// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
+        /// <param name="orderBy7">The order definition of the fields to be used (for dynamic type 7).</param>
         /// <param name="top7">The number of rows to be returned (for dynamic type 7).</param>
         /// <param name="hints7">The table hints to be used (for dynamic type 7).</param>
         /// <param name="cacheKey7">The key to the cache item 7. By setting this argument, it will return the item from the cache if present, otherwise it will query the database. This will only work if the 'cache' argument is set.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>A tuple of 7 enumerable target data entity types.</returns>
         public async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
@@ -21657,7 +21657,7 @@ namespace RepoDb
             string hints7 = null,
             string cacheKey7 = null,
             string traceKey = null,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             // Create a connection
@@ -21718,7 +21718,7 @@ namespace RepoDb
                     cacheItemExpiration: CacheItemExpiration,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     cache: Cache,
                     trace: Trace,
                     statementBuilder: StatementBuilder,

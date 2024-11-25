@@ -68,7 +68,7 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDb'))
                 BEGIN
-	                CREATE DATABASE [RepoDb];
+                    CREATE DATABASE [RepoDb];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForMaster).EnsureOpen())
             {
@@ -174,13 +174,13 @@ namespace RepoDb.IntegrationTests.Setup
                         (
                             [Id] BIGINT NOT NULL,
                             [RowGuid] UNIQUEIDENTIFIER NOT NULL,
-		                    [ColumnBit] BIT NULL,
-		                    [ColumnDateTime] DATETIME NULL,
-		                    [ColumnDateTime2] DATETIME2(7) NULL,
-		                    [ColumnDecimal] DECIMAL(18, 2) NULL,
-		                    [ColumnFloat] FLOAT NULL,
-		                    [ColumnInt] INT NULL,
-		                    [ColumnNVarChar] NVARCHAR(MAX) NULL
+                            [ColumnBit] BIT NULL,
+                            [ColumnDateTime] DATETIME NULL,
+                            [ColumnDateTime2] DATETIME2(7) NULL,
+                            [ColumnDecimal] DECIMAL(18, 2) NULL,
+                            [ColumnFloat] FLOAT NULL,
+                            [ColumnInt] INT NULL,
+                            [ColumnNVarChar] NVARCHAR(MAX) NULL
                         );");
                 }
             }
@@ -197,18 +197,18 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'IdentityTable'))
                 BEGIN
-	                CREATE TABLE [sc].[IdentityTable]
-	                (
-		                [Id] BIGINT NOT NULL IDENTITY(1, 1),
+                    CREATE TABLE [sc].[IdentityTable]
+                    (
+                        [Id] BIGINT NOT NULL IDENTITY(1, 1),
                         [RowGuid] UNIQUEIDENTIFIER NOT NULL,
-		                [ColumnBit] BIT NULL,
-		                [ColumnDateTime] DATETIME NULL,
-		                [ColumnDateTime2] DATETIME2(7) NULL,
-		                [ColumnDecimal] DECIMAL(18, 2) NULL,
-		                [ColumnFloat] FLOAT NULL,
-		                [ColumnInt] INT NULL,
-		                [ColumnNVarChar] NVARCHAR(MAX) NULL,
-	                ) ON [PRIMARY];
+                        [ColumnBit] BIT NULL,
+                        [ColumnDateTime] DATETIME NULL,
+                        [ColumnDateTime2] DATETIME2(7) NULL,
+                        [ColumnDecimal] DECIMAL(18, 2) NULL,
+                        [ColumnFloat] FLOAT NULL,
+                        [ColumnInt] INT NULL,
+                        [ColumnNVarChar] NVARCHAR(MAX) NULL,
+                    ) ON [PRIMARY];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
             {
@@ -223,21 +223,21 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'NonIdentityTable'))
                 BEGIN
-	                CREATE TABLE [dbo].[NonIdentityTable]
-	                (
-		                [Id] UNIQUEIDENTIFIER NOT NULL,
-		                [ColumnBit] BIT NULL,
-		                [ColumnDateTime] DATETIME NULL,
-		                [ColumnDateTime2] DATETIME2(7) NULL,
-		                [ColumnDecimal] DECIMAL(18, 2) NULL,
-		                [ColumnFloat] FLOAT NULL,
-		                [ColumnInt] INT NULL,
-		                [ColumnNVarChar] NVARCHAR(MAX) NULL,
-		                CONSTRAINT [NonIdentityTable_$Id] PRIMARY KEY 
-		                (
-			                [Id] ASC
-		                )
-	                ) ON [PRIMARY];
+                    CREATE TABLE [dbo].[NonIdentityTable]
+                    (
+                        [Id] UNIQUEIDENTIFIER NOT NULL,
+                        [ColumnBit] BIT NULL,
+                        [ColumnDateTime] DATETIME NULL,
+                        [ColumnDateTime2] DATETIME2(7) NULL,
+                        [ColumnDecimal] DECIMAL(18, 2) NULL,
+                        [ColumnFloat] FLOAT NULL,
+                        [ColumnInt] INT NULL,
+                        [ColumnNVarChar] NVARCHAR(MAX) NULL,
+                        CONSTRAINT [NonIdentityTable_$Id] PRIMARY KEY 
+                        (
+                            [Id] ASC
+                        )
+                    ) ON [PRIMARY];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
             {
@@ -252,14 +252,14 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'Unorganized Table'))
                 BEGIN
-	                CREATE TABLE [dbo].[Unorganized Table]
-	                (
-		                [Id] BIGINT NOT NULL IDENTITY(1, 1),
+                    CREATE TABLE [dbo].[Unorganized Table]
+                    (
+                        [Id] BIGINT NOT NULL IDENTITY(1, 1),
                         [Session Id] UNIQUEIDENTIFIER NOT NULL,
-		                [Column Int] INT NULL,
-		                [Column/NVarChar] NVARCHAR(128) NULL,
-		                [Column.DateTime] DATETIME2(7) NULL
-	                ) ON [PRIMARY];
+                        [Column Int] INT NULL,
+                        [Column/NVarChar] NVARCHAR(128) NULL,
+                        [Column.DateTime] DATETIME2(7) NULL
+                    ) ON [PRIMARY];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
             {
@@ -274,14 +274,14 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'Dotted.Table'))
                 BEGIN
-	                CREATE TABLE [dbo].[Dotted.Table]
-	                (
-		                [Id] BIGINT NOT NULL IDENTITY(1, 1),
+                    CREATE TABLE [dbo].[Dotted.Table]
+                    (
+                        [Id] BIGINT NOT NULL IDENTITY(1, 1),
                         [SessionId] UNIQUEIDENTIFIER NOT NULL,
-		                [Column.Int] INT NULL,
-		                [Column.NVarChar] NVARCHAR(128) NULL,
-		                [Column.DateTime] DATETIME2(7) NULL
-	                ) ON [PRIMARY];
+                        [Column.Int] INT NULL,
+                        [Column.NVarChar] NVARCHAR(128) NULL,
+                        [Column.DateTime] DATETIME2(7) NULL
+                    ) ON [PRIMARY];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
             {
@@ -296,48 +296,48 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'CompleteTable'))
                 BEGIN
-	                CREATE TABLE [dbo].[CompleteTable]
-	                (
-		                [SessionId] UNIQUEIDENTIFIER NOT NULL,
-		                [ColumnBigInt] BIGINT NULL,
-		                [ColumnBinary] BINARY(4000) NULL,
-		                [ColumnBit] BIT NULL,
-		                [ColumnChar] CHAR(32) NULL,
-		                [ColumnDate] DATE NULL,
-		                [ColumnDateTime] DATETIME NULL,
-		                [ColumnDateTime2] DATETIME2(7) NULL,
-		                [ColumnDateTimeOffset] DATETIMEOFFSET(7) NULL,
-		                [ColumnDecimal] DECIMAL(18, 2) NULL,
-		                [ColumnFloat] FLOAT NULL,
-		                [ColumnGeography] GEOGRAPHY NULL,
-		                [ColumnGeometry] GEOMETRY NULL,
-		                [ColumnHierarchyId] HIERARCHYID NULL,
-		                [ColumnImage] IMAGE NULL,
-		                [ColumnInt] INT NULL,
-		                [ColumnMoney] MONEY NULL,
-		                [ColumnNChar] NCHAR(32) NULL,
-		                [ColumnNText] NTEXT NULL,
-		                [ColumnNumeric] NUMERIC(18, 2) NULL,
-		                [ColumnNVarChar] NVARCHAR(MAX) NULL,
-		                [ColumnReal] REAL NULL,
-		                [ColumnSmallDateTime] SMALLDATETIME NULL,
-		                [ColumnSmallInt] SMALLINT NULL,
-		                [ColumnSmallMoney] SMALLMONEY NULL,
-		                [ColumnSqlVariant] SQL_VARIANT NULL,
-		                [ColumnText] TEXT NULL,
-		                [ColumnTime] TIME(7) NULL,
-		                [ColumnTimestamp] TIMESTAMP NULL,
-		                [ColumnTinyInt] TINYINT NULL,
-		                [ColumnUniqueIdentifier] UNIQUEIDENTIFIER NULL,
-		                [ColumnVarBinary] VARBINARY(MAX) NULL,
-		                [ColumnVarChar] VARCHAR(MAX) NULL,
-		                [ColumnXml] XML NULL,
-		                CONSTRAINT [SessionId] PRIMARY KEY 
-		                (
-			                [SessionId] ASC
-		                )
-	                ) ON [PRIMARY];
-	                ALTER TABLE [dbo].[CompleteTable] ADD CONSTRAINT [DF_CompleteTable_SessionId] DEFAULT (NEWID()) FOR [SessionId];
+                    CREATE TABLE [dbo].[CompleteTable]
+                    (
+                        [SessionId] UNIQUEIDENTIFIER NOT NULL,
+                        [ColumnBigInt] BIGINT NULL,
+                        [ColumnBinary] BINARY(4000) NULL,
+                        [ColumnBit] BIT NULL,
+                        [ColumnChar] CHAR(32) NULL,
+                        [ColumnDate] DATE NULL,
+                        [ColumnDateTime] DATETIME NULL,
+                        [ColumnDateTime2] DATETIME2(7) NULL,
+                        [ColumnDateTimeOffset] DATETIMEOFFSET(7) NULL,
+                        [ColumnDecimal] DECIMAL(18, 2) NULL,
+                        [ColumnFloat] FLOAT NULL,
+                        [ColumnGeography] GEOGRAPHY NULL,
+                        [ColumnGeometry] GEOMETRY NULL,
+                        [ColumnHierarchyId] HIERARCHYID NULL,
+                        [ColumnImage] IMAGE NULL,
+                        [ColumnInt] INT NULL,
+                        [ColumnMoney] MONEY NULL,
+                        [ColumnNChar] NCHAR(32) NULL,
+                        [ColumnNText] NTEXT NULL,
+                        [ColumnNumeric] NUMERIC(18, 2) NULL,
+                        [ColumnNVarChar] NVARCHAR(MAX) NULL,
+                        [ColumnReal] REAL NULL,
+                        [ColumnSmallDateTime] SMALLDATETIME NULL,
+                        [ColumnSmallInt] SMALLINT NULL,
+                        [ColumnSmallMoney] SMALLMONEY NULL,
+                        [ColumnSqlVariant] SQL_VARIANT NULL,
+                        [ColumnText] TEXT NULL,
+                        [ColumnTime] TIME(7) NULL,
+                        [ColumnTimestamp] TIMESTAMP NULL,
+                        [ColumnTinyInt] TINYINT NULL,
+                        [ColumnUniqueIdentifier] UNIQUEIDENTIFIER NULL,
+                        [ColumnVarBinary] VARBINARY(MAX) NULL,
+                        [ColumnVarChar] VARCHAR(MAX) NULL,
+                        [ColumnXml] XML NULL,
+                        CONSTRAINT [SessionId] PRIMARY KEY 
+                        (
+                            [SessionId] ASC
+                        )
+                    ) ON [PRIMARY];
+                    ALTER TABLE [dbo].[CompleteTable] ADD CONSTRAINT [DF_CompleteTable_SessionId] DEFAULT (NEWID()) FOR [SessionId];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
             {
@@ -352,25 +352,25 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'PropertyHandler'))
                 BEGIN
-	                CREATE TABLE [dbo].[PropertyHandler]
-	                (
-		                [Id] BIGINT NOT NULL IDENTITY(1, 1),
-		                [ColumnNVarChar] NVARCHAR(MAX) NULL,
-		                [ColumnInt] INT NULL,
-		                [ColumnIntNotNull] INT NOT NULL,
-		                [ColumnDecimal] DECIMAL(18, 2) NULL,
-		                [ColumnDecimalNotNull] DECIMAL(18, 2) NOT NULL,
-		                [ColumnFloat] FLOAT NULL,
-		                [ColumnFloatNotNull] FLOAT NOT NULL,
-		                [ColumnDateTime] DATETIME NULL,
-		                [ColumnDateTimeNotNull] DATETIME NOT NULL,
-		                [ColumnDateTime2] DATETIME2(7) NULL,
-		                [ColumnDateTime2NotNull] DATETIME2(7) NOT NULL,
+                    CREATE TABLE [dbo].[PropertyHandler]
+                    (
+                        [Id] BIGINT NOT NULL IDENTITY(1, 1),
+                        [ColumnNVarChar] NVARCHAR(MAX) NULL,
+                        [ColumnInt] INT NULL,
+                        [ColumnIntNotNull] INT NOT NULL,
+                        [ColumnDecimal] DECIMAL(18, 2) NULL,
+                        [ColumnDecimalNotNull] DECIMAL(18, 2) NOT NULL,
+                        [ColumnFloat] FLOAT NULL,
+                        [ColumnFloatNotNull] FLOAT NOT NULL,
+                        [ColumnDateTime] DATETIME NULL,
+                        [ColumnDateTimeNotNull] DATETIME NOT NULL,
+                        [ColumnDateTime2] DATETIME2(7) NULL,
+                        [ColumnDateTime2NotNull] DATETIME2(7) NOT NULL,
                         CONSTRAINT [pk_PropertyHandler] PRIMARY KEY CLUSTERED 
                         (
-	                        [Id] ASC
+                            [Id] ASC
                         )
-	                ) ON [PRIMARY];
+                    ) ON [PRIMARY];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
             {
@@ -385,12 +385,12 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'NonKeyedTable'))
                 BEGIN
-	                CREATE TABLE [dbo].[NonKeyedTable]
-	                (
-		                [ColumnDateTime2] DATETIME2(7) NULL,
-		                [ColumnInt] INT NULL,
-		                [ColumnNVarChar] NVARCHAR(MAX) NULL,
-	                ) ON [PRIMARY];
+                    CREATE TABLE [dbo].[NonKeyedTable]
+                    (
+                        [ColumnDateTime2] DATETIME2(7) NULL,
+                        [ColumnInt] INT NULL,
+                        [ColumnNVarChar] NVARCHAR(MAX) NULL,
+                    ) ON [PRIMARY];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
             {
@@ -413,7 +413,7 @@ namespace RepoDb.IntegrationTests.Setup
                 if (exists == null)
                 {
                     var commandText = @"CREATE PROCEDURE [dbo].[sp_get_identity_tables]
-	                    AS
+                        AS
                         BEGIN
                             SELECT * FROM [sc].[IdentityTable];
                         END";
@@ -436,7 +436,7 @@ namespace RepoDb.IntegrationTests.Setup
                         (
                             @Id INT
                         )
-	                    AS
+                        AS
                         BEGIN
                             SELECT * FROM [sc].[IdentityTable] WHERE Id = @Id;
                         END";
@@ -456,7 +456,7 @@ namespace RepoDb.IntegrationTests.Setup
                 if (exists == null)
                 {
                     var commandText = @"CREATE PROCEDURE [dbo].[sp_get_database_date_time]
-	                    AS
+                        AS
                         BEGIN
                             SELECT GETUTCDATE() AS [Value];
                         END";
@@ -480,7 +480,7 @@ namespace RepoDb.IntegrationTests.Setup
                             @Value1 INT,
                             @Value2 INT
                         )
-	                    AS
+                        AS
                         BEGIN
                             SELECT @Value1 * @Value2 AS [Value];
                         END";
@@ -505,7 +505,7 @@ namespace RepoDb.IntegrationTests.Setup
                             @Value2 INT,
                             @Output INT OUTPUT
                         )
-	                    AS
+                        AS
                         BEGIN
                             SET @Output = (@Value1 * @Value2);
                             SELECT @Output;
@@ -531,7 +531,7 @@ namespace RepoDb.IntegrationTests.Setup
                             @ServerName NVARCHAR(256) OUTPUT,
                             @DateTimeUtc DATETIME2(7) OUTPUT
                         )
-	                    AS
+                        AS
                         BEGIN
                             SET @UserId = 1000;
                             SET @ServerName = 'ServerName';
@@ -559,7 +559,7 @@ namespace RepoDb.IntegrationTests.Setup
                         (
                             @Table IdentityTableType READONLY
                         )
-	                    AS
+                        AS
                         BEGIN
                             INSERT INTO [sc].[IdentityTable]
                             (

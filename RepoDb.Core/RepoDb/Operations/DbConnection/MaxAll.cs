@@ -24,7 +24,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -33,7 +33,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -43,7 +43,7 @@ namespace RepoDb
                 field: field,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -57,7 +57,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -66,7 +66,7 @@ namespace RepoDb
             Expression<Func<TEntity, object>> field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -76,7 +76,7 @@ namespace RepoDb
                 field: Field.Parse<TEntity>(field).First(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -91,7 +91,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -100,7 +100,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -110,7 +110,7 @@ namespace RepoDb
                 field: field,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -125,7 +125,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -134,7 +134,7 @@ namespace RepoDb
             Expression<Func<TEntity, TResult>> field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -144,7 +144,7 @@ namespace RepoDb
                 field: Field.Parse<TEntity, TResult>(field).First(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -159,7 +159,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -168,7 +168,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -188,7 +188,7 @@ namespace RepoDb
                 request: request,
                 param: param,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace);
         }
@@ -205,7 +205,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -215,7 +215,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -226,7 +226,7 @@ namespace RepoDb
                 field: field,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -241,7 +241,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -251,7 +251,7 @@ namespace RepoDb
             Expression<Func<TEntity, object>> field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -262,7 +262,7 @@ namespace RepoDb
                 field: Field.Parse<TEntity>(field).First(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -278,7 +278,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -288,7 +288,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -299,7 +299,7 @@ namespace RepoDb
                 field: field,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -315,7 +315,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -325,7 +325,7 @@ namespace RepoDb
             Expression<Func<TEntity, TResult>> field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -336,7 +336,7 @@ namespace RepoDb
                 field: Field.Parse<TEntity, TResult>(field).First(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -352,7 +352,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -362,7 +362,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -383,7 +383,7 @@ namespace RepoDb
                 request: request,
                 param: param,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 cancellationToken: cancellationToken);
@@ -401,7 +401,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -411,7 +411,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -421,7 +421,7 @@ namespace RepoDb
                 field: field,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -436,7 +436,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -446,7 +446,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -456,7 +456,7 @@ namespace RepoDb
                 field: field,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -471,7 +471,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -481,7 +481,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -499,7 +499,7 @@ namespace RepoDb
                 request: request,
                 param: null,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace);
         }
@@ -516,7 +516,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -527,7 +527,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -538,7 +538,7 @@ namespace RepoDb
                 field: field,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -554,7 +554,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -565,7 +565,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -576,7 +576,7 @@ namespace RepoDb
                 field: field,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -592,7 +592,7 @@ namespace RepoDb
         /// <param name="field">The field to be maximized.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -603,7 +603,7 @@ namespace RepoDb
             Field field,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -622,7 +622,7 @@ namespace RepoDb
                 request: request,
                 param: null,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 cancellationToken: cancellationToken);
@@ -640,7 +640,7 @@ namespace RepoDb
         /// <param name="request">The actual <see cref="MaxAllRequest"/> object.</param>
         /// <param name="param">The mapped object parameters.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <returns>The max value of the target field.</returns>
@@ -648,7 +648,7 @@ namespace RepoDb
             MaxAllRequest request,
             object param,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null)
         {
@@ -664,10 +664,10 @@ namespace RepoDb
                 cacheKey: null,
                 cacheItemExpiration: null,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 cache: null,
-				trace: trace,
+                trace: trace,
                 entityType: request.Type,
                 dbFields: DbFieldCache.Get(connection, request.Name, transaction, true),
                 skipCommandArrayParametersCheck: true);
@@ -688,7 +688,7 @@ namespace RepoDb
         /// <param name="request">The actual <see cref="MaxAllRequest"/> object.</param>
         /// <param name="param">The mapped object parameters.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
@@ -697,7 +697,7 @@ namespace RepoDb
             MaxAllRequest request,
             object param,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.MaxAll,
+            string traceKey = TraceKeys.MaxAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             CancellationToken cancellationToken = default)

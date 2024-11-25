@@ -499,10 +499,10 @@ namespace RepoDb
             // Compose
             var commandText = @$"WITH CTE AS
 (
-	SELECT -1 AS ""Index"", -1 AS ""Identity""
+    SELECT -1 AS ""Index"", -1 AS ""Identity""
 )
 SELECT ""Index""
-	, ""Identity""
+    , ""Identity""
 INTO TEMPORARY {returnIdentityTableName}
 FROM CTE
 WHERE 1 = 0;";
@@ -543,18 +543,18 @@ WHERE 1 = 0;";
             // Compose
             var commandText = @$"WITH CTE AS
 (
-	SELECT ROW_NUMBER() OVER(PARTITION BY S.{orderColumnName} ORDER BY T.{idColumnName} DESC) AS ""RowNumber"",
-		S.{orderColumnName} AS ""Index"", T.{idColumnName} AS ""Identity""
-	FROM {sourceTableName.AsQuoted(true, dbSetting)} AS S
-	LEFT JOIN {destinationTableName.AsQuoted(true, dbSetting)} AS T
-	ON ({qualifiers
+    SELECT ROW_NUMBER() OVER(PARTITION BY S.{orderColumnName} ORDER BY T.{idColumnName} DESC) AS ""RowNumber"",
+        S.{orderColumnName} AS ""Index"", T.{idColumnName} AS ""Identity""
+    FROM {sourceTableName.AsQuoted(true, dbSetting)} AS S
+    LEFT JOIN {destinationTableName.AsQuoted(true, dbSetting)} AS T
+    ON ({qualifiers
             .Select(
                 field =>
                     field.AsJoinQualifier("T", "S", true, dbSetting))
             .Join(" AND ")})
 )
 SELECT ""Index""
-	, ""Identity""
+    , ""Identity""
 INTO TEMPORARY {returnIdentityTableName}
 FROM CTE
 /*WHERE ""RowNumber"" = 1*/
@@ -724,8 +724,8 @@ ORDER BY ""Index"";";
             // Compose the command text (CTEs)
             var commandText = @$"WITH CTE_Insert AS
 (
-	INSERT INTO {destinationTableName} ({targetFields})
-	SELECT {sourceFields}
+    INSERT INTO {destinationTableName} ({targetFields})
+    SELECT {sourceFields}
     FROM {sourceTableName} AS S
     LEFT JOIN {destinationTableName} AS T ON {joinQualifiers}
     WHERE {whereQualifiers}
@@ -735,13 +735,13 @@ ORDER BY ""Index"";";
 CTE_Destination AS
 (
     SELECT ROW_NUMBER() OVER(ORDER BY {identityName}) AS ""RowNumber""
-		, {identityName} AS ""Identity""
+        , {identityName} AS ""Identity""
     FROM CTE_Insert
 ),
 CTE_Source AS
 (
     SELECT ROW_NUMBER() OVER(ORDER BY ""Index"") AS ""RowNumber""
-		, ""Index""
+        , ""Index""
     FROM {returnIdentityTableName}
     WHERE ""Identity"" IS NULL /* This is the trick */
 )
@@ -751,7 +751,7 @@ INSERT INTO {returnIdentityTableName}
     , ""Identity""
 )
 SELECT S.""Index""
-	, T.""Identity""
+    , T.""Identity""
 FROM CTE_Destination T
 INNER JOIN CTE_Source S ON S.""RowNumber"" = T.""RowNumber""
 ON CONFLICT(""Index"") DO UPDATE

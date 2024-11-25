@@ -59,7 +59,7 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
                 BEGIN
-	                CREATE DATABASE [RepoDbTest];
+                    CREATE DATABASE [RepoDbTest];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForMaster).EnsureOpen())
             {
@@ -97,23 +97,23 @@ namespace RepoDb.IntegrationTests.Setup
         {
             var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'BulkOperationIdentityTable'))
                 BEGIN
-	                CREATE TABLE [dbo].[BulkOperationIdentityTable]
-	                (
-		                [Id] BIGINT NOT NULL IDENTITY(1, 1),
+                    CREATE TABLE [dbo].[BulkOperationIdentityTable]
+                    (
+                        [Id] BIGINT NOT NULL IDENTITY(1, 1),
                         [RowGuid] UNIQUEIDENTIFIER NOT NULL,
-		                [ColumnBit] BIT NULL,
-		                [ColumnDateTime] DATETIME NULL,
-		                [ColumnDateTime2] DATETIME2(7) NULL,
-		                [ColumnDecimal] DECIMAL(18, 2) NULL,
-		                [ColumnFloat] FLOAT NULL,
-		                [ColumnInt] INT NULL,
-		                [ColumnNVarChar] NVARCHAR(MAX) NULL,
+                        [ColumnBit] BIT NULL,
+                        [ColumnDateTime] DATETIME NULL,
+                        [ColumnDateTime2] DATETIME2(7) NULL,
+                        [ColumnDecimal] DECIMAL(18, 2) NULL,
+                        [ColumnFloat] FLOAT NULL,
+                        [ColumnInt] INT NULL,
+                        [ColumnNVarChar] NVARCHAR(MAX) NULL,
                         CONSTRAINT [PK_BulkOperationIdentityTable] PRIMARY KEY CLUSTERED 
                         (
-	                        [Id] ASC
+                            [Id] ASC
                         )
                         WITH (FILLFACTOR = 90) ON [PRIMARY]
-	                ) ON [PRIMARY];
+                    ) ON [PRIMARY];
                 END";
             using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
             {

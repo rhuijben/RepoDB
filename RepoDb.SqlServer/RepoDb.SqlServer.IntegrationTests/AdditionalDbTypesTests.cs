@@ -1,9 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.SqlServer.IntegrationTests.Setup;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepoDb.SqlServer.IntegrationTests.Setup;
 
 namespace RepoDb.SqlServer.IntegrationTests
 {
@@ -33,9 +33,9 @@ namespace RepoDb.SqlServer.IntegrationTests
                         [DateOnly]              DATE NOT NULL,
                         [DateOnlyNullable]      DATE NULL,
                         CONSTRAINT [{nameof(DateOnlyTestData)}_Id] PRIMARY KEY 
-		                (
-			                [Id] ASC
-		                )
+                        (
+                            [Id] ASC
+                        )
                     ) ON [PRIMARY]
                 END");
 

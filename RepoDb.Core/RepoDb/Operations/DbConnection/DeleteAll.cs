@@ -34,7 +34,7 @@ namespace RepoDb
         /// <param name="entities">The list of data entity objects to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -44,7 +44,7 @@ namespace RepoDb
             IEnumerable<TEntity> entities,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -58,7 +58,7 @@ namespace RepoDb
                 keys: keys,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -74,7 +74,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -84,7 +84,7 @@ namespace RepoDb
             IEnumerable<TKey> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -95,7 +95,7 @@ namespace RepoDb
                 keys: keys?.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -110,7 +110,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -120,7 +120,7 @@ namespace RepoDb
             IEnumerable<object> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -131,7 +131,7 @@ namespace RepoDb
                 keys: keys,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -145,7 +145,7 @@ namespace RepoDb
         /// <param name="entities">The list of data entity objects to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -154,7 +154,7 @@ namespace RepoDb
             IEnumerable<TEntity> entities,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -168,7 +168,7 @@ namespace RepoDb
                 keys: keys?.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -183,7 +183,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -192,7 +192,7 @@ namespace RepoDb
             IEnumerable<TKey> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -203,7 +203,7 @@ namespace RepoDb
                 keys: keys?.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -217,7 +217,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -226,7 +226,7 @@ namespace RepoDb
             IEnumerable<object> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -237,7 +237,7 @@ namespace RepoDb
                 keys: keys,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -250,7 +250,7 @@ namespace RepoDb
         /// <param name="connection">The connection object to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -258,7 +258,7 @@ namespace RepoDb
         public static int DeleteAll<TEntity>(this IDbConnection connection,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -267,7 +267,7 @@ namespace RepoDb
             return DeleteAllInternal<TEntity>(connection: connection,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -280,7 +280,7 @@ namespace RepoDb
         /// <param name="connection">The connection object to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -288,7 +288,7 @@ namespace RepoDb
         internal static int DeleteAllInternal<TEntity>(this IDbConnection connection,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -305,7 +305,7 @@ namespace RepoDb
             return DeleteAllInternalBase(connection: connection,
                 request: request,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace);
         }
@@ -323,7 +323,7 @@ namespace RepoDb
         /// <param name="entities">The list of data entity objects to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -334,7 +334,7 @@ namespace RepoDb
             IEnumerable<TEntity> entities,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -349,7 +349,7 @@ namespace RepoDb
                 keys: keys,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -366,7 +366,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -377,7 +377,7 @@ namespace RepoDb
             IEnumerable<TKey> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -389,7 +389,7 @@ namespace RepoDb
                 keys: keys?.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -405,7 +405,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -416,7 +416,7 @@ namespace RepoDb
             IEnumerable<object> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -428,7 +428,7 @@ namespace RepoDb
                 keys: keys,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -443,7 +443,7 @@ namespace RepoDb
         /// <param name="entities">The list of data entity objects to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -453,7 +453,7 @@ namespace RepoDb
             IEnumerable<TEntity> entities,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -468,7 +468,7 @@ namespace RepoDb
                 keys: keys?.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -484,7 +484,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -494,7 +494,7 @@ namespace RepoDb
             IEnumerable<TKey> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -506,7 +506,7 @@ namespace RepoDb
                 keys: keys?.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -521,7 +521,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -531,7 +531,7 @@ namespace RepoDb
             IEnumerable<object> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -543,7 +543,7 @@ namespace RepoDb
                 keys: keys,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -557,7 +557,7 @@ namespace RepoDb
         /// <param name="connection">The connection object to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -566,7 +566,7 @@ namespace RepoDb
         public static Task<int> DeleteAllAsync<TEntity>(this IDbConnection connection,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -576,7 +576,7 @@ namespace RepoDb
             return DeleteAllAsyncInternal<TEntity>(connection: connection,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -590,7 +590,7 @@ namespace RepoDb
         /// <param name="connection">The connection object to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -599,7 +599,7 @@ namespace RepoDb
         internal static Task<int> DeleteAllAsyncInternal<TEntity>(this IDbConnection connection,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -617,7 +617,7 @@ namespace RepoDb
             return DeleteAllAsyncInternalBase(connection: connection,
                 request: request,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 cancellationToken: cancellationToken);
@@ -635,7 +635,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -645,7 +645,7 @@ namespace RepoDb
             IEnumerable<object> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -655,7 +655,7 @@ namespace RepoDb
                 keys: keys,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -668,7 +668,7 @@ namespace RepoDb
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -677,7 +677,7 @@ namespace RepoDb
             string tableName,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -686,7 +686,7 @@ namespace RepoDb
                 tableName: tableName,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -699,7 +699,7 @@ namespace RepoDb
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -708,7 +708,7 @@ namespace RepoDb
             string tableName,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -724,7 +724,7 @@ namespace RepoDb
             return DeleteAllInternalBase(connection: connection,
                 request: request,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace);
         }
@@ -737,7 +737,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -747,7 +747,7 @@ namespace RepoDb
             IEnumerable<object> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -783,7 +783,7 @@ namespace RepoDb
                             where: new QueryGroup(field),
                             hints: hints,
                             commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                             transaction: transaction,
                             trace: trace,
                             statementBuilder: statementBuilder);
@@ -822,7 +822,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -833,7 +833,7 @@ namespace RepoDb
             IEnumerable<object> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -844,7 +844,7 @@ namespace RepoDb
                 keys: keys,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -858,7 +858,7 @@ namespace RepoDb
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -868,7 +868,7 @@ namespace RepoDb
             string tableName,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -878,7 +878,7 @@ namespace RepoDb
                 tableName: tableName,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -892,7 +892,7 @@ namespace RepoDb
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -902,7 +902,7 @@ namespace RepoDb
             string tableName,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -919,7 +919,7 @@ namespace RepoDb
             return DeleteAllAsyncInternalBase(connection: connection,
                 request: request,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 cancellationToken: cancellationToken);
@@ -933,7 +933,7 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="statementBuilder">The statement builder object to be used.</param>
@@ -944,7 +944,7 @@ namespace RepoDb
             IEnumerable<object> keys,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -981,7 +981,7 @@ namespace RepoDb
                             where: new QueryGroup(field),
                             hints: hints,
                             commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                             transaction: transaction,
                             trace: trace,
                             statementBuilder: statementBuilder,
@@ -1019,14 +1019,14 @@ namespace RepoDb
         /// <param name="connection">The connection object to be used.</param>
         /// <param name="request">The actual <see cref="DeleteAllRequest"/> object.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         internal static int DeleteAllInternalBase(this IDbConnection connection,
             DeleteAllRequest request,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null)
         {
@@ -1040,7 +1040,7 @@ namespace RepoDb
                 param: null,
                 commandType: commandType,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 entityType: request.Type,
@@ -1061,7 +1061,7 @@ namespace RepoDb
         /// <param name="connection">The connection object to be used.</param>
         /// <param name="request">The actual <see cref="DeleteAllRequest"/> object.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+        /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="trace">The trace object to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
@@ -1069,7 +1069,7 @@ namespace RepoDb
         internal static async Task<int> DeleteAllAsyncInternalBase(this IDbConnection connection,
             DeleteAllRequest request,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.DeleteAll,
+            string traceKey = TraceKeys.DeleteAll,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             CancellationToken cancellationToken = default)

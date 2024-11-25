@@ -16,17 +16,17 @@ namespace RepoDb
         /// <param name="entities">The list of data entity objects to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         public int DeleteAll(IEnumerable<TEntity> entities,
             string? hints = null,
             string traceKey = TraceKeys.DeleteAll,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.DeleteAll<TEntity>(entities: entities,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -36,17 +36,17 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         public int DeleteAll<TKey>(IEnumerable<TKey> keys,
             string? hints = null,
             string traceKey = TraceKeys.DeleteAll,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.DeleteAll<TEntity, TKey>(keys: keys,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -55,33 +55,33 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         public int DeleteAll(IEnumerable<object> keys,
             string? hints = null,
             string traceKey = TraceKeys.DeleteAll,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.DeleteAll<TEntity>(keys: keys,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
         /// Delete all the rows from the table.
         /// </summary>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         public int DeleteAll(string? hints = null,
             string traceKey = TraceKeys.DeleteAll,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.DeleteAll<TEntity>(hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         #endregion
@@ -94,19 +94,19 @@ namespace RepoDb
         /// <param name="entities">The list of data entity objects to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         public Task<int> DeleteAllAsync(IEnumerable<TEntity> entities,
             string? hints = null,
             string traceKey = TraceKeys.DeleteAll,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.DeleteAllAsync<TEntity>(entities: entities,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -117,19 +117,19 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         public Task<int> DeleteAllAsync<TKey>(IEnumerable<TKey> keys,
             string? hints = null,
             string traceKey = TraceKeys.DeleteAll,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.DeleteAllAsync<TEntity, TKey>(keys: keys,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -139,19 +139,19 @@ namespace RepoDb
         /// <param name="keys">The list of the keys to be deleted.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         public Task<int> DeleteAllAsync(IEnumerable<object> keys,
             string? hints = null,
             string traceKey = TraceKeys.DeleteAll,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.DeleteAllAsync<TEntity>(keys: keys,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -159,18 +159,18 @@ namespace RepoDb
         /// Delete all the rows from the table in an asynchronous way.
         /// </summary>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows that has been deleted from the table.</returns>
         public Task<int> DeleteAllAsync(string? hints = null,
             string traceKey = TraceKeys.DeleteAll,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.DeleteAllAsync<TEntity>(hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
