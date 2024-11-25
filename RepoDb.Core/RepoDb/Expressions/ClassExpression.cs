@@ -83,7 +83,7 @@ namespace RepoDb
             GetPropertyValuesCache<TEntity, TResult>.Do(entities, property);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -93,7 +93,7 @@ namespace RepoDb
             private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="property"></param>
             /// <returns></returns>
@@ -118,7 +118,7 @@ namespace RepoDb
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="property"></param>
             private static void Guard(ClassProperty property)
@@ -137,7 +137,7 @@ namespace RepoDb
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="entities"></param>
             /// <param name="property"></param>
@@ -182,7 +182,7 @@ namespace RepoDb
             GetPropertiesCache<TEntity>.Do();
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class GetPropertiesCache<TEntity>
@@ -191,7 +191,7 @@ namespace RepoDb
             private static Func<IEnumerable<ClassProperty>> func;
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             private static Func<IEnumerable<ClassProperty>> GetFunc()
@@ -203,7 +203,7 @@ namespace RepoDb
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             public static IEnumerable<ClassProperty> Do()
@@ -230,7 +230,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class GetPropertiesValuesCache<TEntity>
@@ -239,7 +239,7 @@ namespace RepoDb
             private static Func<TEntity, IEnumerable<PropertyValue>> func;
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <returns></returns>
             private static Func<TEntity, IEnumerable<PropertyValue>> GetFunc()
@@ -276,7 +276,7 @@ namespace RepoDb
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="obj"></param>
             /// <returns></returns>

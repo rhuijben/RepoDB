@@ -209,7 +209,7 @@ namespace RepoDb
         #region BinaryBulkInsertBase<DbDataReader>
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -501,7 +501,7 @@ namespace RepoDb
         #region BinaryBulkInsertBaseAsync<DbDataReader>
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>

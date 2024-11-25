@@ -8,7 +8,7 @@ namespace RepoDb.Reflection
     internal partial class Compiler
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="entityType"></param>
         /// <param name="field"></param>
@@ -26,7 +26,7 @@ namespace RepoDb.Reflection
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="entityType"></param>
         /// <param name="property"></param>

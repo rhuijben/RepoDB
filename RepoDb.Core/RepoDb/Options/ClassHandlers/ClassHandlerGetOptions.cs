@@ -8,12 +8,12 @@ namespace RepoDb.Options
     public sealed class ClassHandlerGetOptions : ClassHandlerOptions
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private ClassHandlerGetOptions() { }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         internal ClassHandlerGetOptions(DbDataReader reader)
@@ -33,7 +33,7 @@ namespace RepoDb.Options
         #region Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>

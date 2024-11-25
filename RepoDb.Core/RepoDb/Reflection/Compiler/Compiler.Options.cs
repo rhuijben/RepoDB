@@ -4,14 +4,14 @@ using System.Reflection;
 namespace RepoDb.Reflection
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal partial class Compiler
     {
         #region ClassHandlers
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="readerExpression"></param>
         /// <returns></returns>
@@ -29,7 +29,7 @@ namespace RepoDb.Reflection
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="commandExpression"></param>
         /// <returns></returns>
@@ -51,7 +51,7 @@ namespace RepoDb.Reflection
         #region PropertyHandlers
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="readerExpression"></param>
         /// <param name="classProperty"></param>
@@ -62,7 +62,7 @@ namespace RepoDb.Reflection
                 classProperty == null ? null : Expression.Constant(classProperty));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="readerExpression"></param>
         /// <param name="classPropertyExpression"></param>
@@ -83,7 +83,7 @@ namespace RepoDb.Reflection
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterExpression"></param>
         /// <param name="classProperty"></param>
@@ -94,7 +94,7 @@ namespace RepoDb.Reflection
                 classProperty == null ? null : Expression.Constant(classProperty));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parameterExpression"></param>
         /// <param name="classPropertyExpression"></param>

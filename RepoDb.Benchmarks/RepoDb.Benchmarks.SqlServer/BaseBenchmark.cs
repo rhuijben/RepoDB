@@ -20,7 +20,7 @@ namespace RepoDb.Benchmarks.SqlServer
 
         [IterationSetup]
         public void IterationSetup() => CurrentId++;
-        
+
         protected void BaseSetup()
         {
             DatabaseHelper.Initialize(ElementsCount);

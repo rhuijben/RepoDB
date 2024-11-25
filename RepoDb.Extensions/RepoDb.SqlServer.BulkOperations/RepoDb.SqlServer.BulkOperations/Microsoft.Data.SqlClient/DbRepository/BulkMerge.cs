@@ -63,7 +63,7 @@ namespace RepoDb
         /// Bulk merge a list of data entity objects into the database.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity object.</typeparam>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="tableName">The target table for bulk-merge operation.</param>
         /// <param name="entities">The list of the data entities to be bulk-merged.</param>
         /// <param name="qualifiers">The expression for the qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
@@ -109,7 +109,7 @@ namespace RepoDb
         /// Bulk merge an instance of <see cref="DbDataReader"/> object into the database.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity object.</typeparam>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="reader">The <see cref="DbDataReader"/> object to be used in the bulk-merge operation.</param>
         /// <param name="qualifiers">The expression for the qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
         /// <param name="mappings">The list of the columns to be used for mappings. If this parameter is not set, then all columns will be used for mapping.</param>
@@ -152,7 +152,7 @@ namespace RepoDb
         /// <summary>
         /// Bulk merge an instance of <see cref="DbDataReader"/> object into the database.
         /// </summary>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="tableName">The target table for bulk-merge operation.</param>
         /// <param name="reader">The <see cref="DbDataReader"/> object to be used in the bulk-merge operation.</param>
         /// <param name="qualifiers">The qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
@@ -194,7 +194,7 @@ namespace RepoDb
         /// Bulk merge an instance of <see cref="DbDataReader"/> object into the database.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity object.</typeparam>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="dataTable">The <see cref="DataTable"/> object to be used in the bulk-merge operation.</param>
         /// <param name="qualifiers">The qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
         /// <param name="rowState">The state of the rows to be copied to the destination.</param>
@@ -239,7 +239,7 @@ namespace RepoDb
         /// <summary>
         /// Bulk merge an instance of <see cref="DbDataReader"/> object into the database.
         /// </summary>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="tableName">The target table for bulk-merge operation.</param>
         /// <param name="dataTable">The <see cref="DataTable"/> object to be used in the bulk-merge operation.</param>
         /// <param name="qualifiers">The qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
@@ -291,7 +291,7 @@ namespace RepoDb
         /// Bulk merge a list of data entity objects into the database in an asynchronous way.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity object.</typeparam>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="entities">The list of the data entities to be bulk-merged.</param>
         /// <param name="qualifiers">The expression for the qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
         /// <param name="mappings">The list of the columns to be used for mappings. If this parameter is not set, then all columns will be used for mapping.</param>
@@ -337,7 +337,7 @@ namespace RepoDb
         /// Bulk merge a list of data entity objects into the database in an asynchronous way.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity object.</typeparam>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="tableName">The target table for bulk-merge operation.</param>
         /// <param name="entities">The list of the data entities to be bulk-merged.</param>
         /// <param name="qualifiers">The expression for the qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
@@ -386,7 +386,7 @@ namespace RepoDb
         /// Bulk merge an instance of <see cref="DbDataReader"/> object into the database in an asynchronous way.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity object.</typeparam>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="reader">The <see cref="DbDataReader"/> object to be used in the bulk-merge operation.</param>
         /// <param name="qualifiers">The expression for the qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
         /// <param name="mappings">The list of the columns to be used for mappings. If this parameter is not set, then all columns will be used for mapping.</param>
@@ -432,7 +432,7 @@ namespace RepoDb
         /// <summary>
         /// Bulk merge an instance of <see cref="DbDataReader"/> object into the database in an asynchronous way.
         /// </summary>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="tableName">The target table for bulk-merge operation.</param>
         /// <param name="reader">The <see cref="DbDataReader"/> object to be used in the bulk-merge operation.</param>
         /// <param name="qualifiers">The qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
@@ -477,7 +477,7 @@ namespace RepoDb
         /// Bulk merge an instance of <see cref="DbDataReader"/> object into the database in an asynchronous way.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity object.</typeparam>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="dataTable">The <see cref="DataTable"/> object to be used in the bulk-merge operation.</param>
         /// <param name="qualifiers">The qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>
         /// <param name="rowState">The state of the rows to be copied to the destination.</param>
@@ -525,7 +525,7 @@ namespace RepoDb
         /// <summary>
         /// Bulk merge an instance of <see cref="DbDataReader"/> object into the database in an asynchronous way.
         /// </summary>
-        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param> 
+        /// <param name="repository">The instance of <see cref="DbRepository{TDbConnection}"/> object.</param>
         /// <param name="tableName">The target table for bulk-merge operation.</param>
         /// <param name="dataTable">The <see cref="DataTable"/> object to be used in the bulk-merge operation.</param>
         /// <param name="qualifiers">The qualifier fields to be used for this bulk-merge operation. This is defaulted to the primary key; if not present, then it will use the identity key.</param>

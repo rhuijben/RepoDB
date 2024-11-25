@@ -6,7 +6,7 @@
     public abstract class ClassHandlerOptions
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal ClassHandlerOptions()
         { }

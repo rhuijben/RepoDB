@@ -219,7 +219,7 @@ namespace RepoDb
         #region BinaryBulkMergeBase<DbDataReader>
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -522,7 +522,7 @@ namespace RepoDb
         #region BinaryBulkMergeBaseAsync<DbDataReader>
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>

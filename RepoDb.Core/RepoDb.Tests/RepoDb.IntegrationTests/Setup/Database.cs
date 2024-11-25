@@ -233,7 +233,7 @@ namespace RepoDb.IntegrationTests.Setup
                         [ColumnFloat] FLOAT NULL,
                         [ColumnInt] INT NULL,
                         [ColumnNVarChar] NVARCHAR(MAX) NULL,
-                        CONSTRAINT [NonIdentityTable_$Id] PRIMARY KEY 
+                        CONSTRAINT [NonIdentityTable_$Id] PRIMARY KEY
                         (
                             [Id] ASC
                         )
@@ -332,7 +332,7 @@ namespace RepoDb.IntegrationTests.Setup
                         [ColumnVarBinary] VARBINARY(MAX) NULL,
                         [ColumnVarChar] VARCHAR(MAX) NULL,
                         [ColumnXml] XML NULL,
-                        CONSTRAINT [SessionId] PRIMARY KEY 
+                        CONSTRAINT [SessionId] PRIMARY KEY
                         (
                             [SessionId] ASC
                         )
@@ -366,7 +366,7 @@ namespace RepoDb.IntegrationTests.Setup
                         [ColumnDateTimeNotNull] DATETIME NOT NULL,
                         [ColumnDateTime2] DATETIME2(7) NULL,
                         [ColumnDateTime2NotNull] DATETIME2(7) NOT NULL,
-                        CONSTRAINT [pk_PropertyHandler] PRIMARY KEY CLUSTERED 
+                        CONSTRAINT [pk_PropertyHandler] PRIMARY KEY CLUSTERED
                         (
                             [Id] ASC
                         )

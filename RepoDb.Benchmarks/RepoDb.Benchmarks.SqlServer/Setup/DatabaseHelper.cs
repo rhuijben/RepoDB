@@ -23,7 +23,7 @@ namespace RepoDb.Benchmarks.SqlServer.Setup
             const string commandText = @"DECLARE @i INT = 1;
                 WHILE @i <= @elementsCount
                 BEGIN
-                    INSERT INTO [dbo].[Person] (Name, Age, CreatedDateUtc) 
+                    INSERT INTO [dbo].[Person] (Name, Age, CreatedDateUtc)
                     VALUES (REPLICATE('x', 128), @i, GETDATE());
                     Set @i = @i + 1;
                 END";

@@ -71,7 +71,7 @@ namespace RepoDb
                 "DeclaringType = ", GetDeclaringType().FullName);
 
         /// <summary>
-        /// Gets the declaring parent type of the current property info. If the class inherits an interface, then this will return 
+        /// Gets the declaring parent type of the current property info. If the class inherits an interface, then this will return
         /// the derived class type instead (if there is), otherwise the <see cref="PropertyInfo.DeclaringType"/> property.
         /// </summary>
         /// <returns>The declaring type.</returns>

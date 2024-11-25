@@ -160,7 +160,7 @@ namespace RepoDb.SQLite.System.IntegrationTests.Setup
                  * No need to explicity specify the 'AUTOINCREMENT' keyword to avoid extra CPU and memory space.
                  * Link: https://sqlite.org/autoinc.html
                  */
-                connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS [SdsCompleteTable] 
+                connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS [SdsCompleteTable]
                     (
                         Id INTEGER PRIMARY KEY
                         , ColumnBigInt BIGINT
@@ -200,7 +200,7 @@ namespace RepoDb.SQLite.System.IntegrationTests.Setup
             }
             try
             {
-                connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS [SdsNonIdentityCompleteTable] 
+                connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS [SdsNonIdentityCompleteTable]
                     (
                         Id VARCHAR PRIMARY KEY
                         , ColumnBigInt BIGINT

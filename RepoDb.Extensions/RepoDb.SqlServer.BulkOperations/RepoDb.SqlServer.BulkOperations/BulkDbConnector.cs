@@ -35,7 +35,7 @@ namespace RepoDb
         {
             if (repository.ConnectionPersistency != ConnectionPersistency.PerCall) return;
 
-            if (transaction == null) 
+            if (transaction == null)
                 Connection?.Dispose();
         }
     }

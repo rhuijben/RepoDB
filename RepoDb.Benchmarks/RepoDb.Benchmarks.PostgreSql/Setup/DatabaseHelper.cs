@@ -6,7 +6,7 @@ namespace RepoDb.Benchmarks.PostgreSql.Setup
     public static class DatabaseHelper
     {
         public static string ConnectionStringForPostgres { get; private set; }
-        
+
         public static string ConnectionString { get; private set; }
 
         public static void Initialize(int elementsCount)
@@ -24,7 +24,7 @@ namespace RepoDb.Benchmarks.PostgreSql.Setup
 
         private static void FillData(int elementsCount)
         {
-            const string commandText = @"insert into public.""Person"" (""Id"", ""Name"", ""Age"", ""CreatedDateUtc"") 
+            const string commandText = @"insert into public.""Person"" (""Id"", ""Name"", ""Age"", ""CreatedDateUtc"")
                                             values (@element, REPEAT('x', 128), @element, NOW());";
 
             using var connection = new NpgsqlConnection(ConnectionString);
@@ -52,7 +52,7 @@ namespace RepoDb.Benchmarks.PostgreSql.Setup
         {
             using var connection = new NpgsqlConnection(ConnectionStringForPostgres);
             connection.Open();
-            
+
             var recordCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDb';");
             if (recordCount <= 0)
             {
@@ -73,9 +73,9 @@ namespace RepoDb.Benchmarks.PostgreSql.Setup
                         ""CreatedDateUtc"" TIMESTAMP(5),
                         CONSTRAINT ""CRIX_Person_Id"" PRIMARY KEY (""Id"")
                     )
-                    
+
                     TABLESPACE pg_default;
-                    
+
                     ALTER TABLE public.""Person""
                     OWNER to postgres;";
 
