@@ -144,6 +144,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RepoDb.SQLite.System", "Rep
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RepoDb.SqlServer", "RepoDb.SqlServer", "{13208D19-44A9-48B0-BB2F-45B1FA090D90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoDb.TestCore", "RepoDb.Core\RepDb.TestCore\RepoDb.TestCore.csproj", "{BB8C880B-3739-1EA4-69F7-E2A0CCAE5E4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -258,6 +260,10 @@ Global
 		{318B1EF1-25E7-47EE-98C2-21A486813AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{318B1EF1-25E7-47EE-98C2-21A486813AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{318B1EF1-25E7-47EE-98C2-21A486813AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB8C880B-3739-1EA4-69F7-E2A0CCAE5E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB8C880B-3739-1EA4-69F7-E2A0CCAE5E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB8C880B-3739-1EA4-69F7-E2A0CCAE5E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8C880B-3739-1EA4-69F7-E2A0CCAE5E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -299,6 +305,7 @@ Global
 		{2C23EF04-E3D3-44F0-820A-5CBA5A1D86F9} = {31B2008C-C79A-444C-B056-02D056950819}
 		{B4E1D3CC-D308-44FA-90DF-4398572DEFB5} = {31B2008C-C79A-444C-B056-02D056950819}
 		{318B1EF1-25E7-47EE-98C2-21A486813AE3} = {13208D19-44A9-48B0-BB2F-45B1FA090D90}
+		{BB8C880B-3739-1EA4-69F7-E2A0CCAE5E4C} = {6A7B318D-F0E6-4CFC-A7E8-DCDD1DF3F18F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D15A7161-5524-45B7-A22A-EA6C877AA840}

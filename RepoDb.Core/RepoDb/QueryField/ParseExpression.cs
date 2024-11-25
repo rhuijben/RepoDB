@@ -199,7 +199,7 @@ namespace RepoDb
                 if (value == null)
                     check = new QueryField(field, Operation.IsNull, value, null, false);
                 else if (GlobalConfiguration.Options.BooleanNotEquals)
-                    return new QueryGroup(new[] { check, new QueryField(field, Operation.IsNotNull, value, null, false) }, Conjunction.And);
+                    return new QueryGroup(new[] { check, new QueryField(field, Operation.IsNotNull, value, null, false) { canSkip = true } }, Conjunction.And);
             }
             else if (operation == Operation.NotEqual)
             {
@@ -208,7 +208,7 @@ namespace RepoDb
                 else if (GlobalConfiguration.Options.BooleanNotEquals)
                 {
                     // X != @Y OR X is NULL
-                    return new QueryGroup(new[] { check, new QueryField(field, Operation.IsNull, value, null, false) }, Conjunction.Or);
+                    return new QueryGroup(new[] { check, new QueryField(field, Operation.IsNull, value, null, false) { canSkip = true } }, Conjunction.Or);
                 }
             }
 

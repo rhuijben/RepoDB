@@ -714,14 +714,14 @@ namespace RepoDb
                 cacheKey: null,
                 cacheItemExpiration: null,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 cache: null,
-				trace: trace,
-                cancellationToken: cancellationToken,
+                trace: trace,
                 entityType: request.Type,
                 dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
-                skipCommandArrayParametersCheck: true);
+                skipCommandArrayParametersCheck: true,
+                cancellationToken: cancellationToken);
 
             // Result
             return result;

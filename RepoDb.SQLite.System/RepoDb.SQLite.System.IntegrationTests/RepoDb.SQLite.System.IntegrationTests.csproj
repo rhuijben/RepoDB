@@ -10,6 +10,7 @@
     <PackageReference Include="MSTest" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\RepoDb.Core\RepDb.TestCore\RepoDb.TestCore.csproj" />
     <ProjectReference Include="..\RepoDb.SQLite.System\RepoDb.SQLite.System.csproj" />
   </ItemGroup>
 </Project>

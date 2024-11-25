@@ -1,13 +1,13 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using RepoDb.Requests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
+using RepoDb.Requests;
 
 namespace RepoDb
 {
@@ -81,7 +81,7 @@ namespace RepoDb
         {
             return AverageInternal<TEntity>(connection: connection,
                 field: field,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -261,7 +261,7 @@ namespace RepoDb
         {
             return AverageInternal<TEntity>(connection: connection,
                 field: Field.Parse<TEntity>(field).First(),
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -494,7 +494,7 @@ namespace RepoDb
         {
             return AverageInternal<TEntity, TResult>(connection: connection,
                 field: field,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -679,7 +679,7 @@ namespace RepoDb
         {
             return AverageInternal<TEntity, TResult>(connection: connection,
                 field: Field.Parse<TEntity, TResult>(field).First(),
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -923,7 +923,7 @@ namespace RepoDb
         {
             return AverageAsyncInternal<TEntity>(connection: connection,
                 field: field,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -1118,7 +1118,7 @@ namespace RepoDb
         {
             return AverageAsyncInternal<TEntity>(connection: connection,
                 field: Field.Parse<TEntity>(field).First(),
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -1369,7 +1369,7 @@ namespace RepoDb
         {
             return AverageAsyncInternal<TEntity, TResult>(connection: connection,
                 field: field,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -1569,7 +1569,7 @@ namespace RepoDb
         {
             return AverageAsyncInternal<TEntity, TResult>(connection: connection,
                 field: Field.Parse<TEntity, TResult>(field).First(),
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -2636,7 +2636,7 @@ namespace RepoDb
                 traceKey: traceKey,
                 transaction: transaction,
                 cache: null,
-				trace: trace,
+                trace: trace,
                 entityType: request.Type,
                 dbFields: DbFieldCache.Get(connection, request.Name, transaction, true),
                 skipCommandArrayParametersCheck: true);
@@ -2685,11 +2685,11 @@ namespace RepoDb
                 traceKey: traceKey,
                 transaction: transaction,
                 cache: null,
-				trace: trace,
-                cancellationToken: cancellationToken,
+                trace: trace,
                 entityType: request.Type,
                 dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
-                skipCommandArrayParametersCheck: true);
+                skipCommandArrayParametersCheck: true,
+                cancellationToken: cancellationToken);
 
             // Result
             return result;

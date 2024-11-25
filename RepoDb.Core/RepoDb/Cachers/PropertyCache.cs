@@ -47,7 +47,7 @@ namespace RepoDb
         /// <param name="propertyName">The name of the property.</param>
         /// <param name="includeMappings">True to evaluate the existing mappings.</param>
         /// <returns>The instance of cached <see cref="ClassProperty"/> object.</returns>
-        public static ClassProperty? Get(Type entityType,
+        public static ClassProperty? Get(Type? entityType,
             string propertyName,
             bool includeMappings = false)
         {
@@ -80,7 +80,7 @@ namespace RepoDb
         /// <param name="field">The instance of the <see cref="Field"/> object.</param>
         /// <param name="includeMappings">True to evaluate the existing mappings.</param>
         /// <returns>The instance of cached <see cref="ClassProperty"/> object.</returns>
-        public static ClassProperty? Get(Type entityType,
+        public static ClassProperty? Get(Type? entityType,
             Field field,
             bool includeMappings = false)
         {
@@ -98,7 +98,7 @@ namespace RepoDb
         /// <param name="propertyInfo">The instance of the <see cref="PropertyInfo"/> object.</param>
         /// <param name="includeMappings">True to evaluate the existing mappings.</param>
         /// <returns>The instance of cached <see cref="ClassProperty"/> object.</returns>
-        internal static ClassProperty? Get(Type entityType,
+        internal static ClassProperty? Get(Type? entityType,
             PropertyInfo propertyInfo,
             bool includeMappings = false)
         {
@@ -123,7 +123,7 @@ namespace RepoDb
         /// </summary>
         /// <param name="entityType">The type of the data entity.</param>
         /// <returns>The cached list <see cref="ClassProperty"/> objects.</returns>
-        public static IEnumerable<ClassProperty> Get(Type entityType)
+        public static IEnumerable<ClassProperty> Get(Type? entityType)
         {
             if (entityType is null || TypeCache.Get(entityType).IsClassType() != true)
             {

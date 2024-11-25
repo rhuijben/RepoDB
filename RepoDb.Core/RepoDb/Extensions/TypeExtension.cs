@@ -1,9 +1,9 @@
 ﻿using System;
-using RepoDb.Attributes.Parameter;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using RepoDb.Attributes.Parameter;
 
 namespace RepoDb.Extensions
 {
@@ -25,7 +25,7 @@ namespace RepoDb.Extensions
         /// </summary>
         /// <param name="type">The target type.</param>
         /// <returns>The instance of the <see cref="DbType"/> object.</returns>
-        public static DbType? GetDbType(this Type type) =>
+        public static DbType? GetDbType(this Type? type) =>
             type != null ? TypeMapCache.Get(TypeCache.Get(type).GetUnderlyingType()) : null;
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace RepoDb.Extensions
         internal static bool IsPlainType(this Type type)
         {
             var cachedType = TypeCache.Get(type);
-            
+
             return (cachedType.IsClassType() || cachedType.IsAnonymousType()) &&
                    IsQueryObjectType(type) != true &&
                    cachedType.IsDictionaryStringObject() != true &&

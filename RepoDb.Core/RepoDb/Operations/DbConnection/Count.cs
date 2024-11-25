@@ -1,12 +1,12 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using RepoDb.Requests;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
+using RepoDb.Requests;
 
 namespace RepoDb
 {
@@ -34,7 +34,7 @@ namespace RepoDb
             object where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -44,7 +44,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -67,17 +67,17 @@ namespace RepoDb
             Expression<Func<TEntity, bool>> where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
             where TEntity : class
         {
             return CountInternal<TEntity>(connection: connection,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -100,7 +100,7 @@ namespace RepoDb
             QueryField? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -110,7 +110,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -133,7 +133,7 @@ namespace RepoDb
             IEnumerable<QueryField> where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -143,7 +143,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -166,7 +166,7 @@ namespace RepoDb
             QueryGroup? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -176,7 +176,7 @@ namespace RepoDb
                 where: where,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -199,7 +199,7 @@ namespace RepoDb
             QueryGroup? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -225,7 +225,7 @@ namespace RepoDb
                 request: request,
                 param: param,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace);
         }
@@ -252,7 +252,7 @@ namespace RepoDb
             object where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -263,7 +263,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -288,7 +288,7 @@ namespace RepoDb
             Expression<Func<TEntity, bool>> where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -296,10 +296,10 @@ namespace RepoDb
             where TEntity : class
         {
             return CountAsyncInternal<TEntity>(connection: connection,
-                where: ToQueryGroup(where),
+                where: connection.ToQueryGroup(where, transaction),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -324,7 +324,7 @@ namespace RepoDb
             QueryField? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -335,7 +335,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -360,7 +360,7 @@ namespace RepoDb
             IEnumerable<QueryField> where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -371,7 +371,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -396,7 +396,7 @@ namespace RepoDb
             QueryGroup? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -407,7 +407,7 @@ namespace RepoDb
                 where: where,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -431,7 +431,7 @@ namespace RepoDb
         internal static Task<long> CountAsyncInternal<TEntity>(this IDbConnection connection,
             QueryGroup? where = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             string? hints = null,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
@@ -459,7 +459,7 @@ namespace RepoDb
                 request: request,
                 param: param,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 cancellationToken: cancellationToken);
@@ -487,7 +487,7 @@ namespace RepoDb
             object where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -497,7 +497,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -521,7 +521,7 @@ namespace RepoDb
             QueryField? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -531,7 +531,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -555,7 +555,7 @@ namespace RepoDb
             IEnumerable<QueryField> where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -565,7 +565,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -589,7 +589,7 @@ namespace RepoDb
             QueryGroup? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -599,7 +599,7 @@ namespace RepoDb
                 where: where,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder);
@@ -623,7 +623,7 @@ namespace RepoDb
             QueryGroup? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null)
@@ -648,7 +648,7 @@ namespace RepoDb
                 request: request,
                 param: param,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace);
         }
@@ -676,7 +676,7 @@ namespace RepoDb
             object where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -687,7 +687,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -713,7 +713,7 @@ namespace RepoDb
             QueryField? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -724,7 +724,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -750,7 +750,7 @@ namespace RepoDb
             IEnumerable<QueryField> where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -761,7 +761,7 @@ namespace RepoDb
                 where: ToQueryGroup(where),
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -787,7 +787,7 @@ namespace RepoDb
             QueryGroup? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -798,7 +798,7 @@ namespace RepoDb
                 where: where,
                 hints: hints,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
@@ -824,7 +824,7 @@ namespace RepoDb
             QueryGroup? where = null,
             string? hints = null,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             IStatementBuilder? statementBuilder = null,
@@ -850,7 +850,7 @@ namespace RepoDb
                 request: request,
                 param: param,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 trace: trace,
                 cancellationToken: cancellationToken);
@@ -875,7 +875,7 @@ namespace RepoDb
             CountRequest request,
             object param,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null)
         {
@@ -891,10 +891,10 @@ namespace RepoDb
                 cacheKey: null,
                 cacheItemExpiration: null,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 cache: null,
-				trace: trace,
+                trace: trace,
                 entityType: request.Type,
                 dbFields: DbFieldCache.Get(connection, request.Name, transaction, true),
                 skipCommandArrayParametersCheck: true);
@@ -923,7 +923,7 @@ namespace RepoDb
             CountRequest request,
             object param,
             int? commandTimeout = null,
-			string traceKey = TraceKeys.Count,
+            string traceKey = TraceKeys.Count,
             IDbTransaction? transaction = null,
             ITrace? trace = null,
             CancellationToken cancellationToken = default)
@@ -931,7 +931,7 @@ namespace RepoDb
             // Variables
             var commandType = CommandType.Text;
             var commandText = CommandTextCache.GetCountText(request);
-            
+
             // Actual Execution
             var result = await ExecuteScalarAsyncInternal<long>(connection: connection,
                 commandText: commandText,
@@ -940,14 +940,14 @@ namespace RepoDb
                 cacheKey: null,
                 cacheItemExpiration: null,
                 commandTimeout: commandTimeout,
-				traceKey: traceKey,
+                traceKey: traceKey,
                 transaction: transaction,
                 cache: null,
-				trace: trace,
-                cancellationToken: cancellationToken,
+                trace: trace,
                 entityType: request.Type,
                 dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
-                skipCommandArrayParametersCheck: true);
+                skipCommandArrayParametersCheck: true,
+                cancellationToken: cancellationToken);
 
             // Result
             return result;

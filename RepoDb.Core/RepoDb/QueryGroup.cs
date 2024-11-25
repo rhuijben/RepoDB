@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
@@ -677,6 +678,80 @@ namespace RepoDb
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        internal QueryGroup Fix<TEntity>(IDbConnection? connection, IDbTransaction? transaction, string? tableName)
+            where TEntity : class
+        {
+            if (isFixed)
+            {
+                return this;
+            }
+
+            // Check the presence
+            var fields = GetFields(true);
+
+            // Check any item
+            if (fields?.Any() != true)
+            {
+                return this;
+            }
+
+            if (connection is { })
+            {
+                DbFieldCollection? dbFields = null;
+                FixNotNullable<TEntity>(connection, transaction, tableName, ref dbFields);
+            }
+
+            // Fix the fields
+            FixQueryFields(fields);
+
+            // Force the variables
+            ForceIsFixedVariables();
+
+            // Return the current instance
+            return this;
+        }
+
+        private void FixNotNullable<TEntity>(IDbConnection connection, IDbTransaction? transaction, string? tableName, ref DbFieldCollection? dbFields)
+            where TEntity : class
+        {
+            if (QueryGroups != null)
+            {
+                foreach (var qg in QueryGroups)
+                {
+                    qg.FixNotNullable<TEntity>(connection, transaction, tableName, ref dbFields);
+                }
+            }
+
+            if (QueryFields?.Count > 1 && Conjunction is Conjunction.Or or Conjunction.And)
+            {
+                bool isOr = Conjunction == Conjunction.Or;
+
+                foreach (QueryField qf in QueryFields)
+                {
+                    if (qf.canSkip)
+                    {
+                        dbFields ??= DbFieldCache.Get(connection, tableName ?? ClassMappedNameCache.Get<TEntity>(), transaction);
+
+                        if (dbFields?.GetByName(qf.Field.Name)?.IsNullable == false)
+                        {
+                            bool isIsNull = qf.Operation == Operation.IsNull;
+
+                            // IsNotNul within OR -> Ignore
+                            if (isOr && isIsNull)
+                                qf.skip = true;
+                            else if (!isOr && !isIsNull)
+                                qf.skip = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Make the current instance of <see cref="QueryGroup"/> object to become an expression for 'Update' operations.
         /// </summary>
         public void IsForUpdate() =>
@@ -714,6 +789,7 @@ namespace RepoDb
             if (QueryFields?.Count > 0)
             {
                 var fields = QueryFields
+                    .Where(qf => !qf.skip)
                     .Select(qf =>
                         qf.GetString(index, dbSetting)).Join(separator);
                 groupList.Add(fields);
@@ -750,11 +826,10 @@ namespace RepoDb
             }
 
             // Variables
-            var explore = (Action<QueryGroup>)null;
             var queryFields = new List<QueryField>();
 
             // Logic for traverse
-            explore = queryGroup =>
+            void Explore(QueryGroup queryGroup)
             {
                 // Check child fields
                 if (queryGroup.QueryFields?.Count > 0)
@@ -767,13 +842,13 @@ namespace RepoDb
                 {
                     foreach (var qg in queryGroup.QueryGroups)
                     {
-                        explore(qg);
+                        Explore(qg);
                     }
                 }
             };
 
             // Explore
-            explore(this);
+            Explore(this);
 
             // Return the value
             return traversedQueryFields = queryFields;

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.Data.Sqlite;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
 
 namespace RepoDb.Sqlite.Microsoft.IntegrationTests.Setup
@@ -217,6 +219,26 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests.Setup
                     connection.Dispose();
                 }
             }
+        }
+
+        static string GetDbPath(TestContext tc)
+        {
+            return Path.Combine(tc.TestRunDirectory, "sqlite.db");
+        }
+
+        internal static void Initialize(TestContext testContext)
+        {
+            Initialize();
+            //throw new NotImplementedException();
+            using (var db = new SqliteConnection(GetConnectionString(testContext)))
+            {
+                db.EnsureOpen();
+            }
+        }
+
+        internal static string GetConnectionString(TestContext testContext)
+        {
+            return "Datasource=" + GetDbPath(testContext).Replace(Path.DirectorySeparatorChar, '/');
         }
 
         #endregion
