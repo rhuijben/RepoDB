@@ -341,7 +341,7 @@ namespace RepoDb
             // Variables
             var commandType = CommandType.Text;
             var commandText = CommandTextCache.GetCountAllText(request);
-            
+
             // Actual Execution
             var result = ExecuteScalarInternal<long>(connection: connection,
                 commandText: commandText,
@@ -390,7 +390,7 @@ namespace RepoDb
             // Variables
             var commandType = CommandType.Text;
             var commandText = CommandTextCache.GetCountAllText(request);
-            
+
             // Actual Execution
             var result = await ExecuteScalarAsyncInternal<long>(connection: connection,
                 commandText: commandText,

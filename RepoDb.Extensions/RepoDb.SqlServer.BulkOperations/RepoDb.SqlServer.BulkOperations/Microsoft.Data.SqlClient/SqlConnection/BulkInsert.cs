@@ -599,7 +599,7 @@ namespace RepoDb
         #region BulkInsertInternal
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="connection"></param>
@@ -639,7 +639,7 @@ namespace RepoDb
                 transaction);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -713,7 +713,7 @@ namespace RepoDb
         #region BulkInsertAsyncInternal
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="connection"></param>
@@ -759,7 +759,7 @@ namespace RepoDb
                 cancellationToken);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -838,7 +838,7 @@ namespace RepoDb
                 cancellationToken);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="connection"></param>

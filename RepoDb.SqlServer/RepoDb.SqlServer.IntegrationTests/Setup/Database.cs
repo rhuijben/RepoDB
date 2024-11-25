@@ -131,7 +131,7 @@ namespace RepoDb.SqlServer.IntegrationTests.Setup
                         [ColumnVarBinary] VARBINARY(MAX) NULL,
                         [ColumnVarChar] VARCHAR(MAX) NULL,
                         [ColumnXml] XML NULL,
-                        CONSTRAINT [CompleteTable_Id] PRIMARY KEY 
+                        CONSTRAINT [CompleteTable_Id] PRIMARY KEY
                         (
                             [Id] ASC
                         )
@@ -184,7 +184,7 @@ namespace RepoDb.SqlServer.IntegrationTests.Setup
                         [ColumnVarBinary] VARBINARY(MAX) NULL,
                         [ColumnVarChar] VARCHAR(MAX) NULL,
                         [ColumnXml] XML NULL,
-                        CONSTRAINT [NonIdentityCompleteTable_Id] PRIMARY KEY 
+                        CONSTRAINT [NonIdentityCompleteTable_Id] PRIMARY KEY
                         (
                             [Id] ASC
                         )

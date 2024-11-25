@@ -29,7 +29,7 @@ namespace RepoDb.Benchmarks.SqlServer.Configurations
             AddColumnProvider(DefaultColumnProviders.Metrics);
 
             var job = Job.ShortRun
-                .WithRuntime(CoreRuntime.Core60) 
+                .WithRuntime(CoreRuntime.Core60)
                 .WithLaunchCount(DefaultsConstants.DefaultLaunchCount)
                 .WithWarmupCount(DefaultsConstants.DefaultWarmupCount)
                 .WithUnrollFactor(DefaultsConstants.DefaultUnrollFactor)

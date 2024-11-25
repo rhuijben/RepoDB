@@ -56,16 +56,16 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
                 Assert.AreEqual(entities.Count(), assertCount);
             }
         }
-        
+
         [TestMethod]
         public void TestBinaryBulkMergeTableNameWithSchema()
         {
             using var connection = GetConnection();
-            
+
             // Prepare
             var entities = Helper.CreateBulkOperationLightIdentityTables(10, false);
             var tableName = "public.BulkOperationIdentityTable";
-            
+
             // Act
             var result = connection.BinaryBulkMerge(tableName, entities);
 
@@ -2766,11 +2766,11 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
         public async Task TestBinaryBulkMergeAsyncTableNameWithSchema()
         {
             await using var connection = GetConnection();
-            
+
             // Prepare
             var entities = Helper.CreateBulkOperationLightIdentityTables(10, false);
             var tableName = "public.BulkOperationIdentityTable";
-            
+
             // Act
             var result = await connection.BinaryBulkMergeAsync(tableName, entities);
 
@@ -2782,7 +2782,7 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
             var assertCount = Helper.AssertEntitiesEquality(entities, queryResult, (t1, t2) => entities.IndexOf(t1) == queryResult.IndexOf(t2));
             Assert.AreEqual(entities.Count, assertCount);
         }
-        
+
         [TestMethod]
         public void TestBinaryBulkMergeAsyncWithBatchSize()
         {

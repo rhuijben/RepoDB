@@ -92,7 +92,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="connection"></param>
@@ -185,7 +185,7 @@ namespace RepoDb
         #region BinaryImport<DataTable>
 
         /// <summary>
-        /// Inserts the rows of the <see cref="DataTable"/> into the target table by bulk. It uses the <see cref="DataTable.TableName"/> property 
+        /// Inserts the rows of the <see cref="DataTable"/> into the target table by bulk. It uses the <see cref="DataTable.TableName"/> property
         /// as the target table. Underneath this operation is a call directly to the existing <see cref="NpgsqlConnection.BeginBinaryExport(string)"/> method.
         /// </summary>
         /// <param name="connection">The current connection object in used.</param>
@@ -255,7 +255,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -357,7 +357,7 @@ namespace RepoDb
                 transaction);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -503,7 +503,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="connection"></param>
@@ -677,7 +677,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -786,7 +786,7 @@ namespace RepoDb
                 cancellationToken);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>

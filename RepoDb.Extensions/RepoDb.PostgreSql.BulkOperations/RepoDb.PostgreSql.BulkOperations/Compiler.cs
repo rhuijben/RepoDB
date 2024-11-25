@@ -23,7 +23,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetNpgsqlBinaryImporterWriteFunc (Mappings)
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="mappings"></param>
@@ -36,7 +36,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             GetNpgsqlBinaryImporterWriteFuncCache<TEntity>.Get(tableName, mappings, entityType);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="tableName"></param>
@@ -56,7 +56,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             GetNpgsqlBinaryImporterWriteFuncCache<TEntity>.Get(tableName, dbFields, properties, entityType, identityBehavior, dbSetting);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class GetNpgsqlBinaryImporterWriteFuncCache<TEntity>
@@ -65,7 +65,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Action<NpgsqlBinaryImporter, TEntity>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="tableName"></param>
             /// <param name="mappings"></param>
@@ -77,7 +77,7 @@ namespace RepoDb.PostgreSql.BulkOperations
                 GetFunc(tableName, mappings, entityType);
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="tableName"></param>
             /// <param name="dbFields"></param>
@@ -110,7 +110,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="tableName"></param>
             /// <param name="mappings"></param>
@@ -194,7 +194,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetNpgsqlBinaryImporterWriteAsyncFunc (Mappings)
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="mappings"></param>
@@ -207,7 +207,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             GetNpgsqlBinaryImporterWriteAsyncFuncCache<TEntity>.Get(tableName, mappings, entityType);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="tableName"></param>
@@ -227,7 +227,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             GetNpgsqlBinaryImporterWriteAsyncFuncCache<TEntity>.Get(tableName, dbFields, properties, entityType, identityBehavior, dbSetting);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class GetNpgsqlBinaryImporterWriteAsyncFuncCache<TEntity>
@@ -237,7 +237,7 @@ namespace RepoDb.PostgreSql.BulkOperations
                 Func<NpgsqlBinaryImporter, TEntity, CancellationToken, Task>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="tableName"></param>
             /// <param name="mappings"></param>
@@ -249,7 +249,7 @@ namespace RepoDb.PostgreSql.BulkOperations
                 GetFunc(tableName, mappings, entityType);
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="tableName"></param>
             /// <param name="dbFields"></param>
@@ -282,7 +282,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             }
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="tableName"></param>
             /// <param name="mappings"></param>
@@ -364,7 +364,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region Helpers
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private static MethodInfo GetNpgsqlBinaryImporterWriteMethod() =>
@@ -375,7 +375,7 @@ namespace RepoDb.PostgreSql.BulkOperations
                 .First(method => method.GetParameters().Length == 1);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private static MethodInfo GetNpgsqlBinaryImporterWriteAsyncMethod() =>
@@ -391,7 +391,7 @@ namespace RepoDb.PostgreSql.BulkOperations
                 });
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private static MethodInfo GetNpgsqlBinaryImporterWriteWithNpgsqlDbTypeMethod()
@@ -409,7 +409,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private static MethodInfo GetNpgsqlBinaryImporterWriteAsyncWithNpgsqlDbTypeMethod()
@@ -428,7 +428,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="entityExpression"></param>
         /// <param name="entityType"></param>
@@ -458,7 +458,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="propertyExpression"></param>
         /// <param name="npgsqlDbType"></param>
@@ -491,7 +491,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="propertyExpression"></param>
         /// <returns></returns>
@@ -501,7 +501,7 @@ namespace RepoDb.PostgreSql.BulkOperations
                 Expression.Convert(propertyExpression, typeof(object)));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="propertyExpression"></param>
         /// <param name="intBasedType"></param>
@@ -520,28 +520,28 @@ namespace RepoDb.PostgreSql.BulkOperations
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private static MethodInfo GetEnumParseMethod() =>
             typeof(Enum).GetMethod("Parse", new[] { typeof(Type), typeof(string), typeof(bool) });
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private static MethodInfo GetEnumGetNameMethod() =>
             typeof(Enum).GetMethod("GetName", new[] { typeof(Type), typeof(object) });
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private static MethodInfo GetConvertToTypeMethod(Type type) =>
             typeof(Convert).GetMethod($"To{type.Name}", new[] { typeof(object) });
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="entityType"></param>
         /// <param name="tableName"></param>
@@ -551,7 +551,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             (tableName ?? ClassMappedNameCache.Get(entityType)).GetHashCode();
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="tableName"></param>
@@ -562,7 +562,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             GetHashCode(typeof(TEntity), tableName, mappings);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="entityType"></param>
         /// <param name="tableName"></param>
@@ -597,7 +597,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetMethodFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -608,7 +608,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             MethodFuncCache<TEntity, TResult>.GetFunc(methodName);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -618,7 +618,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="methodName"></param>
             /// <returns></returns>
@@ -650,7 +650,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetVoidMethodFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="methodName"></param>
@@ -660,7 +660,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             VoidMethodFuncCache<TEntity>.GetFunc(methodName);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class VoidMethodFuncCache<TEntity>
@@ -669,7 +669,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Action<TEntity>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="methodName"></param>
             /// <returns></returns>
@@ -701,7 +701,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetParameterizedMethodFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -714,7 +714,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             ParameterizedMethodFuncCache<TEntity, TResult>.GetFunc(methodName, types);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -724,7 +724,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Func<TEntity, object[], TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="methodName"></param>
             /// <param name="types"></param>
@@ -771,7 +771,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetParameterizedVoidMethodFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="methodName"></param>
@@ -783,7 +783,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             ParameterizedVoidMethodFuncCache<TEntity>.GetFunc(methodName, types);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class ParameterizedVoidMethodFuncCache<TEntity>
@@ -792,7 +792,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Action<TEntity, object[]>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="methodName"></param>
             /// <param name="types"></param>
@@ -839,7 +839,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetPropertyGetterFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -850,7 +850,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             PropertyGetterFuncCache<TEntity, TResult>.GetFunc(PropertyCache.Get<TEntity>(propertyName));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -860,7 +860,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="classProperty"></param>
             /// <returns></returns>
@@ -887,7 +887,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetPropertySetterFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="propertyName"></param>
@@ -897,7 +897,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             PropertySetterFuncCache<TEntity>.GetFunc(PropertyCache.Get<TEntity>(propertyName, true));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class PropertySetterFuncCache<TEntity>
@@ -906,7 +906,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Action<TEntity, object>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="classProperty"></param>
             /// <returns></returns>
@@ -942,7 +942,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetFieldGetterFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -953,7 +953,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             FieldGetterFuncCache<TEntity, TResult>.GetFunc(fieldName);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -963,7 +963,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="fieldName"></param>
             /// <returns></returns>
@@ -997,7 +997,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region GetEnumFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="value"></param>
@@ -1007,7 +1007,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             EnumFuncCache<TEnum>.GetFunc(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         private static class EnumFuncCache<TEnum>
@@ -1016,7 +1016,7 @@ namespace RepoDb.PostgreSql.BulkOperations
             private static ConcurrentDictionary<int, Func<TEnum>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="value"></param>
             /// <returns></returns>
@@ -1047,7 +1047,7 @@ namespace RepoDb.PostgreSql.BulkOperations
         #region SetProperty
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="instance"></param>

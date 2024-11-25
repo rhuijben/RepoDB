@@ -10,7 +10,7 @@ namespace RepoDb
     public partial class QueryGroup
     {
         /// <summary>
-        /// Converts every <see cref="QueryGroup"/> object of the list of <see cref="QueryGroupTypeMap"/> into an <see cref="object"/> 
+        /// Converts every <see cref="QueryGroup"/> object of the list of <see cref="QueryGroupTypeMap"/> into an <see cref="object"/>
         /// with all the child <see cref="QueryField"/>s as the property/value to that object. The value of every property of the created
         /// object will be an instance of the <see cref="CommandParameter"/> with the proper type, name and value.
         /// </summary>
@@ -31,7 +31,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="queryGroupTypeMap"></param>
@@ -61,7 +61,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="queryGroupTypeMap"></param>
@@ -90,7 +90,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="queryGroupTypeMap"></param>
@@ -135,7 +135,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="queryGroupTypeMap"></param>
@@ -167,7 +167,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="queryGroupTypeMap"></param>
@@ -193,7 +193,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="value"></param>
         private static IList<T> GetValueList<T>(T value)

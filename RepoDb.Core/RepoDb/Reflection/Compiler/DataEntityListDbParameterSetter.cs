@@ -9,7 +9,7 @@ namespace RepoDb.Reflection
     internal partial class Compiler
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="entityType"></param>
         /// <param name="inputFields"></param>

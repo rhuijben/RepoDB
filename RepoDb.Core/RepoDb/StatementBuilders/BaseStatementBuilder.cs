@@ -1184,7 +1184,7 @@ namespace RepoDb.StatementBuilders
         #region Helpers
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="tableName"></param>
         /// <exception cref="NullReferenceException"></exception>
@@ -1197,7 +1197,7 @@ namespace RepoDb.StatementBuilders
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="field"></param>
         /// <exception cref="InvalidOperationException"></exception>
@@ -1210,7 +1210,7 @@ namespace RepoDb.StatementBuilders
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="field"></param>
         /// <exception cref="InvalidOperationException"></exception>
@@ -1223,7 +1223,7 @@ namespace RepoDb.StatementBuilders
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="hints"></param>
         /// <exception cref="NotSupportedException"></exception>
@@ -1236,7 +1236,7 @@ namespace RepoDb.StatementBuilders
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="batchSize"></param>
         /// <exception cref="NotSupportedException"></exception>
@@ -1249,7 +1249,7 @@ namespace RepoDb.StatementBuilders
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="primaryDbField"></param>
         /// <param name="identityDbField"></param>

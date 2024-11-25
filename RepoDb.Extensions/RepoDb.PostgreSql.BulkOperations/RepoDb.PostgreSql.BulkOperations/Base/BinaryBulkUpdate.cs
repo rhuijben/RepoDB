@@ -215,7 +215,7 @@ namespace RepoDb
         #region BinaryBulkUpdateBase<DbDataReader>
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -512,7 +512,7 @@ namespace RepoDb
         #region BinaryBulkUpdateBaseAsync<DbDataReader>
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>

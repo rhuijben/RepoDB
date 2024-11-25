@@ -59,16 +59,16 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
                 Assert.AreEqual(0, countResult);
             }
         }
-        
+
         [TestMethod]
         public void TestBinaryBulkDeleteTableNameWithSchema()
         {
             using var connection = GetConnection();
-            
+
             // Prepare
             var entities = Helper.CreateBulkOperationLightIdentityTables(10, true);
             var tableName = "public.BulkOperationIdentityTable";
-            
+
             // Act
             connection.BinaryBulkInsert(tableName,
                 entities: entities,
@@ -1270,16 +1270,16 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
                 Assert.AreEqual(0, countResult);
             }
         }
-        
+
         [TestMethod]
         public async Task TestBinaryBulkDeleteAsyncTableNameWithSchema()
         {
             await using var connection = GetConnection();
-            
+
             // Prepare
             var entities = Helper.CreateBulkOperationLightIdentityTables(10, true);
             var tableName = "public.BulkOperationIdentityTable";
-            
+
             // Act
             await connection.BinaryBulkInsertAsync(tableName,
                 entities: entities,

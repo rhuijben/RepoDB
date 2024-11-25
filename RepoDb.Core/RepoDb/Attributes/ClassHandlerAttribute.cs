@@ -32,7 +32,7 @@ namespace RepoDb.Attributes
         #region Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="handlerType"></param>
         private static void Validate(Type handlerType)
@@ -60,7 +60,7 @@ namespace RepoDb.Attributes
         #region Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="handlerType"></param>
         private static void Validate(Type handlerType)

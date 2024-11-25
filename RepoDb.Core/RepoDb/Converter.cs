@@ -20,7 +20,7 @@ namespace RepoDb
         public static ConversionType ConversionType { get; set; } = ConversionType.Default;
 
         /// <summary>
-        /// Gets or sets the default equivalent database type (of type <see cref="DbType"/>) of an enumeration if it is being used as a parameter to the 
+        /// Gets or sets the default equivalent database type (of type <see cref="DbType"/>) of an enumeration if it is being used as a parameter to the
         /// execution of any non-entity-based operations.
         /// </summary>
         [Obsolete("Use the definition of the ApplicationConfigurationOptions class instead.")]
@@ -68,7 +68,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

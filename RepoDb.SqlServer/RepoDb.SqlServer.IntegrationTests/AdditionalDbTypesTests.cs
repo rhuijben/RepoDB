@@ -32,7 +32,7 @@ namespace RepoDb.SqlServer.IntegrationTests
                         [Id] INT IDENTITY(1, 1),
                         [DateOnly]              DATE NOT NULL,
                         [DateOnlyNullable]      DATE NULL,
-                        CONSTRAINT [{nameof(DateOnlyTestData)}_Id] PRIMARY KEY 
+                        CONSTRAINT [{nameof(DateOnlyTestData)}_Id] PRIMARY KEY
                         (
                             [Id] ASC
                         )

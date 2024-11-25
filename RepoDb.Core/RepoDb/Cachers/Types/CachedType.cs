@@ -23,7 +23,7 @@ public class CachedType
     public CachedType(Type type)
     {
         lazyGetUnderlyingType = new Lazy<Type>(() => type?.GetUnderlyingType());
-        
+
         if (type is null) return;
 
         lazyGetProperties = new Lazy<PropertyInfo[]>(type.GetProperties);

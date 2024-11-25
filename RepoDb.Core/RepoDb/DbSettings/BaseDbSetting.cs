@@ -101,7 +101,7 @@ namespace RepoDb.DbSettings
         public string SchemaSeparator { get; protected set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public bool ForceAutomaticConversions { get; protected set; }
 

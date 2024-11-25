@@ -108,7 +108,7 @@ namespace RepoDb.IntegrationTests.Setup
                         [ColumnFloat] FLOAT NULL,
                         [ColumnInt] INT NULL,
                         [ColumnNVarChar] NVARCHAR(MAX) NULL,
-                        CONSTRAINT [PK_BulkOperationIdentityTable] PRIMARY KEY CLUSTERED 
+                        CONSTRAINT [PK_BulkOperationIdentityTable] PRIMARY KEY CLUSTERED
                         (
                             [Id] ASC
                         )

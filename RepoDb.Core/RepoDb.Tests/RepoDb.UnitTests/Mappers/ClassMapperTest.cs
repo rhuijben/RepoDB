@@ -36,7 +36,7 @@ namespace RepoDb.UnitTests.Mappers
 
         #region Methods
 
-        /* 
+        /*
          * No MapAttribute
          */
 

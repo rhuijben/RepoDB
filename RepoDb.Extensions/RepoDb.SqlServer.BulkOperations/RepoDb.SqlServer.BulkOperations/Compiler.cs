@@ -15,7 +15,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region GetMethodFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -26,7 +26,7 @@ namespace RepoDb.SqlServer.BulkOperations
             MethodFuncCache<TEntity, TResult>.GetFunc(methodName);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -36,7 +36,7 @@ namespace RepoDb.SqlServer.BulkOperations
             private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="methodName"></param>
             /// <returns></returns>
@@ -68,7 +68,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region GetVoidMethodFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="methodName"></param>
@@ -78,7 +78,7 @@ namespace RepoDb.SqlServer.BulkOperations
             VoidMethodFuncCache<TEntity>.GetFunc(methodName);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class VoidMethodFuncCache<TEntity>
@@ -87,7 +87,7 @@ namespace RepoDb.SqlServer.BulkOperations
             private static ConcurrentDictionary<int, Action<TEntity>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="methodName"></param>
             /// <returns></returns>
@@ -119,7 +119,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region GetParameterizedMethodFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -132,7 +132,7 @@ namespace RepoDb.SqlServer.BulkOperations
             ParameterizedMethodFuncCache<TEntity, TResult>.GetFunc(methodName, types);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -142,7 +142,7 @@ namespace RepoDb.SqlServer.BulkOperations
             private static ConcurrentDictionary<int, Func<TEntity, object[], TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="methodName"></param>
             /// <param name="types"></param>
@@ -185,7 +185,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region GetParameterizedVoidMethodFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="methodName"></param>
@@ -197,7 +197,7 @@ namespace RepoDb.SqlServer.BulkOperations
             ParameterizedVoidMethodFuncCache<TEntity>.GetFunc(methodName, types);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class ParameterizedVoidMethodFuncCache<TEntity>
@@ -206,7 +206,7 @@ namespace RepoDb.SqlServer.BulkOperations
             private static ConcurrentDictionary<int, Action<TEntity, object[]>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="methodName"></param>
             /// <param name="types"></param>
@@ -249,7 +249,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region GetPropertyGetterFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -260,7 +260,7 @@ namespace RepoDb.SqlServer.BulkOperations
             PropertyGetterFuncCache<TEntity, TResult>.GetFunc(PropertyCache.Get<TEntity>(propertyName));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -270,7 +270,7 @@ namespace RepoDb.SqlServer.BulkOperations
             private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="classProperty"></param>
             /// <returns></returns>
@@ -297,7 +297,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region GetPropertySetterFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="propertyName"></param>
@@ -307,7 +307,7 @@ namespace RepoDb.SqlServer.BulkOperations
             PropertySetterFuncCache<TEntity>.GetFunc(PropertyCache.Get<TEntity>(propertyName, true));
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         private static class PropertySetterFuncCache<TEntity>
@@ -316,7 +316,7 @@ namespace RepoDb.SqlServer.BulkOperations
             private static ConcurrentDictionary<int, Action<TEntity, object>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="classProperty"></param>
             /// <returns></returns>
@@ -352,7 +352,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region GetFieldGetterFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -363,7 +363,7 @@ namespace RepoDb.SqlServer.BulkOperations
             FieldGetterFuncCache<TEntity, TResult>.GetFunc(fieldName);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <typeparam name="TResult"></typeparam>
@@ -373,7 +373,7 @@ namespace RepoDb.SqlServer.BulkOperations
             private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="fieldName"></param>
             /// <returns></returns>
@@ -407,7 +407,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region GetEnumFunc
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="value"></param>
@@ -417,7 +417,7 @@ namespace RepoDb.SqlServer.BulkOperations
             EnumFuncCache<TEnum>.GetFunc(value);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
         private static class EnumFuncCache<TEnum>
@@ -426,7 +426,7 @@ namespace RepoDb.SqlServer.BulkOperations
             private static ConcurrentDictionary<int, Func<TEnum>> cache = new();
 
             /// <summary>
-            /// 
+            ///
             /// </summary>
             /// <param name="value"></param>
             /// <returns></returns>
@@ -457,7 +457,7 @@ namespace RepoDb.SqlServer.BulkOperations
         #region SetProperty
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="instance"></param>

@@ -562,7 +562,7 @@ namespace RepoDb.Reflection
         ///
         /// </summary>
         /// <param name="expression"></param>
-        /// 
+        ///
         /// <returns></returns>
         internal static Expression ConvertExpressionToNullableValue(Expression expression)
         {
@@ -1379,7 +1379,7 @@ namespace RepoDb.Reflection
         /// <param name="readerExpression"></param>
         /// <param name="classPropertyParameterInfo"></param>
         /// <param name="readerField"></param>
-        /// 
+        ///
         /// <returns></returns>
         internal static Expression GetClassPropertyParameterInfoIsDbNullTrueValueExpression(Expression readerExpression,
             ClassPropertyParameterInfo classPropertyParameterInfo,

@@ -215,7 +215,7 @@ namespace RepoDb
         #region BinaryBulkDeleteBase<DbDataReader>
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -512,7 +512,7 @@ namespace RepoDb
         #region BinaryBulkDeleteBaseAsync<DbDataReader>
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>

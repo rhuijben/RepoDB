@@ -686,7 +686,7 @@ namespace RepoDb
         #region BulkDeleteInternal
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -715,7 +715,7 @@ namespace RepoDb
                 transaction);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -753,7 +753,7 @@ namespace RepoDb
                 transaction);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -798,7 +798,7 @@ namespace RepoDb
         #region BulkDeleteAsyncInternal
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -833,7 +833,7 @@ namespace RepoDb
                 cancellationToken);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>
@@ -877,7 +877,7 @@ namespace RepoDb
                 cancellationToken);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="connection"></param>
         /// <param name="tableName"></param>

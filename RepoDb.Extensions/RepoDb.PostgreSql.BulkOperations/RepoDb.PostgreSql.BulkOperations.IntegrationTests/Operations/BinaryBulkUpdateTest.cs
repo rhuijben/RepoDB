@@ -64,16 +64,16 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
                 Assert.AreEqual(entities.Count(), assertCount);
             }
         }
-        
+
         [TestMethod]
         public void TestBinaryBulkUpdateTableNameWithSchema()
         {
             using var connection = GetConnection();
-            
+
             // Prepare
             var createdEntities = Helper.CreateBulkOperationLightIdentityTables(10, true);
             var tableName = "public.BulkOperationIdentityTable";
-            
+
             // Act
             connection.BinaryBulkInsert(tableName,
                 entities: createdEntities,
@@ -91,7 +91,7 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
             // Assert
             var queryResult = connection.QueryAll<BulkOperationLightIdentityTable>(tableName).ToList();
             Assert.AreEqual(10, queryResult.Count);
-            
+
             var assertCount = Helper.AssertEntitiesEquality(updatedEntities, queryResult, (t1, t2) => t1.Id == t2.Id, false);
             Assert.AreEqual(expected: updatedEntities.Count, assertCount);
         }
@@ -1726,16 +1726,16 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
                 Assert.AreEqual(entities.Count(), assertCount);
             }
         }
-        
+
         [TestMethod]
         public async Task TestBinaryBulkUpdateAsyncTableNameWithSchema()
         {
             await using var connection = GetConnection();
-            
+
             // Prepare
             var createdEntities = Helper.CreateBulkOperationLightIdentityTables(10, true);
             var tableName = "public.BulkOperationIdentityTable";
-            
+
             // Act
             await connection.BinaryBulkInsertAsync(tableName,
                 entities: createdEntities,
@@ -1753,7 +1753,7 @@ namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations
             // Assert
             var queryResult = connection.QueryAll<BulkOperationLightIdentityTable>(tableName).ToList();
             Assert.AreEqual(10, queryResult.Count);
-            
+
             var assertCount = Helper.AssertEntitiesEquality(updatedEntities, queryResult, (t1, t2) => t1.Id == t2.Id, false);
             Assert.AreEqual(expected: updatedEntities.Count, assertCount);
         }

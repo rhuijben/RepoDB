@@ -113,7 +113,7 @@ namespace RepoDb
             {
                 null => default,
                 TClassHandler classHandler => classHandler,
-                
+
                 // Throw an exception
                 _ => throw new InvalidTypeException($"The cache item is not convertible to '{typeof(TClassHandler).FullName}' type.")
             };
@@ -171,7 +171,7 @@ namespace RepoDb
             TypeExtension.GenerateHashCode(type);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="type"></param>
         private static void Guard(Type type)

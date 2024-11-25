@@ -104,7 +104,7 @@ namespace RepoDb
         /// </summary>
         /// <param name="connectionString">The connection string to be used by this repository.</param>
         /// <param name="connectionPersistency">
-        /// The database connection persistency type. Setting to <see cref="ConnectionPersistency.Instance"/> will make the repository re-used a single connection all throughout its lifespan. Setting 
+        /// The database connection persistency type. Setting to <see cref="ConnectionPersistency.Instance"/> will make the repository re-used a single connection all throughout its lifespan. Setting
         /// to <see cref="ConnectionPersistency.PerCall"/> will create a new connection object on every repository call.
         /// </param>
         public BaseRepository(string connectionString,
@@ -193,7 +193,7 @@ namespace RepoDb
         /// <param name="trace">The trace object to be used by this repository. This object must implement the <see cref="ITrace"/> interface.</param>
         /// <param name="statementBuilder">The SQL statement builder object to be used by this repository. This object must implement the <see cref="ITrace"/> interface.</param>
         /// <param name="connectionPersistency">
-        /// The database connection persistency type. Setting to <see cref="ConnectionPersistency.Instance"/> will make the repository re-used a single connection all throughout its lifespan. Setting 
+        /// The database connection persistency type. Setting to <see cref="ConnectionPersistency.Instance"/> will make the repository re-used a single connection all throughout its lifespan. Setting
         /// to <see cref="ConnectionPersistency.PerCall"/> will create a new connection object on every repository call.
         /// </param>
         public BaseRepository(string connectionString,
@@ -332,7 +332,7 @@ namespace RepoDb
         #region ExecuteQueryAsync
 
         /// <summary>
-        /// Executes a SQL statement from the database in an asynchronous way. It uses the underlying method of <see cref="IDbCommand.ExecuteReader(CommandBehavior)"/> and 
+        /// Executes a SQL statement from the database in an asynchronous way. It uses the underlying method of <see cref="IDbCommand.ExecuteReader(CommandBehavior)"/> and
         /// converts the result back to an enumerable list of data entity object.
         /// </summary>
         /// <param name="commandText">The command text to be used.</param>

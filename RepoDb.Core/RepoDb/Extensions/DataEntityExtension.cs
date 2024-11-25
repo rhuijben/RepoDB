@@ -152,7 +152,7 @@ namespace RepoDb.Extensions
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="propertyName"></param>
@@ -162,7 +162,7 @@ namespace RepoDb.Extensions
             GetPropertyOrThrow(typeof(TEntity), propertyName);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="type"></param>
         /// <param name="propertyName"></param>
@@ -179,7 +179,7 @@ namespace RepoDb.Extensions
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="propertyName"></param>
@@ -189,7 +189,7 @@ namespace RepoDb.Extensions
             GetClassPropertyOrThrow(typeof(TEntity), propertyName);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="type"></param>
         /// <param name="propertyName"></param>

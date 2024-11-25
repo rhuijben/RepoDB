@@ -96,7 +96,7 @@ namespace RepoDb
         #region BinaryBulkInsert<DataTable>
 
         /// <summary>
-        /// Inserts the rows of the <see cref="DataTable"/> into the target table by bulk. It uses the <see cref="DataTable.TableName"/> property 
+        /// Inserts the rows of the <see cref="DataTable"/> into the target table by bulk. It uses the <see cref="DataTable.TableName"/> property
         /// as the target table. Underneath this operation is a call directly to the existing <see cref="NpgsqlConnection.BeginBinaryExport(string)"/> method.
         /// </summary>
         /// <param name="connection">The current connection object in used.</param>
@@ -290,7 +290,7 @@ namespace RepoDb
         #region BinaryBulkInsert<DataTable>
 
         /// <summary>
-        /// Inserts the rows of the <see cref="DataTable"/> into the target table by bulk in an asynchronous way. It uses the <see cref="DataTable.TableName"/> property 
+        /// Inserts the rows of the <see cref="DataTable"/> into the target table by bulk in an asynchronous way. It uses the <see cref="DataTable.TableName"/> property
         /// as the target table. Underneath this operation is a call directly to the existing <see cref="NpgsqlConnection.BeginBinaryExport(string)"/> method.
         /// </summary>
         /// <param name="connection">The current connection object in used.</param>
@@ -327,7 +327,7 @@ namespace RepoDb
                 cancellationToken: cancellationToken);
 
         /// <summary>
-        /// Inserts the rows of the <see cref="DataTable"/> into the target table by bulk in an asynchronous way. It uses the <see cref="DataTable.TableName"/> property 
+        /// Inserts the rows of the <see cref="DataTable"/> into the target table by bulk in an asynchronous way. It uses the <see cref="DataTable.TableName"/> property
         /// as the target table. Underneath this operation is a call directly to the existing <see cref="NpgsqlConnection.BeginBinaryExport(string)"/> method.
         /// </summary>
         /// <param name="connection">The current connection object in used.</param>

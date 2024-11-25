@@ -447,7 +447,7 @@ namespace RepoDb
             isDictionaryStringObject ? GetNameForDictionaryStringObject(i) : GetNameForEntities(i);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
@@ -462,7 +462,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
@@ -485,7 +485,7 @@ namespace RepoDb
             isDictionaryStringObject ? GetOrdinalForDictionaryStringObject(name) : GetOrdinalForEntities(name);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -505,7 +505,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -553,7 +553,7 @@ namespace RepoDb
             isDictionaryStringObject ? GetValueForDictionaryStringObject(i) : GetValueForEntities(i);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
@@ -571,7 +571,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="i"></param>
         /// <returns></returns>
@@ -647,7 +647,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private void ThrowExceptionIfNotAvailable()
         {
@@ -662,7 +662,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         private IEnumerable<ClassProperty> GetClassProperties()
@@ -675,7 +675,7 @@ namespace RepoDb
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="dictionary"></param>
         /// <returns></returns>
