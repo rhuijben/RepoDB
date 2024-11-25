@@ -21,7 +21,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(string tableName,
             int skip,
@@ -30,7 +30,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(tableName: tableName,
                 skip: skip,
@@ -39,7 +39,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(string tableName,
             int skip,
@@ -63,7 +63,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(tableName: tableName,
                 skip: skip,
@@ -73,7 +73,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(string tableName,
             int skip,
@@ -97,7 +97,7 @@ namespace RepoDb
             string? hints = null,
             IEnumerable<Field> fields = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(tableName: tableName,
                 skip: skip,
@@ -107,7 +107,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(string tableName,
             int skip,
@@ -131,7 +131,7 @@ namespace RepoDb
             string? hints = null,
             IEnumerable<Field> fields = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(tableName: tableName,
                 skip: skip,
@@ -141,7 +141,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(string tableName,
             int skip,
@@ -165,7 +165,7 @@ namespace RepoDb
             string? hints = null,
             IEnumerable<Field> fields = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(tableName: tableName,
                 skip: skip,
@@ -175,7 +175,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(string tableName,
             int skip,
@@ -199,7 +199,7 @@ namespace RepoDb
             string? hints = null,
             IEnumerable<Field> fields = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(tableName: tableName,
                 skip: skip,
@@ -209,7 +209,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(int skip,
             int rowsPerBatch,
@@ -229,7 +229,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(skip: skip,
                 rowsPerBatch: rowsPerBatch,
@@ -237,7 +237,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(int skip,
             int rowsPerBatch,
@@ -259,7 +259,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(where: where,
                 skip: skip,
@@ -268,7 +268,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(int skip, int rowsPerBatch,
             IEnumerable<OrderField> orderBy,
@@ -289,7 +289,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(skip: skip,
                 rowsPerBatch: rowsPerBatch,
@@ -298,7 +298,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -311,7 +311,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(int skip,
             int rowsPerBatch,
@@ -320,7 +320,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(skip: skip,
                 rowsPerBatch: rowsPerBatch,
@@ -329,7 +329,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -342,7 +342,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(int skip,
             int rowsPerBatch,
@@ -351,7 +351,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(skip: skip,
                 rowsPerBatch: rowsPerBatch,
@@ -360,7 +360,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public IEnumerable<TEntity> SkipQuery(int skip,
             int rowsPerBatch,
@@ -382,7 +382,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null)
+            IDbTransaction? transaction = null)
         {
             return DbRepository.SkipQuery<TEntity>(skip: skip,
                 rowsPerBatch: rowsPerBatch,
@@ -391,7 +391,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction);
+                transaction: transaction);
         }
 
         #endregion
@@ -408,7 +408,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(string tableName,
@@ -418,7 +418,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(tableName: tableName,
@@ -428,7 +428,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -443,7 +443,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(string tableName,
@@ -454,7 +454,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(tableName: tableName,
@@ -465,7 +465,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -480,7 +480,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(string tableName,
@@ -491,7 +491,7 @@ namespace RepoDb
             string? hints = null,
             IEnumerable<Field> fields = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(tableName: tableName,
@@ -502,7 +502,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -517,7 +517,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(string tableName,
@@ -528,7 +528,7 @@ namespace RepoDb
             string? hints = null,
             IEnumerable<Field> fields = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(tableName: tableName,
@@ -539,7 +539,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -554,7 +554,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(string tableName,
@@ -565,7 +565,7 @@ namespace RepoDb
             string? hints = null,
             IEnumerable<Field> fields = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(tableName: tableName,
@@ -576,7 +576,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -591,7 +591,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(string tableName,
@@ -602,7 +602,7 @@ namespace RepoDb
             string? hints = null,
             IEnumerable<Field> fields = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(tableName: tableName,
@@ -613,7 +613,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -626,7 +626,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(int skip,
@@ -635,7 +635,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(skip: skip,
@@ -644,7 +644,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -658,7 +658,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(int skip,
@@ -668,7 +668,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(skip: skip,
@@ -678,7 +678,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -692,7 +692,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(int skip,
@@ -702,7 +702,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(skip: skip,
@@ -712,7 +712,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -726,7 +726,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(int skip,
@@ -736,7 +736,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(skip: skip,
@@ -746,7 +746,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -760,7 +760,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(int skip,
@@ -770,7 +770,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(skip: skip,
@@ -780,7 +780,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 
@@ -794,7 +794,7 @@ namespace RepoDb
         /// <param name="fields">The list of <see cref="Field"/> objects to be used.</param>
         /// <param name="hints">The table hints to be used.</param>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An enumerable list of data entity objects.</returns>
         public Task<IEnumerable<TEntity>> SkipQueryAsync(int skip,
@@ -804,7 +804,7 @@ namespace RepoDb
             IEnumerable<Field> fields = null,
             string? hints = null,
             string traceKey = TraceKeys.SkipQuery,
-			IDbTransaction? transaction = null,
+            IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
             return DbRepository.SkipQueryAsync<TEntity>(skip: skip,
@@ -814,7 +814,7 @@ namespace RepoDb
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
-				transaction: transaction,
+                transaction: transaction,
                 cancellationToken: cancellationToken);
         }
 

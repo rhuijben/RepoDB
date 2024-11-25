@@ -12,7 +12,7 @@ namespace RepoDb
         /// <summary>
         /// Truncates a table from the database.
         /// </summary>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public int Truncate(string traceKey = TraceKeys.Truncate)
         {
@@ -23,7 +23,7 @@ namespace RepoDb
         /// Truncates a table from the database.
         /// </summary>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public int Truncate(string traceKey = TraceKeys.Truncate,
             IDbTransaction? transaction = null)
@@ -39,7 +39,7 @@ namespace RepoDb
         /// <summary>
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public Task<int> TruncateAsync(string traceKey = TraceKeys.Truncate)
         {
@@ -50,7 +50,7 @@ namespace RepoDb
         /// <summary>
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows affected.</returns>
         public Task<int> TruncateAsync(string traceKey = TraceKeys.Truncate,
@@ -64,7 +64,7 @@ namespace RepoDb
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
         /// <param name="traceKey">The tracing key to be used.</param>
-		/// <param name="transaction">The transaction to be used.</param>
+        /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows affected.</returns>
         public Task<int> TruncateAsync(string traceKey = TraceKeys.Truncate,

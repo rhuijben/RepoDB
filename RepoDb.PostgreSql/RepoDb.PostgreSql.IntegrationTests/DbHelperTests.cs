@@ -43,7 +43,7 @@ namespace RepoDb.PostgreSql.IntegrationTests
                 using (var reader = connection.ExecuteReader(@"SELECT COLUMN_NAME AS ColumnName
                     FROM INFORMATION_SCHEMA.COLUMNS
                     WHERE
-	                    TABLE_NAME = @TableName
+                        TABLE_NAME = @TableName
                     ORDER BY ORDINAL_POSITION;", new { TableName = "CompleteTable" }))
                 {
                     var fieldCount = 0;
@@ -120,7 +120,7 @@ namespace RepoDb.PostgreSql.IntegrationTests
                 using (var reader = connection.ExecuteReader(@"SELECT COLUMN_NAME AS ColumnName
                     FROM INFORMATION_SCHEMA.COLUMNS
                     WHERE
-	                    TABLE_NAME = @TableName
+                        TABLE_NAME = @TableName
                     ORDER BY ORDINAL_POSITION;", new { TableName = "CompleteTable" }))
                 {
                     var fieldCount = 0;

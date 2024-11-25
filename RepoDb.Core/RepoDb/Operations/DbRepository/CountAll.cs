@@ -16,11 +16,11 @@ namespace RepoDb
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>An integer value that holds the number of rows from the table.</returns>
         public long CountAll<TEntity>(string? hints = null,
-			string traceKey = TraceKeys.CountAll,
+            string traceKey = TraceKeys.CountAll,
             IDbTransaction? transaction = null)
             where TEntity : class
         {
@@ -33,7 +33,7 @@ namespace RepoDb
                 return connection.CountAll<TEntity>(hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
             }
@@ -53,12 +53,12 @@ namespace RepoDb
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An integer value that holds the number of rows from the table.</returns>
         public async Task<long> CountAllAsync<TEntity>(string? hints = null,
-			string traceKey = TraceKeys.CountAll,
+            string traceKey = TraceKeys.CountAll,
             IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
@@ -72,7 +72,7 @@ namespace RepoDb
                 return await connection.CountAllAsync<TEntity>(hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
                     cancellationToken: cancellationToken);
@@ -94,11 +94,11 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <returns>An integer value that holds the number of rows from the table.</returns>
         public long CountAll(string tableName,
             string? hints = null,
-			string traceKey = TraceKeys.CountAll,
+            string traceKey = TraceKeys.CountAll,
             IDbTransaction? transaction = null)
         {
             // Create a connection
@@ -111,7 +111,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
             }
@@ -132,12 +132,12 @@ namespace RepoDb
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>An integer value that holds the number of rows from the table.</returns>
         public async Task<long> CountAllAsync(string tableName,
             string? hints = null,
-			string traceKey = TraceKeys.CountAll,
+            string traceKey = TraceKeys.CountAll,
             IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
@@ -151,7 +151,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
                     cancellationToken: cancellationToken);

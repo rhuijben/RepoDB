@@ -25,7 +25,7 @@ namespace RepoDb.Benchmarks.PostgreSql.Setup
         private static void FillData(int elementsCount)
         {
             const string commandText = @"insert into public.""Person"" (""Id"", ""Name"", ""Age"", ""CreatedDateUtc"") 
-		                                    values (@element, REPEAT('x', 128), @element, NOW());";
+                                            values (@element, REPEAT('x', 128), @element, NOW());";
 
             using var connection = new NpgsqlConnection(ConnectionString);
             connection.Open();
@@ -67,10 +67,10 @@ namespace RepoDb.Benchmarks.PostgreSql.Setup
         {
             const string commandText = @"CREATE TABLE IF NOT EXISTS public.""Person""
                     (
-	                    ""Id"" bigint,
-	                    ""Name"" VARCHAR(128),
-	                    ""Age"" integer,
-	                    ""CreatedDateUtc"" TIMESTAMP(5),
+                        ""Id"" bigint,
+                        ""Name"" VARCHAR(128),
+                        ""Age"" integer,
+                        ""CreatedDateUtc"" TIMESTAMP(5),
                         CONSTRAINT ""CRIX_Person_Id"" PRIMARY KEY (""Id"")
                     )
                     

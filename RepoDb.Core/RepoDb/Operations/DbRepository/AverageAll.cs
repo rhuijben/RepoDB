@@ -18,12 +18,12 @@ namespace RepoDb
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public object AverageAll<TEntity>(Field field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null)
             where TEntity : class
         {
@@ -37,7 +37,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
             }
@@ -54,12 +54,12 @@ namespace RepoDb
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public object AverageAll<TEntity>(Expression<Func<TEntity, object>> field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null)
             where TEntity : class
         {
@@ -73,7 +73,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
             }
@@ -91,12 +91,12 @@ namespace RepoDb
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public TResult AverageAll<TEntity, TResult>(Field field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null)
             where TEntity : class
         {
@@ -110,7 +110,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
             }
@@ -128,12 +128,12 @@ namespace RepoDb
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public TResult AverageAll<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null)
             where TEntity : class
         {
@@ -147,7 +147,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
             }
@@ -168,13 +168,13 @@ namespace RepoDb
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public async Task<object> AverageAllAsync<TEntity>(Field field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
@@ -189,7 +189,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
                     cancellationToken: cancellationToken);
@@ -207,13 +207,13 @@ namespace RepoDb
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public async Task<object> AverageAllAsync<TEntity>(Expression<Func<TEntity, object>> field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
@@ -228,7 +228,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
                     cancellationToken: cancellationToken);
@@ -247,13 +247,13 @@ namespace RepoDb
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public async Task<TResult> AverageAllAsync<TEntity, TResult>(Field field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
@@ -268,7 +268,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
                     cancellationToken: cancellationToken);
@@ -287,13 +287,13 @@ namespace RepoDb
         /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public async Task<TResult> AverageAllAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
             where TEntity : class
@@ -308,7 +308,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
                     cancellationToken: cancellationToken);
@@ -330,13 +330,13 @@ namespace RepoDb
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public object AverageAll(string tableName,
             Field field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null)
         {
             // Create a connection
@@ -350,7 +350,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
             }
@@ -368,13 +368,13 @@ namespace RepoDb
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The average value of the target field.</returns>
         public TResult AverageAll<TResult>(string tableName,
             Field field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null)
         {
             // Create a connection
@@ -388,7 +388,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder);
             }
@@ -409,14 +409,14 @@ namespace RepoDb
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public async Task<object> AverageAllAsync(string tableName,
             Field field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
@@ -431,7 +431,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
                     cancellationToken: cancellationToken);
@@ -450,14 +450,14 @@ namespace RepoDb
         /// <param name="tableName">The name of the target table.</param>
         /// <param name="field">The field to be averaged.</param>
         /// <param name="hints">The table hints to be used.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The average value of the target field.</returns>
         public async Task<TResult> AverageAllAsync<TResult>(string tableName,
             Field field,
             string? hints = null,
-			string traceKey = TraceKeys.AverageAll,
+            string traceKey = TraceKeys.AverageAll,
             IDbTransaction? transaction = null,
             CancellationToken cancellationToken = default)
         {
@@ -472,7 +472,7 @@ namespace RepoDb
                     hints: hints,
                     commandTimeout: CommandTimeout,
                     traceKey: traceKey,
-					transaction: transaction,
+                    transaction: transaction,
                     trace: Trace,
                     statementBuilder: StatementBuilder,
                     cancellationToken: cancellationToken);

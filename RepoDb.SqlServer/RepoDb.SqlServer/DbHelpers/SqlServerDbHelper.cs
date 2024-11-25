@@ -51,50 +51,50 @@ namespace RepoDb.DbHelpers
         {
             return @"
                 SELECT C.COLUMN_NAME AS ColumnName
-	                , CONVERT(BIT, COALESCE(TC.is_primary, 0)) AS IsPrimary
-	                , CONVERT(BIT, COALESCE(TMP.is_identity, 1)) AS IsIdentity
-	                , CONVERT(BIT, COALESCE(TMP.is_nullable, 1)) AS IsNullable
-	                , C.DATA_TYPE AS DataType
-	                , CASE WHEN TMP.max_length > COALESCE(C.CHARACTER_MAXIMUM_LENGTH, TMP.max_length) THEN
-		                TMP.max_length
-	                  ELSE
-		                COALESCE(C.CHARACTER_MAXIMUM_LENGTH, TMP.max_length)
-	                  END AS Size
-	                , CONVERT(TINYINT, COALESCE(TMP.precision, 1)) AS Precision
-	                , CONVERT(TINYINT, COALESCE(TMP.scale, 1)) AS Scale
-	                , CONVERT(BIT, IIF(C.COLUMN_DEFAULT IS NOT NULL, 1, 0)) AS DefaultValue
+                    , CONVERT(BIT, COALESCE(TC.is_primary, 0)) AS IsPrimary
+                    , CONVERT(BIT, COALESCE(TMP.is_identity, 1)) AS IsIdentity
+                    , CONVERT(BIT, COALESCE(TMP.is_nullable, 1)) AS IsNullable
+                    , C.DATA_TYPE AS DataType
+                    , CASE WHEN TMP.max_length > COALESCE(C.CHARACTER_MAXIMUM_LENGTH, TMP.max_length) THEN
+                        TMP.max_length
+                      ELSE
+                        COALESCE(C.CHARACTER_MAXIMUM_LENGTH, TMP.max_length)
+                      END AS Size
+                    , CONVERT(TINYINT, COALESCE(TMP.precision, 1)) AS Precision
+                    , CONVERT(TINYINT, COALESCE(TMP.scale, 1)) AS Scale
+                    , CONVERT(BIT, IIF(C.COLUMN_DEFAULT IS NOT NULL, 1, 0)) AS DefaultValue
                 FROM INFORMATION_SCHEMA.COLUMNS C
                 OUTER APPLY
                 (
-	                SELECT 1 AS is_primary
-	                FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU
-	                LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC
-		                ON TC.TABLE_SCHEMA = C.TABLE_SCHEMA
-		                AND TC.TABLE_NAME = C.TABLE_NAME
-		                AND TC.CONSTRAINT_NAME = KCU.CONSTRAINT_NAME
-	                WHERE KCU.TABLE_SCHEMA = C.TABLE_SCHEMA
-		                AND KCU.TABLE_NAME = C.TABLE_NAME
-		                AND KCU.COLUMN_NAME = C.COLUMN_NAME
-		                AND TC.CONSTRAINT_TYPE = 'PRIMARY KEY'
+                    SELECT 1 AS is_primary
+                    FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE KCU
+                    LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS TC
+                        ON TC.TABLE_SCHEMA = C.TABLE_SCHEMA
+                        AND TC.TABLE_NAME = C.TABLE_NAME
+                        AND TC.CONSTRAINT_NAME = KCU.CONSTRAINT_NAME
+                    WHERE KCU.TABLE_SCHEMA = C.TABLE_SCHEMA
+                        AND KCU.TABLE_NAME = C.TABLE_NAME
+                        AND KCU.COLUMN_NAME = C.COLUMN_NAME
+                        AND TC.CONSTRAINT_TYPE = 'PRIMARY KEY'
                 ) TC 
                 OUTER APPLY
                 (
-	                SELECT SC.name
-		                , SC.is_identity
-		                , SC.is_nullable
-		                , SC.max_length
-		                , SC.scale
-		                , SC.precision
-	                FROM [sys].[columns] SC
-	                INNER JOIN [sys].[tables] ST ON ST.object_id = SC.object_id
-	                INNER JOIN [sys].[schemas] S ON S.schema_id = ST.schema_id
-	                WHERE SC.name = C.COLUMN_NAME
-		                AND ST.name = C.TABLE_NAME
-		                AND S.name = C.TABLE_SCHEMA
+                    SELECT SC.name
+                        , SC.is_identity
+                        , SC.is_nullable
+                        , SC.max_length
+                        , SC.scale
+                        , SC.precision
+                    FROM [sys].[columns] SC
+                    INNER JOIN [sys].[tables] ST ON ST.object_id = SC.object_id
+                    INNER JOIN [sys].[schemas] S ON S.schema_id = ST.schema_id
+                    WHERE SC.name = C.COLUMN_NAME
+                        AND ST.name = C.TABLE_NAME
+                        AND S.name = C.TABLE_SCHEMA
                 ) TMP
                 WHERE
-	                C.TABLE_SCHEMA = @Schema
-	                AND C.TABLE_NAME = @TableName;";
+                    C.TABLE_SCHEMA = @Schema
+                    AND C.TABLE_NAME = @TableName;";
         }
 
         /// <summary>

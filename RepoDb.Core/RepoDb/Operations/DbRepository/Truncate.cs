@@ -15,7 +15,7 @@ namespace RepoDb
         /// Truncates a table from the database.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public int Truncate<TEntity>(string traceKey = TraceKeys.Truncate)
             where TEntity : class
@@ -44,7 +44,7 @@ namespace RepoDb
         /// Truncates a table from the database.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public int Truncate<TEntity>(string traceKey = TraceKeys.Truncate,
@@ -78,7 +78,7 @@ namespace RepoDb
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public async Task<int> TruncateAsync<TEntity>(string traceKey = TraceKeys.Truncate)
             where TEntity : class
@@ -107,7 +107,7 @@ namespace RepoDb
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows affected.</returns>
         public async Task<int> TruncateAsync<TEntity>(string traceKey = TraceKeys.Truncate,
@@ -138,7 +138,7 @@ namespace RepoDb
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
         /// <typeparam name="TEntity">The type of the data entity.</typeparam>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows affected.</returns>
@@ -175,7 +175,7 @@ namespace RepoDb
         /// Truncates a table from the database.
         /// </summary>
         /// <param name="tableName">The name of the target table.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public int Truncate(string tableName,
             string traceKey = TraceKeys.Truncate)
@@ -204,7 +204,7 @@ namespace RepoDb
         /// Truncates a table from the database.
         /// </summary>
         /// <param name="tableName">The name of the target table.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public int Truncate(string tableName,
@@ -239,7 +239,7 @@ namespace RepoDb
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
         /// <param name="tableName">The name of the target table.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <returns>The number of rows affected.</returns>
         public async Task<int> TruncateAsync(string tableName,
             string traceKey = TraceKeys.Truncate)
@@ -269,7 +269,7 @@ namespace RepoDb
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
         /// <param name="tableName">The name of the target table.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows affected.</returns>
         public async Task<int> TruncateAsync(string tableName,
@@ -301,7 +301,7 @@ namespace RepoDb
         /// Truncates a table from the database in an asynchronous way.
         /// </summary>
         /// <param name="tableName">The name of the target table.</param>
-		/// <param name="traceKey">The tracing key to be used.</param>
+        /// <param name="traceKey">The tracing key to be used.</param>
         /// <param name="transaction">The transaction to be used.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
         /// <returns>The number of rows affected.</returns>
