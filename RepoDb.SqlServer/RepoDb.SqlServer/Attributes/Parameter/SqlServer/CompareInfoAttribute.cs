@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.SqlTypes;
+﻿using System.Data.SqlTypes;
 using Microsoft.Data.SqlClient;
 
 namespace RepoDb.Attributes.Parameter.SqlServer;

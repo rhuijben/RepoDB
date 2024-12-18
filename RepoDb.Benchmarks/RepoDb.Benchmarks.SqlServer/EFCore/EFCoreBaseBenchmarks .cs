@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Linq;
 using BenchmarkDotNet.Attributes;
 using Microsoft.EntityFrameworkCore;
 using RepoDb.Benchmarks.SqlServer.Configurations;

@@ -1,6 +1,4 @@
-using System;
 using System.Data.Common;
-using System.Linq;
 using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;

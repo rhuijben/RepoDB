@@ -1,5 +1,4 @@
-﻿using System;
-using NpgsqlTypes;
+﻿using NpgsqlTypes;
 using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers;

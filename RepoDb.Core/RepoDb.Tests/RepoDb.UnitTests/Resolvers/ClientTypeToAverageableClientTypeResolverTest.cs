@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Resolvers;
-using System;
 
 namespace RepoDb.UnitTests.Resolvers;
 

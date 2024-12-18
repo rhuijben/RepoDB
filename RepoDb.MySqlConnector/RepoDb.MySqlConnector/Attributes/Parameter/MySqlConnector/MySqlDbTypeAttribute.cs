@@ -1,5 +1,4 @@
-﻿using System;
-using MySqlConnector;
+﻿using MySqlConnector;
 
 namespace RepoDb.Attributes.Parameter.MySqlConnector;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.Interfaces;
+﻿namespace RepoDb.Interfaces;
 
 /// <summary>
 /// An interface that is used to mark a class to be expirable.

@@ -1,7 +1,6 @@
 ﻿using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System;
 using System.Collections.Concurrent;
 
 namespace RepoDb;

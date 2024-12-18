@@ -2,8 +2,6 @@
 using RepoDb.Attributes;
 using RepoDb.Interfaces;
 using RepoDb.Options;
-using System;
-using System.Linq;
 
 namespace RepoDb.UnitTests.Caches;
 

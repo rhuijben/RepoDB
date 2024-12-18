@@ -3,10 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
-using System;
-using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
 
 namespace RepoDb.SqlServer.BulkOperations.IntegrationTests;
 

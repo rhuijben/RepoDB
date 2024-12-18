@@ -2,8 +2,6 @@
 using RepoDb.Attributes;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
-using System;
-using System.Linq;
 
 namespace RepoDb.UnitTests.Others;
 

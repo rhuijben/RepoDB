@@ -3,8 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace RepoDb.SqlServer.IntegrationTests;

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes;
 using System.Data;
-using System.Linq;
 
 namespace RepoDb.UnitTests.Caches;
 

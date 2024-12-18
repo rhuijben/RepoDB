@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.Attributes;
+﻿namespace RepoDb.Attributes;
 
 /// <summary>
 /// An attribute that is used to define a mapping of the class/property into its equivalent object/field name in the database.

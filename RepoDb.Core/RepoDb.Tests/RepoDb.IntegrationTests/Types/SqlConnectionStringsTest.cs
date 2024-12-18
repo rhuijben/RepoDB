@@ -1,10 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System;
 using Microsoft.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.IntegrationTests.Types.Strings;
 

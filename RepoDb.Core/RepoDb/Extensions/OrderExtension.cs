@@ -1,5 +1,4 @@
-﻿using System;
-using RepoDb.Enumerations;
+﻿using RepoDb.Enumerations;
 
 namespace RepoDb.Extensions;
 

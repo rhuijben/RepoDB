@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
-using RepoDb.Attributes;
 using RepoDb.Attributes.Parameter.MySql;
 using RepoDb.DbSettings;
 using RepoDb.Extensions;

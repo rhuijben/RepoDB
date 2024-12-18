@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.MySql.IntegrationTests.Models;
+﻿namespace RepoDb.MySql.IntegrationTests.Models;
 
 public class NonIdentityCompleteTable
 {

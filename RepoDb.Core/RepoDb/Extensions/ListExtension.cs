@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace RepoDb.Extensions;
+﻿namespace RepoDb.Extensions;
 
 /// <summary>
 /// An extension class for <see cref="IList{T}"/>.

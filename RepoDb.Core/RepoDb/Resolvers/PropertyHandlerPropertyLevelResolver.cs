@@ -1,6 +1,5 @@
 ﻿using RepoDb.Attributes;
 using RepoDb.Interfaces;
-using System;
 using System.Reflection;
 
 namespace RepoDb.Resolvers;

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using System.Collections;
-using System.Collections.Generic;
 using Moq;
 
 namespace RepoDb.UnitTests.Equalities;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
+﻿namespace RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
 
 public class BulkOperationIdentityTable
 {

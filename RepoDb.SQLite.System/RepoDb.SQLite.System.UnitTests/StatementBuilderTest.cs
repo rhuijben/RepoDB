@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
-using System;
 using System.Data.SQLite;
 
 namespace RepoDb.SQLite.System.UnitTests;

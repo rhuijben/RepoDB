@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-
-namespace RepoDb.Interfaces;
+﻿namespace RepoDb.Interfaces;
 
 /// <summary>
 /// An interface that is used to mark a class to be a trace object. A trace object is being used to provide an auditing and debugging capability when executing the actual operation.

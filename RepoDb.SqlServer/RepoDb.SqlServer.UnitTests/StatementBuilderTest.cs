@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
-using System;
 
 namespace RepoDb.SqlServer.Tests.UnitTests;
 

@@ -3,13 +3,10 @@ using RepoDb.Extensions;
 using RepoDb.IntegrationTests.Enumerations;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System;
 using Microsoft.Data.SqlClient;
-using System.Linq;
 using RepoDb.Attributes;
 using RepoDb.Interfaces;
 using RepoDb;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using RepoDb.Options;
 

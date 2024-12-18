@@ -1,6 +1,4 @@
 ﻿using RepoDb.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RepoDb.Extensions;
 

@@ -2,9 +2,7 @@
 using RepoDb.Attributes;
 using RepoDb.Attributes.Parameter;
 using RepoDb.Exceptions;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 namespace RepoDb.UnitTests.Mappers;
 

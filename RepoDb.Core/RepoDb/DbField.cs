@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb;
+﻿namespace RepoDb;
 
 /// <summary>
 /// A class the holds the column definition of the table.

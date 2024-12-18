@@ -3,9 +3,6 @@ using RepoDb.Attributes;
 using RepoDb.Exceptions;
 using RepoDb.Interfaces;
 using RepoDb.Options;
-using System;
-using System.Linq;
-using System.Reflection;
 
 namespace RepoDb.UnitTests.Mappers;
 

@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System;
-using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Dynamic;
-using System.Threading.Tasks;
 
 namespace RepoDb.IntegrationTests.Caches;
 

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Runtime.CompilerServices;
-using System.Threading;
 using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection;

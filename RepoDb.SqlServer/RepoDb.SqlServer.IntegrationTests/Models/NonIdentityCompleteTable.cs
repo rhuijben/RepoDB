@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.SqlServer.IntegrationTests.Models;
+﻿namespace RepoDb.SqlServer.IntegrationTests.Models;
 
 public class NonIdentityCompleteTable
 {

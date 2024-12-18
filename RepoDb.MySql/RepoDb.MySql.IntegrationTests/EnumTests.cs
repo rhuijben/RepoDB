@@ -3,9 +3,6 @@ using MySql.Data.MySqlClient;
 using RepoDb.Attributes;
 using RepoDb.Extensions;
 using RepoDb.MySql.IntegrationTests.Setup;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RepoDb.MySql.IntegrationTests;
 

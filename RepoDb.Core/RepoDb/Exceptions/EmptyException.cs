@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace RepoDb.Exceptions;
+﻿namespace RepoDb.Exceptions;
 
 /// <summary>
 /// An exception that is being thrown if the <see cref="Array"/> or <see cref="Enumerable"/> is empty.

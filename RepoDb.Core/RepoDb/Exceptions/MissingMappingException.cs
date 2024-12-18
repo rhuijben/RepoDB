@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.Exceptions;
+﻿namespace RepoDb.Exceptions;
 
 /// <summary>
 /// An exception that is being thrown when the mapping is missing.

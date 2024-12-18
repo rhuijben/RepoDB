@@ -1,6 +1,4 @@
 ﻿using RepoDb.Attributes;
-using System;
-using System.Collections.Generic;
 
 namespace RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
 

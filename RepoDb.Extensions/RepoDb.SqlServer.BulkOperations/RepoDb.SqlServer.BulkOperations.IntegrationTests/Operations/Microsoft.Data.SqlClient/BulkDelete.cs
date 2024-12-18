@@ -2,13 +2,9 @@
 using RepoDb.Extensions;
 using RepoDb.IntegrationTests.Setup;
 using RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
-using System.Linq;
-using RepoDb.Exceptions;
 
 namespace RepoDb.SqlServer.BulkOperations.IntegrationTests.Operations;
 

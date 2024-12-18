@@ -2,7 +2,6 @@
 using RepoDb.DbSettings;
 using RepoDb.Resolvers;
 using RepoDb.StatementBuilders;
-using System;
 using System.Data.SQLite;
 
 namespace RepoDb;

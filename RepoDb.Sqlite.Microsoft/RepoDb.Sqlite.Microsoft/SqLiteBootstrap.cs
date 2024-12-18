@@ -3,7 +3,6 @@ using RepoDb.DbHelpers;
 using RepoDb.DbSettings;
 using RepoDb.Resolvers;
 using RepoDb.StatementBuilders;
-using System;
 
 namespace RepoDb;
 

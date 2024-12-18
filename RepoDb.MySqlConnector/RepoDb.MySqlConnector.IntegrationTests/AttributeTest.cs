@@ -3,10 +3,7 @@ using MySqlConnector;
 using RepoDb.Attributes.Parameter.MySqlConnector;
 using RepoDb.Extensions;
 using RepoDb.MySqlConnector.IntegrationTests.Setup;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text;
 
 namespace RepoDb.MySqlConnector.IntegrationTests;

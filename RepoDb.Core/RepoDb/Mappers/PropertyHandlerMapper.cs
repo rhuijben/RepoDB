@@ -1,7 +1,6 @@
 ﻿using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;

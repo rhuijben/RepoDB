@@ -3,10 +3,7 @@ using Npgsql;
 using RepoDb.Enumerations.PostgreSql;
 using RepoDb.IntegrationTests.Setup;
 using RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models;
-using System;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations;
 

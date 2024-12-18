@@ -1,9 +1,4 @@
-﻿using RepoDb.Attributes.Parameter;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace RepoDb.Extensions;
+﻿namespace RepoDb.Extensions;
 
 /// <summary>
 /// Contains the extension methods for <see cref="ClassProperty"/>.

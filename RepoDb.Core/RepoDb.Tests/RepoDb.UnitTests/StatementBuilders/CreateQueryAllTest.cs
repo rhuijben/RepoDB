@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
-using RepoDb.Exceptions;
 using RepoDb.UnitTests.CustomObjects;
-using System;
 
 namespace RepoDb.UnitTests.StatementBuilders;
 

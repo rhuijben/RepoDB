@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes;
 using RepoDb.Exceptions;
-using System;
 using System.Data;
 
 namespace RepoDb.UnitTests.Mappers;

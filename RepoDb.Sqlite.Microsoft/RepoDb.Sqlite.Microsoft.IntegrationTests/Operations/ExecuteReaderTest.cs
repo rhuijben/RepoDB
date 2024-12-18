@@ -4,10 +4,7 @@ using RepoDb.Extensions;
 using RepoDb.Reflection;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Setup;
-using System;
 using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.Sqlite.Microsoft.IntegrationTests.Operations.MDS;
 

@@ -1,13 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
-using RepoDb.Attributes;
 using RepoDb.Attributes.Parameter.MySql;
 using RepoDb.Extensions;
 using RepoDb.MySql.IntegrationTests.Setup;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text;
 
 namespace RepoDb.MySql.IntegrationTests;

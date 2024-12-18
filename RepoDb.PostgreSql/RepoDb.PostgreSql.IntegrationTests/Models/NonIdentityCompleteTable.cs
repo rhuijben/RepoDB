@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.PostgreSql.IntegrationTests.Models;
+﻿namespace RepoDb.PostgreSql.IntegrationTests.Models;
 
 public class NonIdentityCompleteTable
 {

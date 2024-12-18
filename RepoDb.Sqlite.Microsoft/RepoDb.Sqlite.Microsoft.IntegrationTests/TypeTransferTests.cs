@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Setup;

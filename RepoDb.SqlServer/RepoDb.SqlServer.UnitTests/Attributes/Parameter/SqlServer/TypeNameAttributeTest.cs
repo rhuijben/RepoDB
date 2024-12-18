@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes.Parameter.SqlServer;
 using RepoDb.DbSettings;
 using RepoDb.Extensions;
-using System.Data;
 
 namespace RepoDb.SqlServer.UnitTests.Attributes.Parameter.SqlServer;
 

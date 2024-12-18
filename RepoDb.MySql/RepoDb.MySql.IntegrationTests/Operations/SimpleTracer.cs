@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using RepoDb.Interfaces;
+﻿using RepoDb.Interfaces;
 
 namespace RepoDb.MySql.IntegrationTests.Operations;
 

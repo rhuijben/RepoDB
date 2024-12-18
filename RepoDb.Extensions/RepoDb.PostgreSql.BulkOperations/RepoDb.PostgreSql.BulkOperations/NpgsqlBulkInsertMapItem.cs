@@ -1,6 +1,5 @@
 ﻿using NpgsqlTypes;
 using RepoDb.Resolvers;
-using System;
 
 namespace RepoDb.PostgreSql.BulkOperations;
 

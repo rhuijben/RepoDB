@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
+﻿namespace RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
 
 public class MdsNonIdentityCompleteTable
 {

@@ -5,8 +5,6 @@ using RepoDb.Reflection;
 using RepoDb.PostgreSql.IntegrationTests.Models;
 using RepoDb.PostgreSql.IntegrationTests.Setup;
 using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.PostgreSql.IntegrationTests.Operations;
 

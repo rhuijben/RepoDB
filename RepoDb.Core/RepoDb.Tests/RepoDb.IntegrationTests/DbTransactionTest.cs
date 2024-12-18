@@ -3,9 +3,7 @@ using RepoDb.Enumerations;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
 using Microsoft.Data.SqlClient;
-using System.Linq;
 using System.Transactions;
-using System.Threading.Tasks;
 
 namespace RepoDb.IntegrationTests;
 
