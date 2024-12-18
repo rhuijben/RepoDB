@@ -1,10 +1,10 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.IntegrationTests.Operations
 {
@@ -108,6 +108,7 @@ namespace RepoDb.IntegrationTests.Operations
 
         #region AverageAllAsync<TEntity>
 
+#if NET
         [TestMethod]
         public async Task TestSqlConnectionAverageAllAsync()
         {
@@ -126,7 +127,9 @@ namespace RepoDb.IntegrationTests.Operations
                 Assert.AreEqual(tables.Average(t => t.ColumnInt), Convert.ToDouble(result));
             }
         }
+#endif
 
+#if NET
         [TestMethod]
         public async Task TestSqlConnectionAverageAllAsyncWithHints()
         {
@@ -146,6 +149,7 @@ namespace RepoDb.IntegrationTests.Operations
                 Assert.AreEqual(tables.Average(t => t.ColumnInt), Convert.ToDouble(result));
             }
         }
+#endif
 
         [TestMethod]
         public async Task TestSqlConnectionAverageAllAsyncTypedResult()

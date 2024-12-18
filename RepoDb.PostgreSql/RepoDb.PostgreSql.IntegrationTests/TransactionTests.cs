@@ -1,14 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using System.Transactions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Npgsql;
 using RepoDb.Enumerations;
 using RepoDb.PostgreSql.IntegrationTests.Models;
 using RepoDb.PostgreSql.IntegrationTests.Setup;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Transactions;
 
 namespace RepoDb.PostgreSql.IntegrationTests
 {
+#if NET
     [TestClass]
     public class TransactionTests
     {
@@ -1595,4 +1596,5 @@ namespace RepoDb.PostgreSql.IntegrationTests
 
         #endregion
     }
+#endif
 }

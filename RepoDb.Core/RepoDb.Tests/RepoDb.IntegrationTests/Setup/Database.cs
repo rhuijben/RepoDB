@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 
 namespace RepoDb.IntegrationTests.Setup
 {
@@ -8,30 +7,18 @@ namespace RepoDb.IntegrationTests.Setup
     /// </summary>
     public static class Database
     {
+        static readonly SqlServerDbInstance Instance = new SqlServerDbInstance();
+
+
         /// <summary>
         /// Initialize the creation of the database.
         /// </summary>
         public static void Initialize()
         {
-            // Master connection
-            ConnectionStringForMaster =
-                Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_MASTER")
-                ?? Environment.GetEnvironmentVariable("REPODB_CONSTR_MASTER")
-                // ?? "Server=tcp:127.0.0.1,41433;Database=master;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;" // Docker test configuration
-                ?? "Server=(local);Database=master;Integrated Security=SSPI;TrustServerCertificate=True;";
-
-            // RepoDb connection
-            ConnectionStringForRepoDb =
-                Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODB")
-                ?? Environment.GetEnvironmentVariable("REPODB_CONSTR")
-                // ?? "Server=tcp:127.0.0.1,41433;Database=RepoDb;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;" // Docker test configuration
-                ?? "Server=(local);Database=RepoDb;Integrated Security=SSPI;TrustServerCertificate=True;";
-
-            // Set the proper values for type mapper
-            TypeMapper.Add(typeof(DateTime), System.Data.DbType.DateTime2, true);
+            Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
             // Initialize the SqlServer
-            GlobalConfiguration.Setup().UseSqlServer();
+            GlobalConfiguration.Setup(new()).UseSqlServer();
 
             // Create the database first
             CreateDatabase();
@@ -52,12 +39,12 @@ namespace RepoDb.IntegrationTests.Setup
         /// <summary>
         /// Gets the connection string for master.
         /// </summary>
-        public static string ConnectionStringForMaster { get; private set; }
+        public static string ConnectionStringForMaster => Instance.AdminConnectionString;
 
         /// <summary>
         /// Gets the connection string for RepoDb.
         /// </summary>
-        public static string ConnectionStringForRepoDb { get; private set; }
+        public static string ConnectionStringForRepoDb => Instance.ConnectionString;
 
         #region Methods
 

@@ -1,12 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.Enumerations;
-using RepoDb.SQLite.System.IntegrationTests.Models;
-using RepoDb.SQLite.System.IntegrationTests.Setup;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepoDb.Enumerations;
+using RepoDb.SQLite.System.IntegrationTests.Models;
+using RepoDb.SQLite.System.IntegrationTests.Setup;
 
+#if NET
 namespace RepoDb.SQLite.System.IntegrationTests
 {
     [TestClass]
@@ -1801,3 +1802,4 @@ namespace RepoDb.SQLite.System.IntegrationTests
         #endregion
     }
 }
+#endif

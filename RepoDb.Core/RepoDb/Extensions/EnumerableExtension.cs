@@ -96,7 +96,7 @@ namespace RepoDb.Extensions
         /// <returns>A value indicating whether the collection is null or empty.</returns>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> value) => !value?.Any() ?? true;
 
-#if !NET
+#if NETSTANDARD
         /// <summary>
         /// CCreates a new <see cref="HashSet{T}"/> from an <see cref="IEnumerable{T}"/>.
         /// </summary>

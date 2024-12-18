@@ -1,13 +1,13 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.Extensions;
-using RepoDb.IntegrationTests.Models;
-using RepoDb.IntegrationTests.Setup;
-using System;
+﻿using System;
 using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepoDb.Extensions;
+using RepoDb.IntegrationTests.Models;
+using RepoDb.IntegrationTests.Setup;
 
 namespace RepoDb.IntegrationTests.Operations
 {
@@ -815,7 +815,7 @@ namespace RepoDb.IntegrationTests.Operations
             // Setup
             var tables = Helper.CreateIdentityTables(10);
 
-            await using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
+            using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
             {
                 // Act
                 connection.InsertAll(tables);

@@ -1,5 +1,4 @@
-﻿using System;
-using Npgsql;
+﻿using Npgsql;
 
 namespace RepoDb.IntegrationTests.Setup
 {
@@ -8,27 +7,17 @@ namespace RepoDb.IntegrationTests.Setup
     /// </summary>
     public static class Database
     {
+        static readonly PostgreSqlDbInstance instance = new();
+
         /// <summary>
         /// Initialize the creation of the database.
         /// </summary>
         public static void Initialize()
         {
-            // Master connection
-            ConnectionStringForPostgres =
-                Environment.GetEnvironmentVariable("REPODB_POSTGRESQL_CONSTR_POSTGRESDB")
-                ?? Environment.GetEnvironmentVariable("REPODB_CONSTR_POSTGRESDB")
-                //?? "Server=127.0.0.1;Port=45432;Database=postgres;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
-                ?? "Server=127.0.0.1;Port=5432;Database=postgres;User Id=postgres;Password=Password123;";
-
-            // RepoDb connection
-            ConnectionStringForRepoDb =
-                Environment.GetEnvironmentVariable("REPODB_POSTGRESQL_CONSTR_BULK")
-                ?? Environment.GetEnvironmentVariable("REPODB_CONSTR_BULK")
-                //?? "Server=127.0.0.1;Port=45432;Database=RepoDbBulk;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
-                ?? "Server=127.0.0.1;Port=5432;Database=RepoDbBulk;User Id=postgres;Password=Password123;";
+            instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
             // Initialize PostgreSql
-            GlobalConfiguration.Setup().UsePostgreSql();
+            GlobalConfiguration.Setup(new());
 
             // Create databases
             CreateDatabase();
@@ -40,12 +29,12 @@ namespace RepoDb.IntegrationTests.Setup
         /// <summary>
         /// Gets or sets the connection string to be used for Postgres database.
         /// </summary>
-        public static string ConnectionStringForPostgres { get; private set; }
+        public static string ConnectionStringForPostgres => instance.AdminConnectionString;
 
         /// <summary>
         /// Gets or sets the connection string to be used.
         /// </summary>
-        public static string ConnectionStringForRepoDb { get; private set; }
+        public static string ConnectionStringForRepoDb => instance.ConnectionString;
 
         #region Methods
 

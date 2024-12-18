@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Title>RepoDB</Title>
-    <TargetFrameworks>net9.0;netstandard2.0;net6.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net9.0;netstandard2.0;net8.0;net481</TargetFrameworks>
     <Nullable>annotations</Nullable>
     <Description>A hybrid ORM library for .NET.</Description>
     <PackageTags>orm hybrid-orm micro-orm</PackageTags>
@@ -12,7 +12,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <!-- Disable some nullability for netstandard2.0, as some smart annotations are not available there -->
-    <NoWarn Condition="'$(TargetFramework)' == 'netstandard2.0'">$(NoWarn);CS8604</NoWarn>
+    <NoWarn Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net481'">$(NoWarn);CS8604</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" />
@@ -24,10 +24,13 @@
     <PackageReference Include="System.Reflection.TypeExtensions" />
     <PackageReference Include="System.Text.RegularExpressions" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net481'">
     <PackageReference Include="Microsoft.Bcl.HashCode" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
     <PackageReference Include="System.Memory" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net481'">
+    <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\LICENSE.txt" Pack="True" PackagePath="\" />

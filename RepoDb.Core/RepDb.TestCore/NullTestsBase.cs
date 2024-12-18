@@ -22,7 +22,7 @@ namespace RepoDb.TestCore
         [TestMethod]
         public async Task NullQueryTest()
         {
-            await using var sql = await CreateOpenConnectionAsync();
+            using var sql = await CreateOpenConnectionAsync();
 
             if (!GetAllTables().Any(x => string.Equals(x, "CommonNullTestData", StringComparison.OrdinalIgnoreCase)))
             {

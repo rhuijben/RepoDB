@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using RepoDb.TestCore;
 
-namespace RepoDb.SqlServer.IntegrationTests.Setup
+namespace RepoDb.IntegrationTests.Setup
 {
     public class SqlServerDbInstance : DbInstance<SqlConnection>
     {
@@ -24,8 +24,8 @@ namespace RepoDb.SqlServer.IntegrationTests.Setup
 
             // RepoDb connection
             ConnectionString =
-                Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODBTEST")
-                ?? @"Server=tcp:127.0.0.1,41433;Database=RepoDbTest;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;"; // Docker Test Configuration
+                Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODB")
+                ?? "Server=tcp:127.0.0.1,41433;Database=RepoDb;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;"; // Docker test configuration
         }
 
         protected override async Task CreateUserDatabase(DbConnection sql)

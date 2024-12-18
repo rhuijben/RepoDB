@@ -7,6 +7,7 @@ using RepoDb.SqlServer.IntegrationTests.Setup;
 
 namespace RepoDb.SqlServer.IntegrationTests
 {
+#if NET
     [TestClass]
     public class AdditionalDbTypesTests
     {
@@ -146,4 +147,5 @@ namespace RepoDb.SqlServer.IntegrationTests
             public DateOnly? DateOnlyNullable { get; set; }
         }
     }
+#endif
 }

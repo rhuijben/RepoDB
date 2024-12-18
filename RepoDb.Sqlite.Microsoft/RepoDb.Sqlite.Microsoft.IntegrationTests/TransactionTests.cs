@@ -1,14 +1,15 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using System.Transactions;
+using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Setup;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Transactions;
 
 namespace RepoDb.Sqlite.Microsoft.IntegrationTests
 {
+#if NET
     [TestClass]
     public class TransactionTests
     {
@@ -1800,4 +1801,5 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests
 
         #endregion
     }
+#endif
 }
