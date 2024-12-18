@@ -2,36 +2,35 @@
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 
-namespace RepoDb.UnitTests.Enumerations
+namespace RepoDb.UnitTests.Enumerations;
+
+[TestClass]
+public class ConjunctionTextTest
 {
-    [TestClass]
-    public class ConjunctionTextTest
+    [TestMethod]
+    public void TestConjunctionAndText()
     {
-        [TestMethod]
-        public void TestConjunctionAndText()
-        {
-            // Prepare
-            var operation = Conjunction.And;
+        // Prepare
+        var operation = Conjunction.And;
 
-            // Act
-            var text = operation.GetText();
+        // Act
+        var text = operation.GetText();
 
-            // Assert
-            Assert.AreEqual("AND", text);
-        }
-
-        [TestMethod]
-        public void TestConjunctionOrText()
-        {
-            // Prepare
-            var operation = Conjunction.Or;
-
-            // Act
-            var text = operation.GetText();
-
-            // Assert
-            Assert.AreEqual("OR", text);
-        }
-
+        // Assert
+        Assert.AreEqual("AND", text);
     }
+
+    [TestMethod]
+    public void TestConjunctionOrText()
+    {
+        // Prepare
+        var operation = Conjunction.Or;
+
+        // Act
+        var text = operation.GetText();
+
+        // Assert
+        Assert.AreEqual("OR", text);
+    }
+
 }

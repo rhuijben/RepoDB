@@ -3,13 +3,12 @@ using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.SqlServer.IntegrationTests.Setup;
 
-namespace RepoDb.SqlServer.IntegrationTests.Common
-{
-    [TestClass]
-    public class NullTests : RepoDb.TestCore.NullTestsBase<SqlServerDbInstance>
-    {
-        protected override void InitializeCore() => Database.Initialize();
+namespace RepoDb.SqlServer.IntegrationTests.Common;
 
-        public override DbConnection CreateConnection() => new SqlConnection(Database.ConnectionString);
-    }
+[TestClass]
+public class NullTests : RepoDb.TestCore.NullTestsBase<SqlServerDbInstance>
+{
+    protected override void InitializeCore() => Database.Initialize();
+
+    public override DbConnection CreateConnection() => new SqlConnection(Database.ConnectionString);
 }

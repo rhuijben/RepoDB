@@ -1,92 +1,92 @@
 ﻿using Npgsql;
 
-namespace RepoDb.IntegrationTests.Setup
+namespace RepoDb.IntegrationTests.Setup;
+
+/// <summary>
+/// A class used as a startup setup for for RepoDb test database.
+/// </summary>
+public static class Database
 {
+    static readonly PostgreSqlDbInstance instance = new();
+
     /// <summary>
-    /// A class used as a startup setup for for RepoDb test database.
+    /// Initialize the creation of the database.
     /// </summary>
-    public static class Database
+    public static void Initialize()
     {
-        static readonly PostgreSqlDbInstance instance = new();
+        instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
-        /// <summary>
-        /// Initialize the creation of the database.
-        /// </summary>
-        public static void Initialize()
+        // Initialize PostgreSql
+        GlobalConfiguration.Setup(new());
+
+        // Create databases
+        CreateDatabase();
+
+        // Create tables
+        CreateTables();
+    }
+
+    /// <summary>
+    /// Gets or sets the connection string to be used for Postgres database.
+    /// </summary>
+    public static string ConnectionStringForPostgres => instance.AdminConnectionString;
+
+    /// <summary>
+    /// Gets or sets the connection string to be used.
+    /// </summary>
+    public static string ConnectionStringForRepoDb => instance.ConnectionString;
+
+    #region Methods
+
+    /// <summary>
+    /// Creates a test database for RepoDb.
+    /// </summary>
+    public static void CreateDatabase()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionStringForPostgres))
         {
-            instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
-
-            // Initialize PostgreSql
-            GlobalConfiguration.Setup(new());
-
-            // Create databases
-            CreateDatabase();
-
-            // Create tables
-            CreateTables();
-        }
-
-        /// <summary>
-        /// Gets or sets the connection string to be used for Postgres database.
-        /// </summary>
-        public static string ConnectionStringForPostgres => instance.AdminConnectionString;
-
-        /// <summary>
-        /// Gets or sets the connection string to be used.
-        /// </summary>
-        public static string ConnectionStringForRepoDb => instance.ConnectionString;
-
-        #region Methods
-
-        /// <summary>
-        /// Creates a test database for RepoDb.
-        /// </summary>
-        public static void CreateDatabase()
-        {
-            using (var connection = new NpgsqlConnection(ConnectionStringForPostgres))
+            var recordCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDbBulk';");
+            if (recordCount <= 0)
             {
-                var recordCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDbBulk';");
-                if (recordCount <= 0)
-                {
-                    connection.ExecuteNonQuery(@"CREATE DATABASE ""RepoDbBulk""
+                connection.ExecuteNonQuery(@"CREATE DATABASE ""RepoDbBulk""
                         WITH OWNER = ""postgres""
                         ENCODING = ""UTF8""
                         CONNECTION LIMIT = -1;");
-                }
             }
         }
+    }
 
-        /// <summary>
-        /// Create the necessary tables for testing.
-        /// </summary>
-        public static void CreateTables()
+    /// <summary>
+    /// Create the necessary tables for testing.
+    /// </summary>
+    public static void CreateTables()
+    {
+        CreateBulkOperationIdentityTable();
+        CreateEnumTable();
+    }
+
+    /// <summary>
+    /// Clean up all the table.
+    /// </summary>
+    public static void Cleanup()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionStringForRepoDb))
         {
-            CreateBulkOperationIdentityTable();
-            CreateEnumTable();
+            connection.Truncate("BulkOperationIdentityTable");
+            connection.Truncate("EnumTable");
         }
+    }
 
-        /// <summary>
-        /// Clean up all the table.
-        /// </summary>
-        public static void Cleanup()
-        {
-            using (var connection = new NpgsqlConnection(ConnectionStringForRepoDb))
-            {
-                connection.Truncate("BulkOperationIdentityTable");
-                connection.Truncate("EnumTable");
-            }
-        }
+    #endregion
 
-        #endregion
+    #region BulkOperationIdentityTable
 
-        #region BulkOperationIdentityTable
-
-        /// <summary>
-        /// Creates an identity table that has some important fields. All fields are nullable.
-        /// </summary>
-        public static void CreateBulkOperationIdentityTable()
-        {
-            var commandText = @"CREATE TABLE IF NOT EXISTS public.""BulkOperationIdentityTable""
+    /// <summary>
+    /// Creates an identity table that has some important fields. All fields are nullable.
+    /// </summary>
+    public static void CreateBulkOperationIdentityTable()
+    {
+        var commandText = @"CREATE TABLE IF NOT EXISTS public.""BulkOperationIdentityTable""
                 (
                         ""Id"" bigint GENERATED ALWAYS AS IDENTITY,
                         ""ColumnChar"" ""char"",
@@ -113,21 +113,21 @@ namespace RepoDb.IntegrationTests.Setup
 
                     ALTER TABLE public.""BulkOperationIdentityTable""
                         OWNER to postgres;";
-            using (var connection = new NpgsqlConnection(ConnectionStringForRepoDb))
-            {
-                connection.ExecuteNonQuery(commandText);
-            }
-        }
-
-        #endregion
-
-        #region EnumTable
-
-        private static void CreateEnumTable()
+        using (var connection = new NpgsqlConnection(ConnectionStringForRepoDb))
         {
-            using (var connection = new NpgsqlConnection(ConnectionStringForRepoDb))
-            {
-                connection.ExecuteNonQuery(@"
+            connection.ExecuteNonQuery(commandText);
+        }
+    }
+
+    #endregion
+
+    #region EnumTable
+
+    private static void CreateEnumTable()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionStringForRepoDb))
+        {
+            connection.ExecuteNonQuery(@"
                     DO $$
                     BEGIN
                         IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'hand') THEN
@@ -144,10 +144,9 @@ namespace RepoDb.IntegrationTests.Setup
                         ""ColumnEnumHand"" hand null,
                         CONSTRAINT ""EnumTable_PrimaryKey"" PRIMARY KEY (""Id"")
                     );");
-                connection.ReloadTypes();
-            }
+            connection.ReloadTypes();
         }
-
-        #endregion
     }
+
+    #endregion
 }

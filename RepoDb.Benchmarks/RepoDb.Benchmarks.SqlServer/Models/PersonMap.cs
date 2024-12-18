@@ -1,15 +1,14 @@
 ﻿using NHibernate.Mapping.ByCode.Conformist;
 
-namespace RepoDb.Benchmarks.SqlServer.Models
+namespace RepoDb.Benchmarks.SqlServer.Models;
+
+public class PersonMap : ClassMapping<Person>
 {
-    public class PersonMap : ClassMapping<Person>
+    public PersonMap()
     {
-        public PersonMap()
-        {
-            Id(x => x.Id);
-            Property(x => x.Name);
-            Property(x => x.Age);
-            Property(x => x.CreatedDateUtc);
-        }
+        Id(x => x.Id);
+        Property(x => x.Name);
+        Property(x => x.Age);
+        Property(x => x.CreatedDateUtc);
     }
 }

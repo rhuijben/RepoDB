@@ -4,27 +4,26 @@ using Dapper;
 using Dapper.Contrib.Extensions;
 using RepoDb.Benchmarks.PostgreSql.Models;
 
-namespace RepoDb.Benchmarks.PostgreSql.Dapper
+namespace RepoDb.Benchmarks.PostgreSql.Dapper;
+
+public class GetAllDapperBenchmarks : DapperBaseBenchmarks
 {
-    public class GetAllDapperBenchmarks : DapperBaseBenchmarks
+    private readonly Consumer consumer = new();
+
+    [Benchmark]
+    public void GetAll()
     {
-        private readonly Consumer consumer = new();
+        using var connection = GetConnection();
+        connection.Open();
 
-        [Benchmark]
-        public void GetAll()
-        {
-            using var connection = GetConnection();
-            connection.Open();
+        connection.GetAll<Person>().Consume(consumer);
+    }
 
-            connection.GetAll<Person>().Consume(consumer);
-        }
+    [Benchmark]
+    public void QueryAll()
+    {
+        using var connection = GetConnection();
 
-        [Benchmark]
-        public void QueryAll()
-        {
-            using var connection = GetConnection();
-
-            connection.Query<Person>(@"select * from ""Person""", buffered: true).Consume(consumer);
-        }
+        connection.Query<Person>(@"select * from ""Person""", buffered: true).Consume(consumer);
     }
 }

@@ -2,35 +2,34 @@
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 
-namespace RepoDb.UnitTests.Enumerations
+namespace RepoDb.UnitTests.Enumerations;
+
+[TestClass]
+public class OrderTextTest
 {
-    [TestClass]
-    public class OrderTextTest
+    [TestMethod]
+    public void TestOrderAscendingText()
     {
-        [TestMethod]
-        public void TestOrderAscendingText()
-        {
-            // Prepare
-            var operation = Order.Ascending;
+        // Prepare
+        var operation = Order.Ascending;
 
-            // Act
-            var text = operation.GetText();
+        // Act
+        var text = operation.GetText();
 
-            // Assert
-            Assert.AreEqual("ASC", text);
-        }
+        // Assert
+        Assert.AreEqual("ASC", text);
+    }
 
-        [TestMethod]
-        public void TestOrderDescendingText()
-        {
-            // Prepare
-            var operation = Order.Descending;
+    [TestMethod]
+    public void TestOrderDescendingText()
+    {
+        // Prepare
+        var operation = Order.Descending;
 
-            // Act
-            var text = operation.GetText();
+        // Act
+        var text = operation.GetText();
 
-            // Assert
-            Assert.AreEqual("DESC", text);
-        }
+        // Assert
+        Assert.AreEqual("DESC", text);
     }
 }

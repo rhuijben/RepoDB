@@ -3,201 +3,200 @@ using RepoDb.Extensions;
 using RepoDb.UnitTests.CustomObjects;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RepoDb.UnitTests.Attributes
+namespace RepoDb.UnitTests.Attributes;
+
+[TestClass]
+public class ColumnAttributeTest
 {
-    [TestClass]
-    public class ColumnAttributeTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
+        DbSettingMapper.Add<CustomDbConnection>(new CustomDbSetting(), true);
+    }
+
+    [TestCleanup]
+    public void Cleanup()
+    {
+        DbSettingMapper.Clear();
+    }
+
+    #region Classes
+
+    private class TestColumnAttributeUnquotedNameClass
+    {
+        [Column("PrimaryId")]
+        public int Id { get; set; }
+    }
+
+    private class TestColumnAttributeQuotedNameClass
+    {
+        [Column("[PrimaryId]")]
+        public int Id { get; set; }
+    }
+
+    #endregion
+
+    /*
+     * Unquoted
+     */
+
+    [TestMethod]
+    public void TestColumnAttributeViaExpression()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestColumnAttributeUnquotedNameClass>(e => e.Id);
+        var expected = "PrimaryId";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestColumnAttributeViaPropertyName()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestColumnAttributeUnquotedNameClass>("Id");
+        var expected = "PrimaryId";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestColumnAttributeViaField()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestColumnAttributeUnquotedNameClass>(new Field("Id"));
+        var expected = "PrimaryId";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestColumnAttributeUnquotedNameViaEntityViaCreateParameters()
+    {
+        // Act
+        using (var connection = new CustomDbConnection())
         {
-            DbSettingMapper.Add<CustomDbConnection>(new CustomDbSetting(), true);
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            DbSettingMapper.Clear();
-        }
-
-        #region Classes
-
-        private class TestColumnAttributeUnquotedNameClass
-        {
-            [Column("PrimaryId")]
-            public int Id { get; set; }
-        }
-
-        private class TestColumnAttributeQuotedNameClass
-        {
-            [Column("[PrimaryId]")]
-            public int Id { get; set; }
-        }
-
-        #endregion
-
-        /*
-         * Unquoted
-         */
-
-        [TestMethod]
-        public void TestColumnAttributeViaExpression()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestColumnAttributeUnquotedNameClass>(e => e.Id);
-            var expected = "PrimaryId";
+            var command = connection.CreateCommand();
+            DbCommandExtension
+                .CreateParameters(command, new TestColumnAttributeUnquotedNameClass
+                {
+                    Id = 1
+                });
 
             // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void TestColumnAttributeViaPropertyName()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestColumnAttributeUnquotedNameClass>("Id");
-            var expected = "PrimaryId";
+            Assert.AreEqual(1, command.Parameters.Count);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            var parameter = command.Parameters["@PrimaryId"];
+            Assert.IsNotNull(parameter);
         }
+    }
 
-        [TestMethod]
-        public void TestColumnAttributeViaField()
+    [TestMethod]
+    public void TestColumnAttributeUnquotedNameViaAnonymousViaCreateParameters()
+    {
+        // Act
+        using (var connection = new CustomDbConnection())
         {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestColumnAttributeUnquotedNameClass>(new Field("Id"));
-            var expected = "PrimaryId";
+            var command = connection.CreateCommand();
+            DbCommandExtension
+                .CreateParameters(command, new
+                {
+                    PrimaryId = 1
+                },
+                typeof(TestColumnAttributeUnquotedNameClass));
 
             // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void TestColumnAttributeUnquotedNameViaEntityViaCreateParameters()
-        {
-            // Act
-            using (var connection = new CustomDbConnection())
-            {
-                var command = connection.CreateCommand();
-                DbCommandExtension
-                    .CreateParameters(command, new TestColumnAttributeUnquotedNameClass
-                    {
-                        Id = 1
-                    });
-
-                // Assert
-                Assert.AreEqual(1, command.Parameters.Count);
-
-                // Assert
-                var parameter = command.Parameters["@PrimaryId"];
-                Assert.IsNotNull(parameter);
-            }
-        }
-
-        [TestMethod]
-        public void TestColumnAttributeUnquotedNameViaAnonymousViaCreateParameters()
-        {
-            // Act
-            using (var connection = new CustomDbConnection())
-            {
-                var command = connection.CreateCommand();
-                DbCommandExtension
-                    .CreateParameters(command, new
-                    {
-                        PrimaryId = 1
-                    },
-                    typeof(TestColumnAttributeUnquotedNameClass));
-
-                // Assert
-                Assert.AreEqual(1, command.Parameters.Count);
-
-                // Assert
-                var parameter = command.Parameters["@PrimaryId"];
-                Assert.IsNotNull(parameter);
-            }
-        }
-
-        /*
-         * Quoted
-         */
-
-        [TestMethod]
-        public void TestColumnAttributeQuotedNameViaExpression()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestColumnAttributeQuotedNameClass>(e => e.Id);
-            var expected = "[PrimaryId]";
+            Assert.AreEqual(1, command.Parameters.Count);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            var parameter = command.Parameters["@PrimaryId"];
+            Assert.IsNotNull(parameter);
         }
+    }
 
-        [TestMethod]
-        public void TestColumnAttributeQuotedNameViaPropertyName()
+    /*
+     * Quoted
+     */
+
+    [TestMethod]
+    public void TestColumnAttributeQuotedNameViaExpression()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestColumnAttributeQuotedNameClass>(e => e.Id);
+        var expected = "[PrimaryId]";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestColumnAttributeQuotedNameViaPropertyName()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestColumnAttributeQuotedNameClass>("Id");
+        var expected = "[PrimaryId]";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestColumnAttributeQuotedNameViaField()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestColumnAttributeQuotedNameClass>(new Field("Id"));
+        var expected = "[PrimaryId]";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestColumnAttributeQuotedNameViaEntityViaCreateParameters()
+    {
+        // Act
+        using (var connection = new CustomDbConnection())
         {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestColumnAttributeQuotedNameClass>("Id");
-            var expected = "[PrimaryId]";
+            var command = connection.CreateCommand();
+            DbCommandExtension
+                .CreateParameters(command, new TestColumnAttributeQuotedNameClass
+                {
+                    Id = 1
+                });
 
             // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void TestColumnAttributeQuotedNameViaField()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestColumnAttributeQuotedNameClass>(new Field("Id"));
-            var expected = "[PrimaryId]";
+            Assert.AreEqual(1, command.Parameters.Count);
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            var parameter = command.Parameters["@PrimaryId"];
+            Assert.IsNotNull(parameter);
         }
+    }
 
-        [TestMethod]
-        public void TestColumnAttributeQuotedNameViaEntityViaCreateParameters()
+    [TestMethod]
+    public void TestColumnAttributeQuotedNameViaAnonymousViaCreateParameters()
+    {
+        // Act
+        using (var connection = new CustomDbConnection())
         {
-            // Act
-            using (var connection = new CustomDbConnection())
-            {
-                var command = connection.CreateCommand();
-                DbCommandExtension
-                    .CreateParameters(command, new TestColumnAttributeQuotedNameClass
-                    {
-                        Id = 1
-                    });
+            var command = connection.CreateCommand();
+            DbCommandExtension
+                .CreateParameters(command, new
+                {
+                    PrimaryId = 1
+                },
+                typeof(TestColumnAttributeQuotedNameClass));
 
-                // Assert
-                Assert.AreEqual(1, command.Parameters.Count);
+            // Assert
+            Assert.AreEqual(1, command.Parameters.Count);
 
-                // Assert
-                var parameter = command.Parameters["@PrimaryId"];
-                Assert.IsNotNull(parameter);
-            }
-        }
-
-        [TestMethod]
-        public void TestColumnAttributeQuotedNameViaAnonymousViaCreateParameters()
-        {
-            // Act
-            using (var connection = new CustomDbConnection())
-            {
-                var command = connection.CreateCommand();
-                DbCommandExtension
-                    .CreateParameters(command, new
-                    {
-                        PrimaryId = 1
-                    },
-                    typeof(TestColumnAttributeQuotedNameClass));
-
-                // Assert
-                Assert.AreEqual(1, command.Parameters.Count);
-
-                // Assert
-                var parameter = command.Parameters["@PrimaryId"];
-                Assert.IsNotNull(parameter);
-            }
+            // Assert
+            var parameter = command.Parameters["@PrimaryId"];
+            Assert.IsNotNull(parameter);
         }
     }
 }

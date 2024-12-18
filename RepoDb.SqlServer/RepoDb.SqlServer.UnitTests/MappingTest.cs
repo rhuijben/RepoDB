@@ -1,47 +1,46 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace RepoDb.SqlServer.UnitTests
+namespace RepoDb.SqlServer.UnitTests;
+
+[TestClass]
+public class MappingTest
 {
-    [TestClass]
-    public class MappingTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            GlobalConfiguration
-                .Setup()
-                .UseSqlServer();
-        }
+        GlobalConfiguration
+            .Setup()
+            .UseSqlServer();
+    }
 
-        [TestMethod]
-        public void TestSqlServerStatementBuilderMapper()
-        {
-            // Setup
-            var builder = StatementBuilderMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerStatementBuilderMapper()
+    {
+        // Setup
+        var builder = StatementBuilderMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.IsNotNull(builder);
-        }
+        // Assert
+        Assert.IsNotNull(builder);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbHelperMapper()
-        {
-            // Setup
-            var helper = DbHelperMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbHelperMapper()
+    {
+        // Setup
+        var helper = DbHelperMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.IsNotNull(helper);
-        }
+        // Assert
+        Assert.IsNotNull(helper);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingMapper()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingMapper()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.IsNotNull(setting);
-        }
+        // Assert
+        Assert.IsNotNull(setting);
     }
 }

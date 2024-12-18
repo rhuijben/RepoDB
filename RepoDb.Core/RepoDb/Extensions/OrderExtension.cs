@@ -1,21 +1,20 @@
 ﻿using System;
 using RepoDb.Enumerations;
 
-namespace RepoDb.Extensions
+namespace RepoDb.Extensions;
+
+/// <summary>
+/// Contains the extension methods for <see cref="Order"/>.
+/// </summary>
+public static class OrderExtension
 {
     /// <summary>
-    /// Contains the extension methods for <see cref="Order"/>.
+    /// Gets the text value is used to defined the <see cref="Order"/>.
     /// </summary>
-    public static class OrderExtension
+    public static string GetText(this Order order) => order switch
     {
-        /// <summary>
-        /// Gets the text value is used to defined the <see cref="Order"/>.
-        /// </summary>
-        public static string GetText(this Order order) => order switch
-        {
-            Order.Ascending => "ASC",
-            Order.Descending => "DESC",
-            _ => throw new ArgumentOutOfRangeException(nameof(order))
-        };
-    }
+        Order.Ascending => "ASC",
+        Order.Descending => "DESC",
+        _ => throw new ArgumentOutOfRangeException(nameof(order))
+    };
 }

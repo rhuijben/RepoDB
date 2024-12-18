@@ -2,83 +2,83 @@
 using Npgsql;
 using RepoDb.PostgreSql.IntegrationTests.Models;
 
-namespace RepoDb.PostgreSql.IntegrationTests.Setup
+namespace RepoDb.PostgreSql.IntegrationTests.Setup;
+
+public static class Database
 {
-    public static class Database
+    static readonly PostgreSqlDbInstance Instance = new();
+    #region Properties
+
+    /// <summary>
+    /// Gets or sets the connection string to be used for Postgres database.
+    /// </summary>
+    public static string ConnectionStringForPostgres => Instance.AdminConnectionString;
+
+    /// <summary>
+    /// Gets or sets the connection string to be used.
+    /// </summary>
+    public static string ConnectionString => Instance.ConnectionString;
+
+    #endregion
+
+    #region Methods
+
+    public static void Initialize()
     {
-        static readonly PostgreSqlDbInstance Instance = new();
-        #region Properties
+        Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
-        /// <summary>
-        /// Gets or sets the connection string to be used for Postgres database.
-        /// </summary>
-        public static string ConnectionStringForPostgres => Instance.AdminConnectionString;
+        // Create databases
+        CreateDatabase();
 
-        /// <summary>
-        /// Gets or sets the connection string to be used.
-        /// </summary>
-        public static string ConnectionString => Instance.ConnectionString;
+        // Create tables
+        CreateTables();
+    }
 
-        #endregion
-
-        #region Methods
-
-        public static void Initialize()
+    public static void Cleanup()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionString))
         {
-            Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
-
-            // Create databases
-            CreateDatabase();
-
-            // Create tables
-            CreateTables();
+            connection.Truncate<CompleteTable>();
+            connection.Truncate<NonIdentityCompleteTable>();
+            connection.Truncate<EnumTable>();
         }
+    }
 
-        public static void Cleanup()
+    #endregion
+
+    #region CreateDatabases
+
+    private static void CreateDatabase()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionStringForPostgres))
         {
-            using (var connection = new NpgsqlConnection(ConnectionString))
+            var recordCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDb';");
+            if (recordCount <= 0)
             {
-                connection.Truncate<CompleteTable>();
-                connection.Truncate<NonIdentityCompleteTable>();
-                connection.Truncate<EnumTable>();
-            }
-        }
-
-        #endregion
-
-        #region CreateDatabases
-
-        private static void CreateDatabase()
-        {
-            using (var connection = new NpgsqlConnection(ConnectionStringForPostgres))
-            {
-                var recordCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDb';");
-                if (recordCount <= 0)
-                {
-                    connection.ExecuteNonQuery(@"CREATE DATABASE ""RepoDb""
+                connection.ExecuteNonQuery(@"CREATE DATABASE ""RepoDb""
                         WITH OWNER = ""postgres""
                         ENCODING = ""UTF8""
                         CONNECTION LIMIT = -1;");
-                }
             }
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region CreateTables
+    #region CreateTables
 
-        private static void CreateTables()
+    private static void CreateTables()
+    {
+        CreateCompleteTable();
+        CreateNonIdentityCompleteTable();
+        CreateEnumTable();
+    }
+
+    private static void CreateCompleteTable()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionString))
         {
-            CreateCompleteTable();
-            CreateNonIdentityCompleteTable();
-            CreateEnumTable();
-        }
-
-        private static void CreateCompleteTable()
-        {
-            using (var connection = new NpgsqlConnection(ConnectionString))
-            {
-                connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS public.""CompleteTable""
+            connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS public.""CompleteTable""
                     (
                         ""Id"" bigint GENERATED ALWAYS AS IDENTITY,
                         ""ColumnChar"" ""char"",
@@ -226,14 +226,14 @@ namespace RepoDb.PostgreSql.IntegrationTests.Setup
 
                     ALTER TABLE public.""CompleteTable""
                         OWNER to postgres;");
-            }
         }
+    }
 
-        private static void CreateNonIdentityCompleteTable()
+    private static void CreateNonIdentityCompleteTable()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionString))
         {
-            using (var connection = new NpgsqlConnection(ConnectionString))
-            {
-                connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS public.""NonIdentityCompleteTable""
+            connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS public.""NonIdentityCompleteTable""
                     (
                         ""Id"" bigint NOT NULL,
                         ""ColumnChar"" ""char"",
@@ -381,46 +381,46 @@ namespace RepoDb.PostgreSql.IntegrationTests.Setup
 
                     ALTER TABLE public.""NonIdentityCompleteTable""
                         OWNER to postgres;");
-            }
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region CompleteTable
+    #region CompleteTable
 
-        public static IEnumerable<CompleteTable> CreateCompleteTables(int count)
+    public static IEnumerable<CompleteTable> CreateCompleteTables(int count)
+    {
+        using (var connection = new NpgsqlConnection(ConnectionString))
         {
-            using (var connection = new NpgsqlConnection(ConnectionString))
-            {
-                var tables = Helper.CreateCompleteTables(count);
-                connection.InsertAll(tables);
-                return tables;
-            }
+            var tables = Helper.CreateCompleteTables(count);
+            connection.InsertAll(tables);
+            return tables;
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region NonIdentityCompleteTable
+    #region NonIdentityCompleteTable
 
-        public static IEnumerable<NonIdentityCompleteTable> CreateNonIdentityCompleteTables(int count)
+    public static IEnumerable<NonIdentityCompleteTable> CreateNonIdentityCompleteTables(int count)
+    {
+        using (var connection = new NpgsqlConnection(ConnectionString))
         {
-            using (var connection = new NpgsqlConnection(ConnectionString))
-            {
-                var tables = Helper.CreateNonIdentityCompleteTables(count);
-                connection.InsertAll(tables);
-                return tables;
-            }
+            var tables = Helper.CreateNonIdentityCompleteTables(count);
+            connection.InsertAll(tables);
+            return tables;
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region EnumTable
+    #region EnumTable
 
-        private static void CreateEnumTable()
+    private static void CreateEnumTable()
+    {
+        using (var connection = new NpgsqlConnection(ConnectionString))
         {
-            using (var connection = new NpgsqlConnection(ConnectionString))
-            {
-                connection.ExecuteNonQuery(@"
+            connection.ExecuteNonQuery(@"
                     DO $$
                     BEGIN
                         IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'hand') THEN
@@ -434,10 +434,9 @@ namespace RepoDb.PostgreSql.IntegrationTests.Setup
                         ""Id"" bigint primary key,
                         ""ColumnEnumHand"" hand null
                     );");
-                connection.ReloadTypes();
-            }
+            connection.ReloadTypes();
         }
-
-        #endregion
     }
+
+    #endregion
 }

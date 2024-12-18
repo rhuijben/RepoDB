@@ -4,73 +4,72 @@ using RepoDb.Attributes.Parameter.SqlServer;
 using RepoDb.DbSettings;
 using RepoDb.Extensions;
 
-namespace RepoDb.SqlServer.UnitTests.Attributes.Parameter.SqlServer
+namespace RepoDb.SqlServer.UnitTests.Attributes.Parameter.SqlServer;
+
+[TestClass]
+public class LocaleIdAttributeTest
 {
-    [TestClass]
-    public class LocaleIdAttributeTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
+        DbSettingMapper.Add<SqlConnection>(new SqlServerDbSetting(), true);
+    }
+
+    #region Classes
+
+    private class LocaleIdAttributeTestClass
+    {
+        [LocaleId(1000)]
+        public object ColumnName { get; set; }
+    }
+
+    #endregion
+
+    [TestMethod]
+    public void TestLocaleIdAttributeViaEntityViaCreateParameters()
+    {
+        // Act
+        using (var connection = new SqlConnection())
         {
-            DbSettingMapper.Add<SqlConnection>(new SqlServerDbSetting(), true);
-        }
-
-        #region Classes
-
-        private class LocaleIdAttributeTestClass
-        {
-            [LocaleId(1000)]
-            public object ColumnName { get; set; }
-        }
-
-        #endregion
-
-        [TestMethod]
-        public void TestLocaleIdAttributeViaEntityViaCreateParameters()
-        {
-            // Act
-            using (var connection = new SqlConnection())
+            using (var command = connection.CreateCommand())
             {
-                using (var command = connection.CreateCommand())
-                {
-                    DbCommandExtension
-                        .CreateParameters(command, new LocaleIdAttributeTestClass
-                        {
-                            ColumnName = "Test"
-                        });
+                DbCommandExtension
+                    .CreateParameters(command, new LocaleIdAttributeTestClass
+                    {
+                        ColumnName = "Test"
+                    });
 
-                    // Assert
-                    Assert.AreEqual(1, command.Parameters.Count);
+                // Assert
+                Assert.AreEqual(1, command.Parameters.Count);
 
-                    // Assert
-                    var parameter = command.Parameters["@ColumnName"];
-                    Assert.AreEqual(1000, parameter.LocaleId);
-                }
+                // Assert
+                var parameter = command.Parameters["@ColumnName"];
+                Assert.AreEqual(1000, parameter.LocaleId);
             }
         }
+    }
 
-        [TestMethod]
-        public void TestLocaleIdAttributeViaAnonymousViaCreateParameters()
+    [TestMethod]
+    public void TestLocaleIdAttributeViaAnonymousViaCreateParameters()
+    {
+        // Act
+        using (var connection = new SqlConnection())
         {
-            // Act
-            using (var connection = new SqlConnection())
+            using (var command = connection.CreateCommand())
             {
-                using (var command = connection.CreateCommand())
-                {
-                    DbCommandExtension
-                        .CreateParameters(command, new
-                        {
-                            ColumnName = "Test"
-                        },
-                        typeof(LocaleIdAttributeTestClass));
+                DbCommandExtension
+                    .CreateParameters(command, new
+                    {
+                        ColumnName = "Test"
+                    },
+                    typeof(LocaleIdAttributeTestClass));
 
-                    // Assert
-                    Assert.AreEqual(1, command.Parameters.Count);
+                // Assert
+                Assert.AreEqual(1, command.Parameters.Count);
 
-                    // Assert
-                    var parameter = command.Parameters["@ColumnName"];
-                    Assert.AreEqual(1000, parameter.LocaleId);
-                }
+                // Assert
+                var parameter = command.Parameters["@ColumnName"];
+                Assert.AreEqual(1000, parameter.LocaleId);
             }
         }
     }

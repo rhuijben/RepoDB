@@ -1,27 +1,26 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes;
 
-namespace RepoDb.UnitTests.Attributes
+namespace RepoDb.UnitTests.Attributes;
+
+[TestClass]
+public class IdentityAttributeTest
 {
-    [TestClass]
-    public class IdentityAttributeTest
+    private class IdentityAttributeTestClass
     {
-        private class IdentityAttributeTestClass
-        {
-            [Identity]
-            public int WhateverId { get; set; }
-            public string Name { get; set; }
-        }
+        [Identity]
+        public int WhateverId { get; set; }
+        public string Name { get; set; }
+    }
 
-        [TestMethod]
-        public void TestPrimaryAttribute()
-        {
-            // Act
-            var actual = IdentityCache.Get<IdentityAttributeTestClass>();
-            var expected = "WhateverId";
+    [TestMethod]
+    public void TestPrimaryAttribute()
+    {
+        // Act
+        var actual = IdentityCache.Get<IdentityAttributeTestClass>();
+        var expected = "WhateverId";
 
-            // Assert
-            Assert.AreEqual(expected, actual.PropertyInfo.Name);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual.PropertyInfo.Name);
     }
 }

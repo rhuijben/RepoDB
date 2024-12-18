@@ -1,27 +1,26 @@
 ﻿using System.Data;
 using System.Data.Common;
 
-namespace RepoDb.UnitTests.CustomObjects
+namespace RepoDb.UnitTests.CustomObjects;
+
+public class CustomDbTransaction : DbTransaction, IDbTransaction
 {
-    public class CustomDbTransaction : DbTransaction, IDbTransaction
+    public override IsolationLevel IsolationLevel { get; }
+
+    protected override DbConnection DbConnection { get; }
+
+    public override void Commit()
     {
-        public override IsolationLevel IsolationLevel { get; }
+        /* do nothing */
+    }
 
-        protected override DbConnection DbConnection { get; }
+    public new void Dispose()
+    {
+        /* do nothing */
+    }
 
-        public override void Commit()
-        {
-            /* do nothing */
-        }
-
-        public new void Dispose()
-        {
-            /* do nothing */
-        }
-
-        public override void Rollback()
-        {
-            /* do nothing */
-        }
+    public override void Rollback()
+    {
+        /* do nothing */
     }
 }

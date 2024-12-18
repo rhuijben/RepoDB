@@ -2,263 +2,262 @@
 using RepoDb.Resolvers;
 using System.Data;
 
-namespace RepoDb.SqlServer.UnitTests.Resolvers
+namespace RepoDb.SqlServer.UnitTests.Resolvers;
+
+[TestClass]
+public class DbTypeToSqlServerStringNameResolverTest
 {
-    [TestClass]
-    public class DbTypeToSqlServerStringNameResolverTest
+    /*
+     * Taken:
+     * https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-data-type-mappings
+     */
+
+    private readonly DbTypeToSqlServerStringNameResolver m_resolver = new();
+
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForBigInt()
     {
-        /*
-         * Taken:
-         * https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-data-type-mappings
-         */
+        // Setup
+        var dbType = DbType.Int64;
 
-        private readonly DbTypeToSqlServerStringNameResolver m_resolver = new();
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForBigInt()
-        {
-            // Setup
-            var dbType = DbType.Int64;
+        // Assert
+        Assert.AreEqual("bigint", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForBinary()
+    {
+        // Setup
+        var dbType = DbType.Binary;
 
-            // Assert
-            Assert.AreEqual("bigint", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForBinary()
-        {
-            // Setup
-            var dbType = DbType.Binary;
+        // Assert
+        Assert.AreEqual("binary", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForBoolean()
+    {
+        // Setup
+        var dbType = DbType.Boolean;
 
-            // Assert
-            Assert.AreEqual("binary", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForBoolean()
-        {
-            // Setup
-            var dbType = DbType.Boolean;
+        // Assert
+        Assert.AreEqual("bit", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForAnsiStringFixedLength()
+    {
+        // Setup
+        var dbType = DbType.AnsiStringFixedLength;
 
-            // Assert
-            Assert.AreEqual("bit", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForAnsiStringFixedLength()
-        {
-            // Setup
-            var dbType = DbType.AnsiStringFixedLength;
+        // Assert
+        Assert.AreEqual("char", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForDate()
+    {
+        // Setup
+        var dbType = DbType.Date;
 
-            // Assert
-            Assert.AreEqual("char", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForDate()
-        {
-            // Setup
-            var dbType = DbType.Date;
+        // Assert
+        Assert.AreEqual("date", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForDateTime()
+    {
+        // Setup
+        var dbType = DbType.DateTime;
 
-            // Assert
-            Assert.AreEqual("date", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForDateTime()
-        {
-            // Setup
-            var dbType = DbType.DateTime;
+        // Assert
+        Assert.AreEqual("datetime", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForDateTime2()
+    {
+        // Setup
+        var dbType = DbType.DateTime2;
 
-            // Assert
-            Assert.AreEqual("datetime", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForDateTime2()
-        {
-            // Setup
-            var dbType = DbType.DateTime2;
+        // Assert
+        Assert.AreEqual("datetime2", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForDateTimeOffset()
+    {
+        // Setup
+        var dbType = DbType.DateTimeOffset;
 
-            // Assert
-            Assert.AreEqual("datetime2", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForDateTimeOffset()
-        {
-            // Setup
-            var dbType = DbType.DateTimeOffset;
+        // Assert
+        Assert.AreEqual("datetimeoffset", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForDouble()
+    {
+        // Setup
+        var dbType = DbType.Double;
 
-            // Assert
-            Assert.AreEqual("datetimeoffset", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForDouble()
-        {
-            // Setup
-            var dbType = DbType.Double;
+        // Assert
+        Assert.AreEqual("float", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForInt()
+    {
+        // Setup
+        var dbType = DbType.Int32;
 
-            // Assert
-            Assert.AreEqual("float", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForInt()
-        {
-            // Setup
-            var dbType = DbType.Int32;
+        // Assert
+        Assert.AreEqual("int", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForStringFixedLength()
+    {
+        // Setup
+        var dbType = DbType.StringFixedLength;
 
-            // Assert
-            Assert.AreEqual("int", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForStringFixedLength()
-        {
-            // Setup
-            var dbType = DbType.StringFixedLength;
+        // Assert
+        Assert.AreEqual("nchar", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForSingle()
+    {
+        // Setup
+        var dbType = DbType.Single;
 
-            // Assert
-            Assert.AreEqual("nchar", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForSingle()
-        {
-            // Setup
-            var dbType = DbType.Single;
+        // Assert
+        Assert.AreEqual("real", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForString()
+    {
+        // Setup
+        var dbType = DbType.String;
 
-            // Assert
-            Assert.AreEqual("real", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForString()
-        {
-            // Setup
-            var dbType = DbType.String;
+        // Assert
+        Assert.AreEqual("nvarchar", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForObject()
+    {
+        // Setup
+        var dbType = DbType.Object;
 
-            // Assert
-            Assert.AreEqual("nvarchar", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForObject()
-        {
-            // Setup
-            var dbType = DbType.Object;
+        // Assert
+        Assert.AreEqual("object", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForTime()
+    {
+        // Setup
+        var dbType = DbType.Time;
 
-            // Assert
-            Assert.AreEqual("object", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForTime()
-        {
-            // Setup
-            var dbType = DbType.Time;
+        // Assert
+        Assert.AreEqual("time", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForByte()
+    {
+        // Setup
+        var dbType = DbType.Byte;
 
-            // Assert
-            Assert.AreEqual("time", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForByte()
-        {
-            // Setup
-            var dbType = DbType.Byte;
+        // Assert
+        Assert.AreEqual("tinyint", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForGuid()
+    {
+        // Setup
+        var dbType = DbType.Guid;
 
-            // Assert
-            Assert.AreEqual("tinyint", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForGuid()
-        {
-            // Setup
-            var dbType = DbType.Guid;
+        // Assert
+        Assert.AreEqual("uniqueidentifier", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForAnsiString()
+    {
+        // Setup
+        var dbType = DbType.AnsiString;
 
-            // Assert
-            Assert.AreEqual("uniqueidentifier", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForAnsiString()
-        {
-            // Setup
-            var dbType = DbType.AnsiString;
+        // Assert
+        Assert.AreEqual("varchar", name);
+    }
 
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
+    [TestMethod]
+    public void TestDbTypeToSqlServerStringNameResolverForXml()
+    {
+        // Setup
+        var dbType = DbType.Xml;
 
-            // Assert
-            Assert.AreEqual("varchar", name);
-        }
+        // Act
+        var name = m_resolver.Resolve(dbType).ToLowerInvariant();
 
-        [TestMethod]
-        public void TestDbTypeToSqlServerStringNameResolverForXml()
-        {
-            // Setup
-            var dbType = DbType.Xml;
-
-            // Act
-            var name = m_resolver.Resolve(dbType).ToLowerInvariant();
-
-            // Assert
-            Assert.AreEqual("xml", name);
-        }
+        // Assert
+        Assert.AreEqual("xml", name);
     }
 }

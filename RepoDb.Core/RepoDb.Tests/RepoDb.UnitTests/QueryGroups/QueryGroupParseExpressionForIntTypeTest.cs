@@ -1,132 +1,131 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace RepoDb.UnitTests
+namespace RepoDb.UnitTests;
+
+public partial class QueryGroupTest
 {
-    public partial class QueryGroupTest
+    // Int
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionIntConstant()
     {
-        // Int
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == 1).GetString(m_dbSetting);
+        var expected = "([PropertyInt] = @PropertyInt)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionIntConstant()
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionIntVariable()
+    {
+        // Setup
+        var value = 1;
+
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == value).GetString(m_dbSetting);
+        var expected = "([PropertyInt] = @PropertyInt)";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionIntClassProperty()
+    {
+        // Setup
+        var value = new QueryGroupTestExpressionClass
         {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == 1).GetString(m_dbSetting);
-            var expected = "([PropertyInt] = @PropertyInt)";
+            PropertyInt = 1
+        };
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == value.PropertyInt).GetString(m_dbSetting);
+        var expected = "([PropertyInt] = @PropertyInt)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionIntVariable()
-        {
-            // Setup
-            var value = 1;
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == value).GetString(m_dbSetting);
-            var expected = "([PropertyInt] = @PropertyInt)";
+    [TestMethod]
+    public void TestQueryGroupParseExpressionIntMethodCall()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == GetIntValueForParseExpression()).GetString(m_dbSetting);
+        var expected = "([PropertyInt] = @PropertyInt)";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionIntClassProperty()
-        {
-            // Setup
-            var value = new QueryGroupTestExpressionClass
-            {
-                PropertyInt = 1
-            };
+    [TestMethod]
+    public void TestQueryGroupParseExpressionIntVariableMethodCall()
+    {
+        // Setup
+        var value = GetIntValueForParseExpression();
 
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == value.PropertyInt).GetString(m_dbSetting);
-            var expected = "([PropertyInt] = @PropertyInt)";
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == value).GetString(m_dbSetting);
+        var expected = "([PropertyInt] = @PropertyInt)";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionIntMethodCall()
-        {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == GetIntValueForParseExpression()).GetString(m_dbSetting);
-            var expected = "([PropertyInt] = @PropertyInt)";
+    // Others
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionWithIntMathOperations()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == (1 + 1)).GetString(m_dbSetting);
+        var expected = "([PropertyInt] = @PropertyInt)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionIntVariableMethodCall()
-        {
-            // Setup
-            var value = GetIntValueForParseExpression();
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == value).GetString(m_dbSetting);
-            var expected = "([PropertyInt] = @PropertyInt)";
+    [TestMethod]
+    public void TestQueryGroupParseExpressionWithIntNewClassInstance()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == new Random().Next(int.MaxValue)).GetString(m_dbSetting);
+        var expected = "([PropertyInt] = @PropertyInt)";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        // Others
+    [TestMethod]
+    public void TestQueryGroupParseExpressionWithIntMethodClass()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == Convert.ToInt32("1000")).GetString(m_dbSetting);
+        var expected = "([PropertyInt] = @PropertyInt)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionWithIntMathOperations()
-        {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == (1 + 1)).GetString(m_dbSetting);
-            var expected = "([PropertyInt] = @PropertyInt)";
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    private string TestParseExpressionWithIntArgumentParameterMethod<TEntity>(int value) where TEntity : QueryGroupTestExpressionClass
+    {
+        // Act
+        var actual = QueryGroup.Parse<TEntity>(e => e.PropertyInt == value).GetString(m_dbSetting);
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionWithIntNewClassInstance()
-        {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == new Random().Next(int.MaxValue)).GetString(m_dbSetting);
-            var expected = "([PropertyInt] = @PropertyInt)";
+        // Return
+        return actual;
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionWithIntArgumentParameter()
+    {
+        // Act
+        var actual = TestParseExpressionWithIntArgumentParameterMethod<QueryGroupTestExpressionClass>(1);
+        var expected = "([PropertyInt] = @PropertyInt)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionWithIntMethodClass()
-        {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyInt == Convert.ToInt32("1000")).GetString(m_dbSetting);
-            var expected = "([PropertyInt] = @PropertyInt)";
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        private string TestParseExpressionWithIntArgumentParameterMethod<TEntity>(int value) where TEntity : QueryGroupTestExpressionClass
-        {
-            // Act
-            var actual = QueryGroup.Parse<TEntity>(e => e.PropertyInt == value).GetString(m_dbSetting);
-
-            // Return
-            return actual;
-        }
-
-        [TestMethod]
-        public void TestQueryGroupParseExpressionWithIntArgumentParameter()
-        {
-            // Act
-            var actual = TestParseExpressionWithIntArgumentParameterMethod<QueryGroupTestExpressionClass>(1);
-            var expected = "([PropertyInt] = @PropertyInt)";
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
     }
 }

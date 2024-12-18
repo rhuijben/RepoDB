@@ -1,21 +1,20 @@
 ﻿using MySql.Data.MySqlClient;
 
-namespace RepoDb
+namespace RepoDb;
+
+/// <summary>
+/// A class that is being used to initialize the necessary settings for the <see cref="MySqlConnection"/> object.
+/// </summary>
+public static partial class MySqlGlobalConfiguration
 {
     /// <summary>
-    /// A class that is being used to initialize the necessary settings for the <see cref="MySqlConnection"/> object.
+    /// Initializes all the necessary settings for MySQL.
     /// </summary>
-    public static partial class MySqlGlobalConfiguration
+    /// <param name="globalConfiguration">The instance of the global configuration in used.</param>
+    /// <returns>The used global configuration instance itself.</returns>
+    public static GlobalConfiguration UseMySql(this GlobalConfiguration globalConfiguration)
     {
-        /// <summary>
-        /// Initializes all the necessary settings for MySQL.
-        /// </summary>
-        /// <param name="globalConfiguration">The instance of the global configuration in used.</param>
-        /// <returns>The used global configuration instance itself.</returns>
-        public static GlobalConfiguration UseMySql(this GlobalConfiguration globalConfiguration)
-        {
-            MySqlBootstrap.InitializeInternal();
-            return globalConfiguration;
-        }
+        MySqlBootstrap.InitializeInternal();
+        return globalConfiguration;
     }
 }

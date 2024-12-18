@@ -1,59 +1,58 @@
 ﻿using RepoDb.DbSettings;
 
-namespace RepoDb.UnitTests.CustomObjects
+namespace RepoDb.UnitTests.CustomObjects;
+
+public class CustomDbSetting : BaseDbSetting
 {
-    public class CustomDbSetting : BaseDbSetting
+    public CustomDbSetting()
     {
-        public CustomDbSetting()
-        {
-            AreTableHintsSupported = true;
-            AverageableType = typeof(double);
-            ClosingQuote = "]";
-            DefaultSchema = "dbo";
-            IsDirectionSupported = false;
-            IsExecuteReaderDisposable = true;
-            IsMultiStatementExecutable = true;
-            IsPreparable = true;
-            IsUseUpsert = false;
-            OpeningQuote = "[";
-            ParameterPrefix = "@";
-        }
+        AreTableHintsSupported = true;
+        AverageableType = typeof(double);
+        ClosingQuote = "]";
+        DefaultSchema = "dbo";
+        IsDirectionSupported = false;
+        IsExecuteReaderDisposable = true;
+        IsMultiStatementExecutable = true;
+        IsPreparable = true;
+        IsUseUpsert = false;
+        OpeningQuote = "[";
+        ParameterPrefix = "@";
     }
+}
 
-    public class CustomNonHintsSupportingDbSetting : BaseDbSetting
+public class CustomNonHintsSupportingDbSetting : BaseDbSetting
+{
+    public CustomNonHintsSupportingDbSetting()
     {
-        public CustomNonHintsSupportingDbSetting()
-        {
-            AreTableHintsSupported = false;
-            AverageableType = typeof(double);
-            ClosingQuote = "]";
-            DefaultSchema = "dbo";
-            IsDirectionSupported = false;
-            IsExecuteReaderDisposable = true;
-            IsMultiStatementExecutable = true;
-            IsPreparable = true;
-            IsUseUpsert = false;
-            OpeningQuote = "[";
-            ParameterPrefix = "@";
+        AreTableHintsSupported = false;
+        AverageableType = typeof(double);
+        ClosingQuote = "]";
+        DefaultSchema = "dbo";
+        IsDirectionSupported = false;
+        IsExecuteReaderDisposable = true;
+        IsMultiStatementExecutable = true;
+        IsPreparable = true;
+        IsUseUpsert = false;
+        OpeningQuote = "[";
+        ParameterPrefix = "@";
 
-        }
     }
+}
 
-    public class CustomSingleStatementSupportDbSetting : BaseDbSetting
+public class CustomSingleStatementSupportDbSetting : BaseDbSetting
+{
+    public CustomSingleStatementSupportDbSetting()
     {
-        public CustomSingleStatementSupportDbSetting()
-        {
-            AreTableHintsSupported = true;
-            AverageableType = typeof(double);
-            ClosingQuote = "]";
-            DefaultSchema = "dbo";
-            IsDirectionSupported = false;
-            IsExecuteReaderDisposable = true;
-            IsMultiStatementExecutable = false;
-            IsPreparable = true;
-            IsUseUpsert = false;
-            OpeningQuote = "[";
-            ParameterPrefix = "@";
-        }
+        AreTableHintsSupported = true;
+        AverageableType = typeof(double);
+        ClosingQuote = "]";
+        DefaultSchema = "dbo";
+        IsDirectionSupported = false;
+        IsExecuteReaderDisposable = true;
+        IsMultiStatementExecutable = false;
+        IsPreparable = true;
+        IsUseUpsert = false;
+        OpeningQuote = "[";
+        ParameterPrefix = "@";
     }
 }

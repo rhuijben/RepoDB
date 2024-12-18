@@ -1,28 +1,27 @@
 ﻿using MySql.Data.MySqlClient;
 
-namespace RepoDb.DbSettings
+namespace RepoDb.DbSettings;
+
+/// <summary>
+/// A setting class used for <see cref="MySqlConnection"/> data provider.
+/// </summary>
+public sealed class MySqlDbSetting : BaseDbSetting
 {
     /// <summary>
-    /// A setting class used for <see cref="MySqlConnection"/> data provider.
+    /// Creates a new instance of <see cref="MySqlDbSetting"/> class.
     /// </summary>
-    public sealed class MySqlDbSetting : BaseDbSetting
+    public MySqlDbSetting()
     {
-        /// <summary>
-        /// Creates a new instance of <see cref="MySqlDbSetting"/> class.
-        /// </summary>
-        public MySqlDbSetting()
-        {
-            AreTableHintsSupported = false;
-            AverageableType = typeof(double);
-            ClosingQuote = "`";
-            DefaultSchema = null;
-            IsDirectionSupported = false;
-            IsExecuteReaderDisposable = false;
-            IsMultiStatementExecutable = true;
-            IsPreparable = false;
-            IsUseUpsert = false;
-            OpeningQuote = "`";
-            ParameterPrefix = "@";
-        }
+        AreTableHintsSupported = false;
+        AverageableType = typeof(double);
+        ClosingQuote = "`";
+        DefaultSchema = null;
+        IsDirectionSupported = false;
+        IsExecuteReaderDisposable = false;
+        IsMultiStatementExecutable = true;
+        IsPreparable = false;
+        IsUseUpsert = false;
+        OpeningQuote = "`";
+        ParameterPrefix = "@";
     }
 }

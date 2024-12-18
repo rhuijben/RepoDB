@@ -1,11 +1,10 @@
-﻿namespace RepoDb.IntegrationTests.Enumerations
+﻿namespace RepoDb.IntegrationTests.Enumerations;
+
+public enum Direction
 {
-    public enum Direction
-    {
-        None,
-        North,
-        South,
-        East,
-        West
-    }
+    None,
+    North,
+    South,
+    East,
+    West
 }

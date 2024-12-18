@@ -1,44 +1,43 @@
 ﻿using System.Linq.Expressions;
 
-namespace RepoDb.Extensions
+namespace RepoDb.Extensions;
+
+/// <summary>
+/// Contains the extension methods for <see cref="MemberBinding"/> object.
+/// </summary>
+internal static class MemberBindingExtension
 {
     /// <summary>
-    /// Contains the extension methods for <see cref="MemberBinding"/> object.
+    /// Gets a value from the current instance of <see cref="MemberBinding"/> object.
     /// </summary>
-    internal static class MemberBindingExtension
+    /// <param name="member">The instance of <see cref="MemberBinding"/> object where the value is to be extracted.</param>
+    /// <returns>The extracted value from <see cref="MemberBinding"/> object.</returns>
+    public static object GetValue(this MemberBinding member)
     {
-        /// <summary>
-        /// Gets a value from the current instance of <see cref="MemberBinding"/> object.
-        /// </summary>
-        /// <param name="member">The instance of <see cref="MemberBinding"/> object where the value is to be extracted.</param>
-        /// <returns>The extracted value from <see cref="MemberBinding"/> object.</returns>
-        public static object GetValue(this MemberBinding member)
+        if (member is MemberAssignment memberAssignment)
         {
-            if (member is MemberAssignment memberAssignment)
-            {
-                return memberAssignment.Expression.GetValue();
-            }
-            return null;
+            return memberAssignment.Expression.GetValue();
         }
-
-        #region Identification and Conversion
-
-        /// <summary>
-        /// Identify whether the instance of <see cref="MemberBinding"/> is a <see cref="MemberAssignment"/> object.
-        /// </summary>
-        /// <param name="member">The instance of <see cref="MemberBinding"/> object to be identified.</param>
-        /// <returns>Returns true if the expression is a <see cref="MemberAssignment"/>.</returns>
-        public static bool IsMemberAssignment(this MemberBinding member) =>
-            member is MemberAssignment;
-
-        /// <summary>
-        /// Converts the <see cref="MemberBinding"/> object into <see cref="MemberAssignment"/> object.
-        /// </summary>
-        /// <param name="member">The instance of <see cref="MemberBinding"/> object to be converted.</param>
-        /// <returns>A converted instance of <see cref="MemberAssignment"/> object.</returns>
-        public static MemberAssignment ToMemberAssignment(this MemberBinding member) =>
-            (MemberAssignment)member;
-
-        #endregion
+        return null;
     }
+
+    #region Identification and Conversion
+
+    /// <summary>
+    /// Identify whether the instance of <see cref="MemberBinding"/> is a <see cref="MemberAssignment"/> object.
+    /// </summary>
+    /// <param name="member">The instance of <see cref="MemberBinding"/> object to be identified.</param>
+    /// <returns>Returns true if the expression is a <see cref="MemberAssignment"/>.</returns>
+    public static bool IsMemberAssignment(this MemberBinding member) =>
+        member is MemberAssignment;
+
+    /// <summary>
+    /// Converts the <see cref="MemberBinding"/> object into <see cref="MemberAssignment"/> object.
+    /// </summary>
+    /// <param name="member">The instance of <see cref="MemberBinding"/> object to be converted.</param>
+    /// <returns>A converted instance of <see cref="MemberAssignment"/> object.</returns>
+    public static MemberAssignment ToMemberAssignment(this MemberBinding member) =>
+        (MemberAssignment)member;
+
+    #endregion
 }

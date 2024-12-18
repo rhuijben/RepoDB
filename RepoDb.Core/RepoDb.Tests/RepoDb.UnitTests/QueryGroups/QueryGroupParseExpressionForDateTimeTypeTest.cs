@@ -1,77 +1,76 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace RepoDb.UnitTests
+namespace RepoDb.UnitTests;
+
+public partial class QueryGroupTest
 {
-    public partial class QueryGroupTest
+    // DateTime
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionDateTimeConstant()
     {
-        // DateTime
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == DateTime.UtcNow).GetString(m_dbSetting);
+        var expected = "([PropertyDateTime] = @PropertyDateTime)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionDateTimeConstant()
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionDateTimeVariable()
+    {
+        // Setup
+        var value = DateTime.UtcNow;
+
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == value).GetString(m_dbSetting);
+        var expected = "([PropertyDateTime] = @PropertyDateTime)";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionDateTimeClassProperty()
+    {
+        // Setup
+        var value = new QueryGroupTestExpressionClass
         {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == DateTime.UtcNow).GetString(m_dbSetting);
-            var expected = "([PropertyDateTime] = @PropertyDateTime)";
+            PropertyDateTime = DateTime.UtcNow
+        };
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == value.PropertyDateTime).GetString(m_dbSetting);
+        var expected = "([PropertyDateTime] = @PropertyDateTime)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionDateTimeVariable()
-        {
-            // Setup
-            var value = DateTime.UtcNow;
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == value).GetString(m_dbSetting);
-            var expected = "([PropertyDateTime] = @PropertyDateTime)";
+    [TestMethod]
+    public void TestQueryGroupParseExpressionDateTimeMethodCall()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == GetDateTimeValueForParseExpression()).GetString(m_dbSetting);
+        var expected = "([PropertyDateTime] = @PropertyDateTime)";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionDateTimeClassProperty()
-        {
-            // Setup
-            var value = new QueryGroupTestExpressionClass
-            {
-                PropertyDateTime = DateTime.UtcNow
-            };
+    [TestMethod]
+    public void TestQueryGroupParseExpressionDateTimeVariableMethodCall()
+    {
+        // Setup
+        var value = GetDateTimeValueForParseExpression();
 
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == value.PropertyDateTime).GetString(m_dbSetting);
-            var expected = "([PropertyDateTime] = @PropertyDateTime)";
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == value).GetString(m_dbSetting);
+        var expected = "([PropertyDateTime] = @PropertyDateTime)";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void TestQueryGroupParseExpressionDateTimeMethodCall()
-        {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == GetDateTimeValueForParseExpression()).GetString(m_dbSetting);
-            var expected = "([PropertyDateTime] = @PropertyDateTime)";
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void TestQueryGroupParseExpressionDateTimeVariableMethodCall()
-        {
-            // Setup
-            var value = GetDateTimeValueForParseExpression();
-
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyDateTime == value).GetString(m_dbSetting);
-            var expected = "([PropertyDateTime] = @PropertyDateTime)";
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
     }
 }

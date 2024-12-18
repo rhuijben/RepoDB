@@ -1,11 +1,10 @@
-﻿namespace RepoDb.PostgreSql.BulkOperations
+﻿namespace RepoDb.PostgreSql.BulkOperations;
+
+/// <summary>
+/// 
+/// </summary>
+internal class IdentityResult
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    internal class IdentityResult
-    {
-        public int Index { get; set; }
-        public long Identity { get; set; }
-    }
+    public int Index { get; set; }
+    public long Identity { get; set; }
 }

@@ -1,17 +1,16 @@
 ﻿using System;
 
-namespace RepoDb.Exceptions
+namespace RepoDb.Exceptions;
+
+/// <summary>
+/// An exception that is being thrown when the parameter object is not found.
+/// </summary>
+public class ParameterNotFoundException : Exception
 {
     /// <summary>
-    /// An exception that is being thrown when the parameter object is not found.
+    /// Creates a new instance of <see cref="ParameterNotFoundException"/> class.
     /// </summary>
-    public class ParameterNotFoundException : Exception
-    {
-        /// <summary>
-        /// Creates a new instance of <see cref="ParameterNotFoundException"/> class.
-        /// </summary>
-        /// <param name="message">The exception message.</param>
-        public ParameterNotFoundException(string message)
-            : base(message) { }
-    }
+    /// <param name="message">The exception message.</param>
+    public ParameterNotFoundException(string message)
+        : base(message) { }
 }

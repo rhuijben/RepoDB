@@ -2,104 +2,104 @@
 using MySqlConnector;
 using RepoDb.MySqlConnector.IntegrationTests.Models;
 
-namespace RepoDb.MySqlConnector.IntegrationTests.Setup
+namespace RepoDb.MySqlConnector.IntegrationTests.Setup;
+
+public static class Database
 {
-    public static class Database
+    static readonly MysqlDbInstance Instance = new();
+    #region Properties
+
+    /// <summary>
+    /// Gets or sets the connection string to be used for sys.
+    /// </summary>
+    public static string ConnectionStringForSys => Instance.AdminConnectionString;
+
+    /// <summary>
+    /// Gets or sets the connection string to be used.
+    /// </summary>
+    public static string ConnectionString => Instance.ConnectionString;
+
+    #endregion
+
+    #region Methods
+
+    public static void Initialize()
     {
-        static readonly MysqlDbInstance Instance = new();
-        #region Properties
+        // Initialize MySql
+        GlobalConfiguration.Setup(new());
 
-        /// <summary>
-        /// Gets or sets the connection string to be used for sys.
-        /// </summary>
-        public static string ConnectionStringForSys => Instance.AdminConnectionString;
+        // Create databases
+        CreateDatabase();
 
-        /// <summary>
-        /// Gets or sets the connection string to be used.
-        /// </summary>
-        public static string ConnectionString => Instance.ConnectionString;
+        // Create tables
+        CreateTables();
+    }
 
-        #endregion
-
-        #region Methods
-
-        public static void Initialize()
+    public static void Cleanup()
+    {
+        using (var connection = new MySqlConnection(ConnectionString))
         {
-            // Initialize MySql
-            GlobalConfiguration.Setup(new());
-
-            // Create databases
-            CreateDatabase();
-
-            // Create tables
-            CreateTables();
+            connection.Truncate<CompleteTable>();
+            connection.Truncate<NonIdentityCompleteTable>();
         }
+    }
 
-        public static void Cleanup()
+    #endregion
+
+    #region CompleteTable
+
+    public static IEnumerable<CompleteTable> CreateCompleteTables(int count)
+    {
+        using (var connection = new MySqlConnection(ConnectionString))
         {
-            using (var connection = new MySqlConnection(ConnectionString))
-            {
-                connection.Truncate<CompleteTable>();
-                connection.Truncate<NonIdentityCompleteTable>();
-            }
+            var tables = Helper.CreateCompleteTables(count);
+            connection.InsertAll(tables);
+            return tables;
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region CompleteTable
+    #region NonIdentityCompleteTable
 
-        public static IEnumerable<CompleteTable> CreateCompleteTables(int count)
+    public static IEnumerable<NonIdentityCompleteTable> CreateNonIdentityCompleteTables(int count)
+    {
+        using (var connection = new MySqlConnection(ConnectionString))
         {
-            using (var connection = new MySqlConnection(ConnectionString))
-            {
-                var tables = Helper.CreateCompleteTables(count);
-                connection.InsertAll(tables);
-                return tables;
-            }
+            var tables = Helper.CreateNonIdentityCompleteTables(count);
+            connection.InsertAll(tables);
+            return tables;
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region NonIdentityCompleteTable
+    #region CreateDatabases
 
-        public static IEnumerable<NonIdentityCompleteTable> CreateNonIdentityCompleteTables(int count)
+    private static void CreateDatabase()
+    {
+        using (var connection = new MySqlConnection(ConnectionStringForSys))
         {
-            using (var connection = new MySqlConnection(ConnectionString))
-            {
-                var tables = Helper.CreateNonIdentityCompleteTables(count);
-                connection.InsertAll(tables);
-                return tables;
-            }
+            connection.ExecuteNonQuery(@"CREATE DATABASE IF NOT EXISTS `RepoDbTest`;");
+            connection.ExecuteNonQuery(@"GRANT ALL Privileges on RepoDbTest.* to 'root'@'%';");
         }
+    }
 
-        #endregion
+    #endregion
 
-        #region CreateDatabases
+    #region CreateTables
 
-        private static void CreateDatabase()
+    private static void CreateTables()
+    {
+        CreateCompleteTable();
+        CreateNonIdentityCompleteTable();
+    }
+
+    private static void CreateCompleteTable()
+    {
+        using (var connection = new MySqlConnection(ConnectionString))
         {
-            using (var connection = new MySqlConnection(ConnectionStringForSys))
-            {
-                connection.ExecuteNonQuery(@"CREATE DATABASE IF NOT EXISTS `RepoDbTest`;");
-                connection.ExecuteNonQuery(@"GRANT ALL Privileges on RepoDbTest.* to 'root'@'%';");
-            }
-        }
-
-        #endregion
-
-        #region CreateTables
-
-        private static void CreateTables()
-        {
-            CreateCompleteTable();
-            CreateNonIdentityCompleteTable();
-        }
-
-        private static void CreateCompleteTable()
-        {
-            using (var connection = new MySqlConnection(ConnectionString))
-            {
-                connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS `CompleteTable`
+            connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS `CompleteTable`
                     (
                         `Id` bigint(20) NOT NULL AUTO_INCREMENT,
                         `ColumnVarchar` varchar(256) DEFAULT NULL,
@@ -145,14 +145,14 @@ namespace RepoDb.MySqlConnector.IntegrationTests.Setup
                         `ColumnBit` bit(1) DEFAULT NULL,
                         PRIMARY KEY (`Id`)
                     ) ENGINE=InnoDB;");
-            }
         }
+    }
 
-        private static void CreateNonIdentityCompleteTable()
+    private static void CreateNonIdentityCompleteTable()
+    {
+        using (var connection = new MySqlConnection(ConnectionString))
         {
-            using (var connection = new MySqlConnection(ConnectionString))
-            {
-                connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS `NonIdentityCompleteTable`
+            connection.ExecuteNonQuery(@"CREATE TABLE IF NOT EXISTS `NonIdentityCompleteTable`
                     (
                         `Id` bigint(20) NOT NULL,
                         `ColumnVarchar` varchar(256) DEFAULT NULL,
@@ -198,9 +198,8 @@ namespace RepoDb.MySqlConnector.IntegrationTests.Setup
                         `ColumnBit` bit(1) DEFAULT NULL,
                         PRIMARY KEY(`Id`)
                     ) ENGINE = InnoDB;");
-            }
         }
-
-        #endregion
     }
+
+    #endregion
 }

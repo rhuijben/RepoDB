@@ -4,26 +4,25 @@ using Microsoft.EntityFrameworkCore;
 using RepoDb.Benchmarks.SqlServer.Models;
 using RepoDb.Benchmarks.SqlServer.Setup;
 
-namespace RepoDb.Benchmarks.SqlServer.EFCore
+namespace RepoDb.Benchmarks.SqlServer.EFCore;
+
+public class GetAllEFCoreBenchmarks : EFCoreBaseBenchmarks
 {
-    public class GetAllEFCoreBenchmarks : EFCoreBaseBenchmarks
+    private readonly Consumer consumer = new ();
+
+    [Benchmark]
+    public void NoTrackingGetAll()
     {
-        private readonly Consumer consumer = new ();
+        using var context = new EFCoreContext(DatabaseHelper.ConnectionString);
 
-        [Benchmark]
-        public void NoTrackingGetAll()
-        {
-            using var context = new EFCoreContext(DatabaseHelper.ConnectionString);
+        context.Persons.AsNoTracking().Consume(consumer);
+    }
 
-            context.Persons.AsNoTracking().Consume(consumer);
-        }
+    [Benchmark]
+    public void FromSqlRawGetAll()
+    {
+        using var context = new EFCoreContext(DatabaseHelper.ConnectionString);
 
-        [Benchmark]
-        public void FromSqlRawGetAll()
-        {
-            using var context = new EFCoreContext(DatabaseHelper.ConnectionString);
-
-            context.Persons.FromSqlRaw("select * from Person").Consume(consumer);
-        }
+        context.Persons.FromSqlRaw("select * from Person").Consume(consumer);
     }
 }

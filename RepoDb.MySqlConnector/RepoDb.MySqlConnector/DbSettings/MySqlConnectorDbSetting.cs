@@ -1,28 +1,27 @@
 ﻿using MySqlConnector;
 
-namespace RepoDb.DbSettings
+namespace RepoDb.DbSettings;
+
+/// <summary>
+/// A setting class used for <see cref="MySqlConnection"/> data provider.
+/// </summary>
+public sealed class MySqlConnectorDbSetting : BaseDbSetting
 {
     /// <summary>
-    /// A setting class used for <see cref="MySqlConnection"/> data provider.
+    /// Creates a new instance of <see cref="MySqlConnectorDbSetting"/> class.
     /// </summary>
-    public sealed class MySqlConnectorDbSetting : BaseDbSetting
+    public MySqlConnectorDbSetting()
     {
-        /// <summary>
-        /// Creates a new instance of <see cref="MySqlConnectorDbSetting"/> class.
-        /// </summary>
-        public MySqlConnectorDbSetting()
-        {
-            AreTableHintsSupported = false;
-            AverageableType = typeof(double);
-            ClosingQuote = "`";
-            DefaultSchema = null;
-            IsDirectionSupported = false;
-            IsExecuteReaderDisposable = true;
-            IsMultiStatementExecutable = true;
-            IsPreparable = true;
-            IsUseUpsert = false;
-            OpeningQuote = "`";
-            ParameterPrefix = "@";
-        }
+        AreTableHintsSupported = false;
+        AverageableType = typeof(double);
+        ClosingQuote = "`";
+        DefaultSchema = null;
+        IsDirectionSupported = false;
+        IsExecuteReaderDisposable = true;
+        IsMultiStatementExecutable = true;
+        IsPreparable = true;
+        IsUseUpsert = false;
+        OpeningQuote = "`";
+        ParameterPrefix = "@";
     }
 }

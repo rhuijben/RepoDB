@@ -1,17 +1,16 @@
-﻿namespace RepoDb.Enumerations
+﻿namespace RepoDb.Enumerations;
+
+/// <summary>
+/// 
+/// </summary>
+public enum ExpressionNullSemantics
 {
     /// <summary>
     /// 
     /// </summary>
-    public enum ExpressionNullSemantics
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        SqlNull,
-        /// <summary>
-        /// 
-        /// </summary>
-        NullNotEqual
-    }
+    SqlNull,
+    /// <summary>
+    /// 
+    /// </summary>
+    NullNotEqual
 }

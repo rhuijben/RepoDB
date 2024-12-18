@@ -2,115 +2,114 @@
 using RepoDb.UnitTests.CustomObjects;
 using System;
 
-namespace RepoDb.UnitTests.StatementBuilders
+namespace RepoDb.UnitTests.StatementBuilders;
+
+[TestClass]
+public class BaseStatementBuilderCreateDeleteAllTest
 {
-    [TestClass]
-    public class BaseStatementBuilderCreateDeleteAllTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            StatementBuilderMapper.Add<BaseStatementBuilderDbConnection>(new CustomBaseStatementBuilder(), true);
-        }
+        StatementBuilderMapper.Add<BaseStatementBuilderDbConnection>(new CustomBaseStatementBuilder(), true);
+    }
 
-        #region SubClasses
+    #region SubClasses
 
-        private class BaseStatementBuilderDbConnection : CustomDbConnection { }
+    private class BaseStatementBuilderDbConnection : CustomDbConnection { }
 
-        #endregion
+    #endregion
 
-        [TestMethod]
-        public void TestBaseStatementBuilderCreateDeleteAll()
-        {
-            // Setup
-            var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-            var tableName = "Table";
+    [TestMethod]
+    public void TestBaseStatementBuilderCreateDeleteAll()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
+        var tableName = "Table";
 
-            // Act
-            var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
-            var expected = "DELETE FROM [Table] ;";
+        // Act
+        var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
+        var expected = "DELETE FROM [Table] ;";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestBaseStatementBuilderCreateDeleteAllWithQuotedTableSchema()
-        {
-            // Setup
-            var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-            var tableName = "[dbo].[Table]";
+    [TestMethod]
+    public void TestBaseStatementBuilderCreateDeleteAllWithQuotedTableSchema()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
+        var tableName = "[dbo].[Table]";
 
-            // Act
-            var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
-            var expected = "DELETE FROM [dbo].[Table] ;";
+        // Act
+        var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
+        var expected = "DELETE FROM [dbo].[Table] ;";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestBaseStatementBuilderCreateDeleteAllWithUnquotedTableSchema()
-        {
-            // Setup
-            var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-            var tableName = "dbo.Table";
+    [TestMethod]
+    public void TestBaseStatementBuilderCreateDeleteAllWithUnquotedTableSchema()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
+        var tableName = "dbo.Table";
 
-            // Act
-            var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
-            var expected = "DELETE FROM [dbo].[Table] ;";
+        // Act
+        var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
+        var expected = "DELETE FROM [dbo].[Table] ;";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestBaseStatementBuilderCreateDeleteAllWithHints()
-        {
-            // Setup
-            var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-            var tableName = "Table";
+    [TestMethod]
+    public void TestBaseStatementBuilderCreateDeleteAllWithHints()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
+        var tableName = "Table";
 
-            // Act
-            var actual = statementBuilder.CreateDeleteAll(tableName: tableName,
-                hints: "WITH (TABLOCK)");
-            var expected = "DELETE FROM [Table] WITH (TABLOCK) ;";
+        // Act
+        var actual = statementBuilder.CreateDeleteAll(tableName: tableName,
+            hints: "WITH (TABLOCK)");
+        var expected = "DELETE FROM [Table] WITH (TABLOCK) ;";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod, ExpectedException(typeof(NullReferenceException))]
-        public void ThrowExceptionOnBaseStatementBuilderCreateDeleteAllIfTheTableIsNull()
-        {
-            // Setup
-            var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-            var tableName = (string)null;
+    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    public void ThrowExceptionOnBaseStatementBuilderCreateDeleteAllIfTheTableIsNull()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
+        var tableName = (string)null;
 
-            // Act
-            statementBuilder.CreateDeleteAll(tableName: tableName);
-        }
+        // Act
+        statementBuilder.CreateDeleteAll(tableName: tableName);
+    }
 
-        [TestMethod, ExpectedException(typeof(NullReferenceException))]
-        public void ThrowExceptionOnBaseStatementBuilderCreateDeleteAllIfTheTableIsEmpty()
-        {
-            // Setup
-            var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-            var tableName = "";
+    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    public void ThrowExceptionOnBaseStatementBuilderCreateDeleteAllIfTheTableIsEmpty()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
+        var tableName = "";
 
-            // Act
-            statementBuilder.CreateDeleteAll(tableName: tableName);
-        }
+        // Act
+        statementBuilder.CreateDeleteAll(tableName: tableName);
+    }
 
-        [TestMethod, ExpectedException(typeof(NullReferenceException))]
-        public void ThrowExceptionOnBaseStatementBuilderCreateDeleteAllIfTheTableIsWhitespace()
-        {
-            // Setup
-            var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-            var tableName = " ";
+    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    public void ThrowExceptionOnBaseStatementBuilderCreateDeleteAllIfTheTableIsWhitespace()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
+        var tableName = " ";
 
-            // Act
-            statementBuilder.CreateDeleteAll(tableName: tableName);
-        }
+        // Act
+        statementBuilder.CreateDeleteAll(tableName: tableName);
     }
 }
