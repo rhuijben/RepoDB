@@ -904,9 +904,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
     /// <returns>True if the instances are equals.</returns>
     public override bool Equals(object obj)
     {
-        if (obj is null) return false;
-
-        return obj.GetHashCode() == GetHashCode();
+        return Equals(obj as QueryGroup);
     }
 
     /// <summary>
@@ -916,9 +914,11 @@ public partial class QueryGroup : IEquatable<QueryGroup>
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(QueryGroup other)
     {
-        if (other is null) return false;
-
-        return other.GetHashCode() == GetHashCode();
+        return other is not null
+            && other.QueryFields.Count() == QueryFields.Count()
+            && other.Conjunction == Conjunction
+            && other.IsNot == IsNot
+            && other.QueryFields.Zip(QueryFields, Equals).All(v => v);
     }
 
     /// <summary>

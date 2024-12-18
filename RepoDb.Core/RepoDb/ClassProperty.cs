@@ -300,11 +300,7 @@ public class ClassProperty : IEquatable<ClassProperty>
     /// <returns>True if the two instance is the same.</returns>
     public override bool Equals(object obj)
     {
-        if (obj is ClassProperty property)
-        {
-            return PropertyInfo.Equals(property.PropertyInfo);
-        }
-        return Equals(obj);
+        return Equals(obj as ClassProperty);
     }
 
     /// <summary>

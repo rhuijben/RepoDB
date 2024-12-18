@@ -284,9 +284,7 @@ public partial class QueryField : IEquatable<QueryField>
     /// <returns>True if the instances are equals.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is null) return false;
-
-        return obj.GetHashCode() == GetHashCode();
+        return Equals(obj as QueryField);
     }
 
     /// <summary>
@@ -296,9 +294,14 @@ public partial class QueryField : IEquatable<QueryField>
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(QueryField? other)
     {
-        if (other is null) return false;
-
-        return other.GetHashCode() == GetHashCode();
+        return other is not null
+            && other.Field == Field
+            && other.Operation == Operation
+            && other.Parameter == Parameter
+            && other.Parameter.Value == Parameter.Value
+            && (Operation is Operation.In or Operation.NotIn ? (other.Parameter.Value as IEnumerable<object>)?.Count() == (Parameter.Value as IEnumerable<object>).Count() : true)
+            && other.Field?.Name == Field?.Name
+            && other.Operation.GetText() == Operation.GetText();
     }
 
     /// <summary>

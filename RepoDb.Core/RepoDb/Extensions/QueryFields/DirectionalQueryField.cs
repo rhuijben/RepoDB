@@ -1,5 +1,5 @@
-﻿using RepoDb.Enumerations;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Enumerations;
 
 namespace RepoDb;
 
@@ -296,9 +296,7 @@ public class DirectionalQueryField : QueryField, IEquatable<DirectionalQueryFiel
     /// <returns>True if the instances are equals.</returns>
     public override bool Equals(object obj)
     {
-        if (obj is null) return false;
-
-        return obj.GetHashCode() == GetHashCode();
+        return Equals(obj as DirectionalQueryField);
     }
 
     /// <summary>
@@ -308,9 +306,9 @@ public class DirectionalQueryField : QueryField, IEquatable<DirectionalQueryFiel
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(DirectionalQueryField other)
     {
-        if (other is null) return false;
-
-        return other.GetHashCode() == GetHashCode();
+        return other is not null
+            && other.Direction == Direction
+            && other.Size == Size;
     }
 
     /// <summary>

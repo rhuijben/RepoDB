@@ -181,10 +181,7 @@ public abstract class BaseDbSetting : IDbSetting
     /// <returns>True if the instances are equals.</returns>
     public override bool Equals(object obj)
     {
-        if (obj is not BaseDbSetting dbs)
-            return false;
-
-        return Equals(dbs);
+        return Equals(obj as BaseDbSetting);
     }
 
     /// <summary>
@@ -194,10 +191,18 @@ public abstract class BaseDbSetting : IDbSetting
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(BaseDbSetting other)
     {
-        if (other is null) return false;
-
-        // TODO: Implement something without theoretical collisions
-        return other.GetHashCode() == GetHashCode();
+        return other is not null
+            && other.AreTableHintsSupported == AreTableHintsSupported
+            && other.ClosingQuote == ClosingQuote
+            && other.AverageableType == AverageableType
+            && other.DefaultSchema == DefaultSchema
+            && other.IsDirectionSupported == IsDirectionSupported
+            && other.IsExecuteReaderDisposable == IsExecuteReaderDisposable
+            && other.IsMultiStatementExecutable == IsMultiStatementExecutable
+            && other.IsPreparable == IsPreparable
+            && other.IsUseUpsert == IsUseUpsert
+            && other.OpeningQuote == OpeningQuote
+            && other.ParameterPrefix == ParameterPrefix;
     }
 
     /// <summary>

@@ -214,9 +214,7 @@ public class PropertyValueAttribute : Attribute, IEquatable<PropertyValueAttribu
     /// <returns>True if the instances are equals.</returns>
     public override bool Equals(object obj)
     {
-        if (obj is null) return false;
-
-        return obj.GetHashCode() == GetHashCode();
+        return Equals(obj as PropertyValueAttribute);
     }
 
     /// <summary>
@@ -226,9 +224,11 @@ public class PropertyValueAttribute : Attribute, IEquatable<PropertyValueAttribu
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(PropertyValueAttribute other)
     {
-        if (other is null) return false;
-
-        return other.GetHashCode() == GetHashCode();
+        return other is not null
+            && other.GetType() == GetType()
+            && other.PropertyName == PropertyName
+            && other.ParameterType == ParameterType
+            && other.IncludedInCompilation == IncludedInCompilation;
     }
 
     /// <summary>

@@ -1,5 +1,5 @@
-﻿using RepoDb.Extensions;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Extensions;
 
 namespace RepoDb;
 
@@ -176,9 +176,7 @@ public sealed class Parameter : IEquatable<Parameter>
     /// <returns>True if the instances are equals.</returns>
     public override bool Equals(object obj)
     {
-        if (obj is null) return false;
-
-        return obj.GetHashCode() == GetHashCode();
+        return Equals(obj as Parameter);
     }
 
     /// <summary>
@@ -188,9 +186,9 @@ public sealed class Parameter : IEquatable<Parameter>
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(Parameter other)
     {
-        if (other is null) return false;
-
-        return other.GetHashCode() == GetHashCode();
+        return other is not null
+            && other.OriginalName == OriginalName
+            && other.DbType == DbType;
     }
 
     /// <summary>
