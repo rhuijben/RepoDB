@@ -189,9 +189,7 @@ public class DbField : IEquatable<DbField>
     /// <returns>True if the instances are equals.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is null) return false;
-
-        return obj.GetHashCode() == GetHashCode();
+        return Equals(obj as DbField);
     }
 
     /// <summary>
@@ -201,9 +199,17 @@ public class DbField : IEquatable<DbField>
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(DbField? other)
     {
-        if (other is null) return false;
-
-        return other.GetHashCode() == GetHashCode();
+        return other is not null
+            && other.Name == Name
+            && other.IsPrimary == IsPrimary
+            && other.IsIdentity == IsIdentity
+            && other.IsNullable == IsNullable
+            && other.Type == Type
+            && other.Size == Size
+            && other.Precision == Precision
+            && other.Scale == Scale
+            && other.DatabaseType == DatabaseType
+            && other.Provider == Provider;
     }
 
     /// <summary>

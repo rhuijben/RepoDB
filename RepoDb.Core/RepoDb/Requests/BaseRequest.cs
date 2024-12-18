@@ -1,5 +1,5 @@
-﻿using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Requests;
 
@@ -76,16 +76,25 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// </summary>
     /// <param name="obj">The object to be compared to the current object.</param>
     /// <returns>True if the instances are equals.</returns>
-    public override bool Equals(object obj) =>
-        (obj is null) ? false : obj.GetHashCode() == GetHashCode();
+    public override bool Equals(object obj)
+    {
+        return Equals(obj as BaseRequest);
+    }
 
     /// <summary>
     /// Compares the <see cref="BaseRequest"/> object equality against the given target object.
     /// </summary>
     /// <param name="other">The object to be compared to the current object.</param>
     /// <returns>True if the instances are equal.</returns>
-    public bool Equals(BaseRequest other) =>
-        (other is null) ? false : other.GetHashCode() == GetHashCode();
+    public bool Equals(BaseRequest other)
+    {
+        if ((other is null))
+        {
+            return false;
+        }
+
+        return Object.ReferenceEquals(other, this);
+    }
 
     /// <summary>
     /// Compares the equality of the two <see cref="BaseRequest"/> objects.

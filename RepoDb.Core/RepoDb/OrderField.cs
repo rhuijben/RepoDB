@@ -1,7 +1,7 @@
-﻿using RepoDb.Enumerations;
+﻿using System.Linq.Expressions;
+using RepoDb.Enumerations;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
-using System.Linq.Expressions;
 
 namespace RepoDb;
 
@@ -151,7 +151,7 @@ public class OrderField : IEquatable<OrderField>
 
         var properties = TypeCache.Get(obj.GetType()).GetProperties();
         var list = new List<OrderField>(properties.Length);
-        
+
         foreach (var property in properties)
         {
             if (property.PropertyType != typeof(Order))
@@ -190,9 +190,7 @@ public class OrderField : IEquatable<OrderField>
     /// <returns>True if the instances are equals.</returns>
     public override bool Equals(object obj)
     {
-        if (obj is null) return false;
-
-        return obj.GetHashCode() == GetHashCode();
+        return Equals(obj as OrderField);
     }
 
     /// <summary>
@@ -202,9 +200,9 @@ public class OrderField : IEquatable<OrderField>
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(OrderField other)
     {
-        if (other is null) return false;
-
-        return other.GetHashCode() == GetHashCode();
+        return other is not null
+            && other.Name == Name
+            && other.Order == Order;
     }
 
     /// <summary>
