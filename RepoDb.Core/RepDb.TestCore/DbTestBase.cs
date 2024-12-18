@@ -42,7 +42,11 @@ namespace RepoDb.TestCore
             }
             catch
             {
+#if NET
                 await db.DisposeAsync();
+#else
+                db.Dispose();
+#endif
                 throw;
             }
         }

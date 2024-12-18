@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net9.0;net8.0;net481</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <EnableMSTestRunner>true</EnableMSTestRunner>
@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\RepoDb.SqlServer\RepoDb.SqlServer\RepoDb.SqlServer.csproj" />
+    <ProjectReference Include="..\..\RepDb.TestCore\RepoDb.TestCore.csproj" />
     <ProjectReference Include="..\..\RepoDb\RepoDb.csproj" />
   </ItemGroup>
 </Project>

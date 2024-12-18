@@ -8,26 +8,19 @@ namespace RepoDb.SQLite.System.IntegrationTests.Setup
 {
     public static class Database
     {
-        static Database()
-        {
-            // Get the environment variable
-            //var variable = Environment.GetEnvironmentVariable("REPODB_IS_IN_MEMORY", EnvironmentVariableTarget.Process);
-
-            // Set the property
-            IsInMemory = true; //string.Equals(variable, "TRUE", StringComparison.OrdinalIgnoreCase);
-        }
+        static readonly SQLiteDbInstance Instance = new();
 
         #region Properties
 
         /// <summary>
         /// Gets or sets the connection string to be used (for SDS).
         /// </summary>
-        public static string ConnectionStringSDS { get; private set; } = @"Data Source=C:\SqLite\Databases\RepoDb.db;Version=3;";
+        public static string ConnectionStringSDS => Instance.AdminConnectionString;
 
         /// <summary>
         /// Gets or sets the connection string to be used (for MDS).
         /// </summary>
-        public static string ConnectionStringMDS { get; private set; } = @"Data Source=C:\SqLite\Databases\RepoDb.db;";
+        public static string ConnectionStringMDS => Instance.ConnectionString;
 
         /// <summary>
         /// Gets the value that indicates whether to use the in-memory database.
@@ -41,28 +34,12 @@ namespace RepoDb.SQLite.System.IntegrationTests.Setup
         public static void Initialize()
         {
             // Initialize SqLite
-            GlobalConfiguration
-                .Setup()
-                .UseSQLite();
+            GlobalConfiguration.Setup(new());
 
             // Check the type of database
-            if (IsInMemory == true)
-            {
-                // Memory
-                ConnectionStringSDS = @"Data Source=:memory:;";
-                ConnectionStringMDS = @"Data Source=:memory:;";
-            }
-            else
-            {
-                // Local
-                ConnectionStringSDS = @"Data Source=C:\SqLite\Databases\RepoDb.db;Version=3;";
 
-                // Local
-                ConnectionStringMDS = @"Data Source=C:\SqLite\Databases\RepoDb.db;";
-
-                // Create tables
-                CreateSdsTables();
-            }
+            // Create tables
+            CreateSdsTables();
         }
 
         public static void Cleanup()

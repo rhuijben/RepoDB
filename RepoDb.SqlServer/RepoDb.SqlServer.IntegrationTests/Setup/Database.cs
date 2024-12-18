@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using RepoDb.SqlServer.IntegrationTests.Models;
 
@@ -8,17 +6,18 @@ namespace RepoDb.SqlServer.IntegrationTests.Setup
 {
     public static class Database
     {
+        static readonly SqlServerDbInstance Instance = new();
         #region Properties
 
         /// <summary>
         /// Gets or sets the connection string to be used for SQL Server database.
         /// </summary>
-        public static string ConnectionStringForMaster { get; private set; }
+        public static string ConnectionStringForMaster => Instance.AdminConnectionString;
 
         /// <summary>
         /// Gets or sets the connection string to be used.
         /// </summary>
-        public static string ConnectionString { get; private set; }
+        public static string ConnectionString => Instance.ConnectionString;
 
         #endregion
 
@@ -26,27 +25,7 @@ namespace RepoDb.SqlServer.IntegrationTests.Setup
 
         public static void Initialize()
         {
-            // Master connection
-            ConnectionStringForMaster =
-                Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_MASTER")
-                ?? Environment.GetEnvironmentVariable("REPODB_CONSTR_MASTER")
-                ?? @"Server=tcp:127.0.0.1,41433;Database=master;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;" // Docker Test Configuration
-                ?? @"Server=(local);Database=master;Integrated Security=SSPI;TrustServerCertificate=True;";
-
-            // RepoDb connection
-            ConnectionString =
-                Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODBTEST")
-                ?? Environment.GetEnvironmentVariable("REPODB_CONSTR")
-                ?? @"Server=tcp:127.0.0.1,41433;Database=RepoDbTest;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;" // Docker Test Configuration
-                ?? @"Server=(local);Database=RepoDbTest;Integrated Security=SSPI;TrustServerCertificate=True;";
-
-            // Initialize the SqlServer
-            GlobalConfiguration
-                .Setup()
-                .UseSqlServer();
-
-            // Set the DateTime type
-            TypeMapper.Add(typeof(DateTime), DbType.DateTime2, true);
+            Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
             // Create databases
             CreateDatabase();

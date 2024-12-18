@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using RepoDb.Exceptions;
 using RepoDb.MySql.IntegrationTests.Models;
@@ -8,17 +7,18 @@ namespace RepoDb.MySql.IntegrationTests.Setup
 {
     public static class Database
     {
+        static readonly MysqlDbInstance Instance = new();
         #region Properties
 
         /// <summary>
         /// Gets or sets the connection string to be used for sys.
         /// </summary>
-        public static string ConnectionStringForSys { get; private set; }
+        public static string ConnectionStringForSys => Instance.AdminConnectionString;
 
         /// <summary>
         /// Gets or sets the connection string to be used.
         /// </summary>
-        public static string ConnectionString { get; private set; }
+        public static string ConnectionString => Instance.ConnectionString;
 
         #endregion
 
@@ -26,24 +26,7 @@ namespace RepoDb.MySql.IntegrationTests.Setup
 
         public static void Initialize()
         {
-            // Set the connection string
-            ConnectionStringForSys =
-                Environment.GetEnvironmentVariable("REPODB_MYSQL_CONSTR_SYS")
-                ?? Environment.GetEnvironmentVariable("REPODB_CONSTR_SYS")
-                // ?? @"Server=127.0.0.1;Port=43306;Database=sys;User ID=root;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
-                ?? @"Server=localhost;Database=sys;Uid=user;Pwd=Password123;";
-
-            ConnectionString =
-                Environment.GetEnvironmentVariable("REPODB_MYSQL_CONSTR_REPODB")
-                ?? Environment.GetEnvironmentVariable("REPODB_CONSTR")
-                // ?? @"Server=127.0.0.1;Port=43306;Database=RepoDb;User ID=root;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;" // Docker test configuration
-                ?? @"Server=localhost;Database=RepoDb;Uid=user;Pwd=Password123;";
-
-            // Initialize MySql
-            GlobalConfiguration
-                .Setup()
-                .UseMySql();
-
+            Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
             // Create databases
             CreateDatabase();
 

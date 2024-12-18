@@ -1,12 +1,11 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.IntegrationTests.Operations
 {
@@ -1104,7 +1103,7 @@ namespace RepoDb.IntegrationTests.Operations
         [TestMethod, ExpectedException(typeof(KeyFieldNotFoundException))]
         public async Task ThrowExceptionOnSqlConnectionDeleteAsyncViaTableNameIfThereIsNoKeyField()
         {
-            await using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
+            using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
             {
                 await connection.DeleteAsync(ClassMappedNameCache.Get<NonKeyedTable>(), 1);
             }

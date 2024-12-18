@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using RepoDb.Extensions;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System;
 
 namespace RepoDb
 {
@@ -122,7 +122,7 @@ namespace RepoDb
             if (spaceBefore) Space();
 
             stringBuilder
-#if !NETSTANDARD2_0             
+#if NET
                 .AppendJoin(separator, values);
 #else
                 .Append(values.Join(separator));

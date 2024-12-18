@@ -8,6 +8,7 @@ using RepoDb.Trace;
 
 namespace RepoDb.Sqlite.Microsoft.IntegrationTests
 {
+#if NET
     [TestClass]
     public class TypeTransferTests
     {
@@ -291,4 +292,5 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests
 
         }
     }
+#endif
 }
