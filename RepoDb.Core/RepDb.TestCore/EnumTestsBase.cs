@@ -1,6 +1,5 @@
-﻿namespace RepoDb.TestCore
+﻿namespace RepoDb.TestCore;
+
+public abstract class EnumTestsBase<TDbInstance> : DbTestBase<TDbInstance> where TDbInstance : DbInstance, new()
 {
-    public abstract class EnumTestsBase<TDbInstance> : DbTestBase<TDbInstance> where TDbInstance : DbInstance, new()
-    {
-    }
 }

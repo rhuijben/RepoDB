@@ -1,26 +1,26 @@
 ﻿using System;
 using Microsoft.Data.SqlClient;
 
-namespace RepoDb.Benchmarks.SqlServer.Setup
+namespace RepoDb.Benchmarks.SqlServer.Setup;
+
+public static class DatabaseHelper
 {
-    public static class DatabaseHelper
+    public static string ConnectionString { get; private set; }
+
+    public static void Initialize(int elementsCount)
     {
-        public static string ConnectionString { get; private set; }
+        var connectionString = Environment.GetEnvironmentVariable("REPODB_CONSTR", EnvironmentVariableTarget.Process);
 
-        public static void Initialize(int elementsCount)
-        {
-            var connectionString = Environment.GetEnvironmentVariable("REPODB_CONSTR", EnvironmentVariableTarget.Process);
+        ConnectionString = connectionString ?? @"Server=(local);Database=RepoDbTest;Integrated Security=False;User Id=michael;Password=Password123;";
 
-            ConnectionString = connectionString ?? @"Server=(local);Database=RepoDbTest;Integrated Security=False;User Id=michael;Password=Password123;";
+        CreateDatabase();
+        CreatePersonTable();
+        FillData(elementsCount);
+    }
 
-            CreateDatabase();
-            CreatePersonTable();
-            FillData(elementsCount);
-        }
-
-        private static void FillData(int elementsCount)
-        {
-            const string commandText = @"DECLARE @i INT = 1;
+    private static void FillData(int elementsCount)
+    {
+        const string commandText = @"DECLARE @i INT = 1;
                 WHILE @i <= @elementsCount
                 BEGIN
                     INSERT INTO [dbo].[Person] (Name, Age, CreatedDateUtc)
@@ -28,41 +28,41 @@ namespace RepoDb.Benchmarks.SqlServer.Setup
                     Set @i = @i + 1;
                 END";
 
-            using var connection = new SqlConnection(ConnectionString);
+        using var connection = new SqlConnection(ConnectionString);
 
-            var command = new SqlCommand(commandText, connection);
-            command.Parameters.AddWithValue("@elementsCount", elementsCount);
+        var command = new SqlCommand(commandText, connection);
+        command.Parameters.AddWithValue("@elementsCount", elementsCount);
 
-            connection.Open();
-            command.ExecuteNonQuery();
-        }
+        connection.Open();
+        command.ExecuteNonQuery();
+    }
 
-        public static void Cleanup()
-        {
-            const string commandText = "TRUNCATE TABLE [dbo].[Person];";
+    public static void Cleanup()
+    {
+        const string commandText = "TRUNCATE TABLE [dbo].[Person];";
 
-            using var connection = new SqlConnection(ConnectionString);
+        using var connection = new SqlConnection(ConnectionString);
 
-            connection.Open();
-            connection.ExecuteNonQuery(commandText);
-        }
+        connection.Open();
+        connection.ExecuteNonQuery(commandText);
+    }
 
-        private static void CreateDatabase()
-        {
-            const string commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
+    private static void CreateDatabase()
+    {
+        const string commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
                 BEGIN
                     CREATE DATABASE [RepoDbTest];
                 END";
 
-            using var connection = new SqlConnection(ConnectionString);
+        using var connection = new SqlConnection(ConnectionString);
 
-            connection.Open();
-            connection.ExecuteNonQuery(commandText);
-        }
+        connection.Open();
+        connection.ExecuteNonQuery(commandText);
+    }
 
-        private static void CreatePersonTable()
-        {
-            const string commandText = @"IF (NOT EXISTS(SELECT * FROM sys.tables WHERE name = 'Person'))
+    private static void CreatePersonTable()
+    {
+        const string commandText = @"IF (NOT EXISTS(SELECT * FROM sys.tables WHERE name = 'Person'))
                 BEGIN
                     CREATE TABLE [dbo].[Person]
                     (
@@ -75,10 +75,9 @@ namespace RepoDb.Benchmarks.SqlServer.Setup
                     ON [PRIMARY];
                 END";
 
-            using var connection = new SqlConnection(ConnectionString);
+        using var connection = new SqlConnection(ConnectionString);
 
-            connection.Open();
-            connection.ExecuteNonQuery(commandText);
-        }
+        connection.Open();
+        connection.ExecuteNonQuery(commandText);
     }
 }

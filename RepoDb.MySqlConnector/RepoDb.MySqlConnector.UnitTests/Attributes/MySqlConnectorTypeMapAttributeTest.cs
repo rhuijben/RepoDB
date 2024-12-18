@@ -4,73 +4,72 @@ using RepoDb.Attributes.Parameter.MySqlConnector;
 using RepoDb.DbSettings;
 using RepoDb.Extensions;
 
-namespace RepoDb.MySqlConnector.UnitTests.Attributes
+namespace RepoDb.MySqlConnector.UnitTests.Attributes;
+
+[TestClass]
+public class MySqlTypeMapAttributeTest
 {
-    [TestClass]
-    public class MySqlTypeMapAttributeTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
+        DbSettingMapper.Add<MySqlConnection>(new MySqlConnectorDbSetting(), true);
+    }
+
+    #region Classes
+
+    private class MySqlDbTypeAttributeTestClass
+    {
+        [MySqlDbType(MySqlDbType.Geometry)]
+        public object ColumnName { get; set; }
+    }
+
+    #endregion
+
+    [TestMethod]
+    public void TestMySqlConnectorTypeMapAttributeViaEntityViaCreateParameters()
+    {
+        // Act
+        using (var connection = new MySqlConnection())
         {
-            DbSettingMapper.Add<MySqlConnection>(new MySqlConnectorDbSetting(), true);
-        }
-
-        #region Classes
-
-        private class MySqlDbTypeAttributeTestClass
-        {
-            [MySqlDbType(MySqlDbType.Geometry)]
-            public object ColumnName { get; set; }
-        }
-
-        #endregion
-
-        [TestMethod]
-        public void TestMySqlConnectorTypeMapAttributeViaEntityViaCreateParameters()
-        {
-            // Act
-            using (var connection = new MySqlConnection())
+            using (var command = connection.CreateCommand())
             {
-                using (var command = connection.CreateCommand())
-                {
-                    DbCommandExtension
-                        .CreateParameters(command, new MySqlDbTypeAttributeTestClass
-                        {
-                            ColumnName = "Test"
-                        });
+                DbCommandExtension
+                    .CreateParameters(command, new MySqlDbTypeAttributeTestClass
+                    {
+                        ColumnName = "Test"
+                    });
 
-                    // Assert
-                    Assert.AreEqual(1, command.Parameters.Count);
+                // Assert
+                Assert.AreEqual(1, command.Parameters.Count);
 
-                    // Assert
-                    var parameter = command.Parameters["@ColumnName"];
-                    Assert.AreEqual(MySqlDbType.Geometry, parameter.MySqlDbType);
-                }
+                // Assert
+                var parameter = command.Parameters["@ColumnName"];
+                Assert.AreEqual(MySqlDbType.Geometry, parameter.MySqlDbType);
             }
         }
+    }
 
-        [TestMethod]
-        public void TestMySqlConnectorTypeMapAttributeViaAnonymousViaCreateParameters()
+    [TestMethod]
+    public void TestMySqlConnectorTypeMapAttributeViaAnonymousViaCreateParameters()
+    {
+        // Act
+        using (var connection = new MySqlConnection())
         {
-            // Act
-            using (var connection = new MySqlConnection())
+            using (var command = connection.CreateCommand())
             {
-                using (var command = connection.CreateCommand())
-                {
-                    DbCommandExtension
-                        .CreateParameters(command, new
-                        {
-                            ColumnName = "Test"
-                        },
-                        typeof(MySqlDbTypeAttributeTestClass));
+                DbCommandExtension
+                    .CreateParameters(command, new
+                    {
+                        ColumnName = "Test"
+                    },
+                    typeof(MySqlDbTypeAttributeTestClass));
 
-                    // Assert
-                    Assert.AreEqual(1, command.Parameters.Count);
+                // Assert
+                Assert.AreEqual(1, command.Parameters.Count);
 
-                    // Assert
-                    var parameter = command.Parameters["@ColumnName"];
-                    Assert.AreEqual(MySqlDbType.Geometry, parameter.MySqlDbType);
-                }
+                // Assert
+                var parameter = command.Parameters["@ColumnName"];
+                Assert.AreEqual(MySqlDbType.Geometry, parameter.MySqlDbType);
             }
         }
     }

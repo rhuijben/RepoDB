@@ -1,26 +1,25 @@
-﻿namespace RepoDb.DbSettings
+﻿namespace RepoDb.DbSettings;
+
+/// <summary>
+/// A setting class used for SQL Server data provider.
+/// </summary>
+public sealed class SqlServerDbSetting : BaseDbSetting
 {
     /// <summary>
-    /// A setting class used for SQL Server data provider.
+    /// Creates a new instance of <see cref="SqlServerDbSetting"/> class.
     /// </summary>
-    public sealed class SqlServerDbSetting : BaseDbSetting
+    public SqlServerDbSetting()
     {
-        /// <summary>
-        /// Creates a new instance of <see cref="SqlServerDbSetting"/> class.
-        /// </summary>
-        public SqlServerDbSetting()
-        {
-            AreTableHintsSupported = true;
-            AverageableType = typeof(double);
-            ClosingQuote = "]";
-            DefaultSchema = "dbo";
-            IsDirectionSupported = true;
-            IsExecuteReaderDisposable = true;
-            IsMultiStatementExecutable = true;
-            IsPreparable = true;
-            IsUseUpsert = false;
-            OpeningQuote = "[";
-            ParameterPrefix = "@";
-        }
+        AreTableHintsSupported = true;
+        AverageableType = typeof(double);
+        ClosingQuote = "]";
+        DefaultSchema = "dbo";
+        IsDirectionSupported = true;
+        IsExecuteReaderDisposable = true;
+        IsMultiStatementExecutable = true;
+        IsPreparable = true;
+        IsUseUpsert = false;
+        OpeningQuote = "[";
+        ParameterPrefix = "@";
     }
 }

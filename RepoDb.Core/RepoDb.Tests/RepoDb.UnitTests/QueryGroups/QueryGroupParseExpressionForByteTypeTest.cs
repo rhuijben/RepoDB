@@ -1,88 +1,87 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text;
 
-namespace RepoDb.UnitTests
+namespace RepoDb.UnitTests;
+
+public partial class QueryGroupTest
 {
-    public partial class QueryGroupTest
+    // Byte
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionByteArray()
     {
-        // Byte
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == new[] { byte.Parse("0") }).GetString(m_dbSetting);
+        var expected = "([PropertyBytes] = @PropertyBytes)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionByteArray()
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionPassedByteArray()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == Encoding.Unicode.GetBytes("Test")).GetString(m_dbSetting);
+        var expected = "([PropertyBytes] = @PropertyBytes)";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionByteVariable()
+    {
+        // Setup
+        var value = new[] { byte.Parse("0") };
+
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == value).GetString(m_dbSetting);
+        var expected = "([PropertyBytes] = @PropertyBytes)";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionByteClassProperty()
+    {
+        // Setup
+        var value = new QueryGroupTestExpressionClass
         {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == new[] { byte.Parse("0") }).GetString(m_dbSetting);
-            var expected = "([PropertyBytes] = @PropertyBytes)";
+            PropertyBytes = new[] { byte.Parse("0") }
+        };
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == value.PropertyBytes).GetString(m_dbSetting);
+        var expected = "([PropertyBytes] = @PropertyBytes)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionPassedByteArray()
-        {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == Encoding.Unicode.GetBytes("Test")).GetString(m_dbSetting);
-            var expected = "([PropertyBytes] = @PropertyBytes)";
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionByteMethodCall()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == GetBytesValueForParseExpression()).GetString(m_dbSetting);
+        var expected = "([PropertyBytes] = @PropertyBytes)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionByteVariable()
-        {
-            // Setup
-            var value = new[] { byte.Parse("0") };
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == value).GetString(m_dbSetting);
-            var expected = "([PropertyBytes] = @PropertyBytes)";
+    [TestMethod]
+    public void TestQueryGroupParseExpressionByteVariableMethodCall()
+    {
+        // Setup
+        var value = GetBytesValueForParseExpression();
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == value).GetString(m_dbSetting);
+        var expected = "([PropertyBytes] = @PropertyBytes)";
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionByteClassProperty()
-        {
-            // Setup
-            var value = new QueryGroupTestExpressionClass
-            {
-                PropertyBytes = new[] { byte.Parse("0") }
-            };
-
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == value.PropertyBytes).GetString(m_dbSetting);
-            var expected = "([PropertyBytes] = @PropertyBytes)";
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void TestQueryGroupParseExpressionByteMethodCall()
-        {
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == GetBytesValueForParseExpression()).GetString(m_dbSetting);
-            var expected = "([PropertyBytes] = @PropertyBytes)";
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void TestQueryGroupParseExpressionByteVariableMethodCall()
-        {
-            // Setup
-            var value = GetBytesValueForParseExpression();
-
-            // Act
-            var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBytes == value).GetString(m_dbSetting);
-            var expected = "([PropertyBytes] = @PropertyBytes)";
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
     }
 }

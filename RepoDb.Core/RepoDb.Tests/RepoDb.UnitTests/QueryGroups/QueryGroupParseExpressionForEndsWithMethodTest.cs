@@ -1,107 +1,106 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace RepoDb.UnitTests
+namespace RepoDb.UnitTests;
+
+public partial class QueryGroupTest
 {
-    public partial class QueryGroupTest
+    // EndsWith
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionEndsWithAtProperty()
     {
-        // EndsWith
+        // Setup
+        var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyString.EndsWith("A"));
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionEndsWithAtProperty()
-        {
-            // Setup
-            var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyString.EndsWith("A"));
+        // Act
+        var actual = parsed.GetString(m_dbSetting);
+        var expected = "([PropertyString] LIKE @PropertyString)";
 
-            // Act
-            var actual = parsed.GetString(m_dbSetting);
-            var expected = "([PropertyString] LIKE @PropertyString)";
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionNotEndsWithAtProperty()
+    {
+        // Setup
+        var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => !e.PropertyString.EndsWith("A"));
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionNotEndsWithAtProperty()
-        {
-            // Setup
-            var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => !e.PropertyString.EndsWith("A"));
+        // Act
+        var actual = parsed.GetString(m_dbSetting);
+        var expected = "([PropertyString] NOT LIKE @PropertyString)";
 
-            // Act
-            var actual = parsed.GetString(m_dbSetting);
-            var expected = "([PropertyString] NOT LIKE @PropertyString)";
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionEndsWithEqualsTrueAtProperty()
+    {
+        // Setup
+        var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyString.EndsWith("A") == true);
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionEndsWithEqualsTrueAtProperty()
-        {
-            // Setup
-            var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyString.EndsWith("A") == true);
+        // Act
+        var actual = parsed.GetString(m_dbSetting);
+        var expected = "([PropertyString] LIKE @PropertyString)";
 
-            // Act
-            var actual = parsed.GetString(m_dbSetting);
-            var expected = "([PropertyString] LIKE @PropertyString)";
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionEndsWithEqualsFalseAtProperty()
+    {
+        // Setup
+        var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyString.EndsWith("A") == false);
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionEndsWithEqualsFalseAtProperty()
-        {
-            // Setup
-            var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyString.EndsWith("A") == false);
+        // Act
+        var actual = parsed.GetString(m_dbSetting);
+        var expected = "NOT ([PropertyString] LIKE @PropertyString)";
 
-            // Act
-            var actual = parsed.GetString(m_dbSetting);
-            var expected = "NOT ([PropertyString] LIKE @PropertyString)";
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionEndsWithForMappedProperty()
+    {
+        // Setup
+        var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.MappedPropertyString.EndsWith("A"));
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionEndsWithForMappedProperty()
-        {
-            // Setup
-            var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.MappedPropertyString.EndsWith("A"));
+        // Act
+        var actual = parsed.GetString(m_dbSetting);
+        var expected = "([PropertyString] LIKE @PropertyString)";
 
-            // Act
-            var actual = parsed.GetString(m_dbSetting);
-            var expected = "([PropertyString] LIKE @PropertyString)";
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionEndsWithForQuotedProperty()
+    {
+        // Setup
+        var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.QuotedPropertyString.EndsWith("A"));
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionEndsWithForQuotedProperty()
-        {
-            // Setup
-            var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.QuotedPropertyString.EndsWith("A"));
+        // Act
+        var actual = parsed.GetString(m_dbSetting);
+        var expected = "([PropertyString] LIKE @_PropertyString_)";
 
-            // Act
-            var actual = parsed.GetString(m_dbSetting);
-            var expected = "([PropertyString] LIKE @_PropertyString_)";
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+    [TestMethod]
+    public void TestQueryGroupParseExpressionEndsWithForUnorganizedProperty()
+    {
+        // Setup
+        var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.UnorganizedPropertyString.EndsWith("A"));
 
-        [TestMethod]
-        public void TestQueryGroupParseExpressionEndsWithForUnorganizedProperty()
-        {
-            // Setup
-            var parsed = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.UnorganizedPropertyString.EndsWith("A"));
+        // Act
+        var actual = parsed.GetString(m_dbSetting);
+        var expected = "([Property / . String] LIKE @Property_____String)";
 
-            // Act
-            var actual = parsed.GetString(m_dbSetting);
-            var expected = "([Property / . String] LIKE @Property_____String)";
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
     }
 }

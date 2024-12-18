@@ -1,9 +1,8 @@
-﻿namespace RepoDb.PostgreSql.IntegrationTests.Enumerations
+﻿namespace RepoDb.PostgreSql.IntegrationTests.Enumerations;
+
+public enum Hands
 {
-    public enum Hands
-    {
-        Unidentified,
-        Left,
-        Right
-    }
+    Unidentified,
+    Left,
+    Right
 }

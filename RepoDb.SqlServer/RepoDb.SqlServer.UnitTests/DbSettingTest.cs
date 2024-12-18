@@ -1,117 +1,116 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace RepoDb.SqlServer.UnitTests
+namespace RepoDb.SqlServer.UnitTests;
+
+[TestClass]
+public class DbSettingTest
 {
-    [TestClass]
-    public class DbSettingTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            GlobalConfiguration
-                .Setup()
-                .UseSqlServer();
-        }
+        GlobalConfiguration
+            .Setup()
+            .UseSqlServer();
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingAreTableHintsSupportedProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingAreTableHintsSupportedProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.IsTrue(setting.AreTableHintsSupported);
-        }
+        // Assert
+        Assert.IsTrue(setting.AreTableHintsSupported);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingAverageableTypeProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingAverageableTypeProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.AreEqual(typeof(double), setting.AverageableType);
-        }
+        // Assert
+        Assert.AreEqual(typeof(double), setting.AverageableType);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingClosingQuoteProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingClosingQuoteProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.AreEqual("]", setting.ClosingQuote);
-        }
+        // Assert
+        Assert.AreEqual("]", setting.ClosingQuote);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingDefaultSchemaProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingDefaultSchemaProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.AreEqual("dbo", setting.DefaultSchema);
-        }
+        // Assert
+        Assert.AreEqual("dbo", setting.DefaultSchema);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingIsDirectionSupportedSupportedProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingIsDirectionSupportedSupportedProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.IsTrue(setting.IsDirectionSupported);
-        }
+        // Assert
+        Assert.IsTrue(setting.IsDirectionSupported);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingIsExecuteReaderDisposableProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingIsExecuteReaderDisposableProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.IsTrue(setting.IsExecuteReaderDisposable);
-        }
+        // Assert
+        Assert.IsTrue(setting.IsExecuteReaderDisposable);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingIsMultiStatementExecutableProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingIsMultiStatementExecutableProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.IsTrue(setting.IsMultiStatementExecutable);
-        }
+        // Assert
+        Assert.IsTrue(setting.IsMultiStatementExecutable);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingIsUseUpsertProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingIsUseUpsertProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.IsFalse(setting.IsUseUpsert);
-        }
+        // Assert
+        Assert.IsFalse(setting.IsUseUpsert);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingOpeningQuoteProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingOpeningQuoteProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.AreEqual("[", setting.OpeningQuote);
-        }
+        // Assert
+        Assert.AreEqual("[", setting.OpeningQuote);
+    }
 
-        [TestMethod]
-        public void TestSqlServerDbSettingParameterPrefixProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<SqlConnection>();
+    [TestMethod]
+    public void TestSqlServerDbSettingParameterPrefixProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
 
-            // Assert
-            Assert.AreEqual("@", setting.ParameterPrefix);
-        }
+        // Assert
+        Assert.AreEqual("@", setting.ParameterPrefix);
     }
 }

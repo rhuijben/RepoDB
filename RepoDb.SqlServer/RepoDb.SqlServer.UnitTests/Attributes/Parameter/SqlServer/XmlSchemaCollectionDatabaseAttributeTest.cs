@@ -4,73 +4,72 @@ using RepoDb.Attributes.Parameter.SqlServer;
 using RepoDb.DbSettings;
 using RepoDb.Extensions;
 
-namespace RepoDb.SqlServer.UnitTests.Attributes.Parameter.SqlServer
+namespace RepoDb.SqlServer.UnitTests.Attributes.Parameter.SqlServer;
+
+[TestClass]
+public class XmlSchemaCollectionDatabaseAttributeTest
 {
-    [TestClass]
-    public class XmlSchemaCollectionDatabaseAttributeTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
+        DbSettingMapper.Add<SqlConnection>(new SqlServerDbSetting(), true);
+    }
+
+    #region Classes
+
+    private class XmlSchemaCollectionDatabaseAttributeTestClass
+    {
+        [XmlSchemaCollectionDatabase("XmlSchemaCollectionDatabase")]
+        public object ColumnName { get; set; }
+    }
+
+    #endregion
+
+    [TestMethod]
+    public void TestXmlSchemaCollectionDatabaseAttributeViaEntityViaCreateParameters()
+    {
+        // Act
+        using (var connection = new SqlConnection())
         {
-            DbSettingMapper.Add<SqlConnection>(new SqlServerDbSetting(), true);
-        }
-
-        #region Classes
-
-        private class XmlSchemaCollectionDatabaseAttributeTestClass
-        {
-            [XmlSchemaCollectionDatabase("XmlSchemaCollectionDatabase")]
-            public object ColumnName { get; set; }
-        }
-
-        #endregion
-
-        [TestMethod]
-        public void TestXmlSchemaCollectionDatabaseAttributeViaEntityViaCreateParameters()
-        {
-            // Act
-            using (var connection = new SqlConnection())
+            using (var command = connection.CreateCommand())
             {
-                using (var command = connection.CreateCommand())
-                {
-                    DbCommandExtension
-                        .CreateParameters(command, new XmlSchemaCollectionDatabaseAttributeTestClass
-                        {
-                            ColumnName = "Test"
-                        });
+                DbCommandExtension
+                    .CreateParameters(command, new XmlSchemaCollectionDatabaseAttributeTestClass
+                    {
+                        ColumnName = "Test"
+                    });
 
-                    // Assert
-                    Assert.AreEqual(1, command.Parameters.Count);
+                // Assert
+                Assert.AreEqual(1, command.Parameters.Count);
 
-                    // Assert
-                    var parameter = command.Parameters["@ColumnName"];
-                    Assert.AreEqual("XmlSchemaCollectionDatabase", parameter.XmlSchemaCollectionDatabase);
-                }
+                // Assert
+                var parameter = command.Parameters["@ColumnName"];
+                Assert.AreEqual("XmlSchemaCollectionDatabase", parameter.XmlSchemaCollectionDatabase);
             }
         }
+    }
 
-        [TestMethod]
-        public void TestXmlSchemaCollectionDatabaseAttributeViaAnonymousViaCreateParameters()
+    [TestMethod]
+    public void TestXmlSchemaCollectionDatabaseAttributeViaAnonymousViaCreateParameters()
+    {
+        // Act
+        using (var connection = new SqlConnection())
         {
-            // Act
-            using (var connection = new SqlConnection())
+            using (var command = connection.CreateCommand())
             {
-                using (var command = connection.CreateCommand())
-                {
-                    DbCommandExtension
-                        .CreateParameters(command, new
-                        {
-                            ColumnName = "Test"
-                        },
-                        typeof(XmlSchemaCollectionDatabaseAttributeTestClass));
+                DbCommandExtension
+                    .CreateParameters(command, new
+                    {
+                        ColumnName = "Test"
+                    },
+                    typeof(XmlSchemaCollectionDatabaseAttributeTestClass));
 
-                    // Assert
-                    Assert.AreEqual(1, command.Parameters.Count);
+                // Assert
+                Assert.AreEqual(1, command.Parameters.Count);
 
-                    // Assert
-                    var parameter = command.Parameters["@ColumnName"];
-                    Assert.AreEqual("XmlSchemaCollectionDatabase", parameter.XmlSchemaCollectionDatabase);
-                }
+                // Assert
+                var parameter = command.Parameters["@ColumnName"];
+                Assert.AreEqual("XmlSchemaCollectionDatabase", parameter.XmlSchemaCollectionDatabase);
             }
         }
     }

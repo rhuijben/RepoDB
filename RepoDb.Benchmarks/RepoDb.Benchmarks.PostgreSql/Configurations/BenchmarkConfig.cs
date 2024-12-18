@@ -7,38 +7,37 @@ using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Loggers;
 using BenchmarkDotNet.Order;
 
-namespace RepoDb.Benchmarks.PostgreSql.Configurations
+namespace RepoDb.Benchmarks.PostgreSql.Configurations;
+
+public class BenchmarkConfig : ManualConfig
 {
-    public class BenchmarkConfig : ManualConfig
+    public BenchmarkConfig()
     {
-        public BenchmarkConfig()
-        {
-            AddLogger(ConsoleLogger.Default);
-            AddExporter(MarkdownExporter.GitHub);
-            AddDiagnoser(MemoryDiagnoser.Default);
+        AddLogger(ConsoleLogger.Default);
+        AddExporter(MarkdownExporter.GitHub);
+        AddDiagnoser(MemoryDiagnoser.Default);
 
-            AddColumn(new ORMColum());
-            AddColumn(TargetMethodColumn.Method);
-            AddColumn(StatisticColumn.Mean);
-            AddColumn(StatisticColumn.StdDev);
-            AddColumn(StatisticColumn.Error);
-            AddColumn(BaselineRatioColumn.RatioMean);
-            AddColumn(StatisticColumn.Min);
-            AddColumn(StatisticColumn.Max);
+        AddColumn(new ORMColum());
+        AddColumn(TargetMethodColumn.Method);
+        AddColumn(StatisticColumn.Mean);
+        AddColumn(StatisticColumn.StdDev);
+        AddColumn(StatisticColumn.Error);
+        AddColumn(BaselineRatioColumn.RatioMean);
+        AddColumn(StatisticColumn.Min);
+        AddColumn(StatisticColumn.Max);
 
-            AddColumnProvider(DefaultColumnProviders.Metrics);
+        AddColumnProvider(DefaultColumnProviders.Metrics);
 
-            var job = Job.ShortRun
-                .WithRuntime(CoreRuntime.Core60)
-                .WithLaunchCount(DefaultConstants.DefaultLaunchCount)
-                .WithWarmupCount(DefaultConstants.DefaultWarmupCount)
-                .WithUnrollFactor(DefaultConstants.DefaultUnrollFactor)
-                .WithIterationCount(DefaultConstants.DefaultIterationCount);
+        var job = Job.ShortRun
+            .WithRuntime(CoreRuntime.Core60)
+            .WithLaunchCount(DefaultConstants.DefaultLaunchCount)
+            .WithWarmupCount(DefaultConstants.DefaultWarmupCount)
+            .WithUnrollFactor(DefaultConstants.DefaultUnrollFactor)
+            .WithIterationCount(DefaultConstants.DefaultIterationCount);
 
-            AddJob(job);
+        AddJob(job);
 
-            Orderer = new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest);
-            Options |= ConfigOptions.JoinSummary | ConfigOptions.StopOnFirstError;
-        }
+        Orderer = new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest);
+        Options |= ConfigOptions.JoinSummary | ConfigOptions.StopOnFirstError;
     }
 }

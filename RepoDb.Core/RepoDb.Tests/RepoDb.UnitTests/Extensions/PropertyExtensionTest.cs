@@ -5,78 +5,77 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace RepoDb.UnitTests.Extensions
+namespace RepoDb.UnitTests.Extensions;
+
+[TestClass]
+public class PropertyExtensionTest
 {
-    [TestClass]
-    public class PropertyExtensionTest
+    [TestCleanup]
+    public void Cleanup()
     {
-        [TestCleanup]
-        public void Cleanup()
+        PropertyValueAttributeMapper.Clear();
+    }
+
+    #region SubClasses
+
+    private class PropertyValueAttributeClass
+    {
+        [
+            Name("ColumnString"),
+            DbType(DbType.AnsiStringFixedLength),
+            Direction(ParameterDirection.InputOutput),
+            IsNullable(true),
+            Precision(100),
+            Scale(2),
+            Size(256)
+        ]
+        public string PropertyString { get; set; }
+    }
+
+    #endregion
+
+    #region Helpers
+
+    private IEnumerable<PropertyValueAttribute> GetPropertyValueAttributes() =>
+        new PropertyValueAttribute[]
         {
-            PropertyValueAttributeMapper.Clear();
-        }
+            // Different Values
+            new NameAttribute("MappedColumnString"),
+            new DbTypeAttribute(DbType.StringFixedLength),
+            new DirectionAttribute(ParameterDirection.ReturnValue),
+            new SizeAttribute(512),
+            // Same Values
+            new IsNullableAttribute(true),
+            new PrecisionAttribute(100),
+            new ScaleAttribute(2)
+        };
 
-        #region SubClasses
+    #endregion
 
-        private class PropertyValueAttributeClass
-        {
-            [
-                Name("ColumnString"),
-                DbType(DbType.AnsiStringFixedLength),
-                Direction(ParameterDirection.InputOutput),
-                IsNullable(true),
-                Precision(100),
-                Scale(2),
-                Size(256)
-            ]
-            public string PropertyString { get; set; }
-        }
+    [TestMethod]
+    public void TestPropertyInfoGetPropertyValueAttributesMethod()
+    {
+        // Prepare
+        var property = PropertyCache.Get<PropertyValueAttributeClass>(e => e.PropertyString);
 
-        #endregion
+        // Act
+        var attributes = property.PropertyInfo.GetPropertyValueAttributes();
 
-        #region Helpers
+        // Assert
+        Assert.AreEqual(7, attributes.Count());
+    }
 
-        private IEnumerable<PropertyValueAttribute> GetPropertyValueAttributes() =>
-            new PropertyValueAttribute[]
-            {
-                // Different Values
-                new NameAttribute("MappedColumnString"),
-                new DbTypeAttribute(DbType.StringFixedLength),
-                new DirectionAttribute(ParameterDirection.ReturnValue),
-                new SizeAttribute(512),
-                // Same Values
-                new IsNullableAttribute(true),
-                new PrecisionAttribute(100),
-                new ScaleAttribute(2)
-            };
+    [TestMethod]
+    public void TestPropertyInfoGetPropertyValueAttributeMethod()
+    {
+        // Prepare
+        var property = PropertyCache.Get<PropertyValueAttributeClass>(e => e.PropertyString);
 
-        #endregion
+        // Act
+        var attribute = property.PropertyInfo.GetPropertyValueAttribute<NameAttribute>();
 
-        [TestMethod]
-        public void TestPropertyInfoGetPropertyValueAttributesMethod()
-        {
-            // Prepare
-            var property = PropertyCache.Get<PropertyValueAttributeClass>(e => e.PropertyString);
-
-            // Act
-            var attributes = property.PropertyInfo.GetPropertyValueAttributes();
-
-            // Assert
-            Assert.AreEqual(7, attributes.Count());
-        }
-
-        [TestMethod]
-        public void TestPropertyInfoGetPropertyValueAttributeMethod()
-        {
-            // Prepare
-            var property = PropertyCache.Get<PropertyValueAttributeClass>(e => e.PropertyString);
-
-            // Act
-            var attribute = property.PropertyInfo.GetPropertyValueAttribute<NameAttribute>();
-
-            // Assert
-            Assert.IsNotNull(attribute);
-            Assert.AreEqual("ColumnString", attribute.Name);
-        }
+        // Assert
+        Assert.IsNotNull(attribute);
+        Assert.AreEqual("ColumnString", attribute.Name);
     }
 }

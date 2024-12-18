@@ -1,25 +1,24 @@
 ﻿using System;
 
-namespace RepoDb.Attributes
+namespace RepoDb.Attributes;
+
+/// <summary>
+/// An attribute that is used to define a mapping of the class/property into its equivalent object/field name in the database.
+/// </summary>
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
+public class MapAttribute : Attribute
 {
     /// <summary>
-    /// An attribute that is used to define a mapping of the class/property into its equivalent object/field name in the database.
+    /// Creates a new instance of <see cref="MapAttribute"/> class.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
-    public class MapAttribute : Attribute
+    /// <param name="name">The name of the mapping that is equivalent to the database object/field.</param>
+    public MapAttribute(string name)
     {
-        /// <summary>
-        /// Creates a new instance of <see cref="MapAttribute"/> class.
-        /// </summary>
-        /// <param name="name">The name of the mapping that is equivalent to the database object/field.</param>
-        public MapAttribute(string name)
-        {
-            Name = name;
-        }
-
-        /// <summary>
-        /// Gets the name of the mapping that is equivalent to the database object/field.
-        /// </summary>
-        public string Name { get; }
+        Name = name;
     }
+
+    /// <summary>
+    /// Gets the name of the mapping that is equivalent to the database object/field.
+    /// </summary>
+    public string Name { get; }
 }

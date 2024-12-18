@@ -3,34 +3,33 @@ using BenchmarkDotNet.Attributes;
 using Dapper;
 using RepoDb.Benchmarks.PostgreSql.Models;
 
-namespace RepoDb.Benchmarks.PostgreSql.Dapper
+namespace RepoDb.Benchmarks.PostgreSql.Dapper;
+
+public class GetFirstDapperBenchmarks : DapperBaseBenchmarks
 {
-    public class GetFirstDapperBenchmarks : DapperBaseBenchmarks
+    [Benchmark]
+    public Person QueryFirst()
     {
-        [Benchmark]
-        public Person QueryFirst()
+        using var connection = GetConnection();
+
+        var param = new
         {
-            using var connection = GetConnection();
+            Id = CurrentId
+        };
 
-            var param = new
-            {
-                Id = CurrentId
-            };
+        return connection.QueryFirst<Person>(@"select * from ""Person"" where ""Id"" = @Id", param);
+    }
 
-            return connection.QueryFirst<Person>(@"select * from ""Person"" where ""Id"" = @Id", param);
-        }
+    [Benchmark]
+    public Person QueryLinqFirst()
+    {
+        using var connection = GetConnection();
 
-        [Benchmark]
-        public Person QueryLinqFirst()
+        var param = new
         {
-            using var connection = GetConnection();
+            Id = CurrentId
+        };
 
-            var param = new
-            {
-                Id = CurrentId
-            };
-
-            return connection.Query<Person>(@"select * from ""Person"" where ""Id"" = @Id", param, buffered: true).First();
-        }
+        return connection.Query<Person>(@"select * from ""Person"" where ""Id"" = @Id", param, buffered: true).First();
     }
 }

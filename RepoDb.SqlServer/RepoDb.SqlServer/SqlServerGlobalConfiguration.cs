@@ -1,21 +1,20 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace RepoDb
+namespace RepoDb;
+
+/// <summary>
+/// A class that is being used to initialize the necessary settings for the <see cref="SqlConnection"/> object.
+/// </summary>
+public static partial class SqlServerGlobalConfiguration
 {
     /// <summary>
-    /// A class that is being used to initialize the necessary settings for the <see cref="SqlConnection"/> object.
+    /// Initializes all the necessary settings for SQL Server.
     /// </summary>
-    public static partial class SqlServerGlobalConfiguration
+    /// <param name="globalConfiguration">The instance of the global configuration in used.</param>
+    /// <returns>The used global configuration instance itself.</returns>
+    public static GlobalConfiguration UseSqlServer(this GlobalConfiguration globalConfiguration)
     {
-        /// <summary>
-        /// Initializes all the necessary settings for SQL Server.
-        /// </summary>
-        /// <param name="globalConfiguration">The instance of the global configuration in used.</param>
-        /// <returns>The used global configuration instance itself.</returns>
-        public static GlobalConfiguration UseSqlServer(this GlobalConfiguration globalConfiguration)
-        {
-            SqlServerBootstrap.InitializeInternal();
-            return globalConfiguration;
-        }
+        SqlServerBootstrap.InitializeInternal();
+        return globalConfiguration;
     }
 }

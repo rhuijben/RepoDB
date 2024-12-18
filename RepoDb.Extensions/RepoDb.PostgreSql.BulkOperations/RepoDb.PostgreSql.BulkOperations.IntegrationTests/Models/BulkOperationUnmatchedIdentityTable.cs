@@ -1,30 +1,29 @@
 ﻿using RepoDb.Attributes;
 using System;
 
-namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models
+namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models;
+
+/*
+ * Useful for NpgsqlBulkInsertMapItem mappings
+ */
+
+[Map("[dbo].[BulkOperationIdentityTable]")]
+public class BulkOperationUnmatchedIdentityTable
 {
-    /*
-     * Useful for NpgsqlBulkInsertMapItem mappings
-     */
+    [Identity]
+    public long IdMapped { get; set; }
 
-    [Map("[dbo].[BulkOperationIdentityTable]")]
-    public class BulkOperationUnmatchedIdentityTable
-    {
-        [Identity]
-        public long IdMapped { get; set; }
+    public long? ColumnBigIntMapped { get; set; }
 
-        public long? ColumnBigIntMapped { get; set; }
+    public bool? ColumnBooleanMapped { get; set; }
 
-        public bool? ColumnBooleanMapped { get; set; }
+    public int? ColumnIntegerMapped { get; set; }
 
-        public int? ColumnIntegerMapped { get; set; }
+    public decimal? ColumnNumericMapped { get; set; }
 
-        public decimal? ColumnNumericMapped { get; set; }
+    public float? ColumnRealMapped { get; set; }
 
-        public float? ColumnRealMapped { get; set; }
+    public short? ColumnSmallIntMapped { get; set; }
 
-        public short? ColumnSmallIntMapped { get; set; }
-
-        public string ColumnTextMapped { get; set; }
-    }
+    public string ColumnTextMapped { get; set; }
 }

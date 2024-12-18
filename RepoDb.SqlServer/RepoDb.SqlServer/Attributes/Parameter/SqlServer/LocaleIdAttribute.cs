@@ -1,26 +1,25 @@
 ﻿using System;
 using Microsoft.Data.SqlClient;
 
-namespace RepoDb.Attributes.Parameter.SqlServer
+namespace RepoDb.Attributes.Parameter.SqlServer;
+
+/// <summary>
+/// An attribute used to define a value to the <see cref="SqlParameter.LocaleId"/>
+/// property via an entity property before the actual execution.
+/// </summary>
+[AttributeUsage(AttributeTargets.Property)]
+public class LocaleIdAttribute : PropertyValueAttribute
 {
     /// <summary>
-    /// An attribute used to define a value to the <see cref="SqlParameter.LocaleId"/>
-    /// property via an entity property before the actual execution.
+    /// Creates a new instance of <see cref="LocaleIdAttribute"/> class.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property)]
-    public class LocaleIdAttribute : PropertyValueAttribute
-    {
-        /// <summary>
-        /// Creates a new instance of <see cref="LocaleIdAttribute"/> class.
-        /// </summary>
-        /// <param name="localeId">The value of the locale identifier.</param>
-        public LocaleIdAttribute(int localeId)
-            : base(typeof(SqlParameter), nameof(SqlParameter.LocaleId), localeId)
-        { }
+    /// <param name="localeId">The value of the locale identifier.</param>
+    public LocaleIdAttribute(int localeId)
+        : base(typeof(SqlParameter), nameof(SqlParameter.LocaleId), localeId)
+    { }
 
-        /// <summary>
-        /// Gets the mapped value of the local identifier of the parameter.
-        /// </summary>
-        public int LocaleId => (int)Value;
-    }
+    /// <summary>
+    /// Gets the mapped value of the local identifier of the parameter.
+    /// </summary>
+    public int LocaleId => (int)Value;
 }

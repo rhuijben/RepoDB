@@ -2,76 +2,76 @@
 using Microsoft.Data.SqlClient;
 using RepoDb.SqlServer.IntegrationTests.Models;
 
-namespace RepoDb.SqlServer.IntegrationTests.Setup
+namespace RepoDb.SqlServer.IntegrationTests.Setup;
+
+public static class Database
 {
-    public static class Database
+    static readonly SqlServerDbInstance Instance = new();
+    #region Properties
+
+    /// <summary>
+    /// Gets or sets the connection string to be used for SQL Server database.
+    /// </summary>
+    public static string ConnectionStringForMaster => Instance.AdminConnectionString;
+
+    /// <summary>
+    /// Gets or sets the connection string to be used.
+    /// </summary>
+    public static string ConnectionString => Instance.ConnectionString;
+
+    #endregion
+
+    #region Methods
+
+    public static void Initialize()
     {
-        static readonly SqlServerDbInstance Instance = new();
-        #region Properties
+        Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
-        /// <summary>
-        /// Gets or sets the connection string to be used for SQL Server database.
-        /// </summary>
-        public static string ConnectionStringForMaster => Instance.AdminConnectionString;
+        // Create databases
+        CreateDatabase();
 
-        /// <summary>
-        /// Gets or sets the connection string to be used.
-        /// </summary>
-        public static string ConnectionString => Instance.ConnectionString;
+        // Create tables
+        CreateTables();
+    }
 
-        #endregion
-
-        #region Methods
-
-        public static void Initialize()
+    public static void Cleanup()
+    {
+        using (var connection = new SqlConnection(ConnectionString))
         {
-            Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
-
-            // Create databases
-            CreateDatabase();
-
-            // Create tables
-            CreateTables();
+            connection.Truncate<CompleteTable>();
+            connection.Truncate<NonIdentityCompleteTable>();
         }
+    }
 
-        public static void Cleanup()
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Truncate<CompleteTable>();
-                connection.Truncate<NonIdentityCompleteTable>();
-            }
-        }
+    #endregion
 
-        #endregion
+    #region CreateDatabases
 
-        #region CreateDatabases
-
-        private static void CreateDatabase()
-        {
-            var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
+    private static void CreateDatabase()
+    {
+        var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
                 BEGIN
                     CREATE DATABASE [RepoDbTest];
                 END";
-            using (var connection = new SqlConnection(ConnectionStringForMaster).EnsureOpen())
-            {
-                connection.ExecuteNonQuery(commandText);
-            }
-        }
-
-        #endregion
-
-        #region CreateTables
-
-        private static void CreateTables()
+        using (var connection = new SqlConnection(ConnectionStringForMaster).EnsureOpen())
         {
-            CreateCompleteTable();
-            CreateNonIdentityCompleteTable();
+            connection.ExecuteNonQuery(commandText);
         }
+    }
 
-        private static void CreateCompleteTable()
-        {
-            var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'CompleteTable'))
+    #endregion
+
+    #region CreateTables
+
+    private static void CreateTables()
+    {
+        CreateCompleteTable();
+        CreateNonIdentityCompleteTable();
+    }
+
+    private static void CreateCompleteTable()
+    {
+        var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'CompleteTable'))
                 BEGIN
                     CREATE TABLE [dbo].[CompleteTable]
                     (
@@ -116,15 +116,15 @@ namespace RepoDb.SqlServer.IntegrationTests.Setup
                         )
                     ) ON [PRIMARY];
                 END";
-            using (var connection = new SqlConnection(ConnectionString).EnsureOpen())
-            {
-                connection.ExecuteNonQuery(commandText);
-            }
-        }
-
-        private static void CreateNonIdentityCompleteTable()
+        using (var connection = new SqlConnection(ConnectionString).EnsureOpen())
         {
-            var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'NonIdentityCompleteTable'))
+            connection.ExecuteNonQuery(commandText);
+        }
+    }
+
+    private static void CreateNonIdentityCompleteTable()
+    {
+        var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'NonIdentityCompleteTable'))
                 BEGIN
                     CREATE TABLE [dbo].[NonIdentityCompleteTable]
                     (
@@ -169,40 +169,39 @@ namespace RepoDb.SqlServer.IntegrationTests.Setup
                         )
                     ) ON [PRIMARY];
                 END";
-            using (var connection = new SqlConnection(ConnectionString).EnsureOpen())
-            {
-                connection.ExecuteNonQuery(commandText);
-            }
-        }
-
-        #endregion
-
-        #region CompleteTable
-
-        public static IEnumerable<CompleteTable> CreateCompleteTables(int count)
+        using (var connection = new SqlConnection(ConnectionString).EnsureOpen())
         {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                var tables = Helper.CreateCompleteTables(count);
-                connection.InsertAll(tables);
-                return tables;
-            }
+            connection.ExecuteNonQuery(commandText);
         }
-
-        #endregion
-
-        #region NonIdentityCompleteTable
-
-        public static IEnumerable<NonIdentityCompleteTable> CreateNonIdentityCompleteTables(int count)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                var tables = Helper.CreateNonIdentityCompleteTables(count);
-                connection.InsertAll(tables);
-                return tables;
-            }
-        }
-
-        #endregion
     }
+
+    #endregion
+
+    #region CompleteTable
+
+    public static IEnumerable<CompleteTable> CreateCompleteTables(int count)
+    {
+        using (var connection = new SqlConnection(ConnectionString))
+        {
+            var tables = Helper.CreateCompleteTables(count);
+            connection.InsertAll(tables);
+            return tables;
+        }
+    }
+
+    #endregion
+
+    #region NonIdentityCompleteTable
+
+    public static IEnumerable<NonIdentityCompleteTable> CreateNonIdentityCompleteTables(int count)
+    {
+        using (var connection = new SqlConnection(ConnectionString))
+        {
+            var tables = Helper.CreateNonIdentityCompleteTables(count);
+            connection.InsertAll(tables);
+            return tables;
+        }
+    }
+
+    #endregion
 }

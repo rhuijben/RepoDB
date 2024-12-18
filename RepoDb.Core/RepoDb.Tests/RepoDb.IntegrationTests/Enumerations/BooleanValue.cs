@@ -1,8 +1,7 @@
-﻿namespace RepoDb.IntegrationTests.Enumerations
+﻿namespace RepoDb.IntegrationTests.Enumerations;
+
+public enum BooleanValue
 {
-    public enum BooleanValue
-    {
-        False,
-        True
-    }
+    False,
+    True
 }

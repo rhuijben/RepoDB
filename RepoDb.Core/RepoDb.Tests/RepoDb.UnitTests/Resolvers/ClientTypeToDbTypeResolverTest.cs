@@ -4,244 +4,243 @@ using RepoDb.Types;
 using System;
 using System.Data;
 
-namespace RepoDb.UnitTests.Resolvers
+namespace RepoDb.UnitTests.Resolvers;
+
+[TestClass]
+public class ClientTypeToDbTypeResolverTest
 {
-    [TestClass]
-    public class ClientTypeToDbTypeResolverTest
+    /*
+     * Taken:
+     * https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-data-type-mappings
+     */
+
+    private readonly ClientTypeToDbTypeResolver m_resolver = new ClientTypeToDbTypeResolver();
+
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForBigInt()
     {
-        /*
-         * Taken:
-         * https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-data-type-mappings
-         */
+        // Setup
+        var clientType = typeof(long);
 
-        private readonly ClientTypeToDbTypeResolver m_resolver = new ClientTypeToDbTypeResolver();
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForBigInt()
-        {
-            // Setup
-            var clientType = typeof(long);
+        // Assert
+        Assert.AreEqual(DbType.Int64, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForByte()
+    {
+        // Setup
+        var clientType = typeof(byte);
 
-            // Assert
-            Assert.AreEqual(DbType.Int64, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForByte()
-        {
-            // Setup
-            var clientType = typeof(byte);
+        // Assert
+        Assert.AreEqual(DbType.Byte, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForBytes()
+    {
+        // Setup
+        var clientType = typeof(byte[]);
 
-            // Assert
-            Assert.AreEqual(DbType.Byte, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForBytes()
-        {
-            // Setup
-            var clientType = typeof(byte[]);
+        // Assert
+        Assert.AreEqual(DbType.Binary, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForBoolean()
+    {
+        // Setup
+        var clientType = typeof(bool);
 
-            // Assert
-            Assert.AreEqual(DbType.Binary, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForBoolean()
-        {
-            // Setup
-            var clientType = typeof(bool);
+        // Assert
+        Assert.AreEqual(DbType.Boolean, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForString()
+    {
+        // Setup
+        var clientType = typeof(string);
 
-            // Assert
-            Assert.AreEqual(DbType.Boolean, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForString()
-        {
-            // Setup
-            var clientType = typeof(string);
+        // Assert
+        Assert.AreEqual(DbType.String, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForChars()
+    {
+        // Setup
+        var clientType = typeof(char[]);
 
-            // Assert
-            Assert.AreEqual(DbType.String, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForChars()
-        {
-            // Setup
-            var clientType = typeof(char[]);
+        // Assert
+        Assert.AreEqual(DbType.String, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForDateTime()
+    {
+        // Setup
+        var clientType = typeof(DateTime);
 
-            // Assert
-            Assert.AreEqual(DbType.String, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForDateTime()
-        {
-            // Setup
-            var clientType = typeof(DateTime);
+        // Assert
+        Assert.AreEqual(DbType.DateTime, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForDateTimeOffset()
+    {
+        // Setup
+        var clientType = typeof(DateTimeOffset);
 
-            // Assert
-            Assert.AreEqual(DbType.DateTime, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForDateTimeOffset()
-        {
-            // Setup
-            var clientType = typeof(DateTimeOffset);
+        // Assert
+        Assert.AreEqual(DbType.DateTimeOffset, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForDecimal()
+    {
+        // Setup
+        var clientType = typeof(decimal);
 
-            // Assert
-            Assert.AreEqual(DbType.DateTimeOffset, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForDecimal()
-        {
-            // Setup
-            var clientType = typeof(decimal);
+        // Assert
+        Assert.AreEqual(DbType.Decimal, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForDouble()
+    {
+        // Setup
+        var clientType = typeof(double);
 
-            // Assert
-            Assert.AreEqual(DbType.Decimal, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForDouble()
-        {
-            // Setup
-            var clientType = typeof(double);
+        // Assert
+        Assert.AreEqual(DbType.Double, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForInt()
+    {
+        // Setup
+        var clientType = typeof(int);
 
-            // Assert
-            Assert.AreEqual(DbType.Double, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForInt()
-        {
-            // Setup
-            var clientType = typeof(int);
+        // Assert
+        Assert.AreEqual(DbType.Int32, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForSingle()
+    {
+        // Setup
+        var clientType = typeof(float);
 
-            // Assert
-            Assert.AreEqual(DbType.Int32, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForSingle()
-        {
-            // Setup
-            var clientType = typeof(float);
+        // Assert
+        Assert.AreEqual(DbType.Single, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForShort()
+    {
+        // Setup
+        var clientType = typeof(short);
 
-            // Assert
-            Assert.AreEqual(DbType.Single, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForShort()
-        {
-            // Setup
-            var clientType = typeof(short);
+        // Assert
+        Assert.AreEqual(DbType.Int16, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForObject()
+    {
+        // Setup
+        var clientType = typeof(object);
 
-            // Assert
-            Assert.AreEqual(DbType.Int16, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForObject()
-        {
-            // Setup
-            var clientType = typeof(object);
+        // Assert
+        Assert.AreEqual(DbType.String, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForTimeSpan()
+    {
+        // Setup
+        var clientType = typeof(TimeSpan);
 
-            // Assert
-            Assert.AreEqual(DbType.String, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForTimeSpan()
-        {
-            // Setup
-            var clientType = typeof(TimeSpan);
+        // Assert
+        Assert.AreEqual(DbType.Time, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForGuid()
+    {
+        // Setup
+        var clientType = typeof(Guid);
 
-            // Assert
-            Assert.AreEqual(DbType.Time, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForGuid()
-        {
-            // Setup
-            var clientType = typeof(Guid);
+        // Assert
+        Assert.AreEqual(DbType.Guid, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
+    [TestMethod]
+    public void TestClientTypeToDbTypeResolverForSqlVariant()
+    {
+        // Setup
+        var clientType = typeof(SqlVariant);
 
-            // Assert
-            Assert.AreEqual(DbType.Guid, dbType);
-        }
+        // Act
+        var dbType = m_resolver.Resolve(clientType);
 
-        [TestMethod]
-        public void TestClientTypeToDbTypeResolverForSqlVariant()
-        {
-            // Setup
-            var clientType = typeof(SqlVariant);
+        // Assert
+        Assert.AreEqual(DbType.Object, dbType);
+    }
 
-            // Act
-            var dbType = m_resolver.Resolve(clientType);
-
-            // Assert
-            Assert.AreEqual(DbType.Object, dbType);
-        }
-
-        [TestMethod, ExpectedException(typeof(NullReferenceException))]
-        public void ThrowOnExceptionClientTypeToDbTypeResolverIfTypeIsNull()
-        {
-            // Act
-            m_resolver.Resolve(null);
-        }
+    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    public void ThrowOnExceptionClientTypeToDbTypeResolverIfTypeIsNull()
+    {
+        // Act
+        m_resolver.Resolve(null);
     }
 }

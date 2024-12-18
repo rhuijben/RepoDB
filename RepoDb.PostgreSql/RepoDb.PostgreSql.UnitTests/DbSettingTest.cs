@@ -1,117 +1,116 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Npgsql;
 
-namespace RepoDb.PostgreSql.UnitTests
+namespace RepoDb.PostgreSql.UnitTests;
+
+[TestClass]
+public class DbSettingTest
 {
-    [TestClass]
-    public class DbSettingTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            GlobalConfiguration
-                .Setup()
-                .UsePostgreSql();
-        }
+        GlobalConfiguration
+            .Setup()
+            .UsePostgreSql();
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingAreTableHintsSupportedProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingAreTableHintsSupportedProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.IsFalse(setting.AreTableHintsSupported);
-        }
+        // Assert
+        Assert.IsFalse(setting.AreTableHintsSupported);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingClosingQuoteProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingClosingQuoteProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.AreEqual("\"", setting.ClosingQuote);
-        }
+        // Assert
+        Assert.AreEqual("\"", setting.ClosingQuote);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingAverageableTypeProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingAverageableTypeProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.AreEqual(typeof(double), setting.AverageableType);
-        }
+        // Assert
+        Assert.AreEqual(typeof(double), setting.AverageableType);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingDefaultSchemaProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingDefaultSchemaProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.AreEqual("public", setting.DefaultSchema);
-        }
+        // Assert
+        Assert.AreEqual("public", setting.DefaultSchema);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingIsDirectionSupportedProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingIsDirectionSupportedProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.IsTrue(setting.IsDirectionSupported);
-        }
+        // Assert
+        Assert.IsTrue(setting.IsDirectionSupported);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingIsExecuteReaderDisposableProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingIsExecuteReaderDisposableProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.IsTrue(setting.IsExecuteReaderDisposable);
-        }
+        // Assert
+        Assert.IsTrue(setting.IsExecuteReaderDisposable);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingIsMultiStatementExecutableProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingIsMultiStatementExecutableProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.IsTrue(setting.IsMultiStatementExecutable);
-        }
+        // Assert
+        Assert.IsTrue(setting.IsMultiStatementExecutable);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingIsUseUpsertProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingIsUseUpsertProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.IsFalse(setting.IsUseUpsert);
-        }
+        // Assert
+        Assert.IsFalse(setting.IsUseUpsert);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingOpeningQuoteProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingOpeningQuoteProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.AreEqual("\"", setting.OpeningQuote);
-        }
+        // Assert
+        Assert.AreEqual("\"", setting.OpeningQuote);
+    }
 
-        [TestMethod]
-        public void TestPostgreSqlDbSettingParameterPrefixProperty()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<NpgsqlConnection>();
+    [TestMethod]
+    public void TestPostgreSqlDbSettingParameterPrefixProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<NpgsqlConnection>();
 
-            // Assert
-            Assert.AreEqual("@", setting.ParameterPrefix);
-        }
+        // Assert
+        Assert.AreEqual("@", setting.ParameterPrefix);
     }
 }

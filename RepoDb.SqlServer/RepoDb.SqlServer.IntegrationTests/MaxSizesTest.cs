@@ -8,122 +8,121 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RepoDb.SqlServer.IntegrationTests
+namespace RepoDb.SqlServer.IntegrationTests;
+
+[TestClass]
+public class MaxSizesTest
 {
-    [TestClass]
-    public class MaxSizesTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            Database.Initialize();
-            Cleanup();
-        }
+        Database.Initialize();
+        Cleanup();
+    }
 
-        [TestCleanup]
-        public void Cleanup()
-        {
-            Database.Cleanup();
-        }
+    [TestCleanup]
+    public void Cleanup()
+    {
+        Database.Cleanup();
+    }
 
-        #region SubClasses
+    #region SubClasses
 
-        [Map("[dbo].[CompleteTable]")]
-        private class MaxNVarCharClass
-        {
-            public Guid SessionId { get; set; }
-            public string ColumnNVarChar { get; set; }
-        }
+    [Map("[dbo].[CompleteTable]")]
+    private class MaxNVarCharClass
+    {
+        public Guid SessionId { get; set; }
+        public string ColumnNVarChar { get; set; }
+    }
 
-        [Map("[dbo].[CompleteTable]")]
-        private class MaxVarBinaryClass
-        {
-            public Guid SessionId { get; set; }
-            public byte[] ColumnVarBinary { get; set; }
-        }
+    [Map("[dbo].[CompleteTable]")]
+    private class MaxVarBinaryClass
+    {
+        public Guid SessionId { get; set; }
+        public byte[] ColumnVarBinary { get; set; }
+    }
 
-        private IEnumerable<MaxNVarCharClass> GetMaxNVarCharClasses(int count = 10)
+    private IEnumerable<MaxNVarCharClass> GetMaxNVarCharClasses(int count = 10)
+    {
+        for (var i = 0; i < count; i++)
         {
-            for (var i = 0; i < count; i++)
+            yield return new MaxNVarCharClass
             {
-                yield return new MaxNVarCharClass
-                {
-                    SessionId = Guid.NewGuid(),
-                    ColumnNVarChar = GetRandomString(10000)
-                };
-            }
+                SessionId = Guid.NewGuid(),
+                ColumnNVarChar = GetRandomString(10000)
+            };
         }
+    }
 
-        private IEnumerable<MaxVarBinaryClass> GetMaxVarBinaryClasses(int count = 10)
+    private IEnumerable<MaxVarBinaryClass> GetMaxVarBinaryClasses(int count = 10)
+    {
+        for (var i = 0; i < count; i++)
         {
-            for (var i = 0; i < count; i++)
+            yield return new MaxVarBinaryClass
             {
-                yield return new MaxVarBinaryClass
-                {
-                    SessionId = Guid.NewGuid(),
-                    ColumnVarBinary = Encoding.UTF8.GetBytes(GetRandomString(10000))
-                };
-            }
+                SessionId = Guid.NewGuid(),
+                ColumnVarBinary = Encoding.UTF8.GetBytes(GetRandomString(10000))
+            };
         }
+    }
 
-        private string GetRandomString(int count = 8000)
+    private string GetRandomString(int count = 8000)
+    {
+        var random = new Random();
+        var result = string.Empty;
+        for (var i = 0; i < count; i++)
         {
-            var random = new Random();
-            var result = string.Empty;
-            for (var i = 0; i < count; i++)
-            {
-                result = string.Concat(result, (char)random.Next(61, 122));
-            }
-            return result;
+            result = string.Concat(result, (char)random.Next(61, 122));
         }
+        return result;
+    }
 
-        #endregion
+    #endregion
 
 
-        [TestMethod]
-        public void TestNVarCharMax()
+    [TestMethod]
+    public void TestNVarCharMax()
+    {
+        // Setup
+        var entities = GetMaxNVarCharClasses(10).AsList();
+
+        using (var connection = new SqlConnection(Database.ConnectionString))
         {
-            // Setup
-            var entities = GetMaxNVarCharClasses(10).AsList();
+            // Act
+            connection.InsertAll(entities);
 
-            using (var connection = new SqlConnection(Database.ConnectionString))
+            // Act
+            var result = connection.QueryAll<MaxNVarCharClass>();
+
+            // Assert
+            entities.ForEach(entity =>
             {
-                // Act
-                connection.InsertAll(entities);
-
-                // Act
-                var result = connection.QueryAll<MaxNVarCharClass>();
-
-                // Assert
-                entities.ForEach(entity =>
-                {
-                    var item = result.First(e => e.SessionId == entity.SessionId);
-                    Helper.AssertPropertiesEquality(entity, item);
-                });
-            }
+                var item = result.First(e => e.SessionId == entity.SessionId);
+                Helper.AssertPropertiesEquality(entity, item);
+            });
         }
+    }
 
-        [TestMethod]
-        public void TestVarBinaryMax()
+    [TestMethod]
+    public void TestVarBinaryMax()
+    {
+        // Setup
+        var entities = GetMaxVarBinaryClasses(10).AsList();
+
+        using (var connection = new SqlConnection(Database.ConnectionString))
         {
-            // Setup
-            var entities = GetMaxVarBinaryClasses(10).AsList();
+            // Act
+            connection.InsertAll(entities);
 
-            using (var connection = new SqlConnection(Database.ConnectionString))
+            // Act
+            var result = connection.QueryAll<MaxVarBinaryClass>();
+
+            // Assert
+            entities.ForEach(entity =>
             {
-                // Act
-                connection.InsertAll(entities);
-
-                // Act
-                var result = connection.QueryAll<MaxVarBinaryClass>();
-
-                // Assert
-                entities.ForEach(entity =>
-                {
-                    var item = result.First(e => e.SessionId == entity.SessionId);
-                    Helper.AssertPropertiesEquality(entity, item);
-                });
-            }
+                var item = result.First(e => e.SessionId == entity.SessionId);
+                Helper.AssertPropertiesEquality(entity, item);
+            });
         }
     }
 }

@@ -2,251 +2,250 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Resolvers;
 
-namespace RepoDb.Sqlite.Microsoft.UnitTests.Resolvers
+namespace RepoDb.Sqlite.Microsoft.UnitTests.Resolvers;
+
+[TestClass]
+public class MdsSqLiteDbTypeNameToClientTypeResolverTest
 {
-    [TestClass]
-    public class MdsSqLiteDbTypeNameToClientTypeResolverTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            GlobalConfiguration
-                .Setup()
-                .UseSqlite();
-        }
+        GlobalConfiguration
+            .Setup()
+            .UseSqlite();
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBigInt()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBigInt()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("BIGINT");
+        // Act
+        var result = resolver.Resolve("BIGINT");
 
-            // Assert
-            Assert.AreEqual(typeof(long), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(long), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForInteger()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForInteger()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("INTEGER");
+        // Act
+        var result = resolver.Resolve("INTEGER");
 
-            // Assert
-            Assert.AreEqual(typeof(long), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(long), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBlob()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBlob()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("BLOB");
+        // Act
+        var result = resolver.Resolve("BLOB");
 
-            // Assert
-            Assert.AreEqual(typeof(byte[]), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(byte[]), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBoolean()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBoolean()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("BOOLEAN");
+        // Act
+        var result = resolver.Resolve("BOOLEAN");
 
-            // Assert
-            Assert.AreEqual(typeof(string), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(string), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForChar()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForChar()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("CHAR");
+        // Act
+        var result = resolver.Resolve("CHAR");
 
-            // Assert
-            Assert.AreEqual(typeof(string), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(string), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForString()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForString()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("STRING");
+        // Act
+        var result = resolver.Resolve("STRING");
 
-            // Assert
-            Assert.AreEqual(typeof(string), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(string), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForText()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForText()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("TEXT");
+        // Act
+        var result = resolver.Resolve("TEXT");
 
-            // Assert
-            Assert.AreEqual(typeof(string), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(string), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForVarChar()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForVarChar()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("VARCHAR");
+        // Act
+        var result = resolver.Resolve("VARCHAR");
 
-            // Assert
-            Assert.AreEqual(typeof(string), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(string), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDate()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDate()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("DATE");
+        // Act
+        var result = resolver.Resolve("DATE");
 
-            // Assert
-            Assert.AreEqual(typeof(DateTime), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(DateTime), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDateTime()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDateTime()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("DATETIME");
+        // Act
+        var result = resolver.Resolve("DATETIME");
 
-            // Assert
-            Assert.AreEqual(typeof(DateTime), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(DateTime), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForTime()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForTime()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("TIME");
+        // Act
+        var result = resolver.Resolve("TIME");
 
-            // Assert
-            Assert.AreEqual(typeof(string), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(string), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDecimal()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDecimal()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("DECIMAL");
+        // Act
+        var result = resolver.Resolve("DECIMAL");
 
-            // Assert
-            Assert.AreEqual(typeof(long), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(long), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForNumeric()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForNumeric()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("NUMERIC");
+        // Act
+        var result = resolver.Resolve("NUMERIC");
 
-            // Assert
-            Assert.AreEqual(typeof(long), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(long), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDouble()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDouble()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("DOUBLE");
+        // Act
+        var result = resolver.Resolve("DOUBLE");
 
-            // Assert
-            Assert.AreEqual(typeof(double), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(double), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForReal()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForReal()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("REAL");
+        // Act
+        var result = resolver.Resolve("REAL");
 
-            // Assert
-            Assert.AreEqual(typeof(double), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(double), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForInt()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForInt()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("INT");
+        // Act
+        var result = resolver.Resolve("INT");
 
-            // Assert
-            Assert.AreEqual(typeof(long), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(long), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForNone()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForNone()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("NONE");
+        // Act
+        var result = resolver.Resolve("NONE");
 
-            // Assert
-            Assert.AreEqual(typeof(string), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(string), result);
+    }
 
-        [TestMethod]
-        public void TestMdsSqLiteDbTypeNameToClientTypeResolverForOther()
-        {
-            // Setup
-            var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+    [TestMethod]
+    public void TestMdsSqLiteDbTypeNameToClientTypeResolverForOther()
+    {
+        // Setup
+        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
 
-            // Act
-            var result = resolver.Resolve("WHATEVER");
+        // Act
+        var result = resolver.Resolve("WHATEVER");
 
-            // Assert
-            Assert.AreEqual(typeof(object), result);
-        }
+        // Assert
+        Assert.AreEqual(typeof(object), result);
     }
 }

@@ -1,47 +1,46 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySqlConnector;
 
-namespace RepoDb.MySqlConnector.UnitTests
+namespace RepoDb.MySqlConnector.UnitTests;
+
+[TestClass]
+public class MappingTest
 {
-    [TestClass]
-    public class MappingTest
+    [TestInitialize]
+    public void Initialize()
     {
-        [TestInitialize]
-        public void Initialize()
-        {
-            GlobalConfiguration
-                .Setup()
-                .UseMySqlConnector();
-        }
+        GlobalConfiguration
+            .Setup()
+            .UseMySqlConnector();
+    }
 
-        [TestMethod]
-        public void TestMySqlStatementBuilderMapper()
-        {
-            // Setup
-            var builder = StatementBuilderMapper.Get<MySqlConnection>();
+    [TestMethod]
+    public void TestMySqlStatementBuilderMapper()
+    {
+        // Setup
+        var builder = StatementBuilderMapper.Get<MySqlConnection>();
 
-            // Assert
-            Assert.IsNotNull(builder);
-        }
+        // Assert
+        Assert.IsNotNull(builder);
+    }
 
-        [TestMethod]
-        public void TestMySqlDbHelperMapper()
-        {
-            // Setup
-            var helper = DbHelperMapper.Get<MySqlConnection>();
+    [TestMethod]
+    public void TestMySqlDbHelperMapper()
+    {
+        // Setup
+        var helper = DbHelperMapper.Get<MySqlConnection>();
 
-            // Assert
-            Assert.IsNotNull(helper);
-        }
+        // Assert
+        Assert.IsNotNull(helper);
+    }
 
-        [TestMethod]
-        public void TestMySqlDbSettingMapper()
-        {
-            // Setup
-            var setting = DbSettingMapper.Get<MySqlConnection>();
+    [TestMethod]
+    public void TestMySqlDbSettingMapper()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<MySqlConnection>();
 
-            // Assert
-            Assert.IsNotNull(setting);
-        }
+        // Assert
+        Assert.IsNotNull(setting);
     }
 }

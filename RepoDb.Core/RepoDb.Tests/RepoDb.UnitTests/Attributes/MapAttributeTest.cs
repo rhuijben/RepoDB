@@ -1,119 +1,118 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes;
 
-namespace RepoDb.UnitTests.Attributes
+namespace RepoDb.UnitTests.Attributes;
+
+[TestClass]
+public class MapAttributeTest
 {
-    [TestClass]
-    public class MapAttributeTest
+    [Map("Name")]
+    private class TestMapAttributeUnquotedNameClass
     {
-        [Map("Name")]
-        private class TestMapAttributeUnquotedNameClass
-        {
-            [Map("PrimaryId")]
-            public int Id { get; set; }
-        }
+        [Map("PrimaryId")]
+        public int Id { get; set; }
+    }
 
-        [Map("[dbo].[Name]")]
-        private class TestMapAttributeQuotedNameClass
-        {
-            [Map("[PrimaryId]")]
-            public int Id { get; set; }
-        }
+    [Map("[dbo].[Name]")]
+    private class TestMapAttributeQuotedNameClass
+    {
+        [Map("[PrimaryId]")]
+        public int Id { get; set; }
+    }
 
-        /*
-         * Unquoted
-         */
+    /*
+     * Unquoted
+     */
 
-        [TestMethod]
-        public void TestMapAttributeForClass()
-        {
-            // Act
-            var actual = ClassMappedNameCache.Get<TestMapAttributeUnquotedNameClass>();
-            var expected = "Name";
+    [TestMethod]
+    public void TestMapAttributeForClass()
+    {
+        // Act
+        var actual = ClassMappedNameCache.Get<TestMapAttributeUnquotedNameClass>();
+        var expected = "Name";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestMapAttributeForPropertyViaExpression()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestMapAttributeUnquotedNameClass>(e => e.Id);
-            var expected = "PrimaryId";
+    [TestMethod]
+    public void TestMapAttributeForPropertyViaExpression()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestMapAttributeUnquotedNameClass>(e => e.Id);
+        var expected = "PrimaryId";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestMapAttributeForPropertyViaPropertyName()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestMapAttributeUnquotedNameClass>("Id");
-            var expected = "PrimaryId";
+    [TestMethod]
+    public void TestMapAttributeForPropertyViaPropertyName()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestMapAttributeUnquotedNameClass>("Id");
+        var expected = "PrimaryId";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestMapAttributeForPropertyViaField()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestMapAttributeUnquotedNameClass>(new Field("Id"));
-            var expected = "PrimaryId";
+    [TestMethod]
+    public void TestMapAttributeForPropertyViaField()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestMapAttributeUnquotedNameClass>(new Field("Id"));
+        var expected = "PrimaryId";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        /*
-         * Quoted
-         */
+    /*
+     * Quoted
+     */
 
-        [TestMethod]
-        public void TestMapAttributeForPropertyWithQuotedName()
-        {
-            // Act
-            var actual = ClassMappedNameCache.Get<TestMapAttributeQuotedNameClass>();
-            var expected = "[dbo].[Name]";
+    [TestMethod]
+    public void TestMapAttributeForPropertyWithQuotedName()
+    {
+        // Act
+        var actual = ClassMappedNameCache.Get<TestMapAttributeQuotedNameClass>();
+        var expected = "[dbo].[Name]";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestMapAttributeForPropertyWithQuotedNameViaExpression()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestMapAttributeQuotedNameClass>(e => e.Id);
-            var expected = "[PrimaryId]";
+    [TestMethod]
+    public void TestMapAttributeForPropertyWithQuotedNameViaExpression()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestMapAttributeQuotedNameClass>(e => e.Id);
+        var expected = "[PrimaryId]";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestMapAttributeForPropertyWithQuotedNameViaPropertyName()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestMapAttributeQuotedNameClass>("Id");
-            var expected = "[PrimaryId]";
+    [TestMethod]
+    public void TestMapAttributeForPropertyWithQuotedNameViaPropertyName()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestMapAttributeQuotedNameClass>("Id");
+        var expected = "[PrimaryId]";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 
-        [TestMethod]
-        public void TestMapAttributeForPropertyWithQuotedNameViaField()
-        {
-            // Act
-            var actual = PropertyMappedNameCache.Get<TestMapAttributeQuotedNameClass>(new Field("Id"));
-            var expected = "[PrimaryId]";
+    [TestMethod]
+    public void TestMapAttributeForPropertyWithQuotedNameViaField()
+    {
+        // Act
+        var actual = PropertyMappedNameCache.Get<TestMapAttributeQuotedNameClass>(new Field("Id"));
+        var expected = "[PrimaryId]";
 
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
+        // Assert
+        Assert.AreEqual(expected, actual);
     }
 }

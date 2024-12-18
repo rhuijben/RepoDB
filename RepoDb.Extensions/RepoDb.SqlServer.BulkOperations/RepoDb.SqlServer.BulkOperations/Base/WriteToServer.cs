@@ -10,491 +10,490 @@ using RepoDb.Exceptions;
 using RepoDb.Interfaces;
 using RepoDb.SqlServer.BulkOperations;
 
-namespace RepoDb
+namespace RepoDb;
+
+public static partial class SqlConnectionExtension
 {
-    public static partial class SqlConnectionExtension
+    #region WriteToServerInternal
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <param name="connection"></param>
+    /// <param name="tableName"></param>
+    /// <param name="entities"></param>
+    /// <param name="mappings"></param>
+    /// <param name="options"></param>
+    /// <param name="bulkCopyTimeout"></param>
+    /// <param name="batchSize"></param>
+    /// <param name="hasOrderingColumn"></param>
+    /// <param name="transaction"></param>
+    /// <param name="trace"></param>
+    /// <returns></returns>
+    private static int WriteToServerInternal<TEntity>(SqlConnection connection,
+        string tableName,
+        IEnumerable<TEntity> entities,
+        IEnumerable<BulkInsertMapItem>? mappings = null,
+        SqlBulkCopyOptions options = default,
+        int? bulkCopyTimeout = null,
+        int? batchSize = null,
+        bool hasOrderingColumn = false,
+        SqlTransaction? transaction = null,
+        ITrace? trace = null)
+        where TEntity : class
     {
-        #region WriteToServerInternal
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="connection"></param>
-        /// <param name="tableName"></param>
-        /// <param name="entities"></param>
-        /// <param name="mappings"></param>
-        /// <param name="options"></param>
-        /// <param name="bulkCopyTimeout"></param>
-        /// <param name="batchSize"></param>
-        /// <param name="hasOrderingColumn"></param>
-        /// <param name="transaction"></param>
-        /// <param name="trace"></param>
-        /// <returns></returns>
-        private static int WriteToServerInternal<TEntity>(SqlConnection connection,
-            string tableName,
-            IEnumerable<TEntity> entities,
-            IEnumerable<BulkInsertMapItem>? mappings = null,
-            SqlBulkCopyOptions options = default,
-            int? bulkCopyTimeout = null,
-            int? batchSize = null,
-            bool hasOrderingColumn = false,
-            SqlTransaction? transaction = null,
-            ITrace? trace = null)
-            where TEntity : class
+        // Throw an error if there are no mappings
+        if (mappings?.Any() != true)
         {
-            // Throw an error if there are no mappings
-            if (mappings?.Any() != true)
-            {
-                throw new MissingMappingException("There are no mapping(s) found for this operation.");
-            }
-
-            // Variables needed
-            int result;
-
-            // Actual Execution
-            using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
-            {
-                // Set the destinationtable
-                Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
-
-                // Set the timeout
-                if (bulkCopyTimeout.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
-                }
-
-                // Set the batch size
-                if (batchSize.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
-                }
-
-                // Add the order column
-                if (hasOrderingColumn)
-                {
-                    mappings = AddOrderColumnMapping(mappings);
-                }
-
-                // Add the mappings
-                AddMappings(sqlBulkCopy, mappings);
-
-                // Open the connection and do the operation
-                connection.EnsureOpen();
-                using (var reader = new DataEntityDataReader<TEntity>(tableName, entities, connection, transaction, hasOrderingColumn))
-                {
-                    var writeToServerMethod = Compiler.GetParameterizedVoidMethodFunc<SqlBulkCopy>("WriteToServer", new[] { typeof(DbDataReader) });
-                    writeToServerMethod(sqlBulkCopy, new[] { reader });
-                    result = reader.RecordsAffected;
-                }
-
-                // Ensure the result
-                if (result <= 0)
-                {
-                    // Set the return value
-                    var rowsCopiedFieldOrProperty = Compiler.GetFieldGetterFunc<SqlBulkCopy, int>("_rowsCopied") ??
-                        Compiler.GetPropertyGetterFunc<SqlBulkCopy, int>("RowsCopied");
-                    result = (int)rowsCopiedFieldOrProperty?.Invoke(sqlBulkCopy);
-                }
-            }
-
-            // Return the result
-            return result;
+            throw new MissingMappingException("There are no mapping(s) found for this operation.");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="tableName"></param>
-        /// <param name="reader"></param>
-        /// <param name="mappings"></param>
-        /// <param name="options"></param>
-        /// <param name="bulkCopyTimeout"></param>
-        /// <param name="batchSize"></param>
-        /// <param name="transaction"></param>
-        /// <returns></returns>
-        private static int WriteToServerInternal(SqlConnection connection,
-            string tableName,
-            DbDataReader reader,
-            IEnumerable<BulkInsertMapItem>? mappings = null,
-            SqlBulkCopyOptions options = default,
-            int? bulkCopyTimeout = null,
-            int? batchSize = null,
-            SqlTransaction? transaction = null)
+        // Variables needed
+        int result;
+
+        // Actual Execution
+        using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
         {
-            // Throw an error if there are no mappings
-            if (mappings?.Any() != true)
+            // Set the destinationtable
+            Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
+
+            // Set the timeout
+            if (bulkCopyTimeout.HasValue)
             {
-                throw new MissingMappingException("There are no mapping(s) found for this operation.");
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
             }
 
-            // Variables needed
-            int result;
-
-            // Actual Execution
-            using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
+            // Set the batch size
+            if (batchSize.HasValue)
             {
-                // Set the destinationtable
-                Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+            }
 
-                // Set the timeout
-                if (bulkCopyTimeout.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
-                }
+            // Add the order column
+            if (hasOrderingColumn)
+            {
+                mappings = AddOrderColumnMapping(mappings);
+            }
 
-                // Set the batch size
-                if (batchSize.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
-                }
+            // Add the mappings
+            AddMappings(sqlBulkCopy, mappings);
 
-                // Add the mappings
-                AddMappings(sqlBulkCopy, mappings);
-
-
-                // Open the connection and do the operation
-                connection.EnsureOpen();
+            // Open the connection and do the operation
+            connection.EnsureOpen();
+            using (var reader = new DataEntityDataReader<TEntity>(tableName, entities, connection, transaction, hasOrderingColumn))
+            {
                 var writeToServerMethod = Compiler.GetParameterizedVoidMethodFunc<SqlBulkCopy>("WriteToServer", new[] { typeof(DbDataReader) });
                 writeToServerMethod(sqlBulkCopy, new[] { reader });
+                result = reader.RecordsAffected;
+            }
 
+            // Ensure the result
+            if (result <= 0)
+            {
                 // Set the return value
                 var rowsCopiedFieldOrProperty = Compiler.GetFieldGetterFunc<SqlBulkCopy, int>("_rowsCopied") ??
                     Compiler.GetPropertyGetterFunc<SqlBulkCopy, int>("RowsCopied");
-                result = rowsCopiedFieldOrProperty != null ? rowsCopiedFieldOrProperty(sqlBulkCopy) : reader.RecordsAffected;
+                result = (int)rowsCopiedFieldOrProperty?.Invoke(sqlBulkCopy);
             }
-
-            // Return the result
-            return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="tableName"></param>
-        /// <param name="dataTable"></param>
-        /// <param name="rowState"></param>
-        /// <param name="mappings"></param>
-        /// <param name="options"></param>
-        /// <param name="bulkCopyTimeout"></param>
-        /// <param name="batchSize"></param>
-        /// <param name="hasOrderingColumn"></param>
-        /// <param name="transaction"></param>
-        /// <returns></returns>
-        private static int WriteToServerInternal(SqlConnection connection,
-            string tableName,
-            DataTable dataTable,
-            DataRowState? rowState = null,
-            IEnumerable<BulkInsertMapItem>? mappings = null,
-            SqlBulkCopyOptions options = default,
-            int? bulkCopyTimeout = null,
-            int? batchSize = null,
-            bool hasOrderingColumn = false,
-            SqlTransaction? transaction = null)
+        // Return the result
+        return result;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="tableName"></param>
+    /// <param name="reader"></param>
+    /// <param name="mappings"></param>
+    /// <param name="options"></param>
+    /// <param name="bulkCopyTimeout"></param>
+    /// <param name="batchSize"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
+    private static int WriteToServerInternal(SqlConnection connection,
+        string tableName,
+        DbDataReader reader,
+        IEnumerable<BulkInsertMapItem>? mappings = null,
+        SqlBulkCopyOptions options = default,
+        int? bulkCopyTimeout = null,
+        int? batchSize = null,
+        SqlTransaction? transaction = null)
+    {
+        // Throw an error if there are no mappings
+        if (mappings?.Any() != true)
         {
-            // Throw an error if there are no mappings
-            if (mappings?.Any() != true)
-            {
-                throw new MissingMappingException("There are no mapping(s) found for this operation.");
-            }
-
-            // Variables needed
-            int result;
-
-            // Actual Execution
-            using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
-            {
-                // Set the destinationtable
-                Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
-
-                // Set the timeout
-                if (bulkCopyTimeout.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
-                }
-
-                // Set the batch size
-                if (batchSize.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
-                }
-
-                // Add the order column
-                if (hasOrderingColumn)
-                {
-                    AddOrderColumn(dataTable);
-                    mappings = AddOrderColumnMapping(mappings);
-                }
-
-                // Add the mappings
-                AddMappings(sqlBulkCopy, mappings);
-
-                // Open the connection and do the operation
-                connection.EnsureOpen();
-                if (rowState.HasValue == true)
-                {
-                    var writeToServerMethod = Compiler.GetParameterizedVoidMethodFunc<SqlBulkCopy>("WriteToServer", new[] { typeof(DataTable), typeof(DataRowState) });
-                    writeToServerMethod(sqlBulkCopy, new object[] { dataTable, rowState.Value });
-                }
-                else
-                {
-                    var writeToServerMethod = Compiler.GetParameterizedVoidMethodFunc<SqlBulkCopy>("WriteToServer", new[] { typeof(DataTable) });
-                    writeToServerMethod(sqlBulkCopy, new[] { dataTable });
-                }
-
-                // Set the result
-                result = rowState == null ? dataTable.Rows.Count : GetDataRows(dataTable, rowState).Count();
-            }
-
-            // Return the result
-            return result;
+            throw new MissingMappingException("There are no mapping(s) found for this operation.");
         }
 
-        #endregion
+        // Variables needed
+        int result;
 
-        #region WriteToServerAsync
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TEntity"></typeparam>
-        /// <param name="connection"></param>
-        /// <param name="tableName"></param>
-        /// <param name="entities"></param>
-        /// <param name="mappings"></param>
-        /// <param name="options"></param>
-        /// <param name="bulkCopyTimeout"></param>
-        /// <param name="batchSize"></param>
-        /// <param name="hasOrderingColumn"></param>
-        /// <param name="transaction"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        private static async Task<int> WriteToServerAsyncInternal<TEntity>(SqlConnection connection,
-            string tableName,
-            IEnumerable<TEntity> entities,
-            IEnumerable<BulkInsertMapItem>? mappings = null,
-            SqlBulkCopyOptions options = default,
-            int? bulkCopyTimeout = null,
-            int? batchSize = null,
-            bool hasOrderingColumn = false,
-            SqlTransaction? transaction = null,
-            CancellationToken cancellationToken = default)
-            where TEntity : class
+        // Actual Execution
+        using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
         {
-            // Throw an error if there are no mappings
-            if (mappings?.Any() != true)
+            // Set the destinationtable
+            Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
+
+            // Set the timeout
+            if (bulkCopyTimeout.HasValue)
             {
-                throw new MissingMappingException("There are no mapping(s) found for this operation.");
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
             }
 
-            // Variables needed
-            int result;
-
-            // Actual Execution
-            using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
+            // Set the batch size
+            if (batchSize.HasValue)
             {
-                // Set the destinationtable
-                Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
-
-                // Set the timeout
-                if (bulkCopyTimeout.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
-                }
-
-                // Set the batch size
-                if (batchSize.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
-                }
-
-                // Add the order column
-                if (hasOrderingColumn)
-                {
-                    mappings = AddOrderColumnMapping(mappings);
-                }
-
-                // Add the mappings
-                AddMappings(sqlBulkCopy, mappings);
-
-                // Open the connection and do the operation
-                await connection.EnsureOpenAsync(cancellationToken: cancellationToken);
-                using (var reader = new DataEntityDataReader<TEntity>(tableName, entities, connection, transaction, hasOrderingColumn))
-                {
-                    var writeToServerMethod = Compiler.GetParameterizedMethodFunc<SqlBulkCopy, Task>("WriteToServerAsync", new[] { typeof(DbDataReader), typeof(CancellationToken) });
-                    await writeToServerMethod(sqlBulkCopy, new object[] { reader, cancellationToken });
-                    result = reader.RecordsAffected;
-                }
-
-                // Ensure the result
-                if (result <= 0)
-                {
-                    // Set the return value
-                    var rowsCopiedFieldOrProperty = Compiler.GetFieldGetterFunc<SqlBulkCopy, int>("_rowsCopied") ??
-                        Compiler.GetPropertyGetterFunc<SqlBulkCopy, int>("RowsCopied");
-                    result = (int)rowsCopiedFieldOrProperty?.Invoke(sqlBulkCopy);
-                }
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
             }
 
-            // Return the result
-            return result;
+            // Add the mappings
+            AddMappings(sqlBulkCopy, mappings);
+
+
+            // Open the connection and do the operation
+            connection.EnsureOpen();
+            var writeToServerMethod = Compiler.GetParameterizedVoidMethodFunc<SqlBulkCopy>("WriteToServer", new[] { typeof(DbDataReader) });
+            writeToServerMethod(sqlBulkCopy, new[] { reader });
+
+            // Set the return value
+            var rowsCopiedFieldOrProperty = Compiler.GetFieldGetterFunc<SqlBulkCopy, int>("_rowsCopied") ??
+                Compiler.GetPropertyGetterFunc<SqlBulkCopy, int>("RowsCopied");
+            result = rowsCopiedFieldOrProperty != null ? rowsCopiedFieldOrProperty(sqlBulkCopy) : reader.RecordsAffected;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="tableName"></param>
-        /// <param name="reader"></param>
-        /// <param name="mappings"></param>
-        /// <param name="options"></param>
-        /// <param name="bulkCopyTimeout"></param>
-        /// <param name="batchSize"></param>
-        /// <param name="transaction"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        private static async Task<int> WriteToServerAsyncInternal(SqlConnection connection,
-            string tableName,
-            DbDataReader reader,
-            IEnumerable<BulkInsertMapItem>? mappings = null,
-            SqlBulkCopyOptions options = default,
-            int? bulkCopyTimeout = null,
-            int? batchSize = null,
-            SqlTransaction? transaction = null,
-            CancellationToken cancellationToken = default)
+        // Return the result
+        return result;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="tableName"></param>
+    /// <param name="dataTable"></param>
+    /// <param name="rowState"></param>
+    /// <param name="mappings"></param>
+    /// <param name="options"></param>
+    /// <param name="bulkCopyTimeout"></param>
+    /// <param name="batchSize"></param>
+    /// <param name="hasOrderingColumn"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
+    private static int WriteToServerInternal(SqlConnection connection,
+        string tableName,
+        DataTable dataTable,
+        DataRowState? rowState = null,
+        IEnumerable<BulkInsertMapItem>? mappings = null,
+        SqlBulkCopyOptions options = default,
+        int? bulkCopyTimeout = null,
+        int? batchSize = null,
+        bool hasOrderingColumn = false,
+        SqlTransaction? transaction = null)
+    {
+        // Throw an error if there are no mappings
+        if (mappings?.Any() != true)
         {
-            // Throw an error if there are no mappings
-            if (mappings?.Any() != true)
+            throw new MissingMappingException("There are no mapping(s) found for this operation.");
+        }
+
+        // Variables needed
+        int result;
+
+        // Actual Execution
+        using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
+        {
+            // Set the destinationtable
+            Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
+
+            // Set the timeout
+            if (bulkCopyTimeout.HasValue)
             {
-                throw new MissingMappingException("There are no mapping(s) found for this operation.");
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
             }
 
-            // Variables needed
-            int result;
-
-            // Actual Execution
-            using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
+            // Set the batch size
+            if (batchSize.HasValue)
             {
-                // Set the destinationtable
-                Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+            }
 
-                // Set the timeout
-                if (bulkCopyTimeout.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
-                }
+            // Add the order column
+            if (hasOrderingColumn)
+            {
+                AddOrderColumn(dataTable);
+                mappings = AddOrderColumnMapping(mappings);
+            }
 
-                // Set the batch size
-                if (batchSize.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
-                }
+            // Add the mappings
+            AddMappings(sqlBulkCopy, mappings);
 
-                // Add the mappings
-                AddMappings(sqlBulkCopy, mappings);
+            // Open the connection and do the operation
+            connection.EnsureOpen();
+            if (rowState.HasValue == true)
+            {
+                var writeToServerMethod = Compiler.GetParameterizedVoidMethodFunc<SqlBulkCopy>("WriteToServer", new[] { typeof(DataTable), typeof(DataRowState) });
+                writeToServerMethod(sqlBulkCopy, new object[] { dataTable, rowState.Value });
+            }
+            else
+            {
+                var writeToServerMethod = Compiler.GetParameterizedVoidMethodFunc<SqlBulkCopy>("WriteToServer", new[] { typeof(DataTable) });
+                writeToServerMethod(sqlBulkCopy, new[] { dataTable });
+            }
 
-                // Open the connection and do the operation
-                await connection.EnsureOpenAsync(cancellationToken);
+            // Set the result
+            result = rowState == null ? dataTable.Rows.Count : GetDataRows(dataTable, rowState).Count();
+        }
+
+        // Return the result
+        return result;
+    }
+
+    #endregion
+
+    #region WriteToServerAsync
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <param name="connection"></param>
+    /// <param name="tableName"></param>
+    /// <param name="entities"></param>
+    /// <param name="mappings"></param>
+    /// <param name="options"></param>
+    /// <param name="bulkCopyTimeout"></param>
+    /// <param name="batchSize"></param>
+    /// <param name="hasOrderingColumn"></param>
+    /// <param name="transaction"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    private static async Task<int> WriteToServerAsyncInternal<TEntity>(SqlConnection connection,
+        string tableName,
+        IEnumerable<TEntity> entities,
+        IEnumerable<BulkInsertMapItem>? mappings = null,
+        SqlBulkCopyOptions options = default,
+        int? bulkCopyTimeout = null,
+        int? batchSize = null,
+        bool hasOrderingColumn = false,
+        SqlTransaction? transaction = null,
+        CancellationToken cancellationToken = default)
+        where TEntity : class
+    {
+        // Throw an error if there are no mappings
+        if (mappings?.Any() != true)
+        {
+            throw new MissingMappingException("There are no mapping(s) found for this operation.");
+        }
+
+        // Variables needed
+        int result;
+
+        // Actual Execution
+        using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
+        {
+            // Set the destinationtable
+            Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
+
+            // Set the timeout
+            if (bulkCopyTimeout.HasValue)
+            {
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+            }
+
+            // Set the batch size
+            if (batchSize.HasValue)
+            {
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+            }
+
+            // Add the order column
+            if (hasOrderingColumn)
+            {
+                mappings = AddOrderColumnMapping(mappings);
+            }
+
+            // Add the mappings
+            AddMappings(sqlBulkCopy, mappings);
+
+            // Open the connection and do the operation
+            await connection.EnsureOpenAsync(cancellationToken: cancellationToken);
+            using (var reader = new DataEntityDataReader<TEntity>(tableName, entities, connection, transaction, hasOrderingColumn))
+            {
                 var writeToServerMethod = Compiler.GetParameterizedMethodFunc<SqlBulkCopy, Task>("WriteToServerAsync", new[] { typeof(DbDataReader), typeof(CancellationToken) });
                 await writeToServerMethod(sqlBulkCopy, new object[] { reader, cancellationToken });
+                result = reader.RecordsAffected;
+            }
 
+            // Ensure the result
+            if (result <= 0)
+            {
                 // Set the return value
                 var rowsCopiedFieldOrProperty = Compiler.GetFieldGetterFunc<SqlBulkCopy, int>("_rowsCopied") ??
                     Compiler.GetPropertyGetterFunc<SqlBulkCopy, int>("RowsCopied");
-                result = rowsCopiedFieldOrProperty?.Invoke(sqlBulkCopy) ?? reader.RecordsAffected;
+                result = (int)rowsCopiedFieldOrProperty?.Invoke(sqlBulkCopy);
             }
-
-            // Return the result
-            return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="connection"></param>
-        /// <param name="tableName"></param>
-        /// <param name="dataTable"></param>
-        /// <param name="rowState"></param>
-        /// <param name="mappings"></param>
-        /// <param name="options"></param>
-        /// <param name="bulkCopyTimeout"></param>
-        /// <param name="batchSize"></param>
-        /// <param name="hasOrderingColumn"></param>
-        /// <param name="transaction"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        private static async Task<int> WriteToServerAsyncInternal(SqlConnection connection,
-            string tableName,
-            DataTable dataTable,
-            DataRowState? rowState = null,
-            IEnumerable<BulkInsertMapItem>? mappings = null,
-            SqlBulkCopyOptions options = default,
-            int? bulkCopyTimeout = null,
-            int? batchSize = null,
-            bool hasOrderingColumn = false,
-            SqlTransaction? transaction = null,
-            CancellationToken cancellationToken = default)
-        {
-            // Throw an error if there are no mappings
-            if (mappings?.Any() != true)
-            {
-                throw new MissingMappingException("There are no mapping(s) found for this operation.");
-            }
-
-            // Variables needed
-            int result;
-
-            // Actual Execution
-            using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
-            {
-                // Set the destinationtable
-                Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
-
-                // Set the timeout
-                if (bulkCopyTimeout.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
-                }
-
-                // Set the batch size
-                if (batchSize.HasValue)
-                {
-                    Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
-                }
-
-                // Add the order column
-                if (hasOrderingColumn)
-                {
-                    AddOrderColumn(dataTable);
-                    mappings = AddOrderColumnMapping(mappings);
-                }
-
-                // Add the mappings
-                AddMappings(sqlBulkCopy, mappings);
-
-                // Open the connection and do the operation
-                await connection.EnsureOpenAsync(cancellationToken);
-                if (rowState.HasValue == true)
-                {
-                    var writeToServerMethod = Compiler.GetParameterizedMethodFunc<SqlBulkCopy, Task>("WriteToServerAsync", new[] { typeof(DataTable), typeof(DataRowState), typeof(CancellationToken) });
-                    await writeToServerMethod(sqlBulkCopy, new object[] { dataTable, rowState.Value, cancellationToken });
-                }
-                else
-                {
-                    var writeToServerMethod = Compiler.GetParameterizedMethodFunc<SqlBulkCopy, Task>("WriteToServerAsync", new[] { typeof(DataTable), typeof(CancellationToken) });
-                    await writeToServerMethod(sqlBulkCopy, new object[] { dataTable, cancellationToken });
-                }
-
-                // Set the result
-                result = rowState == null ? dataTable.Rows.Count : GetDataRows(dataTable, rowState).Count();
-            }
-
-            // Return the result
-            return result;
-        }
-
-        #endregion
+        // Return the result
+        return result;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="tableName"></param>
+    /// <param name="reader"></param>
+    /// <param name="mappings"></param>
+    /// <param name="options"></param>
+    /// <param name="bulkCopyTimeout"></param>
+    /// <param name="batchSize"></param>
+    /// <param name="transaction"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    private static async Task<int> WriteToServerAsyncInternal(SqlConnection connection,
+        string tableName,
+        DbDataReader reader,
+        IEnumerable<BulkInsertMapItem>? mappings = null,
+        SqlBulkCopyOptions options = default,
+        int? bulkCopyTimeout = null,
+        int? batchSize = null,
+        SqlTransaction? transaction = null,
+        CancellationToken cancellationToken = default)
+    {
+        // Throw an error if there are no mappings
+        if (mappings?.Any() != true)
+        {
+            throw new MissingMappingException("There are no mapping(s) found for this operation.");
+        }
+
+        // Variables needed
+        int result;
+
+        // Actual Execution
+        using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
+        {
+            // Set the destinationtable
+            Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
+
+            // Set the timeout
+            if (bulkCopyTimeout.HasValue)
+            {
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+            }
+
+            // Set the batch size
+            if (batchSize.HasValue)
+            {
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+            }
+
+            // Add the mappings
+            AddMappings(sqlBulkCopy, mappings);
+
+            // Open the connection and do the operation
+            await connection.EnsureOpenAsync(cancellationToken);
+            var writeToServerMethod = Compiler.GetParameterizedMethodFunc<SqlBulkCopy, Task>("WriteToServerAsync", new[] { typeof(DbDataReader), typeof(CancellationToken) });
+            await writeToServerMethod(sqlBulkCopy, new object[] { reader, cancellationToken });
+
+            // Set the return value
+            var rowsCopiedFieldOrProperty = Compiler.GetFieldGetterFunc<SqlBulkCopy, int>("_rowsCopied") ??
+                Compiler.GetPropertyGetterFunc<SqlBulkCopy, int>("RowsCopied");
+            result = rowsCopiedFieldOrProperty?.Invoke(sqlBulkCopy) ?? reader.RecordsAffected;
+        }
+
+        // Return the result
+        return result;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="connection"></param>
+    /// <param name="tableName"></param>
+    /// <param name="dataTable"></param>
+    /// <param name="rowState"></param>
+    /// <param name="mappings"></param>
+    /// <param name="options"></param>
+    /// <param name="bulkCopyTimeout"></param>
+    /// <param name="batchSize"></param>
+    /// <param name="hasOrderingColumn"></param>
+    /// <param name="transaction"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    private static async Task<int> WriteToServerAsyncInternal(SqlConnection connection,
+        string tableName,
+        DataTable dataTable,
+        DataRowState? rowState = null,
+        IEnumerable<BulkInsertMapItem>? mappings = null,
+        SqlBulkCopyOptions options = default,
+        int? bulkCopyTimeout = null,
+        int? batchSize = null,
+        bool hasOrderingColumn = false,
+        SqlTransaction? transaction = null,
+        CancellationToken cancellationToken = default)
+    {
+        // Throw an error if there are no mappings
+        if (mappings?.Any() != true)
+        {
+            throw new MissingMappingException("There are no mapping(s) found for this operation.");
+        }
+
+        // Variables needed
+        int result;
+
+        // Actual Execution
+        using (var sqlBulkCopy = (SqlBulkCopy)Activator.CreateInstance(typeof(SqlBulkCopy), connection, options, transaction))
+        {
+            // Set the destinationtable
+            Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
+
+            // Set the timeout
+            if (bulkCopyTimeout.HasValue)
+            {
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+            }
+
+            // Set the batch size
+            if (batchSize.HasValue)
+            {
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+            }
+
+            // Add the order column
+            if (hasOrderingColumn)
+            {
+                AddOrderColumn(dataTable);
+                mappings = AddOrderColumnMapping(mappings);
+            }
+
+            // Add the mappings
+            AddMappings(sqlBulkCopy, mappings);
+
+            // Open the connection and do the operation
+            await connection.EnsureOpenAsync(cancellationToken);
+            if (rowState.HasValue == true)
+            {
+                var writeToServerMethod = Compiler.GetParameterizedMethodFunc<SqlBulkCopy, Task>("WriteToServerAsync", new[] { typeof(DataTable), typeof(DataRowState), typeof(CancellationToken) });
+                await writeToServerMethod(sqlBulkCopy, new object[] { dataTable, rowState.Value, cancellationToken });
+            }
+            else
+            {
+                var writeToServerMethod = Compiler.GetParameterizedMethodFunc<SqlBulkCopy, Task>("WriteToServerAsync", new[] { typeof(DataTable), typeof(CancellationToken) });
+                await writeToServerMethod(sqlBulkCopy, new object[] { dataTable, cancellationToken });
+            }
+
+            // Set the result
+            result = rowState == null ? dataTable.Rows.Count : GetDataRows(dataTable, rowState).Count();
+        }
+
+        // Return the result
+        return result;
+    }
+
+    #endregion
 }

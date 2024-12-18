@@ -2,20 +2,19 @@
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Engines;
 
-namespace RepoDb.Benchmarks.PostgreSql.Linq2db
+namespace RepoDb.Benchmarks.PostgreSql.Linq2db;
+
+public class GetAllLinq2dbBenchmarks : Linq2dbBaseBenchmarks
 {
-    public class GetAllLinq2dbBenchmarks : Linq2dbBaseBenchmarks
+    private readonly Consumer consumer = new();
+
+    [Benchmark]
+    public void SelectAll()
     {
-        private readonly Consumer consumer = new();
+        using var db = GetDb();
 
-        [Benchmark]
-        public void SelectAll()
-        {
-            using var db = GetDb();
+        var persons = from p in db.People select p;
 
-            var persons = from p in db.People select p;
-
-            persons.Consume(consumer);
-        }
+        persons.Consume(consumer);
     }
 }

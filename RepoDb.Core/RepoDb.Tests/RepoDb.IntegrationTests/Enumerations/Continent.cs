@@ -1,13 +1,12 @@
-﻿namespace RepoDb.IntegrationTests.Enumerations
+﻿namespace RepoDb.IntegrationTests.Enumerations;
+
+public enum Continent
 {
-    public enum Continent
-    {
-        Asia,
-        Africa,
-        Australia,
-        Europe,
-        NorthAmerica,
-        SouthAmerica,
-        Antartica
-    }
+    Asia,
+    Africa,
+    Australia,
+    Europe,
+    NorthAmerica,
+    SouthAmerica,
+    Antartica
 }

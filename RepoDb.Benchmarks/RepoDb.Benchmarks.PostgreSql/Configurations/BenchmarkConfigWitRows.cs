@@ -1,12 +1,11 @@
 ﻿using BenchmarkDotNet.Columns;
 
-namespace RepoDb.Benchmarks.PostgreSql.Configurations
+namespace RepoDb.Benchmarks.PostgreSql.Configurations;
+
+public class BenchmarkConfigWitRows : BenchmarkConfig
 {
-    public class BenchmarkConfigWitRows : BenchmarkConfig
+    public BenchmarkConfigWitRows()
     {
-        public BenchmarkConfigWitRows()
-        {
-            AddColumn(new ParamColumn("Rows"));
-        }
+        AddColumn(new ParamColumn("Rows"));
     }
 }
