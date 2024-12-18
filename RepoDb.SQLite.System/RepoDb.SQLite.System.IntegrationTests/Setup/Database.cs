@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.SQLite;
-using System.IO;
+﻿using System.Data.SQLite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.SQLite.System.IntegrationTests.Models;
 

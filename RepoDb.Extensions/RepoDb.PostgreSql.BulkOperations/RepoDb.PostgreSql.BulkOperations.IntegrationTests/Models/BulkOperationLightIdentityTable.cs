@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models;
+﻿namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models;
 
 public class BulkOperationLightIdentityTable
 {

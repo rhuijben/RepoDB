@@ -5,8 +5,6 @@ using RepoDb.Reflection;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
 using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.SqlServer.IntegrationTests.Operations;
 

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Linq;
 using System.Reflection;
 using RepoDb.Attributes;
 using RepoDb.Attributes.Parameter;

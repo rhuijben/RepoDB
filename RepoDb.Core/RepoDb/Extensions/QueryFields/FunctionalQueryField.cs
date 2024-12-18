@@ -1,6 +1,5 @@
 ﻿using RepoDb.Enumerations;
 using RepoDb.Interfaces;
-using System;
 using System.Data;
 
 namespace RepoDb.Extensions.QueryFields;

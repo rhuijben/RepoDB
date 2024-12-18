@@ -1,6 +1,5 @@
 ﻿using RepoDb.Exceptions;
 using RepoDb.Interfaces;
-using System;
 using System.Collections.Concurrent;
 using System.Data;
 

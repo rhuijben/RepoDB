@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.UnitTests.CustomObjects;
-using System;
 
 namespace RepoDb.UnitTests.StatementBuilders;
 

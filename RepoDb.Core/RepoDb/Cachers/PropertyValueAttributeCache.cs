@@ -1,9 +1,7 @@
 ﻿using RepoDb.Attributes.Parameter;
 using RepoDb.Extensions;
 using RepoDb.Resolvers;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 

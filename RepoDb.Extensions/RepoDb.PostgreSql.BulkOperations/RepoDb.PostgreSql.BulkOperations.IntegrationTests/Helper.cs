@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Dynamic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Npgsql;
 using RepoDb.Extensions;

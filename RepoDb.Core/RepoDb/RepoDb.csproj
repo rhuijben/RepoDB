@@ -3,6 +3,7 @@
     <Title>RepoDB</Title>
     <TargetFrameworks>net9.0;netstandard2.0;net8.0;net481</TargetFrameworks>
     <Nullable>annotations</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Description>A hybrid ORM library for .NET.</Description>
     <PackageTags>orm hybrid-orm micro-orm</PackageTags>
     <PackageReleaseNotes>http://repodb.net/release/core</PackageReleaseNotes>

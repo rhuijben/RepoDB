@@ -3,9 +3,6 @@ using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Options;
 using RepoDb.UnitTests.CustomObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RepoDb.UnitTests.Extensions;
 

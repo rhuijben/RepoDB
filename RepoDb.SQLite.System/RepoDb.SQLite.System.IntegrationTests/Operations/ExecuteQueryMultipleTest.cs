@@ -2,11 +2,7 @@
 using RepoDb.Extensions;
 using RepoDb.SQLite.System.IntegrationTests.Models;
 using RepoDb.SQLite.System.IntegrationTests.Setup;
-using System;
-using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.SQLite.System.IntegrationTests.Operations.SDS;
 

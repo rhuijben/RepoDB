@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace RepoDb.Exceptions;
+﻿namespace RepoDb.Exceptions;
 
 /// <summary>
 /// An exception that is being thrown if the qualifier fields are not found from the request.

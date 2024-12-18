@@ -1,12 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using RepoDb.Contexts.Execution;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.UnitTests.CustomObjects;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 namespace RepoDb.UnitTests.DbHelpers;
 

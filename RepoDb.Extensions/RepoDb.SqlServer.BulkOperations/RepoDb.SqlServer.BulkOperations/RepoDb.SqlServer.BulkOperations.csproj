@@ -3,6 +3,7 @@
     <Title>RepoDb.SqlServer.BulkOperations</Title>
     <TargetFrameworks>net9.0;net8.0;netstandard2.0;net481</TargetFrameworks>
     <Nullable>annotations</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Description>An extension library that contains the official Bulk Operations of RepoDb for SQL Server.</Description>
     <PackageTags>orm hybrid-orm micro-orm sqlserver bulkoperations</PackageTags>
     <RepositoryUrl>https://github.com/mikependon/RepoDb/tree/master/RepoDb.Extensions/RepoDb.SqlServer.BulkOperations</RepositoryUrl>

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using RepoDb.Exceptions;
 using RepoDb.MySql.IntegrationTests.Models;
 

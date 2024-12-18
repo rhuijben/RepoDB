@@ -2,8 +2,6 @@
 using Npgsql;
 using RepoDb.IntegrationTests.Setup;
 using RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models;
-using System;
-using System.Linq;
 
 namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Base;
 

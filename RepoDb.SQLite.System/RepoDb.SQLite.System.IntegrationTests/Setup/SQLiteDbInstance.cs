@@ -1,7 +1,5 @@
-﻿using System;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.SQLite;
-using System.Threading.Tasks;
 using RepoDb.TestCore;
 
 namespace RepoDb.SQLite.System.IntegrationTests.Setup;

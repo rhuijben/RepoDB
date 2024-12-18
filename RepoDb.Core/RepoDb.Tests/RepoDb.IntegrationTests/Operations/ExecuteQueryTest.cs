@@ -4,12 +4,8 @@ using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.IntegrationTests.Operations;
 

@@ -3,9 +3,6 @@ using MySqlConnector;
 using RepoDb.Extensions;
 using RepoDb.MySqlConnector.IntegrationTests.Models;
 using RepoDb.MySqlConnector.IntegrationTests.Setup;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.MySqlConnector.IntegrationTests.Operations;
 

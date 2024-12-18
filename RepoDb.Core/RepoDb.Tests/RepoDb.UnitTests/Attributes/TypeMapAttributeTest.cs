@@ -2,9 +2,7 @@
 using RepoDb.Attributes;
 using RepoDb.Extensions;
 using RepoDb.UnitTests.CustomObjects;
-using System;
 using System.Data;
-using System.Linq;
 
 namespace RepoDb.UnitTests.Attributes;
 

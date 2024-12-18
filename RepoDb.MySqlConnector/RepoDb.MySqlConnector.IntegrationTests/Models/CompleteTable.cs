@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.MySqlConnector.IntegrationTests.Models;
+﻿namespace RepoDb.MySqlConnector.IntegrationTests.Models;
 
 public class CompleteTable
 {

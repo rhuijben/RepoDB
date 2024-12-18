@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Resolvers;
-using System;
 
 namespace RepoDb.Sqlite.Microsoft.UnitTests.Resolvers;
 

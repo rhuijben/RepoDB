@@ -1,14 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Npgsql;
 using NpgsqlTypes;
-using RepoDb.Attributes;
 using RepoDb.Attributes.Parameter.Npgsql;
 using RepoDb.Extensions;
 using RepoDb.PostgreSql.IntegrationTests.Setup;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text;
 
 namespace RepoDb.PostgreSql.IntegrationTests;

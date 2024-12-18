@@ -1,7 +1,4 @@
-﻿using RepoDb.Attributes;
-using System;
-
-namespace RepoDb.IntegrationTests.Models;
+﻿namespace RepoDb.IntegrationTests.Models;
 
 public class NonKeyedTable
 {

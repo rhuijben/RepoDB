@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace RepoDb.Extensions;
+﻿namespace RepoDb.Extensions;
 
 /// <summary>
 /// Contains the extension methods for <see cref="QueryGroup"/> object.

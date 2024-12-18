@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Resolvers;
 
 namespace RepoDb.PostgreSql.UnitTests.Resolvers;

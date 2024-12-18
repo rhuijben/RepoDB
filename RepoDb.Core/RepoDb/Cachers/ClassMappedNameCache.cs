@@ -1,7 +1,6 @@
 ﻿using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System;
 using System.Collections.Concurrent;
 
 namespace RepoDb;

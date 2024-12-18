@@ -3,11 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.IntegrationTests.Operations;
 

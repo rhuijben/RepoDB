@@ -5,7 +5,6 @@ using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Options;
 using RepoDb.UnitTests.CustomObjects;
-using System;
 using System.Linq.Expressions;
 
 namespace RepoDb.UnitTests.PropertyHandlers;

@@ -1,10 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
-using System;
-using System.Collections.Generic;
 using System.Dynamic;
-using System.Linq;
 using System.Text;
 
 namespace RepoDb.Sqlite.Microsoft.IntegrationTests;

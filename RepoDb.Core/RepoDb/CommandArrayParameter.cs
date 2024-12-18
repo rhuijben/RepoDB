@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace RepoDb;
+﻿namespace RepoDb;
 
 /// <summary>
 /// A class that is being used to handle the array value of the parameter.

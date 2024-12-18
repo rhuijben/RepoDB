@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.Exceptions;
+﻿namespace RepoDb.Exceptions;
 
 /// <summary>
 /// An exception that is being thrown if the qualifier <see cref="Field"/> objects passed in the operation are not valid.

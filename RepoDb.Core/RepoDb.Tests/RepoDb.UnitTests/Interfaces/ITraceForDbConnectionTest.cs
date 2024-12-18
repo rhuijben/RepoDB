@@ -3,10 +3,6 @@ using Moq;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.UnitTests.CustomObjects;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RepoDb.UnitTests.Interfaces;
 

@@ -2,7 +2,6 @@
 using Npgsql;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
-using System;
 
 namespace RepoDb.PostgreSql.UnitTests;
 

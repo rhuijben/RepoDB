@@ -4,8 +4,6 @@ using RepoDb.Contexts.Cachers;
 using RepoDb.Enumerations;
 using RepoDb.Interfaces;
 using RepoDb.UnitTests.CustomObjects;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace RepoDb.UnitTests.Interfaces;
 

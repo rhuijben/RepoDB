@@ -1,5 +1,4 @@
 ﻿using RepoDb.Attributes;
-using System;
 
 namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models;
 

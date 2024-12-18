@@ -1,8 +1,6 @@
 ﻿using RepoDb.Interfaces;
 using RepoDb.Resolvers;
 using RepoDb.StatementBuilders;
-using System;
-using System.Collections.Generic;
 
 namespace RepoDb.UnitTests.CustomObjects;
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data.SQLite;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Data.SQLite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.Interfaces;

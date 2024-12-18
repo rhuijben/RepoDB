@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Data;
-using System.Linq;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;

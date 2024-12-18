@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb;
+﻿namespace RepoDb;
 
 /// <summary>
 /// A class that holds the result of the tracing.

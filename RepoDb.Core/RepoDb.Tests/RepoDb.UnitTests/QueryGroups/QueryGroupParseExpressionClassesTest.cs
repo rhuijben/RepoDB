@@ -1,5 +1,4 @@
 ﻿using RepoDb.Attributes;
-using System;
 using System.Text;
 
 namespace RepoDb.UnitTests;

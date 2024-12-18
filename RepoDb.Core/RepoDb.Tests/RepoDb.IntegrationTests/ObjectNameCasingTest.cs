@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
-using System.Linq;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes;
 using RepoDb.Extensions;

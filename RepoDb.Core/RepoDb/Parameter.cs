@@ -1,5 +1,4 @@
 ﻿using RepoDb.Extensions;
-using System;
 using System.Data;
 
 namespace RepoDb;

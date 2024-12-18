@@ -1,8 +1,6 @@
 ﻿using RepoDb.Interfaces;
 using RepoDb.Requests;
 using System.Data;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RepoDb;
 

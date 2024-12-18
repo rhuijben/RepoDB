@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.Data.Common;
-using System.Linq;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Reflection;

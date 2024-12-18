@@ -1,5 +1,4 @@
-﻿using System;
-using Npgsql;
+﻿using Npgsql;
 using NpgsqlTypes;
 
 namespace RepoDb.Attributes.Parameter.Npgsql;

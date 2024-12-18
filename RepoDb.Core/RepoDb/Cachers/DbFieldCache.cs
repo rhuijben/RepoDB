@@ -1,9 +1,6 @@
 #nullable enable
-using System;
 using System.Collections.Concurrent;
 using System.Data;
-using System.Threading;
-using System.Threading.Tasks;
 using RepoDb.Exceptions;
 
 namespace RepoDb;

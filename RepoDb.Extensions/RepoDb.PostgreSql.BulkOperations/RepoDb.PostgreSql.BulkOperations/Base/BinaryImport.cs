@@ -3,13 +3,9 @@ using RepoDb.Enumerations.PostgreSql;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.PostgreSql.BulkOperations;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Dynamic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace RepoDb;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.IntegrationTests.Models;
+﻿namespace RepoDb.IntegrationTests.Models;
 
 public class SharedIdentityTable
 {

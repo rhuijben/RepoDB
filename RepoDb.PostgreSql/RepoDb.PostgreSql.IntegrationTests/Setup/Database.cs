@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Npgsql;
+﻿using Npgsql;
 using RepoDb.PostgreSql.IntegrationTests.Models;
 
 namespace RepoDb.PostgreSql.IntegrationTests.Setup;

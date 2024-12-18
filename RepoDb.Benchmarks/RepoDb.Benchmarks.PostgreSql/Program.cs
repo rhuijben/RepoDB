@@ -1,7 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
 using RepoDb.Benchmarks.PostgreSql.Configurations;
-using RepoDb.Benchmarks.PostgreSql.Dapper;
-using RepoDb.Benchmarks.PostgreSql.RepoDb;
 
 namespace RepoDb.Benchmarks.PostgreSql;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.IntegrationTests.Enumerations;
+﻿namespace RepoDb.IntegrationTests.Enumerations;
 
 [Flags]
 public enum StorageType

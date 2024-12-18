@@ -1,6 +1,4 @@
 ﻿using RepoDb.Interfaces;
-using System;
-using System.Linq;
 
 namespace RepoDb.Resolvers;
 

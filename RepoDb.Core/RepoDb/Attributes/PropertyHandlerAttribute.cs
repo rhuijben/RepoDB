@@ -1,5 +1,4 @@
-﻿using System;
-using RepoDb.Exceptions;
+﻿using RepoDb.Exceptions;
 using RepoDb.Extensions;
 
 namespace RepoDb.Attributes;

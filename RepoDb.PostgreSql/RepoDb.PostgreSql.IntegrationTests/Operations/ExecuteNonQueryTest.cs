@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Npgsql;
 using RepoDb.PostgreSql.IntegrationTests.Setup;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.PostgreSql.IntegrationTests.Operations;
 

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
 using RepoDb.Interfaces;
-using System.Threading.Tasks;
 using RepoDb.Enumerations;
 using System.Dynamic;
-using System.Threading;
 
 namespace RepoDb;
 

@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySql.Data.MySqlClient;
 using RepoDb.MySql.IntegrationTests.Setup;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RepoDb.MySql.IntegrationTests.Operations;
 

@@ -1,8 +1,5 @@
 ﻿#nullable enable
-using System;
 using System.Data.Common;
-using System.Threading;
-using System.Threading.Tasks;
 using RepoDb.Exceptions;
 using RepoDb.Interfaces;
 

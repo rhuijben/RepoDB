@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RepoDb.Exceptions;
+﻿namespace RepoDb.Exceptions;
 
 /// <summary>
 /// An exception that is being thrown if the primary key and identity key is not found from the data entity.

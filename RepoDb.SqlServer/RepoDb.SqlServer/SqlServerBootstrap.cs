@@ -2,7 +2,6 @@
 using RepoDb.DbHelpers;
 using RepoDb.DbSettings;
 using RepoDb.StatementBuilders;
-using System;
 
 namespace RepoDb;
 

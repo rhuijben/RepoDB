@@ -1,6 +1,5 @@
 ﻿using RepoDb.Attributes;
 using RepoDb.IntegrationTests.Enumerations;
-using System;
 using System.Data;
 
 namespace RepoDb.IntegrationTests.Models;

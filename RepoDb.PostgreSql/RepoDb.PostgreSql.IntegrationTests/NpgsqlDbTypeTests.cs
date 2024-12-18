@@ -6,9 +6,6 @@ using RepoDb.Attributes.Parameter.Npgsql;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.PostgreSql.IntegrationTests.Setup;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace RepoDb.PostgreSql.IntegrationTests;
 

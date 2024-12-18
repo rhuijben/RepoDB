@@ -1,7 +1,5 @@
 ﻿using RepoDb.Attributes.Parameter;
 using RepoDb.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Data;
 
 namespace RepoDb;
