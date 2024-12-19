@@ -23,7 +23,7 @@ public sealed class GlobalConfiguration
     /// Setup the globalized configurations for the application.
     /// </summary>
     /// <returns>The used global configuration instance itself.</returns>
-    public static GlobalConfiguration Setup() => Setup(new());
+    public static GlobalConfiguration Setup() => Setup(Options);
 
     /// <summary>
     /// Setup the globalized configurations for the application.
@@ -32,7 +32,8 @@ public sealed class GlobalConfiguration
     /// <returns>The used global configuration instance itself.</returns>
     public static GlobalConfiguration Setup(GlobalConfigurationOptions options)
     {
-        Options = options;
+        Options = options ?? Options;
+
         return _instance;
     }
 

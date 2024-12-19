@@ -363,8 +363,7 @@ public static class DbCommandExtension
             (DbType?)GlobalConfiguration.Options.EnumDefaultDatabaseType;
 
         // Create the parameter
-        if (dbType == DbType.String
-            && (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || command.Connection?.GetDbSetting().ForceAutomaticConversions == true))
+        if (dbType == DbType.String)
         {
             // The database needs the value as string for an operation
 
@@ -798,7 +797,7 @@ public static class DbCommandExtension
         ref Type? valueType,
         ref object? value)
     {
-        if (valueType != null && dbField != null && IsAutomaticConversion(dbField))
+        if (valueType != null && dbField != null && dbField?.Type != null)
         {
             var dbFieldType = TypeCache.Get(dbField.Type).GetUnderlyingType();
 
@@ -817,19 +816,6 @@ public static class DbCommandExtension
 
         return false;
     }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="dbField"></param>
-    /// <returns></returns>
-    private static bool IsAutomaticConversion(DbField dbField) =>
-        (
-            GlobalConfiguration.Options.ConversionType == ConversionType.Automatic ||
-            dbField?.IsPrimary == true ||
-            dbField?.IsIdentity == true
-        ) &&
-        dbField?.Type != null;
 
     /// <summary>
     ///

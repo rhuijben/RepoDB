@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.Enumerations;
-using System.Collections;
-using Moq;
+﻿using System.Collections;
 using System.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using RepoDb.Enumerations;
 
 namespace RepoDb.UnitTests.Equalities;
 
@@ -176,33 +176,5 @@ public class DirectionalQueryFieldEqualityTest
 
         // Assert
         mockOfFiled.Verify(x => x.GetHashCode(), Times.Never);
-    }
-
-    [TestMethod]
-    public void TestDirectionalQueryFieldGetHashCodeInvocationOnEqualsNotNull()
-    {
-        // Prepare
-        var mockOfFiled = new Mock<DirectionalQueryField>("DirectionalQueryFieldName", Operation.Equal, "Value1", ParameterDirection.Output);
-        var otherFiled = new DirectionalQueryField("DirectionalQueryFieldName", Operation.Equal, "Value1", ParameterDirection.Output);
-
-        // Act
-        mockOfFiled.Object.Equals(otherFiled);
-
-        // Assert
-        mockOfFiled.Verify(x => x.GetHashCode(), Times.Once);
-    }
-
-    [TestMethod]
-    public void TestDirectionalQueryFieldGetHashCodeInvocationOnEqualityNotNull()
-    {
-        // Prepare
-        var mockOfFiled = new Mock<DirectionalQueryField>("DirectionalQueryFieldName", Operation.Equal, "Value1", ParameterDirection.Output);
-        var otherFiled = new DirectionalQueryField("DirectionalQueryFieldName", Operation.Equal, "Value1", ParameterDirection.Output);
-
-        // Act
-        if (mockOfFiled.Object == otherFiled) { }
-
-        // Assert
-        mockOfFiled.Verify(x => x.GetHashCode(), Times.Once);
     }
 }

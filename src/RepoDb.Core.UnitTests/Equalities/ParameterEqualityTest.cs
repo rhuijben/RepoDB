@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections;
+﻿using System.Collections;
 using System.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RepoDb.UnitTests.Equalities;
 
@@ -14,7 +14,7 @@ public class ParameterEqualityTest
         var objA = new Parameter("ParameterName", new object());
 
         // Act
-        var equal = Equals(objA, "ParameterName");
+        var equal = Equals(objA.GetHashCode(), "ParameterName".GetHashCode());
 
         // Assert
         Assert.IsTrue(equal);

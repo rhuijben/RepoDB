@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data.SQLite;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.SQLite.System.IntegrationTests.Models;
 using RepoDb.SQLite.System.IntegrationTests.Setup;
-using System.Data.SQLite;
 
 namespace RepoDb.SQLite.System.IntegrationTests.Operations.SDS;
 
@@ -15,10 +15,7 @@ public class EnumerableTest
         Database.Initialize();
         Cleanup();
         GlobalConfiguration
-            .Setup(new()
-            {
-                ConversionType = Enumerations.ConversionType.Automatic
-            })
+            .Setup()
             .UseSQLite();
     }
 
@@ -26,11 +23,6 @@ public class EnumerableTest
     public void Cleanup()
     {
         Database.Cleanup();
-        GlobalConfiguration
-            .Setup(new()
-            {
-                ConversionType = Enumerations.ConversionType.Default
-            });
     }
 
     #region List

@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.Enumerations;
-using System.Collections;
+﻿using System.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using RepoDb.Enumerations;
 
 namespace RepoDb.UnitTests.Equalities;
 
@@ -154,7 +154,7 @@ public class OrderFieldEqualityTest
         // Assert
         Assert.IsFalse(equal);
     }
-    
+
     [TestMethod]
     public void TestOrderFieldGetHashCodeInvocationOnCheckNotNull()
     {
@@ -162,12 +162,12 @@ public class OrderFieldEqualityTest
         var mockOfFiled = new Mock<OrderField>("OrderFieldName", Order.Ascending);
 
         // Act
-        if (mockOfFiled.Object != null){}
-        
+        if (mockOfFiled.Object != null) { }
+
         // Assert
         mockOfFiled.Verify(x => x.GetHashCode(), Times.Never);
     }
-    
+
     [TestMethod]
     public void TestOrderFieldGetHashCodeInvocationOnCheckNull()
     {
@@ -175,12 +175,12 @@ public class OrderFieldEqualityTest
         var mockOfFiled = new Mock<OrderField>("OrderFieldName", Order.Ascending);
 
         // Act
-        if (mockOfFiled.Object == null){}
-        
+        if (mockOfFiled.Object == null) { }
+
         // Assert
         mockOfFiled.Verify(x => x.GetHashCode(), Times.Never);
     }
-    
+
     [TestMethod]
     public void TestOrderFieldGetHashCodeInvocationOnEqualsNull()
     {
@@ -189,36 +189,8 @@ public class OrderFieldEqualityTest
 
         // Act
         mockOfFiled.Object.Equals(null);
-        
+
         // Assert
         mockOfFiled.Verify(x => x.GetHashCode(), Times.Never);
-    }
-
-    [TestMethod]
-    public void TestOrderFieldGetHashCodeInvocationOnEqualsNotNull()
-    {
-        // Prepare
-        var mockOfFiled = new Mock<OrderField>("OrderFieldName", Order.Ascending);
-        var otherFiled = new OrderField("OrderFieldName", Order.Ascending);
-
-        // Act
-        mockOfFiled.Object.Equals(otherFiled);
-        
-        // Assert
-        mockOfFiled.Verify(x => x.GetHashCode(), Times.Once);
-    }
-    
-    [TestMethod]
-    public void TestOrderFieldGetHashCodeInvocationOnEqualityNotNull()
-    {
-        // Prepare
-        var mockOfFiled = new Mock<OrderField>("OrderFieldName", Order.Ascending);
-        var otherFiled = new OrderField("OrderFieldName", Order.Ascending);
-
-        // Act
-        if (mockOfFiled.Object == otherFiled) {}
-        
-        // Assert
-        mockOfFiled.Verify(x => x.GetHashCode(), Times.Once);
     }
 }

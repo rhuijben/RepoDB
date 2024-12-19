@@ -915,10 +915,12 @@ public partial class QueryGroup : IEquatable<QueryGroup>
     public bool Equals(QueryGroup other)
     {
         return other is not null
-            && other.QueryFields.Count() == QueryFields.Count()
+            && other.QueryFields?.Count() == QueryFields?.Count()
+            && other.QueryGroups?.Count() == QueryGroups?.Count()
             && other.Conjunction == Conjunction
             && other.IsNot == IsNot
-            && other.QueryFields.Zip(QueryFields, Equals).All(v => v);
+            && ((other.QueryFields == null && QueryFields == null) || other.QueryFields.Zip(QueryFields, Equals).All(v => v))
+            && ((other.QueryGroups == null && QueryGroups == null) || other.QueryGroups.Zip(QueryGroups, Equals).All(v => v)); ;
     }
 
     /// <summary>

@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
-using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Resolvers;
 
@@ -99,7 +98,7 @@ internal partial class Compiler
                         dbType = default;
                     }
                 }
-                else if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic && dbField?.Type != null)
+                else if (dbField?.Type != null)
                 {
                     valueExpression = ConvertExpressionWithAutomaticConversion(valueExpression, dbField.TypeNullable());
                     dbType = default;

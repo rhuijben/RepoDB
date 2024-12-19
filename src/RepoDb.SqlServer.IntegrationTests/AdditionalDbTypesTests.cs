@@ -12,10 +12,7 @@ public class AdditionalDbTypesTests
     public void Initialize()
     {
         GlobalConfiguration
-            .Setup(new()
-            {
-                ConversionType = Enumerations.ConversionType.Automatic
-            })
+            .Setup()
             .UseSqlServer();
 
         Database.Initialize();
@@ -24,14 +21,14 @@ public class AdditionalDbTypesTests
         using var connection = new SqlConnection(Database.ConnectionString).EnsureOpen();
 
 
-/* Unmerged change from project 'RepoDb.SqlServer.IntegrationTests (net9.0)'
-Before:
-            connection.ExecuteNonQuery($@"
-                IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = '{nameof(DateOnlyTestData)}'))
-After:
-        connection.ExecuteNonQuery($@"
-                IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = '{nameof(DateOnlyTestData)}'))
-*/
+        /* Unmerged change from project 'RepoDb.SqlServer.IntegrationTests (net9.0)'
+        Before:
+                    connection.ExecuteNonQuery($@"
+                        IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = '{nameof(DateOnlyTestData)}'))
+        After:
+                connection.ExecuteNonQuery($@"
+                        IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = '{nameof(DateOnlyTestData)}'))
+        */
         connection.ExecuteNonQuery($@"
             IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = '{nameof(DateOnlyTestData)}'))
             BEGIN
@@ -48,11 +45,7 @@ After:
 
         // Do this again as this is now overwritten
         GlobalConfiguration
-            .Setup(new()
-            {
-                ConversionType = Enumerations.ConversionType.Automatic
-            })
-            .UseSqlServer();
+            .Setup().UseSqlServer();
     }
 
     [TestCleanup]

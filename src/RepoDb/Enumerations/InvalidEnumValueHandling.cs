@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public enum EnumHandling
+public enum InvalidEnumValueHandling
 {
     /// <summary>
     /// Throw an error when encountering non defined enum values. For enums decorated with a <see cref="FlagsAttribute"/> no value check is performed.

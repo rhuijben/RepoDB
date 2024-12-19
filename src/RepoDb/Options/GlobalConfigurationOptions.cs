@@ -10,14 +10,9 @@ namespace RepoDb.Options;
 public record GlobalConfigurationOptions
 {
     /// <summary>
-    /// Gets or sets the value that defines the conversion logic when converting an instance of <see cref="DbDataReader"/> into a .NET CLR class.
-    /// </summary>
-    public ConversionType ConversionType { get; init; } = ConversionType.Default;
-
-    /// <summary>
     /// Gets or sets the handling of invalid enum values when converting an instance of <see cref="DbDataReader"/> into .NET enum values
     /// </summary>
-    public EnumHandling EnumHandling { get; init; } = EnumHandling.ThrowError;
+    public InvalidEnumValueHandling EnumHandling { get; init; } = InvalidEnumValueHandling.ThrowError;
 
     /// <summary>
     /// Gets or sets the value that defines how <c>null</c> is handled in linq style expressions
@@ -43,9 +38,4 @@ public record GlobalConfigurationOptions
     /// Gets or sets the default value of how the push operations (i.e.: Insert, InsertAll, Merge and MergeAll) behaves when returning the value from the key columns (i.e.: Primary and Identity).
     /// </summary>
     public KeyColumnReturnBehavior KeyColumnReturnBehavior { get; init; } = KeyColumnReturnBehavior.IdentityOrElsePrimary;
-
-    /// <summary>
-    /// Makes the <c>!=</c> operator in linq queries work like expected in C# by converting Col != 'A' into (COL <> 'A' OR COL IS NULL)
-    /// </summary>
-    public bool BooleanNotEquals { get; init; }
 }

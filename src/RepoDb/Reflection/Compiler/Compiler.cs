@@ -544,9 +544,6 @@ internal partial class Compiler
             return null;
     }
 
-    internal static MethodInfo GetEnumParseNullDefinedMethod() =>
-        typeof(Compiler).GetMethod(nameof(EnumParseNullDefined), BindingFlags.Static | BindingFlags.NonPublic);
-
     private static TEnum? EnumParseNullDefined<TEnum>(string value) where TEnum : struct, System.Enum
     {
         if (Enum.TryParse<TEnum>(value, true, out var r) && Enum.IsDefined(typeof(TEnum), r))
@@ -892,14 +889,10 @@ internal partial class Compiler
         Type toEnumType,
         IDbSetting dbSetting)
     {
-        var checkMethod = (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || GlobalConfiguration.Options.EnumHandling == EnumHandling.Cast || toEnumType.GetCustomAttribute<FlagsAttribute>() != null)
-            ? GetEnumParseNullMethod()
-            : GetEnumParseNullDefinedMethod();
-
         return Expression.Coalesce(
-                    Expression.Call(checkMethod.MakeGenericMethod(toEnumType), expression),
+                    Expression.Call(GetEnumParseNullMethod().MakeGenericMethod(toEnumType), expression),
 
-                    (GlobalConfiguration.Options.EnumHandling == EnumHandling.UseDefault)
+                    (GlobalConfiguration.Options.EnumHandling == InvalidEnumValueHandling.UseDefault)
                     ? Expression.Default(toEnumType)
                     : Expression.Throw(Expression.New(
                         typeof(ArgumentOutOfRangeException).GetConstructor(new[] { StaticType.String, StaticType.Object, StaticType.String }),
@@ -919,7 +912,7 @@ internal partial class Compiler
         Type toEnumType,
         IDbSetting dbSetting)
     {
-        if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || GlobalConfiguration.Options.EnumHandling == EnumHandling.Cast)
+        if (GlobalConfiguration.Options.EnumHandling == InvalidEnumValueHandling.Cast)
         {
             return Expression.Convert(expression, toEnumType);
         }
@@ -934,8 +927,8 @@ internal partial class Compiler
                 Expression.Convert(expression, toEnumType), // Cast to enum
                 GlobalConfiguration.Options.EnumHandling switch
                 {
-                    EnumHandling.UseDefault => Expression.Default(toEnumType),
-                    EnumHandling.ThrowError => Expression.Throw(Expression.New(typeof(InvalidEnumArgumentException).GetConstructor(new[] { StaticType.String, StaticType.Int32, StaticType.Type }),
+                    InvalidEnumValueHandling.UseDefault => Expression.Default(toEnumType),
+                    InvalidEnumValueHandling.ThrowError => Expression.Throw(Expression.New(typeof(InvalidEnumArgumentException).GetConstructor(new[] { StaticType.String, StaticType.Int32, StaticType.Type }),
                                                                 new Expression[] { Expression.Constant("value"), Expression.Convert(expression, StaticType.Int32), Expression.Constant(toEnumType) }),
                         toEnumType
                     ),
@@ -1440,14 +1433,6 @@ internal partial class Compiler
         var valueExpression = (Expression)GetDbReaderGetValueExpression(readerParameterExpression,
             readerGetValueMethod, readerField.Ordinal);
         var targetTypeUnderlyingType = TypeCache.Get(targetType).GetUnderlyingType();
-        var isAutomaticConversion = GlobalConfiguration.Options.ConversionType == ConversionType.Automatic ||
-            targetTypeUnderlyingType == StaticType.TimeSpan ||
-#if NET
-            targetTypeUnderlyingType == StaticType.DateOnly ||
-#endif
-            /* SQLite: Guid/String (Vice-Versa) : Enforce automatic conversion for the Primary/Identity fields */
-            readerField?.DbField?.IsPrimary == true || readerField?.DbField?.IsIdentity == true
-            || dbSetting.ForceAutomaticConversions;
 
         // get handler on class property or type level
         var handlerInstance = GetHandlerInstance(classPropertyParameterInfo, readerField) ?? PropertyHandlerCache.Get<object>(classPropertyParameterInfo.GetTargetType());
@@ -1479,17 +1464,14 @@ internal partial class Compiler
         else
         {
             // Auto-conversion
-            if (isAutomaticConversion == true)
+            try
             {
-                try
-                {
-                    valueExpression = ConvertExpressionWithAutomaticConversion(valueExpression, targetType);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException($"Compiler.DataReader.IsDbNull.FalseExpression: Failed to automatically convert the value expression. " +
-                        $"{classPropertyParameterInfo.GetDescriptiveContextString()}", ex);
-                }
+                valueExpression = ConvertExpressionWithAutomaticConversion(valueExpression, targetType);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Compiler.DataReader.IsDbNull.FalseExpression: Failed to automatically convert the value expression. " +
+                    $"{classPropertyParameterInfo.GetDescriptiveContextString()}", ex);
             }
         }
 
@@ -1791,31 +1773,28 @@ internal partial class Compiler
         }
 
         // Auto-conversion Handling
-        if (GlobalConfiguration.Options.ConversionType == ConversionType.Automatic || dbField?.IsPrimary == true || dbField?.IsIdentity == true)
+        try
         {
-            try
-            {
-                var origExpression = expression;
-                expression = ConvertExpressionWithAutomaticConversion(expression, targetType);
+            var origExpression = expression;
+            expression = ConvertExpressionWithAutomaticConversion(expression, targetType);
 
-                if (dbField?.IsIdentity == true
-                    && targetType.IsValueType && TypeCache.Get(targetType).GetUnderlyingType() == targetType
-                    && TypeCache.Get(origExpression.Type).IsNullable())
-                {
-                    var nullableType = typeof(Nullable<>).MakeGenericType(expression.Type);
-
-                    // Don't set '0' in the identity output property
-                    expression = Expression.Condition(
-                        Expression.Property(origExpression, nameof(Nullable<int>.HasValue)),
-                        Expression.Convert(expression, nullableType),
-                        Expression.Constant(null, nullableType));
-                }
-            }
-            catch (Exception ex)
+            if (dbField?.IsIdentity == true
+                && targetType.IsValueType && TypeCache.Get(targetType).GetUnderlyingType() == targetType
+                && TypeCache.Get(origExpression.Type).IsNullable())
             {
-                throw new InvalidOperationException($"Compiler.Entity/Object.Property: Failed to automatically convert the value expression for " +
-                    $"property '{classProperty.GetMappedName()} ({classProperty.PropertyInfo.PropertyType.FullName})'. {classProperty}", ex);
+                var nullableType = typeof(Nullable<>).MakeGenericType(expression.Type);
+
+                // Don't set '0' in the identity output property
+                expression = Expression.Condition(
+                    Expression.Property(origExpression, nameof(Nullable<int>.HasValue)),
+                    Expression.Convert(expression, nullableType),
+                    Expression.Constant(null, nullableType));
             }
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Compiler.Entity/Object.Property: Failed to automatically convert the value expression for " +
+                $"property '{classProperty.GetMappedName()} ({classProperty.PropertyInfo.PropertyType.FullName})'. {classProperty}", ex);
         }
 
         // Property Handler
