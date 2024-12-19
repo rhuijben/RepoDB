@@ -1,1 +1,0 @@
-All official extension libraries of RepoDb must be placed under this folder.
