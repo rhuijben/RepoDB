@@ -17,22 +17,12 @@ public class TypeConversionsTest
     {
         Database.Initialize();
         Cleanup();
-
-        GlobalConfiguration.Setup(new()
-        {
-            ConversionType = ConversionType.Automatic
-        });
     }
 
     [TestCleanup]
     public void Cleanup()
     {
         Database.Cleanup();
-
-        GlobalConfiguration.Setup(new()
-        {
-            ConversionType = ConversionType.Default
-        });
     }
 
     #region TypedResult
@@ -482,7 +472,7 @@ public class TypeConversionsTest
             Assert.AreEqual((Direction)10, data10);
         }
 
-        GlobalConfiguration.Setup(new() { ConversionType = ConversionType.Default, EnumHandling = EnumHandling.UseDefault });
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.UseDefault });
 
         // With default conversion
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
@@ -499,7 +489,7 @@ public class TypeConversionsTest
         }
 
 
-        GlobalConfiguration.Setup(new() { ConversionType = ConversionType.Default, EnumHandling = EnumHandling.ThrowError });
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.ThrowError });
 
         // With default conversion
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
@@ -560,7 +550,7 @@ public class TypeConversionsTest
             Assert.AreEqual((Direction)9, data9);
         }
 
-        GlobalConfiguration.Setup(new() { ConversionType = ConversionType.Default, EnumHandling = EnumHandling.UseDefault });
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.UseDefault });
 
         // With default conversion
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
@@ -581,7 +571,7 @@ public class TypeConversionsTest
         }
 
 
-        GlobalConfiguration.Setup(new() { ConversionType = ConversionType.Default, EnumHandling = EnumHandling.ThrowError });
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.ThrowError });
 
         // With default conversion
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
@@ -622,7 +612,7 @@ public class TypeConversionsTest
         }
 
 
-        GlobalConfiguration.Setup(new() { ConversionType = ConversionType.Default, EnumHandling = EnumHandling.ThrowError });
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.ThrowError });
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
         {
             // Act Query
@@ -679,7 +669,7 @@ public class TypeConversionsTest
             Assert.AreEqual(Direction.North | Direction.West, data2); // Flag behavior
         }
 
-        GlobalConfiguration.Setup(new() { ConversionType = ConversionType.Default, EnumHandling = EnumHandling.UseDefault });
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.UseDefault });
 
         // With default conversion
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
@@ -694,7 +684,7 @@ public class TypeConversionsTest
         }
 
 
-        GlobalConfiguration.Setup(new() { ConversionType = ConversionType.Default, EnumHandling = EnumHandling.ThrowError });
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.ThrowError });
 
         // With default conversion
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())

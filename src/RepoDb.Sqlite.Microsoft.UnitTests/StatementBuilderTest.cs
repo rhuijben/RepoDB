@@ -150,9 +150,7 @@ public class StatementBuilderTest
     #region CreateInsert
 
     [TestMethod]
-    [DataRow(ConversionType.Automatic)]
-    [DataRow(ConversionType.Default)]
-    public void TestMdsSqLiteStatementBuilderCreateInsert(ConversionType conversionType)
+    public void TestMdsSqLiteStatementBuilderCreateInsert()
     {
         //GlobalConfiguration.Setup(GlobalConfiguration.Options with { ConversionType = conversionType });
         // Setup

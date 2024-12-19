@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes;
+using RepoDb.Enumerations;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Setup;
 using RepoDb.Trace;
 
@@ -319,7 +320,6 @@ public class TypeTransferTests
     [TestMethod]
     public void EnumCompareValue()
     {
-        GlobalConfiguration.Setup(new Options.GlobalConfigurationOptions { ConversionType = Enumerations.ConversionType.Automatic });
         using var connection = new SqliteConnection(Database.ConnectionStringMDS);
         {
             AddTables(connection);
@@ -391,7 +391,7 @@ public class TypeTransferTests
             r = connection.Query<EnumTypesData>(where: x => !(x.EnumVarCharNull == VAT.None && x.EnumIntNull == Wind.North), trace: new DiagnosticsTracer());
             Assert.AreEqual(0, r.Count());
 
-            GlobalConfiguration.Setup(GlobalConfiguration.Options with { BooleanNotEquals = true });
+            GlobalConfiguration.Setup(GlobalConfiguration.Options with { ExpressionNullSemantics = ExpressionNullSemantics.NullNotEqual });
 
             r = connection.Query<EnumTypesData>(where: x => x.EnumVarCharNull != VAT.None, trace: new DiagnosticsTracer());
             Assert.AreEqual(1, r.Count());

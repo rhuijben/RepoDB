@@ -15,10 +15,7 @@ public class EnumerableTest
         Database.Initialize();
         Cleanup();
         GlobalConfiguration
-            .Setup(new()
-            {
-                ConversionType = Enumerations.ConversionType.Automatic
-            })
+            .Setup()
             .UseSqlite();
     }
 

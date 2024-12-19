@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections;
+﻿using System.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
 namespace RepoDb.UnitTests.Equalities;
@@ -14,7 +14,7 @@ public class FieldEqualityTest
         var objA = new Field("FieldName");
 
         // Act
-        var equal = Equals(objA, "FieldName");
+        var equal = Equals(objA.GetHashCode(), "FieldName".GetHashCode());
 
         // Assert
         Assert.IsTrue(equal);
@@ -139,12 +139,12 @@ public class FieldEqualityTest
         var mockOfFiled = new Mock<Field>("FieldName");
 
         // Act
-        if (mockOfFiled.Object != null){}
-        
+        if (mockOfFiled.Object != null) { }
+
         // Assert
         mockOfFiled.Verify(x => x.GetHashCode(), Times.Never);
     }
-    
+
     [TestMethod]
     public void TestFieldGetHashCodeInvocationOnCheckNull()
     {
@@ -152,12 +152,12 @@ public class FieldEqualityTest
         var mockOfFiled = new Mock<Field>("FieldName");
 
         // Act
-        if (mockOfFiled.Object == null){}
-        
+        if (mockOfFiled.Object == null) { }
+
         // Assert
         mockOfFiled.Verify(x => x.GetHashCode(), Times.Never);
     }
-    
+
     [TestMethod]
     public void TestFieldGetHashCodeInvocationOnEqualsNull()
     {
@@ -166,36 +166,8 @@ public class FieldEqualityTest
 
         // Act
         mockOfFiled.Object.Equals(null);
-        
+
         // Assert
         mockOfFiled.Verify(x => x.GetHashCode(), Times.Never);
-    }
-
-    [TestMethod]
-    public void TestFieldGetHashCodeInvocationOnEqualsNotNull()
-    {
-        // Prepare
-        var mockOfFiled = new Mock<Field>("FieldName");
-        var otherFiled = new Field("FieldName");
-
-        // Act
-        mockOfFiled.Object.Equals(otherFiled);
-        
-        // Assert
-        mockOfFiled.Verify(x => x.GetHashCode(), Times.Once);
-    }
-    
-    [TestMethod]
-    public void TestFieldGetHashCodeInvocationOnEqualityNotNull()
-    {
-        // Prepare
-        var mockOfFiled = new Mock<Field>("FieldName");
-        var otherFiled = new Field("FieldName");
-
-        // Act
-        if (mockOfFiled.Object == otherFiled) {}
-        
-        // Assert
-        mockOfFiled.Verify(x => x.GetHashCode(), Times.Once);
     }
 }

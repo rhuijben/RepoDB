@@ -1,32 +1,10 @@
-﻿using RepoDb.Enumerations;
-using System.Data;
-using System.Data.Common;
-
-namespace RepoDb;
+﻿namespace RepoDb;
 
 /// <summary>
 /// A generalized converter class.
 /// </summary>
 public static class Converter
 {
-    #region Properties
-
-    /// <summary>
-    /// Gets or sets the conversion type when converting the instance of <see cref="DbDataReader"/> object into its destination .NET CLR Types.
-    /// The default value is <see cref="ConversionType.Default"/>.
-    /// </summary>
-    [Obsolete("Use the definition of the ApplicationConfigurationOptions class instead.")]
-    public static ConversionType ConversionType { get; set; } = ConversionType.Default;
-
-    /// <summary>
-    /// Gets or sets the default equivalent database type (of type <see cref="DbType"/>) of an enumeration if it is being used as a parameter to the
-    /// execution of any non-entity-based operations.
-    /// </summary>
-    [Obsolete("Use the definition of the ApplicationConfigurationOptions class instead.")]
-    public static DbType EnumDefaultDatabaseType { get; set; } = DbType.String;
-
-    #endregion
-
     #region Methods
 
     /// <summary>
