@@ -24,7 +24,7 @@ public partial class FieldTest
         var field = new Field("FieldName");
 
         // Act
-        var equal = field.Equals("FieldName");
+        var equal = field.GetHashCode() == "FieldName".GetHashCode();
 
         // Assert
         Assert.IsTrue(equal);

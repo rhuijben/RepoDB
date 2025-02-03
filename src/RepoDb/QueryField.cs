@@ -294,11 +294,14 @@ public partial class QueryField : IEquatable<QueryField>
     /// <returns>True if the instances are equal.</returns>
     public bool Equals(QueryField? other)
     {
+        // This just checks the generated query string, not the actual values set in the query parameters
+        // Equal/NotEqual change to 'IS NULL'
+        // And IN/Not In generate multiple arguments
         return other is not null
             && other.Field == Field
             && other.Operation == Operation
             && other.Parameter == Parameter
-            && other.Parameter.Value == Parameter.Value
+            && (Operation is Operation.Equal or Operation.NotEqual ? (other.Parameter.Value == null) == (Parameter.Value == null) : true)
             && (Operation is Operation.In or Operation.NotIn ? (other.Parameter.Value as IEnumerable<object>)?.Count() == (Parameter.Value as IEnumerable<object>).Count() : true)
             && other.Field?.Name == Field?.Name
             && other.Operation.GetText() == Operation.GetText();

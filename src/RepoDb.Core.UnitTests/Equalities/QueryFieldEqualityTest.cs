@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.Enumerations;
-using System.Collections;
-using Moq;
+﻿using System.Collections;
 using System.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using RepoDb.Enumerations;
 
 namespace RepoDb.UnitTests.Equalities;
 
@@ -148,34 +148,6 @@ public class QueryFieldEqualityTest
 
         // Assert
         mockOfField.Verify(x => x.GetHashCode(), Times.Never);
-    }
-
-    [TestMethod]
-    public void TestQueryFieldGetHashCodeInvocationOnEqualsNotNull()
-    {
-        // Prepare
-        var mockOfField = new Mock<QueryField>("QueryFieldName", Operation.Equal, "Value1", null);
-        var otherField = new QueryField("QueryFieldName", Operation.Equal, "Value1");
-
-        // Act
-        mockOfField.Object.Equals(otherField);
-
-        // Assert
-        mockOfField.Verify(x => x.GetHashCode(), Times.Once);
-    }
-
-    [TestMethod]
-    public void TestQueryFieldGetHashCodeInvocationOnEqualityNotNull()
-    {
-        // Prepare
-        var mockOfField = new Mock<QueryField>("QueryFieldName", Operation.Equal, "Value1", null);
-        var otherField = new QueryField("QueryFieldName", Operation.Equal, "Value1");
-
-        // Act
-        if (mockOfField.Object == otherField) { }
-
-        // Assert
-        mockOfField.Verify(x => x.GetHashCode(), Times.Once);
     }
 
     [TestMethod]

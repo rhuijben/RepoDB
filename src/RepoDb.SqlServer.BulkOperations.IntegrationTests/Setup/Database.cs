@@ -1,5 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
+
+[assembly: DoNotParallelize]
 
 namespace RepoDb.IntegrationTests.Setup;
 
