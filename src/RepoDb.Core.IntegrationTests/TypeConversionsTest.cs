@@ -8,6 +8,7 @@ using RepoDb.IntegrationTests.Setup;
 namespace RepoDb.IntegrationTests;
 
 [TestClass]
+[DoNotParallelize]
 public class TypeConversionsTest
 {
     private class CompleteTable { }
@@ -458,6 +459,8 @@ public class TypeConversionsTest
     {
         using var _ = new CultureScope("EN-US");
 
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.Cast });
+
         // With automatic conversion
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
         {
@@ -523,6 +526,7 @@ public class TypeConversionsTest
         using var _ = new CultureScope("EN-US");
 
         // With automatic conversion
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.Cast });
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
         {
             // Act Query
@@ -658,6 +662,7 @@ public class TypeConversionsTest
         using var _ = new CultureScope("EN-US");
 
         // With automatic conversion
+        GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.Cast });
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen())
         {
             // Act Query

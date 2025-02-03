@@ -536,6 +536,9 @@ internal partial class Compiler
     internal static MethodInfo GetEnumParseNullMethod() =>
         typeof(Compiler).GetMethod(nameof(EnumParseNull), BindingFlags.Static | BindingFlags.NonPublic);
 
+    internal static MethodInfo GetEnumParseNullDefinedMethod() =>
+        typeof(Compiler).GetMethod(nameof(EnumParseNullDefined), BindingFlags.Static | BindingFlags.NonPublic);
+
     private static TEnum? EnumParseNull<TEnum>(string value) where TEnum : struct, System.Enum
     {
         if (Enum.TryParse<TEnum>(value, true, out var r))
@@ -889,8 +892,9 @@ internal partial class Compiler
         Type toEnumType,
         IDbSetting dbSetting)
     {
+        var func = ((GlobalConfiguration.Options.EnumHandling is InvalidEnumValueHandling.Cast || toEnumType.GetCustomAttribute<FlagsAttribute>() is { }) ? GetEnumParseNullMethod() : GetEnumParseNullDefinedMethod()).MakeGenericMethod(toEnumType);
         return Expression.Coalesce(
-                    Expression.Call(GetEnumParseNullMethod().MakeGenericMethod(toEnumType), expression),
+                    Expression.Call(func, expression),
 
                     (GlobalConfiguration.Options.EnumHandling == InvalidEnumValueHandling.UseDefault)
                     ? Expression.Default(toEnumType)
@@ -1117,7 +1121,7 @@ internal partial class Compiler
         }
 #endif
         // Others
-        else
+        else if (toType != StaticType.SqlVariant)
         {
             expression = ConvertExpressionToSystemConvertExpression(expression, trueToType);
         }
