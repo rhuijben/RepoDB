@@ -18,6 +18,8 @@
     <Nullable>annotations</Nullable>
     <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <Target Name="SetGenerateBeforeBuild" BeforeTargets="Build">
     <!-- IsPackable is set in project files, so delay evaluating this -->
