@@ -9,6 +9,7 @@
     <RepositoryUrl>https://github.com/mikependon/RepoDb/tree/master/RepoDb.SqLite</RepositoryUrl>
     <PackageReleaseNotes>http://repodb.net/release/sqlite</PackageReleaseNotes>
     <PackageProjectUrl>https://repodb.net/tutorial/get-started-sqlite</PackageProjectUrl>
+    <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" />
