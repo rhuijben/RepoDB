@@ -754,7 +754,7 @@ internal partial class Compiler
         }
         else if (underlyingToType == StaticType.DateTimeOffset && underlyingFromType == StaticType.DateTime)
         {
-            result = Expression.New(typeof(DateTimeOffset).GetConstructor([typeof(DateTime)]), [result]);
+            result = Expression.New(typeof(DateTimeOffset).GetConstructor([typeof(DateTime), typeof(TimeSpan)]), [result, Expression.Constant(TimeSpan.Zero)]);
         }
         else if (GetSystemConvertToTypeMethod(underlyingFromType, underlyingToType) is { } methodInfo)
         {
@@ -834,7 +834,7 @@ internal partial class Compiler
 
     static DateTime StrictParseDateTime(string value)
     {
-        return DateTime.Parse(value, CultureInfo.InvariantCulture);
+        return DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.RoundtripKind);
     }
 
     static string StrictToString(DateTime value)
@@ -1102,7 +1102,19 @@ internal partial class Compiler
         // Guid to String
         if (fromType == StaticType.Guid && toType == StaticType.String)
         {
-            expression = ConvertExpressionToGuidToStringExpression(expression);
+            var result = ConvertExpressionToGuidToStringExpression(expression);
+
+            if (fromType != expression.Type)
+            {
+                // Handle nullability
+                expression = Expression.Condition(
+                    Expression.Property(expression, nameof(Nullable<Guid>.HasValue)),
+                    result,
+                    Expression.Constant(null, StaticType.String)
+                    );
+            }
+            else
+                expression = result;
         }
 
         // String to Guid

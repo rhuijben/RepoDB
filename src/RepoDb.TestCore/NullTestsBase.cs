@@ -102,4 +102,54 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
         await t.RollbackAsync();
     }
+
+    public record GuidNullData
+    {
+        public int ID { get; set; }
+        public Guid Txt { get; set; }
+        public Guid? TxtNull { get; set; }
+
+        public Guid Uuid { get; set; }
+        public Guid? UuidNull { get; set; }
+    }
+
+    [TestMethod]
+    public async Task GuidNullTest()
+    {
+        // Regression test. Failed on sqlite and sqlserver before this commit
+        using var sql = await CreateOpenConnectionAsync();
+
+        if (!GetAllTables().Any(x => string.Equals(x, "GuidNullData", StringComparison.OrdinalIgnoreCase)))
+        {
+            var sqlText = @"CREATE TABLE [GuidNullData] (
+                        [ID] int NOT NULL,
+                        [Txt] TEXT NOT NULL,
+                        [TxtNull] varchar(128) NULL,
+                        [Uuid] [uniqueidentifier] NOT NULL,
+                        [UuidNull] [uniqueidentifier] NULL
+                )";
+
+            var set = sql.GetDbSetting();
+
+            if (set.OpeningQuote != "[")
+                sqlText = sqlText.Replace("[", set.OpeningQuote);
+            if (set.ClosingQuote != "]")
+                sqlText = sqlText.Replace("]", set.ClosingQuote);
+
+            await sql.ExecuteNonQueryAsync(sqlText);
+        }
+
+        var t = await sql.BeginTransactionAsync();
+
+        await sql.InsertAllAsync(
+            new GuidNullData[]
+            {
+                new GuidNullData(){ ID = 1, Txt = Guid.NewGuid(), TxtNull = Guid.NewGuid(), Uuid = Guid.NewGuid(), UuidNull=Guid.NewGuid()},
+                new GuidNullData(){ ID = 2, Txt = Guid.NewGuid(), Uuid = Guid.NewGuid()},
+            }, transaction: t);
+
+        await t.RollbackAsync();
+    }
+
+
 }
