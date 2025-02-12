@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.Trace;
 
@@ -14,6 +15,25 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
         public int Nr { get; set; }
         public int? NrNull { get; set; }
+    }
+
+
+    public enum NullTest
+    {
+        Value1 = 1,
+        Value2 = 2,
+        Value3 = 3
+    }
+
+    [Table(nameof(CommonNullTestData))]
+    public record EnumNullTestData
+    {
+        public int ID { get; set; }
+        public NullTest Txt { get; set; }
+        public NullTest? TxtNull { get; set; }
+
+        public NullTest Nr { get; set; }
+        public NullTest? NrNull { get; set; }
     }
 
 
@@ -76,6 +96,9 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
 
         Assert.AreEqual(1, await sql.CountAsync<CommonNullTestData>(where: x => x.ID == 1 && !(x.Txt == "t5" && x.Nr == 22), transaction: t, trace: new DiagnosticsTracer()));
+
+
+        sql.Insert(new EnumNullTestData(), trace: new DiagnosticsTracer(), transaction: t);
 
         await t.RollbackAsync();
     }

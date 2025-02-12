@@ -748,6 +748,14 @@ internal partial class Compiler
             result = Expression.Call(GetStaticMethodInfo(() => StrictToString(DateOnly.MinValue)), result);
         }
 #endif
+        else if (underlyingToType == StaticType.DateTime && underlyingFromType == StaticType.DateTimeOffset)
+        {
+            result = Expression.Property(result, nameof(DateTimeOffset.DateTime));
+        }
+        else if (underlyingToType == StaticType.DateTimeOffset && underlyingFromType == StaticType.DateTime)
+        {
+            result = Expression.New(typeof(DateTimeOffset).GetConstructor([typeof(DateTime)]), [result]);
+        }
         else if (GetSystemConvertToTypeMethod(underlyingFromType, underlyingToType) is { } methodInfo)
         {
             result = Expression.Call(methodInfo, Expression.Convert(result, methodInfo.GetParameters()[0].ParameterType));
@@ -847,7 +855,14 @@ internal partial class Compiler
 #if NET
     static DateOnly StrictParseDateOnly(string value)
     {
-        return DateOnly.Parse(value, CultureInfo.InvariantCulture);
+        try
+        {
+            return DateOnly.Parse(value, CultureInfo.InvariantCulture);
+        }
+        catch (FormatException) when (DateTime.TryParse(value, CultureInfo.InvariantCulture, out var vv) && DateOnly.FromDateTime(vv) is { } dateOnly && dateOnly.ToDateTime(TimeOnly.MinValue) == vv)
+        {
+            return dateOnly; // We can't guarantee that DateOnly is only serialized in text form as dateonly :(
+        }
     }
 
     static string StrictToString(DateOnly value)
@@ -1512,7 +1527,9 @@ internal partial class Compiler
     /// <param name="targetType"></param>
     /// <returns></returns>
     internal static Expression GetNullableTypeExpression(Type targetType) =>
-        Expression.New(StaticType.Nullable.MakeGenericType(TypeCache.Get(targetType).GetUnderlyingType()));
+        targetType.IsValueType
+        ? Expression.New(StaticType.Nullable.MakeGenericType(TypeCache.Get(targetType).GetUnderlyingType()))
+        : Expression.Constant(null, targetType);
 
     /// <summary>
     ///
