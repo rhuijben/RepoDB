@@ -2810,7 +2810,7 @@ public static partial class DbConnectionExtension
         {
             return null;
         }
-        return QueryGroup.Parse<TEntity>(where, connection: connection, tableName: tableName);
+        return QueryGroup.Parse<TEntity>(where, connection: connection, transaction: transaction, tableName: tableName);
     }
 
     /// <summary>
