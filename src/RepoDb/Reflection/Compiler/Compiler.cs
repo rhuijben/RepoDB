@@ -834,17 +834,23 @@ internal partial class Compiler
 
     static DateTime StrictParseDateTime(string value)
     {
-        return DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.RoundtripKind);
+        return DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
     }
 
     static string StrictToString(DateTime value)
     {
-        return value.ToString("u");
+        if (value.Kind == DateTimeKind.Utc)
+            return value.ToString("u");
+        else
+            return value.ToString("o");
     }
 
     static string StrictToString(DateTimeOffset value)
     {
-        return value.ToString("u");
+        if (value.Offset == TimeSpan.Zero)
+            return value.ToString("u");
+        else
+            return value.ToString("o");
     }
 
     static DateTimeOffset StrictParseDateTimeOffset(string value)

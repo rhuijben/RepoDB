@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Dynamic;
+using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
-using System.Dynamic;
-using System.Text;
 
 namespace RepoDb.Sqlite.Microsoft.IntegrationTests;
 
@@ -194,7 +194,7 @@ public static class Helper
                 ColumnBoolean = "true",
                 ColumnChar = "C",
                 ColumnDate = EpocDate.ToString(DATE_FORMAT),
-                ColumnDateTime = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified).ToString(DATE_FORMAT),
+                ColumnDateTime = DateTime.SpecifyKind(DateTime.UtcNow.TruncateToSqlSafe(), DateTimeKind.Unspecified).ToString(DATE_FORMAT),
                 ColumnDecimal = Convert.ToInt64(i),
                 ColumnDouble = Convert.ToDouble(i),
                 ColumnInt = i,
@@ -204,7 +204,7 @@ public static class Helper
                 ColumnReal = (float)i,
                 ColumnString = $"ColumnString:{i}",
                 ColumnText = $"ColumnText:{i}",
-                ColumnTime = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified).ToString(DATE_FORMAT),
+                ColumnTime = DateTime.SpecifyKind(DateTime.UtcNow.TruncateToSqlSafe(), DateTimeKind.Unspecified).ToString(DATE_FORMAT),
                 ColumnVarChar = $"ColumnVarChar:{i}"
             });
         }
@@ -221,8 +221,8 @@ public static class Helper
         table.ColumnBlob = Encoding.UTF32.GetBytes(Guid.NewGuid().ToString());
         table.ColumnBoolean = "true";
         table.ColumnChar = char.Parse("C").ToString();
-        table.ColumnDate = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified).Date.ToString(DATE_FORMAT);
-        table.ColumnDateTime = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified).ToString(DATE_FORMAT);
+        table.ColumnDate = DateTime.SpecifyKind(DateTime.UtcNow.TruncateToSqlSafe(), DateTimeKind.Unspecified).Date.ToString(DATE_FORMAT);
+        table.ColumnDateTime = DateTime.SpecifyKind(DateTime.UtcNow.TruncateToSqlSafe(), DateTimeKind.Unspecified).ToString(DATE_FORMAT);
         table.ColumnDecimal = Randomizer.Next(1000000);
         table.ColumnDouble = Convert.ToDouble(Randomizer.Next(1000000));
         table.ColumnInt = Randomizer.Next(1000000);
@@ -556,4 +556,12 @@ public static class Helper
     }
 
     #endregion
+}
+
+static class Extensions
+{
+    public static DateTime TruncateToSqlSafe(this DateTime self)
+    {
+        return new DateTime(self.Year, self.Month, self.Day, self.Hour, self.Minute, self.Second, self.Kind);
+    }
 }
