@@ -855,7 +855,7 @@ internal partial class Compiler
 
     static DateTimeOffset StrictParseDateTimeOffset(string value)
     {
-        return DateTimeOffset.Parse(value, CultureInfo.InvariantCulture);
+        return DateTimeOffset.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal); // If we have no offset assume no offset
     }
 
 #if NET
