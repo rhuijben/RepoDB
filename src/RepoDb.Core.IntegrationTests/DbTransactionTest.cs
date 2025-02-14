@@ -1,12 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Transactions;
+using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using Microsoft.Data.SqlClient;
-using System.Transactions;
 
 namespace RepoDb.IntegrationTests;
 
+#if NET
 [TestClass]
 public class SqlTransactionTest
 {
@@ -1589,3 +1590,4 @@ public class SqlTransactionTest
 
     #endregion
 }
+#endif
