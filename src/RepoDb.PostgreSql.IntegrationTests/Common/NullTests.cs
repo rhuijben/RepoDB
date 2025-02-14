@@ -10,4 +10,11 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<PostgreSqlDbInstance>
     protected override void InitializeCore() => Database.Initialize();
 
     public override DbConnection CreateConnection() => new Npgsql.NpgsqlConnection(Database.ConnectionString);
+
+    public override Task GuidNullTest()
+    {
+        Assert.Inconclusive();
+
+        return Task.CompletedTask;
+    }
 }

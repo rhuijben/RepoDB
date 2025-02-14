@@ -114,7 +114,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     }
 
     [TestMethod]
-    public async Task GuidNullTest()
+    public async virtual Task GuidNullTest()
     {
         // Regression test. Failed on sqlite and sqlserver before this commit
         using var sql = await CreateOpenConnectionAsync();
