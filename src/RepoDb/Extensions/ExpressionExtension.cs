@@ -332,23 +332,30 @@ public static class ExpressionExtension
     /// <returns>The extracted value from <see cref="UnaryExpression"/> object.</returns>
     public static object GetValue(this UnaryExpression expression)
     {
-        if (expression.Operand.GetValue() is { } value)
+        var value = expression.Operand.GetValue();
+        switch (expression.NodeType)
         {
-            switch (expression.NodeType)
-            {
-                case ExpressionType.Convert:
-                    Type toType = expression.Type;
-                    if (TypeCache.Get(expression.Type) is { } tp && tp.IsNullable())
+            case ExpressionType.Convert:
+                Type toType = expression.Type;
+
+                if (value is null && !toType.IsValueType)
+                {
+                    return null;
+                }
+                else if (TypeCache.Get(expression.Type) is { } tp && tp.IsNullable())
+                {
+                    if (value is null)
                     {
-                        toType = tp.GetUnderlyingType();
+                        return null;
                     }
-                    return Convert.ChangeType(value, toType);
-                default:
-                    throw new NotSupportedException($"Expression '{expression}' is currently not supported.");
-            }
+
+                    toType = tp.GetUnderlyingType();
+                }
+
+                return Convert.ChangeType(value, toType);
+            default:
+                throw new NotSupportedException($"Expression '{expression}' is currently not supported.");
         }
-        else
-            throw new NotSupportedException($"Expression '{expression}' is currently not supported.");
     }
 
     /// <summary>
