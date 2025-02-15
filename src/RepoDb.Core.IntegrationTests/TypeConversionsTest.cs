@@ -351,7 +351,7 @@ public class TypeConversionsTest
                 var data = connection.ExecuteQuery<string>("SELECT CONVERT(DATETIME2(5), '1970-01-01') AS Value;").First();
 
                 // Assert
-                Assert.AreEqual("1970-01-01 00:00:00Z", data);
+                Assert.AreEqual("1970-01-01T00:00:00.0000000", data);
             }
         }
     }
@@ -1115,7 +1115,7 @@ public class TypeConversionsTest
                 var data = connection.Query<StringToDateClass>(e => e.SessionId == (Guid)id).FirstOrDefault();
 
                 // Assert
-                Assert.AreEqual("1970-01-01 00:00:00Z", data.ColumnDate);
+                Assert.AreEqual("1970-01-01T00:00:00.0000000", data.ColumnDate);
             }
         }
     }
@@ -1153,7 +1153,7 @@ public class TypeConversionsTest
                 var data = connection.Query<StringToDateTimeClass>(e => e.SessionId == (Guid)id).FirstOrDefault();
 
                 // Assert
-                Assert.AreEqual("1970-01-01 11:30:00Z", data.ColumnDateTime);
+                Assert.AreEqual("1970-01-01T11:30:00.0000000", data.ColumnDateTime);
             }
         }
     }
@@ -1191,7 +1191,7 @@ public class TypeConversionsTest
                 var data = connection.Query<StringToDateTime2Class>(e => e.SessionId == (Guid)id).FirstOrDefault();
 
                 // Assert
-                Assert.AreEqual("2019-03-03 15:22:10Z", data.ColumnDateTime2);
+                Assert.AreEqual("2019-03-03T15:22:10.0500000", data.ColumnDateTime2);
             }
         }
     }

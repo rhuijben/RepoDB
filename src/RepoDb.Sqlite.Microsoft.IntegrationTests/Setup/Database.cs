@@ -6,30 +6,10 @@ namespace RepoDb.Sqlite.Microsoft.IntegrationTests.Setup;
 
 public static class Database
 {
-    static Database()
-    {
-        // Get the environment variable
-        var variable = Environment.GetEnvironmentVariable("REPODB_IS_IN_MEMORY", EnvironmentVariableTarget.Process);
+    static readonly SqliteDbInstance Instance = new();
 
-        // Set the property
-        IsInMemory = true; //string.Equals(variable, "TRUE", StringComparison.OrdinalIgnoreCase);
-    }
+    public static string ConnectionString => Instance.ConnectionString;
 
-    #region Properties
-
-    /// <summary>
-    /// Gets or sets the connection string to be used (for MDS).
-    /// </summary>
-    public static string ConnectionStringMDS { get; private set; } = @"Data Source=C:\SqLite\Databases\RepoDb.db;";
-
-    /// <summary>
-    /// Gets the value that indicates whether to use the in-memory database.
-    /// </summary>
-    public static bool IsInMemory { get; private set; }
-
-    #endregion
-
-    #region Methods
 
     public static void Initialize()
     {
@@ -38,36 +18,18 @@ public static class Database
             .Setup()
             .UseSqlite();
 
-        // Check the type of database
-        if (IsInMemory == true)
-        {
-            // Memory
-            ConnectionStringMDS = @"Data Source=:memory:;";
-        }
-        else
-        {
-            // Local
-            ConnectionStringMDS = @"Data Source=C:\SqLite\Databases\RepoDb.db;";
-
-            // Create tables
-            CreateMdsTables();
-        }
+        // Create tables
+        CreateMdsTables();
     }
 
     public static void Cleanup()
     {
-        if (IsInMemory == true)
-        {
-            return;
-        }
-        using (var connection = new SqliteConnection(ConnectionStringMDS))
+        using (var connection = new SqliteConnection(ConnectionString))
         {
             connection.DeleteAll<MdsCompleteTable>();
             connection.DeleteAll<MdsNonIdentityCompleteTable>();
         }
     }
-
-    #endregion
 
     #region MdsCompleteTable
 
@@ -77,7 +39,7 @@ public static class Database
         var hasConnection = (connection != null);
         if (hasConnection == false)
         {
-            connection = new SqliteConnection(ConnectionStringMDS);
+            connection = new SqliteConnection(ConnectionString);
         }
         try
         {
@@ -105,7 +67,7 @@ public static class Database
         var hasConnection = (connection != null);
         if (hasConnection == false)
         {
-            connection = new SqliteConnection(ConnectionStringMDS);
+            connection = new SqliteConnection(ConnectionString);
         }
         try
         {
@@ -138,7 +100,7 @@ public static class Database
         var hasConnection = (connection != null);
         if (hasConnection == false)
         {
-            connection = new SqliteConnection(ConnectionStringMDS);
+            connection = new SqliteConnection(ConnectionString);
         }
         try
         {
@@ -183,7 +145,7 @@ public static class Database
         var hasConnection = (connection != null);
         if (hasConnection == false)
         {
-            connection = new SqliteConnection(ConnectionStringMDS);
+            connection = new SqliteConnection(ConnectionString);
         }
         try
         {

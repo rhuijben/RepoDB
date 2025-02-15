@@ -28,7 +28,7 @@ public class DbHelperTests
     [TestMethod]
     public void TestDbHelperGetFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -62,7 +62,7 @@ public class DbHelperTests
     [TestMethod]
     public void TestDbHelperGetFieldsPrimary()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -81,7 +81,7 @@ public class DbHelperTests
     [TestMethod]
     public void TestDbHelperGetFieldsIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -104,7 +104,7 @@ public class DbHelperTests
     [TestMethod]
     public async Task TestDbHelperGetFieldsAsync()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -138,7 +138,7 @@ public class DbHelperTests
     [TestMethod]
     public async Task TestDbHelperGetFieldsAsyncPrimary()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -157,7 +157,7 @@ public class DbHelperTests
     [TestMethod]
     public async Task TestDbHelperGetFieldsAsyncIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -184,7 +184,7 @@ public class DbHelperTests
     [TestMethod]
     public void TestDbHelperGetScopeIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -215,7 +215,7 @@ public class DbHelperTests
     [TestMethod]
     public async Task TestDbHelperGetScopeIdentityAsync()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);

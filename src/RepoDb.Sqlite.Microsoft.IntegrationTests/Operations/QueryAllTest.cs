@@ -29,7 +29,7 @@ public class QueryAllTest
     [TestMethod]
     public void TestSqLiteConnectionQueryAll()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -49,7 +49,7 @@ public class QueryAllTest
         // Setup
         var table = Database.CreateMdsCompleteTables(1).First();
 
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Act
             connection.QueryAll<MdsCompleteTable>(hints: "WhatEver");
@@ -63,7 +63,7 @@ public class QueryAllTest
     [TestMethod]
     public void TestSqLiteConnectionQueryAllAsync()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -83,7 +83,7 @@ public class QueryAllTest
         // Setup
         var table = Database.CreateMdsCompleteTables(1).First();
 
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Act
             await connection.QueryAllAsync<MdsCompleteTable>(hints: "WhatEver");
@@ -101,7 +101,7 @@ public class QueryAllTest
     [TestMethod]
     public void TestSqLiteConnectionQueryAllViaTableName()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -121,7 +121,7 @@ public class QueryAllTest
         // Setup
         var table = Database.CreateMdsCompleteTables(1).First();
 
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Act
             connection.Query(ClassMappedNameCache.Get<MdsCompleteTable>(),
@@ -137,7 +137,7 @@ public class QueryAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAllAsyncViaTableName()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -157,7 +157,7 @@ public class QueryAllTest
         // Setup
         var table = Database.CreateMdsCompleteTables(1).First();
 
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Act
             await connection.QueryAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),

@@ -108,7 +108,7 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsTextAsNull()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             //  Create the table first
             Database.CreateMdsCompleteTable(connection);
@@ -131,7 +131,7 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsText()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             //  Create the table first
             Database.CreateMdsCompleteTable(connection);
@@ -153,7 +153,7 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsTextByBatch()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             //  Create the table first
             Database.CreateMdsCompleteTable(connection);
@@ -179,7 +179,7 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsIntegerAsNull()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             //  Create the table first
             Database.CreateMdsCompleteTable(connection);
@@ -202,7 +202,7 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsInteger()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             //  Create the table first
             Database.CreateMdsCompleteTable(connection);
@@ -224,7 +224,7 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsIntegerAsBatch()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             //  Create the table first
             Database.CreateMdsCompleteTable(connection);
@@ -250,7 +250,7 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsTextAsInt()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             //  Create the table first
             Database.CreateMdsCompleteTable(connection);
@@ -272,7 +272,7 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsTextAsIntAsBatch()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             //  Create the table first
             Database.CreateMdsCompleteTable(connection);

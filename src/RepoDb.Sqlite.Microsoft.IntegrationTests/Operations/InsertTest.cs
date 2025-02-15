@@ -28,7 +28,7 @@ public class InsertTest
     [TestMethod]
     public void TestSqLiteConnectionInsertForIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -56,7 +56,7 @@ public class InsertTest
     [TestMethod]
     public void TestSqLiteConnectionInsertForNonIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -87,7 +87,7 @@ public class InsertTest
     [TestMethod]
     public async Task TestSqLiteConnectionInsertAsyncForIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -115,7 +115,7 @@ public class InsertTest
     [TestMethod]
     public async Task TestSqLiteConnectionInsertAsyncForNonIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -150,7 +150,7 @@ public class InsertTest
     [TestMethod]
     public void TestSqLiteConnectionInsertViaTableNameForIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -178,7 +178,7 @@ public class InsertTest
     [TestMethod]
     public void TestSqliteConnectionInsertViaTableNameAsExpandoObjectForIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -207,7 +207,7 @@ public class InsertTest
     [TestMethod]
     public void TestSqLiteConnectionInsertViaTableNameAsDynamicForIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -235,7 +235,7 @@ public class InsertTest
     [TestMethod]
     public void TestSqLiteConnectionInsertViaTableNameForNonIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -263,7 +263,7 @@ public class InsertTest
     [TestMethod]
     public void TestSqliteConnectionInsertViaTableNameAsExpandoObjectForNonIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -291,7 +291,7 @@ public class InsertTest
     [TestMethod]
     public void TestSqLiteConnectionInsertViaTableNameAsDynamicForNonIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -323,7 +323,7 @@ public class InsertTest
     [TestMethod]
     public async Task TestSqLiteConnectionInsertViaTableNameAsyncForIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -351,7 +351,7 @@ public class InsertTest
     [TestMethod]
     public async Task TestSqLiteConnectionInsertAsyncViaTableNameAsExpandoObjectForIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -380,7 +380,7 @@ public class InsertTest
     [TestMethod]
     public async Task TestSqLiteConnectionInsertAsyncViaTableNameAsDynamicForIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -408,7 +408,7 @@ public class InsertTest
     [TestMethod]
     public async Task TestSqLiteConnectionInsertViaTableNameAsyncForNonIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -436,7 +436,7 @@ public class InsertTest
     [TestMethod]
     public async Task TestSqLiteConnectionInsertAsyncViaTableNameAsExpandoObjectForNonIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -464,7 +464,7 @@ public class InsertTest
     [TestMethod]
     public async Task TestSqLiteConnectionInsertAsyncViaTableNameAsDynamicForNonIdentity()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);

@@ -29,7 +29,7 @@ public class UpdateAllTest
     [TestMethod]
     public void TestSqLiteConnectionUpdateAll()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -57,7 +57,7 @@ public class UpdateAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionUpdateAllAsync()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -89,7 +89,7 @@ public class UpdateAllTest
     [TestMethod]
     public void TestSqLiteConnectionUpdateAllViaTableName()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -113,7 +113,7 @@ public class UpdateAllTest
     [TestMethod]
     public void TestSqLiteConnectionUpdateAllAsExpandoObjectViaTableName()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             Database.CreateMdsCompleteTables(10, connection);
@@ -142,7 +142,7 @@ public class UpdateAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionUpdateAllAsyncViaTableName()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -166,7 +166,7 @@ public class UpdateAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionUpdateAllAsyncAsExpandoObjectViaTableName()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             Database.CreateMdsCompleteTables(10, connection);

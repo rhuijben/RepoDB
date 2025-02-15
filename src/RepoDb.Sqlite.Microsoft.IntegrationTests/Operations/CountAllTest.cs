@@ -28,7 +28,7 @@ public class CountAllTest
     [TestMethod]
     public void TestSqLiteConnectionCountAll()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -44,7 +44,7 @@ public class CountAllTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionCountAllWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -61,7 +61,7 @@ public class CountAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionCountAllAsync()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -77,7 +77,7 @@ public class CountAllTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionCountAllAsyncWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -98,7 +98,7 @@ public class CountAllTest
     [TestMethod]
     public void TestSqLiteConnectionCountAllViaTableName()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -114,7 +114,7 @@ public class CountAllTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionCountAllViaTableNameWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -132,7 +132,7 @@ public class CountAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionCountAllAsyncViaTableName()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -148,7 +148,7 @@ public class CountAllTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionCountAllAsyncViaTableNameWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);

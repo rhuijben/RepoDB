@@ -29,7 +29,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxWithoutExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -46,7 +46,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -64,7 +64,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaDynamic()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -81,7 +81,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaQueryField()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -98,7 +98,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaQueryFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -120,7 +120,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaQueryGroup()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -143,7 +143,7 @@ public class MaxTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionMaxWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -162,7 +162,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncWithoutExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -179,7 +179,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -197,7 +197,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaDynamic()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -214,7 +214,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaQueryField()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -231,7 +231,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaQueryFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -253,7 +253,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaQueryGroup()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -276,7 +276,7 @@ public class MaxTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionMaxAsyncWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -299,7 +299,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaTableNameWithoutExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -317,7 +317,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaTableNameViaDynamic()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -335,7 +335,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaTableNameViaQueryField()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -353,7 +353,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaTableNameViaQueryFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -376,7 +376,7 @@ public class MaxTest
     [TestMethod]
     public void TestSqLiteConnectionMaxViaTableNameViaQueryGroup()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -400,7 +400,7 @@ public class MaxTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionMaxViaTableNameWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -420,7 +420,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaTableNameWithoutExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -438,7 +438,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaTableNameViaDynamic()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -456,7 +456,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaTableNameViaQueryField()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -474,7 +474,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaTableNameViaQueryFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -497,7 +497,7 @@ public class MaxTest
     [TestMethod]
     public async Task TestSqLiteConnectionMaxAsyncViaTableNameViaQueryGroup()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -521,7 +521,7 @@ public class MaxTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionMaxAsyncViaTableNameWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);

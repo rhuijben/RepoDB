@@ -17,7 +17,7 @@ public class TypeTransferTests
     {
         Database.Initialize();
         Cleanup();
-        using var connection = new SqliteConnection(Database.ConnectionStringMDS);
+        using var connection = new SqliteConnection(Database.ConnectionString);
         {
             AddTables(connection);
         }
@@ -115,6 +115,10 @@ public class TypeTransferTests
                         EnumVarChar         VarChar NOT NULL,
                         EnumVarCharNull     VarChar NULL
                     )");
+
+
+        connection.Truncate<DateTypesData>();
+        connection.Truncate<EnumTypesData>();
     }
 
     public record DateTypesData
@@ -182,7 +186,7 @@ public class TypeTransferTests
     [TestMethod]
     public void BoolDateDecimalInsertRead()
     {
-        using var connection = new SqliteConnection(Database.ConnectionStringMDS);
+        using var connection = new SqliteConnection(Database.ConnectionString);
         {
             AddTables(connection);
 
@@ -281,7 +285,7 @@ public class TypeTransferTests
     [TestMethod]
     public void EnumInsertRead()
     {
-        using var connection = new SqliteConnection(Database.ConnectionStringMDS);
+        using var connection = new SqliteConnection(Database.ConnectionString);
         {
             AddTables(connection);
 
@@ -320,7 +324,7 @@ public class TypeTransferTests
     [TestMethod]
     public void EnumCompareValue()
     {
-        using var connection = new SqliteConnection(Database.ConnectionStringMDS);
+        using var connection = new SqliteConnection(Database.ConnectionString);
         {
             AddTables(connection);
 
@@ -351,7 +355,7 @@ public class TypeTransferTests
     [TestMethod]
     public void EnumCompareNull()
     {
-        using var connection = new SqliteConnection(Database.ConnectionStringMDS);
+        using var connection = new SqliteConnection(Database.ConnectionString);
         {
             AddTables(connection);
 

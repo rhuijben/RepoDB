@@ -839,23 +839,17 @@ internal partial class Compiler
 
     static string StrictToString(DateTime value)
     {
-        if (value.Kind == DateTimeKind.Utc)
-            return value.ToString("u");
-        else
-            return value.ToString("o");
+        return value.ToString("o", CultureInfo.InvariantCulture);
     }
 
     static string StrictToString(DateTimeOffset value)
     {
-        if (value.Offset == TimeSpan.Zero)
-            return value.ToString("u");
-        else
-            return value.ToString("o");
+        return value.ToString("o", CultureInfo.InvariantCulture);
     }
 
     static DateTimeOffset StrictParseDateTimeOffset(string value)
     {
-        return DateTimeOffset.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal); // If we have no offset assume no offset
+        return DateTimeOffset.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.RoundtripKind); // If we have no offset assume no offset
     }
 
 #if NET

@@ -29,7 +29,7 @@ public class AverageTest
     [TestMethod]
     public void TestSqLiteConnectionAverageWithoutExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -46,7 +46,7 @@ public class AverageTest
     [TestMethod]
     public void TestSqLiteConnectionAverageWithExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -64,7 +64,7 @@ public class AverageTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void TestSqLiteConnectionAverageWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -83,7 +83,7 @@ public class AverageTest
     [TestMethod]
     public async Task TestSqLiteConnectionAverageAsyncWithoutExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -100,7 +100,7 @@ public class AverageTest
     [TestMethod]
     public async Task TestSqLiteConnectionAverageAsyncWithExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -118,7 +118,7 @@ public class AverageTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task TestSqLiteConnectionAverageAsyncWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -141,7 +141,7 @@ public class AverageTest
     [TestMethod]
     public void TestSqLiteConnectionAverageViaTableNameWithoutExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -159,7 +159,7 @@ public class AverageTest
     [TestMethod]
     public void TestSqLiteConnectionAverageViaTableNameWithExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -178,7 +178,7 @@ public class AverageTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void TestSqLiteConnectionAverageViaTableNameWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -198,7 +198,7 @@ public class AverageTest
     [TestMethod]
     public async Task TestSqLiteConnectionAverageAsyncViaTableNameWithoutExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -216,7 +216,7 @@ public class AverageTest
     [TestMethod]
     public async Task TestSqLiteConnectionAverageAsyncViaTableNameWithExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -235,7 +235,7 @@ public class AverageTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task TestSqLiteConnectionAverageAsyncViaTableNameWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);

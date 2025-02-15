@@ -29,7 +29,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaPrimaryKey()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -45,7 +45,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -61,7 +61,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaDynamic()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -77,7 +77,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaQueryField()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -93,7 +93,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaQueryFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -114,7 +114,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaQueryGroup()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -136,7 +136,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryWithTop()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -154,7 +154,7 @@ public class QueryTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionQueryWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -172,7 +172,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaPrimaryKey()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -188,7 +188,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaExpression()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -204,7 +204,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaDynamic()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -220,7 +220,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaQueryField()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -236,7 +236,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaQueryFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -257,7 +257,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaQueryGroup()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -279,7 +279,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncWithTop()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -297,7 +297,7 @@ public class QueryTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionQueryAsyncWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -319,7 +319,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaTableNameViaPrimaryKey()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -335,7 +335,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaTableNameViaDynamic()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -351,7 +351,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaTableNameViaQueryField()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -367,7 +367,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaTableNameViaQueryFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -388,7 +388,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaTableNameViaQueryGroup()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -410,7 +410,7 @@ public class QueryTest
     [TestMethod]
     public void TestSqLiteConnectionQueryViaTableNameWithTop()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -429,7 +429,7 @@ public class QueryTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionQueryViaTableNameWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -448,7 +448,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaTableNameViaPrimaryKey()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -464,7 +464,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaTableNameViaDynamic()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -480,7 +480,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaTableNameViaQueryField()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -496,7 +496,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaTableNameViaQueryFields()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -517,7 +517,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaTableNameViaQueryGroup()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();
@@ -539,7 +539,7 @@ public class QueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryAsyncViaTableNameWithTop()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection);
@@ -558,7 +558,7 @@ public class QueryTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionQueryAsyncViaTableNameWithHints()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateMdsCompleteTables(1, connection).First();

@@ -8,10 +8,7 @@ public static class Database
 {
     static readonly SQLiteDbInstance Instance = new();
 
-    /// <summary>
-    /// Gets or sets the connection string to be used (for MDS).
-    /// </summary>
-    public static string ConnectionString { get; private set; } = Instance.ConnectionString;
+    public static string ConnectionString => Instance.ConnectionString;
 
     public static void Initialize()
     {
@@ -31,8 +28,6 @@ public static class Database
         {
             connection.DeleteAll<SdsCompleteTable>();
             connection.DeleteAll<SdsNonIdentityCompleteTable>();
-            //connection.DeleteAll<MdsCompleteTable>();
-            //connection.DeleteAll<MdsNonIdentityCompleteTable>();
         }
     }
 

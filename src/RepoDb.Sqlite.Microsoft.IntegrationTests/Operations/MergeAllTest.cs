@@ -29,7 +29,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllForIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -56,7 +56,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllForIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -82,7 +82,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -113,7 +113,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllForNonIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -139,7 +139,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllForNonIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -165,7 +165,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllForNonIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -200,7 +200,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncForIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -227,7 +227,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncForIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -253,7 +253,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -284,7 +284,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncForNonIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -310,7 +310,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncForNonIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -336,7 +336,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncForNonIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -375,7 +375,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -403,7 +403,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllAsExpandoObjectViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -432,7 +432,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -459,7 +459,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllAsExpandoObjectViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -487,7 +487,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllViaTableNameForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -519,7 +519,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllAsDynamicsViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -546,7 +546,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllAsDynamicsViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -571,7 +571,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllAsDynamicsViaTableNameForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -601,7 +601,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllViaTableNameForNonIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -628,7 +628,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllViaTableNameForNonIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -655,7 +655,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllViaTableNameForNonIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -687,7 +687,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllAsDynamicsViaTableNameForNonIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -714,7 +714,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllAsDynamicsViaTableNameForNonIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -739,7 +739,7 @@ public class MergeAllTest
     [TestMethod]
     public void TestSqLiteConnectionMergeAllAsDynamicsViaTableNameForNonIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -773,7 +773,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllViaTableNameAsyncForIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -801,7 +801,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncAsExpandoObjectViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -830,7 +830,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllViaTableNameAsyncForIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -857,7 +857,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncAsExpandoObjectViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -885,7 +885,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllViaTableNameAsyncForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -917,7 +917,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncAsDynamicsViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -944,7 +944,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncAsDynamicsViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -969,7 +969,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncAsDynamicsViaTableNameForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsCompleteTables(10, connection).AsList();
@@ -999,7 +999,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncViaTableNameForNonIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -1026,7 +1026,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncViaTableNameForNonIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -1053,7 +1053,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncViaTableNameForNonIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -1085,7 +1085,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncAsDynamicsViaTableNameForNonIdentityForEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateMdsTables(connection);
@@ -1112,7 +1112,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncAsDynamicsViaTableNameForNonIdentityForNonEmptyTable()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
@@ -1137,7 +1137,7 @@ public class MergeAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionMergeAllAsyncAsDynamicsViaTableNameForNonIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SqliteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SqliteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateMdsNonIdentityCompleteTables(10, connection).AsList();
