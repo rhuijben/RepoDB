@@ -29,7 +29,7 @@ public class SkipQueryTest
     [TestMethod]
     public void TestSqLiteConnectionSkipQueryFirstBatchAscending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -50,7 +50,7 @@ public class SkipQueryTest
     [TestMethod]
     public void TestSqLiteConnectionSkipQueryFirstBatchDescending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -71,7 +71,7 @@ public class SkipQueryTest
     [TestMethod]
     public void TestSqLiteConnectionSkipQueryThirdBatchAscending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -92,7 +92,7 @@ public class SkipQueryTest
     [TestMethod]
     public void TestSqLiteConnectionSkipQueryThirdBatchDescending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -113,7 +113,7 @@ public class SkipQueryTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionSkipQueryWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -135,7 +135,7 @@ public class SkipQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionSkipQueryAsyncFirstBatchAscending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -156,7 +156,7 @@ public class SkipQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionSkipQueryAsyncFirstBatchDescending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -177,7 +177,7 @@ public class SkipQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionSkipQueryAsyncThirdBatchAscending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -198,7 +198,7 @@ public class SkipQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionSkipQueryAsyncThirdBatchDescending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -219,7 +219,7 @@ public class SkipQueryTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionSkipQueryAsyncWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -245,7 +245,7 @@ public class SkipQueryTest
     [TestMethod]
     public void TestSqLiteConnectionSkipQueryViaTableNameFirstBatchAscending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -266,7 +266,7 @@ public class SkipQueryTest
     [TestMethod]
     public void TestSqLiteConnectionSkipQueryViaTableNameFirstBatchDescending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -287,7 +287,7 @@ public class SkipQueryTest
     [TestMethod]
     public void TestSqLiteConnectionSkipQueryViaTableNameThirdBatchAscending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -308,7 +308,7 @@ public class SkipQueryTest
     [TestMethod]
     public void TestSqLiteConnectionSkipQueryViaTableNameThirdBatchDescending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -329,7 +329,7 @@ public class SkipQueryTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionSkipQueryViaTableNameWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -351,7 +351,7 @@ public class SkipQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionSkipQueryViaTableNameAsyncFirstBatchAscending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -372,7 +372,7 @@ public class SkipQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionSkipQueryViaTableNameAsyncFirstBatchDescending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -393,7 +393,7 @@ public class SkipQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionSkipQueryViaTableNameAsyncThirdBatchAscending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -414,7 +414,7 @@ public class SkipQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionSkipQueryViaTableNameAsyncThirdBatchDescending()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -435,7 +435,7 @@ public class SkipQueryTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionSkipQueryAsyncViaTableNameWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

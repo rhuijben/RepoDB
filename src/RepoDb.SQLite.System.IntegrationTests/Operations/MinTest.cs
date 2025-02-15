@@ -29,7 +29,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -46,7 +46,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -64,7 +64,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -81,7 +81,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaQueryField()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -98,7 +98,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaQueryFields()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -120,7 +120,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaQueryGroup()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -143,7 +143,7 @@ public class MinTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionMinWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -162,7 +162,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -179,7 +179,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -197,7 +197,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -214,7 +214,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaQueryField()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -231,7 +231,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaQueryFields()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -253,7 +253,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaQueryGroup()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -276,7 +276,7 @@ public class MinTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionMinAsyncWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -299,7 +299,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaTableNameWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -317,7 +317,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaTableNameViaDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -335,7 +335,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaTableNameViaQueryField()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -353,7 +353,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaTableNameViaQueryFields()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -376,7 +376,7 @@ public class MinTest
     [TestMethod]
     public void TestSqLiteConnectionMinViaTableNameViaQueryGroup()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -400,7 +400,7 @@ public class MinTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionMinViaTableNameWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -420,7 +420,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaTableNameWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -438,7 +438,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaTableNameViaDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -456,7 +456,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaTableNameViaQueryField()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -474,7 +474,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaTableNameViaQueryFields()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -497,7 +497,7 @@ public class MinTest
     [TestMethod]
     public async Task TestSqLiteConnectionMinAsyncViaTableNameViaQueryGroup()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -521,7 +521,7 @@ public class MinTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionMinAsyncViaTableNameWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

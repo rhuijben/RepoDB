@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data.SQLite;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.SQLite.System.IntegrationTests.Setup;
-using System.Data.SQLite;
 
 namespace RepoDb.SQLite.System.IntegrationTests.Operations.SDS;
 
@@ -25,7 +25,7 @@ public class ExecuteScalarTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteScalar()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -41,7 +41,7 @@ public class ExecuteScalarTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteScalarWithReturnType()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -61,7 +61,7 @@ public class ExecuteScalarTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteScalarAsync()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -77,7 +77,7 @@ public class ExecuteScalarTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteScalarAsyncWithReturnType()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

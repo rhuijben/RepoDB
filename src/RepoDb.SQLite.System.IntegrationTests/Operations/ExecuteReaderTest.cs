@@ -29,7 +29,7 @@ public class ExecuteReaderTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteReader()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -57,7 +57,7 @@ public class ExecuteReaderTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteReaderWithMultipleStatements()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -88,7 +88,7 @@ public class ExecuteReaderTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteReaderAsExtractedEntity()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -108,7 +108,7 @@ public class ExecuteReaderTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteReaderAsExtractedDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -132,7 +132,7 @@ public class ExecuteReaderTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteReaderAsync()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -160,7 +160,7 @@ public class ExecuteReaderTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteReaderAsyncWithMultipleStatements()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -191,7 +191,7 @@ public class ExecuteReaderTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteReaderAsyncAsExtractedEntity()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -211,7 +211,7 @@ public class ExecuteReaderTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteReaderAsyncAsExtractedDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

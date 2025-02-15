@@ -25,7 +25,7 @@ public class ExecuteNonQueryTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteNonQuery()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -41,7 +41,7 @@ public class ExecuteNonQueryTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteNonQueryWithParameters()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -58,7 +58,7 @@ public class ExecuteNonQueryTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteNonQueryWithMultipleStatement()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -78,7 +78,7 @@ public class ExecuteNonQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteNonQueryAsync()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -94,7 +94,7 @@ public class ExecuteNonQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteNonQueryAsyncWithParameters()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -111,7 +111,7 @@ public class ExecuteNonQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteNonQueryAsyncWithMultipleStatement()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

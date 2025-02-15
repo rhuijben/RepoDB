@@ -27,7 +27,7 @@ public class ExecuteQueryTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteQuery()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -44,7 +44,7 @@ public class ExecuteQueryTest
     [TestMethod]
     public void TestSqLiteConnectionExecuteQueryWithParameters()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -66,7 +66,7 @@ public class ExecuteQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteQueryAsync()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -83,7 +83,7 @@ public class ExecuteQueryTest
     [TestMethod]
     public async Task TestSqLiteConnectionExecuteQueryAsyncWithParameters()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

@@ -8,33 +8,18 @@ public static class Database
 {
     static readonly SQLiteDbInstance Instance = new();
 
-    #region Properties
-
-    /// <summary>
-    /// Gets or sets the connection string to be used (for SDS).
-    /// </summary>
-    public static string ConnectionStringSDS => Instance.AdminConnectionString;
-
     /// <summary>
     /// Gets or sets the connection string to be used (for MDS).
     /// </summary>
-    public static string ConnectionStringMDS => Instance.ConnectionString;
-
-    /// <summary>
-    /// Gets the value that indicates whether to use the in-memory database.
-    /// </summary>
-    public static bool IsInMemory { get; private set; }
-
-    #endregion
-
-    #region Methods
+    public static string ConnectionString { get; private set; } = Instance.ConnectionString;
 
     public static void Initialize()
     {
         // Initialize SqLite
-        GlobalConfiguration.Setup(new());
+        GlobalConfiguration
+            .Setup()
+            .UseSQLite();
 
-        // Check the type of database
 
         // Create tables
         CreateSdsTables();
@@ -42,20 +27,14 @@ public static class Database
 
     public static void Cleanup()
     {
-        if (IsInMemory == true)
-        {
-            return;
-        }
-        using (var connection = new SQLiteConnection(ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(ConnectionString))
         {
             connection.DeleteAll<SdsCompleteTable>();
             connection.DeleteAll<SdsNonIdentityCompleteTable>();
-            connection.DeleteAll<MdsCompleteTable>();
-            connection.DeleteAll<MdsNonIdentityCompleteTable>();
+            //connection.DeleteAll<MdsCompleteTable>();
+            //connection.DeleteAll<MdsNonIdentityCompleteTable>();
         }
     }
-
-    #endregion
 
     #region SdsCompleteTable
 
@@ -65,7 +44,7 @@ public static class Database
         var hasConnection = (connection != null);
         if (hasConnection == false)
         {
-            connection = new SQLiteConnection(ConnectionStringSDS);
+            connection = new SQLiteConnection(ConnectionString);
         }
         try
         {
@@ -93,7 +72,7 @@ public static class Database
         var hasConnection = (connection != null);
         if (hasConnection == false)
         {
-            connection = new SQLiteConnection(ConnectionStringSDS);
+            connection = new SQLiteConnection(ConnectionString);
         }
         try
         {
@@ -126,7 +105,7 @@ public static class Database
         var hasConnection = (connection != null);
         if (hasConnection == false)
         {
-            connection = new SQLiteConnection(ConnectionStringSDS);
+            connection = new SQLiteConnection(ConnectionString);
         }
         try
         {
@@ -171,7 +150,7 @@ public static class Database
         var hasConnection = (connection != null);
         if (hasConnection == false)
         {
-            connection = new SQLiteConnection(ConnectionStringSDS);
+            connection = new SQLiteConnection(ConnectionString);
         }
         try
         {

@@ -28,7 +28,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeForIdentityForEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -50,7 +50,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeForIdentityForNonEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -76,7 +76,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -111,7 +111,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncForIdentityForEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -134,7 +134,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncForIdentityForNonEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -160,7 +160,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -199,7 +199,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -223,7 +223,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -248,7 +248,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeViaTableNameForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -280,7 +280,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeAsDynamicViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateSdsTables(connection);
@@ -308,7 +308,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeAsDynamicViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -333,7 +333,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeAsDynamicViaTableNameForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -363,7 +363,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeViaTableNameAsExpandoObjectForIdentityForEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             Database.CreateSdsCompleteTables(1, connection).First();
@@ -389,7 +389,7 @@ public class MergeTest
     [TestMethod]
     public void TestSQLiteConnectionMergeViaTableNameAsExpandoObjectForIdentityForNonEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             Database.CreateSdsCompleteTables(1, connection).First();
@@ -418,7 +418,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -441,7 +441,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -466,7 +466,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncViaTableNameForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -496,7 +496,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncAsDynamicViaTableNameForIdentityForEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Create the tables
             Database.CreateSdsTables(connection);
@@ -523,7 +523,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncAsDynamicViaTableNameForIdentityForNonEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -548,7 +548,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncAsDynamicViaTableNameForIdentityForNonEmptyTableWithQualifiers()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var table = Database.CreateSdsCompleteTables(1, connection).First();
@@ -578,7 +578,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncViaTableNameAsExpandoObjectForIdentityForEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             Database.CreateSdsCompleteTables(1, connection).First();
@@ -604,7 +604,7 @@ public class MergeTest
     [TestMethod]
     public async Task TestSQLiteConnectionMergeAsyncViaTableNameAsExpandoObjectForIdentityForNonEmptyTable()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             Database.CreateSdsCompleteTables(1, connection).First();

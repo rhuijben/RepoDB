@@ -32,7 +32,7 @@ public class NullableTest
     //        })
     //        .UseSQLite();
     //
-    //    using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+    //    using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
     //    {
     //        // Create the tables
     //        Database.CreateSdsTables(connection);

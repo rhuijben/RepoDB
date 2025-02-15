@@ -28,7 +28,7 @@ public class TruncateTest
     [TestMethod]
     public void TestSqLiteConnectionTruncate()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -49,7 +49,7 @@ public class TruncateTest
     [TestMethod]
     public async Task TestSqLiteConnectionTruncateAsyncWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -74,7 +74,7 @@ public class TruncateTest
     [TestMethod]
     public void TestSqLiteConnectionTruncateViaTableNameWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -95,7 +95,7 @@ public class TruncateTest
     [TestMethod]
     public async Task TestSqLiteConnectionTruncateAsyncViaTableNameWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

@@ -28,7 +28,7 @@ public class DeleteAllTest
     [TestMethod]
     public void TestSqLiteConnectionDeleteAll()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -44,7 +44,7 @@ public class DeleteAllTest
     [TestMethod]
     public void TestSqLiteConnectionDeleteAllViaPrimaryKeys()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -82,7 +82,7 @@ public class DeleteAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionDeleteAllAsync()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -98,7 +98,7 @@ public class DeleteAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionDeleteAllAsyncViaPrimaryKeys()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -140,7 +140,7 @@ public class DeleteAllTest
     [TestMethod]
     public void TestSqLiteConnectionDeleteAllViaTableName()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -156,7 +156,7 @@ public class DeleteAllTest
     [TestMethod]
     public void TestSqLiteConnectionDeleteAllViaTableNameViaPrimaryKeys()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -194,7 +194,7 @@ public class DeleteAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionDeleteAllAsyncViaTableName()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -210,7 +210,7 @@ public class DeleteAllTest
     [TestMethod]
     public async Task TestSqLiteConnectionDeleteAllAsyncViaTableNameViaPrimaryKeys()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

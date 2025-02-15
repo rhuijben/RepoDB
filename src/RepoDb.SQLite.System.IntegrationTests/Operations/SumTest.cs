@@ -29,7 +29,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -46,7 +46,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -64,7 +64,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -81,7 +81,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaQueryField()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -98,7 +98,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaQueryFields()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -120,7 +120,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaQueryGroup()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -143,7 +143,7 @@ public class SumTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionSumWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -162,7 +162,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -179,7 +179,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -197,7 +197,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -214,7 +214,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaQueryField()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -231,7 +231,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaQueryFields()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -253,7 +253,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaQueryGroup()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -276,7 +276,7 @@ public class SumTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionSumAsyncWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -299,7 +299,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaTableNameWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -317,7 +317,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaTableNameViaDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -335,7 +335,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaTableNameViaQueryField()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -353,7 +353,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaTableNameViaQueryFields()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -376,7 +376,7 @@ public class SumTest
     [TestMethod]
     public void TestSqLiteConnectionSumViaTableNameViaQueryGroup()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -400,7 +400,7 @@ public class SumTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnSqLiteConnectionSumViaTableNameWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -420,7 +420,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaTableNameWithoutExpression()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -438,7 +438,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaTableNameViaDynamic()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -456,7 +456,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaTableNameViaQueryField()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -474,7 +474,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaTableNameViaQueryFields()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -497,7 +497,7 @@ public class SumTest
     [TestMethod]
     public async Task TestSqLiteConnectionSumAsyncViaTableNameViaQueryGroup()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -521,7 +521,7 @@ public class SumTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionOnSqLiteConnectionSumAsyncViaTableNameWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);

@@ -32,7 +32,7 @@ public class EnumerableTest
     [TestMethod]
     public void TestSQLiteConnectionQueryListContains()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsNonIdentityCompleteTables(10, connection).AsList();
@@ -51,7 +51,7 @@ public class EnumerableTest
     [TestMethod]
     public void TestSQLiteConnectionQueryEmptyList()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsNonIdentityCompleteTables(10, connection).AsList();
@@ -71,7 +71,7 @@ public class EnumerableTest
     [TestMethod]
     public async Task TestSQLiteConnectionQueryAsyncListContains()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsNonIdentityCompleteTables(10, connection).AsList();
@@ -90,7 +90,7 @@ public class EnumerableTest
     [TestMethod]
     public async Task TestSQLiteConnectionQueryAsyncEmptyList()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringMDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsNonIdentityCompleteTables(10, connection).AsList();

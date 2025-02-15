@@ -29,7 +29,7 @@ public class QueryMultipleTest
     [TestMethod]
     public void TestSqLiteConnectionQueryMultipleForT2()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -51,7 +51,7 @@ public class QueryMultipleTest
     [TestMethod]
     public void TestSqLiteConnectionQueryMultipleForT3()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -77,7 +77,7 @@ public class QueryMultipleTest
     [TestMethod]
     public void TestSqLiteConnectionQueryMultipleForT4()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -107,7 +107,7 @@ public class QueryMultipleTest
     [TestMethod]
     public void TestSqLiteConnectionQueryMultipleForT5()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -141,7 +141,7 @@ public class QueryMultipleTest
     [TestMethod]
     public void TestSqLiteConnectionQueryMultipleForT6()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -179,7 +179,7 @@ public class QueryMultipleTest
     [TestMethod]
     public void TestSqLiteConnectionQueryMultipleForT7()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -221,7 +221,7 @@ public class QueryMultipleTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionQueryMultipleWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -243,7 +243,7 @@ public class QueryMultipleTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryMultipleAsyncForT2()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -265,7 +265,7 @@ public class QueryMultipleTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryMultipleAsyncForT3()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -291,7 +291,7 @@ public class QueryMultipleTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryMultipleAsyncForT4()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -321,7 +321,7 @@ public class QueryMultipleTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryMultipleAsyncForT5()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -355,7 +355,7 @@ public class QueryMultipleTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryMultipleAsyncForT6()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -393,7 +393,7 @@ public class QueryMultipleTest
     [TestMethod]
     public async Task TestSqLiteConnectionQueryMultipleAsyncForT7()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
@@ -435,7 +435,7 @@ public class QueryMultipleTest
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public async Task ThrowExceptionQueryMultipleAsyncWithHints()
     {
-        using (var connection = new SQLiteConnection(Database.ConnectionStringSDS))
+        using (var connection = new SQLiteConnection(Database.ConnectionString))
         {
             // Setup
             var tables = Database.CreateSdsCompleteTables(10, connection);
