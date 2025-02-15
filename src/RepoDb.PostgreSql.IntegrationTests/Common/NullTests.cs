@@ -11,10 +11,5 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<PostgreSqlDbInstance>
 
     public override DbConnection CreateConnection() => new Npgsql.NpgsqlConnection(Database.ConnectionString);
 
-    public override Task GuidNullTest()
-    {
-        Assert.Inconclusive();
-
-        return Task.CompletedTask;
-    }
+    public override string UuidDbType => "CHAR(38)";
 }

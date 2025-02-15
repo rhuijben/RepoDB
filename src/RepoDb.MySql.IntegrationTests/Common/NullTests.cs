@@ -11,4 +11,6 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<MysqlDbInstance>
     protected override void InitializeCore() => Database.Initialize();
 
     public override DbConnection CreateConnection() => new MySqlConnection(Database.ConnectionString);
+
+    public override string UuidDbType => "CHAR(38)";
 }

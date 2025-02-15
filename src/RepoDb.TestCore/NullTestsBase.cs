@@ -113,20 +113,22 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         public Guid? UuidNull { get; set; }
     }
 
+    public virtual string UuidDbType => "[uniqueidentifier]";
+
     [TestMethod]
-    public async virtual Task GuidNullTest()
+    public async Task GuidNullTest()
     {
         // Regression test. Failed on sqlite and sqlserver before this commit
         using var sql = await CreateOpenConnectionAsync();
 
         if (!GetAllTables().Any(x => string.Equals(x, "GuidNullData", StringComparison.OrdinalIgnoreCase)))
         {
-            var sqlText = @"CREATE TABLE [GuidNullData] (
+            var sqlText = $@"CREATE TABLE [GuidNullData] (
                         [ID] int NOT NULL,
                         [Txt] TEXT NOT NULL,
                         [TxtNull] varchar(128) NULL,
-                        [Uuid] [uniqueidentifier] NOT NULL,
-                        [UuidNull] [uniqueidentifier] NULL
+                        [Uuid] {UuidDbType} NOT NULL,
+                        [UuidNull] {UuidDbType} NULL
                 )";
 
             var set = sql.GetDbSetting();
