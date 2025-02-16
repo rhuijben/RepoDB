@@ -21,7 +21,7 @@ public class PostgreSqlDbInstance : DbInstance<NpgsqlConnection>
         // RepoDb connection
         ConnectionString =
             Environment.GetEnvironmentVariable("REPODB_POSTGRESQL_CONSTR")
-            ?? "Server=127.0.0.1;Port=45432;Database=RepoDb;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;"; // Docker test configuration
+            ?? new NpgsqlConnectionStringBuilder(AdminConnectionString) { Database = "RepoDb" }.ToString();
     }
 
     protected override async Task CreateUserDatabase(DbConnection sql)

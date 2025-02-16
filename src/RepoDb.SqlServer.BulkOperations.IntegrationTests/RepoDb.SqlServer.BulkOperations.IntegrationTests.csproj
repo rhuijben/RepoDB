@@ -15,6 +15,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RepoDb.TestCore\RepoDb.TestCore.csproj" />
     <ProjectReference Include="..\RepoDb\RepoDb.csproj" />
     <ProjectReference Include="..\RepoDb.SqlServer\RepoDb.SqlServer.csproj" />
     <ProjectReference Include="..\RepoDb.SqlServer.BulkOperations\RepoDb.SqlServer.BulkOperations.csproj" />

@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.Extensions;
-using RepoDb.IntegrationTests.Setup;
-using RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepoDb.Extensions;
+using RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
 
 namespace RepoDb.SqlServer.BulkOperations.IntegrationTests.Operations;
 

@@ -878,7 +878,7 @@ public static class DbCommandExtension
         {
             if (value == DBNull.Value)
             {
-                if (targetType.IsClass || TypeCache.Get(targetType).IsNullable()) // If reference type or nullable, return null
+                if (TypeCache.Get(targetType).HasNullValue())
                     return null;
                 else
                     return Activator.CreateInstance(targetType);

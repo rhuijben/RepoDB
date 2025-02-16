@@ -21,15 +21,15 @@ public class PostgreSqlDbInstance : DbInstance<NpgsqlConnection>
         // RepoDb connection
         ConnectionString =
             Environment.GetEnvironmentVariable("REPODB_POSTGRESQL_CONSTR")
-            ?? "Server=127.0.0.1;Port=45432;Database=RepoDbBulk;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;"; // Docker test configuration; // Docker test configuration
+            ?? new NpgsqlConnectionStringBuilder(AdminConnectionString) { Database = "RepoDbBulk" }.ToString();
     }
 
     protected override async Task CreateUserDatabase(DbConnection sql)
     {
-        var recordCount = await sql.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDb';");
+        var recordCount = await sql.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDbBulk';");
         if (recordCount <= 0)
         {
-            await sql.ExecuteNonQueryAsync(@"CREATE DATABASE ""RepoDb""
+            await sql.ExecuteNonQueryAsync(@"CREATE DATABASE ""RepoDbBulk""
                         WITH OWNER = ""postgres""
                         ENCODING = ""UTF8""
                         CONNECTION LIMIT = -1;");

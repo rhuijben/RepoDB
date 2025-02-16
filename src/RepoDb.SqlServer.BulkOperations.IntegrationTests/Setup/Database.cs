@@ -4,53 +4,40 @@ using RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
 
 [assembly: DoNotParallelize]
 
-namespace RepoDb.IntegrationTests.Setup;
+namespace RepoDb.SqlServer.BulkOperations.IntegrationTests;
 
 /// <summary>
 /// A class used as a startup setup for for RepoDb test database.
 /// </summary>
 public static class Database
 {
+    static readonly SqlServerDbInstance Instance = new();
+    #region Properties
+
     /// <summary>
-    /// Initialize the creation of the database.
+    /// Gets or sets the connection string to be used for SQL Server database.
     /// </summary>
+    public static string ConnectionStringForMaster => Instance.AdminConnectionString;
+
+    /// <summary>
+    /// Gets or sets the connection string to be used.
+    /// </summary>
+    public static string ConnectionString => Instance.ConnectionString;
+
+    public static string ConnectionStringForRepoDb => ConnectionString;
+
+    #endregion
+
     public static void Initialize()
     {
-        // Master connection
-        ConnectionStringForMaster =
-            Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_MASTER")
-            ?? Environment.GetEnvironmentVariable("REPODB_CONSTR_MASTER")
-            // ?? @"Server=tcp:127.0.0.1,41433;Database=master;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;" // Docker Test Configuration
-            ?? @"Server=(local);Database=master;Integrated Security=SSPI;TrustServerCertificate=True;";
+        Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
-        // RepoDb connection
-        ConnectionStringForRepoDb =
-            Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODBTEST")
-            ?? Environment.GetEnvironmentVariable("REPODB_CONSTR")
-            // ?? @"Server=tcp:127.0.0.1,41433;Database=RepoDbTest;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;" // Docker Test Configuration
-            ?? @"Server=(local);Database=RepoDbTest;Integrated Security=SSPI;TrustServerCertificate=True;";
-
-        // Initialize the SqlServer
-        GlobalConfiguration
-            .Setup()
-            .UseSqlServer();
-
-        // Create the database first
+        // Create databases
         CreateDatabase();
 
-        // Create the tables
+        // Create tables
         CreateTables();
     }
-
-    /// <summary>
-    /// Gets the connection string for master.
-    /// </summary>
-    public static string ConnectionStringForMaster { get; private set; }
-
-    /// <summary>
-    /// Gets the connection string for RepoDb.
-    /// </summary>
-    public static string ConnectionStringForRepoDb { get; private set; }
 
     #region Methods
 
@@ -59,9 +46,9 @@ public static class Database
     /// </summary>
     public static void CreateDatabase()
     {
-        var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
+        var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbBulk'))
                 BEGIN
-                    CREATE DATABASE [RepoDbTest];
+                    CREATE DATABASE [RepoDbBulk];
                 END";
         using (var connection = new SqlConnection(ConnectionStringForMaster).EnsureOpen())
         {
@@ -82,7 +69,7 @@ public static class Database
     /// </summary>
     public static void Cleanup()
     {
-        using (var connection = new SqlConnection(ConnectionStringForRepoDb))
+        using (var connection = new SqlConnection(ConnectionString))
         {
             connection.Truncate<BulkOperationIdentityTable>();
         }
@@ -117,7 +104,7 @@ public static class Database
                         WITH (FILLFACTOR = 90) ON [PRIMARY]
                     ) ON [PRIMARY];
                 END";
-        using (var connection = new SqlConnection(ConnectionStringForRepoDb).EnsureOpen())
+        using (var connection = new SqlConnection(ConnectionString).EnsureOpen())
         {
             connection.ExecuteNonQuery(commandText);
         }

@@ -267,7 +267,7 @@ internal partial class Compiler
     /// </summary>
     /// <returns></returns>
     internal static MethodInfo GetDbCommandCreateParameterMethod() =>
-        StaticType.DbCommandExtension.GetMethod("CreateParameter", new[]
+        StaticType.DbCommandExtension.GetMethod(nameof(DbCommandExtension.CreateParameter), new[]
         {
             StaticType.IDbCommand,
             StaticType.String,
@@ -1812,7 +1812,7 @@ internal partial class Compiler
             expression = ConvertExpressionWithAutomaticConversion(expression, targetType);
 
             if (dbField?.IsIdentity == true
-                && targetType.IsValueType && TypeCache.Get(targetType).GetUnderlyingType() == targetType
+                && targetType.IsValueType && !TypeCache.Get(targetType).IsNullable()
                 && TypeCache.Get(origExpression.Type).IsNullable())
             {
                 var nullableType = typeof(Nullable<>).MakeGenericType(expression.Type);
@@ -1915,14 +1915,12 @@ internal partial class Compiler
     /// <param name="propertyExpression"></param>
     /// <param name="classProperty"></param>
     /// <param name="dbField"></param>
-    /// <param name="dbSetting"></param>
     /// <returns></returns>
     internal static Expression GetDataEntityDbParameterValueAssignmentExpression(ParameterExpression dbParameterExpression,
         Expression entityExpression,
         ParameterExpression propertyExpression,
         ClassProperty classProperty,
-        DbField dbField,
-        IDbSetting dbSetting)
+        DbField dbField)
     {
         Expression expression;
 

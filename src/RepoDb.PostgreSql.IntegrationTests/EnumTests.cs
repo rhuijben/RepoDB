@@ -4,6 +4,7 @@ using RepoDb.Attributes;
 using RepoDb.Attributes.Parameter.Npgsql;
 using RepoDb.Extensions;
 using RepoDb.PostgreSql.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.PostgreSql.IntegrationTests;
 
@@ -284,7 +285,7 @@ public class EnumTests
             var person = GetPersonWithTextAsInteger(1).First();
 
             // Act
-            connection.Insert(person);
+            connection.Insert(person, trace: new DiagnosticsTracer());
 
             // Query
             var queryResult = connection.Query<PersonWithTextAsInteger>(person.Id).First();

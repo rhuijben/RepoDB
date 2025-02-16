@@ -2,7 +2,7 @@
 using Microsoft.Data.SqlClient;
 using RepoDb.TestCore;
 
-namespace RepoDb.IntegrationTests.Setup;
+namespace RepoDb.SqlServer.BulkOperations.IntegrationTests;
 
 public class SqlServerDbInstance : DbInstance<SqlConnection>
 {
@@ -22,15 +22,15 @@ public class SqlServerDbInstance : DbInstance<SqlConnection>
 
         // RepoDb connection
         ConnectionString =
-            Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODB")
-            ?? new SqlConnectionStringBuilder(AdminConnectionString) { InitialCatalog = "RepoDbCoreTest" }.ToString();
+            Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODBBULK")
+            ?? new SqlConnectionStringBuilder(AdminConnectionString) { InitialCatalog = "RepoDbBulk" }.ToString();
     }
 
     protected override async Task CreateUserDatabase(DbConnection sql)
     {
-        await sql.ExecuteNonQueryAsync(@"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbCoreTest'))
+        await sql.ExecuteNonQueryAsync(@"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbBulk'))
                 BEGIN
-                    CREATE DATABASE [RepoDbCoreTest];
+                    CREATE DATABASE [RepoDbBulk];
                 END");
     }
 }

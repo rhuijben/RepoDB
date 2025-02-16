@@ -336,19 +336,15 @@ public static class ExpressionExtension
         switch (expression.NodeType)
         {
             case ExpressionType.Convert:
-                Type toType = expression.Type;
+                var toType = expression.Type;
+                var tp = TypeCache.Get(expression.Type);
 
-                if (value is null && !toType.IsValueType)
+                if (value is null && tp.HasNullValue())
                 {
                     return null;
                 }
-                else if (TypeCache.Get(expression.Type) is { } tp && tp.IsNullable())
+                else if (tp.IsNullable())
                 {
-                    if (value is null)
-                    {
-                        return null;
-                    }
-
                     toType = tp.GetUnderlyingType();
                 }
 

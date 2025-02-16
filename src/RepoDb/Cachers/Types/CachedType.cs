@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿#nullable enable
+using System.Reflection;
 using RepoDb.Extensions;
 
 namespace RepoDb;
@@ -14,6 +15,7 @@ public class CachedType
     private readonly Lazy<bool> lazyIsClassType;
     private readonly Lazy<bool> lazyIsDictionaryStringObject;
     private readonly Lazy<bool> lazyIsNullable;
+    private readonly Lazy<bool> lazyHasNullValue;
 
     /// <summary>
     /// Creates a new instance of <see cref="CachedType" /> object.
@@ -21,16 +23,30 @@ public class CachedType
     /// <param name="type">The target type.</param>
     public CachedType(Type type)
     {
-        lazyGetUnderlyingType = new Lazy<Type>(() => type?.GetUnderlyingType());
+        if (type is null)
+            throw new ArgumentNullException(nameof(type));
 
-        if (type is null) return;
-
-        lazyGetProperties = new Lazy<PropertyInfo[]>(type.GetProperties);
-        lazyIsAnonymousType = new Lazy<bool>(type.IsAnonymousType);
-        lazyIsClassType = new Lazy<bool>(type.IsClassType);
-        lazyIsDictionaryStringObject = new Lazy<bool>(type.IsDictionaryStringObject);
-        lazyIsNullable = new Lazy<bool>(type.IsNullable);
+        lazyGetUnderlyingType = new(() => type?.GetUnderlyingType());
+        lazyGetProperties = new(type.GetProperties);
+        lazyIsAnonymousType = new(type.IsAnonymousType);
+        lazyIsClassType = new(type.IsClassType);
+        lazyIsDictionaryStringObject = new(type.IsDictionaryStringObject);
+        lazyIsNullable = new(() => this.GetUnderlyingType() != type);
+        lazyHasNullValue = new(() => !type.IsValueType || this.IsNullable());
     }
+
+    private CachedType()
+    {
+        lazyGetUnderlyingType = new(() => null!);
+        lazyGetProperties = new(() => null!);
+        lazyIsAnonymousType = new(() => false);
+        lazyIsClassType = new(() => false);
+        lazyIsDictionaryStringObject = new(() => false);
+        lazyIsNullable = new(() => false);
+        lazyHasNullValue = new(() => false);
+    }
+
+    public static readonly CachedType Null = new();
 
     /// <summary>
     /// Returns all the public properties of the current Type.
@@ -70,4 +86,10 @@ public class CachedType
     /// </summary>
     /// <returns>Returns true if the current type is wrapped within a <see cref="Nullable{T}"/> object.</returns>
     public bool IsNullable() => lazyIsNullable.Value;
+
+    /// <summary>
+    /// If null can be assigned to this type. (Reference type or nullable type)
+    /// </summary>
+    /// <returns></returns>
+    public bool HasNullValue() => lazyHasNullValue.Value;
 }

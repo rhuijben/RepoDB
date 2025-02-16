@@ -8,7 +8,6 @@ namespace RepoDb;
 public static class TypeCache
 {
     private static readonly ConcurrentDictionary<Type, CachedType> cache = new();
-    private static readonly CachedType nullCachedType = new(null);
 
     /// <summary>
     /// Gets the cached <see cref="CachedType"/> object that is being mapped on a type.
@@ -19,17 +18,9 @@ public static class TypeCache
     {
         if (type is null)
         {
-            return nullCachedType;
+            return CachedType.Null;
         }
 
-        if (cache.TryGetValue(type, out var result))
-        {
-            return result;
-        }
-
-        result = new CachedType(type);
-        cache.TryAdd(type, result);
-
-        return result;
+        return cache.GetOrAdd(type, (t) => new CachedType(t));
     }
 }

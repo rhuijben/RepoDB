@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using RepoDb.Attributes.Parameter;
 
@@ -14,7 +16,10 @@ public static class TypeExtension
     /// </summary>
     /// <param name="type">The target type.</param>
     /// <returns>The instance of the <see cref="DbType"/> object.</returns>
-    public static IEnumerable<PropertyValueAttribute> GetPropertyValueAttributes(this Type type) =>
+#if NET
+    [return: NotNullIfNotNull(nameof(type))]
+#endif
+    public static IEnumerable<PropertyValueAttribute>? GetPropertyValueAttributes(this Type type) =>
         type != null ? PropertyValueAttributeMapper.Get(TypeCache.Get(type).GetUnderlyingType()) : null;
 
     /// <summary>
@@ -30,7 +35,7 @@ public static class TypeExtension
     /// </summary>
     /// <param name="type">The current type.</param>
     /// <returns>The instance of <see cref="ConstructorInfo"/> with the most arguments.</returns>
-    public static ConstructorInfo GetConstructorWithMostArguments(this Type type) =>
+    public static ConstructorInfo? GetConstructorWithMostArguments(this Type type) =>
         type.GetConstructors().Where(item => item.GetParameters().Length > 0)
             .OrderByDescending(item => item.GetParameters().Length).FirstOrDefault();
 
@@ -58,7 +63,7 @@ public static class TypeExtension
     /// <param name="type">The current type.</param>
     /// <returns>Returns true if the current type is an anonymous class.</returns>
     public static bool IsAnonymousType(this Type type) =>
-        type.FullName.StartsWith("<>f__AnonymousType", StringComparison.OrdinalIgnoreCase);
+        type.FullName?.StartsWith("<>f__AnonymousType", StringComparison.OrdinalIgnoreCase) ?? false;
 
     /// <summary>
     /// Checks whether the current type is of type <see cref="IDictionary{TKey, TValue}"/> (with string/object key-value-pair).
@@ -142,7 +147,10 @@ public static class TypeExtension
     /// </summary>
     /// <param name="type">The current type to check.</param>
     /// <returns>The underlying type or the current type.</returns>
-    public static Type GetUnderlyingType(this Type type) =>
+#if NET
+    [return: NotNullIfNotNull(nameof(type))]
+#endif
+    public static Type? GetUnderlyingType(this Type? type) =>
         type != null ? (Nullable.GetUnderlyingType(type) ?? type) : null;
 
     /// <summary>
@@ -151,19 +159,9 @@ public static class TypeExtension
     /// <param name="type">The current type.</param>
     /// <param name="mappedName">The name of the property mapping.</param>
     /// <returns>The instance of <see cref="ClassProperty"/>.</returns>
-    internal static ClassProperty GetMappedProperty(this Type type,
+    internal static ClassProperty? GetMappedProperty(this Type type,
         string mappedName) =>
         PropertyCache.Get(type)?.FirstOrDefault(p => string.Equals(p.GetMappedName(), mappedName, StringComparison.OrdinalIgnoreCase));
-
-    /// <summary>
-    /// Returns the list of the interface types being implemented by the current type.
-    /// </summary>
-    /// <param name="type">The current type.</param>
-    /// <returns>The list of the interface types.</returns>
-    [Obsolete("Please use the Type.GetInterfaces() method instead.")]
-    public static Type[] GetImplementedInterfaces(this Type type) =>
-        type?.GetInterfaces() ??
-        type?.GetType().GetProperty("ImplementedInterfaces")?.GetValue(type) as Type[];
 
     /// <summary>
     /// Creates a generic type of the current type based on the generic type available from the source type.
@@ -171,11 +169,11 @@ public static class TypeExtension
     /// <param name="currentType">The current type.</param>
     /// <param name="sourceType">The source type.</param>
     /// <returns>The newly created generic type.</returns>
-    public static Type MakeGenericTypeFrom(this Type currentType,
-        Type sourceType)
+    public static Type? MakeGenericTypeFrom(this Type currentType,
+        Type? sourceType)
     {
         var genericTypes = sourceType?.GetGenericArguments();
-        if (genericTypes?.Length == currentType?.GetGenericArguments().Length)
+        if (genericTypes?.Length == currentType.GetGenericArguments().Length)
         {
             return currentType.MakeGenericType(genericTypes);
         }
@@ -196,7 +194,7 @@ public static class TypeExtension
                 .GetInterfaces()?
                 .FirstOrDefault(item =>
                     item.Name == interfaceType.Name && item.Namespace == interfaceType.Namespace);
-        interfaceType = interfaceType?.MakeGenericTypeFrom(targetInterface);
+        interfaceType = interfaceType.MakeGenericTypeFrom(targetInterface)!;
         return interfaceType?.IsAssignableFrom(currentType) == true;
     }
 

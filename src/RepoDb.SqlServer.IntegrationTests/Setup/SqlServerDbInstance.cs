@@ -23,14 +23,14 @@ public class SqlServerDbInstance : DbInstance<SqlConnection>
         // RepoDb connection
         ConnectionString =
             Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODBTEST")
-            ?? @"Server=tcp:127.0.0.1,41433;Database=RepoDbTest;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;"; // Docker Test Configuration
+            ?? new SqlConnectionStringBuilder(AdminConnectionString) { InitialCatalog = "RepoDbSqlServerTest" }.ToString();
     }
 
     protected override async Task CreateUserDatabase(DbConnection sql)
     {
-        await sql.ExecuteNonQueryAsync(@"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
+        await sql.ExecuteNonQueryAsync(@"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbSqlServerTest'))
                 BEGIN
-                    CREATE DATABASE [RepoDbTest];
+                    CREATE DATABASE [RepoDbSqlServerTest];
                 END");
     }
 }
