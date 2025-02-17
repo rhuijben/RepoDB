@@ -23,14 +23,14 @@ public class SqlServerDbInstance : DbInstance<SqlConnection>
         // RepoDb connection
         ConnectionString =
             Environment.GetEnvironmentVariable("REPODB_SQLSERVER_CONSTR_REPODB")
-            ?? new SqlConnectionStringBuilder(AdminConnectionString) { InitialCatalog = "RepoDbCoreTest" }.ToString();
+            ?? new SqlConnectionStringBuilder(AdminConnectionString) { InitialCatalog = DatabaseName }.ToString();
     }
 
     protected override async Task CreateUserDatabase(DbConnection sql)
     {
-        await sql.ExecuteNonQueryAsync(@"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbCoreTest'))
+        await sql.ExecuteNonQueryAsync($@"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = '{DatabaseName}'))
                 BEGIN
-                    CREATE DATABASE [RepoDbCoreTest];
+                    CREATE DATABASE [{DatabaseName}];
                 END");
     }
 }

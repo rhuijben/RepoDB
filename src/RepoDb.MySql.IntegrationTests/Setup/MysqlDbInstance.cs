@@ -19,12 +19,12 @@ public class MysqlDbInstance : DbInstance<MySqlConnection>
 
         ConnectionString =
             Environment.GetEnvironmentVariable("REPODB_MYSQL_CONSTR_REPODB")
-            ?? new MySqlConnectionStringBuilder(AdminConnectionString) { Database = "RepoDb" }.ToString();
+            ?? new MySqlConnectionStringBuilder(AdminConnectionString) { Database = DatabaseName }.ToString();
     }
 
     protected override async Task CreateUserDatabase(DbConnection sql)
     {
-        await sql.ExecuteNonQueryAsync(@"CREATE DATABASE IF NOT EXISTS `RepoDb`;");
-        await sql.ExecuteNonQueryAsync(@"GRANT ALL Privileges on RepoDb.* to 'root'@'%';");
+        await sql.ExecuteNonQueryAsync($@"CREATE DATABASE IF NOT EXISTS `{DatabaseName}`;");
+        await sql.ExecuteNonQueryAsync($@"GRANT ALL Privileges on {DatabaseName}.* to 'root'@'%';");
     }
 }

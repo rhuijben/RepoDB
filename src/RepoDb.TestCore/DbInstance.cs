@@ -1,4 +1,6 @@
 ﻿using System.Data.Common;
+using System.Reflection;
+using System.Runtime.Versioning;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RepoDb.TestCore;
@@ -79,6 +81,7 @@ public abstract class DbInstance : IAsyncDisposable
 
 public abstract class DbInstance<TDbConnection> : DbInstance where TDbConnection : DbConnection, new()
 {
+    string? _databaseName;
     public override DbConnection CreateConnection()
     {
         var c = new TDbConnection();
@@ -91,5 +94,16 @@ public abstract class DbInstance<TDbConnection> : DbInstance where TDbConnection
         var c = new TDbConnection();
         c.ConnectionString = AdminConnectionString;
         return c;
+    }
+
+    public virtual string DatabaseName
+    {
+        get => _databaseName ??= (GetType().Assembly is { } a ? (a.GetName().Name + "for" + a.GetCustomAttribute<TargetFrameworkAttribute>()?.FrameworkName) : "RepoDbTest")
+            .Replace("Integration", "")
+            .Replace("Unit", "")
+            .Replace("NETCore", "")
+            .Replace("App", "")
+            .Replace("Version", "")
+            .Replace("Tests", "").Replace(".", "").Replace(",", "").Replace("=", "");
     }
 }

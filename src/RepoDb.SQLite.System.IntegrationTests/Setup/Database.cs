@@ -12,6 +12,8 @@ public static class Database
 
     public static void Initialize()
     {
+        Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
+
         // Initialize SqLite
         GlobalConfiguration
             .Setup()

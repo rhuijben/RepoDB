@@ -26,6 +26,8 @@ public static class Database
     {
         Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
+        GlobalConfiguration.Setup(new()).UsePostgreSql();
+
         // Create databases
         CreateDatabase();
 

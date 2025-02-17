@@ -21,15 +21,15 @@ public class PostgreSqlDbInstance : DbInstance<NpgsqlConnection>
         // RepoDb connection
         ConnectionString =
             Environment.GetEnvironmentVariable("REPODB_POSTGRESQL_CONSTR")
-            ?? new NpgsqlConnectionStringBuilder(AdminConnectionString) { Database = "RepoDbBulk" }.ToString();
+            ?? new NpgsqlConnectionStringBuilder(AdminConnectionString) { Database = DatabaseName }.ToString();
     }
 
     protected override async Task CreateUserDatabase(DbConnection sql)
     {
-        var recordCount = await sql.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDbBulk';");
+        var recordCount = await sql.ExecuteScalarAsync<int>($"SELECT COUNT(*) FROM pg_database WHERE datname = '{DatabaseName}';");
         if (recordCount <= 0)
         {
-            await sql.ExecuteNonQueryAsync(@"CREATE DATABASE ""RepoDbBulk""
+            await sql.ExecuteNonQueryAsync($@"CREATE DATABASE ""{DatabaseName}""
                         WITH OWNER = ""postgres""
                         ENCODING = ""UTF8""
                         CONNECTION LIMIT = -1;");

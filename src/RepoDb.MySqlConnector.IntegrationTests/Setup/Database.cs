@@ -24,8 +24,10 @@ public static class Database
 
     public static void Initialize()
     {
+        Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
+
         // Initialize MySql
-        GlobalConfiguration.Setup(new());
+        GlobalConfiguration.Setup(new()).UseMySqlConnector();
 
         // Create databases
         CreateDatabase();

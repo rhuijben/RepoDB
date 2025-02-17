@@ -25,6 +25,8 @@ public class SqliteDbInstance : DbInstance<SqliteConnection>
         _conn.Open();
     }
 
+    public override string DatabaseName => "sqlite";
+
     protected override Task CreateUserDatabase(DbConnection sql)
     {
         return Task.CompletedTask;

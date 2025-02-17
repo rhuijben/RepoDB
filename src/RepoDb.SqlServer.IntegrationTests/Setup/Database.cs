@@ -26,6 +26,9 @@ public static class Database
     {
         Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
 
+        GlobalConfiguration.Setup(new())
+            .UseSqlServer();
+
         // Create databases
         CreateDatabase();
 
