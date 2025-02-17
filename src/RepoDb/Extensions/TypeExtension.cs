@@ -244,7 +244,7 @@ public static class TypeExtension
     /// <typeparam name="T">The target .NET CLR type.</typeparam>
     /// <param name="propertyName">The name of the class property to be mapped.</param>
     /// <returns>An instance of <see cref="PropertyInfo"/> object.</returns>
-    public static PropertyInfo GetProperty<T>(string propertyName)
+    public static PropertyInfo? GetProperty<T>(string propertyName)
         where T : class =>
         GetProperty(typeof(T), propertyName);
 
@@ -254,7 +254,7 @@ public static class TypeExtension
     /// <param name="type">The target .NET CLR type.</param>
     /// <param name="propertyName">The name of the target class property.</param>
     /// <returns>An instance of <see cref="PropertyInfo"/> object.</returns>
-    public static PropertyInfo GetProperty(Type type,
+    public static PropertyInfo? GetProperty(Type type,
         string propertyName) =>
         TypeCache.Get(type)
             .GetProperties()

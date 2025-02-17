@@ -26,7 +26,7 @@ public class CachedType
         if (type is null)
             throw new ArgumentNullException(nameof(type));
 
-        lazyGetUnderlyingType = new(() => type?.GetUnderlyingType());
+        lazyGetUnderlyingType = new(() => type.GetUnderlyingType());
         lazyGetProperties = new(type.GetProperties);
         lazyIsAnonymousType = new(type.IsAnonymousType);
         lazyIsClassType = new(type.IsClassType);

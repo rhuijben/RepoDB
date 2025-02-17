@@ -107,10 +107,11 @@ public class ParameterEqualityTest
         // Prepare
         var objA = new Parameter("ParameterName", new object());
         var objB = new Parameter("ParameterName", new object());
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -123,10 +124,11 @@ public class ParameterEqualityTest
         // Prepare
         var objA = new Parameter("ParameterName", new object());
         var objB = new Parameter("ParameterName", new object());
-        var list = new List<Parameter>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<Parameter>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert

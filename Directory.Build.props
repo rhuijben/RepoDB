@@ -20,6 +20,8 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
   <Target Name="SetGenerateBeforeBuild" BeforeTargets="Build">
     <!-- IsPackable is set in project files, so delay evaluating this -->

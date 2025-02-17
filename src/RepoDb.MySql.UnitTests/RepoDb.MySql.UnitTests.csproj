@@ -1,17 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net8.0;net481</TargetFrameworks>
+    <TargetFrameworks>net9.0;net8.0;net48</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <EnableMSTestRunner>true</EnableMSTestRunner>
-    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MSTest" />
     <PackageReference Include="MySql.Data" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RepoDb\RepoDb.csproj" />
     <ProjectReference Include="..\RepoDb.MySql\RepoDb.MySql.csproj" />
   </ItemGroup>
 </Project>

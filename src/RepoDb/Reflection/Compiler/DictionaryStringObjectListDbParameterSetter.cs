@@ -27,10 +27,11 @@ internal partial class Compiler
         var entitiesParameterExpression = Expression.Parameter(typeOfListEntity, "entities");
         var dbParameterCollectionExpression = Expression.Property(dbCommandExpression,
             StaticType.DbCommand.GetProperty("Parameters"));
-        var bodyExpressions = new List<Expression>();
-
-        // Clear the parameter collection first
-        bodyExpressions.Add(GetDbParameterCollectionClearMethodExpression(dbParameterCollectionExpression));
+        var bodyExpressions = new List<Expression>
+        {
+            // Clear the parameter collection first
+            GetDbParameterCollectionClearMethodExpression(dbParameterCollectionExpression)
+        };
 
         // Iterate by batch size
         for (var entityIndex = 0; entityIndex < batchSize; entityIndex++)

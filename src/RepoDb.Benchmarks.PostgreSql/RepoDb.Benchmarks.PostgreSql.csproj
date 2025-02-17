@@ -17,6 +17,7 @@
     <PackageReference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RepoDb\RepoDb.csproj" />
     <ProjectReference Include="..\RepoDb.PostgreSql\RepoDb.PostgreSql.csproj" />
   </ItemGroup>
 </Project>

@@ -1394,7 +1394,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1433,7 +1433,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1475,7 +1475,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1526,7 +1526,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     mappings: mappings,
@@ -1578,7 +1578,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     mappings: mappings,
@@ -1631,7 +1631,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     mappings: mappings,
@@ -3056,7 +3056,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -3095,7 +3095,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -3137,7 +3137,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -3188,7 +3188,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     mappings: mappings,
@@ -3240,7 +3240,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     mappings: mappings,
@@ -3293,7 +3293,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+                connection.BinaryBulkInsert(
                     tableName,
                     reader,
                     mappings: mappings,

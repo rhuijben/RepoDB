@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Title>RepoDb.PostgreSql</Title>
-    <TargetFrameworks>net9.0;net8.0;netstandard2.0;net481</TargetFrameworks>
+    <TargetFrameworks>net9.0;net8.0;netstandard2.0;net48</TargetFrameworks>
     <Nullable>annotations</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Description>A hybrid .NET ORM library for PostgreSQL.</Description>

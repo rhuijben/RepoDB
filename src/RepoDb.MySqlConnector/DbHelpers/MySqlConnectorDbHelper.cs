@@ -69,8 +69,8 @@ public sealed class MySqlConnectorDbHelper : IDbHelper
     /// <returns></returns>
     private HashSet<string> GetBlobTypes()
     {
-        return new()
-        {
+        return
+        [
             "blob",
             "blobasarray",
             "binary",
@@ -80,7 +80,7 @@ public sealed class MySqlConnectorDbHelper : IDbHelper
             "mediumblob",
             "tinyblob",
             "varbinary"
-        };
+        ];
     }
 
     /// <summary>

@@ -8,7 +8,7 @@ public class CustomDbParameterCollection : DbParameterCollection
 {
     #region Privates
 
-    private List<object> m_parameters = new List<object>();
+    private List<object> m_parameters = [];
 
     #endregion
 

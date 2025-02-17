@@ -36,11 +36,12 @@ public class ExecuteQueryMultipleTest
             using (var extractor = connection.ExecuteQueryMultiple(@"SELECT * FROM [SdsCompleteTable];
                     SELECT * FROM [SdsCompleteTable];"))
             {
-                var list = new List<IEnumerable<SdsCompleteTable>>();
-
-                // Act
-                list.Add(extractor.Extract<SdsCompleteTable>());
-                list.Add(extractor.Extract<SdsCompleteTable>());
+                var list = new List<IEnumerable<SdsCompleteTable>>
+                {
+                    // Act
+                    extractor.Extract<SdsCompleteTable>(),
+                    extractor.Extract<SdsCompleteTable>()
+                };
 
                 // Assert
                 list.ForEach(item =>
@@ -69,11 +70,12 @@ public class ExecuteQueryMultipleTest
                     Id2 = tables.Last().Id
                 }))
             {
-                var list = new List<IEnumerable<SdsCompleteTable>>();
-
-                // Act
-                list.Add(extractor.Extract<SdsCompleteTable>());
-                list.Add(extractor.Extract<SdsCompleteTable>());
+                var list = new List<IEnumerable<SdsCompleteTable>>
+                {
+                    // Act
+                    extractor.Extract<SdsCompleteTable>(),
+                    extractor.Extract<SdsCompleteTable>()
+                };
 
                 // Assert
                 list.ForEach(item =>
@@ -97,11 +99,12 @@ public class ExecuteQueryMultipleTest
                     SELECT * FROM [SdsCompleteTable] WHERE Id = @Id;",
                 new { Id = tables.Last().Id }))
             {
-                var list = new List<IEnumerable<SdsCompleteTable>>();
-
-                // Act
-                list.Add(extractor.Extract<SdsCompleteTable>());
-                list.Add(extractor.Extract<SdsCompleteTable>());
+                var list = new List<IEnumerable<SdsCompleteTable>>
+                {
+                    // Act
+                    extractor.Extract<SdsCompleteTable>(),
+                    extractor.Extract<SdsCompleteTable>()
+                };
 
                 // Assert
                 list.ForEach(item =>
@@ -128,11 +131,12 @@ public class ExecuteQueryMultipleTest
             using (var extractor = await connection.ExecuteQueryMultipleAsync(@"SELECT * FROM [SdsCompleteTable];
                     SELECT * FROM [SdsCompleteTable];"))
             {
-                var list = new List<IEnumerable<SdsCompleteTable>>();
-
-                // Act
-                list.Add(extractor.Extract<SdsCompleteTable>());
-                list.Add(extractor.Extract<SdsCompleteTable>());
+                var list = new List<IEnumerable<SdsCompleteTable>>
+                {
+                    // Act
+                    extractor.Extract<SdsCompleteTable>(),
+                    extractor.Extract<SdsCompleteTable>()
+                };
 
                 // Assert
                 list.ForEach(item =>
@@ -161,11 +165,12 @@ public class ExecuteQueryMultipleTest
                     Id2 = tables.Last().Id
                 }))
             {
-                var list = new List<IEnumerable<SdsCompleteTable>>();
-
-                // Act
-                list.Add(extractor.Extract<SdsCompleteTable>());
-                list.Add(extractor.Extract<SdsCompleteTable>());
+                var list = new List<IEnumerable<SdsCompleteTable>>
+                {
+                    // Act
+                    extractor.Extract<SdsCompleteTable>(),
+                    extractor.Extract<SdsCompleteTable>()
+                };
 
                 // Assert
                 list.ForEach(item =>
@@ -189,11 +194,12 @@ public class ExecuteQueryMultipleTest
                     SELECT * FROM [SdsCompleteTable] WHERE Id = @Id;",
                 new { Id = tables.Last().Id }))
             {
-                var list = new List<IEnumerable<SdsCompleteTable>>();
-
-                // Act
-                list.Add(extractor.Extract<SdsCompleteTable>());
-                list.Add(extractor.Extract<SdsCompleteTable>());
+                var list = new List<IEnumerable<SdsCompleteTable>>
+                {
+                    // Act
+                    extractor.Extract<SdsCompleteTable>(),
+                    extractor.Extract<SdsCompleteTable>()
+                };
 
                 // Assert
                 list.ForEach(item =>

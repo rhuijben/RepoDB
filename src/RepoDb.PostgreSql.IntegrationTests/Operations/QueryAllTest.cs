@@ -69,7 +69,7 @@ public class QueryAllTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            var queryResult = connection.QueryAll<CompleteTable>();
+            var queryResult = await connection.QueryAllAsync<CompleteTable>();
 
             // Assert
             tables.AsList().ForEach(table =>

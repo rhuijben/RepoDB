@@ -10,7 +10,7 @@ namespace RepoDb.Benchmarks.PostgreSql.Dapper;
 
 public class UpdateAllDapperBenchmarks : DapperBaseBenchmarks
 {
-    private readonly List<Person> persons = new ();
+    private readonly List<Person> persons = [];
 
     [Params(10, 100, 1000)]
     public int Rows { get; set; }

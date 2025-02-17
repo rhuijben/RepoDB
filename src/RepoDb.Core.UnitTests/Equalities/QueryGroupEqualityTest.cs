@@ -969,10 +969,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse(new { Id = 1 });
         var objB = QueryGroup.Parse(new { Id = 2 });
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -985,10 +986,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable());
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable());
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1001,10 +1003,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable(), Conjunction.And);
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable(), Conjunction.And);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1017,10 +1020,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable(), Conjunction.And);
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable(), Conjunction.Or);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1033,10 +1037,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable(), true);
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable(), true);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1049,10 +1054,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable(), true);
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable(), false);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1065,10 +1071,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1);
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id == 2);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1081,10 +1088,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && c.Value != 1);
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id != 1 && c.Value == 1);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1097,10 +1105,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => !c.Name.Contains("Name1"));
         var objB = QueryGroup.Parse<EntityClass>(c => c.Name.Contains("Name2"));
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1113,10 +1122,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Name.Contains("Name1") == true);
         var objB = QueryGroup.Parse<EntityClass>(c => c.Name.Contains("Name2") == false);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1129,10 +1139,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse(new { Id = 1, Name = "Name1" });
         var objB = QueryGroup.Parse(new { Id = 2, Name = "Name2" });
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1153,10 +1164,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         });
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1177,10 +1189,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         }, Conjunction.And);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1201,10 +1214,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         }, Conjunction.Or);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1225,10 +1239,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         }, true);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1249,10 +1264,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         }, false);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1265,10 +1281,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && c.Name == "Name1");
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id == 2 && c.Name == "Name2");
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1281,10 +1298,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && !c.Name.Contains("Name1"));
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id == 2 && c.Name.Contains("Name2"));
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1297,10 +1315,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && c.Name.Contains("Name1") == true);
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id == 2 && c.Name.Contains("Name2") == false);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1317,10 +1336,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse(new { Id = 1 });
         var objB = QueryGroup.Parse(new { Id = 2 });
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1333,10 +1353,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable());
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable());
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1349,10 +1370,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable(), Conjunction.And);
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable(), Conjunction.And);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1365,10 +1387,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable(), Conjunction.And);
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable(), Conjunction.Or);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1381,10 +1404,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable(), true);
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable(), true);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1397,10 +1421,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = new QueryGroup(new QueryField("Id", 1).AsEnumerable(), true);
         var objB = new QueryGroup(new QueryField("Id", 2).AsEnumerable(), false);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1413,10 +1438,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1);
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id == 2);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1429,10 +1455,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && c.Value != 1);
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id != 1 && c.Value == 1);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1445,10 +1472,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => !c.Name.Contains("Name1"));
         var objB = QueryGroup.Parse<EntityClass>(c => c.Name.Contains("Name2"));
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1461,10 +1489,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Name.Contains("Name1") == true);
         var objB = QueryGroup.Parse<EntityClass>(c => c.Name.Contains("Name2") == false);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1477,10 +1506,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse(new { Id = 1, Name = "Name1" });
         var objB = QueryGroup.Parse(new { Id = 2, Name = "Name2" });
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1501,10 +1531,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         });
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1525,10 +1556,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         }, Conjunction.And);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1549,10 +1581,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         }, Conjunction.Or);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1573,10 +1606,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         }, true);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1597,10 +1631,11 @@ public class QueryGroupEqualityTest
             new QueryField("Id", 2),
             new QueryField("Name", "Name2")
         }, false);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1613,10 +1648,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && c.Name == "Name1");
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id == 2 && c.Name == "Name2");
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1629,10 +1665,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && !c.Name.Contains("Name1"));
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id == 2 && c.Name.Contains("Name2"));
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -1645,10 +1682,11 @@ public class QueryGroupEqualityTest
         // Prepare
         var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && c.Name.Contains("Name1") == true);
         var objB = QueryGroup.Parse<EntityClass>(c => c.Id == 2 && c.Name.Contains("Name2") == false);
-        var list = new List<QueryGroup>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryGroup>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert

@@ -110,6 +110,6 @@ public static class EnumerableExtension
     /// <typeparam name="T">The type of the elements=.</typeparam>
     /// <param name="source">The actual enumerable instance.</param>
     /// <returns>The created <see cref="HashSet{T}"/> object.</returns>
-    internal static HashSet<T> ToHashSet<T>(this IEnumerable<T> source) => new(source);
+    internal static HashSet<T> ToHashSet<T>(this IEnumerable<T> source) => [.. source];
 #endif
 }

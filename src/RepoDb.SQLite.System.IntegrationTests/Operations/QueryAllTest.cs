@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data.SQLite;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.SQLite.System.IntegrationTests.Models;
 using RepoDb.SQLite.System.IntegrationTests.Setup;
-using System.Data.SQLite;
 
 namespace RepoDb.SQLite.System.IntegrationTests.Operations.SDS;
 
@@ -69,7 +69,7 @@ public class QueryAllTest
             var tables = Database.CreateSdsCompleteTables(10, connection);
 
             // Act
-            var queryResult = connection.QueryAll<SdsCompleteTable>();
+            var queryResult = await connection.QueryAllAsync<SdsCompleteTable>();
 
             // Assert
             tables.AsList().ForEach(table =>

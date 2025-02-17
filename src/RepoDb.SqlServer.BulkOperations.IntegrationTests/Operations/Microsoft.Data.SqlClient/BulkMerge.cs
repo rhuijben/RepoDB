@@ -217,18 +217,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
@@ -447,18 +448,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationMappedIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.IdMapped), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.RowGuidMapped), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnBitMapped), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDateTimeMapped), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDateTime2Mapped), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDecimalMapped), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnFloatMapped), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnIntMapped), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnNVarCharMapped), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.IdMapped), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.RowGuidMapped), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnBitMapped), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDateTimeMapped), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDateTime2Mapped), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDecimalMapped), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnFloatMapped), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnIntMapped), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnNVarCharMapped), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
@@ -491,18 +493,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
@@ -547,18 +550,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -591,18 +595,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -715,18 +720,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -764,18 +770,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -884,16 +891,17 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateWithExtraFieldsBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
@@ -1452,18 +1460,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -1497,18 +1506,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -1681,18 +1691,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -1731,18 +1742,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -1849,7 +1861,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     #region BulkMergeAsync<TEntity>
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesForEmptyTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesForEmptyTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -1857,7 +1869,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -1875,7 +1887,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesForEmptyTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesForEmptyTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -1883,7 +1895,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -1903,7 +1915,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntities()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntities()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -1914,7 +1926,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             connection.InsertAll(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -1932,7 +1944,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -1943,7 +1955,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             connection.InsertAll(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -1963,7 +1975,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithQualifiers()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithQualifiers()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -1977,8 +1989,8 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables,
-                qualifiers: e => new { e.RowGuid, e.ColumnInt }).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables,
+                qualifiers: e => new { e.RowGuid, e.ColumnInt });
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -1996,7 +2008,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithUsePhysicalPseudoTempTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithUsePhysicalPseudoTempTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2010,8 +2022,8 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables,
-                usePhysicalPseudoTempTable: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables,
+                usePhysicalPseudoTempTable: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2029,22 +2041,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithMappings()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithMappings()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
@@ -2052,7 +2065,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             connection.InsertAll(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables, mappings: mappings).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables, mappings: mappings);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2070,7 +2083,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesForEmptyTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesForEmptyTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationMappedIdentityTables(10);
@@ -2078,7 +2091,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2096,7 +2109,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesForEmptyTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesForEmptyTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationMappedIdentityTables(10);
@@ -2104,7 +2117,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2124,7 +2137,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntities()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntities()
     {
         // Setup
         var tables = Helper.CreateBulkOperationMappedIdentityTables(10);
@@ -2138,7 +2151,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationMappedIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2156,7 +2169,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationMappedIdentityTables(10);
@@ -2170,7 +2183,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationMappedIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2190,7 +2203,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesWithQualifiers()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesWithQualifiers()
     {
         // Setup
         var tables = Helper.CreateBulkOperationMappedIdentityTables(10);
@@ -2204,8 +2217,8 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationMappedIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables,
-                qualifiers: e => new { e.RowGuidMapped, e.ColumnIntMapped }).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables,
+                qualifiers: e => new { e.RowGuidMapped, e.ColumnIntMapped });
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2223,7 +2236,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesWithUsePhysicalPseudoTempTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesWithUsePhysicalPseudoTempTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationMappedIdentityTables(10);
@@ -2237,8 +2250,8 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationMappedIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables,
-                usePhysicalPseudoTempTable: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables,
+                usePhysicalPseudoTempTable: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2256,22 +2269,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesWithMappings()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForMappedEntitiesWithMappings()
     {
         // Setup
         var tables = Helper.CreateBulkOperationMappedIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.IdMapped), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.RowGuidMapped), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnBitMapped), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDateTimeMapped), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDateTime2Mapped), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDecimalMapped), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnFloatMapped), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnIntMapped), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnNVarCharMapped), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.IdMapped), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.RowGuidMapped), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnBitMapped), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDateTimeMapped), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDateTime2Mapped), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnDecimalMapped), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnFloatMapped), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnIntMapped), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationMappedIdentityTable.ColumnNVarCharMapped), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
@@ -2282,7 +2296,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationMappedIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables, mappings: mappings).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables, mappings: mappings);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2300,36 +2314,37 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesIfTheMappingsAreInvalid()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesIfTheMappingsAreInvalid()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables,
+            var bulkMergeResult = await connection.BulkMergeAsync(tables,
                 mappings: mappings);
 
             // Trigger
-            var result = bulkMergeResult.Result;
+            var result = bulkMergeResult;
         }
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDbDataReader()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDbDataReader()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2350,7 +2365,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                 using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                 {
                     // Act
-                    var bulkMergeResult = destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>((DbDataReader)reader).Result;
+                    var bulkMergeResult = await destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>((DbDataReader)reader);
 
                     // Assert
                     Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2360,22 +2375,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDbDataReaderWithMappings()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDbDataReaderWithMappings()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -2393,8 +2409,8 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                 using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                 {
                     // Act
-                    var bulkMergeResult = destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>((DbDataReader)reader,
-                        mappings: mappings).Result;
+                    var bulkMergeResult = await destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>((DbDataReader)reader,
+                        mappings: mappings);
 
                     // Assert
                     Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2404,22 +2420,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDbDataReaderIfTheMappingsAreInvalid()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDbDataReaderIfTheMappingsAreInvalid()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -2437,18 +2454,18 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                 using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                 {
                     // Act
-                    var bulkMergeResult = destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>((DbDataReader)reader,
+                    var bulkMergeResult = await destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>((DbDataReader)reader,
                         mappings: mappings);
 
                     // Trigger
-                    var result = bulkMergeResult.Result;
+                    var result = bulkMergeResult;
                 }
             }
         }
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2473,7 +2490,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>(table).Result;
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>(table);
 
                         // Assert
                         Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2484,7 +2501,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2509,7 +2526,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>(table, isReturnIdentity: true).Result;
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>(table, isReturnIdentity: true);
 
                         // Assert
                         Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2531,22 +2548,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTableWithMappings()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTableWithMappings()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -2568,8 +2586,8 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>(table,
-                            mappings: mappings).Result;
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>(table,
+                            mappings: mappings);
 
                         // Assert
                         Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2580,22 +2598,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTableIfTheMappingsAreInvalid()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTableIfTheMappingsAreInvalid()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -2617,11 +2636,11 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>(table,
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync<BulkOperationIdentityTable>(table,
                             mappings: mappings);
 
                         // Trigger
-                        var result = bulkMergeResult.Result;
+                        var result = bulkMergeResult;
                     }
                 }
             }
@@ -2671,7 +2690,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     #region BulkMergeAsync<TEntity>(Extra Fields)
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithExtraFields()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithExtraFields()
     {
         // Setup
         var tables = Helper.CreateWithExtraFieldsBulkOperationIdentityTables(10);
@@ -2685,7 +2704,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateWithExtraFieldsBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2703,21 +2722,22 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithExtraFieldsWithMappings()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForEntitiesWithExtraFieldsWithMappings()
     {
         // Setup
         var tables = Helper.CreateWithExtraFieldsBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
@@ -2728,7 +2748,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateWithExtraFieldsBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2750,7 +2770,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     #region BulkMergeAsync(TableName)
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameExpandoObjectsForEmptyTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameExpandoObjectsForEmptyTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationExpandoObjectIdentityTables(10, true);
@@ -2758,7 +2778,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2776,7 +2796,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameExpandoObjectsForEmptyTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameExpandoObjectsForEmptyTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationExpandoObjectIdentityTables(10, true);
@@ -2784,7 +2804,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2803,7 +2823,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameExpandoObjectsForNonEmptyTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameExpandoObjectsForNonEmptyTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2817,7 +2837,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             var entities = Helper.CreateBulkOperationExpandoObjectIdentityTables(10, true);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), entities).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), entities);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2835,7 +2855,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameExpandoObjectsForNonEmptyTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameExpandoObjectsForNonEmptyTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2849,7 +2869,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             var entities = Helper.CreateBulkOperationExpandoObjectIdentityTables(10, true);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2868,7 +2888,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameAnonymousObjectsForEmptyTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameAnonymousObjectsForEmptyTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationAnonymousObjectIdentityTables(10, true);
@@ -2876,7 +2896,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2894,7 +2914,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameAnonymousObjectsForEmptyTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameAnonymousObjectsForEmptyTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationAnonymousObjectIdentityTables(10, true);
@@ -2902,7 +2922,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2921,7 +2941,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameAnonymousObjectsForNonEmptyTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameAnonymousObjectsForNonEmptyTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2935,7 +2955,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             var entities = Helper.CreateBulkOperationAnonymousObjectIdentityTables(10, true);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), entities).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), entities);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2953,7 +2973,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameAnonymousObjectsForNonEmptyTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameAnonymousObjectsForNonEmptyTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2967,7 +2987,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             var entities = Helper.CreateBulkOperationAnonymousObjectIdentityTables(10, true);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -2986,7 +3006,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestSystemSqlConnectionBulkMergeAsyncForTableNameDataEntitiesForEmptyTable()
+    public async Task TestSystemSqlConnectionBulkMergeAsyncForTableNameDataEntitiesForEmptyTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -2994,7 +3014,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3012,7 +3032,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesForEmptyTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesForEmptyTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3020,7 +3040,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3040,7 +3060,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesForNonEmptyTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesForNonEmptyTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3054,7 +3074,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3072,7 +3092,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesForNonEmptyTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesForNonEmptyTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3086,7 +3106,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3106,7 +3126,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntities()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntities()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3120,7 +3140,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3138,7 +3158,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3152,7 +3172,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true).Result;
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), tables, isReturnIdentity: true);
             Assert.IsFalse(tables.Any(e => e.Id <= 0));
 
             // Assert
@@ -3172,7 +3192,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesWithQualifiers()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesWithQualifiers()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3186,9 +3206,9 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
                 tables,
-                qualifiers: e => new { e.RowGuid, e.ColumnInt }).Result;
+                qualifiers: e => new { e.RowGuid, e.ColumnInt });
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3206,7 +3226,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesWithUsePhysicalPseudoTempTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataEntitiesWithUsePhysicalPseudoTempTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3220,9 +3240,9 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
             Helper.UpdateBulkOperationIdentityTables(tables);
 
             // Act
-            var bulkMergeResult = connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
+            var bulkMergeResult = await connection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
                 tables,
-                usePhysicalPseudoTempTable: true).Result;
+                usePhysicalPseudoTempTable: true);
 
             // Assert
             Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3240,7 +3260,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReader()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReader()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3261,7 +3281,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                 using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                 {
                     // Act
-                    var bulkMergeResult = destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), (DbDataReader)reader).Result;
+                    var bulkMergeResult = await destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), (DbDataReader)reader);
 
                     // Assert
                     Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3271,22 +3291,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderWithMappings()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderWithMappings()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -3304,9 +3325,9 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                 using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                 {
                     // Act
-                    var bulkMergeResult = destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
+                    var bulkMergeResult = await destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
                         (DbDataReader)reader,
-                        mappings: mappings).Result;
+                        mappings: mappings);
 
                     // Assert
                     Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3316,22 +3337,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheMappingsAreInvalid()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheMappingsAreInvalid()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -3349,19 +3371,19 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                 using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                 {
                     // Act
-                    var bulkMergeResult = destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
+                    var bulkMergeResult = await destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
                         (DbDataReader)reader,
                         mappings: mappings);
 
                     // Trigger
-                    var result = bulkMergeResult.Result;
+                    var result = bulkMergeResult;
                 }
             }
         }
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheTableNameIsNotValid()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheTableNameIsNotValid()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3382,17 +3404,17 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                 using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                 {
                     // Act
-                    var bulkMergeResult = destinationConnection.BulkMergeAsync("InvalidTable", (DbDataReader)reader);
+                    var bulkMergeResult = await destinationConnection.BulkMergeAsync("InvalidTable", (DbDataReader)reader);
 
                     // Trigger
-                    var result = bulkMergeResult.Result;
+                    var result = bulkMergeResult;
                 }
             }
         }
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheTableNameIsMissing()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheTableNameIsMissing()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3413,17 +3435,17 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                 using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                 {
                     // Act
-                    var bulkMergeResult = destinationConnection.BulkMergeAsync("MissingTable", (DbDataReader)reader);
+                    var bulkMergeResult = await destinationConnection.BulkMergeAsync("MissingTable", (DbDataReader)reader);
 
                     // Trigger
-                    var result = bulkMergeResult.Result;
+                    var result = bulkMergeResult;
                 }
             }
         }
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTable()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTable()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3448,7 +3470,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), table).Result;
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), table);
 
                         // Assert
                         Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3459,7 +3481,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableWithReturnIdentity()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableWithReturnIdentity()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3484,7 +3506,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), table, isReturnIdentity: true).Result;
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(), table, isReturnIdentity: true);
 
                         // Assert
                         Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3506,22 +3528,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod]
-    public void TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableWithMappings()
+    public async Task TestMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableWithMappings()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
-
-        // Add the mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add the mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.Id), nameof(BulkOperationIdentityTable.Id)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.RowGuid), nameof(BulkOperationIdentityTable.RowGuid)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnInt)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnNVarChar))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -3543,9 +3566,9 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
                             table,
-                            mappings: mappings).Result;
+                            mappings: mappings);
 
                         // Assert
                         Assert.AreEqual(tables.Count, bulkMergeResult);
@@ -3556,22 +3579,23 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheMappingsAreInvalid()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheMappingsAreInvalid()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
-        var mappings = new List<BulkInsertMapItem>();
+        var mappings = new List<BulkInsertMapItem>
+        {
+            // Add invalid mappings
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)),
 
-        // Add invalid mappings
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnBit), nameof(BulkOperationIdentityTable.ColumnBit)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime), nameof(BulkOperationIdentityTable.ColumnDateTime)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDateTime2), nameof(BulkOperationIdentityTable.ColumnDateTime2)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnDecimal), nameof(BulkOperationIdentityTable.ColumnDecimal)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnFloat), nameof(BulkOperationIdentityTable.ColumnFloat)));
-
-        // Switched
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)));
-        mappings.Add(new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt)));
+            // Switched
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnInt), nameof(BulkOperationIdentityTable.ColumnNVarChar)),
+            new BulkInsertMapItem(nameof(BulkOperationIdentityTable.ColumnNVarChar), nameof(BulkOperationIdentityTable.ColumnInt))
+        };
 
         // Insert the records first
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -3593,12 +3617,12 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync(ClassMappedNameCache.Get<BulkOperationIdentityTable>(),
                             table,
                             mappings: mappings);
 
                         // Trigger
-                        var result = bulkMergeResult.Result;
+                        var result = bulkMergeResult;
                     }
                 }
             }
@@ -3606,7 +3630,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheTableNameIsNotValid()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheTableNameIsNotValid()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3631,10 +3655,10 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync("InvalidTable", table);
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync("InvalidTable", table);
 
                         // Trigger
-                        var result = bulkMergeResult.Result;
+                        var result = bulkMergeResult;
                     }
                 }
             }
@@ -3642,7 +3666,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     }
 
     [TestMethod, ExpectedException(typeof(AggregateException))]
-    public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheTableNameIsMissing()
+    public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheTableNameIsMissing()
     {
         // Setup
         var tables = Helper.CreateBulkOperationIdentityTables(10);
@@ -3667,11 +3691,11 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
                     using (var destinationConnection = new SqlConnection(Database.ConnectionStringForRepoDb))
                     {
                         // Act
-                        var bulkMergeResult = destinationConnection.BulkMergeAsync("MissingTable",
+                        var bulkMergeResult = await destinationConnection.BulkMergeAsync("MissingTable",
                             table);
 
                         // Trigger
-                        var result = bulkMergeResult.Result;
+                        var result = bulkMergeResult;
                     }
                 }
             }

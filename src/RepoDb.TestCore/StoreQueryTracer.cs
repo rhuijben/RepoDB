@@ -22,5 +22,5 @@ public sealed class StoreQueryTracer : ITrace
         return Task.CompletedTask;
     }
 
-    public List<string> Traces = new();
+    public List<string> Traces = [];
 }

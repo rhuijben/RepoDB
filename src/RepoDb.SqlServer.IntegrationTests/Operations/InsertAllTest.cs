@@ -410,7 +410,7 @@ public class InsertAllTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.InsertAll(ClassMappedNameCache.Get<NonIdentityCompleteTable>(),
+            var result = await connection.InsertAllAsync(ClassMappedNameCache.Get<NonIdentityCompleteTable>(),
                 tables);
 
             // Assert

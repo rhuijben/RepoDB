@@ -22,7 +22,7 @@ public sealed class QueryMultipleExtractor : IDisposable
     private string _cacheKey = null;
     private int? _cacheItemExpiration = null;
     private ICache _cache = null;
-    private List<object> _items = new List<object>();
+    private List<object> _items = [];
 
     /// <summary>
     /// Creates a new instance of <see cref="QueryMultipleExtractor"/> class.

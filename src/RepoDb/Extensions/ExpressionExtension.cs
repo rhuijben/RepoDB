@@ -15,23 +15,23 @@ namespace RepoDb.Extensions;
 /// </summary>
 public static class ExpressionExtension
 {
-    private readonly static HashSet<ExpressionType> extractableExpressionTypes = new()
-    {
+    private readonly static HashSet<ExpressionType> extractableExpressionTypes =
+    [
         ExpressionType.Equal,
         ExpressionType.NotEqual,
         ExpressionType.GreaterThan,
         ExpressionType.GreaterThanOrEqual,
         ExpressionType.LessThan,
         ExpressionType.LessThanOrEqual
-    };
+    ];
 
-    private readonly static HashSet<ExpressionType> mathematicalExpressionTypes = new()
-    {
+    private readonly static HashSet<ExpressionType> mathematicalExpressionTypes =
+    [
         ExpressionType.Add,
         ExpressionType.Subtract,
         ExpressionType.Multiply,
         ExpressionType.Divide
-    };
+    ];
 
     /// <summary>
     /// Identify whether the instance of <see cref="Expression"/> can be extracted as <see cref="QueryField"/> object.

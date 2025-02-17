@@ -345,7 +345,7 @@ public class UpdateTest
             var table = Helper.CreateMdsCompleteTablesAsExpandoObjects(1).First();
 
             // Act
-            var result = DbConnectionExtension.Update(connection, ClassMappedNameCache.Get<MdsCompleteTable>(),
+            var result = connection.Update(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 table);
 
             // Assert
@@ -369,7 +369,7 @@ public class UpdateTest
             Helper.UpdateMdsCompleteTableProperties(table);
 
             // Act
-            var result = DbConnectionExtension.Update(connection, ClassMappedNameCache.Get<MdsCompleteTable>(), table);
+            var result = connection.Update(ClassMappedNameCache.Get<MdsCompleteTable>(), table);
 
             // Assert
             Assert.AreEqual(1, result);
@@ -392,7 +392,7 @@ public class UpdateTest
             Helper.UpdateMdsCompleteTableProperties(table);
 
             // Act
-            var result = DbConnectionExtension.Update(connection, ClassMappedNameCache.Get<MdsCompleteTable>(), table, new { table.Id });
+            var result = connection.Update(ClassMappedNameCache.Get<MdsCompleteTable>(), table, new { table.Id });
 
             // Assert
             Assert.AreEqual(1, result);
@@ -415,7 +415,7 @@ public class UpdateTest
             Helper.UpdateMdsCompleteTableProperties(table);
 
             // Act
-            var result = DbConnectionExtension.Update(connection, ClassMappedNameCache.Get<MdsCompleteTable>(), table, new QueryField("Id", table.Id));
+            var result = connection.Update(ClassMappedNameCache.Get<MdsCompleteTable>(), table, new QueryField("Id", table.Id));
 
             // Assert
             Assert.AreEqual(1, result);
@@ -443,7 +443,7 @@ public class UpdateTest
             Helper.UpdateMdsCompleteTableProperties(table);
 
             // Act
-            var result = DbConnectionExtension.Update(connection, ClassMappedNameCache.Get<MdsCompleteTable>(), table, queryFields);
+            var result = connection.Update(ClassMappedNameCache.Get<MdsCompleteTable>(), table, queryFields);
 
             // Assert
             Assert.AreEqual(1, result);
@@ -472,7 +472,7 @@ public class UpdateTest
             Helper.UpdateMdsCompleteTableProperties(table);
 
             // Act
-            var result = DbConnectionExtension.Update(connection, ClassMappedNameCache.Get<MdsCompleteTable>(), table, queryGroup);
+            var result = connection.Update(ClassMappedNameCache.Get<MdsCompleteTable>(), table, queryGroup);
 
             // Assert
             Assert.AreEqual(1, result);
@@ -499,7 +499,7 @@ public class UpdateTest
             var table = Helper.CreateMdsCompleteTablesAsExpandoObjects(1).First();
 
             // Act
-            var result = await DbConnectionExtension.UpdateAsync(connection, ClassMappedNameCache.Get<MdsCompleteTable>(),
+            var result = await connection.UpdateAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 table);
 
             // Assert

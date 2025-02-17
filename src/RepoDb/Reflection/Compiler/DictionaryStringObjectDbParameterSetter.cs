@@ -24,10 +24,11 @@ internal partial class Compiler
         var dbParameterCollectionExpression = Expression.Property(dbCommandExpression,
             StaticType.DbCommand.GetProperty("Parameters"));
         var dictionaryInstanceExpression = ConvertExpressionToTypeExpression(entityParameterExpression, StaticType.IDictionaryStringObject);
-        var bodyExpressions = new List<Expression>();
-
-        // Clear the parameter collection first
-        bodyExpressions.Add(GetDbParameterCollectionClearMethodExpression(dbParameterCollectionExpression));
+        var bodyExpressions = new List<Expression>
+        {
+            // Clear the parameter collection first
+            GetDbParameterCollectionClearMethodExpression(dbParameterCollectionExpression)
+        };
 
         // Iterate the fields
         foreach (var dbField in inputFields)

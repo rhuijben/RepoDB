@@ -590,7 +590,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -626,7 +626,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1023,7 +1023,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1059,7 +1059,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1587,7 +1587,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1623,7 +1623,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -2176,7 +2176,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            connection.BinaryBulkMerge(
                 tableName,
                 table: table);
 
@@ -2216,7 +2216,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            connection.BinaryBulkMerge(
                 tableName,
                 table: table);
 
@@ -3295,7 +3295,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities).Wait();
 
@@ -3331,7 +3331,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities).Wait();
 
@@ -3728,7 +3728,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities).Wait();
 
@@ -3764,7 +3764,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities).Wait();
 
@@ -4292,7 +4292,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities).Wait();
 
@@ -4328,7 +4328,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities).Wait();
 
@@ -4881,7 +4881,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table).Wait();
 
@@ -4921,7 +4921,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table).Wait();
 

@@ -20,5 +20,5 @@ internal class CommandArrayParametersText
     /// <summary>
     /// Gets the list of the command array parameters.
     /// </summary>
-    public IList<CommandArrayParameter> CommandArrayParameters { get; } = new List<CommandArrayParameter>();
+    public IList<CommandArrayParameter> CommandArrayParameters { get; } = [];
 }

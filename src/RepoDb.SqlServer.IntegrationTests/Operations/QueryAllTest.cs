@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
@@ -73,7 +73,7 @@ public class QueryAllTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var queryResult = connection.QueryAll<CompleteTable>();
+            var queryResult = await connection.QueryAllAsync<CompleteTable>();
 
             // Assert
             tables.AsList().ForEach(table =>
@@ -90,7 +90,7 @@ public class QueryAllTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var queryResult = connection.QueryAll<CompleteTable>(hints: SqlServerTableHints.NoLock);
+            var queryResult = await connection.QueryAllAsync<CompleteTable>(hints: SqlServerTableHints.NoLock);
 
             // Assert
             tables.AsList().ForEach(table =>

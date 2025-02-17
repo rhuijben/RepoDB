@@ -107,10 +107,11 @@ public class FieldEqualityTest
         // Prepare
         var objA = new Field("FieldName");
         var objB = new Field("FieldName");
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert

@@ -69,7 +69,7 @@ public class QueryAllTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            var queryResult = connection.QueryAll<MdsCompleteTable>();
+            var queryResult = await connection.QueryAllAsync<MdsCompleteTable>();
 
             // Assert
             tables.AsList().ForEach(table =>

@@ -85,10 +85,11 @@ public class QueryFieldEqualityTest
         // Prepare
         var objA = new QueryField("FieldName", Operation.Equal, "Value1");
         var objB = new QueryField("FieldName", Operation.Equal, "Value2");
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -101,10 +102,11 @@ public class QueryFieldEqualityTest
         // Prepare
         var objA = new QueryField("FieldName", Operation.Equal, "Value1");
         var objB = new QueryField("FieldName", Operation.Equal, "Value2");
-        var list = new List<QueryField>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<QueryField>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert

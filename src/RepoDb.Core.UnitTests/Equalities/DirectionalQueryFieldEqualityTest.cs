@@ -113,10 +113,11 @@ public class DirectionalQueryFieldEqualityTest
         // Prepare
         var objA = new DirectionalQueryField("FieldName", Operation.Equal, "Value1", ParameterDirection.Output);
         var objB = new DirectionalQueryField("FieldName", Operation.Equal, "Value2", ParameterDirection.Output);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -129,10 +130,11 @@ public class DirectionalQueryFieldEqualityTest
         // Prepare
         var objA = new DirectionalQueryField("FieldName", Operation.Equal, "Value1", ParameterDirection.Output);
         var objB = new DirectionalQueryField("FieldName", Operation.Equal, "Value2", ParameterDirection.Output);
-        var list = new List<DirectionalQueryField>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<DirectionalQueryField>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert

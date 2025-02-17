@@ -18,7 +18,12 @@ public class SQLiteDbInstance : DbInstance<SQLiteConnection>
         var cacheKey = Guid.NewGuid();
 
         // Database is shared when cache key is shared, until last connection dies
+#if NET
         AdminConnectionString = ConnectionString = $"Data Source=file:{cacheKey}?mode=memory&cache=shared;";
+#else
+        // The NetFramework version of System.Data.SQLite doesn't support Data Source=file: syntax yet. (Is compiletime option. Conservative default)
+        AdminConnectionString = ConnectionString = "Data Source=" +Path.GetFullPath(Path.GetTempFileName()).Replace(Path.DirectorySeparatorChar, '/');
+#endif
 
         // Keep one connection open, but don't use it
         _conn = new SQLiteConnection(AdminConnectionString);

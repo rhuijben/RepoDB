@@ -69,10 +69,11 @@ public class OrderFieldEqualityTest
         // Prepare
         var objA = new OrderField("OrderFieldName", Order.Ascending);
         var objB = new OrderField("OrderFieldName", Order.Ascending);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -85,10 +86,11 @@ public class OrderFieldEqualityTest
         // Prepare
         var objA = new OrderField("OrderFieldName", Order.Ascending);
         var objB = new OrderField("OrderFieldName", Order.Ascending);
-        var list = new List<OrderField>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<OrderField>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -129,10 +131,11 @@ public class OrderFieldEqualityTest
         // Prepare
         var objA = new OrderField("OrderFieldName", Order.Ascending);
         var objB = new OrderField("OrderFieldName", Order.Descending);
-        var list = new ArrayList();
-
-        // Act
-        list.Add(objA);
+        var list = new ArrayList
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert
@@ -145,10 +148,11 @@ public class OrderFieldEqualityTest
         // Prepare
         var objA = new OrderField("OrderFieldName", Order.Ascending);
         var objB = new OrderField("OrderFieldName", Order.Descending);
-        var list = new List<OrderField>();
-
-        // Act
-        list.Add(objA);
+        var list = new List<OrderField>
+        {
+            // Act
+            objA
+        };
         var equal = list.Contains(objB);
 
         // Assert

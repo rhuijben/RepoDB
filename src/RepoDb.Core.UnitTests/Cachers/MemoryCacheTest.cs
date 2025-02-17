@@ -39,8 +39,10 @@ public class MemoryCacheTest
     public void TestMemoryCacheClear()
     {
         // Prepare
-        var cache = new MemoryCache();
-        cache.Add(new CacheItem<object>("Key", new object()));
+        var cache = new MemoryCache
+        {
+            new CacheItem<object>("Key", new object())
+        };
 
         // Act
         cache.Clear();
@@ -53,8 +55,10 @@ public class MemoryCacheTest
     public void TestMemoryCacheContains()
     {
         // Prepare
-        var cache = new MemoryCache();
-        cache.Add(new CacheItem<object>("Key", new object()));
+        var cache = new MemoryCache
+        {
+            new CacheItem<object>("Key", new object())
+        };
 
         // Act
         var actual = cache.Contains("Key");
@@ -84,8 +88,10 @@ public class MemoryCacheTest
     public void TestMemoryCacheGetExpired()
     {
         // Prepare
-        var cache = new MemoryCache();
-        cache.Add("Key", new object(), 0);
+        var cache = new MemoryCache
+        {
+            { "Key", new object(), 0 }
+        };
 
         // Act
         var actual = cache.Get<object>("Key");
@@ -98,8 +104,10 @@ public class MemoryCacheTest
     public void TestMemoryCacheOverrideExpiredItem()
     {
         // Prepare
-        var cache = new MemoryCache();
-        cache.Add("Key", new object(), 0);
+        var cache = new MemoryCache
+        {
+            { "Key", new object(), 0 }
+        };
 
         // Act
         var actual = cache.Get<object>("Key");
@@ -165,10 +173,11 @@ public class MemoryCacheTest
     public void ThrowExceptionAtMemoryCacheOnAddingACacheWithNegativeExpiration()
     {
         // Prepare
-        var cache = new MemoryCache();
-
-        // Act/Assert
-        cache.Add("Key", "Value", -1);
+        var cache = new MemoryCache
+        {
+            // Act/Assert
+            { "Key", "Value", -1 }
+        };
     }
 
     [TestMethod, ExpectedException(typeof(ItemNotFoundException))]

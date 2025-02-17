@@ -9,7 +9,7 @@ namespace RepoDb.Benchmarks.PostgreSql.Linq2db;
 
 public class UpdateAllLinq2dbBenchmarks : Linq2dbBaseBenchmarks
 {
-    private readonly List<Person> persons = new();
+    private readonly List<Person> persons = [];
 
     [Params(10, 100, 1000)] 
     public int Rows { get; set; }
