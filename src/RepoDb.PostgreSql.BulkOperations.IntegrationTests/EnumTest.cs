@@ -140,7 +140,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities);
 
@@ -164,7 +164,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities);
 
@@ -195,7 +195,7 @@ public class EnumTest
             connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
+            var result = connection.BinaryBulkDelete(
                 tableName,
                 entities: entities);
 
@@ -221,7 +221,7 @@ public class EnumTest
             connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
+            var result = connection.BinaryBulkDelete(
                 tableName,
                 entities: entities);
 
@@ -248,7 +248,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -272,7 +272,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -303,7 +303,7 @@ public class EnumTest
             connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -330,7 +330,7 @@ public class EnumTest
             connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -362,7 +362,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities);
 
@@ -386,7 +386,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities);
 
@@ -417,7 +417,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
+            var result = connection.BinaryBulkDelete(
                 tableName,
                 entities: entities);
 
@@ -443,7 +443,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
+            var result = connection.BinaryBulkDelete(
                 tableName,
                 entities: entities);
 
@@ -470,7 +470,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -494,7 +494,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -525,7 +525,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -552,7 +552,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -584,7 +584,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities);
 
@@ -608,7 +608,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities);
 
@@ -639,7 +639,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
+            var result = connection.BinaryBulkDelete(
                 tableName,
                 entities: entities);
 
@@ -665,7 +665,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
+            var result = connection.BinaryBulkDelete(
                 tableName,
                 entities: entities);
 
@@ -692,7 +692,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -716,7 +716,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -747,7 +747,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -774,7 +774,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -807,7 +807,7 @@ public class EnumTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table);
 
@@ -827,7 +827,7 @@ public class EnumTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table);
 
@@ -859,7 +859,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
+            var result = connection.BinaryBulkDelete(
                 tableName,
                 table);
 
@@ -886,7 +886,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
+            var result = connection.BinaryBulkDelete(
                 tableName,
                 table);
 
@@ -914,7 +914,7 @@ public class EnumTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table);
 
@@ -938,7 +938,7 @@ public class EnumTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table);
 
@@ -969,7 +969,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 table);
 
@@ -992,7 +992,7 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 table);
 

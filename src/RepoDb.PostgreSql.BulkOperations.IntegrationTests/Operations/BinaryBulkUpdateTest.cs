@@ -39,7 +39,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -48,7 +48,7 @@ public class BinaryBulkUpdateTest
             entities = entities = Helper.UpdateBulkOperationLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -104,7 +104,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -113,7 +113,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -138,7 +138,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -147,7 +147,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
@@ -174,7 +174,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -183,7 +183,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -208,7 +208,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -217,7 +217,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationMappedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -241,7 +241,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -250,7 +250,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationMappedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -275,7 +275,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -284,7 +284,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationMappedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 keepIdentity: true,
@@ -321,7 +321,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -331,7 +331,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -367,7 +367,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -377,7 +377,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -414,7 +414,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -424,7 +424,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -451,7 +451,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -474,7 +474,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -483,7 +483,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationAnonymousLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -507,7 +507,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -516,7 +516,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationAnonymousLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -541,7 +541,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -550,7 +550,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationAnonymousLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
@@ -577,7 +577,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -586,7 +586,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationAnonymousLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -622,7 +622,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -632,7 +632,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationAnonymousUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -668,7 +668,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -678,7 +678,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationAnonymousUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -715,7 +715,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -725,7 +725,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationAnonymousUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -752,7 +752,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -775,7 +775,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -784,7 +784,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationExpandoObjectLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -808,7 +808,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -817,7 +817,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationExpandoObjectLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -842,7 +842,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -851,7 +851,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationExpandoObjectLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
@@ -878,7 +878,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -887,7 +887,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationExpandoObjectLightIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -923,7 +923,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -933,7 +933,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationExpandoObjectUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -969,7 +969,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -979,7 +979,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationExpandoObjectUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -1016,7 +1016,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -1026,7 +1026,7 @@ public class BinaryBulkUpdateTest
             entities = Helper.UpdateBulkOperationExpandoObjectUnmatchedIdentityTables(entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -1053,7 +1053,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 entities: entities);
 
@@ -1077,7 +1077,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1087,7 +1087,7 @@ public class BinaryBulkUpdateTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 table);
 
@@ -1112,7 +1112,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1122,7 +1122,7 @@ public class BinaryBulkUpdateTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 table: table,
                 batchSize: 3);
@@ -1148,7 +1148,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1158,7 +1158,7 @@ public class BinaryBulkUpdateTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 table: table,
                 qualifiers: Field.From(
@@ -1186,7 +1186,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1196,7 +1196,7 @@ public class BinaryBulkUpdateTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 table: table,
                 keepIdentity: true);
@@ -1233,7 +1233,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 mappings: mappings,
@@ -1244,7 +1244,7 @@ public class BinaryBulkUpdateTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 table: table,
                 mappings: mappings);
@@ -1281,7 +1281,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 mappings: mappings,
@@ -1292,7 +1292,7 @@ public class BinaryBulkUpdateTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 table: table,
                 mappings: mappings,
@@ -1330,7 +1330,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 mappings: mappings,
@@ -1341,7 +1341,7 @@ public class BinaryBulkUpdateTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            result = connection.BinaryBulkUpdate(
                 tableName,
                 table: table,
                 mappings: mappings,
@@ -1369,7 +1369,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+            var result = connection.BinaryBulkUpdate(
                 tableName,
                 table);
 
@@ -1406,7 +1406,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+                var result = connection.BinaryBulkUpdate(
                     tableName,
                     reader);
 
@@ -1445,7 +1445,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+                var result = connection.BinaryBulkUpdate(
                     tableName,
                     reader,
                     qualifiers: Field.From(
@@ -1487,7 +1487,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+                var result = connection.BinaryBulkUpdate(
                     tableName,
                     reader,
                     keepIdentity: true);
@@ -1539,7 +1539,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+                var result = connection.BinaryBulkUpdate(
                     tableName,
                     reader,
                     mappings: mappings);
@@ -1591,7 +1591,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+                var result = connection.BinaryBulkUpdate(
                     tableName,
                     reader,
                     mappings: mappings,
@@ -1644,7 +1644,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+                var result = connection.BinaryBulkUpdate(
                     tableName,
                     reader,
                     mappings: mappings,
@@ -1674,7 +1674,7 @@ public class BinaryBulkUpdateTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
+                var result = connection.BinaryBulkUpdate(
                     tableName,
                     reader);
 
@@ -1701,7 +1701,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1766,7 +1766,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1800,7 +1800,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1836,7 +1836,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1870,7 +1870,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1903,7 +1903,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1983,7 +1983,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2029,7 +2029,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2076,7 +2076,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2136,7 +2136,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2169,7 +2169,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2203,7 +2203,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2239,7 +2239,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2284,7 +2284,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2330,7 +2330,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2377,7 +2377,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2437,7 +2437,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2470,7 +2470,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2504,7 +2504,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2540,7 +2540,7 @@ public class BinaryBulkUpdateTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2585,7 +2585,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2631,7 +2631,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2678,7 +2678,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -2739,7 +2739,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2774,7 +2774,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2810,7 +2810,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2848,7 +2848,7 @@ public class BinaryBulkUpdateTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2895,7 +2895,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 mappings: mappings,
@@ -2943,7 +2943,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 mappings: mappings,
@@ -2992,7 +2992,7 @@ public class BinaryBulkUpdateTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 table,
                 mappings: mappings,

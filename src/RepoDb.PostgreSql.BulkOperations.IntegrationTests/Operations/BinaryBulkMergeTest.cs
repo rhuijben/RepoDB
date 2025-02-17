@@ -40,7 +40,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -85,7 +85,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -110,7 +110,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
@@ -137,7 +137,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -162,7 +162,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
@@ -192,7 +192,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -219,7 +219,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -243,7 +243,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -268,7 +268,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
@@ -294,7 +294,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
@@ -320,7 +320,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -358,7 +358,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -394,7 +394,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -431,7 +431,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -469,7 +469,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -507,7 +507,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -535,7 +535,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
@@ -560,7 +560,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
@@ -595,7 +595,7 @@ public class BinaryBulkMergeTest
                 entities: entities);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -631,7 +631,7 @@ public class BinaryBulkMergeTest
                 entities: entities);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -659,7 +659,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -669,7 +669,7 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -694,7 +694,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -718,7 +718,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -728,7 +728,7 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -756,7 +756,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -780,7 +780,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -805,7 +805,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
@@ -832,7 +832,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -868,7 +868,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -904,7 +904,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -941,7 +941,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -968,7 +968,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
@@ -993,7 +993,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
@@ -1028,7 +1028,7 @@ public class BinaryBulkMergeTest
                 entities: entities);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -1064,7 +1064,7 @@ public class BinaryBulkMergeTest
                 entities: entities);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -1092,7 +1092,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1102,7 +1102,7 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1127,7 +1127,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1151,7 +1151,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1161,7 +1161,7 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1189,7 +1189,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1213,7 +1213,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -1238,7 +1238,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
@@ -1265,7 +1265,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1290,7 +1290,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
@@ -1316,7 +1316,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -1354,7 +1354,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -1390,7 +1390,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -1427,7 +1427,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -1465,7 +1465,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -1504,7 +1504,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -1533,7 +1533,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1557,7 +1557,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
@@ -1592,7 +1592,7 @@ public class BinaryBulkMergeTest
                 entities: entities);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -1628,7 +1628,7 @@ public class BinaryBulkMergeTest
                 entities: entities);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -1656,7 +1656,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1666,7 +1666,7 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1691,7 +1691,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1715,7 +1715,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1725,7 +1725,7 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            result = connection.BinaryBulkMerge(
                 tableName,
                 entities: entities);
 
@@ -1754,7 +1754,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table);
 
@@ -1779,7 +1779,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 batchSize: 3);
@@ -1805,7 +1805,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 qualifiers: Field.From(
@@ -1833,7 +1833,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -1859,7 +1859,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
@@ -1889,7 +1889,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -1931,7 +1931,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 mappings: mappings);
@@ -1968,7 +1968,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 mappings: mappings,
@@ -2006,7 +2006,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 mappings: mappings,
@@ -2045,7 +2045,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 mappings: mappings,
@@ -2087,7 +2087,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 mappings: mappings,
@@ -2119,7 +2119,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
@@ -2145,7 +2145,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
@@ -2181,7 +2181,7 @@ public class BinaryBulkMergeTest
                 table: table);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                tableName,
                table: table,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -2221,7 +2221,7 @@ public class BinaryBulkMergeTest
                 table: table);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                tableName,
                table: table,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -2253,7 +2253,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table);
 
@@ -2264,7 +2264,7 @@ public class BinaryBulkMergeTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            result = connection.BinaryBulkMerge(
                 tableName,
                 table: table);
 
@@ -2290,7 +2290,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table);
 
@@ -2315,7 +2315,7 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            var result = connection.BinaryBulkMerge(
                 tableName,
                 table: table);
 
@@ -2326,7 +2326,7 @@ public class BinaryBulkMergeTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+            result = connection.BinaryBulkMerge(
                 tableName,
                 table: table);
 
@@ -2356,7 +2356,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader);
 
@@ -2383,7 +2383,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader,
                     qualifiers: Field.From(
@@ -2413,7 +2413,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader: reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -2452,7 +2452,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader: reader,
                     mappings: mappings);
@@ -2492,7 +2492,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader: reader,
                     mappings: mappings,
@@ -2533,7 +2533,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader: reader,
                     mappings: mappings,
@@ -2563,7 +2563,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader,
                     mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
@@ -2591,7 +2591,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
@@ -2621,7 +2621,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader);
 
@@ -2638,7 +2638,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader);
 
@@ -2667,7 +2667,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader);
 
@@ -2695,7 +2695,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader);
 
@@ -2712,7 +2712,7 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
+                var result = connection.BinaryBulkMerge(
                     tableName,
                     reader);
 

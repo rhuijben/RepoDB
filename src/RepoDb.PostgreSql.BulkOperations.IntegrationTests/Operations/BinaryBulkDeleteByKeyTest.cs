@@ -37,13 +37,13 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkDeleteByKey(connection,
+            result = connection.BinaryBulkDeleteByKey(
                 tableName,
                 primaryKeys: primaryKeys);
 
@@ -67,13 +67,13 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkDeleteByKey(connection,
+            result = connection.BinaryBulkDeleteByKey(
                 tableName,
                 primaryKeys: primaryKeys,
                 batchSize: 3);
@@ -98,13 +98,13 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkDeleteByKey(connection,
+            result = connection.BinaryBulkDeleteByKey(
                 tableName,
                 primaryKeys: primaryKeys,
                 pseudoTableType: BulkImportPseudoTableType.Physical);
@@ -194,7 +194,7 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
+            var result = connection.BinaryBulkInsert(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);

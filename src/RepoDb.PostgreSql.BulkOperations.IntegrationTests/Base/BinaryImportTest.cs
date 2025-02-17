@@ -38,7 +38,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities);
 
@@ -62,7 +62,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -87,7 +87,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -112,7 +112,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities);
 
@@ -136,7 +136,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -172,7 +172,7 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -209,7 +209,7 @@ public class BinaryImportTest
             entities.ForEach(entity => entity.IdMapped += 100);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -262,7 +262,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities);
 
@@ -286,7 +286,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -311,7 +311,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -347,7 +347,7 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -385,7 +385,7 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -437,7 +437,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities);
 
@@ -461,7 +461,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -486,7 +486,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -522,7 +522,7 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -558,7 +558,7 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -612,7 +612,7 @@ public class BinaryImportTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 table.TableName,
                 table: table);
 
@@ -637,7 +637,7 @@ public class BinaryImportTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 table.TableName,
                 table: table,
                 batchSize: 3);
@@ -665,7 +665,7 @@ public class BinaryImportTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 table.TableName,
                 table: table,
                 keepIdentity: true);
@@ -702,7 +702,7 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 table.TableName,
                 table: table,
                 mappings: mappings);
@@ -741,7 +741,7 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport(connection,
+            var result = connection.BinaryImport(
                 table.TableName,
                 table: table,
                 mappings: mappings);
@@ -794,7 +794,7 @@ public class BinaryImportTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryImport(connection,
+                var result = connection.BinaryImport(
                     tableName,
                     reader: reader);
 
@@ -821,7 +821,7 @@ public class BinaryImportTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryImport(connection,
+                var result = connection.BinaryImport(
                     tableName,
                     reader: reader,
                     keepIdentity: true);
@@ -861,7 +861,7 @@ public class BinaryImportTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryImport(connection,
+                var result = connection.BinaryImport(
                     tableName,
                     reader: reader,
                     mappings: mappings);
@@ -901,7 +901,7 @@ public class BinaryImportTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryImport(connection,
+                var result = connection.BinaryImport(
                     tableName,
                     reader: reader,
                     mappings: mappings,
