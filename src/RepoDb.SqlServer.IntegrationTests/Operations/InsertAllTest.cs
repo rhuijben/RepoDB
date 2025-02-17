@@ -402,7 +402,7 @@ public class InsertAllTest
     }
 
     [TestMethod]
-    public void TestSqlConnectionInsertAllAsyncViaTableNameAsExpandoObjectForNonIdentity()
+    public async Task TestSqlConnectionInsertAllAsyncViaTableNameAsExpandoObjectForNonIdentity()
     {
         // Setup
         var tables = Helper.CreateNonIdentityCompleteTablesAsExpandoObjects(10);

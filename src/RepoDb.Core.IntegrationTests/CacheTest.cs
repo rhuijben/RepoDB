@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Dynamic;
+using System.Linq.Expressions;
+using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using Microsoft.Data.SqlClient;
-using System.Linq.Expressions;
-using System.Dynamic;
 
 namespace RepoDb.IntegrationTests.Caches;
 
@@ -1207,7 +1207,7 @@ public class CacheTest
     }
 
     [TestMethod]
-    public void TestSqlConnectionQueryAsyncCacheViaQueryFieldsAsDynamics()
+    public async Task TestSqlConnectionQueryAsyncCacheViaQueryFieldsAsDynamics()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
@@ -1221,7 +1221,7 @@ public class CacheTest
             entity.Id = Convert.ToInt32(connection.Insert(entity));
 
             // Act
-            var result = connection.Query(ClassMappedNameCache.Get<IdentityTable>(),
+            var result = await connection.QueryAsync(ClassMappedNameCache.Get<IdentityTable>(),
                 where: (IEnumerable<QueryField>)null,
                 orderBy: null,
                 top: 0,

@@ -40,7 +40,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -85,7 +85,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -110,7 +110,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
@@ -137,7 +137,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -162,7 +162,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
@@ -192,7 +192,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -219,7 +219,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationMappedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -243,7 +243,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationMappedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -268,7 +268,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationMappedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
@@ -294,7 +294,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationMappedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
@@ -320,7 +320,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationMappedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -358,7 +358,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -394,7 +394,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -431,7 +431,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -469,7 +469,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -507,7 +507,7 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -535,7 +535,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
@@ -560,7 +560,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
@@ -590,12 +590,12 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -626,12 +626,12 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
@@ -659,7 +659,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -669,7 +669,7 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -694,7 +694,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -718,7 +718,7 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -728,7 +728,7 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMerge<BulkOperationLightIdentityTable>(connection,
+            result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -2736,7 +2736,7 @@ public class BinaryBulkMergeTest
     #region BinaryBulkMergeAsync<TEntity>
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsync()
+    public async Task TestBinaryBulkMergeAsync()
     {
         using (var connection = GetConnection())
         {
@@ -2745,9 +2745,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2781,7 +2781,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithBatchSize()
+    public async Task TestBinaryBulkMergeAsyncWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -2790,10 +2790,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2806,7 +2806,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithQualifiers()
+    public async Task TestBinaryBulkMergeAsyncWithQualifiers()
     {
         using (var connection = GetConnection())
         {
@@ -2815,12 +2815,12 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
                     nameof(BulkOperationLightIdentityTable.ColumnBigInt),
-                    nameof(BulkOperationLightIdentityTable.ColumnInteger))).Result;
+                    nameof(BulkOperationLightIdentityTable.ColumnInteger)));
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2833,7 +2833,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -2842,10 +2842,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2858,7 +2858,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -2867,10 +2867,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2888,7 +2888,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -2897,11 +2897,11 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2915,7 +2915,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithMappings()
+    public async Task TestBinaryBulkMergeAsyncWithMappings()
     {
         using (var connection = GetConnection())
         {
@@ -2924,9 +2924,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationMappedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2939,7 +2939,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithMappingsAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncWithMappingsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -2948,10 +2948,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationMappedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2964,7 +2964,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithMappingsAndWithKeepIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncWithMappingsAndWithKeepIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -2973,11 +2973,11 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationMappedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -2990,7 +2990,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithMappingsAndWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncWithMappingsAndWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -2999,10 +2999,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationMappedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3016,7 +3016,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithMappingsAndWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncWithMappingsAndWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -3025,11 +3025,11 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationMappedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3043,7 +3043,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithBulkInsertMapItems()
+    public async Task TestBinaryBulkMergeAsyncWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -3063,10 +3063,10 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3079,7 +3079,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3099,11 +3099,11 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3116,7 +3116,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -3136,12 +3136,12 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3154,7 +3154,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithBulkInsertMapItemsAndWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncWithBulkInsertMapItemsAndWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3174,11 +3174,11 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
-                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3192,7 +3192,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithBulkInsertMapItemsAndWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncWithBulkInsertMapItemsAndWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -3212,12 +3212,12 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3231,7 +3231,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithOnConflictDoUpdateMergeCommandType()
+    public async Task TestBinaryBulkMergeAsyncWithOnConflictDoUpdateMergeCommandType()
     {
         using (var connection = GetConnection())
         {
@@ -3240,10 +3240,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3256,7 +3256,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3265,11 +3265,11 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3282,7 +3282,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3295,16 +3295,16 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
                 tableName,
                 entities: entities).Wait();
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-               mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+               mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3318,7 +3318,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -3331,17 +3331,17 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
                 tableName,
                 entities: entities).Wait();
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate,
-               pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+               pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3355,7 +3355,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -3364,9 +3364,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Prepare (Elimination)
             entities = entities
@@ -3374,9 +3374,9 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            result =  await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3390,7 +3390,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithNoIdentityValues()
+    public async Task TestBinaryBulkMergeAsyncWithNoIdentityValues()
     {
         using (var connection = GetConnection())
         {
@@ -3399,9 +3399,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3414,7 +3414,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncWithNoIdentityValuesAndWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncWithNoIdentityValuesAndWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -3423,9 +3423,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Prepare (Elimination)
             entities = entities
@@ -3433,9 +3433,9 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<BulkOperationLightIdentityTable>(connection,
+            result =  await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3452,7 +3452,7 @@ public class BinaryBulkMergeTest
     #region BinaryBulkMergeAsync<Anonymous>
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymous()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymous()
     {
         using (var connection = GetConnection())
         {
@@ -3461,9 +3461,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3476,7 +3476,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithBatchSize()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -3485,10 +3485,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3501,7 +3501,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithQualifiers()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithQualifiers()
     {
         using (var connection = GetConnection())
         {
@@ -3510,12 +3510,12 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
                     nameof(BulkOperationLightIdentityTable.ColumnBigInt),
-                    nameof(BulkOperationLightIdentityTable.ColumnInteger))).Result;
+                    nameof(BulkOperationLightIdentityTable.ColumnInteger)));
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3528,7 +3528,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3537,10 +3537,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3553,7 +3553,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithBulkInsertMapItems()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -3573,10 +3573,10 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3589,7 +3589,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3609,11 +3609,11 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3626,7 +3626,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -3646,12 +3646,12 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3664,7 +3664,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithOnConflictDoUpdateMergeCommandType()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithOnConflictDoUpdateMergeCommandType()
     {
         using (var connection = GetConnection())
         {
@@ -3673,10 +3673,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3689,7 +3689,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3698,11 +3698,11 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3715,7 +3715,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3733,11 +3733,11 @@ public class BinaryBulkMergeTest
                 entities: entities).Wait();
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-               mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+               mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3751,7 +3751,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -3769,12 +3769,12 @@ public class BinaryBulkMergeTest
                 entities: entities).Wait();
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate,
-               pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+               pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3788,7 +3788,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -3797,9 +3797,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Prepare (Elimination)
             entities = entities
@@ -3807,9 +3807,9 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            result =  await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3823,7 +3823,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithNoIdentityValues()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithNoIdentityValues()
     {
         using (var connection = GetConnection())
         {
@@ -3832,9 +3832,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3847,7 +3847,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaAnonymousWithNoIdentityValuesAndWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncViaAnonymousWithNoIdentityValuesAndWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -3856,9 +3856,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Prepare (Elimination)
             entities = entities
@@ -3866,9 +3866,9 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            result =  await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3885,7 +3885,7 @@ public class BinaryBulkMergeTest
     #region BinaryBulkMergeAsync<IDictionary<string, object>>
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObject()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObject()
     {
         using (var connection = GetConnection())
         {
@@ -3894,9 +3894,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3909,7 +3909,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithBatchSize()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -3918,10 +3918,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3934,7 +3934,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithQualifiers()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithQualifiers()
     {
         using (var connection = GetConnection())
         {
@@ -3943,12 +3943,12 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 qualifiers: Field.From(
                     nameof(BulkOperationLightIdentityTable.ColumnBigInt),
-                    nameof(BulkOperationLightIdentityTable.ColumnInteger))).Result;
+                    nameof(BulkOperationLightIdentityTable.ColumnInteger)));
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3961,7 +3961,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3970,10 +3970,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -3986,7 +3986,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -3995,10 +3995,10 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4012,7 +4012,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -4021,11 +4021,11 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4039,7 +4039,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItems()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -4059,10 +4059,10 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4075,7 +4075,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4095,11 +4095,11 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4112,7 +4112,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -4132,12 +4132,12 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4150,7 +4150,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4170,11 +4170,11 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
-                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4189,7 +4189,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -4209,12 +4209,12 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4229,7 +4229,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithOnConflictDoUpdateMergeCommandType()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithOnConflictDoUpdateMergeCommandType()
     {
         using (var connection = GetConnection())
         {
@@ -4238,9 +4238,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4253,7 +4253,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4262,11 +4262,11 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4279,7 +4279,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4297,11 +4297,11 @@ public class BinaryBulkMergeTest
                 entities: entities).Wait();
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-               mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+               mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4315,7 +4315,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -4333,12 +4333,12 @@ public class BinaryBulkMergeTest
                 entities: entities).Wait();
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                tableName,
                entities: entities,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate,
-               pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+               pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4352,7 +4352,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -4361,9 +4361,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Prepare (Elimination)
             entities = entities
@@ -4371,9 +4371,9 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            result =  await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4387,7 +4387,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithNoIdentityValues()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithNoIdentityValues()
     {
         using (var connection = GetConnection())
         {
@@ -4396,9 +4396,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4411,7 +4411,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaExpandoObjectWithNoIdentityValuesAndWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncViaExpandoObjectWithNoIdentityValuesAndWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -4420,9 +4420,9 @@ public class BinaryBulkMergeTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Prepare (Elimination)
             entities = entities
@@ -4430,9 +4430,9 @@ public class BinaryBulkMergeTest
                 .ToList();
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            result =  await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4449,7 +4449,7 @@ public class BinaryBulkMergeTest
     #region BinaryBulkMergeAsync<DataTable>
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTable()
+    public async Task TestBinaryBulkMergeAsyncViaDataTable()
     {
         using (var connection = GetConnection())
         {
@@ -4459,9 +4459,9 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4474,7 +4474,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithBatchSize()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -4484,10 +4484,10 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4500,7 +4500,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithQualifiers()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithQualifiers()
     {
         using (var connection = GetConnection())
         {
@@ -4510,12 +4510,12 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
                 qualifiers: Field.From(
                     nameof(BulkOperationLightIdentityTable.ColumnBigInt),
-                    nameof(BulkOperationLightIdentityTable.ColumnInteger))).Result;
+                    nameof(BulkOperationLightIdentityTable.ColumnInteger)));
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4528,7 +4528,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4538,10 +4538,10 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4554,7 +4554,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4564,10 +4564,10 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
-                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4584,7 +4584,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -4594,11 +4594,11 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4615,7 +4615,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItems()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -4636,10 +4636,10 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4652,7 +4652,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4673,11 +4673,11 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
                 mappings: mappings,
-                identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4690,7 +4690,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -4711,12 +4711,12 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
                 mappings: mappings,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4729,7 +4729,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItemsAndWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItemsAndWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4750,11 +4750,11 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
                 mappings: mappings,
-                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity).Result;
+                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4771,7 +4771,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItemsAndWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithBulkInsertMapItemsAndWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -4792,12 +4792,12 @@ public class BinaryBulkMergeTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
                 mappings: mappings,
                 identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4814,7 +4814,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithOnConflictDoUpdateMergeCommandType()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithOnConflictDoUpdateMergeCommandType()
     {
         using (var connection = GetConnection())
         {
@@ -4824,10 +4824,10 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
-                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4840,7 +4840,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4850,11 +4850,11 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
                 table: table,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4867,7 +4867,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -4886,11 +4886,11 @@ public class BinaryBulkMergeTest
                 table: table).Wait();
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                tableName,
                table: table,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
-               mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+               mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4907,7 +4907,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithOnConflictDoUpdateMergeCommandTypeAndWithReturnIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -4926,12 +4926,12 @@ public class BinaryBulkMergeTest
                 table: table).Wait();
 
             // Act (More)
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                tableName,
                table: table,
                identityBehavior: BulkImportIdentityBehavior.ReturnIdentity,
                mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate,
-               pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+               pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4948,7 +4948,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -4958,9 +4958,9 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                table: table).Result;
+                table: table);
 
             // Prepare (Elimination)
             entities = entities
@@ -4969,9 +4969,9 @@ public class BinaryBulkMergeTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            result =  await connection.BinaryBulkMergeAsync(
                 tableName,
-                table: table).Result;
+                table: table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -4985,7 +4985,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithNoIdentityValues()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithNoIdentityValues()
     {
         using (var connection = GetConnection())
         {
@@ -4995,9 +4995,9 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                table: table).Result;
+                table: table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -5010,7 +5010,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDataTableWithNoIdentityValuesAndWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncViaDataTableWithNoIdentityValuesAndWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -5020,9 +5020,9 @@ public class BinaryBulkMergeTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                table: table).Result;
+                table: table);
 
             // Prepare (Elimination)
             entities = entities
@@ -5031,9 +5031,9 @@ public class BinaryBulkMergeTest
             table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            result =  await connection.BinaryBulkMergeAsync(
                 tableName,
-                table: table).Result;
+                table: table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -5050,7 +5050,7 @@ public class BinaryBulkMergeTest
     #region BinaryBulkMergeAsync<DbDataReader>
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReader()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReader()
     {
         using (var connection = GetConnection())
         {
@@ -5061,9 +5061,9 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
-                    reader).Result;
+                    reader);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5077,7 +5077,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithQualifiers()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithQualifiers()
     {
         using (var connection = GetConnection())
         {
@@ -5088,12 +5088,12 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
                     reader,
                     qualifiers: Field.From(
                         nameof(BulkOperationLightIdentityTable.ColumnBigInt),
-                        nameof(BulkOperationLightIdentityTable.ColumnInteger))).Result;
+                        nameof(BulkOperationLightIdentityTable.ColumnInteger)));
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5107,7 +5107,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -5118,10 +5118,10 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
                     reader: reader,
-                    identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                    identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5135,7 +5135,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithBulkInsertMapItems()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -5157,10 +5157,10 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
                     reader: reader,
-                    mappings: mappings).Result;
+                    mappings: mappings);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5174,7 +5174,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -5197,11 +5197,11 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
                     reader: reader,
                     mappings: mappings,
-                    identityBehavior: BulkImportIdentityBehavior.KeepIdentity).Result;
+                    identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5215,7 +5215,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithBulkInsertMapItemsAndWithKeepIdentityViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -5238,12 +5238,12 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
                     reader: reader,
                     mappings: mappings,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                    pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                    pseudoTableType: BulkImportPseudoTableType.Physical);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5257,7 +5257,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithOnConflictDoUpdateMergeCommandType()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithOnConflictDoUpdateMergeCommandType()
     {
         using (var connection = GetConnection())
         {
@@ -5268,10 +5268,10 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
                     reader,
-                    mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                    mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5285,7 +5285,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithOnConflictDoUpdateMergeCommandTypeAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -5296,11 +5296,11 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
                     reader,
                     identityBehavior: BulkImportIdentityBehavior.KeepIdentity,
-                    mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate).Result;
+                    mergeCommandType: BulkImportMergeCommandType.OnConflictDoUpdate);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5314,7 +5314,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -5326,9 +5326,9 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
-                    reader).Result;
+                    reader);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5343,9 +5343,9 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
-                    reader).Result;
+                    reader);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5360,7 +5360,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithNoIdentityValues()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithNoIdentityValues()
     {
         using (var connection = GetConnection())
         {
@@ -5372,9 +5372,9 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
-                    reader).Result;
+                    reader);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5388,7 +5388,7 @@ public class BinaryBulkMergeTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncViaDbDataReaderWithNoIdentityValuesAndWithExistingData()
+    public async Task TestBinaryBulkMergeAsyncViaDbDataReaderWithNoIdentityValuesAndWithExistingData()
     {
         using (var connection = GetConnection())
         {
@@ -5400,9 +5400,9 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
-                    reader).Result;
+                    reader);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -5417,9 +5417,9 @@ public class BinaryBulkMergeTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+                var result = await connection.BinaryBulkMergeAsync(
                     tableName,
-                    reader).Result;
+                    reader);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);

@@ -479,7 +479,7 @@ public class DeleteTest
     }
 
     [TestMethod]
-    public void TestSqlConnectionDeleteAsyncWithoutCondition()
+    public async Task TestSqlConnectionDeleteAsyncWithoutCondition()
     {
         // Setup
         var tables = Helper.CreateIdentityTables(10);
@@ -490,7 +490,7 @@ public class DeleteTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Delete<IdentityTable>((object)null);
+            var result = await connection.DeleteAsync<IdentityTable>((object)null);
 
             // Assert
             Assert.AreEqual(10, result);
@@ -499,7 +499,7 @@ public class DeleteTest
     }
 
     [TestMethod]
-    public void TestSqlConnectionDeleteAsyncWithEmptyQueryFields()
+    public async Task TestSqlConnectionDeleteAsyncWithEmptyQueryFields()
     {
         // Setup
         var tables = Helper.CreateIdentityTables(10);
@@ -510,7 +510,7 @@ public class DeleteTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Delete<IdentityTable>(Enumerable.Empty<QueryField>());
+            var result = await connection.DeleteAsync<IdentityTable>(Enumerable.Empty<QueryField>());
 
             // Assert
             Assert.AreEqual(10, result);
@@ -960,7 +960,7 @@ public class DeleteTest
     }
 
     [TestMethod]
-    public void TestSqlConnectionDeleteAsyncViaTableNameWithoutCondition()
+    public async Task TestSqlConnectionDeleteAsyncViaTableNameWithoutCondition()
     {
         // Setup
         var tables = Helper.CreateIdentityTables(10);
@@ -971,7 +971,7 @@ public class DeleteTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Delete(ClassMappedNameCache.Get<IdentityTable>(),
+            var result = await connection.DeleteAsync(ClassMappedNameCache.Get<IdentityTable>(),
                 (object)null);
 
             // Assert
@@ -1077,7 +1077,7 @@ public class DeleteTest
     }
 
     [TestMethod]
-    public void TestSqlConnectionDeleteAsyncViaTableNameWithoutConditionButWithHints()
+    public async Task TestSqlConnectionDeleteAsyncViaTableNameWithoutConditionButWithHints()
     {
         // Setup
         var tables = Helper.CreateIdentityTables(10);
@@ -1088,7 +1088,7 @@ public class DeleteTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Delete(ClassMappedNameCache.Get<IdentityTable>(),
+            var result = await connection.DeleteAsync(ClassMappedNameCache.Get<IdentityTable>(),
                 (object)null,
                 hints: SqlServerTableHints.TabLock);
 

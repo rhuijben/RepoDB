@@ -61,7 +61,7 @@ public class QueryAllTest
     #region Async
 
     [TestMethod]
-    public void TestMySqlConnectionQueryAllAsync()
+    public async Task TestMySqlConnectionQueryAllAsync()
     {
         // Setup
         var tables = Database.CreateCompleteTables(10);
@@ -69,7 +69,7 @@ public class QueryAllTest
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
             // Act
-            var queryResult = connection.QueryAll<CompleteTable>();
+            var queryResult = await connection.QueryAllAsync<CompleteTable>();
 
             // Assert
             tables.AsList().ForEach(table =>

@@ -61,7 +61,7 @@ public class QueryAllTest
     #region Async
 
     [TestMethod]
-    public void TestPostgreSqlConnectionQueryAllAsync()
+    public async Task TestPostgreSqlConnectionQueryAllAsync()
     {
         // Setup
         var tables = Database.CreateCompleteTables(10);

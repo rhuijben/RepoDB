@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Dynamic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Npgsql;
 using RepoDb.IntegrationTests.Setup;
 using RepoDb.PostgreSql.BulkOperations.IntegrationTests.Enumerations;
 using RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models;
-using System.Dynamic;
 
 namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests;
 
@@ -140,7 +140,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert<EnumTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
                 tableName,
                 entities: entities);
 
@@ -164,7 +164,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert<EnumTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
                 tableName,
                 entities: entities);
 
@@ -192,10 +192,10 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            connection.InsertAll<EnumTable>(entities);
+            connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete<EnumTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
                 tableName,
                 entities: entities);
 
@@ -218,10 +218,10 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            connection.InsertAll<EnumTable>(entities);
+            connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDelete<EnumTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkDelete(connection,
                 tableName,
                 entities: entities);
 
@@ -248,7 +248,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<EnumTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -272,7 +272,7 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMerge<EnumTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkMerge(connection,
                 tableName,
                 entities: entities);
 
@@ -300,10 +300,10 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            connection.InsertAll<EnumTable>(entities);
+            connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate<EnumTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
                 tableName,
                 entities: entities);
 
@@ -327,10 +327,10 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            connection.InsertAll<EnumTable>(entities);
+            connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdate<EnumTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkUpdate(connection,
                 tableName,
                 entities: entities);
 
@@ -1014,7 +1014,7 @@ public class EnumTest
     #region BinaryBulkInsertAsync
 
     [TestMethod]
-    public void TestBinaryBulkInsertAsyncForEnum()
+    public async Task TestBinaryBulkInsertAsyncForEnum()
     {
         using (var connection = GetConnection())
         {
@@ -1023,9 +1023,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsertAsync<EnumTable>(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1038,7 +1038,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkInsertAsyncForEnumWithNullValues()
+    public async Task TestBinaryBulkInsertAsyncForEnumWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1047,9 +1047,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsertAsync<EnumTable>(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1066,7 +1066,7 @@ public class EnumTest
     #region BinaryBulkDeleteAsync
 
     [TestMethod]
-    public void TestBinaryBulkDeleteAsyncForEnum()
+    public async Task TestBinaryBulkDeleteAsyncForEnum()
     {
         using (var connection = GetConnection())
         {
@@ -1075,12 +1075,12 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            connection.InsertAll<EnumTable>(entities);
+            connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDeleteAsync<EnumTable>(connection,
+            var result = await connection.BinaryBulkDeleteAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1092,7 +1092,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkDeleteAsyncForEnumWithNullValues()
+    public async Task TestBinaryBulkDeleteAsyncForEnumWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1101,12 +1101,12 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            connection.InsertAll<EnumTable>(entities);
+            connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDeleteAsync<EnumTable>(connection,
+            var result = await connection.BinaryBulkDeleteAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1122,7 +1122,7 @@ public class EnumTest
     #region BinaryBulkMergeAsync
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncForEnum()
+    public async Task TestBinaryBulkMergeAsyncForEnum()
     {
         using (var connection = GetConnection())
         {
@@ -1131,9 +1131,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<EnumTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1146,7 +1146,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncForEnumWithNullValues()
+    public async Task TestBinaryBulkMergeAsyncForEnumWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1155,9 +1155,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync<EnumTable>(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1174,7 +1174,7 @@ public class EnumTest
     #region BinaryBulkUpdateAsync
 
     [TestMethod]
-    public void TestBinaryBulkUpdateAsyncForEnum()
+    public async Task TestBinaryBulkUpdateAsyncForEnum()
     {
         using (var connection = GetConnection())
         {
@@ -1183,12 +1183,12 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            connection.InsertAll<EnumTable>(entities);
+            connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdateAsync<EnumTable>(connection,
+            var result = await connection.BinaryBulkUpdateAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1201,7 +1201,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkUpdateAsyncForEnumWithNullValues()
+    public async Task TestBinaryBulkUpdateAsyncForEnumWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1210,12 +1210,12 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            connection.InsertAll<EnumTable>(entities);
+            connection.InsertAll(entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdateAsync<EnumTable>(connection,
+            var result = await connection.BinaryBulkUpdateAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1236,7 +1236,7 @@ public class EnumTest
     #region BinaryBulkInsertAsync
 
     [TestMethod]
-    public void TestBinaryBulkInsertAsyncForEnumForAnonymous()
+    public async Task TestBinaryBulkInsertAsyncForEnumForAnonymous()
     {
         using (var connection = GetConnection())
         {
@@ -1245,9 +1245,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsertAsync(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1260,7 +1260,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkInsertAsyncForEnumForAnonymousWithNullValues()
+    public async Task TestBinaryBulkInsertAsyncForEnumForAnonymousWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1269,9 +1269,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsertAsync(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1288,7 +1288,7 @@ public class EnumTest
     #region BinaryBulkDeleteAsync
 
     [TestMethod]
-    public void TestBinaryBulkDeleteAsyncForEnumForAnonymous()
+    public async Task TestBinaryBulkDeleteAsyncForEnumForAnonymous()
     {
         using (var connection = GetConnection())
         {
@@ -1300,9 +1300,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDeleteAsync(connection,
+            var result = await connection.BinaryBulkDeleteAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1314,7 +1314,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkDeleteAsyncForEnumForAnonymousWithNullValues()
+    public async Task TestBinaryBulkDeleteAsyncForEnumForAnonymousWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1326,9 +1326,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDeleteAsync(connection,
+            var result = await connection.BinaryBulkDeleteAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1344,7 +1344,7 @@ public class EnumTest
     #region BinaryBulkMergeAsync
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncForEnumForAnonymous()
+    public async Task TestBinaryBulkMergeAsyncForEnumForAnonymous()
     {
         using (var connection = GetConnection())
         {
@@ -1353,9 +1353,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1368,7 +1368,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncForEnumForAnonymousWithNullValues()
+    public async Task TestBinaryBulkMergeAsyncForEnumForAnonymousWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1377,9 +1377,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1396,7 +1396,7 @@ public class EnumTest
     #region BinaryBulkUpdateAsync
 
     [TestMethod]
-    public void TestBinaryBulkUpdateAsyncForEnumForAnonymous()
+    public async Task TestBinaryBulkUpdateAsyncForEnumForAnonymous()
     {
         using (var connection = GetConnection())
         {
@@ -1408,9 +1408,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdateAsync(connection,
+            var result = await connection.BinaryBulkUpdateAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1423,7 +1423,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkUpdateAsyncForEnumForAnonymousWithNullValues()
+    public async Task TestBinaryBulkUpdateAsyncForEnumForAnonymousWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1435,9 +1435,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdateAsync(connection,
+            var result = await connection.BinaryBulkUpdateAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1458,7 +1458,7 @@ public class EnumTest
     #region BinaryBulkInsertAsync
 
     [TestMethod]
-    public void TestBinaryBulkInsertAsyncForEnumForExpandoObject()
+    public async Task TestBinaryBulkInsertAsyncForEnumForExpandoObject()
     {
         using (var connection = GetConnection())
         {
@@ -1467,9 +1467,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsertAsync(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1482,7 +1482,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkInsertAsyncForEnumForExpandoObjectWithNullValues()
+    public async Task TestBinaryBulkInsertAsyncForEnumForExpandoObjectWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1491,9 +1491,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsertAsync(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1510,7 +1510,7 @@ public class EnumTest
     #region BinaryBulkDeleteAsync
 
     [TestMethod]
-    public void TestBinaryBulkDeleteAsyncForEnumForExpandoObject()
+    public async Task TestBinaryBulkDeleteAsyncForEnumForExpandoObject()
     {
         using (var connection = GetConnection())
         {
@@ -1522,9 +1522,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDeleteAsync(connection,
+            var result = await connection.BinaryBulkDeleteAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1536,7 +1536,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkDeleteAsyncForEnumForExpandoObjectWithNullValues()
+    public async Task TestBinaryBulkDeleteAsyncForEnumForExpandoObjectWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1548,9 +1548,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDeleteAsync(connection,
+            var result = await connection.BinaryBulkDeleteAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1566,7 +1566,7 @@ public class EnumTest
     #region BinaryBulkMergeAsync
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncForEnumForExpandoObject()
+    public async Task TestBinaryBulkMergeAsyncForEnumForExpandoObject()
     {
         using (var connection = GetConnection())
         {
@@ -1575,9 +1575,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1590,7 +1590,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncForEnumForExpandoObjectWithNullValues()
+    public async Task TestBinaryBulkMergeAsyncForEnumForExpandoObjectWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1599,9 +1599,9 @@ public class EnumTest
             var tableName = "EnumTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1618,7 +1618,7 @@ public class EnumTest
     #region BinaryBulkUpdateAsync
 
     [TestMethod]
-    public void TestBinaryBulkUpdateAsyncForEnumForExpandoObject()
+    public async Task TestBinaryBulkUpdateAsyncForEnumForExpandoObject()
     {
         using (var connection = GetConnection())
         {
@@ -1630,9 +1630,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdateAsync(connection,
+            var result = await connection.BinaryBulkUpdateAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1645,7 +1645,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkUpdateAsyncForEnumForExpandoObjectWithNullValues()
+    public async Task TestBinaryBulkUpdateAsyncForEnumForExpandoObjectWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1657,9 +1657,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdateAsync(connection,
+            var result = await connection.BinaryBulkUpdateAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1680,7 +1680,7 @@ public class EnumTest
     #region BinaryBulkInsertAsync
 
     [TestMethod]
-    public void TestBinaryBulkInsertAsyncForEnumForDataTable()
+    public async Task TestBinaryBulkInsertAsyncForEnumForDataTable()
     {
         using (var connection = GetConnection())
         {
@@ -1690,9 +1690,9 @@ public class EnumTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsertAsync(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1700,7 +1700,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkInsertAsyncForEnumForDataTableWithNullValues()
+    public async Task TestBinaryBulkInsertAsyncForEnumForDataTableWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1710,9 +1710,9 @@ public class EnumTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsertAsync(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1729,7 +1729,7 @@ public class EnumTest
     #region BinaryBulkDeleteAsync
 
     [TestMethod]
-    public void TestBinaryBulkDeleteAsyncForEnumForDataTable()
+    public async Task TestBinaryBulkDeleteAsyncForEnumForDataTable()
     {
         using (var connection = GetConnection())
         {
@@ -1742,9 +1742,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDeleteAsync(connection,
+            var result = await connection.BinaryBulkDeleteAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1756,7 +1756,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkDeleteAsyncForEnumForDataTableWithNullValues()
+    public async Task TestBinaryBulkDeleteAsyncForEnumForDataTableWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1769,9 +1769,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkDeleteAsync(connection,
+            var result = await connection.BinaryBulkDeleteAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1787,7 +1787,7 @@ public class EnumTest
     #region BinaryBulkMergeAsync
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncForEnumForDataTable()
+    public async Task TestBinaryBulkMergeAsyncForEnumForDataTable()
     {
         using (var connection = GetConnection())
         {
@@ -1797,9 +1797,9 @@ public class EnumTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1811,7 +1811,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkMergeAsyncForEnumForDataTableWithNullValues()
+    public async Task TestBinaryBulkMergeAsyncForEnumForDataTableWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1821,9 +1821,9 @@ public class EnumTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkMergeAsync(connection,
+            var result = await connection.BinaryBulkMergeAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1839,7 +1839,7 @@ public class EnumTest
     #region BinaryBulkUpdateAsync
 
     [TestMethod]
-    public void TestBinaryBulkUpdateAsyncForEnumForDataTable()
+    public async Task TestBinaryBulkUpdateAsyncForEnumForDataTable()
     {
         using (var connection = GetConnection())
         {
@@ -1852,9 +1852,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdateAsync(connection,
+            var result = await connection.BinaryBulkUpdateAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1862,7 +1862,7 @@ public class EnumTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkUpdateAsyncForEnumForDataTableWithNullValues()
+    public async Task TestBinaryBulkUpdateAsyncForEnumForDataTableWithNullValues()
     {
         using (var connection = GetConnection())
         {
@@ -1875,9 +1875,9 @@ public class EnumTest
             connection.InsertAll(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkUpdateAsync(connection,
+            var result = await connection.BinaryBulkUpdateAsync(
                 tableName,
-                table).Result;
+                table);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);

@@ -61,7 +61,7 @@ public class QueryAllTest
     #region Async
 
     [TestMethod]
-    public void TestSqLiteConnectionQueryAllAsync()
+    public async Task TestSqLiteConnectionQueryAllAsync()
     {
         using (var connection = new SqliteConnection(Database.ConnectionString))
         {

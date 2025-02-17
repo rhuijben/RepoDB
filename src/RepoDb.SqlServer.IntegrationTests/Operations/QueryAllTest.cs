@@ -65,7 +65,7 @@ public class QueryAllTest
     #region Async
 
     [TestMethod]
-    public void TestSqlServerConnectionQueryAllAsync()
+    public async Task TestSqlServerConnectionQueryAllAsync()
     {
         // Setup
         var tables = Database.CreateCompleteTables(10);
@@ -82,7 +82,7 @@ public class QueryAllTest
     }
 
     [TestMethod]
-    public void TestSqlServerConnectionQueryAllAsyncWithHints()
+    public async Task TestSqlServerConnectionQueryAllAsyncWithHints()
     {
         // Setup
         var tables = Database.CreateCompleteTables(10);

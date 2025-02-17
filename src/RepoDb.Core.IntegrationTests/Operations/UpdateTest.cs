@@ -1443,7 +1443,7 @@ public class UpdateTest
     }
 
     [TestMethod]
-    public void TestSqlConnectionUpdateViaDynamicAsyncViaTableNameViaPrimaryKey()
+    public async Task TestSqlConnectionUpdateViaDynamicAsyncViaTableNameViaPrimaryKey()
     {
         // Setup
         var table = Helper.CreateNonIdentityTable();
@@ -1463,7 +1463,7 @@ public class UpdateTest
             };
 
             // Act
-            var affectedRows = connection.Update<object>(ClassMappedNameCache.Get<NonIdentityTable>(),
+            var affectedRows = await connection.UpdateAsync<object>(ClassMappedNameCache.Get<NonIdentityTable>(),
                 data,
                 table.Id);
 

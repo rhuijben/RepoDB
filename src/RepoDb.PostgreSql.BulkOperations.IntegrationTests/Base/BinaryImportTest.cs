@@ -38,7 +38,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities);
 
@@ -62,7 +62,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities,
                 batchSize: 3);
@@ -87,7 +87,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -112,7 +112,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport<BulkOperationMappedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities);
 
@@ -136,7 +136,7 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport<BulkOperationMappedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -172,7 +172,7 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities,
                 mappings: mappings);
@@ -209,7 +209,7 @@ public class BinaryImportTest
             entities.ForEach(entity => entity.IdMapped += 100);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImport<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities,
                 mappings: mappings,
@@ -235,13 +235,13 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryImport<BulkOperationLightIdentityTable>(connection,
+            NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities,
                 keepIdentity: true);
 
             // Act (Trigger)
-            NpgsqlConnectionExtension.BinaryImport<BulkOperationLightIdentityTable>(connection,
+            NpgsqlConnectionExtension.BinaryImport(connection,
                 tableName,
                 entities: entities,
                 keepIdentity: true);
@@ -956,7 +956,7 @@ public class BinaryImportTest
     #region BinaryImportAsync<TEntity>
 
     [TestMethod]
-    public void TestBinaryImportAsync()
+    public async Task TestBinaryImportAsync()
     {
         using (var connection = GetConnection())
         {
@@ -965,9 +965,9 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await NpgsqlConnectionExtension.BinaryImportAsync(connection,
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -980,7 +980,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncWithBatchSize()
+    public async Task TestBinaryImportAsyncWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -989,10 +989,10 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await NpgsqlConnectionExtension.BinaryImportAsync(connection,
                 tableName,
                 entities: entities,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1005,7 +1005,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncWithKeepIdentity()
+    public async Task TestBinaryImportAsyncWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1014,10 +1014,10 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationLightIdentityTable>(connection,
+            var result = await NpgsqlConnectionExtension.BinaryImportAsync(connection,
                 tableName,
                 entities: entities,
-                keepIdentity: true).Result;
+                keepIdentity: true);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1030,7 +1030,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncWithMappings()
+    public async Task TestBinaryImportAsyncWithMappings()
     {
         using (var connection = GetConnection())
         {
@@ -1039,9 +1039,9 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationMappedIdentityTable>(connection,
+            var result = await NpgsqlConnectionExtension.BinaryImportAsync(connection,
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1054,7 +1054,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncWithMappingsAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncWithMappingsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1063,10 +1063,10 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationMappedIdentityTable>(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
-                keepIdentity: true).Result;
+                keepIdentity: true);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1079,7 +1079,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncWithBulkInsertMapItems()
+    public async Task TestBinaryImportAsyncWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -1099,10 +1099,10 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1115,7 +1115,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1135,11 +1135,11 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationUnmatchedIdentityTable>(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
-                keepIdentity: true).Result;
+                keepIdentity: true);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1161,13 +1161,13 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationLightIdentityTable>(connection,
+            NpgsqlConnectionExtension.BinaryImportAsync(connection,
                 tableName,
                 entities: entities,
                 keepIdentity: true).Wait();
 
             // Act (Trigger)
-            NpgsqlConnectionExtension.BinaryImportAsync<BulkOperationLightIdentityTable>(connection,
+            NpgsqlConnectionExtension.BinaryImportAsync(connection,
                 tableName,
                 entities: entities,
                 keepIdentity: true).Wait();
@@ -1179,7 +1179,7 @@ public class BinaryImportTest
     #region BinaryImportAsync<Anonymous>
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaAnonymous()
+    public async Task TestBinaryImportAsyncViaAnonymous()
     {
         using (var connection = GetConnection())
         {
@@ -1188,9 +1188,9 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1203,7 +1203,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaAnoynymousWithBatchSize()
+    public async Task TestBinaryImportAsyncViaAnoynymousWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -1212,10 +1212,10 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1228,7 +1228,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaAnonymousAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncViaAnonymousAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1237,10 +1237,10 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
-                keepIdentity: true).Result;
+                keepIdentity: true);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1253,7 +1253,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaAnonymousWithBulkInsertMapItems()
+    public async Task TestBinaryImportAsyncViaAnonymousWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -1273,10 +1273,10 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1289,7 +1289,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaAnonymousWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncViaAnonymousWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1311,11 +1311,11 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
-                keepIdentity: true).Result;
+                keepIdentity: true);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1355,7 +1355,7 @@ public class BinaryImportTest
     #region BinaryImportAsync<IDictionary<string,object>>
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaExpandoObject()
+    public async Task TestBinaryImportAsyncViaExpandoObject()
     {
         using (var connection = GetConnection())
         {
@@ -1364,9 +1364,9 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
-                entities: entities).Result;
+                entities: entities);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1379,7 +1379,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaExpandoObjectWithBatchSize()
+    public async Task TestBinaryImportAsyncViaExpandoObjectWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -1388,10 +1388,10 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1404,7 +1404,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaExpandoObjectAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncViaExpandoObjectAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1413,10 +1413,10 @@ public class BinaryImportTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
-                keepIdentity: true).Result;
+                keepIdentity: true);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1429,7 +1429,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaExpandoObjectWithBulkInsertMapItems()
+    public async Task TestBinaryImportAsyncViaExpandoObjectWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -1449,10 +1449,10 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1465,7 +1465,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncViaExpandoObjectWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1485,11 +1485,11 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 tableName,
                 entities: entities,
                 mappings: mappings,
-                keepIdentity: true).Result;
+                keepIdentity: true);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -1529,7 +1529,7 @@ public class BinaryImportTest
     #region BinaryImportAsync<DataTable>
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDataTable()
+    public async Task TestBinaryImportAsyncViaDataTable()
     {
         using (var connection = GetConnection())
         {
@@ -1539,9 +1539,9 @@ public class BinaryImportTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 table.TableName,
-                table: table).Result;
+                table: table);
 
             // Assert
             Assert.AreEqual(table.Rows.Count, result);
@@ -1554,7 +1554,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDataTableWithBatchSize()
+    public async Task TestBinaryImportAsyncViaDataTableWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -1564,10 +1564,10 @@ public class BinaryImportTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 table.TableName,
                 table: table,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(table.Rows.Count, result);
@@ -1580,7 +1580,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDataTableAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncViaDataTableAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1592,10 +1592,10 @@ public class BinaryImportTest
             var table = Helper.ToDataTable(tableName, entities);
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 table.TableName,
                 table: table,
-                keepIdentity: true).Result;
+                keepIdentity: true);
 
             // Assert
             Assert.AreEqual(table.Rows.Count, result);
@@ -1608,7 +1608,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDataTableWithBulkInsertMapItems()
+    public async Task TestBinaryImportAsyncViaDataTableWithBulkInsertMapItems()
     {
         using (var connection = GetConnection())
         {
@@ -1629,10 +1629,10 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 table.TableName,
                 table: table,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(table.Rows.Count, result);
@@ -1645,7 +1645,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDataTableWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncViaDataTableWithBulkInsertMapItemsAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1668,10 +1668,10 @@ public class BinaryImportTest
             };
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+            var result = await connection.BinaryImportAsync(
                 table.TableName,
                 table: table,
-                mappings: mappings).Result;
+                mappings: mappings);
 
             // Assert
             Assert.AreEqual(table.Rows.Count, result);
@@ -1710,7 +1710,7 @@ public class BinaryImportTest
     #region BinaryImportAsync<DbDataReader>
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDbDataReader()
+    public async Task TestBinaryImportAsyncViaDbDataReader()
     {
         using (var connection = GetConnection())
         {
@@ -1721,9 +1721,9 @@ public class BinaryImportTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+                var result = await connection.BinaryImportAsync(
                     tableName,
-                    reader: reader).Result;
+                    reader: reader);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -1737,7 +1737,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDbDataReaderAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncViaDbDataReaderAndWithKeepIdentity()
     {
         using (var connection = GetConnection())
         {
@@ -1748,10 +1748,10 @@ public class BinaryImportTest
             using (var reader = new DataEntityDataReader<BulkOperationLightIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+                var result = await connection.BinaryImportAsync(
                     tableName,
                     reader: reader,
-                    keepIdentity: true).Result;
+                    keepIdentity: true);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -1765,7 +1765,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDbDataReaderWithBulkInsertMapItems()
+    public async Task TestBinaryImportAsyncViaDbDataReaderWithBulkInsertMapItems()
     {
 
         using (var connection = GetConnection())
@@ -1788,10 +1788,10 @@ public class BinaryImportTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+                var result = await connection.BinaryImportAsync(
                     tableName,
                     reader: reader,
-                    mappings: mappings).Result;
+                    mappings: mappings);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);
@@ -1805,7 +1805,7 @@ public class BinaryImportTest
     }
 
     [TestMethod]
-    public void TestBinaryImportAsyncViaDbDataReaderWithBulkInsertMapItemsAndWithKeepIdentity()
+    public async Task TestBinaryImportAsyncViaDbDataReaderWithBulkInsertMapItemsAndWithKeepIdentity()
     {
 
         using (var connection = GetConnection())
@@ -1830,11 +1830,11 @@ public class BinaryImportTest
             using (var reader = new DataEntityDataReader<BulkOperationUnmatchedIdentityTable>(entities))
             {
                 // Act
-                var result = NpgsqlConnectionExtension.BinaryImportAsync(connection,
+                var result = await connection.BinaryImportAsync(
                     tableName,
                     reader: reader,
                     mappings: mappings,
-                    keepIdentity: true).Result;
+                    keepIdentity: true);
 
                 // Assert
                 Assert.AreEqual(entities.Count(), result);

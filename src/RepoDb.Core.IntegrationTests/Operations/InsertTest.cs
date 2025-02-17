@@ -1,8 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Dynamic;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System.Dynamic;
 
 namespace RepoDb.IntegrationTests.Operations;
 
@@ -311,7 +311,7 @@ public class InsertTest
     }
 
     [TestMethod]
-    public void TestSqlConnectionInsertAsyncForIdentityTable()
+    public async Task TestSqlConnectionInsertAsyncForIdentityTable()
     {
         // Setup
         var table = Helper.CreateIdentityTable();
@@ -325,7 +325,7 @@ public class InsertTest
             Assert.IsTrue(table.Id > 0);
 
             // Act
-            var result = connection.Query<IdentityTable>(id)?.FirstOrDefault();
+            var result = (await connection.QueryAsync<IdentityTable>(id)).FirstOrDefault();
 
             // Assert
             Helper.AssertPropertiesEquality(table, result);

@@ -2,7 +2,6 @@
 using Npgsql;
 using RepoDb.Enumerations.PostgreSql;
 using RepoDb.IntegrationTests.Setup;
-using RepoDb.PostgreSql.BulkOperations.IntegrationTests.Models;
 
 namespace RepoDb.PostgreSql.BulkOperations.IntegrationTests.Operations;
 
@@ -38,7 +37,7 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -68,7 +67,7 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -99,7 +98,7 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
@@ -124,7 +123,7 @@ public class BinaryBulkDeleteByKeyTest
     #region Async
 
     [TestMethod]
-    public void TestBinaryBulkDeleteByKeyAsync()
+    public async Task TestBinaryBulkDeleteByKeyAsync()
     {
         using (var connection = GetConnection())
         {
@@ -134,15 +133,15 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkDeleteByKeyAsync(connection,
+            result = await connection.BinaryBulkDeleteByKeyAsync(
                 tableName,
-                primaryKeys: primaryKeys).Result;
+                primaryKeys: primaryKeys);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -154,7 +153,7 @@ public class BinaryBulkDeleteByKeyTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkDeleteByKeyAsyncWithBatchSize()
+    public async Task TestBinaryBulkDeleteByKeyAsyncWithBatchSize()
     {
         using (var connection = GetConnection())
         {
@@ -164,16 +163,16 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert<BulkOperationLightIdentityTable>(connection,
+            var result = await connection.BinaryBulkInsertAsync(
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkDeleteByKeyAsync(connection,
+            result = await connection.BinaryBulkDeleteByKeyAsync(
                 tableName,
                 primaryKeys: primaryKeys,
-                batchSize: 3).Result;
+                batchSize: 3);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
@@ -185,7 +184,7 @@ public class BinaryBulkDeleteByKeyTest
     }
 
     [TestMethod]
-    public void TestBinaryBulkDeleteByKeyAsyncViaPhysicalTable()
+    public async Task TestBinaryBulkDeleteByKeyAsyncViaPhysicalTable()
     {
         using (var connection = GetConnection())
         {
@@ -195,16 +194,16 @@ public class BinaryBulkDeleteByKeyTest
             var tableName = "BulkOperationIdentityTable";
 
             // Act
-            var result = NpgsqlConnectionExtension.BinaryBulkInsert<BulkOperationLightIdentityTable>(connection,
+            var result = NpgsqlConnectionExtension.BinaryBulkInsert(connection,
                 tableName,
                 entities: entities,
                 identityBehavior: BulkImportIdentityBehavior.KeepIdentity);
 
             // Act
-            result = NpgsqlConnectionExtension.BinaryBulkDeleteByKeyAsync(connection,
+            result = await connection.BinaryBulkDeleteByKeyAsync(
                 tableName,
                 primaryKeys: primaryKeys,
-                pseudoTableType: BulkImportPseudoTableType.Physical).Result;
+                pseudoTableType: BulkImportPseudoTableType.Physical);
 
             // Assert
             Assert.AreEqual(entities.Count(), result);
