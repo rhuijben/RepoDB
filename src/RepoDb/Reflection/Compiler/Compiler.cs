@@ -754,7 +754,7 @@ internal partial class Compiler
         }
         else if (underlyingToType == StaticType.DateTimeOffset && underlyingFromType == StaticType.DateTime)
         {
-            result = Expression.New(typeof(DateTimeOffset).GetConstructor([typeof(DateTime), typeof(TimeSpan)]), [result, Expression.Constant(TimeSpan.Zero)]);
+            result = Expression.New(typeof(DateTimeOffset).GetConstructor([typeof(DateTime)]), [result]);
         }
         else if (GetSystemConvertToTypeMethod(underlyingFromType, underlyingToType) is { } methodInfo)
         {
