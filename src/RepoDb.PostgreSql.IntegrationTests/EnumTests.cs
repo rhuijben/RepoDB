@@ -278,7 +278,6 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsTextAsInt()
     {
-        Assert.Inconclusive(); // For now disable. Needs fix in RepoDb.Core
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Setup
@@ -298,7 +297,6 @@ public class EnumTests
     [TestMethod]
     public void TestInsertAndQueryEnumAsTextAsIntAsBatch()
     {
-        Assert.Inconclusive(); // For now disable. Needs fix in RepoDb.Core
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Setup

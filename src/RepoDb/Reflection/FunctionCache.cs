@@ -188,22 +188,16 @@ internal static class FunctionCache
             string cacheKey,
             IEnumerable<DbField> inputFields,
             IEnumerable<DbField> outputFields,
-            IDbSetting dbSetting = null,
-            IDbHelper dbHelper = null)
+            IDbSetting dbSetting,
+            IDbHelper dbHelper)
         {
             var key = GetKey(entityType, cacheKey, inputFields, outputFields);
-            if (cache.TryGetValue(key, out var func) == false)
-            {
-                if (TypeCache.Get(entityType).IsDictionaryStringObject())
-                {
-                    func = FunctionFactory.CompileDictionaryStringObjectDbParameterSetter(entityType, inputFields, dbSetting, dbHelper);
-                }
-                else
-                {
-                    func = FunctionFactory.CompileDataEntityDbParameterSetter(entityType, inputFields, outputFields, dbSetting, dbHelper);
-                }
-            }
-            return func;
+
+            return cache.GetOrAdd(key, (_) =>
+                TypeCache.Get(entityType).IsDictionaryStringObject()
+                ? FunctionFactory.CompileDictionaryStringObjectDbParameterSetter(entityType, inputFields, dbSetting, dbHelper)
+                : FunctionFactory.CompileDataEntityDbParameterSetter(entityType, inputFields, outputFields, dbSetting, dbHelper)
+                );
         }
 
         /// <summary>

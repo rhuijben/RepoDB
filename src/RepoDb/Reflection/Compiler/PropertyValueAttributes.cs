@@ -1,8 +1,8 @@
-﻿using RepoDb.Attributes.Parameter;
-using RepoDb.Extensions;
-using System.Data;
+﻿using System.Data;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Attributes.Parameter;
+using RepoDb.Extensions;
 
 namespace RepoDb.Reflection;
 
@@ -101,7 +101,7 @@ internal partial class Compiler
     /// <returns></returns>
     internal static MethodInfo GetPropertyValueAttributeSetValueMethod() =>
 
-        StaticType.PropertyValueAttribute.GetMethod("SetValue",
+        StaticType.PropertyValueAttribute.GetMethod(nameof(PropertyValueAttribute.SetValue),
             BindingFlags.Instance | BindingFlags.NonPublic);
 
     #endregion

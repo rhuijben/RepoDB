@@ -1776,7 +1776,9 @@ internal partial class Compiler
 
         // Target type
         var handlerInstance = classProperty.GetPropertyHandler() ?? PropertyHandlerCache.Get<object>(TypeCache.Get(dbField.Type).GetUnderlyingType());
-        var targetType = GetPropertyHandlerSetParameter(handlerInstance)?.ParameterType ?? dbField.TypeNullable();
+        var targetType = GetPropertyHandlerSetParameter(handlerInstance)?.ParameterType
+            ?? (classProperty.GetDbType() is { } dbt ? new DbTypeToClientTypeResolver().Resolve(dbt) : null)
+            ?? dbField.TypeNullable();
 
         /*
          * Note: The other data provider can coerce the Enum into its destination data type in the DB by default,
