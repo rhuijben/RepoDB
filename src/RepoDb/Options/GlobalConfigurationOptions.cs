@@ -38,4 +38,11 @@ public record GlobalConfigurationOptions
     /// Gets or sets the default value of how the push operations (i.e.: Insert, InsertAll, Merge and MergeAll) behaves when returning the value from the key columns (i.e.: Primary and Identity).
     /// </summary>
     public KeyColumnReturnBehavior KeyColumnReturnBehavior { get; init; } = KeyColumnReturnBehavior.IdentityOrElsePrimary;
+
+#if NET
+    /// <summary>
+    /// Prefer <see cref="DateOnly" /> and <see cref="TimeOnly"/> support over the legacy handing using <see cref="TimeSpan"/> and <see cref="DateTime"/>
+    /// </summary>
+    public bool DateOnlyAndTimeOnly { get; init; } = false;
+#endif
 }

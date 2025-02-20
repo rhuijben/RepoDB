@@ -220,7 +220,7 @@ internal partial class Compiler
     /// <param name="handlerInstance"></param>
     /// <returns></returns>
     internal static MethodInfo GetClassHandlerSetMethod(object handlerInstance) =>
-        handlerInstance?.GetType().GetMethod("Set");
+        handlerInstance?.GetType().GetMethod(nameof(IPropertyHandler<object, object>.Set));
 
     /// <summary>
     ///
@@ -288,7 +288,7 @@ internal partial class Compiler
     /// <param name="handlerInstance"></param>
     /// <returns></returns>
     internal static MethodInfo GetPropertyHandlerSetMethod(object handlerInstance) =>
-        GetPropertyHandlerInterfaceOrHandlerType(handlerInstance)?.GetMethod("Set");
+        GetPropertyHandlerInterfaceOrHandlerType(handlerInstance)?.GetMethod(nameof(IPropertyHandler<object, object>.Set));
 
     /// <summary>
     ///
@@ -432,55 +432,48 @@ internal partial class Compiler
     /// <summary>
     ///
     /// </summary>
-    /// <param name="readerField"></param>
-    /// <returns></returns>
-    internal static MethodInfo GetDbReaderGetValueMethod(DataReaderField readerField) =>
-        GetDbReaderGetValueMethod(readerField.Type);
-
-    /// <summary>
-    ///
-    /// </summary>
     /// <param name="targetType"></param>
     /// <returns></returns>
-    internal static MethodInfo GetDbReaderGetValueMethod(Type targetType) =>
-        StaticType.DbDataReader.GetMethod(string.Concat("Get", targetType?.Name));
+    internal static MethodInfo GetDbReaderGetValueMethod(Type targetType, Type? readerType) =>
+        readerType?.GetMethod(string.Concat("Get", targetType?.Name), new[] { StaticType.Int32 })
+        ?? StaticType.DbDataReader.GetMethod(string.Concat("Get", targetType?.Name));
 
     /// <summary>
     ///
     /// </summary>
     /// <returns></returns>
     internal static MethodInfo GetDbReaderGetValueMethod() =>
-        StaticType.DbDataReader.GetMethod("GetValue");
+        StaticType.DbDataReader.GetMethod(nameof(DbDataReader.GetValue));
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="readerField"></param>
     /// <returns></returns>
-    internal static MethodInfo GetDbReaderGetValueOrDefaultMethod(DataReaderField readerField) =>
-        GetDbReaderGetValueOrDefaultMethod(readerField.Type);
+    internal static MethodInfo GetDbReaderGetValueOrDefaultMethod(DataReaderField readerField, Type readerType) =>
+        GetDbReaderGetValueOrDefaultMethod(readerField.Type, readerType);
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="targetType"></param>
     /// <returns></returns>
-    internal static MethodInfo GetDbReaderGetValueOrDefaultMethod(Type targetType) =>
-        GetDbReaderGetValueMethod(targetType) ?? GetDbReaderGetValueMethod();
+    internal static MethodInfo GetDbReaderGetValueOrDefaultMethod(Type targetType, Type readerType) =>
+        GetDbReaderGetValueMethod(targetType, readerType) ?? GetDbReaderGetValueMethod();
 
     /// <summary>
     ///
     /// </summary>
     /// <returns></returns>
     internal static MethodInfo GetDbParameterValueSetMethod() =>
-        StaticType.DbParameter.GetProperty("Value").SetMethod;
+        StaticType.DbParameter.GetProperty(nameof(DbParameter.Value)).SetMethod;
 
     /// <summary>
     ///
     /// </summary>
     /// <returns></returns>
     internal static PropertyInfo GetTimeSpanTicksProperty() =>
-        StaticType.TimeSpan.GetProperty("Ticks");
+        StaticType.TimeSpan.GetProperty(nameof(TimeSpan.Ticks));
 
     /// <summary>
     ///
@@ -494,7 +487,7 @@ internal partial class Compiler
     /// </summary>
     /// <returns></returns>
     internal static PropertyInfo GetDateTimeTimeOfDayProperty() =>
-        StaticType.DateTime.GetProperty("TimeOfDay");
+        StaticType.DateTime.GetProperty(nameof(DateTime.TimeOfDay));
 
     /// <summary>
     ///
@@ -502,20 +495,20 @@ internal partial class Compiler
     /// <returns></returns>
     internal static MethodInfo GetDateTimeTimeOfDayPropertyGetMethod() =>
         GetDateTimeTimeOfDayProperty().GetMethod;
-#if NET6_0_OR_GREATER
+#if NET
     /// <summary>
     ///
     /// </summary>
     /// <returns></returns>
     internal static MethodInfo GetDateOnlyFromDateTimeStaticMethod() =>
-        StaticType.DateOnly.GetMethod("FromDateTime");
+        StaticType.DateOnly.GetMethod(nameof(DateOnly.FromDateTime));
 
     /// <summary>
     ///
     /// </summary>
     /// <returns></returns>
     internal static MethodInfo GetDateTimeFromDateOnlyMethod() =>
-        StaticType.DateOnly.GetMethod("ToDateTime", new Type[] { StaticType.TimeOnly });
+        StaticType.DateOnly.GetMethod(nameof(DateOnly.ToDateTime), new Type[] { StaticType.TimeOnly });
 #endif
 
     /// <summary>
@@ -597,7 +590,7 @@ internal partial class Compiler
     {
         if (Nullable.GetUnderlyingType(expression.Type) != null)
         {
-            Expression.Call(expression, expression.Type.GetProperty("Value").GetMethod, expression);
+            Expression.Call(expression, expression.Type.GetProperty(nameof(Nullable<int>.Value)).GetMethod, expression);
         }
         return expression;
     }
@@ -1370,11 +1363,11 @@ internal partial class Compiler
     /// <returns></returns>
     internal static Expression GetClassPropertyParameterInfoValueExpression(ParameterExpression readerParameterExpression,
         ClassPropertyParameterInfo classPropertyParameterInfo,
-        DataReaderField readerField, IDbSetting dbSetting)
+        DataReaderField readerField, IDbSetting dbSetting, Type readerType)
     {
         // False expression
         var falseExpression = GetClassPropertyParameterInfoIsDbNullFalseValueExpression(readerParameterExpression,
-            classPropertyParameterInfo, readerField, dbSetting);
+            classPropertyParameterInfo, readerField, dbSetting, readerType);
 
         // Skip if possible
         if (readerField?.DbField?.IsNullable == false)
@@ -1384,7 +1377,7 @@ internal partial class Compiler
 
         // IsDbNull Check
         var isDbNullExpression = Expression.Call(readerParameterExpression,
-            StaticType.DbDataReader.GetMethod("IsDBNull"), Expression.Constant(readerField.Ordinal));
+            StaticType.DbDataReader.GetMethod(nameof(DbDataReader.IsDBNull)), Expression.Constant(readerField.Ordinal));
 
         // True Expression
         var trueExpression = GetClassPropertyParameterInfoIsDbNullTrueValueExpression(readerParameterExpression,
@@ -1455,12 +1448,13 @@ internal partial class Compiler
     internal static Expression GetClassPropertyParameterInfoIsDbNullFalseValueExpression(ParameterExpression readerParameterExpression,
         ClassPropertyParameterInfo classPropertyParameterInfo,
         DataReaderField readerField,
-        IDbSetting dbSetting)
+        IDbSetting dbSetting,
+        Type readerType)
     {
         var parameterType = GetPropertyHandlerGetParameter(classPropertyParameterInfo)?.ParameterType;
         var classPropertyParameterInfoType = classPropertyParameterInfo.GetTargetType();
         var targetType = parameterType ?? classPropertyParameterInfoType;
-        var readerGetValueMethod = GetDbReaderGetValueOrDefaultMethod(readerField);
+        var readerGetValueMethod = GetDbReaderGetValueOrDefaultMethod(readerField, readerType);
         var valueExpression = (Expression)GetDbReaderGetValueExpression(readerParameterExpression,
             readerGetValueMethod, readerField.Ordinal);
         var targetTypeUnderlyingType = TypeCache.Get(targetType).GetUnderlyingType();
@@ -1615,14 +1609,15 @@ internal partial class Compiler
     /// <returns>The enumerable list of <see cref="MemberBinding"/> objects.</returns>
     internal static IEnumerable<MemberBinding> GetMemberBindingsForDataEntity<TResult>(ParameterExpression readerParameterExpression,
         IEnumerable<DataReaderField> readerFields,
-        IDbSetting dbSetting)
+        IDbSetting dbSetting,
+        Type readerType)
     {
         // Variables needed
         var readerFieldsName = readerFields.Select(f => f.Name.ToLowerInvariant()).AsList();
-        var classPropertyParameterInfos = GetClassPropertyParameterInfos<TResult>(readerFieldsName, dbSetting);
+        var classProperties = GetClassPropertyParameterInfos<TResult>(readerFieldsName, dbSetting);
 
         // Check the presence
-        if (classPropertyParameterInfos?.Any() != true)
+        if (classProperties?.Any() != true)
         {
             return default;
         }
@@ -1631,11 +1626,11 @@ internal partial class Compiler
         var memberBindings = new List<MemberBinding>();
 
         // Iterate each properties
-        foreach (var classPropertyParameterInfo in classPropertyParameterInfos)
+        foreach (var p in classProperties)
         {
-            var mappedName = classPropertyParameterInfo.ParameterInfoMappedClassProperty?.GetMappedName().AsUnquoted(true, dbSetting) ??
-                classPropertyParameterInfo.ParameterInfo?.Name.AsUnquoted(true, dbSetting) ??
-                classPropertyParameterInfo.ClassProperty?.GetMappedName().AsUnquoted(true, dbSetting);
+            var mappedName = p.ParameterInfoMappedClassProperty?.GetMappedName().AsUnquoted(true, dbSetting) ??
+                p.ParameterInfo?.Name.AsUnquoted(true, dbSetting) ??
+                p.ClassProperty?.GetMappedName().AsUnquoted(true, dbSetting);
 
             // Skip if not found
             var ordinal = readerFieldsName.IndexOf(mappedName?.ToLowerInvariant());
@@ -1647,20 +1642,20 @@ internal partial class Compiler
             // Get the value expression
             var readerField = readerFields.First(f => string.Equals(f.Name.AsUnquoted(true, dbSetting), mappedName.AsUnquoted(true, dbSetting), StringComparison.OrdinalIgnoreCase));
             var expression = GetClassPropertyParameterInfoValueExpression(readerParameterExpression,
-                classPropertyParameterInfo, readerField, dbSetting);
+                p, readerField, dbSetting, readerType);
 
             try
             {
                 // Member values
-                var memberAssignment = classPropertyParameterInfo.ClassProperty?.PropertyInfo?.CanWrite == true ?
-                    Expression.Bind(classPropertyParameterInfo.ClassProperty.PropertyInfo, expression) : null;
-                var argument = classPropertyParameterInfo.ParameterInfo != null ? expression : null;
+                var memberAssignment = p.ClassProperty?.PropertyInfo?.CanWrite == true ?
+                    Expression.Bind(p.ClassProperty.PropertyInfo, expression) : null;
+                var argument = p.ParameterInfo != null ? expression : null;
 
                 // Add the bindings
                 memberBindings.Add(new MemberBinding
                 {
-                    ClassProperty = classPropertyParameterInfo.ClassProperty,
-                    ParameterInfo = classPropertyParameterInfo?.ParameterInfo,
+                    ClassProperty = p.ClassProperty,
+                    ParameterInfo = p?.ParameterInfo,
                     MemberAssignment = memberAssignment,
                     Argument = argument
                 });
@@ -1668,7 +1663,7 @@ internal partial class Compiler
             catch (Exception ex)
             {
                 throw new InvalidOperationException($"Compiler.MemberBinding: Failed to bind the value expression into a property/ctor-argument. " +
-                    $"{classPropertyParameterInfo.GetDescriptiveContextString()}", ex);
+                    $"{p.GetDescriptiveContextString()}", ex);
             }
         }
 
@@ -1694,7 +1689,7 @@ internal partial class Compiler
     /// <returns></returns>
     internal static Expression GetDbNullExpression(ParameterExpression readerParameterExpression,
         ConstantExpression ordinalExpression) =>
-        Expression.Call(readerParameterExpression, StaticType.DbDataReader.GetMethod("IsDBNull"), ordinalExpression);
+        Expression.Call(readerParameterExpression, StaticType.DbDataReader.GetMethod(nameof(DbDataReader.IsDBNull)), ordinalExpression);
 
     /// <summary>
     ///
@@ -1718,7 +1713,10 @@ internal partial class Compiler
     internal static MethodCallExpression GetDbReaderGetValueExpression(ParameterExpression readerParameterExpression,
         MethodInfo readerGetValueMethod,
         ConstantExpression ordinalExpression) =>
-        Expression.Call(readerParameterExpression, readerGetValueMethod, ordinalExpression);
+        Expression.Call(
+            readerGetValueMethod.DeclaringType == StaticType.DbDataReader
+            ? readerParameterExpression
+            : Expression.Convert(readerParameterExpression, readerGetValueMethod.DeclaringType), readerGetValueMethod, ordinalExpression);
 
     /// <summary>
     /// Returns the list of the bindings for the object.
@@ -1727,7 +1725,8 @@ internal partial class Compiler
     /// <param name="readerFields">The list of fields to be bound from the data reader.</param>
     /// <returns>The enumerable list of child elements initializations.</returns>
     internal static IEnumerable<ElementInit> GetMemberBindingsForDictionary(ParameterExpression readerParameterExpression,
-        IList<DataReaderField> readerFields)
+        IList<DataReaderField> readerFields,
+        Type readerType)
     {
         // Initialize variables
         var elementInits = new List<ElementInit>();
@@ -1737,7 +1736,7 @@ internal partial class Compiler
         for (var ordinal = 0; ordinal < readerFields?.Count; ordinal++)
         {
             var readerField = readerFields[ordinal];
-            var readerGetValueMethod = GetDbReaderGetValueOrDefaultMethod(readerField);
+            var readerGetValueMethod = GetDbReaderGetValueOrDefaultMethod(readerField, readerType);
             var expression = (Expression)GetDbReaderGetValueExpression(readerParameterExpression, readerGetValueMethod, ordinal);
 
             // Check for nullables
@@ -1991,28 +1990,6 @@ internal partial class Compiler
     ///
     /// </summary>
     /// <param name="dbParameterExpression"></param>
-    /// <param name="classProperty"></param>
-    /// <param name="dbField"></param>
-    /// <returns></returns>
-    internal static MethodCallExpression GetDbParameterDbTypeAssignmentExpression(ParameterExpression dbParameterExpression,
-        ClassProperty classProperty,
-        DbField dbField) =>
-        GetDbParameterDbTypeAssignmentExpression(dbParameterExpression, GetDbType(classProperty, dbField));
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="dbParameterExpression"></param>
-    /// <param name="dbField"></param>
-    /// <returns></returns>
-    internal static MethodCallExpression GetDbParameterDbTypeAssignmentExpression(ParameterExpression dbParameterExpression,
-        DbField dbField) =>
-        GetDbParameterDbTypeAssignmentExpression(dbParameterExpression, GetDbType(null, dbField));
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="dbParameterExpression"></param>
     /// <param name="dbType"></param>
     /// <returns></returns>
     internal static MethodCallExpression GetDbParameterDbTypeAssignmentExpression(ParameterExpression dbParameterExpression,
@@ -2023,7 +2000,7 @@ internal partial class Compiler
         // Set the DB Type
         if (dbType != null)
         {
-            var dbParameterDbTypeSetMethod = StaticType.DbParameter.GetProperty("DbType").SetMethod;
+            var dbParameterDbTypeSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.DbType)).SetMethod;
             expression = Expression.Call(dbParameterExpression, dbParameterDbTypeSetMethod, Expression.Constant(dbType));
         }
 
@@ -2040,7 +2017,7 @@ internal partial class Compiler
     internal static MethodCallExpression GetDbCommandCreateParameterExpression(ParameterExpression dbCommandExpression,
         DbField dbField)
     {
-        var dbCommandCreateParameterMethod = StaticType.DbCommand.GetMethod("CreateParameter");
+        var dbCommandCreateParameterMethod = StaticType.DbCommand.GetMethod(nameof(DbCommand.CreateParameter));
         return Expression.Call(dbCommandExpression, dbCommandCreateParameterMethod);
     }
 
@@ -2079,7 +2056,7 @@ internal partial class Compiler
     internal static MethodCallExpression GetDbParameterNameAssignmentExpression(Expression dbParameterExpression,
         Expression paramaterNameExpression)
     {
-        var dbParameterValueNameMethod = StaticType.DbParameter.GetProperty("ParameterName").SetMethod;
+        var dbParameterValueNameMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.ParameterName)).SetMethod;
         return Expression.Call(dbParameterExpression, dbParameterValueNameMethod, paramaterNameExpression);
     }
 
@@ -2103,8 +2080,8 @@ internal partial class Compiler
         Expression valueExpression)
     {
         var parameterExpression = ConvertExpressionToTypeExpression(dbParameterExpression, StaticType.DbParameter);
-        var dbParameterValueSetMethod = StaticType.DbParameter.GetProperty("Value").SetMethod;
-        var convertToDbNullMethod = StaticType.Converter.GetMethod("NullToDbNull");
+        var dbParameterValueSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.Value)).SetMethod;
+        var convertToDbNullMethod = StaticType.Converter.GetMethod(nameof(Converter.NullToDbNull));
         return Expression.Call(parameterExpression, dbParameterValueSetMethod,
             Expression.Call(convertToDbNullMethod, ConvertExpressionToTypeExpression(valueExpression, StaticType.Object)));
     }
@@ -2129,7 +2106,7 @@ internal partial class Compiler
         Expression dbTypeExpression)
     {
         var parameterExpression = ConvertExpressionToTypeExpression(dbParameterExpression, StaticType.DbParameter);
-        var dbParameterDbTypeSetMethod = StaticType.DbParameter.GetProperty("DbType").SetMethod;
+        var dbParameterDbTypeSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.DbType)).SetMethod;
         return Expression.Call(parameterExpression, dbParameterDbTypeSetMethod, dbTypeExpression);
     }
 
@@ -2153,7 +2130,7 @@ internal partial class Compiler
         Expression directionExpression)
     {
         var parameterExpression = ConvertExpressionToTypeExpression(dbParameterExpression, StaticType.DbParameter);
-        var dbParameterDirectionSetMethod = StaticType.DbParameter.GetProperty("Direction").SetMethod;
+        var dbParameterDirectionSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.Direction)).SetMethod;
         return Expression.Call(parameterExpression, dbParameterDirectionSetMethod, directionExpression);
     }
 
@@ -2177,7 +2154,7 @@ internal partial class Compiler
         Expression sizeExpression)
     {
         var parameterExpression = ConvertExpressionToTypeExpression(dbParameterExpression, StaticType.DbParameter);
-        var dbParameterSizeSetMethod = StaticType.DbParameter.GetProperty("Size").SetMethod;
+        var dbParameterSizeSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.Size)).SetMethod;
         return Expression.Call(parameterExpression, dbParameterSizeSetMethod, sizeExpression);
     }
 
@@ -2201,7 +2178,7 @@ internal partial class Compiler
         Expression precisionExpression)
     {
         var parameterExpression = ConvertExpressionToTypeExpression(dbParameterExpression, StaticType.DbParameter);
-        var dbParameterPrecisionSetMethod = StaticType.DbParameter.GetProperty("Precision").SetMethod;
+        var dbParameterPrecisionSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.Precision)).SetMethod;
         return Expression.Call(parameterExpression, dbParameterPrecisionSetMethod, precisionExpression);
     }
 
@@ -2225,7 +2202,7 @@ internal partial class Compiler
         Expression scaleExpression)
     {
         var parameterExpression = ConvertExpressionToTypeExpression(dbParameterExpression, StaticType.DbParameter);
-        var dbParameterScaleSetMethod = StaticType.DbParameter.GetProperty("Scale").SetMethod;
+        var dbParameterScaleSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.Scale)).SetMethod;
         return Expression.Call(parameterExpression, dbParameterScaleSetMethod, scaleExpression);
     }
 
@@ -2250,9 +2227,9 @@ internal partial class Compiler
     internal static MethodCallExpression GetDbCommandParametersAddExpression(Expression dbCommandExpression,
         Expression dbParameterExpression)
     {
-        var dbCommandParametersProperty = StaticType.DbCommand.GetProperty("Parameters");
+        var dbCommandParametersProperty = StaticType.DbCommand.GetProperty(nameof(DbCommand.Parameters));
         var dbParameterCollection = Expression.Property(dbCommandExpression, dbCommandParametersProperty);
-        var dbParameterCollectionAddMethod = StaticType.DbParameterCollection.GetMethod("Add", new[] { StaticType.Object });
+        var dbParameterCollectionAddMethod = StaticType.DbParameterCollection.GetMethod(nameof(DbParameterCollection.Add), new[] { StaticType.Object });
         return Expression.Call(dbParameterCollection, dbParameterCollectionAddMethod, dbParameterExpression);
     }
 
@@ -2263,7 +2240,7 @@ internal partial class Compiler
     /// <returns></returns>
     internal static Expression GetDbParameterCollectionClearMethodExpression(MemberExpression dbParameterCollectionExpression)
     {
-        var dbParameterCollectionClearMethod = StaticType.DbParameterCollection.GetMethod("Clear");
+        var dbParameterCollectionClearMethod = StaticType.DbParameterCollection.GetMethod(nameof(DbParameterCollection.Clear));
         return Expression.Call(dbParameterCollectionExpression, dbParameterCollectionClearMethod);
     }
 
@@ -2299,7 +2276,7 @@ internal partial class Compiler
                 StaticType.String,
                 StaticType.BindingFlags
             });
-            var objectGetTypeMethod = StaticType.Object.GetMethod("GetType");
+            var objectGetTypeMethod = StaticType.Object.GetMethod(nameof(object.GetType));
             propertyVariableExpression = Expression.Variable(StaticType.PropertyInfo, string.Concat("propertyVariable", propertyName));
             propertyInstanceExpression = Expression.Call(Expression.Call(entityExpression, objectGetTypeMethod),
                 typeGetPropertyMethod, new[]
@@ -2357,8 +2334,8 @@ internal partial class Compiler
     internal static MethodCallExpression GetDbCommandParametersClearExpression(ParameterExpression dbCommandExpression)
     {
         var dbParameterCollection = Expression.Property(dbCommandExpression,
-            StaticType.DbCommand.GetProperty("Parameters"));
-        return Expression.Call(dbParameterCollection, StaticType.DbParameterCollection.GetMethod("Clear"));
+            StaticType.DbCommand.GetProperty(nameof(DbCommand.Parameters)));
+        return Expression.Call(dbParameterCollection, StaticType.DbParameterCollection.GetMethod(nameof(DbParameterCollection.Clear)));
     }
 
     /// <summary>

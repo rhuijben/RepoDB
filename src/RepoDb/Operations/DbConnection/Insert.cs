@@ -1,7 +1,7 @@
-﻿using RepoDb.Contexts.Providers;
-using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
+using RepoDb.Contexts.Providers;
+using RepoDb.Interfaces;
 
 namespace RepoDb;
 

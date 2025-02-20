@@ -60,7 +60,7 @@ internal partial class Compiler
         var readerField = GetDataReaderFields(reader, dbSetting).First();
         var classPropertyParameterInfo = new ClassPropertyParameterInfo { TargetType = typeOfResult };
         var expression = GetClassPropertyParameterInfoValueExpression(readerParameterExpression,
-            classPropertyParameterInfo, readerField, dbSetting);
+            classPropertyParameterInfo, readerField, dbSetting, reader.GetType());
 
         // Return
         return Expression
@@ -83,7 +83,7 @@ internal partial class Compiler
         var readerParameterExpression = Expression.Parameter(StaticType.DbDataReader, "reader");
         var readerFields = GetDataReaderFields(reader, dbFields, dbSetting);
         var memberBindings = GetMemberBindingsForDataEntity<TResult>(readerParameterExpression,
-            readerFields, dbSetting);
+            readerFields, dbSetting, reader.GetType());
         var memberAssignments = memberBindings?.Where(item => item.MemberAssignment != null).Select(item => item.MemberAssignment);
         var arguments = memberBindings?.Where(item => item.Argument != null).Select(item => item.Argument);
         var typeOfResult = typeof(TResult);

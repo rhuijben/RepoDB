@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
-using System.Linq.Expressions;
 using System.Dynamic;
+using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
@@ -22,7 +22,7 @@ internal partial class Compiler
         var readerParameterExpression = Expression.Parameter(StaticType.DbDataReader, "reader");
         var readerFields = GetDataReaderFields(reader, dbFields, dbSetting);
         var memberBindings = GetMemberBindingsForDictionary(readerParameterExpression,
-            readerFields?.AsList());
+            readerFields?.AsList(), reader.GetType());
 
         // Throw an error if there are no matching at least one
         if (memberBindings.Any() != true)

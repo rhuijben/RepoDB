@@ -726,7 +726,7 @@ public static class DbCommandExtension
 
         if (propertyHandler != null)
         {
-            var propertyHandlerSetMethod = Reflection.Compiler.GetPropertyHandlerInterfaceOrHandlerType(propertyHandler)?.GetMethod("Set")!;
+            var propertyHandlerSetMethod = Reflection.Compiler.GetPropertyHandlerInterfaceOrHandlerType(propertyHandler)?.GetMethod(nameof(IPropertyHandler<object, object>.Set))!;
             value = propertyHandlerSetMethod
                 .Invoke(propertyHandler, new[] { value,
                     PropertyHandlerSetOptions.Create(parameter, classProperty!) });
@@ -868,6 +868,14 @@ public static class DbCommandExtension
         {
             return AutomaticConvertGuidToString(value);
         }
+        else if (fromType == StaticType.DateTimeOffset && targetType == StaticType.DateTime && value is DateTimeOffset dto)
+        {
+            return dto.DateTime;
+        }
+        else if (targetType == StaticType.DateTime && value is DateTime dt)
+        {
+            return dt;
+        }
 #if NET
         else if (fromType == StaticType.DateOnly && targetType == StaticType.DateTime)
         {
@@ -883,7 +891,15 @@ public static class DbCommandExtension
                 else
                     return Activator.CreateInstance(targetType);
             }
-            return Convert.ChangeType(value, targetType);
+
+            try
+            {
+                return Convert.ChangeType(value, targetType);
+            }
+            catch (InvalidCastException e)
+            {
+                throw new InvalidCastException($"While converting from {value?.GetType().FullName} to {targetType.FullName}: " + e.Message, e);
+            }
         }
     }
 

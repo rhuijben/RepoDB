@@ -34,6 +34,7 @@ internal partial class Compiler
         var dbParameterExpression = Expression.Variable(StaticType.DbParameter,
             string.Concat("parameter", dbField.Name.AsUnquoted(true, dbSetting).AsAlphaNumeric()));
 
+
         // Variable
         var createParameterExpression = GetDbCommandCreateParameterExpression(dbCommandExpression, dbField);
         parameterAssignmentExpressions.AddIfNotNull(Expression.Assign(dbParameterExpression, createParameterExpression));
@@ -58,7 +59,7 @@ internal partial class Compiler
 
         // DbParameter.DbType
         var dbTypeAssignmentExpression = GetDbParameterDbTypeAssignmentExpression(dbParameterExpression,
-            classProperty, dbField);
+            GetDbType(null, dbField));
         parameterAssignmentExpressions.AddIfNotNull(dbTypeAssignmentExpression);
 
         // DbParameter.Direction
