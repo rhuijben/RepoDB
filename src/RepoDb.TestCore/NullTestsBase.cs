@@ -153,5 +153,87 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         await t.RollbackAsync();
     }
 
+    [Table("CommonDateTimeNullTestData")]
+    class DateTestData
+    {
+        public int ID { get; set; }
+        public DateTime? Txt { get; set; }
+        public DateTime? Date { get; set; }
+    }
+
+    [Table("CommonDateTimeNullTestData")]
+    class DateOffsetTestData
+    {
+        public int ID { get; set; }
+        public DateTimeOffset? Txt { get; set; }
+        public DateTimeOffset? Date { get; set; }
+    }
+
+    public virtual string DateTimeDbType => "datetime";
+
+    [TestMethod]
+    public async Task DateTimeToDateTimeOffsetTests()
+    {
+        using var sql = await CreateOpenConnectionAsync();
+
+        if (sql.GetType().Name is { } name && (name.Contains("Postgre") || name.Contains("Npgsql")))
+            return;
+
+        if (!GetAllTables().Any(x => string.Equals(x, "CommonDateTimeNullTestData", StringComparison.OrdinalIgnoreCase)))
+        {
+            var sqlText = $@"CREATE TABLE [CommonDateTimeNullTestData] (
+                        [ID] int NOT NULL,
+                        [Txt] varchar(128) NULL,
+                        [Date] {DateTimeDbType} NULL
+                )";
+
+            var set = sql.GetDbSetting();
+
+            if (set.OpeningQuote != "[")
+                sqlText = sqlText.Replace("[", set.OpeningQuote);
+            if (set.ClosingQuote != "]")
+                sqlText = sqlText.Replace("]", set.ClosingQuote);
+
+            await sql.ExecuteNonQueryAsync(sqlText);
+        }
+
+        var t = await sql.BeginTransactionAsync();
+
+        await sql.InsertAllAsync(
+            new[]
+            {
+                new DateTestData(){ ID = 1, Txt = new DateTime(2001, 1,1,1,1,1, DateTimeKind.Utc), Date = new DateTime(2002, 2,2,2,2,2, DateTimeKind.Utc)},
+                new DateTestData(){ ID = 2, Txt =null, Date = null }
+            }, transaction: t);
+        await sql.InsertAllAsync(
+            new[]
+            {
+                new DateOffsetTestData(){ ID = 3, Txt = new DateTimeOffset(2003, 3,3,3,3,3, TimeSpan.Zero), Date = new DateTimeOffset(2004, 4,4,4,4,4, TimeSpan.Zero)},
+                new DateOffsetTestData(){ ID = 4, Txt =null, Date = null }
+            }, transaction: t);
+
+        var all = sql.QueryAll<DateTestData>(transaction: t);
+        Assert.AreEqual(4, all.Count());
+
+        var allOffset = sql.QueryAll<DateOffsetTestData>(transaction: t);
+        Assert.AreEqual(4, all.Count());
+
+        foreach (var v in all)
+        {
+            if (v.Txt is { } d2)
+            {
+                Assert.AreEqual(v.ID, d2.Month);
+                Assert.AreEqual(v.ID, d2.Hour);
+            }
+            if (v.Date is { } d)
+            {
+                Assert.AreEqual(v.ID, 1 + d.Month);
+                Assert.AreEqual(v.ID, 1 + d.Hour);
+            }
+        }
+
+        await t.RollbackAsync();
+    }
+
 
 }

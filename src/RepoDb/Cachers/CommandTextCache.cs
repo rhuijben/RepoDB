@@ -1,9 +1,9 @@
-﻿using RepoDb.Exceptions;
+﻿using System.Collections.Concurrent;
+using System.Data;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Requests;
-using System.Collections.Concurrent;
-using System.Data;
 
 namespace RepoDb;
 
@@ -23,15 +23,14 @@ public static class CommandTextCache
     /// <returns></returns>
     internal static string GetAverageText(AverageRequest request)
     {
-        if (cache.TryGetValue(request, out var commandText) == false)
+        var commandText = cache.GetOrAdd(request, (_) =>
         {
             var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
-            commandText = statementBuilder.CreateAverage(request.Name,
+            return statementBuilder.CreateAverage(request.Name,
                 request.Field,
                 request.Where,
                 request.Hints);
-            cache.TryAdd(request, commandText);
-        }
+        });
         return commandText;
     }
 

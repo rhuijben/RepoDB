@@ -347,6 +347,16 @@ public static class ExpressionExtension
                 {
                     toType = tp.GetUnderlyingType();
                 }
+                else if (tp.GetUnderlyingType() == StaticType.DateTimeOffset && value is DateTime dateTime)
+                {
+                    return new DateTimeOffset(dateTime);
+                }
+#if NET
+                else if (tp.GetUnderlyingType() == StaticType.DateOnly && value is DateTime dateTime2)
+                {
+                    return DateOnly.FromDateTime(dateTime2.Date);
+                }
+#endif
 
                 return Convert.ChangeType(value, toType);
             default:
@@ -487,7 +497,7 @@ public static class ExpressionExtension
     /// <summary>
     /// Gets a value from the current instance of <see cref="DefaultExpression"/> object.
     /// </summary>
-    /// <param name="expression">The instance of <see cref="DefaultExpression"/> object where the value is to be extracted.</param>
+    /// <param name="expression">The instance of <see cref="DefaultE"/> object where the value is to be extracted.</param>
     /// <returns>The extracted value from <see cref="DefaultExpression"/> object.</returns>
     public static object GetValue(this DefaultExpression expression) =>
         expression.Type.IsValueType ? Activator.CreateInstance(expression.Type) : null;

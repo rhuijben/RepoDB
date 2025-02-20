@@ -1,11 +1,11 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Dynamic;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using System.Dynamic;
 
 namespace RepoDb.IntegrationTests.Operations;
 
@@ -3684,4 +3684,46 @@ public class QueryTest
     }
 
     #endregion
+
+    class DateTimeItems
+    {
+        public DateTime DateTime { get; set; }
+        public DateTime? DateTimeNullable { get; set; }
+
+        public DateTimeOffset DateTimeOffset { get; set; }
+        public DateTimeOffset? DateTimeOffsetNullable { get; set; }
+
+#if NET
+        public DateOnly DateOnly { get; set; }
+        public DateOnly? DateOnlyNullable { get; set; }
+#endif
+    }
+
+    [TestMethod]
+    public void TestDateTimeCasts()
+    {
+        using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
+        {
+            var dt = DateTimeOffset.Now.Date.AddDays(14); // Converts to DateTime, without you knowing
+            DateTimeOffset dto = DateTimeOffset.Now.Date.AddDays(14);
+
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateTime < dt));
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateTimeNullable < dt));
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateTimeOffset < dt));
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateTimeOffsetNullable < dt));
+
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateTime < dto));
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateTimeNullable < dto));
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateTimeOffset < dto));
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateTimeOffsetNullable < dto));
+#if NET
+            DateOnly dateOnly = DateOnly.FromDateTime(dt); // Converts to DateTime, without you knowing
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateOnly < dateOnly));
+            Assert.IsNotNull(QueryGroup.Parse<DateTimeItems>(x => x.DateOnlyNullable < dateOnly));
+#endif
+
+            Assert.AreEqual("([DateTime] < @DateTime)", QueryGroup.Parse<DateTimeItems>(x => x.DateTime < dto).GetString(connection.GetDbSetting()));
+            Assert.AreEqual("([DateTimeOffset] < @DateTimeOffset)", QueryGroup.Parse<DateTimeItems>(x => x.DateTimeOffset < dt).GetString(connection.GetDbSetting()));
+        }
+    }
 }

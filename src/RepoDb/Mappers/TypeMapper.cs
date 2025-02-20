@@ -342,11 +342,15 @@ public static class TypeMapper
         // Variables
         var key = TypeExtension.GenerateHashCode(entityType, propertyInfo);
 
-        // Try get the value
-        maps.TryGetValue(key, out var value);
+        // Try get the value via the property
+        if (maps.TryGetValue(key, out var value))
+            return value;
 
-        // Return the value
-        return value;
+        // Try get the value via the type
+        if (maps.TryGetValue(TypeExtension.GenerateHashCode(propertyInfo.PropertyType), out value))
+            return value;
+
+        return null;
     }
 
     /*

@@ -1,9 +1,9 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Resolvers;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Data;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Extensions;
+using RepoDb.Resolvers;
 
 namespace RepoDb;
 
@@ -44,14 +44,7 @@ public static class TypeMapCache
         var key = GenerateHashCode(type);
 
         // Try get the value
-        if (cache.TryGetValue(key, out var result) == false)
-        {
-            result = new TypeMapTypeLevelResolver().Resolve(type);
-            cache.TryAdd(key, result);
-        }
-
-        // Return the value
-        return result;
+        return cache.GetOrAdd(key, (_) => new TypeMapTypeLevelResolver().Resolve(type));
     }
 
     #endregion
@@ -114,14 +107,7 @@ public static class TypeMapCache
         var key = GenerateHashCode(entityType, propertyInfo);
 
         // Try get the value
-        if (cache.TryGetValue(key, out var result) == false)
-        {
-            result = new TypeMapPropertyLevelResolver().Resolve(propertyInfo);
-            cache.TryAdd(key, result);
-        }
-
-        // Return the value
-        return result;
+        return cache.GetOrAdd(key, (_) => new TypeMapPropertyLevelResolver().Resolve(propertyInfo));
     }
 
     #endregion

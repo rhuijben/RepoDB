@@ -1,7 +1,7 @@
-﻿using RepoDb.Extensions;
+﻿using System.Collections.Concurrent;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System.Collections.Concurrent;
 
 namespace RepoDb;
 
@@ -37,14 +37,7 @@ public static class ClassMappedNameCache
         var key = GenerateHashCode(entityType);
 
         // Try get the value
-        if (cache.TryGetValue(key, out var result) == false)
-        {
-            result = resolver.Resolve(entityType);
-            cache.TryAdd(key, result);
-        }
-
-        // Return the value
-        return result;
+        return cache.GetOrAdd(key, resolver.Resolve(entityType));
     }
 
     #endregion

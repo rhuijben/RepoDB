@@ -1,10 +1,10 @@
-﻿using System.Reflection;
-using RepoDb.Attributes;
-using RepoDb.Enumerations;
-using System.ComponentModel.DataAnnotations.Schema;
-using RepoDb.Interfaces;
-using RepoDb.Attributes.Parameter;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
+using System.Reflection;
+using RepoDb.Attributes;
+using RepoDb.Attributes.Parameter;
+using RepoDb.Enumerations;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Extensions;
 
@@ -303,7 +303,7 @@ public static class PropertyInfoExtension
         var value = property?.GetValue(entity);
         if (propertyHandler != null)
         {
-            var setMethod = propertyHandler.GetType().GetMethod("Set");
+            var setMethod = propertyHandler.GetType().GetMethod(nameof(IPropertyHandler<object, object>.Set));
             return setMethod.Invoke(propertyHandler, new[] { value, classProperty });
         }
         return value;

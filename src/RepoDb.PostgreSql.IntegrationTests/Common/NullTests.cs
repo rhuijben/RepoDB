@@ -12,4 +12,5 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<PostgreSqlDbInstance>
     public override DbConnection CreateConnection() => new Npgsql.NpgsqlConnection(Database.ConnectionString);
 
     public override string UuidDbType => "CHAR(38)";
+    public override string DateTimeDbType => "TIMESTAMP";
 }

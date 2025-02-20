@@ -123,12 +123,8 @@ internal static class FunctionCache
             IDbSetting dbSetting = null)
         {
             var key = GetKey(reader);
-            if (cache.TryGetValue(key, out var result) == false)
-            {
-                result = FunctionFactory.CompileDataReaderToExpandoObject(reader, dbFields, dbSetting);
-                cache.TryAdd(key, result);
-            }
-            return result;
+
+            return cache.GetOrAdd(key, (_) => FunctionFactory.CompileDataReaderToExpandoObject(reader, dbFields, dbSetting));
         }
 
         /// <summary>
@@ -297,28 +293,20 @@ internal static class FunctionCache
             IDbHelper dbHelper = null)
         {
             var key = GetKey(entityType, cacheKey, inputFields, outputFields, batchSize);
-            if (cache.TryGetValue(key, out var func) == false)
-            {
-                if (TypeCache.Get(entityType).IsDictionaryStringObject())
-                {
-                    func = FunctionFactory.CompileDictionaryStringObjectListDbParameterSetter(entityType,
+
+            return cache.GetOrAdd(key, (_) =>
+                TypeCache.Get(entityType).IsDictionaryStringObject()
+                ? FunctionFactory.CompileDictionaryStringObjectListDbParameterSetter(entityType,
                         inputFields,
                         batchSize,
                         dbSetting,
-                        dbHelper);
-                }
-                else
-                {
-                    func = FunctionFactory.CompileDataEntityListDbParameterSetter(entityType,
+                        dbHelper)
+                : FunctionFactory.CompileDataEntityListDbParameterSetter(entityType,
                         inputFields,
                         outputFields,
                         batchSize,
                         dbSetting,
-                        dbHelper);
-                }
-                cache.TryAdd(key, func);
-            }
-            return func;
+                        dbHelper));
         }
 
         /// <summary>
@@ -403,12 +391,7 @@ internal static class FunctionCache
             IDbSetting dbSetting = null)
         {
             var key = HashCode.Combine((long)typeof(TEntity).GetHashCode(), field.GetHashCode(), parameterName.GetHashCode(), index.GetHashCode());
-            if (cache.TryGetValue(key, out var func) == false)
-            {
-                func = FunctionFactory.CompileDbCommandToProperty<TEntity>(field, parameterName, index, dbSetting);
-                cache.TryAdd(key, func);
-            }
-            return func;
+            return cache.GetOrAdd(key, (_) => FunctionFactory.CompileDbCommandToProperty<TEntity>(field, parameterName, index, dbSetting));
         }
     }
 
@@ -447,19 +430,11 @@ internal static class FunctionCache
             Field field)
         {
             var key = HashCode.Combine(type.GetHashCode(), field.GetHashCode());
-            if (cache.TryGetValue(key, out var func) == false)
-            {
-                if (TypeCache.Get(type).IsDictionaryStringObject())
-                {
-                    func = FunctionFactory.CompileDictionaryStringObjectItemSetter(type, field);
-                }
-                else
-                {
-                    func = FunctionFactory.CompileDataEntityPropertySetter(type, field);
-                }
-                cache.TryAdd(key, func);
-            }
-            return func;
+            return cache.GetOrAdd(key, (_) =>
+                TypeCache.Get(type).IsDictionaryStringObject()
+                ? FunctionFactory.CompileDictionaryStringObjectItemSetter(type, field)
+                : FunctionFactory.CompileDataEntityPropertySetter(type, field)
+                );
         }
     }
 
@@ -506,15 +481,11 @@ internal static class FunctionCache
                 return null;
             }
             var key = HashCode.Combine(paramType.GetHashCode(), (entityType?.GetHashCode() ?? 0));
-            if (cache.TryGetValue(key, out var func) == false)
-            {
-                if (paramType.IsPlainType())
-                {
-                    func = FunctionFactory.GetPlainTypeToDbParametersCompiledFunction(paramType, entityType, dbFields);
-                }
-                cache.TryAdd(key, func);
-            }
-            return func;
+            return cache.GetOrAdd(key, (_) =>
+                paramType.IsPlainType()
+                ? FunctionFactory.GetPlainTypeToDbParametersCompiledFunction(paramType, entityType, dbFields)
+                : null
+            );
         }
     }
 

@@ -131,14 +131,7 @@ public static class PropertyCache
         var key = GenerateHashCode(entityType);
 
         // Try get the value
-        if (cache.TryGetValue(key, out var properties) == false)
-        {
-            properties = entityType.GetClassProperties().AsList();
-            cache.TryAdd(key, properties);
-        }
-
-        // Return the value
-        return properties;
+        return cache.GetOrAdd(key, (_) => entityType.GetClassProperties().AsList());
     }
 
     #endregion

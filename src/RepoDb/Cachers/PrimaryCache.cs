@@ -1,7 +1,7 @@
-﻿using RepoDb.Extensions;
+﻿using System.Collections.Concurrent;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System.Collections.Concurrent;
 
 namespace RepoDb;
 
@@ -34,15 +34,7 @@ public static class PrimaryCache
         // Variables for the cache
         var key = GenerateHashCode(entityType);
 
-        // Try get the value
-        if (cache.TryGetValue(key, out var property) == false)
-        {
-            property = resolver.Resolve(entityType);
-            cache.TryAdd(key, property);
-        }
-
-        // Return the value
-        return property;
+        return cache.GetOrAdd(key, (_) => resolver.Resolve(entityType));
     }
 
     #endregion

@@ -1,9 +1,9 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using RepoDb.Resolvers;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
+using RepoDb.Resolvers;
 
 namespace RepoDb;
 
@@ -85,14 +85,7 @@ public static class PropertyMappedNameCache
         var key = GenerateHashCode(entityType, propertyInfo);
 
         // Try get the value
-        if (cache.TryGetValue(key, out var result) == false)
-        {
-            result = resolver.Resolve(propertyInfo, entityType);
-            cache.TryAdd(key, result);
-        }
-
-        // Return the value
-        return result;
+        return cache.GetOrAdd(key, (_) => resolver.Resolve(propertyInfo, entityType));
     }
 
     #endregion

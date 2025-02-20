@@ -1,8 +1,8 @@
-﻿using RepoDb.Extensions;
+﻿using System.Collections.Concurrent;
+using System.Reflection;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System.Collections.Concurrent;
-using System.Reflection;
 
 namespace RepoDb;
 
@@ -43,23 +43,11 @@ public static class ClassHandlerCache
 
         // Variables
         var key = GenerateHashCode(type);
-        var result = default(TClassHandler);
 
         // Try get the value
-        if (cache.TryGetValue(key, out var value) == false)
-        {
-            value = resolver.Resolve(type);
-            result = Converter.ToType<TClassHandler>(value);
-            cache.TryAdd(key, result);
-        }
-        else
-        {
-            // Set the result
-            result = Converter.ToType<TClassHandler>(value);
-        }
+        var value = cache.GetOrAdd(key, (_) => resolver.Resolve(type));
 
-        // Return the value
-        return result;
+        return Converter.ToType<TClassHandler>(value);
     }
 
     #endregion

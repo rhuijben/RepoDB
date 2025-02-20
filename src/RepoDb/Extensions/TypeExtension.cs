@@ -136,7 +136,7 @@ public static class TypeExtension
     /// <returns>A list of <see cref="ClassProperty"/> objects.</returns>
     public static IEnumerable<ClassProperty> GetClassProperties(this Type type)
     {
-        foreach (var property in TypeCache.Get(type).GetProperties())
+        foreach (var property in TypeCache.Get(type).GetProperties().Distinct(PropertyNameComparer.Instance))
         {
             yield return new ClassProperty(type, property);
         }
@@ -263,4 +263,22 @@ public static class TypeExtension
                 string.Equals(p.GetMappedName(), propertyName, StringComparison.OrdinalIgnoreCase));
 
     #endregion
+
+    sealed class PropertyNameComparer : IEqualityComparer<PropertyInfo>
+    {
+        public static readonly PropertyNameComparer Instance = new();
+
+        private PropertyNameComparer()
+        { }
+
+        public bool Equals(PropertyInfo? x, PropertyInfo? y)
+        {
+            return StringComparer.Ordinal.Equals(x?.Name, y?.Name);
+        }
+
+        public int GetHashCode(PropertyInfo obj)
+        {
+            return StringComparer.Ordinal.GetHashCode(obj.Name);
+        }
+    }
 }

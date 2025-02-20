@@ -1,5 +1,5 @@
-﻿using RepoDb.Extensions;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
+using RepoDb.Extensions;
 
 namespace RepoDb;
 
@@ -37,14 +37,7 @@ public static class FieldCache
         var key = GenerateHashCode(entityType);
 
         // Try get the value
-        if (cache.TryGetValue(key, out var result) == false)
-        {
-            result = entityType.AsFields();
-            cache.TryAdd(key, result);
-        }
-
-        // Return the value
-        return result;
+        return cache.GetOrAdd(key, (_) => entityType.AsFields());
     }
 
     #endregion

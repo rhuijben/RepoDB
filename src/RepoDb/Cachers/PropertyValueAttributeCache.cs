@@ -1,9 +1,9 @@
-﻿using RepoDb.Attributes.Parameter;
-using RepoDb.Extensions;
-using RepoDb.Resolvers;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Attributes.Parameter;
+using RepoDb.Extensions;
+using RepoDb.Resolvers;
 
 namespace RepoDb;
 
@@ -77,14 +77,7 @@ public static class PropertyValueAttributeCache
         var key = TypeExtension.GenerateHashCode(entityType, propertyInfo);
 
         // Try get the value
-        if (cache.TryGetValue(key, out var result) == false)
-        {
-            result = new PropertyValueAttributePropertyLevelResolver().Resolve(propertyInfo);
-            cache.TryAdd(key, result);
-        }
-
-        // Return the value
-        return result;
+        return cache.GetOrAdd(key, (_) => new PropertyValueAttributePropertyLevelResolver().Resolve(propertyInfo));
     }
 
     #endregion
@@ -112,15 +105,7 @@ public static class PropertyValueAttributeCache
         // Variables
         var key = TypeExtension.GenerateHashCode(type);
 
-        // Try get the value
-        if (cache.TryGetValue(key, out var result) == false)
-        {
-            result = new PropertyValueAttributeTypeLevelResolver().Resolve(type);
-            cache.TryAdd(key, result);
-        }
-
-        // Return the value
-        return result;
+        return cache.GetOrAdd(key, (_) => new PropertyValueAttributeTypeLevelResolver().Resolve(type));
     }
 
     #endregion

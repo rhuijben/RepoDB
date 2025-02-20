@@ -96,11 +96,10 @@ public static class DbFieldCache
             key = HashCode.Combine(key, tableName.GetHashCode());
         }
 
-        // Try get the value
-        if (cache.TryGetValue(key, out var result) == false)
+        return cache.GetOrAdd(key, (_) =>
         {
             // Get from DB
-            result = new DbFieldCollection(connection
+            var result = new DbFieldCollection(connection
                 .GetDbHelper()
                 .GetFields(connection, tableName, transaction),
                 connection.GetDbSetting());
@@ -111,12 +110,8 @@ public static class DbFieldCache
                 ValidateDbFields(tableName, result);
             }
 
-            // Add to cache
-            cache.TryAdd(key, result);
-        }
-
-        // Return the value
-        return result;
+            return result;
+        });
     }
 
     #endregion
