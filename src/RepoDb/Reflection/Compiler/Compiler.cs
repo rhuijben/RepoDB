@@ -25,7 +25,7 @@ internal partial class Compiler
     /// </summary>
     internal class ClassPropertyParameterInfo
     {
-        private string descriptiveContextString = null;
+        private string? descriptiveContextString;
 
         /// <summary>
         /// Gets the instance of <see cref="RepoDb.ClassProperty"/> object in used.
@@ -1240,7 +1240,7 @@ internal partial class Compiler
     /// <param name="classProperty"></param>
     /// <param name="targetType"></param>
     /// <returns></returns>
-    internal static (Expression convertedExpression, Type handlerSetReturnType) ConvertExpressionToPropertyHandlerSetExpressionTuple(Expression expression,
+    internal static (Expression convertedExpression, Type? handlerSetReturnType) ConvertExpressionToPropertyHandlerSetExpressionTuple(Expression expression,
         Expression parameterExpression,
         ClassProperty classProperty,
         Type targetType)
@@ -1607,7 +1607,7 @@ internal partial class Compiler
     /// <param name="readerFields">The list of fields to be bound from the data reader.</param>
     /// <param name="dbSetting">The database setting that is being used.</param>
     /// <returns>The enumerable list of <see cref="MemberBinding"/> objects.</returns>
-    internal static IEnumerable<MemberBinding> GetMemberBindingsForDataEntity<TResult>(ParameterExpression readerParameterExpression,
+    internal static IEnumerable<MemberBinding>? GetMemberBindingsForDataEntity<TResult>(ParameterExpression readerParameterExpression,
         IEnumerable<DataReaderField> readerFields,
         IDbSetting dbSetting,
         Type readerType)
@@ -1619,7 +1619,7 @@ internal partial class Compiler
         // Check the presence
         if (classProperties?.Any() != true)
         {
-            return default;
+            return null;
         }
 
         // Variables needed
@@ -1976,13 +1976,13 @@ internal partial class Compiler
     /// <param name="classProperty"></param>
     /// <param name="dbField"></param>
     /// <returns></returns>
-    private static DbType? GetDbType(ClassProperty classProperty,
+    private static DbType? GetDbType(ClassProperty? classProperty,
         DbField dbField)
     {
         var dbType = IsPostgreSqlUserDefined(dbField) ? DbType.Object : classProperty?.GetDbType();
         if (dbType == null)
         {
-            var underlyingType = TypeCache.Get(dbField?.Type)?.GetUnderlyingType();
+            var underlyingType = TypeCache.Get(dbField?.Type).GetUnderlyingType();
             dbType = TypeMapper.Get(underlyingType) ?? new ClientTypeToDbTypeResolver().Resolve(underlyingType);
         }
         return dbType;
