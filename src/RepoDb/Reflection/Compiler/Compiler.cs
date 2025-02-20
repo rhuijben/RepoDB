@@ -2090,30 +2090,6 @@ internal partial class Compiler
     ///
     /// </summary>
     /// <param name="dbParameterExpression"></param>
-    /// <param name="dbType"></param>
-    /// <returns></returns>
-    internal static MethodCallExpression GetDbParameterDbTypeAssignmentExpression(Expression dbParameterExpression,
-        DbType dbType) =>
-        GetDbParameterDbTypeAssignmentExpression(dbParameterExpression, Expression.Constant(dbType));
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="dbParameterExpression"></param>
-    /// <param name="dbTypeExpression"></param>
-    /// <returns></returns>
-    internal static MethodCallExpression GetDbParameterDbTypeAssignmentExpression(Expression dbParameterExpression,
-        Expression dbTypeExpression)
-    {
-        var parameterExpression = ConvertExpressionToTypeExpression(dbParameterExpression, StaticType.DbParameter);
-        var dbParameterDbTypeSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.DbType)).SetMethod;
-        return Expression.Call(parameterExpression, dbParameterDbTypeSetMethod, dbTypeExpression);
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="dbParameterExpression"></param>
     /// <param name="direction"></param>
     /// <returns></returns>
     internal static MethodCallExpression GetDbParameterDirectionAssignmentExpression(Expression dbParameterExpression,
