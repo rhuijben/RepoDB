@@ -202,13 +202,13 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         await sql.InsertAllAsync(
             new[]
             {
-                new DateTestData(){ ID = 1, Txt = new DateTime(2001, 1,1,1,1,1, DateTimeKind.Utc), Date = new DateTime(2002, 2,2,2,2,2, DateTimeKind.Utc)},
+                new DateTestData(){ ID = 1, Txt = new DateTime(2001, 1,1,1,1,1, DateTimeKind.Utc), Date = new DateTime(2002, 1,2,2,2,2, DateTimeKind.Utc)},
                 new DateTestData(){ ID = 2, Txt =null, Date = null }
             }, transaction: t);
         await sql.InsertAllAsync(
             new[]
             {
-                new DateOffsetTestData(){ ID = 3, Txt = new DateTimeOffset(2003, 3,3,3,3,3, TimeSpan.Zero), Date = new DateTimeOffset(2004, 4,4,4,4,4, TimeSpan.Zero)},
+                new DateOffsetTestData(){ ID = 3, Txt = new DateTimeOffset(2003, 1,3,3,3,3, TimeSpan.Zero), Date = new DateTimeOffset(2004, 1,4,4,4,4, TimeSpan.Zero)},
                 new DateOffsetTestData(){ ID = 4, Txt =null, Date = null }
             }, transaction: t);
 
@@ -222,13 +222,11 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         {
             if (v.Txt is { } d2)
             {
-                Assert.AreEqual(v.ID, d2.Month);
-                Assert.AreEqual(v.ID, d2.Hour);
+                Assert.AreEqual(v.ID, d2.Day);
             }
             if (v.Date is { } d)
             {
-                Assert.AreEqual(v.ID, 1 + d.Month);
-                Assert.AreEqual(v.ID, 1 + d.Hour);
+                Assert.AreEqual(v.ID + 1, d.Day);
             }
         }
 

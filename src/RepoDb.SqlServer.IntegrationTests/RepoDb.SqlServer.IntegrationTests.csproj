@@ -6,6 +6,7 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.Types" />
     <PackageReference Include="MSTest" />
   </ItemGroup>
   <ItemGroup>

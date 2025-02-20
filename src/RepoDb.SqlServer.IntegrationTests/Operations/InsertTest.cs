@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
@@ -444,4 +445,53 @@ public class InsertTest
     #endregion
 
     #endregion
+
+
+    [Table(nameof(CompleteTable))]
+    class DateTimeMixup : CompleteTable
+    {
+        public new int Id { get; set; }
+
+#if NET
+        public new DateOnly ColumnDate { get; set; }
+#endif
+        public new DateTimeOffset ColumnDateTime { get; set; }
+        public new DateTime ColumnDateTimeOffset { get; set; }
+    }
+
+    [TestMethod]
+    public void DateTypeMixes()
+    {
+        using var connection = new SqlConnection(Database.ConnectionString);
+
+        using var t = connection.EnsureOpen().BeginTransaction();
+
+        var late = new DateTime(2399, 9, 9);
+        t.Connection.Delete<DateTimeMixup>(x => !(x.ColumnDateTime > late), transaction: t);
+        connection.Insert(new DateTimeMixup
+        {
+            Id = 1,
+#if NET
+            ColumnDate = DateOnly.FromDateTime(DateTime.Now),
+#endif
+            ColumnDateTime = DateTimeOffset.Now,
+            ColumnDateTimeOffset = DateTime.Now,
+
+            // And to fix minimal use
+            ColumnDateTime2 = DateTime.Now,
+            ColumnSmallDateTime = DateTime.Now,
+        }, transaction: t);
+        var result0 = connection.ExecuteQuery<DateTimeMixup>("SELECT * FROM CompleteTable", transaction: t).First();
+        var result1 = connection.Query<DateTimeMixup>(1, transaction: t).First();
+
+
+        //connection.CreateCommand().ExecuteReader().GetDateTimeOffset
+
+        //Assert.IsNotNull(result);
+        //Assert.AreEqual(1, result.Id);
+        //Assert.AreEqual(DateTime.Now.Date, result.Date);
+        //Assert.AreEqual(DateTime.Now.Date, result.DateTime.Date);
+        //Assert.AreEqual(DateTimeOffset.Now.Date, result.DateTimeOffset.Date);
+        //Assert.AreEqual(DateTime.Now.TimeOfDay, result.Time);
+    }
 }
