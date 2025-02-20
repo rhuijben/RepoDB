@@ -76,7 +76,11 @@ public class SqlServerTypeNameToClientTypeResolverTest
         var clientType = m_resolver.Resolve(dbTypeName);
 
         // Assert
-        Assert.AreEqual(typeof(DateTime), clientType);
+        Assert.AreEqual(
+#if NET
+            GlobalConfiguration.Options.DateOnlyAndTimeOnly ? typeof(DateOnly) :
+#endif
+            typeof(DateTime), clientType);
     }
 
     [TestMethod]
@@ -375,7 +379,11 @@ public class SqlServerTypeNameToClientTypeResolverTest
         var clientType = m_resolver.Resolve(dbTypeName);
 
         // Assert
-        Assert.AreEqual(typeof(TimeSpan), clientType);
+        Assert.AreEqual(
+#if NET
+            GlobalConfiguration.Options.DateOnlyAndTimeOnly ? typeof(TimeOnly) :
+#endif
+            typeof(TimeSpan), clientType);
     }
 
     [TestMethod]
