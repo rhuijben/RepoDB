@@ -2313,7 +2313,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesIfTheMappingsAreInvalid()
     {
         // Setup
@@ -2419,7 +2419,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDbDataReaderIfTheMappingsAreInvalid()
     {
         // Setup
@@ -2597,7 +2597,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForEntitiesDataTableIfTheMappingsAreInvalid()
     {
         // Setup
@@ -3336,7 +3336,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheMappingsAreInvalid()
     {
         // Setup
@@ -3382,7 +3382,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheTableNameIsNotValid()
     {
         // Setup
@@ -3413,7 +3413,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDbDataReaderIfTheTableNameIsMissing()
     {
         // Setup
@@ -3578,7 +3578,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheMappingsAreInvalid()
     {
         // Setup
@@ -3629,7 +3629,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheTableNameIsNotValid()
     {
         // Setup
@@ -3665,7 +3665,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkMergeAsyncForTableNameDataTableIfTheTableNameIsMissing()
     {
         // Setup

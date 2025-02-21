@@ -1764,7 +1764,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForEntitiesIfTheMappingsAreInvalid()
     {
         // Setup
@@ -1879,7 +1879,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForEntitiesDbDataReaderIfTheMappingsAreInvalid()
     {
         // Setup
@@ -2169,7 +2169,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForEntitiesDataTableIfTheMappingsAreInvalid()
     {
         // Setup
@@ -2602,7 +2602,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForTableNameDbDataReaderIfTheMappingsAreInvalid()
     {
         // Setup
@@ -2646,7 +2646,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForTableNameDbDataReaderIfTheTableNameIsNotValid()
     {
         // Setup
@@ -2677,7 +2677,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForTableNameDbDataReaderIfTheTableNameIsMissing()
     {
         // Setup
@@ -2954,7 +2954,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForTableNameDataTableIfTheMappingsAreInvalid()
     {
         // Setup
@@ -3003,7 +3003,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForTableNameDataTableIfTheTableNameIsNotValid()
     {
         // Setup
@@ -3039,7 +3039,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkInsertAsyncForTableNameDataTableIfTheTableNameIsMissing()
     {
         // Setup

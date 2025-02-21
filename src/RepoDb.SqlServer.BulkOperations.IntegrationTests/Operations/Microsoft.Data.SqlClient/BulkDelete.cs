@@ -2,6 +2,7 @@
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.SqlServer.BulkOperations.IntegrationTests.Models;
 
@@ -1401,7 +1402,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForEntitiesIfTheMappingsAreInvalid()
     {
         // Setup
@@ -1521,7 +1522,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForEntitiesDbDataReaderIfTheMappingsAreInvalid()
     {
         // Setup
@@ -1667,7 +1668,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForEntitiesDataTableIfTheMappingsAreInvalid()
     {
         // Setup
@@ -2082,7 +2083,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForTableNameDbDataReaderIfTheMappingsAreInvalid()
     {
         // Setup
@@ -2129,7 +2130,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForTableNameDbDataReaderIfTheTableNameIsNotValid()
     {
         // Setup
@@ -2160,7 +2161,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForTableNameDbDataReaderIfTheTableNameIsMissing()
     {
         // Setup
@@ -2292,7 +2293,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(InvalidOperationException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForTableNameDataTableIfTheMappingsAreInvalid()
     {
         // Setup
@@ -2345,7 +2346,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForTableNameDataTableIfTheTableNameIsNotValid()
     {
         // Setup
@@ -2381,7 +2382,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(AggregateException))]
+    [TestMethod, ExpectedException(typeof(MissingFieldsException))]
     public async Task ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteAsyncForTableNameDataTableIfTheTableNameIsMissing()
     {
         // Setup
