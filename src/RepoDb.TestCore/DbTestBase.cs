@@ -47,9 +47,8 @@ public abstract class DbTestBase<TDbInstance> where TDbInstance : DbInstance, ne
         }
     }
 
-    public virtual IEnumerable<string> GetAllTables()
+    public virtual IEnumerable<string> GetAllTables(DbConnection sql)
     {
-        using var sql = CreateConnection();
         sql.EnsureOpen();
 
         DataTable tables;

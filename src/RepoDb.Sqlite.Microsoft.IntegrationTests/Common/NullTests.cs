@@ -11,4 +11,9 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<SqliteDbInstance>
     protected override void InitializeCore() => Database.Initialize(TestContext);
 
     public override DbConnection CreateConnection() => new SqliteConnection(Database.GetConnectionString(TestContext));
+
+#if NET
+    public override string TimeOnlyDbType => "TEXT";
+#endif
+
 }

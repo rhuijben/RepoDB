@@ -42,7 +42,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables().Any(x => string.Equals(x, "CommonNullTestData", StringComparison.OrdinalIgnoreCase)))
+        if (!GetAllTables(sql).Any(x => string.Equals(x, "CommonNullTestData", StringComparison.OrdinalIgnoreCase)))
         {
             var sqlText = @"CREATE TABLE [CommonNullTestData] (
                         [ID] int NOT NULL,
@@ -121,7 +121,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         // Regression test. Failed on sqlite and sqlserver before this commit
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables().Any(x => string.Equals(x, "GuidNullData", StringComparison.OrdinalIgnoreCase)))
+        if (!GetAllTables(sql).Any(x => string.Equals(x, "GuidNullData", StringComparison.OrdinalIgnoreCase)))
         {
             var sqlText = $@"CREATE TABLE [GuidNullData] (
                         [ID] int NOT NULL,
@@ -179,22 +179,13 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         if (sql.GetType().Name is { } name && (name.Contains("Postgre") || name.Contains("Npgsql")))
             return;
 
-        if (!GetAllTables().Any(x => string.Equals(x, "CommonDateTimeNullTestData", StringComparison.OrdinalIgnoreCase)))
+        if (!GetAllTables(sql).Any(x => string.Equals(x, "CommonDateTimeNullTestData", StringComparison.OrdinalIgnoreCase)))
         {
-            var sqlText = $@"CREATE TABLE [CommonDateTimeNullTestData] (
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [CommonDateTimeNullTestData] (
                         [ID] int NOT NULL,
                         [Txt] varchar(128) NULL,
                         [Date] {DateTimeDbType} NULL
-                )";
-
-            var set = sql.GetDbSetting();
-
-            if (set.OpeningQuote != "[")
-                sqlText = sqlText.Replace("[", set.OpeningQuote);
-            if (set.ClosingQuote != "]")
-                sqlText = sqlText.Replace("]", set.ClosingQuote);
-
-            await sql.ExecuteNonQueryAsync(sqlText);
+                )");
         }
 
         var t = await sql.BeginTransactionAsync();
@@ -232,6 +223,55 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
         await t.RollbackAsync();
     }
+
+    private static async Task<string> PerformCreateTableAsync(System.Data.Common.DbConnection sql, string sqlText)
+    {
+        var set = sql.GetDbSetting();
+
+        if (set.OpeningQuote != "[")
+            sqlText = sqlText.Replace("[", set.OpeningQuote);
+        if (set.ClosingQuote != "]")
+            sqlText = sqlText.Replace("]", set.ClosingQuote);
+
+        await sql.ExecuteNonQueryAsync(sqlText);
+        return sqlText;
+    }
+
+#if NET
+    public virtual string TimeOnlyDbType => "time";
+    public virtual string DateOnlyDbType => "date";
+
+    record DateTimeOnlyTable
+    {
+        public TimeOnly TOnly { get; set; }
+        public DateOnly DOnly { get; set; }
+    }
+
+    [TestMethod]
+    public async Task DateTimeOnlyTests()
+    {
+        using var sql = await CreateOpenConnectionAsync();
+
+        if (!GetAllTables(sql).Any(x => string.Equals(x, "DateTimeOnlyTable", StringComparison.OrdinalIgnoreCase)))
+        {
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [DateTimeOnlyTable] (
+                        [TOnly] {TimeOnlyDbType} NOT NULL,
+                        [DOnly] {DateOnlyDbType} NOT NULL
+            )");
+        }
+
+        await sql.TruncateAsync<DateTimeOnlyTable>();
+
+        await sql.InsertAsync(new DateTimeOnlyTable() { DOnly = new DateOnly(2021, 1, 1), TOnly = new TimeOnly(1, 2, 3) });
+
+        Assert.IsNotEmpty(await sql.QueryAllAsync<DateTimeOnlyTable>());
+
+        if (sql.GetType().Name is { } name && (name.Contains("Postgre") || name.Contains("Npgsql")))
+            return; // Case sensitive issue
+
+        Assert.IsNotEmpty(await sql.ExecuteQueryAsync<DateTimeOnlyTable>("SELECT * FROM DateTimeOnlyTable"));
+    }
+#endif
 
 
 }

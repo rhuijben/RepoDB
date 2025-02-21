@@ -68,8 +68,17 @@ public class MySqlConnectorDbTypeNameToClientTypeResolver : IResolver<string, Ty
             "blob" or "blobasarray" or "binary" or "longblob" or "mediumblob" or "tinyblob" or "varbinary" or "geometry" or "linestring" or "multilinestring" or "multipoint" or "multipolygon" or "point" or "polygon" => typeof(byte[]),
             "boolean" => typeof(bool),
             "char" or "json" or "longtext" or "mediumtext" or "nchar" or "nvarchar" or "string" or "text" or "tinytext" or "varchar" => typeof(string),
-            "date" or "datetime" or "datetime2" or "timestamp" => typeof(DateTime),
-            "time" => typeof(TimeSpan),
+            "date" =>
+#if NET
+            GlobalConfiguration.Options.DateOnlyAndTimeOnly ? typeof(DateOnly) :
+#endif
+            typeof(DateTime),
+            "datetime" or "datetime2" or "timestamp" => typeof(DateTime),
+            "time" =>
+#if NET
+            GlobalConfiguration.Options.DateOnlyAndTimeOnly ? typeof(TimeOnly) :
+#endif
+            typeof(TimeSpan),
             "decimal" or "decimal2" or "numeric" => typeof(decimal),
             "double" or "real" => typeof(double),
             "float" => typeof(float),

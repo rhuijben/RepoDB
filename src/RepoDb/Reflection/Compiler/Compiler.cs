@@ -195,7 +195,7 @@ internal partial class Compiler
     /// <param name="conversionType"></param>
     /// <returns></returns>
     internal static MethodInfo GetSystemConvertChangeTypeMethod(Type conversionType) =>
-        StaticType.Convert.GetMethod("ChangeType",
+        StaticType.Convert.GetMethod(nameof(Convert.ChangeType),
             new[] { StaticType.Object, TypeCache.Get(conversionType).GetUnderlyingType() });
 
     /// <summary>
@@ -429,6 +429,8 @@ internal partial class Compiler
         return value;
     }
 
+    static PropertyInfo GetPropertyInfo<TFrom>(Expression<Func<TFrom, object>> expression) => ((MemberExpression)UnwrapUnary(expression.Body)).Member as PropertyInfo;
+
     /// <summary>
     ///
     /// </summary>
@@ -496,19 +498,17 @@ internal partial class Compiler
     internal static MethodInfo GetDateTimeTimeOfDayPropertyGetMethod() =>
         GetDateTimeTimeOfDayProperty().GetMethod;
 #if NET
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    internal static MethodInfo GetDateOnlyFromDateTimeStaticMethod() =>
-        StaticType.DateOnly.GetMethod(nameof(DateOnly.FromDateTime));
+    private static MethodInfo GetDateOnlyFromDateTimeStaticMethod() =>
+        GetMethodInfo<DateOnly>((_) => DateOnly.FromDateTime(default(DateTime)));
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    internal static MethodInfo GetDateTimeFromDateOnlyMethod() =>
-        StaticType.DateOnly.GetMethod(nameof(DateOnly.ToDateTime), new Type[] { StaticType.TimeOnly });
+    private static MethodInfo GetDateTimeFromDateOnlyMethod() =>
+        GetMethodInfo<DateOnly>((x) => x.ToDateTime(default(TimeOnly)));
+
+    private static MethodInfo GetTimeOnlyFromTimeSpanMethod() =>
+        GetMethodInfo<TimeOnly>((x) => TimeOnly.FromTimeSpan(default));
+
+    private static MethodInfo GetTimeSpanFromTimeOnlyMethod() =>
+        GetMethodInfo<TimeOnly>((x) => x.ToTimeSpan());
 #endif
 
     /// <summary>
@@ -516,21 +516,21 @@ internal partial class Compiler
     /// </summary>
     /// <returns></returns>
     internal static MethodInfo GetEnumGetNameMethod() =>
-        StaticType.Enum.GetMethod("GetName", new[] { StaticType.Type, StaticType.Object });
+        GetMethodInfo<Enum>((x) => Enum.GetName(default, default));
 
     /// <summary>
     ///
     /// </summary>
     /// <returns></returns>
     internal static MethodInfo GetEnumIsDefinedMethod() =>
-        StaticType.Enum.GetMethod("IsDefined", new[] { StaticType.Type, StaticType.Object });
+        GetMethodInfo<Enum>((x) => Enum.IsDefined(default, default));
 
 
     internal static MethodInfo GetEnumParseNullMethod() =>
-        typeof(Compiler).GetMethod(nameof(EnumParseNull), BindingFlags.Static | BindingFlags.NonPublic);
+        GetMethodInfo<Compiler>((x) => Compiler.EnumParseNull<DbType>(default)).GetGenericMethodDefinition();
 
     internal static MethodInfo GetEnumParseNullDefinedMethod() =>
-        typeof(Compiler).GetMethod(nameof(EnumParseNullDefined), BindingFlags.Static | BindingFlags.NonPublic);
+        GetMethodInfo<Compiler>((x) => Compiler.EnumParseNullDefined<DbType>(default)).GetGenericMethodDefinition();
 
     private static TEnum? EnumParseNull<TEnum>(string value) where TEnum : struct, System.Enum
     {
@@ -563,7 +563,6 @@ internal partial class Compiler
         return expression;
     }
 
-#if NET
     internal static Expression ConvertExpressionToNullableGetValueOrDefaultExpression(Func<Expression, Expression> converter, Expression expression)
     {
         if (Nullable.GetUnderlyingType(expression.Type) != null)
@@ -579,7 +578,6 @@ internal partial class Compiler
 
         return converter(expression);
     }
-#endif
 
     /// <summary>
     ///
@@ -608,7 +606,7 @@ internal partial class Compiler
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    internal static Expression ConvertExpressionToStringToGuidExpression(Expression expression) =>
+    internal static Expression ConvertExpressionToStringToGuid(Expression expression) =>
         Expression.New(StaticType.Guid.GetConstructor(new[] { StaticType.String }), ConvertExpressionToNullableValue(expression));
 
     /// <summary>
@@ -616,34 +614,10 @@ internal partial class Compiler
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    internal static Expression ConvertExpressionToTimeSpanToDateTimeExpression(Expression expression) =>
+    internal static Expression ConvertExpressionToTimeSpanToDateTime(Expression expression) =>
         Expression.New(StaticType.DateTime.GetConstructor(new[] { StaticType.Int64 }),
             ConvertExpressionToNullableValue(ConvertExpressionToTimeSpanTicksExpression(expression)));
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    internal static Expression ConvertExpressionToDateTimeToTimeSpanExpression(Expression expression) =>
-        ConvertExpressionToNullableValue(ConvertExpressionToDateTimeTimeOfDayExpression(expression));
-#if NET
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    internal static Expression ConvertExpressionToDateTimeToDateOnlyExpression(Expression expression) =>
-        ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToDateTimeFromDateOnlyExpression, expression);
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    internal static Expression ConvertExpressionToDateOnlyToDateTimeExpression(Expression expression) =>
-        ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToDateOnlyFromDateTimeExpression, expression);
-#endif
     /// <summary>
     ///
     /// </summary>
@@ -657,24 +631,20 @@ internal partial class Compiler
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    internal static Expression ConvertExpressionToDateTimeTimeOfDayExpression(Expression expression) =>
+    internal static Expression ConvertExpressionToDateTimeToTimeSpan(Expression expression) =>
         Expression.Call(expression, GetDateTimeTimeOfDayPropertyGetMethod());
 #if NET
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    internal static Expression ConvertExpressionToDateOnlyFromDateTimeExpression(Expression expression) =>
+    private static Expression ConvertExpressionToDateOnlyToDateTime(Expression expression) =>
         Expression.Call(expression, GetDateTimeFromDateOnlyMethod(), Expression.Constant(default(TimeOnly)));
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    internal static Expression ConvertExpressionToDateTimeFromDateOnlyExpression(Expression expression) =>
+    private static Expression ConvertExpressionToDateTimeToDateOnly(Expression expression) =>
         Expression.Call(null, GetDateOnlyFromDateTimeStaticMethod(), expression);
+
+    private static Expression ConvertExpressionToTimeSpanToTimeOnly(Expression expression) =>
+        Expression.Call(null, GetTimeOnlyFromTimeSpanMethod(), expression);
+
+    private static Expression ConvertExpressionToTimeOnlyToTimeSpan(Expression expression) =>
+        Expression.Call(expression, GetTimeSpanFromTimeOnlyMethod());
 #endif
     /// <summary>
     ///
@@ -728,18 +698,14 @@ internal partial class Compiler
                 return result; // Will fail
         }
         else if (toType == StaticType.String && fromType == StaticType.DateTime)
-        {
-            result = Expression.Call(GetStaticMethodInfo(() => StrictToString(DateTime.MinValue)), result);
-        }
+            result = Expression.Call(GetMethodInfo(() => StrictToString(DateTime.MinValue)), result);
         else if (toType == StaticType.String && fromType == StaticType.DateTimeOffset)
-        {
-            result = Expression.Call(GetStaticMethodInfo(() => StrictToString(DateTimeOffset.MinValue)), result);
-        }
+            result = Expression.Call(GetMethodInfo(() => StrictToString(DateTimeOffset.MinValue)), result);
 #if NET
         else if (toType == StaticType.String && fromType == StaticType.DateOnly)
-        {
-            result = Expression.Call(GetStaticMethodInfo(() => StrictToString(DateOnly.MinValue)), result);
-        }
+            result = Expression.Call(GetMethodInfo(() => StrictToString(DateOnly.MinValue)), result);
+        else if (toType == StaticType.String && fromType == StaticType.TimeOnly)
+            result = Expression.Call(GetMethodInfo(() => StrictToString(TimeOnly.MinValue)), result);
 #endif
         else if (underlyingToType == StaticType.DateTime && underlyingFromType == StaticType.DateTimeOffset)
         {
@@ -765,20 +731,24 @@ internal partial class Compiler
         {
             if (underlyingToType == StaticType.Decimal)
             {
-                result = Expression.Call(GetStaticMethodInfo(() => StrictParseDecimal(null)), expression);
+                result = Expression.Call(GetMethodInfo(() => StrictParseDecimal(null)), expression);
             }
             else if (underlyingToType == StaticType.DateTime)
             {
-                result = Expression.Call(GetStaticMethodInfo(() => StrictParseDateTime(null)), expression);
+                result = Expression.Call(GetMethodInfo(() => StrictParseDateTime(null)), expression);
             }
             else if (underlyingToType == StaticType.DateTimeOffset)
             {
-                result = Expression.Call(GetStaticMethodInfo(() => StrictParseDateTimeOffset(null)), expression);
+                result = Expression.Call(GetMethodInfo(() => StrictParseDateTimeOffset(null)), expression);
             }
 #if NET
             else if (underlyingToType == typeof(DateOnly))
             {
-                result = Expression.Call(GetStaticMethodInfo(() => StrictParseDateOnly(null)), expression);
+                result = Expression.Call(GetMethodInfo(() => StrictParseDateOnly(null)), expression);
+            }
+            else if (underlyingToType == typeof(TimeOnly))
+            {
+                result = Expression.Call(GetMethodInfo(() => StrictParseTimeOnly(null)), expression);
             }
 #endif
             else
@@ -815,9 +785,13 @@ internal partial class Compiler
         return result;
     }
 
-    static MethodInfo GetStaticMethodInfo(Expression<Action> call)
+    static Expression UnwrapUnary(Expression e) => e is UnaryExpression ue ? UnwrapUnary(ue.Operand) : e;
+
+    static MethodInfo GetMethodInfo<TFrom>(Expression<Action<TFrom>> call) => ((MethodCallExpression)call.Body).Method;
+
+    static MethodInfo GetMethodInfo(Expression<Action> call)
     {
-        return (call.Body as MethodCallExpression)?.Method;
+        return (call.Body as MethodCallExpression).Method;
     }
 
     static decimal StrictParseDecimal(string value)
@@ -861,6 +835,23 @@ internal partial class Compiler
     static string StrictToString(DateOnly value)
     {
         return value.ToString("d", CultureInfo.InvariantCulture);
+    }
+
+    static TimeOnly StrictParseTimeOnly(string value)
+    {
+        try
+        {
+            return TimeOnly.Parse(value, CultureInfo.InvariantCulture);
+        }
+        catch (FormatException) when (DateTime.TryParse(value, CultureInfo.InvariantCulture, out var vv) && TimeOnly.FromDateTime(vv) is { } timeOnly)
+        {
+            return timeOnly;
+        }
+    }
+
+    static string StrictToString(TimeOnly value)
+    {
+        return value.ToString("o", CultureInfo.InvariantCulture);
     }
 #endif
 
@@ -1112,33 +1103,20 @@ internal partial class Compiler
 
         // String to Guid
         else if (fromType == StaticType.String && toType == StaticType.Guid)
-        {
-            expression = ConvertExpressionToStringToGuidExpression(expression);
-        }
-
-        // TimeSpan to DateTime
+            expression = ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToStringToGuid, expression);
         else if (fromType == StaticType.TimeSpan && toType == StaticType.DateTime)
-        {
-            expression = ConvertExpressionToTimeSpanToDateTimeExpression(expression);
-        }
-
-        // DateTime to TimeSpan
+            expression = ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToTimeSpanToDateTime, expression);
         else if (fromType == StaticType.DateTime && toType == StaticType.TimeSpan)
-        {
-            expression = ConvertExpressionToDateTimeToTimeSpanExpression(expression);
-        }
+            expression = ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToDateTimeToTimeSpan, expression);
 #if NET
-        // DateTime to DateOnly
         else if (fromType == StaticType.DateTime && toType == StaticType.DateOnly)
-        {
-            expression = ConvertExpressionToDateTimeToDateOnlyExpression(expression);
-        }
-
-        // DateOnly to DateTime
+            expression = ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToDateTimeToDateOnly, expression);
         else if (fromType == StaticType.DateOnly && toType == StaticType.DateTime)
-        {
-            expression = ConvertExpressionToDateOnlyToDateTimeExpression(expression);
-        }
+            expression = ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToDateOnlyToDateTime, expression);
+        else if (fromType == StaticType.TimeSpan && toType == StaticType.TimeOnly)
+            expression = ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToTimeSpanToTimeOnly, expression);
+        else if (fromType == StaticType.TimeOnly && toType == StaticType.TimeSpan)
+            expression = ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToTimeOnlyToTimeSpan, expression);
 #endif
         // Others
         else if (toType != StaticType.SqlVariant)
@@ -1777,8 +1755,8 @@ internal partial class Compiler
         // Target type
         var handlerInstance = classProperty.GetPropertyHandler() ?? PropertyHandlerCache.Get<object>(TypeCache.Get(dbField.Type).GetUnderlyingType());
         var targetType = GetPropertyHandlerSetParameter(handlerInstance)?.ParameterType
-            ?? (classProperty.GetDbType() is { } dbt ? new DbTypeToClientTypeResolver().Resolve(dbt) : null)
-            ?? dbField.Type;
+            //?? (classProperty.GetDbType() is { } dbt ? new DbTypeToClientTypeResolver().Resolve(dbt) : null)
+            ?? dbField.TypeNullable();
 
         if (targetType.IsValueType && dbField.IsNullable)
         {
