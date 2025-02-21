@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     #region ClassHandlers
 

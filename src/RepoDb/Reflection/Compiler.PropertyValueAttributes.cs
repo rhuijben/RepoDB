@@ -6,7 +6,7 @@ using RepoDb.Extensions;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     #region PropertyValueAttribute
 
@@ -16,7 +16,7 @@ internal partial class Compiler
     /// <param name="dbParameterExpression"></param>
     /// <param name="classProperty"></param>
     /// <returns></returns>
-    internal static IEnumerable<Expression> GetPropertyValueAttributeAssignmentExpressions(
+    private static IEnumerable<Expression> GetPropertyValueAttributeAssignmentExpressions(
         ParameterExpression dbParameterExpression,
         ClassProperty classProperty) =>
         GetParameterPropertyValueSetterAttributesAssignmentExpressions((Expression)dbParameterExpression, classProperty);
@@ -27,7 +27,7 @@ internal partial class Compiler
     /// <param name="dbParameterExpression"></param>
     /// <param name="classProperty"></param>
     /// <returns></returns>
-    internal static IEnumerable<Expression> GetParameterPropertyValueSetterAttributesAssignmentExpressions(
+    private static IEnumerable<Expression> GetParameterPropertyValueSetterAttributesAssignmentExpressions(
         Expression dbParameterExpression,
         ClassProperty classProperty)
     {
@@ -63,7 +63,7 @@ internal partial class Compiler
     /// <param name="dbParameterExpression"></param>
     /// <param name="attribute"></param>
     /// <returns></returns>
-    internal static Expression GetPropertyValueAttributesAssignmentExpression(
+    private static Expression GetPropertyValueAttributesAssignmentExpression(
         ParameterExpression dbParameterExpression,
         PropertyValueAttribute attribute) =>
         GetPropertyValueAttributesAssignmentExpression((Expression)dbParameterExpression, attribute);
@@ -74,7 +74,7 @@ internal partial class Compiler
     /// <param name="parameterExpression"></param>
     /// <param name="attribute"></param>
     /// <returns></returns>
-    internal static Expression GetPropertyValueAttributesAssignmentExpression(
+    private static Expression GetPropertyValueAttributesAssignmentExpression(
         Expression parameterExpression,
         PropertyValueAttribute attribute)
     {
@@ -99,7 +99,7 @@ internal partial class Compiler
     /// 
     /// </summary>
     /// <returns></returns>
-    internal static MethodInfo GetPropertyValueAttributeSetValueMethod() =>
+    private static MethodInfo GetPropertyValueAttributeSetValueMethod() =>
 
         StaticType.PropertyValueAttribute.GetMethod(nameof(PropertyValueAttribute.SetValue),
             BindingFlags.Instance | BindingFlags.NonPublic);

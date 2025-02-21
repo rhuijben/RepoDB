@@ -4,7 +4,7 @@ using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     /// 

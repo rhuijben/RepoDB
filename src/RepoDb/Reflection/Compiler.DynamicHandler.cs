@@ -3,7 +3,7 @@ using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     /// 
@@ -11,12 +11,12 @@ internal partial class Compiler
     /// <param name="dbCommandExpression"></param>
     /// <param name="dbHelper"></param>
     /// <returns></returns>
-    internal static MethodCallExpression GetCompilerDbParameterPostCreationExpression(ParameterExpression dbCommandExpression,
+    private static MethodCallExpression GetCompilerDbParameterPostCreationExpression(ParameterExpression dbCommandExpression,
         IDbHelper dbHelper)
     {
         var method = StaticType.IDbHelper.GetMethod(nameof(IDbHelper.DynamicHandler))
             .MakeGenericMethod(dbCommandExpression.Type);
         return Expression.Call(Expression.Constant(dbHelper),
-            method, dbCommandExpression, Expression.Constant("RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]"));
+            method, dbCommandExpression, Expression.Constant("RepoDb.private.Compiler.Events[AfterCreateDbParameter]"));
     }
 }

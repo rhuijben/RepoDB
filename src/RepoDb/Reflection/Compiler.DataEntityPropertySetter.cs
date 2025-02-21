@@ -4,7 +4,7 @@ using RepoDb.Extensions;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     ///
@@ -12,7 +12,7 @@ internal partial class Compiler
     /// <param name="entityType"></param>
     /// <param name="field"></param>
     /// <returns></returns>
-    internal static Action<object, object> CompileDataEntityPropertySetter(Type entityType,
+    public static Action<object, object> CompileDataEntityPropertySetter(Type entityType,
         Field field)
     {
         // Get the entity property
@@ -31,7 +31,7 @@ internal partial class Compiler
     /// <param name="property"></param>
     /// <param name="targetType"></param>
     /// <returns></returns>
-    internal static Action<object, object> CompileDataEntityPropertySetter(Type entityType,
+    private static Action<object, object> CompileDataEntityPropertySetter(Type entityType,
         PropertyInfo property,
         Type targetType)
     {

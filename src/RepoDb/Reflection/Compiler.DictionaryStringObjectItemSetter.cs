@@ -2,7 +2,7 @@
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     /// 
@@ -10,7 +10,7 @@ internal partial class Compiler
     /// <param name="entityType"></param>
     /// <param name="field"></param>
     /// <returns></returns>
-    internal static Action<object, object> CompileDictionaryStringObjectItemSetter(Type entityType,
+    public static Action<object, object> CompileDictionaryStringObjectItemSetter(Type entityType,
         Field field)
     {
         // Check the property first

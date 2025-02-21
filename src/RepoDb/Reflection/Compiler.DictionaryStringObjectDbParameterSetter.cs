@@ -4,7 +4,7 @@ using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     /// 
@@ -14,7 +14,7 @@ internal partial class Compiler
     /// <param name="dbSetting"></param>
     /// <param name="dbHelper"></param>
     /// <returns></returns>
-    internal static Action<DbCommand, object> CompileDictionaryStringObjectDbParameterSetter(Type entityType,
+    public static Action<DbCommand, object> CompileDictionaryStringObjectDbParameterSetter(Type entityType,
         IEnumerable<DbField> inputFields,
         IDbSetting dbSetting,
         IDbHelper dbHelper)

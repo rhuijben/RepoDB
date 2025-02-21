@@ -5,7 +5,7 @@ using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     ///
@@ -15,7 +15,7 @@ internal partial class Compiler
     /// <param name="dbFields"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    internal static Func<DbDataReader, TResult> CompileDataReaderToType<TResult>(DbDataReader reader,
+    public static Func<DbDataReader, TResult> CompileDataReaderToType<TResult>(DbDataReader reader,
         DbFieldCollection dbFields,
         IDbSetting dbSetting)
     {
@@ -44,7 +44,7 @@ internal partial class Compiler
     /// <param name="reader"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    internal static Func<DbDataReader, TResult> CompileDataReaderToTargetType<TResult>(DbDataReader reader,
+    private static Func<DbDataReader, TResult> CompileDataReaderToTargetType<TResult>(DbDataReader reader,
         IDbSetting dbSetting)
     {
         var typeOfResult = typeof(TResult);
@@ -76,7 +76,7 @@ internal partial class Compiler
     /// <param name="dbFields"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    internal static Func<DbDataReader, TResult> CompileDataReaderToDataEntity<TResult>(DbDataReader reader,
+    private static Func<DbDataReader, TResult> CompileDataReaderToDataEntity<TResult>(DbDataReader reader,
         DbFieldCollection dbFields,
         IDbSetting dbSetting)
     {

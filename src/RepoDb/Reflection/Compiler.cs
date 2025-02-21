@@ -227,7 +227,7 @@ internal sealed partial class Compiler
     /// </summary>
     /// <param name="handlerInstance"></param>
     /// <returns></returns>
-    internal static Type GetPropertyHandlerInterfaceOrHandlerType(object handlerInstance)
+    public static Type GetPropertyHandlerInterfaceOrHandlerType(object handlerInstance)
     {
         if (handlerInstance is null) return null;
         Type handlerType = handlerInstance.GetType();

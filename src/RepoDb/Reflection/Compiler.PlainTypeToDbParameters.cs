@@ -6,7 +6,7 @@ using RepoDb.Resolvers;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     /// 
@@ -15,7 +15,7 @@ internal partial class Compiler
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     /// <returns></returns>
-    internal static Action<DbCommand, object> GetPlainTypeToDbParametersCompiledFunction(Type paramType,
+    public static Action<DbCommand, object> GetPlainTypeToDbParametersCompiledFunction(Type paramType,
         Type entityType,
         DbFieldCollection? dbFields = null)
     {

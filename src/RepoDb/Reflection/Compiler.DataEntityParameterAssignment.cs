@@ -5,7 +5,7 @@ using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     ///
@@ -20,7 +20,7 @@ internal partial class Compiler
     /// <param name="dbSetting"></param>
     /// <param name="dbHelper"></param>
     /// <returns></returns>
-    internal static Expression GetDataEntityParameterAssignmentExpression(ParameterExpression dbCommandExpression,
+    private static Expression GetDataEntityParameterAssignmentExpression(ParameterExpression dbCommandExpression,
         int entityIndex,
         Expression entityExpression,
         ParameterExpression propertyExpression,

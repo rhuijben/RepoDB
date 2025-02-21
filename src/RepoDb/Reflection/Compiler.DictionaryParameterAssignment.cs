@@ -5,7 +5,7 @@ using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     ///
@@ -17,7 +17,7 @@ internal partial class Compiler
     /// <param name="dbSetting"></param>
     /// <param name="dbHelper"></param>
     /// <returns></returns>
-    internal static Expression GetDictionaryStringObjectParameterAssignmentExpression(ParameterExpression dbCommandExpression,
+    private static Expression GetDictionaryStringObjectParameterAssignmentExpression(ParameterExpression dbCommandExpression,
         int entityIndex,
         Expression dictionaryInstanceExpression,
         DbField dbField,

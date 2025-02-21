@@ -5,7 +5,7 @@ using RepoDb.Interfaces;
 
 namespace RepoDb.Reflection;
 
-internal partial class Compiler
+partial class Compiler
 {
     /// <summary>
     /// 
@@ -16,7 +16,7 @@ internal partial class Compiler
     /// <param name="index"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    internal static Action<TEntity, DbCommand> CompileDbCommandToProperty<TEntity>(Field field,
+    public static Action<TEntity, DbCommand> CompileDbCommandToProperty<TEntity>(Field field,
         string parameterName,
         int index,
         IDbSetting dbSetting)
