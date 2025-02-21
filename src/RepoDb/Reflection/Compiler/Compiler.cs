@@ -212,7 +212,7 @@ internal partial class Compiler
     /// <param name="handlerInstance"></param>
     /// <returns></returns>
     internal static MethodInfo GetClassHandlerGetMethod(object handlerInstance) =>
-        handlerInstance?.GetType().GetMethod("Get");
+        handlerInstance?.GetType().GetMethod(nameof(IPropertyHandler<object, object>.Get));
 
     /// <summary>
     ///
@@ -245,7 +245,7 @@ internal partial class Compiler
     /// <returns></returns>
     internal static MethodInfo GetPropertyHandlerGetMethod(object handlerInstance) =>
         // In F#, the instance is not a concrete class, therefore, we need to extract it by interface
-        GetPropertyHandlerInterfaceOrHandlerType(handlerInstance)?.GetMethod("Get");
+        GetPropertyHandlerInterfaceOrHandlerType(handlerInstance)?.GetMethod(nameof(IPropertyHandler<object, object>.Get));
 
     /// <summary>
     ///
@@ -259,7 +259,7 @@ internal partial class Compiler
             .GetInterfaces()
             .FirstOrDefault(interfaceType =>
                 interfaceType.IsInterfacedTo(StaticType.IPropertyHandler));
-        return propertyHandlerInterface?.GetMethod("Get");
+        return propertyHandlerInterface?.GetMethod(nameof(IPropertyHandler<object, object>.Get));
     }
 
     /// <summary>
@@ -475,7 +475,7 @@ internal partial class Compiler
     /// </summary>
     /// <returns></returns>
     internal static PropertyInfo GetTimeSpanTicksProperty() =>
-        StaticType.TimeSpan.GetProperty(nameof(TimeSpan.Ticks));
+        GetPropertyInfo<TimeSpan>(x => x.Ticks);
 
     /// <summary>
     ///
@@ -499,13 +499,13 @@ internal partial class Compiler
         GetDateTimeTimeOfDayProperty().GetMethod;
 #if NET
     private static MethodInfo GetDateOnlyFromDateTimeStaticMethod() =>
-        GetMethodInfo<DateOnly>((_) => DateOnly.FromDateTime(default(DateTime)));
+        GetMethodInfo(() => DateOnly.FromDateTime(default(DateTime)));
 
     private static MethodInfo GetDateTimeFromDateOnlyMethod() =>
         GetMethodInfo<DateOnly>((x) => x.ToDateTime(default(TimeOnly)));
 
     private static MethodInfo GetTimeOnlyFromTimeSpanMethod() =>
-        GetMethodInfo<TimeOnly>((x) => TimeOnly.FromTimeSpan(default));
+        GetMethodInfo(() => TimeOnly.FromTimeSpan(default));
 
     private static MethodInfo GetTimeSpanFromTimeOnlyMethod() =>
         GetMethodInfo<TimeOnly>((x) => x.ToTimeSpan());
@@ -1755,7 +1755,7 @@ internal partial class Compiler
         // Target type
         var handlerInstance = classProperty.GetPropertyHandler() ?? PropertyHandlerCache.Get<object>(TypeCache.Get(dbField.Type).GetUnderlyingType());
         var targetType = GetPropertyHandlerSetParameter(handlerInstance)?.ParameterType
-            //?? (classProperty.GetDbType() is { } dbt ? new DbTypeToClientTypeResolver().Resolve(dbt) : null)
+            ?? (classProperty.GetDbType() is { } dbt ? new DbTypeToClientTypeResolver().Resolve(dbt) : null)
             ?? dbField.TypeNullable();
 
         if (targetType.IsValueType && dbField.IsNullable)
