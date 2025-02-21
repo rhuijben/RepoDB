@@ -123,10 +123,9 @@ internal partial class Compiler
                 parameterCallExpressions.AddIfNotNull(setValueExpression);
 
                 // Size
-                var size = GetSize(null, dbField);
-                if (size > 0)
+                if (dbField?.Size > 0)
                 {
-                    var setSizeExpression = GetDbParameterSizeAssignmentExpression(dbParameterExpression, size);
+                    var setSizeExpression = GetDbParameterSizeAssignmentExpression(dbParameterExpression, dbField.Size.Value);
                     parameterCallExpressions.AddIfNotNull(setSizeExpression);
                 }
 

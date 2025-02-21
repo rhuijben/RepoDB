@@ -3,9 +3,6 @@ using System.Reflection;
 
 namespace RepoDb.Reflection;
 
-/// <summary>
-///
-/// </summary>
 internal partial class Compiler
 {
     #region ClassHandlers
@@ -15,7 +12,7 @@ internal partial class Compiler
     /// </summary>
     /// <param name="readerExpression"></param>
     /// <returns></returns>
-    internal static Expression CreateClassHandlerGetOptionsExpression(Expression readerExpression)
+    private static Expression CreateClassHandlerGetOptionsExpression(Expression readerExpression)
     {
         // Get the 'Create' method
         var method = StaticType.ClassHandlerGetOptions.GetMethod("Create",
@@ -33,7 +30,7 @@ internal partial class Compiler
     /// </summary>
     /// <param name="commandExpression"></param>
     /// <returns></returns>
-    internal static Expression CreateClassHandlerSetOptionsExpression(Expression commandExpression)
+    private static Expression CreateClassHandlerSetOptionsExpression(Expression commandExpression)
     {
         // Get the 'Create' method
         var method = StaticType.ClassHandlerSetOptions.GetMethod("Create",
@@ -56,7 +53,7 @@ internal partial class Compiler
     /// <param name="readerExpression"></param>
     /// <param name="classProperty"></param>
     /// <returns></returns>
-    internal static Expression CreatePropertyHandlerGetOptionsExpression(Expression readerExpression,
+    private static Expression CreatePropertyHandlerGetOptionsExpression(Expression readerExpression,
         ClassProperty classProperty) =>
         CreatePropertyHandlerGetOptionsExpression(readerExpression,
             classProperty == null ? null : Expression.Constant(classProperty));
@@ -67,7 +64,7 @@ internal partial class Compiler
     /// <param name="readerExpression"></param>
     /// <param name="classPropertyExpression"></param>
     /// <returns></returns>
-    internal static Expression CreatePropertyHandlerGetOptionsExpression(Expression readerExpression,
+    private static Expression CreatePropertyHandlerGetOptionsExpression(Expression readerExpression,
         Expression classPropertyExpression)
     {
         // Get the 'Create' method
@@ -88,7 +85,7 @@ internal partial class Compiler
     /// <param name="parameterExpression"></param>
     /// <param name="classProperty"></param>
     /// <returns></returns>
-    internal static Expression CreatePropertyHandlerSetOptionsExpression(Expression parameterExpression,
+    private static Expression CreatePropertyHandlerSetOptionsExpression(Expression parameterExpression,
         ClassProperty classProperty) =>
         CreatePropertyHandlerSetOptionsExpression(parameterExpression,
             classProperty == null ? null : Expression.Constant(classProperty));
@@ -99,7 +96,7 @@ internal partial class Compiler
     /// <param name="parameterExpression"></param>
     /// <param name="classPropertyExpression"></param>
     /// <returns></returns>
-    internal static Expression CreatePropertyHandlerSetOptionsExpression(Expression parameterExpression,
+    private static Expression CreatePropertyHandlerSetOptionsExpression(Expression parameterExpression,
         Expression classPropertyExpression)
     {
         // Get the 'Create' method
