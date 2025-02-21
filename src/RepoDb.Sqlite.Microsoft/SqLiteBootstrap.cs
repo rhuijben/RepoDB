@@ -44,7 +44,7 @@ public static class SqliteBootstrap
         DbSettingMapper.Add<SqliteConnection>(mdsDbSetting, true);
 
         // Map the DbHelper
-        DbHelperMapper.Add<SqliteConnection>(new SqLiteDbHelper(mdsDbSetting, new MdsSqLiteDbTypeNameToClientTypeResolver()), true);
+        DbHelperMapper.Add<SqliteConnection>(new SqLiteDbHelper(mdsDbSetting, new SqLiteDbTypeNameToClientTypeResolver()), true);
 
         // Map the Statement Builder
         StatementBuilderMapper.Add<SqliteConnection>(new SqLiteStatementBuilder(mdsDbSetting,

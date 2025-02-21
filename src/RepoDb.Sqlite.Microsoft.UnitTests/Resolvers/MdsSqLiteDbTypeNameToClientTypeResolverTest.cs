@@ -18,7 +18,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBigInt()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("BIGINT");
@@ -31,7 +31,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForInteger()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("INTEGER");
@@ -44,7 +44,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBlob()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("BLOB");
@@ -57,7 +57,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForBoolean()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("BOOLEAN");
@@ -70,7 +70,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForChar()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("CHAR");
@@ -83,7 +83,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForString()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("STRING");
@@ -96,7 +96,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForText()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("TEXT");
@@ -109,7 +109,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForVarChar()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("VARCHAR");
@@ -122,7 +122,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDate()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("DATE");
@@ -135,7 +135,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDateTime()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("DATETIME");
@@ -148,7 +148,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForTime()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("TIME");
@@ -161,7 +161,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDecimal()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("DECIMAL");
@@ -174,7 +174,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForNumeric()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("NUMERIC");
@@ -187,7 +187,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForDouble()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("DOUBLE");
@@ -200,7 +200,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForReal()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("REAL");
@@ -213,7 +213,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForInt()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("INT");
@@ -226,7 +226,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForNone()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("NONE");
@@ -239,7 +239,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
     public void TestMdsSqLiteDbTypeNameToClientTypeResolverForOther()
     {
         // Setup
-        var resolver = new MdsSqLiteDbTypeNameToClientTypeResolver();
+        var resolver = new SqLiteDbTypeNameToClientTypeResolver();
 
         // Act
         var result = resolver.Resolve("WHATEVER");

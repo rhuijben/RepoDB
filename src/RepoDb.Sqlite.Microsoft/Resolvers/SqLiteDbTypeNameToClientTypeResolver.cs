@@ -5,7 +5,7 @@ namespace RepoDb.Resolvers;
 /// <summary>
 /// A class that is being used to resolve the SqLite Database Types into its equivalent .NET CLR Types. This is only used for 'Microsoft.Data.Sqlite' library.
 /// </summary>
-public class MdsSqLiteDbTypeNameToClientTypeResolver : IResolver<string, Type>
+public class SqLiteDbTypeNameToClientTypeResolver : IResolver<string, Type>
 {
     /// <summary>
     /// Returns the equivalent .NET CLR Types of the Database Type.
@@ -43,7 +43,8 @@ public class MdsSqLiteDbTypeNameToClientTypeResolver : IResolver<string, Type>
             "bigint" or "decimal" or "int" or "integer" or "numeric" => typeof(long),
             "blob" => typeof(byte[]),
             "double" or "real" => typeof(double),
-            "boolean" or "char" or "date" or "datetime" or "none" or "string" or "text" or "time" or "varchar" => typeof(string),
+            "date" or "datetime" => typeof(DateTime),
+            "boolean" or "char" or "none" or "string" or "text" or "time" or "varchar" => typeof(string),
             _ => typeof(object),
         };
     }
