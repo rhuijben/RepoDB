@@ -17,6 +17,6 @@ partial class Compiler
         var method = StaticType.IDbHelper.GetMethod(nameof(IDbHelper.DynamicHandler))
             .MakeGenericMethod(dbCommandExpression.Type);
         return Expression.Call(Expression.Constant(dbHelper),
-            method, dbCommandExpression, Expression.Constant("RepoDb.private.Compiler.Events[AfterCreateDbParameter]"));
+            method, dbCommandExpression, Expression.Constant("RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]"));
     }
 }
