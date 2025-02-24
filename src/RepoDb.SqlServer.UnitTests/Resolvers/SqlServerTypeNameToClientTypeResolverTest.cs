@@ -464,7 +464,7 @@ public class SqlServerTypeNameToClientTypeResolverTest
         Assert.AreEqual(typeof(string), clientType);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowOnExceptionTestSqlServerTypeNameToClientTypeResolverIfDbTypeNameIsNull()
     {
         // Act

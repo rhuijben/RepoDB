@@ -54,7 +54,7 @@ public class StatementBuilderTest
         Assert.AreEqual(expected, query);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMdsSqLiteStatementBuilderCreateBatchQueryIfThereAreNoFields()
     {
         // Setup
@@ -757,7 +757,7 @@ public class StatementBuilderTest
         Assert.AreEqual(expected, query);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMdsSqLiteStatementBuilderSkipBatchQueryIfThereAreNoFields()
     {
         // Setup

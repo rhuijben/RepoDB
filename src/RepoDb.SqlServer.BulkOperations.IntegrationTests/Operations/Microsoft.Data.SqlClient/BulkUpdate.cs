@@ -589,7 +589,7 @@ public class MicrosoftSqlConnectionBulkUpdateOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkUpdateForNullEntities()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -607,7 +607,7 @@ public class MicrosoftSqlConnectionBulkUpdateOperationsTest
     //    }
     //}
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkUpdateForNullDataReader()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -617,7 +617,7 @@ public class MicrosoftSqlConnectionBulkUpdateOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkUpdateForNullDataTable()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))

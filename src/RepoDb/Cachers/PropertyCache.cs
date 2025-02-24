@@ -49,7 +49,7 @@ public static class PropertyCache
         bool includeMappings = false)
     {
         // Validate the presence
-        ThrowNullReferenceException(propertyName, "PropertyName");
+        ThrowArgumentNullException(propertyName, "PropertyName");
 
         // Return the value
         return Get(entityType)?
@@ -82,7 +82,7 @@ public static class PropertyCache
         bool includeMappings = false)
     {
         // Validate the presence
-        ThrowNullReferenceException(field, "Field");
+        ThrowArgumentNullException(field, "Field");
 
         // Return the value
         return Get(entityType, field.Name, includeMappings);
@@ -100,7 +100,7 @@ public static class PropertyCache
         bool includeMappings = false)
     {
         // Validate the presence
-        ThrowNullReferenceException(propertyInfo, "PropertyInfo");
+        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
 
         // Return the value
         return Get(entityType, propertyInfo.Name, includeMappings);
@@ -158,7 +158,7 @@ public static class PropertyCache
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="obj">The object to be checked.</param>
     /// <param name="argument">The name of the argument.</param>
-    private static void ThrowNullReferenceException<T>(T obj,
+    private static void ThrowArgumentNullException<T>(T obj,
         string argument)
     {
         if (obj == null)

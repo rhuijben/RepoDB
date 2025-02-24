@@ -31,7 +31,7 @@ public static class ClassMappedNameCache
     public static string Get(Type entityType)
     {
         // Validate
-        ThrowNullReferenceException(entityType, "EntityType");
+        ThrowArgumentNullException(entityType, "EntityType");
 
         // Variables
         var key = GenerateHashCode(entityType);
@@ -64,7 +64,7 @@ public static class ClassMappedNameCache
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="obj">The object to be checked.</param>
     /// <param name="argument">The name of the argument.</param>
-    private static void ThrowNullReferenceException<T>(T obj,
+    private static void ThrowArgumentNullException<T>(T obj,
         string argument)
     {
         if (obj == null)

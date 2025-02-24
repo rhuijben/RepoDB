@@ -42,7 +42,7 @@ public static class PropertyHandlerCache
     public static TPropertyHandler Get<TPropertyHandler>(Type type)
     {
         // Validate
-        ThrowNullReferenceException(type, "Type");
+        ThrowArgumentNullException(type, "Type");
 
         // Variables
         var key = GenerateHashCode(type);
@@ -113,7 +113,7 @@ public static class PropertyHandlerCache
         PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowNullReferenceException(propertyInfo, "PropertyInfo");
+        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
@@ -160,7 +160,7 @@ public static class PropertyHandlerCache
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="obj">The object to be checked.</param>
     /// <param name="argument">The name of the argument.</param>
-    private static void ThrowNullReferenceException<T>(T obj,
+    private static void ThrowArgumentNullException<T>(T obj,
         string argument)
     {
         if (obj == null)

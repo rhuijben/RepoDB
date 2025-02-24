@@ -39,7 +39,7 @@ public static class ClassHandlerCache
     public static TClassHandler Get<TClassHandler>(Type type)
     {
         // Validate
-        ThrowNullReferenceException(type, "Type");
+        ThrowArgumentNullException(type, "Type");
 
         // Variables
         var key = GenerateHashCode(type);
@@ -84,7 +84,7 @@ public static class ClassHandlerCache
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="obj">The object to be checked.</param>
     /// <param name="argument">The name of the argument.</param>
-    private static void ThrowNullReferenceException<T>(T obj,
+    private static void ThrowArgumentNullException<T>(T obj,
         string argument)
     {
         if (obj == null)

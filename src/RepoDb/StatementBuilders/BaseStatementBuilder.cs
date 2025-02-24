@@ -1,7 +1,7 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
+﻿using RepoDb.Enumerations;
 using RepoDb.Exceptions;
-using RepoDb.Enumerations;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
 
 namespace RepoDb.StatementBuilders;
 
@@ -1183,7 +1183,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     ///
     /// </summary>
     /// <param name="tableName"></param>
-    /// <exception cref="NullReferenceException"></exception>
+    /// <exception cref="ArgumentNullException"></exception>
     protected void GuardTableName(string tableName)
     {
         if (string.IsNullOrWhiteSpace(tableName))

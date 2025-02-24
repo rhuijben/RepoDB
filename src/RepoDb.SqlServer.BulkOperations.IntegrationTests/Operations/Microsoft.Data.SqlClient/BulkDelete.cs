@@ -579,7 +579,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteForNullEntities()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -597,7 +597,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
     //    }
     //}
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteForNullDataReader()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -607,7 +607,7 @@ public class MicrosoftSqlConnectionBulkDeleteOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkDeleteForNullDataTable()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))

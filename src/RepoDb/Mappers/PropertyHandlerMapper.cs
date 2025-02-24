@@ -262,7 +262,7 @@ public static class PropertyHandlerMapper
         where TEntity : class
     {
         // Validates
-        ThrowNullReferenceException(propertyName, "PropertyName");
+        ThrowArgumentNullException(propertyName, "PropertyName");
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(propertyName);
@@ -327,7 +327,7 @@ public static class PropertyHandlerMapper
         where TEntity : class
     {
         // Validates
-        ThrowNullReferenceException(field, "Field");
+        ThrowArgumentNullException(field, "Field");
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(field.Name);
@@ -393,8 +393,8 @@ public static class PropertyHandlerMapper
         bool force)
     {
         // Validate
-        ThrowNullReferenceException(propertyInfo, "PropertyInfo");
-        ThrowNullReferenceException(propertyHandler, "PropertyHandler");
+        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ThrowArgumentNullException(propertyHandler, "PropertyHandler");
         Guard(propertyHandler?.GetType() ?? typeof(TPropertyHandler));
 
         /*
@@ -491,7 +491,7 @@ public static class PropertyHandlerMapper
         PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowNullReferenceException(propertyInfo, "PropertyInfo");
+        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
@@ -529,7 +529,7 @@ public static class PropertyHandlerMapper
         where TEntity : class
     {
         // Validates
-        ThrowNullReferenceException(propertyName, "PropertyName");
+        ThrowArgumentNullException(propertyName, "PropertyName");
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(propertyName);
@@ -551,7 +551,7 @@ public static class PropertyHandlerMapper
         where TEntity : class
     {
         // Validates
-        ThrowNullReferenceException(field, "Field");
+        ThrowArgumentNullException(field, "Field");
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(field.Name);
@@ -581,7 +581,7 @@ public static class PropertyHandlerMapper
         PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowNullReferenceException(propertyInfo, "PropertyInfo");
+        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
@@ -651,7 +651,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TType">The type of the object.</typeparam>
     /// <param name="obj">The object to be checked.</param>
     /// <param name="argument">The name of the argument.</param>
-    private static void ThrowNullReferenceException<TType>(TType obj,
+    private static void ThrowArgumentNullException<TType>(TType obj,
         string argument)
     {
         if (obj == null)

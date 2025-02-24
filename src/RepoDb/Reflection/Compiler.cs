@@ -2316,7 +2316,7 @@ internal sealed partial class Compiler
         Expression expression)
     {
         var isNullExpression = Expression.Equal(Expression.Constant(null), expression);
-        var exception = new NullReferenceException($"Entity of type '{resultType}' must not be null. If you have defined a class handler, please check the 'Set' method.");
+        var exception = new ArgumentNullException($"Entity of type '{resultType}' must not be null. If you have defined a class handler, please check the 'Set' method.");
         return Expression.IfThen(isNullExpression, Expression.Throw(Expression.Constant(exception)));
     }
 

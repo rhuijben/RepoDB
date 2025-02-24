@@ -812,7 +812,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    //[TestMethod, ExpectedException(typeof(NullReferenceException))]
+    //[TestMethod, ExpectedException(typeof(ArgumentNullException))]
     //public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeForNullEntities()
     //{
     //    using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -830,7 +830,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
     //    }
     //}
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeForNullDataReader()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -840,7 +840,7 @@ public class MicrosoftSqlConnectionBulkMergeOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkMergeForNullDataTable()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))

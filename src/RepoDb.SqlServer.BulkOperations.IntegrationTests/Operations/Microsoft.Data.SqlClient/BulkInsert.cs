@@ -767,7 +767,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkInsertForNullEntities()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -785,7 +785,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
     //    }
     //}
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkInsertForNullDataReader()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
@@ -795,7 +795,7 @@ public class MicrosoftSqlConnectionBulkInsertOperationsTest
         }
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnMicrosoftSqlConnectionBulkInsertForNullDataTable()
     {
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))

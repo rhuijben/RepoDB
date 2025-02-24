@@ -207,7 +207,7 @@ public class StatementBuilderTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateBatchQueryIfTheTableIsNull()
     {
         // Setup
@@ -224,7 +224,7 @@ public class StatementBuilderTest
             where: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateBatchQueryIfTheTableIsEmpty()
     {
         // Setup
@@ -241,7 +241,7 @@ public class StatementBuilderTest
             where: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateBatchQueryIfTheTableIsWhitespace()
     {
         // Setup
@@ -1462,7 +1462,7 @@ public class StatementBuilderTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateMergeAllIfTheTableIsNull()
     {
         // Setup
@@ -1480,7 +1480,7 @@ public class StatementBuilderTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateMergeAllIfTheTableIsEmpty()
     {
         // Setup
@@ -1498,7 +1498,7 @@ public class StatementBuilderTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateMergeAllIfTheTableIsWhitespace()
     {
         // Setup
@@ -1957,7 +1957,7 @@ public class StatementBuilderTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateMergeIfTheTableIsNull()
     {
         // Setup
@@ -1974,7 +1974,7 @@ public class StatementBuilderTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateMergeIfTheTableIsEmpty()
     {
         // Setup
@@ -1991,7 +1991,7 @@ public class StatementBuilderTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateMergeIfTheTableIsWhitespace()
     {
         // Setup
@@ -2269,7 +2269,7 @@ public class StatementBuilderTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateSkipQueryIfTheTableIsNull()
     {
         // Setup
@@ -2286,7 +2286,7 @@ public class StatementBuilderTest
             where: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateSkipQueryIfTheTableIsEmpty()
     {
         // Setup
@@ -2303,7 +2303,7 @@ public class StatementBuilderTest
             where: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqlServerStatementBuilderCreateSkipQueryIfTheTableIsWhitespace()
     {
         // Setup
