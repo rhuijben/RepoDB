@@ -274,7 +274,7 @@ public partial class QueryField : IEquatable<QueryField>
         hashCode = HashCode.Combine(hashCode, Field.Name, Operation.GetText());
 
         // Set and return the hashcode
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     /// <summary>

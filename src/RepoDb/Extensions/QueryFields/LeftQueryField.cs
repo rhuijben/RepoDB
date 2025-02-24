@@ -109,7 +109,7 @@ public sealed class LeftQueryField : FunctionalQueryField
         hashCode = HashCode.Combine(hashCode, CharCount);
 
         // Return
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     #endregion

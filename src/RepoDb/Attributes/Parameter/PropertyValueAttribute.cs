@@ -204,7 +204,7 @@ public class PropertyValueAttribute : Attribute, IEquatable<PropertyValueAttribu
         }
 
         // Return
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     /// <summary>

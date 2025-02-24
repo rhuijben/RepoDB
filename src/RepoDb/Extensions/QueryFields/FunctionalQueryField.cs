@@ -92,7 +92,7 @@ public class FunctionalQueryField : QueryField, IEquatable<FunctionalQueryField>
         }
 
         // Return
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     /// <summary>

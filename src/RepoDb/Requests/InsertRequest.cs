@@ -129,7 +129,7 @@ internal class InsertRequest : BaseRequest
         }
 
         // Set and return the hashcode
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     #endregion

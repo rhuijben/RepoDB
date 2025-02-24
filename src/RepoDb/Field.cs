@@ -282,7 +282,7 @@ public class Field : IEquatable<Field>
         }
 
         // Set and return the hashcode
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     /// <summary>

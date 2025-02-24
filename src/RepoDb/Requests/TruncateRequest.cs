@@ -64,7 +64,7 @@ internal class TruncateRequest : BaseRequest
         var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".Truncate");
 
         // Set and return the hashcode
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
     
     #endregion

@@ -1,5 +1,5 @@
-﻿using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Requests;
 
@@ -99,7 +99,7 @@ internal class ExistsRequest : BaseRequest
         }
 
         // Set and return the hashcode
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     #endregion

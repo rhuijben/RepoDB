@@ -171,7 +171,7 @@ public abstract class BaseDbSetting : IDbSetting
         }
 
         // Set and return the hashcode
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     /// <summary>

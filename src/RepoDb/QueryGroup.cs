@@ -894,7 +894,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
         hashCode = HashCode.Combine(hashCode, IsNot);
 
         // Set and return the hashcode
-        return (this.hashCode = hashCode).Value;
+        return this.hashCode ??= hashCode;
     }
 
     /// <summary>
