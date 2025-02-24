@@ -1,12 +1,12 @@
-﻿using RepoDb.Contexts.Execution;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
+using RepoDb.Contexts.Execution;
 
 namespace RepoDb.Contexts.Cachers;
 
 /// <summary>
 /// A class that is being used to cache the execution context of the Merge operation.
 /// </summary>
-public static class MergeExecutionContextCache
+internal static class MergeExecutionContextCache
 {
     private static ConcurrentDictionary<string, MergeExecutionContext> cache = new();
 

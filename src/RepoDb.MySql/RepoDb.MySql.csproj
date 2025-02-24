@@ -6,7 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Description>A hybrid .NET ORM library for MySQL (using MySql.Data).</Description>
     <PackageTags>orm hybrid-orm micro-orm mysql</PackageTags>
-    <RepositoryUrl>https://github.com/mikependon/RepoDb/tree/master/RepoDb.MySql</RepositoryUrl>
     <PackageReleaseNotes>http://repodb.net/release/mysql</PackageReleaseNotes>
     <PackageProjectUrl>https://repodb.net/tutorial/get-started-mysql</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>

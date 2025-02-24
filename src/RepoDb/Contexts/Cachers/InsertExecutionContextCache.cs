@@ -1,12 +1,12 @@
-﻿using RepoDb.Contexts.Execution;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
+using RepoDb.Contexts.Execution;
 
 namespace RepoDb.Contexts.Cachers;
 
 /// <summary>
 /// A class that is being used to cache the execution context of the Insert operation.
 /// </summary>
-public static class InsertExecutionContextCache
+internal static class InsertExecutionContextCache
 {
     private static ConcurrentDictionary<string, InsertExecutionContext> cache = new();
 
