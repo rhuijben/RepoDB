@@ -17,7 +17,7 @@ public class PostgreSqlDbTypeNameToNpgsqlDbTypeResolver : IResolver<string, Npgs
     {
         if (string.IsNullOrWhiteSpace(dbTypeName))
         {
-            throw new NullReferenceException("The database type name must not be a null or whitespace.");
+            throw new ArgumentNullException("The database type name must not be a null or whitespace.");
         }
 
         // Try parse

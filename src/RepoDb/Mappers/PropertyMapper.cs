@@ -329,7 +329,7 @@ public static class PropertyMapper
     {
         if (string.IsNullOrWhiteSpace(columnName))
         {
-            throw new NullReferenceException("The target column name cannot be null or empty.");
+            throw new ArgumentNullException("The target column name cannot be null or empty.");
         }
     }
 
@@ -344,7 +344,7 @@ public static class PropertyMapper
     {
         if (obj == null)
         {
-            throw new NullReferenceException($"The argument '{argument}' cannot be null.");
+            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
         }
     }
 

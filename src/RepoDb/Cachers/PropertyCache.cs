@@ -163,7 +163,7 @@ public static class PropertyCache
     {
         if (obj == null)
         {
-            throw new NullReferenceException($"The argument '{argument}' cannot be null.");
+            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
         }
     }
 

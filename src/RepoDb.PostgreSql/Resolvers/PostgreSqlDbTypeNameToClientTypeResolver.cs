@@ -16,7 +16,7 @@ public class PostgreSqlDbTypeNameToClientTypeResolver : IResolver<string, Type>
     {
         if (dbTypeName == null)
         {
-            throw new NullReferenceException("The DB Type name must not be null.");
+            throw new ArgumentNullException("The DB Type name must not be null.");
         }
 
         /*

@@ -123,7 +123,7 @@ public static partial class ClassExpression
             // Check the presence
             if (property == null)
             {
-                throw new NullReferenceException("Property");
+                throw new ArgumentNullException("Property");
             }
 
             // Check the type (polymorphism)

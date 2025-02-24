@@ -63,7 +63,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         // There should be fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of queryable fields must not be null for '{tableName}'.");
+            throw new ArgumentNullException($"The list of queryable fields must not be null for '{tableName}'.");
         }
 
         // Validate order by
@@ -457,7 +457,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         // Verify the fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of fields cannot be null or empty.");
+            throw new ArgumentNullException($"The list of fields cannot be null or empty.");
         }
 
         // Validate the Primary Key
@@ -533,7 +533,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         // Verify the fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of fields cannot be null or empty.");
+            throw new ArgumentNullException($"The list of fields cannot be null or empty.");
         }
 
         // Validate the Primary Key
@@ -663,7 +663,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         // There should be fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of queryable fields must not be null for '{tableName}'.");
+            throw new ArgumentNullException($"The list of queryable fields must not be null for '{tableName}'.");
         }
 
         // Initialize the builder
@@ -720,7 +720,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         // There should be fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of queryable fields must not be null for '{tableName}'.");
+            throw new ArgumentNullException($"The list of queryable fields must not be null for '{tableName}'.");
         }
 
         // Validate order by

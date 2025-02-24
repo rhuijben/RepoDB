@@ -23,7 +23,7 @@ public class OrderField : IEquatable<OrderField>
         // Name is required
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new NullReferenceException(name);
+            throw new ArgumentNullException(name);
         }
 
         // Set the properties
@@ -146,7 +146,7 @@ public class OrderField : IEquatable<OrderField>
     {
         if (obj == null)
         {
-            throw new NullReferenceException("The 'obj' must not be null.");
+            throw new ArgumentNullException("The 'obj' must not be null.");
         }
 
         var properties = TypeCache.Get(obj.GetType()).GetProperties();

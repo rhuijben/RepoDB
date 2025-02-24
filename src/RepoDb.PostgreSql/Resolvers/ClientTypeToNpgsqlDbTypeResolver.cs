@@ -17,7 +17,7 @@ public class ClientTypeToNpgsqlDbTypeResolver : IResolver<Type, NpgsqlDbType?>
     {
         if (type == null)
         {
-            throw new NullReferenceException("The type must not be null.");
+            throw new ArgumentNullException("The type must not be null.");
         }
 
         if (type == typeof(NpgsqlBox))

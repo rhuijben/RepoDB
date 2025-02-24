@@ -54,7 +54,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         // There should be fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of queryable fields must not be null for '{tableName}'.");
+            throw new ArgumentNullException($"The list of queryable fields must not be null for '{tableName}'.");
         }
 
         // Validate order by
@@ -377,7 +377,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         // There should be fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of queryable fields must not be null for '{tableName}'.");
+            throw new ArgumentNullException($"The list of queryable fields must not be null for '{tableName}'.");
         }
 
         // Initialize the builder
@@ -434,7 +434,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         // There should be fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of queryable fields must not be null for '{tableName}'.");
+            throw new ArgumentNullException($"The list of queryable fields must not be null for '{tableName}'.");
         }
 
         // Validate order by

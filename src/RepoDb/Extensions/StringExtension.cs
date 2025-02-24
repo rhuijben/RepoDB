@@ -523,11 +523,11 @@ public static class StringExtension
         {
             if (string.IsNullOrEmpty(argument))
             {
-                throw new NullReferenceException();
+                throw new ArgumentNullException();
             }
             else
             {
-                throw new NullReferenceException($"The argument '{argument}' cannot be null.");
+                throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
             }
         }
     }
@@ -553,11 +553,11 @@ public static class StringExtension
         }
         if (string.IsNullOrWhiteSpace(argument))
         {
-            throw new NullReferenceException();
+            throw new ArgumentNullException();
         }
         else
         {
-            throw new NullReferenceException($"The argument '{argument}' is either null or whitespace.");
+            throw new ArgumentNullException($"The argument '{argument}' is either null or whitespace.");
         }
     }
 }

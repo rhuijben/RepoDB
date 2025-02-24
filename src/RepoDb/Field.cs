@@ -31,7 +31,7 @@ public class Field : IEquatable<Field>
         // Name is required
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new NullReferenceException(name);
+            throw new ArgumentNullException(name);
         }
 
         // Set the name
@@ -78,7 +78,7 @@ public class Field : IEquatable<Field>
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new NullReferenceException("The field name must not be null or empty.");
+            throw new ArgumentNullException("The field name must not be null or empty.");
         }
         yield return new Field(name);
     }
@@ -92,11 +92,11 @@ public class Field : IEquatable<Field>
     {
         if (fields == null)
         {
-            throw new NullReferenceException("The list of fields must not be null.");
+            throw new ArgumentNullException("The list of fields must not be null.");
         }
         if (fields.Any(field => string.IsNullOrWhiteSpace(field)))
         {
-            throw new NullReferenceException("The field name must not be null or empty.");
+            throw new ArgumentNullException("The field name must not be null or empty.");
         }
         foreach (var field in fields)
         {

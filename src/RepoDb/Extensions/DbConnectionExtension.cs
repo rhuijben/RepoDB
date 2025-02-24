@@ -2102,7 +2102,7 @@ public static partial class DbConnectionExtension
         // Check the connection
         if (connection == null)
         {
-            throw new NullReferenceException("The connection object cannot be null.");
+            throw new ArgumentNullException("The connection object cannot be null.");
         }
 
         // Get the setting
@@ -2128,7 +2128,7 @@ public static partial class DbConnectionExtension
         // Check the connection
         if (connection == null)
         {
-            throw new NullReferenceException("The connection object cannot be null.");
+            throw new ArgumentNullException("The connection object cannot be null.");
         }
 
         // Get the setting
@@ -2154,7 +2154,7 @@ public static partial class DbConnectionExtension
         // Check the connection
         if (connection == null)
         {
-            throw new NullReferenceException("The connection object cannot be null.");
+            throw new ArgumentNullException("The connection object cannot be null.");
         }
 
         // Get the setting
@@ -2905,7 +2905,7 @@ public static partial class DbConnectionExtension
     {
         if (entities == null)
         {
-            throw new NullReferenceException("The entities must not be null.");
+            throw new ArgumentNullException("The entities must not be null.");
         }
         if (entities.Any() == false)
         {

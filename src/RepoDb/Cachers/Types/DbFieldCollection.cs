@@ -6,7 +6,7 @@ namespace RepoDb;
 /// <summary>
 /// A class the holds the collection of column definitions of the table.
 /// </summary>
-public class DbFieldCollection
+public sealed class DbFieldCollection
 {
     private readonly IDbSetting dbSetting;
     private readonly IReadOnlyList<DbField> dbFields;

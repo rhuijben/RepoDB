@@ -303,7 +303,7 @@ public static partial class SqlConnectionExtension
     {
         if (reader == null)
         {
-            throw new NullReferenceException("The reader must not be null.");
+            throw new ArgumentNullException("The reader must not be null.");
         }
         if (reader.HasRows == false)
         {
@@ -319,7 +319,7 @@ public static partial class SqlConnectionExtension
     {
         if (dataTable == null)
         {
-            throw new NullReferenceException("The data table must not be null.");
+            throw new ArgumentNullException("The data table must not be null.");
         }
         if (dataTable.Rows.Count <= 0)
         {
@@ -337,7 +337,7 @@ public static partial class SqlConnectionExtension
     {
         if (entities == null)
         {
-            throw new NullReferenceException("The entities must not be null.");
+            throw new ArgumentNullException("The entities must not be null.");
         }
         if (entities.Any() == false)
         {

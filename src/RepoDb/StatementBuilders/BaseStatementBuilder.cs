@@ -20,7 +20,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         IResolver<Field, IDbSetting, string> convertFieldResolver = null,
         IResolver<Type, Type> averageableClientTypeResolver = null)
     {
-        DbSetting = dbSetting ?? throw new NullReferenceException("The database setting cannot be null.");
+        DbSetting = dbSetting ?? throw new ArgumentNullException("The database setting cannot be null.");
         ConvertFieldResolver = convertFieldResolver;
         AverageableClientTypeResolver = averageableClientTypeResolver;
     }
@@ -70,7 +70,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new NullReferenceException("The field cannot be null.");
+            throw new ArgumentNullException("The field cannot be null.");
         }
         else
         {
@@ -119,7 +119,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new NullReferenceException("The field cannot be null.");
+            throw new ArgumentNullException("The field cannot be null.");
         }
         else
         {
@@ -538,7 +538,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new NullReferenceException("The field cannot be null.");
+            throw new ArgumentNullException("The field cannot be null.");
         }
 
         // Initialize the builder
@@ -583,7 +583,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new NullReferenceException("The field cannot be null.");
+            throw new ArgumentNullException("The field cannot be null.");
         }
 
         // Initialize the builder
@@ -629,7 +629,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new NullReferenceException("The field cannot be null.");
+            throw new ArgumentNullException("The field cannot be null.");
         }
 
         // Initialize the builder
@@ -674,7 +674,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new NullReferenceException("The field cannot be null.");
+            throw new ArgumentNullException("The field cannot be null.");
         }
 
         // Initialize the builder
@@ -724,7 +724,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // There should be fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of queryable fields must not be null for '{tableName}'.");
+            throw new ArgumentNullException($"The list of queryable fields must not be null for '{tableName}'.");
         }
 
         // Initialize the builder
@@ -772,7 +772,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // There should be fields
         if (fields?.Any() != true)
         {
-            throw new NullReferenceException($"The list of queryable fields must not be null for '{tableName}'.");
+            throw new ArgumentNullException($"The list of queryable fields must not be null for '{tableName}'.");
         }
 
         // Initialize the builder
@@ -818,7 +818,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new NullReferenceException("The field cannot be null.");
+            throw new ArgumentNullException("The field cannot be null.");
         }
 
         // Initialize the builder
@@ -863,7 +863,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new NullReferenceException("The field cannot be null.");
+            throw new ArgumentNullException("The field cannot be null.");
         }
 
         // Initialize the builder
@@ -1040,7 +1040,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             else
             {
                 // Throw exception, qualifiers are not defined
-                throw new NullReferenceException($"There are no qualifier field objects found for '{tableName}'.");
+                throw new ArgumentNullException($"There are no qualifier field objects found for '{tableName}'.");
             }
         }
 
@@ -1188,7 +1188,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     {
         if (string.IsNullOrWhiteSpace(tableName))
         {
-            throw new NullReferenceException("The name of the table could be null.");
+            throw new ArgumentNullException("The name of the table could be null.");
         }
     }
 

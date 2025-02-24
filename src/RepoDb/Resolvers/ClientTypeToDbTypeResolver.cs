@@ -22,7 +22,7 @@ public class ClientTypeToDbTypeResolver : IResolver<Type, DbType?>
     {
         if (type == null)
         {
-            throw new NullReferenceException("The type must not be null.");
+            throw new ArgumentNullException("The type must not be null.");
         }
         if (type.IsEnum)
         {

@@ -3,9 +3,9 @@
 /// <summary>
 /// A class the holds the column definition of the table.
 /// </summary>
-public class DbField : IEquatable<DbField>
+public sealed class DbField : IEquatable<DbField>
 {
-    private int? hashCode = null;
+    private int? HashCode { get; set; }
 
     /// <summary>
     /// Creates a new instance of <see cref="DbField"/> object.
@@ -36,7 +36,7 @@ public class DbField : IEquatable<DbField>
         // Name is required
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new NullReferenceException("Name");
+            throw new ArgumentNullException("Name");
         }
 
         // Set the properties
@@ -133,7 +133,7 @@ public class DbField : IEquatable<DbField>
     /// </summary>
     /// <returns>The string that represents the instance of this <see cref="DbField"/> object.</returns>
     public override string ToString() =>
-        string.Concat(Name, ", ", IsPrimary.ToString(), " (", hashCode.ToString(), ")");
+        string.Concat(Name, ", ", IsPrimary.ToString(), " (", HashCode.ToString(), ")");
 
     #endregion
 
@@ -145,41 +145,23 @@ public class DbField : IEquatable<DbField>
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        if (this.hashCode != null)
+        if (HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            HashCode = hashCode = System.HashCode.Combine(
+                Name,
+                IsPrimary,
+                IsIdentity,
+                IsNullable,
+                Type,
+                Size,
+                System.HashCode.Combine(
+                    Precision,
+                    Scale,
+                    DatabaseType,
+                    Provider));
         }
 
-        // Set the hashcode
-        var hashCode = HashCode.Combine(Name, IsPrimary, IsIdentity, IsNullable);
-
-        if (Type != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Type);
-        }
-        if (Size != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Size);
-        }
-        if (Precision != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Precision);
-        }
-        if (Scale != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Scale);
-        }
-        if (DatabaseType != null)
-        {
-            hashCode = HashCode.Combine(hashCode, DatabaseType);
-        }
-        if (Provider != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Provider);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+        return hashCode;
     }
 
     /// <summary>

@@ -84,7 +84,7 @@ public class DataEntityDataReader<TEntity> : DbDataReader
     {
         if (entities == null)
         {
-            throw new NullReferenceException("The entities could not be null.");
+            throw new ArgumentNullException("The entities could not be null.");
         }
 
         // Fields
@@ -596,7 +596,7 @@ public class DataEntityDataReader<TEntity> : DbDataReader
         ThrowExceptionIfNotAvailable();
         if (values == null)
         {
-            throw new NullReferenceException("The values array must not be null.");
+            throw new ArgumentNullException("The values array must not be null.");
         }
         if (values.Length != FieldCount)
         {

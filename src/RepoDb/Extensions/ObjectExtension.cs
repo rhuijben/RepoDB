@@ -36,11 +36,11 @@ internal static class ObjectExtension
         }
         if (string.IsNullOrEmpty(argument))
         {
-            throw new NullReferenceException();
+            throw new ArgumentNullException();
         }
         else
         {
-            throw new NullReferenceException($"The argument '{argument}' cannot be null.");
+            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
         }
     }
 }

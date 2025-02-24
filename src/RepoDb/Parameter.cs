@@ -49,7 +49,7 @@ public sealed class Parameter : IEquatable<Parameter>
         // Name is required
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new NullReferenceException(name);
+            throw new ArgumentNullException(name);
         }
 
         // Set the properties
