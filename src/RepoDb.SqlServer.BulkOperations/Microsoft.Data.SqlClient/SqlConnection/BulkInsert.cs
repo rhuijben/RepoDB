@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.Common;
+
 using Microsoft.Data.SqlClient;
 using RepoDb.Interfaces;
 
@@ -150,6 +151,9 @@ public static partial class SqlConnectionExtension
         int? batchSize = null,
         SqlTransaction? transaction = null)
     {
+        if (reader is null)
+            throw new ArgumentNullException(nameof(reader));
+
         return BulkInsertInternal(connection: connection,
             tableName: tableName,
             reader: reader,
@@ -232,6 +236,9 @@ public static partial class SqlConnectionExtension
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
     {
+        if (dataTable is null)
+            throw new ArgumentNullException(nameof(dataTable));
+
         return BulkInsertInternal(connection: connection,
             tableName: tableName,
             dataTable: dataTable,
