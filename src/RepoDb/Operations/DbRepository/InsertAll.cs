@@ -128,7 +128,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.InsertAllAsync<TEntity>(tableName: tableName,
+            return await connection.InsertAllAsync(tableName: tableName,
                 entities: entities,
                 batchSize: batchSize,
                 fields: fields,
@@ -138,7 +138,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -174,7 +174,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.InsertAllAsync<TEntity>(entities: entities,
+            return await connection.InsertAllAsync(entities: entities,
                 batchSize: batchSize,
                 fields: fields,
                 hints: hints,
@@ -183,7 +183,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -280,7 +280,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {

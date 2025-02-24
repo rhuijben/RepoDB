@@ -118,14 +118,14 @@ internal static class InsertExecutionContextProvider
         }
 
         // Create
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var request = new InsertRequest(tableName,
             connection,
             transaction,
             fields,
             hints,
             statementBuilder);
-        var commandText = await CommandTextCache.GetInsertTextAsync(request, cancellationToken);
+        var commandText = await CommandTextCache.GetInsertTextAsync(request, cancellationToken).ConfigureAwait(false);
 
         // Call
         context = CreateInternal(entityType,

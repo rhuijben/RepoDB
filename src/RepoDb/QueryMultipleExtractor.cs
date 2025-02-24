@@ -179,13 +179,13 @@ public sealed class QueryMultipleExtractor : IDisposable
         {
             result = await DataReader
                 .ToEnumerableAsync<TEntity>(_reader, dbSetting: _connection?.GetDbSetting(), cancellationToken: CancellationToken)
-                .ToListAsync(CancellationToken);
+                .ToListAsync(CancellationToken).ConfigureAwait(false);
             AddToCache(result);
         }
 
         if (isMoveToNextResult)
         {
-            await NextResultAsync();
+            await NextResultAsync().ConfigureAwait(false);
         }
 
         return result;
@@ -226,13 +226,13 @@ public sealed class QueryMultipleExtractor : IDisposable
         if (GetCacheItem<IEnumerable<dynamic>>(out var result) == false)
         {
             result = await DataReader.ToEnumerableAsync(_reader, cancellationToken: CancellationToken)
-                .ToListAsync(CancellationToken);
+                .ToListAsync(CancellationToken).ConfigureAwait(false);
             AddToCache(result);
         }
 
         if (isMoveToNextResult)
         {
-            await NextResultAsync();
+            await NextResultAsync().ConfigureAwait(false);
         }
         return result;
     }
@@ -280,7 +280,7 @@ public sealed class QueryMultipleExtractor : IDisposable
     {
         if (GetCacheItem<TResult>(out var result) == false)
         {
-            if (await _reader.ReadAsync(CancellationToken))
+            if (await _reader.ReadAsync(CancellationToken).ConfigureAwait(false))
             {
                 result = Converter.ToType<TResult>(_reader[0]);
                 AddToCache(result);
@@ -289,7 +289,7 @@ public sealed class QueryMultipleExtractor : IDisposable
 
         if (isMoveToNextResult)
         {
-            await NextResultAsync();
+            await NextResultAsync().ConfigureAwait(false);
         }
 
         return result;
@@ -333,7 +333,7 @@ public sealed class QueryMultipleExtractor : IDisposable
     /// <returns>True if there are more result sets; otherwise false.</returns>
     /// </summary>
     public async Task<bool> NextResultAsync() =>
-        (Position = await _reader.NextResultAsync(CancellationToken) ? Position + 1 : -1) >= 0;
+        (Position = await _reader.NextResultAsync(CancellationToken).ConfigureAwait(false) ? Position + 1 : -1) >= 0;
 
     #endregion
 }

@@ -144,7 +144,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -191,7 +191,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -292,7 +292,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {

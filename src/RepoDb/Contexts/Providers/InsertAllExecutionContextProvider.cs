@@ -148,7 +148,7 @@ internal static class InsertAllExecutionContextProvider
         }
 
         // Create
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         string commandText;
 
         // Create a different kind of requests
@@ -161,7 +161,7 @@ internal static class InsertAllExecutionContextProvider
                 batchSize,
                 hints,
                 statementBuilder);
-            commandText = await CommandTextCache.GetInsertAllTextAsync(request, cancellationToken);
+            commandText = await CommandTextCache.GetInsertAllTextAsync(request, cancellationToken).ConfigureAwait(false);
         }
         else
         {
@@ -171,7 +171,7 @@ internal static class InsertAllExecutionContextProvider
                 fields,
                 hints,
                 statementBuilder);
-            commandText = await CommandTextCache.GetInsertTextAsync(request, cancellationToken);
+            commandText = await CommandTextCache.GetInsertTextAsync(request, cancellationToken).ConfigureAwait(false);
         }
 
         // Call

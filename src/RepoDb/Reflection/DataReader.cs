@@ -59,7 +59,7 @@ public static class DataReader
             dbFields,
             dbSetting);
 
-        while (await reader.ReadAsync(cancellationToken))
+        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
         {
             yield return func(reader);
         }
@@ -115,7 +115,7 @@ public static class DataReader
             dbFields,
             dbSetting);
 
-        while (await reader.ReadAsync(cancellationToken))
+        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
         {
             yield return func(reader);
         }

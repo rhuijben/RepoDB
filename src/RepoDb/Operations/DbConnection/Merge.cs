@@ -2373,7 +2373,7 @@ public static partial class DbConnectionExtension
         if (qualifiers?.Any() != true)
         {
             var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
-                entity?.GetType() ?? typeof(TEntity), cancellationToken);
+                entity?.GetType() ?? typeof(TEntity), cancellationToken).ConfigureAwait(false);
             qualifiers = key.AsEnumerable();
         }
 
@@ -2387,11 +2387,11 @@ public static partial class DbConnectionExtension
             hints,
             transaction,
             statementBuilder,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
         var result = default(TResult);
 
         // Create the command
-        using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken)).CreateCommand(context.CommandText,
+        using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).CreateCommand(context.CommandText,
             CommandType.Text, commandTimeout, transaction))
         {
             // Set the values
@@ -2399,7 +2399,7 @@ public static partial class DbConnectionExtension
 
             // Before Execution
             var traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -2408,11 +2408,11 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken));
+            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
 
             // Set the return value
             if (result != null)
@@ -2464,7 +2464,7 @@ public static partial class DbConnectionExtension
         // Variables needed
         var type = entity?.GetType() ?? typeof(TEntity);
         var isDictionaryType = TypeCache.Get(type).IsDictionaryStringObject();
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var primary = dbFields?.GetPrimary();
         var properties = (IEnumerable<ClassProperty>)null;
         var primaryKey = (ClassProperty)null;
@@ -2529,13 +2529,13 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Check the existence
         if (exists == true)
         {
             // Call the update operation
-            var updateResult = await connection.UpdateAsync<TEntity>(tableName,
+            var updateResult = await connection.UpdateAsync(tableName,
                 entity,
                 where,
                 fields: fields,
@@ -2545,7 +2545,7 @@ public static partial class DbConnectionExtension
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
 
             // Check if there is result
             if (updateResult > 0)
@@ -2579,7 +2579,7 @@ public static partial class DbConnectionExtension
                 transaction: transaction,
                 trace: trace,
                 statementBuilder: statementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
 
             // Set the result
             result = Converter.ToType<TResult>(insertResult);

@@ -91,7 +91,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: null,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: CancellationToken.None);
+                cancellationToken: CancellationToken.None).ConfigureAwait(false);
         }
         finally
         {
@@ -122,7 +122,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: null,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -155,7 +155,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -253,7 +253,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: null,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: CancellationToken.None);
+                cancellationToken: CancellationToken.None).ConfigureAwait(false);
         }
         finally
         {
@@ -285,7 +285,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: null,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -319,7 +319,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {

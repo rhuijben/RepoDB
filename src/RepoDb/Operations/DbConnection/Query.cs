@@ -755,7 +755,7 @@ public static partial class DbConnectionExtension
         return await QueryAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             fields: fields,
-            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             orderBy: orderBy,
             top: top,
             hints: hints,
@@ -767,7 +767,7 @@ public static partial class DbConnectionExtension
             cache: cache,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -813,7 +813,7 @@ public static partial class DbConnectionExtension
         return await QueryAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             fields: fields,
-            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             orderBy: orderBy,
             top: top,
             hints: hints,
@@ -825,7 +825,7 @@ public static partial class DbConnectionExtension
             cache: cache,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1095,7 +1095,7 @@ public static partial class DbConnectionExtension
     {
         return await QueryAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
-            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
             orderBy: orderBy,
             top: top,
@@ -1108,7 +1108,7 @@ public static partial class DbConnectionExtension
             cache: cache,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1151,7 +1151,7 @@ public static partial class DbConnectionExtension
     {
         return await QueryAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
-            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
             orderBy: orderBy,
             top: top,
@@ -1164,7 +1164,7 @@ public static partial class DbConnectionExtension
             cache: cache,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1428,7 +1428,7 @@ public static partial class DbConnectionExtension
     {
         // Ensure the fields
         fields = GetQualifiedFields<TEntity>(fields) ??
-            (await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken))?.GetAsFields();
+            (await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false))?.GetAsFields();
 
         // Return
         return await QueryAsyncInternalBase<TEntity>(connection: connection,
@@ -1446,7 +1446,7 @@ public static partial class DbConnectionExtension
             cache: cache,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     #endregion
@@ -1810,7 +1810,7 @@ public static partial class DbConnectionExtension
     {
         return await QueryAsync(connection: connection,
             tableName: tableName,
-            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
             orderBy: orderBy,
             top: top,
@@ -1823,7 +1823,7 @@ public static partial class DbConnectionExtension
             cache: cache,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1865,7 +1865,7 @@ public static partial class DbConnectionExtension
     {
         return await QueryAsync(connection: connection,
             tableName: tableName,
-            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
             orderBy: orderBy,
             top: top,
@@ -1878,7 +1878,7 @@ public static partial class DbConnectionExtension
             cache: cache,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -2243,7 +2243,7 @@ public static partial class DbConnectionExtension
         // Get Cache
         if (cache != null && cacheKey != null)
         {
-            var item = await cache.GetAsync<IEnumerable<TEntity>>(cacheKey, false, cancellationToken);
+            var item = await cache.GetAsync<IEnumerable<TEntity>>(cacheKey, false, cancellationToken).ConfigureAwait(false);
             if (item != null)
             {
                 return item.Value;
@@ -2261,7 +2261,7 @@ public static partial class DbConnectionExtension
             top,
             hints,
             statementBuilder);
-        var commandText = await CommandTextCache.GetQueryTextAsync(request, cancellationToken);
+        var commandText = await CommandTextCache.GetQueryTextAsync(request, cancellationToken).ConfigureAwait(false);
         var param = (object)null;
 
         // Converts to property mapped object
@@ -2284,12 +2284,12 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             tableName: tableName,
-            skipCommandArrayParametersCheck: true);
+            skipCommandArrayParametersCheck: true).ConfigureAwait(false);
 
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken);
+            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
         }
 
         // Result

@@ -98,12 +98,12 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             await ValidateOrderFieldsAsync(request.Connection,
                 request.Name,
                 request.OrderBy,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             commandText = GetBatchQueryTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -277,9 +277,9 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken);
+                cancellationToken).ConfigureAwait(false);
+            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
+            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
             commandText = GetInsertTextInternal(request, fields, primaryField, identityField);
             cache.TryAdd(request, commandText);
         }
@@ -347,9 +347,9 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken);
+                cancellationToken).ConfigureAwait(false);
+            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
+            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
             commandText = GetInsertAllTextInternal(request, fields, primaryField, identityField);
             cache.TryAdd(request, commandText);
         }
@@ -463,9 +463,9 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken);
+                cancellationToken).ConfigureAwait(false);
+            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
+            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
             commandText = GetMergeTextInternal(request, fields, primaryField, identityField);
             cache.TryAdd(request, commandText);
         }
@@ -534,9 +534,9 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken);
+                cancellationToken).ConfigureAwait(false);
+            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
+            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
             commandText = GetMergeAllTextInternal(request, fields, primaryField, identityField);
             cache.TryAdd(request, commandText);
         }
@@ -653,12 +653,12 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             await ValidateOrderFieldsAsync(request.Connection,
                 request.Name,
                 request.OrderBy,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             commandText = GetQueryTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -725,12 +725,12 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             await ValidateOrderFieldsAsync(request.Connection,
                 request.Name,
                 request.OrderBy,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             commandText = GetQueryAllTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -795,12 +795,12 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             await ValidateOrderFieldsAsync(request.Connection,
                 request.Name,
                 request.OrderBy,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             commandText = GetQueryMultipleTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -867,12 +867,12 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             await ValidateOrderFieldsAsync(request.Connection,
                 request.Name,
                 request.OrderBy,
                 request.Transaction,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
             commandText = GetSkipQueryTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -1004,9 +1004,9 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken);
+                cancellationToken).ConfigureAwait(false);
+            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
+            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
             commandText = GetUpdateTextInternal(request, fields, primaryField, identityField);
             cache.TryAdd(request, commandText);
         }
@@ -1075,9 +1075,9 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction,
-                cancellationToken);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken);
+                cancellationToken).ConfigureAwait(false);
+            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
+            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
             commandText = GetUpdateAllTextInternal(request, fields, primaryField, identityField);
             cache.TryAdd(request, commandText);
         }
@@ -1153,7 +1153,7 @@ public static class CommandTextCache
     {
         if (orderFields?.Any() == true)
         {
-            var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+            var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
             ValidateOrderFieldsInternal(orderFields, dbFields, connection.GetDbSetting());
         }
     }
@@ -1218,7 +1218,7 @@ public static class CommandTextCache
         {
             return null;
         }
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         return GetTargetFieldsInternal(fields, dbFields, connection.GetDbSetting());
     }
 
@@ -1260,7 +1260,7 @@ public static class CommandTextCache
     private static async Task<DbField> GetPrimaryFieldAsync(BaseRequest request,
         CancellationToken cancellationToken = default)
     {
-        var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
         return GetPrimaryField(request, dbFields);
     }
 
@@ -1316,7 +1316,7 @@ public static class CommandTextCache
     private static async Task<DbField> GetIdentityFieldAsync(BaseRequest request,
         CancellationToken cancellationToken = default)
     {
-        var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
         return GetIdentityField(request, dbFields);
     }
 

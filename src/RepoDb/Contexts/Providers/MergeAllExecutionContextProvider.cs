@@ -163,7 +163,7 @@ internal static class MergeAllExecutionContextProvider
         }
 
         // Create
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         string commandText;
 
         // Create a different kind of requests
@@ -177,7 +177,7 @@ internal static class MergeAllExecutionContextProvider
                 batchSize,
                 hints,
                 statementBuilder);
-            commandText = await CommandTextCache.GetMergeAllTextAsync(request, cancellationToken);
+            commandText = await CommandTextCache.GetMergeAllTextAsync(request, cancellationToken).ConfigureAwait(false);
         }
         else
         {
@@ -188,7 +188,7 @@ internal static class MergeAllExecutionContextProvider
                 qualifiers,
                 hints,
                 statementBuilder);
-            commandText = await CommandTextCache.GetMergeTextAsync(request, cancellationToken);
+            commandText = await CommandTextCache.GetMergeTextAsync(request, cancellationToken).ConfigureAwait(false);
         }
 
         // Call

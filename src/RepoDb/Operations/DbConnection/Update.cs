@@ -1,9 +1,9 @@
-﻿using RepoDb.Contexts.Providers;
-using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
+using RepoDb.Contexts.Providers;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
 
 namespace RepoDb;
 
@@ -682,8 +682,8 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
-            GetEntityType<TEntity>(entity), cancellationToken);
-        return await UpdateAsyncInternal<TEntity>(connection: connection,
+            GetEntityType(entity), cancellationToken).ConfigureAwait(false);
+        return await UpdateAsyncInternal(connection: connection,
             tableName: tableName,
             entity: entity,
             where: ToQueryGroup(key, entity),
@@ -694,7 +694,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -729,10 +729,10 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal(connection: connection,
             tableName: tableName,
             entity: entity,
-            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -740,7 +740,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -774,10 +774,10 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal(connection: connection,
             tableName: tableName,
             entity: entity,
-            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -785,7 +785,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -995,11 +995,11 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType<TEntity>(entity), connection, transaction, cancellationToken);
-        return await UpdateAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entity), connection, transaction, cancellationToken).ConfigureAwait(false);
+        return await UpdateAsyncInternal(connection: connection,
+            tableName: GetMappedName(entity),
             entity: entity,
-            where: ToQueryGroup<TEntity>(key, entity),
+            where: ToQueryGroup(key, entity),
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1007,7 +1007,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1040,10 +1040,10 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+        return await UpdateAsyncInternal(connection: connection,
+            tableName: GetMappedName(entity),
             entity: entity,
-            where: await WhatToQueryGroupAsync(GetEntityType<TEntity>(entity), connection, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(GetEntityType(entity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1051,7 +1051,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1083,10 +1083,10 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+        return await UpdateAsyncInternal(connection: connection,
+            tableName: GetMappedName(entity),
             entity: entity,
-            where: await WhatToQueryGroupAsync(GetEntityType<TEntity>(entity), connection, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(GetEntityType(entity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1094,7 +1094,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1567,8 +1567,8 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
-            entity?.GetType(), cancellationToken);
-        return await UpdateAsyncInternal<object>(connection: connection,
+            entity?.GetType(), cancellationToken).ConfigureAwait(false);
+        return await UpdateAsyncInternal(connection: connection,
             tableName: tableName,
             entity: entity,
             where: ToQueryGroup(key, entity),
@@ -1579,7 +1579,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1883,11 +1883,11 @@ public static partial class DbConnectionExtension
             hints,
             transaction,
             statementBuilder,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
         var result = 0;
 
         // Create the command
-        using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken)).CreateCommand(context.CommandText,
+        using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).CreateCommand(context.CommandText,
             CommandType.Text, commandTimeout, transaction))
         {
             // Set the values
@@ -1895,11 +1895,11 @@ public static partial class DbConnectionExtension
 
             // Add the fields from the query group
             WhereToCommandParameters(command, where, entity?.GetType(),
-                await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken));
+                await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false));
 
             // Before Execution
             var traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -1908,11 +1908,11 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = await command.ExecuteNonQueryAsync(cancellationToken);
+            result = await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Return the result

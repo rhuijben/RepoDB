@@ -645,7 +645,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(tableName: tableName,
+            return await connection.UpdateAsync(tableName: tableName,
                 entity: entity,
                 fields: fields,
                 hints: hints,
@@ -654,7 +654,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -693,7 +693,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity, TWhat>(tableName: tableName,
+            return await connection.UpdateAsync(tableName: tableName,
                 entity: entity,
                 what: what,
                 fields: fields,
@@ -703,7 +703,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -741,7 +741,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(tableName: tableName,
+            return await connection.UpdateAsync(tableName: tableName,
                 entity: entity,
                 what: what,
                 fields: fields,
@@ -751,7 +751,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -789,7 +789,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(tableName: tableName,
+            return await connection.UpdateAsync(tableName: tableName,
                 entity: entity,
                 where: where,
                 fields: fields,
@@ -799,7 +799,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -837,7 +837,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(tableName: tableName,
+            return await connection.UpdateAsync(tableName: tableName,
                 entity: entity,
                 where: where,
                 fields: fields,
@@ -847,7 +847,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -885,7 +885,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(tableName: tableName,
+            return await connection.UpdateAsync(tableName: tableName,
                 entity: entity,
                 where: where,
                 fields: fields,
@@ -895,7 +895,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -933,7 +933,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(tableName: tableName,
+            return await connection.UpdateAsync(tableName: tableName,
                 entity: entity,
                 where: where,
                 fields: fields,
@@ -943,7 +943,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -977,7 +977,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(entity: entity,
+            return await connection.UpdateAsync(entity: entity,
                 fields: fields,
                 hints: hints,
                 commandTimeout: CommandTimeout,
@@ -985,7 +985,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1022,7 +1022,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity, TWhat>(entity: entity,
+            return await connection.UpdateAsync(entity: entity,
                 what: what,
                 fields: fields,
                 hints: hints,
@@ -1031,7 +1031,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1067,7 +1067,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(entity: entity,
+            return await connection.UpdateAsync(entity: entity,
                 what: what,
                 fields: fields,
                 hints: hints,
@@ -1076,7 +1076,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1112,7 +1112,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(entity: entity,
+            return await connection.UpdateAsync(entity: entity,
                 where: where,
                 fields: fields,
                 hints: hints,
@@ -1121,7 +1121,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1157,7 +1157,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(entity: entity,
+            return await connection.UpdateAsync(entity: entity,
                 where: where,
                 fields: fields,
                 hints: hints,
@@ -1166,7 +1166,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1202,7 +1202,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(entity: entity,
+            return await connection.UpdateAsync(entity: entity,
                 where: where,
                 fields: fields,
                 hints: hints,
@@ -1211,7 +1211,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1247,7 +1247,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.UpdateAsync<TEntity>(entity: entity,
+            return await connection.UpdateAsync(entity: entity,
                 where: where,
                 fields: fields,
                 hints: hints,
@@ -1256,7 +1256,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1519,7 +1519,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1565,7 +1565,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1611,7 +1611,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1657,7 +1657,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1703,7 +1703,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 transaction: transaction,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {

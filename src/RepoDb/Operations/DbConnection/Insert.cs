@@ -744,11 +744,11 @@ public static partial class DbConnectionExtension
             hints,
             transaction,
             statementBuilder,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
         var result = default(TResult);
 
         // Create the command
-        using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken)).CreateCommand(context.CommandText,
+        using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).CreateCommand(context.CommandText,
             CommandType.Text, commandTimeout, transaction))
         {
             // Set the values
@@ -756,7 +756,7 @@ public static partial class DbConnectionExtension
 
             // Before Execution
             var traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -765,11 +765,11 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken));
+            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
 
             // Set the return value
             if (result != null)

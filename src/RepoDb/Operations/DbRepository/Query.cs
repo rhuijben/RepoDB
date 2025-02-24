@@ -679,7 +679,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -736,7 +736,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -778,7 +778,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.QueryAsync<TEntity>(tableName: tableName,
+            return await connection.QueryAsync(tableName: tableName,
                 where: where,
                 fields: fields,
                 orderBy: orderBy,
@@ -792,7 +792,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -848,7 +848,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -904,7 +904,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -960,7 +960,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1013,7 +1013,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1067,7 +1067,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1107,7 +1107,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.QueryAsync<TEntity>(where: where,
+            return await connection.QueryAsync(where: where,
                 fields: fields,
                 orderBy: orderBy,
                 top: top,
@@ -1120,7 +1120,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1173,7 +1173,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1226,7 +1226,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1279,7 +1279,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1583,7 +1583,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.QueryAsync<TWhat>(tableName: tableName,
+            return await connection.QueryAsync(tableName: tableName,
                 what: what,
                 fields: fields,
                 orderBy: orderBy,
@@ -1597,7 +1597,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1651,7 +1651,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1705,7 +1705,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1759,7 +1759,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -1813,7 +1813,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cache: Cache,
                 trace: Trace,
                 statementBuilder: StatementBuilder,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {

@@ -1263,7 +1263,7 @@ public static partial class DbConnectionExtension
     {
         // Ensure the fields
         fields = GetQualifiedFields<TEntity>(fields) ??
-            (await DbFieldCache.GetAsync(connection, tableName, transaction, true, cancellationToken))?.GetAsFields();
+            (await DbFieldCache.GetAsync(connection, tableName, transaction, true, cancellationToken).ConfigureAwait(false))?.GetAsFields();
 
         // Return
         return await SkipQueryAsyncInternalBase<TEntity>(connection: connection,
@@ -1279,7 +1279,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     #endregion
@@ -1889,7 +1889,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var commandText = await CommandTextCache.GetSkipQueryTextAsync(request, cancellationToken);
+        var commandText = await CommandTextCache.GetSkipQueryTextAsync(request, cancellationToken).ConfigureAwait(false);
         var param = (object)null;
 
         // Converts to property mapped object
@@ -1912,7 +1912,7 @@ public static partial class DbConnectionExtension
             trace: trace,
             cancellationToken: cancellationToken,
             tableName: tableName,
-            skipCommandArrayParametersCheck: true);
+            skipCommandArrayParametersCheck: true).ConfigureAwait(false);
 
         // Result
         return result;

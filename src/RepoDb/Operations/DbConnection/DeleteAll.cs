@@ -337,7 +337,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, GetEntityType<TEntity>(entities), cancellationToken);
+        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, GetEntityType(entities), cancellationToken).ConfigureAwait(false);
         var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get<TEntity>(key, true)).AsList();
 
         return await DeleteAllAsyncInternal(connection: connection,
@@ -349,7 +349,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -456,7 +456,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType<TEntity>(entities), connection, transaction, cancellationToken);
+        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entities), connection, transaction, cancellationToken).ConfigureAwait(false);
         var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get<TEntity>(key, true))?.AsList();
 
         return await DeleteAllAsyncInternal(connection: connection,
@@ -468,7 +468,7 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -946,7 +946,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, cancellationToken);
+        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var dbSetting = connection.GetDbSetting();
         var hasImplicitTransaction = false;
         var count = keys?.AsList()?.Count;
@@ -957,7 +957,7 @@ public static partial class DbConnectionExtension
             // Creates a transaction (if needed)
             if (transaction == null && count > ParameterBatchCount)
             {
-                transaction = (await connection.EnsureOpenAsync(cancellationToken)).BeginTransaction();
+                transaction = (await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).BeginTransaction();
                 hasImplicitTransaction = true;
             }
 
@@ -981,7 +981,7 @@ public static partial class DbConnectionExtension
                         transaction: transaction,
                         trace: trace,
                         statementBuilder: statementBuilder,
-                        cancellationToken: cancellationToken);
+                        cancellationToken: cancellationToken).ConfigureAwait(false);
                 }
             }
 
@@ -1084,9 +1084,9 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             entityType: request.Type,
-            dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
+            dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken).ConfigureAwait(false),
             skipCommandArrayParametersCheck: true,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Result
         return result;

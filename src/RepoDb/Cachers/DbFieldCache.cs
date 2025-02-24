@@ -186,7 +186,7 @@ public static class DbFieldCache
             // Get from DB
             result = new DbFieldCollection(await connection
                 .GetDbHelper()
-                .GetFieldsAsync(connection, tableName, transaction, cancellationToken),
+                .GetFieldsAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false),
                 connection.GetDbSetting());
 
             // Validate

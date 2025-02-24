@@ -323,16 +323,16 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType<TEntity>(entity), connection, transaction, cancellationToken);
+        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entity), connection, transaction, cancellationToken).ConfigureAwait(false);
         return await DeleteAsyncInternal<TEntity>(connection: connection,
-            where: ToQueryGroup<TEntity>(key, entity),
+            where: ToQueryGroup(key, entity),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -362,14 +362,14 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await DeleteAsyncInternal<TEntity>(connection: connection,
-            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -398,14 +398,14 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await DeleteAsyncInternal<TEntity>(connection: connection,
-            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -858,14 +858,14 @@ public static partial class DbConnectionExtension
     {
         return await DeleteAsyncInternal(connection: connection,
             tableName: tableName,
-            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken).ConfigureAwait(false),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -895,14 +895,14 @@ public static partial class DbConnectionExtension
     {
         return await DeleteAsyncInternal(connection: connection,
             tableName: tableName,
-            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken),
+            where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken).ConfigureAwait(false),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1150,9 +1150,9 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             entityType: request.Type,
-            dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
+            dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken).ConfigureAwait(false),
             skipCommandArrayParametersCheck: true,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Result
         return result;

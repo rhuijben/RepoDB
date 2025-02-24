@@ -63,7 +63,7 @@ public class Field : IEquatable<Field>
     /// </summary>
     /// <returns>The string value equivalent to the name of the field.</returns>
     public override string ToString() =>
-        string.Concat(Name, ", ", Type?.FullName, " (", HashCode.ToString(CultureInfo.InvariantCulture), ")");
+        string.Concat(Name, ", ", Type?.FullName, " (", HashCode?.ToString(CultureInfo.InvariantCulture), ")");
 
 
     #endregion

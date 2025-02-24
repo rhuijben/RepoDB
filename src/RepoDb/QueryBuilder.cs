@@ -679,7 +679,7 @@ public class QueryBuilder
         if (take > 0)
         {
             return Append("LIMIT")
-                .Append(take.ToString(CultureInfo.InvariantCulture));
+                .Append(take?.ToString(CultureInfo.InvariantCulture));
         }
 
         return Append("LIMIT");

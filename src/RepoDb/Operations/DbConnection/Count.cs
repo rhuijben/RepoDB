@@ -941,9 +941,9 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             entityType: request.Type,
-            dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken),
+            dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken).ConfigureAwait(false),
             skipCommandArrayParametersCheck: true,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Result
         return result;

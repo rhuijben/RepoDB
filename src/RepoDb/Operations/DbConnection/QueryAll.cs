@@ -299,7 +299,7 @@ public static partial class DbConnectionExtension
     {
         // Ensure the fields
         fields = GetQualifiedFields<TEntity>(fields) ??
-            (await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken))?.GetAsFields();
+            (await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false))?.GetAsFields();
 
         // Return
         return await QueryAllAsyncInternalBase<TEntity>(connection: connection,
@@ -315,7 +315,7 @@ public static partial class DbConnectionExtension
             cache: cache,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     #endregion
@@ -642,7 +642,7 @@ public static partial class DbConnectionExtension
         // Get Cache
         if (cache != null && cacheKey != null)
         {
-            var item = await cache.GetAsync<IEnumerable<TEntity>>(cacheKey, false, cancellationToken);
+            var item = await cache.GetAsync<IEnumerable<TEntity>>(cacheKey, false, cancellationToken).ConfigureAwait(false);
             if (item != null)
             {
                 return item.Value;
@@ -658,7 +658,7 @@ public static partial class DbConnectionExtension
             orderBy,
             hints,
             statementBuilder);
-        var commandText = await CommandTextCache.GetQueryAllTextAsync(request, cancellationToken);
+        var commandText = await CommandTextCache.GetQueryAllTextAsync(request, cancellationToken).ConfigureAwait(false);
         var param = (object)null;
         
         // Actual Execution
@@ -675,12 +675,12 @@ public static partial class DbConnectionExtension
             trace: trace,
             cancellationToken: cancellationToken,
             tableName: tableName,
-            skipCommandArrayParametersCheck: true);
+            skipCommandArrayParametersCheck: true).ConfigureAwait(false);
 
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken);
+            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
         }
 
         // Result

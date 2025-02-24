@@ -128,7 +128,7 @@ internal static class UpdateExecutionContextProvider
         }
 
         // Create
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var request = new UpdateRequest(tableName,
             connection,
             transaction,
@@ -136,7 +136,7 @@ internal static class UpdateExecutionContextProvider
             fields,
             hints,
             statementBuilder);
-        var commandText = await CommandTextCache.GetUpdateTextAsync(request, cancellationToken);
+        var commandText = await CommandTextCache.GetUpdateTextAsync(request, cancellationToken).ConfigureAwait(false);
 
         // Call
         context = CreateInternal(entityType,

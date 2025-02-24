@@ -4504,8 +4504,8 @@ public static partial class DbConnectionExtension
         where T2 : class
     {
         return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -4523,7 +4523,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -4968,9 +4968,9 @@ public static partial class DbConnectionExtension
         where T3 : class
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -4993,7 +4993,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -5554,10 +5554,10 @@ public static partial class DbConnectionExtension
         where T4 : class
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
-            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
+            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -5585,7 +5585,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -6266,11 +6266,11 @@ public static partial class DbConnectionExtension
         where T5 : class
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
-            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken),
-            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
+            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken).ConfigureAwait(false),
+            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -6303,7 +6303,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -7099,12 +7099,12 @@ public static partial class DbConnectionExtension
         where T6 : class
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
-            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken),
-            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken),
-            where6: await WhatToQueryGroupAsync(typeof(T6), connection, what6, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
+            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken).ConfigureAwait(false),
+            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken).ConfigureAwait(false),
+            where6: await WhatToQueryGroupAsync(typeof(T6), connection, what6, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -7142,7 +7142,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -8053,13 +8053,13 @@ public static partial class DbConnectionExtension
         where T7 : class
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
-            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken),
-            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken),
-            where6: await WhatToQueryGroupAsync(typeof(T6), connection, what6, transaction, cancellationToken),
-            where7: await WhatToQueryGroupAsync(typeof(T7), connection, what7, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
+            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken).ConfigureAwait(false),
+            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken).ConfigureAwait(false),
+            where6: await WhatToQueryGroupAsync(typeof(T6), connection, what6, transaction, cancellationToken).ConfigureAwait(false),
+            where7: await WhatToQueryGroupAsync(typeof(T7), connection, what7, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -8102,7 +8102,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -19730,9 +19730,9 @@ public static partial class DbConnectionExtension
     {
         return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             tableName1: tableName1,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
             tableName2: tableName2,
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -19750,7 +19750,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -20139,13 +20139,13 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal<T2>(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -20163,7 +20163,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo<T1>());
         }
 
@@ -20180,7 +20180,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo<T2>());
         }
 
@@ -20193,7 +20193,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -20208,7 +20208,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -20220,7 +20220,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = await QueryMultipleAsyncInternal<T1>(connection,
+            item1 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -20229,10 +20229,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
-            item2 = await QueryMultipleAsyncInternal<T2>(connection,
+            item2 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -20241,14 +20241,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -20332,11 +20332,11 @@ public static partial class DbConnectionExtension
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             tableName1: tableName1,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
             tableName2: tableName2,
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
             tableName3: tableName3,
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -20359,7 +20359,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -20856,19 +20856,19 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal<T2>(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal<T3>(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -20886,7 +20886,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo<T1>());
         }
 
@@ -20903,7 +20903,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo<T2>());
         }
 
@@ -20920,7 +20920,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo<T3>());
         }
 
@@ -20933,7 +20933,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -20948,7 +20948,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -20960,7 +20960,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = await QueryMultipleAsyncInternal<T1>(connection,
+            item1 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -20969,10 +20969,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
-            item2 = await QueryMultipleAsyncInternal<T2>(connection,
+            item2 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -20981,10 +20981,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
-            item3 = await QueryMultipleAsyncInternal<T3>(connection,
+            item3 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -20993,14 +20993,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -21101,13 +21101,13 @@ public static partial class DbConnectionExtension
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             tableName1: tableName1,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
             tableName2: tableName2,
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
             tableName3: tableName3,
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
             tableName4: tableName4,
-            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken),
+            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -21135,7 +21135,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -21745,25 +21745,25 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal<T2>(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal<T3>(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item4 = await QueryMultipleAsyncInternal<T4>(cacheKey4,
             cache,
             where4,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -21781,7 +21781,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo<T1>());
         }
 
@@ -21798,7 +21798,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo<T2>());
         }
 
@@ -21815,7 +21815,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo<T3>());
         }
 
@@ -21832,7 +21832,7 @@ public static partial class DbConnectionExtension
                 top4,
                 hints4,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken).ConfigureAwait(false));
             maps.Add(where4.MapTo<T4>());
         }
 
@@ -21845,7 +21845,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -21860,7 +21860,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -21872,7 +21872,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = await QueryMultipleAsyncInternal<T1>(connection,
+            item1 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -21881,10 +21881,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
-            item2 = await QueryMultipleAsyncInternal<T2>(connection,
+            item2 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -21893,10 +21893,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
-            item3 = await QueryMultipleAsyncInternal<T3>(connection,
+            item3 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -21905,10 +21905,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T4
-            item4 = await QueryMultipleAsyncInternal<T4>(connection,
+            item4 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item4,
                 cacheKey4,
@@ -21917,14 +21917,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3, item4);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -22041,15 +22041,15 @@ public static partial class DbConnectionExtension
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             tableName1: tableName1,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
             tableName2: tableName2,
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
             tableName3: tableName3,
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
             tableName4: tableName4,
-            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken),
+            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken).ConfigureAwait(false),
             tableName5: tableName5,
-            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken),
+            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -22082,7 +22082,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -22800,31 +22800,31 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal<T2>(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal<T3>(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item4 = await QueryMultipleAsyncInternal<T4>(cacheKey4,
             cache,
             where4,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item5 = await QueryMultipleAsyncInternal<T5>(cacheKey5,
             cache,
             where5,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -22842,7 +22842,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo<T1>());
         }
 
@@ -22859,7 +22859,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo<T2>());
         }
 
@@ -22876,7 +22876,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo<T3>());
         }
 
@@ -22893,7 +22893,7 @@ public static partial class DbConnectionExtension
                 top4,
                 hints4,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken).ConfigureAwait(false));
             maps.Add(where4.MapTo<T4>());
         }
 
@@ -22910,7 +22910,7 @@ public static partial class DbConnectionExtension
                 top5,
                 hints5,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken).ConfigureAwait(false));
             maps.Add(where5.MapTo<T5>());
         }
 
@@ -22923,7 +22923,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -22938,7 +22938,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -22950,7 +22950,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = await QueryMultipleAsyncInternal<T1>(connection,
+            item1 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -22959,10 +22959,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
-            item2 = await QueryMultipleAsyncInternal<T2>(connection,
+            item2 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -22971,10 +22971,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
-            item3 = await QueryMultipleAsyncInternal<T3>(connection,
+            item3 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -22983,10 +22983,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T4
-            item4 = await QueryMultipleAsyncInternal<T4>(connection,
+            item4 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item4,
                 cacheKey4,
@@ -22995,10 +22995,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T5
-            item5 = await QueryMultipleAsyncInternal<T5>(connection,
+            item5 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item5,
                 cacheKey5,
@@ -23007,14 +23007,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3, item4, item5);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -23147,17 +23147,17 @@ public static partial class DbConnectionExtension
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             tableName1: tableName1,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
             tableName2: tableName2,
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
             tableName3: tableName3,
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
             tableName4: tableName4,
-            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken),
+            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken).ConfigureAwait(false),
             tableName5: tableName5,
-            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken),
+            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken).ConfigureAwait(false),
             tableName6: tableName6,
-            where6: await WhatToQueryGroupAsync(typeof(T6), connection, what6, transaction, cancellationToken),
+            where6: await WhatToQueryGroupAsync(typeof(T6), connection, what6, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -23195,7 +23195,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -24021,37 +24021,37 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal<T2>(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal<T3>(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item4 = await QueryMultipleAsyncInternal<T4>(cacheKey4,
             cache,
             where4,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item5 = await QueryMultipleAsyncInternal<T5>(cacheKey5,
             cache,
             where5,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item6 = await QueryMultipleAsyncInternal<T6>(cacheKey6,
             cache,
             where6,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -24069,7 +24069,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo<T1>());
         }
 
@@ -24086,7 +24086,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo<T2>());
         }
 
@@ -24103,7 +24103,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo<T3>());
         }
 
@@ -24120,7 +24120,7 @@ public static partial class DbConnectionExtension
                 top4,
                 hints4,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken).ConfigureAwait(false));
             maps.Add(where4.MapTo<T4>());
         }
 
@@ -24137,7 +24137,7 @@ public static partial class DbConnectionExtension
                 top5,
                 hints5,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken).ConfigureAwait(false));
             maps.Add(where5.MapTo<T5>());
         }
 
@@ -24154,7 +24154,7 @@ public static partial class DbConnectionExtension
                 top6,
                 hints6,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request6, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request6, cancellationToken).ConfigureAwait(false));
             maps.Add(where6.MapTo<T6>());
         }
 
@@ -24167,7 +24167,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -24182,7 +24182,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -24194,7 +24194,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = await QueryMultipleAsyncInternal<T1>(connection,
+            item1 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -24203,10 +24203,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
-            item2 = await QueryMultipleAsyncInternal<T2>(connection,
+            item2 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -24215,10 +24215,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
-            item3 = await QueryMultipleAsyncInternal<T3>(connection,
+            item3 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -24227,10 +24227,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T4
-            item4 = await QueryMultipleAsyncInternal<T4>(connection,
+            item4 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item4,
                 cacheKey4,
@@ -24239,10 +24239,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T5
-            item5 = await QueryMultipleAsyncInternal<T5>(connection,
+            item5 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item5,
                 cacheKey5,
@@ -24251,10 +24251,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T6
-            item6 = await QueryMultipleAsyncInternal<T6>(connection,
+            item6 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item6,
                 cacheKey6,
@@ -24263,14 +24263,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3, item4, item5, item6);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -24419,19 +24419,19 @@ public static partial class DbConnectionExtension
     {
         return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             tableName1: tableName1,
-            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken),
+            where1: await WhatToQueryGroupAsync(typeof(T1), connection, what1, transaction, cancellationToken).ConfigureAwait(false),
             tableName2: tableName2,
-            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken),
+            where2: await WhatToQueryGroupAsync(typeof(T2), connection, what2, transaction, cancellationToken).ConfigureAwait(false),
             tableName3: tableName3,
-            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken),
+            where3: await WhatToQueryGroupAsync(typeof(T3), connection, what3, transaction, cancellationToken).ConfigureAwait(false),
             tableName4: tableName4,
-            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken),
+            where4: await WhatToQueryGroupAsync(typeof(T4), connection, what4, transaction, cancellationToken).ConfigureAwait(false),
             tableName5: tableName5,
-            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken),
+            where5: await WhatToQueryGroupAsync(typeof(T5), connection, what5, transaction, cancellationToken).ConfigureAwait(false),
             tableName6: tableName6,
-            where6: await WhatToQueryGroupAsync(typeof(T6), connection, what6, transaction, cancellationToken),
+            where6: await WhatToQueryGroupAsync(typeof(T6), connection, what6, transaction, cancellationToken).ConfigureAwait(false),
             tableName7: tableName7,
-            where7: await WhatToQueryGroupAsync(typeof(T7), connection, what7, transaction, cancellationToken),
+            where7: await WhatToQueryGroupAsync(typeof(T7), connection, what7, transaction, cancellationToken).ConfigureAwait(false),
             fields1: fields1,
             orderBy1: orderBy1,
             top1: top1,
@@ -24474,7 +24474,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -25408,43 +25408,43 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal<T2>(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal<T3>(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item4 = await QueryMultipleAsyncInternal<T4>(cacheKey4,
             cache,
             where4,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item5 = await QueryMultipleAsyncInternal<T5>(cacheKey5,
             cache,
             where5,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item6 = await QueryMultipleAsyncInternal<T6>(cacheKey6,
             cache,
             where6,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item7 = await QueryMultipleAsyncInternal<T7>(cacheKey7,
             cache,
             where7,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -25462,7 +25462,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo<T1>());
         }
 
@@ -25479,7 +25479,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo<T2>());
         }
 
@@ -25496,7 +25496,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo<T3>());
         }
 
@@ -25513,7 +25513,7 @@ public static partial class DbConnectionExtension
                 top4,
                 hints4,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken).ConfigureAwait(false));
             maps.Add(where4.MapTo<T4>());
         }
 
@@ -25530,7 +25530,7 @@ public static partial class DbConnectionExtension
                 top5,
                 hints5,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken).ConfigureAwait(false));
             maps.Add(where5.MapTo<T5>());
         }
 
@@ -25547,7 +25547,7 @@ public static partial class DbConnectionExtension
                 top6,
                 hints6,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request6, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request6, cancellationToken).ConfigureAwait(false));
             maps.Add(where6.MapTo<T6>());
         }
 
@@ -25564,7 +25564,7 @@ public static partial class DbConnectionExtension
                 top7,
                 hints7,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request7, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request7, cancellationToken).ConfigureAwait(false));
             maps.Add(where7.MapTo<T7>());
         }
 
@@ -25577,7 +25577,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -25592,7 +25592,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -25604,7 +25604,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = await QueryMultipleAsyncInternal<T1>(connection,
+            item1 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -25613,10 +25613,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
-            item2 = await QueryMultipleAsyncInternal<T2>(connection,
+            item2 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -25625,10 +25625,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
-            item3 = await QueryMultipleAsyncInternal<T3>(connection,
+            item3 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -25637,10 +25637,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T4
-            item4 = await QueryMultipleAsyncInternal<T4>(connection,
+            item4 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item4,
                 cacheKey4,
@@ -25649,10 +25649,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T5
-            item5 = await QueryMultipleAsyncInternal<T5>(connection,
+            item5 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item5,
                 cacheKey5,
@@ -25661,10 +25661,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T6
-            item6 = await QueryMultipleAsyncInternal<T6>(connection,
+            item6 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item6,
                 cacheKey6,
@@ -25673,10 +25673,10 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T7
-            item7 = await QueryMultipleAsyncInternal<T7>(connection,
+            item7 = await QueryMultipleAsyncInternal(connection,
                 reader,
                 item7,
                 cacheKey7,
@@ -25685,14 +25685,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3, item4, item5, item6, item7);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -25780,7 +25780,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -26073,13 +26073,13 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -26097,7 +26097,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo());
         }
 
@@ -26114,7 +26114,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo());
         }
 
@@ -26127,7 +26127,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -26142,7 +26142,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -26163,7 +26163,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
             item2 = await QueryMultipleAsyncInternal(connection,
@@ -26175,14 +26175,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -26287,7 +26287,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -26657,19 +26657,19 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -26687,7 +26687,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo());
         }
 
@@ -26704,7 +26704,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo());
         }
 
@@ -26721,7 +26721,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo());
         }
 
@@ -26734,7 +26734,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -26749,7 +26749,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -26770,7 +26770,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
             item2 = await QueryMultipleAsyncInternal(connection,
@@ -26782,7 +26782,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
             item3 = await QueryMultipleAsyncInternal(connection,
@@ -26794,14 +26794,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -26928,7 +26928,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -27379,25 +27379,25 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item4 = await QueryMultipleAsyncInternal(cacheKey4,
             cache,
             where4,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -27415,7 +27415,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo());
         }
 
@@ -27432,7 +27432,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo());
         }
 
@@ -27449,7 +27449,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo());
         }
 
@@ -27466,7 +27466,7 @@ public static partial class DbConnectionExtension
                 top4,
                 hints4,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken).ConfigureAwait(false));
             maps.Add(where4.MapTo());
         }
 
@@ -27479,7 +27479,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -27494,7 +27494,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -27515,7 +27515,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
             item2 = await QueryMultipleAsyncInternal(connection,
@@ -27527,7 +27527,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
             item3 = await QueryMultipleAsyncInternal(connection,
@@ -27539,7 +27539,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T4
             item4 = await QueryMultipleAsyncInternal(connection,
@@ -27551,14 +27551,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3, item4);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -27706,7 +27706,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -28234,31 +28234,31 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item4 = await QueryMultipleAsyncInternal(cacheKey4,
             cache,
             where4,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item5 = await QueryMultipleAsyncInternal(cacheKey5,
             cache,
             where5,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -28276,7 +28276,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo());
         }
 
@@ -28293,7 +28293,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo());
         }
 
@@ -28310,7 +28310,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo());
         }
 
@@ -28327,7 +28327,7 @@ public static partial class DbConnectionExtension
                 top4,
                 hints4,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken).ConfigureAwait(false));
             maps.Add(where4.MapTo());
         }
 
@@ -28344,7 +28344,7 @@ public static partial class DbConnectionExtension
                 top5,
                 hints5,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken).ConfigureAwait(false));
             maps.Add(where5.MapTo());
         }
 
@@ -28357,7 +28357,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -28372,7 +28372,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -28393,7 +28393,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
             item2 = await QueryMultipleAsyncInternal(connection,
@@ -28405,7 +28405,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
             item3 = await QueryMultipleAsyncInternal(connection,
@@ -28417,7 +28417,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T4
             item4 = await QueryMultipleAsyncInternal(connection,
@@ -28429,7 +28429,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T5
             item5 = await QueryMultipleAsyncInternal(connection,
@@ -28441,14 +28441,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3, item4, item5);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -28617,7 +28617,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -29222,37 +29222,37 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item4 = await QueryMultipleAsyncInternal(cacheKey4,
             cache,
             where4,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item5 = await QueryMultipleAsyncInternal(cacheKey5,
             cache,
             where5,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item6 = await QueryMultipleAsyncInternal(cacheKey6,
             cache,
             where6,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -29270,7 +29270,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo());
         }
 
@@ -29287,7 +29287,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo());
         }
 
@@ -29304,7 +29304,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo());
         }
 
@@ -29321,7 +29321,7 @@ public static partial class DbConnectionExtension
                 top4,
                 hints4,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken).ConfigureAwait(false));
             maps.Add(where4.MapTo());
         }
 
@@ -29338,7 +29338,7 @@ public static partial class DbConnectionExtension
                 top5,
                 hints5,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken).ConfigureAwait(false));
             maps.Add(where5.MapTo());
         }
 
@@ -29355,7 +29355,7 @@ public static partial class DbConnectionExtension
                 top6,
                 hints6,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request6, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request6, cancellationToken).ConfigureAwait(false));
             maps.Add(where6.MapTo());
         }
 
@@ -29368,7 +29368,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -29383,7 +29383,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -29404,7 +29404,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
             item2 = await QueryMultipleAsyncInternal(connection,
@@ -29416,7 +29416,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
             item3 = await QueryMultipleAsyncInternal(connection,
@@ -29428,7 +29428,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T4
             item4 = await QueryMultipleAsyncInternal(connection,
@@ -29440,7 +29440,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T5
             item5 = await QueryMultipleAsyncInternal(connection,
@@ -29452,7 +29452,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T6
             item6 = await QueryMultipleAsyncInternal(connection,
@@ -29464,14 +29464,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3, item4, item5, item6);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -29661,7 +29661,7 @@ public static partial class DbConnectionExtension
             cache: null,
             trace: trace,
             statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -30343,43 +30343,43 @@ public static partial class DbConnectionExtension
             cache,
             where1,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item2 = await QueryMultipleAsyncInternal(cacheKey2,
             cache,
             where2,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item3 = await QueryMultipleAsyncInternal(cacheKey3,
             cache,
             where3,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item4 = await QueryMultipleAsyncInternal(cacheKey4,
             cache,
             where4,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item5 = await QueryMultipleAsyncInternal(cacheKey5,
             cache,
             where5,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item6 = await QueryMultipleAsyncInternal(cacheKey6,
             cache,
             where6,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         var item7 = await QueryMultipleAsyncInternal(cacheKey7,
             cache,
             where7,
             queryGroups,
-            cancellationToken);
+            cancellationToken).ConfigureAwait(false);
 
         // Fix
         QueryGroup.FixForQueryMultiple(queryGroups.ToArray());
@@ -30397,7 +30397,7 @@ public static partial class DbConnectionExtension
                 top1,
                 hints1,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request1, cancellationToken).ConfigureAwait(false));
             maps.Add(where1.MapTo());
         }
 
@@ -30414,7 +30414,7 @@ public static partial class DbConnectionExtension
                 top2,
                 hints2,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request2, cancellationToken).ConfigureAwait(false));
             maps.Add(where2.MapTo());
         }
 
@@ -30431,7 +30431,7 @@ public static partial class DbConnectionExtension
                 top3,
                 hints3,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request3, cancellationToken).ConfigureAwait(false));
             maps.Add(where3.MapTo());
         }
 
@@ -30448,7 +30448,7 @@ public static partial class DbConnectionExtension
                 top4,
                 hints4,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request4, cancellationToken).ConfigureAwait(false));
             maps.Add(where4.MapTo());
         }
 
@@ -30465,7 +30465,7 @@ public static partial class DbConnectionExtension
                 top5,
                 hints5,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request5, cancellationToken).ConfigureAwait(false));
             maps.Add(where5.MapTo());
         }
 
@@ -30482,7 +30482,7 @@ public static partial class DbConnectionExtension
                 top6,
                 hints6,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request6, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request6, cancellationToken).ConfigureAwait(false));
             maps.Add(where6.MapTo());
         }
 
@@ -30499,7 +30499,7 @@ public static partial class DbConnectionExtension
                 top7,
                 hints7,
                 statementBuilder);
-            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request7, cancellationToken));
+            commandTexts.Add(await CommandTextCache.GetQueryMultipleTextAsync(request7, cancellationToken).ConfigureAwait(false));
             maps.Add(where7.MapTo());
         }
 
@@ -30512,7 +30512,7 @@ public static partial class DbConnectionExtension
         // Before Execution
         async Task<TraceResult> beforeExecutionCallbackAsync(DbCommand command, CancellationToken cancellationToken) =>
             traceResult = await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
         using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
@@ -30527,7 +30527,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken)))
+            cancellationToken: cancellationToken).ConfigureAwait(false)))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -30548,7 +30548,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 false,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T2
             item2 = await QueryMultipleAsyncInternal(connection,
@@ -30560,7 +30560,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T3
             item3 = await QueryMultipleAsyncInternal(connection,
@@ -30572,7 +30572,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T4
             item4 = await QueryMultipleAsyncInternal(connection,
@@ -30584,7 +30584,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T5
             item5 = await QueryMultipleAsyncInternal(connection,
@@ -30596,7 +30596,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T6
             item6 = await QueryMultipleAsyncInternal(connection,
@@ -30608,7 +30608,7 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // T7
             item7 = await QueryMultipleAsyncInternal(connection,
@@ -30620,14 +30620,14 @@ public static partial class DbConnectionExtension
                 transaction,
                 cache,
                 true,
-                cancellationToken);
+                cancellationToken).ConfigureAwait(false);
 
             // Result
             result = Tuple.Create(item1, item2, item3, item4, item5, item6, item7);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
         }
 
         // Result
@@ -30764,7 +30764,7 @@ public static partial class DbConnectionExtension
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            item = (await cache?.GetAsync<IEnumerable<T>>(cacheKey, false, cancellationToken))?.Value;
+            item = (await (cache?.GetAsync<IEnumerable<T>>(cacheKey, false, cancellationToken)).ConfigureAwait(false))?.Value;
         }
 
         if (item == null)
@@ -30794,7 +30794,7 @@ public static partial class DbConnectionExtension
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            item = (await cache?.GetAsync<IEnumerable<dynamic>>(cacheKey, false, cancellationToken))?.Value;
+            item = (await (cache?.GetAsync<IEnumerable<dynamic>>(cacheKey, false, cancellationToken)).ConfigureAwait(false))?.Value;
         }
 
         if (item == null)
@@ -30833,18 +30833,18 @@ public static partial class DbConnectionExtension
     {
         if (forwardToNextResult)
         {
-            await reader.NextResultAsync(cancellationToken);
+            await reader.NextResultAsync(cancellationToken).ConfigureAwait(false);
         }
 
         if (items == null)
         {
-            var dbFields = await DbFieldCache.GetAsync(connection, ClassMappedNameCache.Get<T>(), transaction, true, cancellationToken);
-            items = await DataReader.ToEnumerableAsync<T>(reader, dbFields, dbSetting, cancellationToken).ToListAsync(cancellationToken);
+            var dbFields = await DbFieldCache.GetAsync(connection, ClassMappedNameCache.Get<T>(), transaction, true, cancellationToken).ConfigureAwait(false);
+            items = await DataReader.ToEnumerableAsync<T>(reader, dbFields, dbSetting, cancellationToken).ToListAsync(cancellationToken).ConfigureAwait(false);
         }
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            await cache?.AddAsync(cacheKey, items, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken);
+            await (cache?.AddAsync(cacheKey, items, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken)).ConfigureAwait(false);
         }
 
         return items;

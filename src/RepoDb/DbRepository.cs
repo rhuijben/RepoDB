@@ -434,7 +434,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -543,7 +543,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -626,7 +626,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -725,7 +725,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 cacheItemExpiration: CacheItemExpiration,
                 transaction: transaction,
                 cache: Cache,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {
@@ -826,7 +826,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache,
-                cancellationToken: cancellationToken);
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         finally
         {

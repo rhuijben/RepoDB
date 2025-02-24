@@ -127,7 +127,7 @@ internal static class MergeExecutionContextProvider
         }
 
         // Create
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var request = new MergeRequest(tableName,
             connection,
             transaction,
@@ -135,7 +135,7 @@ internal static class MergeExecutionContextProvider
             qualifiers,
             hints,
             statementBuilder);
-        var commandText = await CommandTextCache.GetMergeTextAsync(request, cancellationToken);
+        var commandText = await CommandTextCache.GetMergeTextAsync(request, cancellationToken).ConfigureAwait(false);
 
         // Call
         context = CreateInternal(entityType,

@@ -61,7 +61,7 @@ internal static class Tracer
 
         var result = TraceResult.Create(key, command);
 
-        await trace.BeforeExecutionAsync(result.CancellableTraceLog, cancellationToken);
+        await trace.BeforeExecutionAsync(result.CancellableTraceLog, cancellationToken).ConfigureAwait(false);
 
         ValidateCancellation(key, result.CancellableTraceLog);
 
@@ -131,7 +131,7 @@ internal static class Tracer
             value,
             result.CancellableTraceLog);
 
-        await trace.AfterExecutionAsync(log, cancellationToken);
+        await trace.AfterExecutionAsync(log, cancellationToken).ConfigureAwait(false);
     }
 
     #endregion

@@ -79,7 +79,7 @@ public static partial class DbConnectionExtension
     {
         if (connection.State != ConnectionState.Open)
         {
-            await ((DbConnection)connection).OpenAsync(cancellationToken);
+            await ((DbConnection)connection).OpenAsync(cancellationToken).ConfigureAwait(false);
         }
         return connection;
     }
@@ -325,7 +325,7 @@ public static partial class DbConnectionExtension
         // Get Cache
         if (cache != null && cacheKey != null)
         {
-            var item = await cache.GetAsync<IEnumerable<dynamic>>(cacheKey, false, cancellationToken);
+            var item = await cache.GetAsync<IEnumerable<dynamic>>(cacheKey, false, cancellationToken).ConfigureAwait(false);
             if (item != null)
             {
                 return item.Value;
@@ -334,7 +334,7 @@ public static partial class DbConnectionExtension
 
         // DB Fields
         var dbFields = !string.IsNullOrWhiteSpace(tableName) ?
-            await DbFieldCache.GetAsync(connection, tableName, transaction, false, cancellationToken) : null;
+            await DbFieldCache.GetAsync(connection, tableName, transaction, false, cancellationToken).ConfigureAwait(false) : null;
 
         // Execute the actual method
         using var command = await CreateDbCommandForExecutionAsync(connection: connection,
@@ -346,14 +346,14 @@ public static partial class DbConnectionExtension
             entityType: null,
             dbFields: dbFields,
             skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Variables
         IEnumerable<dynamic>? result = null;
 
         // Before Execution
         var traceResult = await Tracer
-            .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+            .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Silent cancellation
         if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -362,19 +362,19 @@ public static partial class DbConnectionExtension
         }
 
         // Execute
-        using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+        using (var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false))
         {
             result = await DataReader.ToEnumerableAsync(reader, dbFields, connection.GetDbSetting(), cancellationToken)
-                .ToListAsync(cancellationToken);
+                .ToListAsync(cancellationToken).ConfigureAwait(false);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
 
             // Set Cache
             if (cache != null && cacheKey != null)
             {
-                await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken);
+                await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -780,7 +780,7 @@ public static partial class DbConnectionExtension
         // Get Cache
         if (cache != null && cacheKey != null)
         {
-            var item = await cache.GetAsync<IEnumerable<TResult>>(cacheKey, false, cancellationToken);
+            var item = await cache.GetAsync<IEnumerable<TResult>>(cacheKey, false, cancellationToken).ConfigureAwait(false);
             if (item != null)
             {
                 return item.Value;
@@ -806,7 +806,7 @@ public static partial class DbConnectionExtension
                trace: trace,
                cancellationToken: cancellationToken,
                tableName: tableName,
-               skipCommandArrayParametersCheck: skipCommandArrayParametersCheck);
+               skipCommandArrayParametersCheck: skipCommandArrayParametersCheck).ConfigureAwait(false);
         }
         else
         {
@@ -823,7 +823,7 @@ public static partial class DbConnectionExtension
                trace: trace,
                cancellationToken: cancellationToken,
                tableName: tableName,
-               skipCommandArrayParametersCheck: skipCommandArrayParametersCheck);
+               skipCommandArrayParametersCheck: skipCommandArrayParametersCheck).ConfigureAwait(false);
         }
     }
 
@@ -864,7 +864,7 @@ public static partial class DbConnectionExtension
         // Get Cache
         if (cache != null && cacheKey != null)
         {
-            var item = await cache.GetAsync<IEnumerable<TResult>>(cacheKey, false, cancellationToken);
+            var item = await cache.GetAsync<IEnumerable<TResult>>(cacheKey, false, cancellationToken).ConfigureAwait(false);
             if (item != null)
             {
                 return item.Value;
@@ -885,12 +885,12 @@ public static partial class DbConnectionExtension
             cache: null,
             cancellationToken: cancellationToken,
             tableName: tableName,
-            skipCommandArrayParametersCheck: skipCommandArrayParametersCheck)).WithType<TResult>();
+            skipCommandArrayParametersCheck: skipCommandArrayParametersCheck).ConfigureAwait(false)).WithType<TResult>();
 
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken);
+            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
         }
 
         // Set the output parameters
@@ -937,7 +937,7 @@ public static partial class DbConnectionExtension
         // Get Cache
         if (cache != null && cacheKey != null)
         {
-            var item = await cache.GetAsync<IEnumerable<TResult>>(cacheKey, false, cancellationToken);
+            var item = await cache.GetAsync<IEnumerable<TResult>>(cacheKey, false, cancellationToken).ConfigureAwait(false);
             if (item != null)
             {
                 return item.Value;
@@ -946,7 +946,7 @@ public static partial class DbConnectionExtension
 
         // DB Fields
         var dbFields = !string.IsNullOrWhiteSpace(tableName) ?
-            await DbFieldCache.GetAsync(connection, tableName, transaction, false, cancellationToken) : null;
+            await DbFieldCache.GetAsync(connection, tableName, transaction, false, cancellationToken).ConfigureAwait(false) : null;
 
         // Execute the actual method
         using var command = await CreateDbCommandForExecutionAsync(connection: connection,
@@ -958,13 +958,13 @@ public static partial class DbConnectionExtension
             entityType: typeof(TResult),
             dbFields: dbFields,
             skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
 
         IEnumerable<TResult>? result = null;
 
         // Before Execution
         var traceResult = await Tracer
-            .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+            .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Silent cancellation
         if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -973,19 +973,19 @@ public static partial class DbConnectionExtension
         }
 
         // Execute
-        using (var reader = await command.ExecuteReaderAsync(cancellationToken))
+        using (var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false))
         {
             result = await DataReader.ToEnumerableAsync<TResult>(reader, dbFields, connection.GetDbSetting(), cancellationToken)
-                .ToListAsync(cancellationToken);
+                .ToListAsync(cancellationToken).ConfigureAwait(false);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
 
             // Set Cache
             if (cache != null && cacheKey != null)
             {
-                await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken);
+                await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -1203,7 +1203,7 @@ public static partial class DbConnectionExtension
                 cancellationToken: cancellationToken,
                 entityType: null,
                 dbFields: null,
-                skipCommandArrayParametersCheck: false);
+                skipCommandArrayParametersCheck: false).ConfigureAwait(false);
         }
 
         // Return
@@ -1431,7 +1431,7 @@ public static partial class DbConnectionExtension
             entityType: entityType,
             dbFields: dbFields,
             skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
         var hasError = false;
 
         // Ensure the DbCommand disposal
@@ -1442,12 +1442,12 @@ public static partial class DbConnectionExtension
             // A hacky solution for other operations (i.e.: QueryMultipleAsync)
             if (beforeExecutionCallbackAsync != null)
             {
-                traceResult = await beforeExecutionCallbackAsync(command, cancellationToken);
+                traceResult = await beforeExecutionCallbackAsync(command, cancellationToken).ConfigureAwait(false);
             }
 
             // Before Execution
             traceResult ??= await Tracer
-                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+                .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -1456,11 +1456,11 @@ public static partial class DbConnectionExtension
             }
 
             // Execute
-            var reader = await command.ExecuteReaderAsync(cancellationToken);
+            var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
             // After Execution
             await Tracer
-                .InvokeAfterExecutionAsync(traceResult, trace, reader, cancellationToken);
+                .InvokeAfterExecutionAsync(traceResult, trace, reader, cancellationToken).ConfigureAwait(false);
 
             // Set the output parameters
             SetOutputParameters(param);
@@ -1668,11 +1668,11 @@ public static partial class DbConnectionExtension
             entityType: entityType,
             dbFields: dbFields,
             skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Before Execution
         var traceResult = await Tracer
-            .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+            .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Silent cancellation
         if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -1681,11 +1681,11 @@ public static partial class DbConnectionExtension
         }
 
         // Execution
-        var result = await command.ExecuteNonQueryAsync(cancellationToken);
+        var result = await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
 
         // After Execution
         await Tracer
-            .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+            .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
 
         // Set the output parameters
         SetOutputParameters(param);
@@ -2041,7 +2041,7 @@ public static partial class DbConnectionExtension
         // Get Cache
         if (cache != null && cacheKey != null)
         {
-            var item = await cache.GetAsync<TResult>(cacheKey, false, cancellationToken);
+            var item = await cache.GetAsync<TResult>(cacheKey, false, cancellationToken).ConfigureAwait(false);
             if (item != null)
             {
                 return item.Value;
@@ -2057,11 +2057,11 @@ public static partial class DbConnectionExtension
             entityType: entityType,
             dbFields: dbFields,
             skipCommandArrayParametersCheck: skipCommandArrayParametersCheck,
-            cancellationToken: cancellationToken);
+            cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Before Execution
         var traceResult = await Tracer
-            .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken);
+            .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Silent cancellation
         if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -2070,16 +2070,16 @@ public static partial class DbConnectionExtension
         }
 
         // Execution
-        var result = await command.ExecuteScalarAsync(cancellationToken) is { } v ? Converter.ToType<TResult>(v) : default;
+        var result = await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false) is { } v ? Converter.ToType<TResult>(v) : default;
 
         // After Execution
         await Tracer
-            .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken);
+            .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
 
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken);
+            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
         }
 
         // Set the output parameters
@@ -2355,7 +2355,7 @@ public static partial class DbConnectionExtension
         Type entityType,
         CancellationToken cancellationToken = default)
     {
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var property = GetAndGuardPrimaryKeyOrIdentityKey(entityType, dbFields) ?? GetPrimaryOrIdentityKey(entityType);
         return GetAndGuardPrimaryKeyOrIdentityKey(tableName, property);
     }
@@ -2373,7 +2373,7 @@ public static partial class DbConnectionExtension
         IDbTransaction transaction,
         CancellationToken cancellationToken = default)
     {
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken);
+        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var dbField = dbFields?.GetPrimary() ?? dbFields?.GetIdentity();
         return GetAndGuardPrimaryKeyOrIdentityKey(tableName, dbField);
     }
@@ -2560,12 +2560,12 @@ public static partial class DbConnectionExtension
             var cachedType = TypeCache.Get(whatType);
             if (cachedType.IsClassType() || cachedType.IsAnonymousType())
             {
-                var field = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, whatType, cancellationToken);
+                var field = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, whatType, cancellationToken).ConfigureAwait(false);
                 queryGroup = WhatToQueryGroup<T>(field, what);
             }
             else
             {
-                var dbField = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, cancellationToken);
+                var dbField = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
                 queryGroup = WhatToQueryGroup<T>(dbField, what);
             }
         }
@@ -2645,7 +2645,7 @@ public static partial class DbConnectionExtension
         {
             return queryGroup;
         }
-        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(entityType, connection, transaction, cancellationToken);
+        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(entityType, connection, transaction, cancellationToken).ConfigureAwait(false);
         return WhatToQueryGroup(key, what);
     }
 
@@ -3151,7 +3151,7 @@ public static partial class DbConnectionExtension
         ValidateTransactionConnectionObject(connection, transaction);
 
         // Open
-        await connection.EnsureOpenAsync(cancellationToken);
+        await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
 
         // Call
         return CreateDbCommandForExecutionInternal(connection: connection,
