@@ -12,12 +12,9 @@ public class FieldEqualityTest
     {
         // Prepare
         var objA = new Field("FieldName");
+        var objB = new Field("FieldName");
 
-        // Act
-        var equal = Equals(objA.GetHashCode(), "FieldName".GetHashCode());
-
-        // Assert
-        Assert.IsTrue(equal);
+        Assert.AreEqual(objA.GetHashCode(), objB.GetHashCode());
     }
 
     [TestMethod]
@@ -42,19 +39,6 @@ public class FieldEqualityTest
 
         // Act
         var equal = (objA.GetHashCode() == objB.GetHashCode());
-
-        // Assert
-        Assert.IsTrue(equal);
-    }
-
-    [TestMethod]
-    public void TestFieldHashCodeEqualityFromLiteralString()
-    {
-        // Prepare
-        var objA = new Field("FieldName");
-
-        // Act
-        var equal = (objA.GetHashCode() == "FieldName".GetHashCode());
 
         // Assert
         Assert.IsTrue(equal);

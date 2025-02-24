@@ -151,7 +151,7 @@ public class BaseStatementBuilderCreateAverageAllTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateAverageAllIfTheTableIsNull()
     {
         // Setup
@@ -165,7 +165,7 @@ public class BaseStatementBuilderCreateAverageAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateAverageAllIfTheTableIsEmpty()
     {
         // Setup
@@ -179,7 +179,7 @@ public class BaseStatementBuilderCreateAverageAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateAverageAllIfTheTableIsWhitespace()
     {
         // Setup
@@ -193,7 +193,7 @@ public class BaseStatementBuilderCreateAverageAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateAverageAllIfTheFieldIsNull()
     {
         // Setup

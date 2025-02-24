@@ -1,7 +1,7 @@
+using System.Data.SQLite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
-using System.Data.SQLite;
 
 namespace RepoDb.SQLite.System.UnitTests;
 
@@ -54,7 +54,7 @@ public class StatementBuilderTest
         Assert.AreEqual(expected, query);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqLiteStatementBuilderCreateBatchQueryIfThereAreNoFields()
     {
         // Setup
@@ -756,7 +756,7 @@ public class StatementBuilderTest
         Assert.AreEqual(expected, query);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnSqLiteStatementBuilderCreateSkipQueryIfThereAreNoFields()
     {
         // Setup

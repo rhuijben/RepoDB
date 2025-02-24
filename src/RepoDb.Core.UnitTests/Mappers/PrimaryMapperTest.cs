@@ -351,21 +351,21 @@ public partial class PrimaryMapperTest
      * Null Properties
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPrimaryMapperViaPropertyNameThatIsNull()
     {
         // Setup
         PrimaryMapper.Add<PrimaryMapperTestClass>(propertyName: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPrimaryMapperViaFieldThatIsNull()
     {
         // Setup
         PrimaryMapper.Add<PrimaryMapperTestClass>(field: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPrimaryMapperViaExpressionThatIsNull()
     {
         // Setup
@@ -383,7 +383,7 @@ public partial class PrimaryMapperTest
         PrimaryMapper.Add<PrimaryMapperTestClass>(propertyName: "");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPrimaryMapperViaFieldThatIsEmpty()
     {
         // Setup
@@ -401,7 +401,7 @@ public partial class PrimaryMapperTest
         PrimaryMapper.Add<PrimaryMapperTestClass>(propertyName: "  ");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPrimaryMapperViaFieldThatIsEmptySpaces()
     {
         // Setup

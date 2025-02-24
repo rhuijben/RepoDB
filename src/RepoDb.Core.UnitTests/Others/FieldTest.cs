@@ -21,13 +21,11 @@ public partial class FieldTest
     public void TestFieldAndStringEquality()
     {
         // Prepare
-        var field = new Field("FieldName");
+        var field1 = new Field("FieldName");
+        var field2 = new Field("FieldName");
 
-        // Act
-        var equal = field.GetHashCode() == "FieldName".GetHashCode();
-
-        // Assert
-        Assert.IsTrue(equal);
+        Assert.AreEqual(field1, field2);
+        Assert.AreEqual(field1.GetHashCode(), field2.GetHashCode());
     }
 
     [TestMethod]
@@ -149,7 +147,7 @@ public partial class FieldTest
         Assert.IsTrue(parsed.All(field => fields.Contains(field)));
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnFieldIfTheFromMethodFieldsParameterIsNull()
     {
         // Prepare
@@ -159,7 +157,7 @@ public partial class FieldTest
         Field.From(fields).AsList();
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnFieldIfTheFromMethodFieldsParameterIsEmpty()
     {
         // Prepare
@@ -169,7 +167,7 @@ public partial class FieldTest
         Field.From(fields).AsList();
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnFieldIfTheFromMethodFieldsParameterIsWhitespace()
     {
         // Prepare
@@ -179,7 +177,7 @@ public partial class FieldTest
         Field.From(fields).AsList();
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnFieldIfTheFromMethodFieldsParameterHasNull()
     {
         // Prepare
@@ -189,7 +187,7 @@ public partial class FieldTest
         Field.From(fields).AsList();
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnFieldFromIfAnyOfTheParameterIsEmpty()
     {
         // Prepare
@@ -199,7 +197,7 @@ public partial class FieldTest
         Field.From(fields).AsList();
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnFieldIfTheFromMethodFieldsParameterHasWhitespace()
     {
         // Prepare

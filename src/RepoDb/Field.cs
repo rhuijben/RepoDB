@@ -10,7 +10,7 @@ namespace RepoDb;
 /// </summary>
 public class Field : IEquatable<Field>
 {
-    private int? hashCode = null;
+    private int? HashCode { get; set; }
 
     /// <summary>
     /// Creates a new instance of <see cref="Field"/> object.
@@ -62,7 +62,7 @@ public class Field : IEquatable<Field>
     /// </summary>
     /// <returns>The string value equivalent to the name of the field.</returns>
     public override string ToString() =>
-        string.Concat(Name, ", ", Type?.FullName, " (", hashCode.ToString(), ")");
+        string.Concat(Name, ", ", Type?.FullName, " (", HashCode.ToString(), ")");
 
 
     #endregion
@@ -268,21 +268,14 @@ public class Field : IEquatable<Field>
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        if (this.hashCode != null)
+        if (HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            HashCode = hashCode = System.HashCode.Combine(
+                Name,
+                Type);
         }
 
-        var hashCode = Name.GetHashCode();
-
-        // Set the hash code
-        if (Type != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Type);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+        return hashCode;
     }
 
     /// <summary>

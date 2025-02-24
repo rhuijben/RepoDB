@@ -265,21 +265,21 @@ public partial class TypeMapperTest
      * Null Properties
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnTypeMapperViaPropertyNameThatIsNull()
     {
         // Setup
         TypeMapper.Add<TypeMapperTestClass>((string)null, DbType.AnsiStringFixedLength);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnTypeMapperViaFieldThatIsNull()
     {
         // Setup
         TypeMapper.Add<TypeMapperTestClass>((Field)null, DbType.AnsiStringFixedLength);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnTypeMapperViaExpressionThatIsNull()
     {
         // Setup
@@ -308,21 +308,21 @@ public partial class TypeMapperTest
      * Null ColumnName
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnTypeMapperViaPropertyNameWithNullTargetColumnName()
     {
         // Setup
         TypeMapper.Add<TypeMapperTestClass>("ColumnString", null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnTypeMapperViaFieldWithNullTargetColumnName()
     {
         // Setup
         TypeMapper.Add<TypeMapperTestClass>(new Field("ColumnString"), null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnTypeMapperViaExpressionWithNullTargetColumnName()
     {
         // Setup

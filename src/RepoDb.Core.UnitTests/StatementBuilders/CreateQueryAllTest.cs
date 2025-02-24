@@ -138,7 +138,7 @@ public class BaseStatementBuilderCreateQueryAllTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateQueryAllIfThereAreNoFields()
     {
         // Setup
@@ -150,7 +150,7 @@ public class BaseStatementBuilderCreateQueryAllTest
             fields: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateQueryAllIfTheTableIsNull()
     {
         // Setup
@@ -163,7 +163,7 @@ public class BaseStatementBuilderCreateQueryAllTest
             fields: fields);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateQueryAllIfTheTableIsEmpty()
     {
         // Setup
@@ -176,7 +176,7 @@ public class BaseStatementBuilderCreateQueryAllTest
             fields: fields);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateQueryAllIfTheTableIsWhitespace()
     {
         // Setup

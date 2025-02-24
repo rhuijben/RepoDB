@@ -94,7 +94,7 @@ public class BaseStatementBuilderCreateMaxAllTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateMaxAllIfTheTableIsNull()
     {
         // Setup
@@ -108,7 +108,7 @@ public class BaseStatementBuilderCreateMaxAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateMaxAllIfTheTableIsEmpty()
     {
         // Setup
@@ -122,7 +122,7 @@ public class BaseStatementBuilderCreateMaxAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateMaxAllIfTheTableIsWhitespace()
     {
         // Setup
@@ -136,7 +136,7 @@ public class BaseStatementBuilderCreateMaxAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateMaxAllIfTheFieldIsNull()
     {
         // Setup

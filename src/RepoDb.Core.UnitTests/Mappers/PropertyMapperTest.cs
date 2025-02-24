@@ -213,21 +213,21 @@ public partial class PropertyMapperTest
      * Null Properties
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaPropertyNameThatIsNull()
     {
         // Setup
         PropertyMapper.Add<PropertyMapperTestClass>((string)null, "PropertyText");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaFieldThatIsNull()
     {
         // Setup
         PropertyMapper.Add<PropertyMapperTestClass>((Field)null, "PropertyText");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaExpressionThatIsNull()
     {
         // Setup
@@ -256,21 +256,21 @@ public partial class PropertyMapperTest
      * Null ColumnName
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaPropertyNameWithNullTargetColumnName()
     {
         // Setup
         PropertyMapper.Add<PropertyMapperTestClass>("ColumnString", null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaFieldWithNullTargetColumnName()
     {
         // Setup
         PropertyMapper.Add<PropertyMapperTestClass>(new Field("ColumnString"), null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaExpressionWithNullTargetColumnName()
     {
         // Setup
@@ -281,21 +281,21 @@ public partial class PropertyMapperTest
      * Empty ColumnName
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaPropertyNameWithEmptyTargetColumnName()
     {
         // Setup
         PropertyMapper.Add<PropertyMapperTestClass>("ColumnString", "");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaFieldWithEmptyTargetColumnName()
     {
         // Setup
         PropertyMapper.Add<PropertyMapperTestClass>(new Field("ColumnString"), "");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaExpressionWithEmptyTargetColumnName()
     {
         // Setup
@@ -306,21 +306,21 @@ public partial class PropertyMapperTest
      * Empty-spaces ColumnName
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaPropertyNameWithEmptySpacesTargetColumnName()
     {
         // Setup
         PropertyMapper.Add<PropertyMapperTestClass>("ColumnString", "  ");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaFieldWithEmptySpacesTargetColumnName()
     {
         // Setup
         PropertyMapper.Add<PropertyMapperTestClass>(new Field("ColumnString"), "  ");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyMapperViaExpressionWithEmptySpacesTargetColumnName()
     {
         // Setup

@@ -63,7 +63,7 @@ public class BaseStatementBuilderCreateTruncateTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateTruncateIfTheTableIsNull()
     {
         // Setup
@@ -74,7 +74,7 @@ public class BaseStatementBuilderCreateTruncateTest
         statementBuilder.CreateTruncate(tableName: tableName);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateTruncateIfTheTableIsEmpty()
     {
         // Setup
@@ -85,7 +85,7 @@ public class BaseStatementBuilderCreateTruncateTest
         statementBuilder.CreateTruncate(tableName: tableName);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateTruncateIfTheTableIsWhitespace()
     {
         // Setup

@@ -263,7 +263,7 @@ public class BaseStatementBuilderCreateUpdateAllTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateUpdateAllIfTheTableIsNull()
     {
         // Setup
@@ -281,7 +281,7 @@ public class BaseStatementBuilderCreateUpdateAllTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateUpdateAllIfTheTableIsEmpty()
     {
         // Setup
@@ -299,7 +299,7 @@ public class BaseStatementBuilderCreateUpdateAllTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateUpdateAllIfTheTableIsWhitespace()
     {
         // Setup
@@ -373,7 +373,7 @@ public class BaseStatementBuilderCreateUpdateAllTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateUpdateAllIfThereAreNoQualifiers()
     {
         // Setup

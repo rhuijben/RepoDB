@@ -15,11 +15,8 @@ public class OrderFieldEqualityTest
         var objA = new OrderField("OrderFieldName", Order.Ascending);
         var objB = new OrderField("OrderFieldName", Order.Ascending);
 
-        // Act
-        var equal = (objA.GetHashCode() == objB.GetHashCode());
-
-        // Assert
-        Assert.IsTrue(equal);
+        Assert.AreEqual(objA.GetHashCode(), objB.GetHashCode());
+        Assert.AreEqual(objA, objB);
     }
 
     [TestMethod]

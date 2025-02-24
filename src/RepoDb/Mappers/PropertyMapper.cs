@@ -1,9 +1,9 @@
-﻿using RepoDb.Attributes;
-using RepoDb.Exceptions;
-using RepoDb.Extensions;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Attributes;
+using RepoDb.Exceptions;
+using RepoDb.Extensions;
 
 namespace RepoDb;
 
@@ -33,7 +33,7 @@ public static class PropertyMapper
     public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
         string columnName)
         where TEntity : class =>
-        Add<TEntity>(expression, columnName, false);
+        Add(expression ?? throw new ArgumentNullException(nameof(expression)), columnName, false);
 
     /// <summary>
     /// Adds a mapping between a class property and a database column (via expression).

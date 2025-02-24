@@ -351,21 +351,21 @@ public partial class IdentityMapperTest
      * Null Properties
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnIdentityMapperViaPropertyNameThatIsNull()
     {
         // Setup
         IdentityMapper.Add<IdentityMapperTestClass>(propertyName: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnIdentityMapperViaFieldThatIsNull()
     {
         // Setup
         IdentityMapper.Add<IdentityMapperTestClass>(field: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnIdentityMapperViaExpressionThatIsNull()
     {
         // Setup
@@ -383,7 +383,7 @@ public partial class IdentityMapperTest
         IdentityMapper.Add<IdentityMapperTestClass>(propertyName: "");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnIdentityMapperViaFieldThatIsEmpty()
     {
         // Setup
@@ -401,7 +401,7 @@ public partial class IdentityMapperTest
         IdentityMapper.Add<IdentityMapperTestClass>(propertyName: "  ");
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnIdentityMapperViaFieldThatIsEmptySpaces()
     {
         // Setup

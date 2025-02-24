@@ -128,7 +128,7 @@ public class BaseStatementBuilderCreateCountTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateCountIfTheTableIsNull()
     {
         // Setup
@@ -140,7 +140,7 @@ public class BaseStatementBuilderCreateCountTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateCountIfTheTableIsEmpty()
     {
         // Setup
@@ -152,7 +152,7 @@ public class BaseStatementBuilderCreateCountTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateCountIfTheTableIsWhitespace()
     {
         // Setup

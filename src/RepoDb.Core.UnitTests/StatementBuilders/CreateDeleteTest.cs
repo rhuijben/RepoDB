@@ -100,7 +100,7 @@ public class BaseStatementBuilderCreateDeleteTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateDeleteIfTheTableIsNull()
     {
         // Setup
@@ -111,7 +111,7 @@ public class BaseStatementBuilderCreateDeleteTest
         statementBuilder.CreateDelete(tableName: tableName);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateDeleteIfTheTableIsEmpty()
     {
         // Setup
@@ -122,7 +122,7 @@ public class BaseStatementBuilderCreateDeleteTest
         statementBuilder.CreateDelete(tableName: tableName);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateDeleteIfTheTableIsWhitespace()
     {
         // Setup

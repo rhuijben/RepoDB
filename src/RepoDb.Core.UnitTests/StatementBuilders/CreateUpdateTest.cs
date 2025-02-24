@@ -362,7 +362,7 @@ public class BaseStatementBuilderCreateUpdateTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateUpdateIfTheTableIsNull()
     {
         // Setup
@@ -378,7 +378,7 @@ public class BaseStatementBuilderCreateUpdateTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateUpdateIfTheTableIsEmpty()
     {
         // Setup
@@ -394,7 +394,7 @@ public class BaseStatementBuilderCreateUpdateTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateUpdateIfTheTableIsWhitespace()
     {
         // Setup

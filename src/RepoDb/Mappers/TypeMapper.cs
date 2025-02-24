@@ -157,7 +157,7 @@ public static class TypeMapper
     public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
         DbType? dbType)
         where TEntity : class =>
-        Add<TEntity>(expression, dbType, false);
+        Add<TEntity>(expression ?? throw new ArgumentNullException(nameof(expression)), dbType, false);
 
     /// <summary>
     /// Property Level: Adds a mapping between a class property and a <see cref="DbType"/> object (via expression).

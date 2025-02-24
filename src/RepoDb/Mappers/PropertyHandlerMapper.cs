@@ -1,9 +1,9 @@
-﻿using RepoDb.Exceptions;
-using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Exceptions;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
 
 namespace RepoDb;
 
@@ -180,7 +180,7 @@ public static class PropertyHandlerMapper
     public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object>> expression,
         TPropertyHandler propertyHandler)
         where TEntity : class =>
-        Add<TEntity, TPropertyHandler>(expression, propertyHandler, false);
+        Add(expression ?? throw new ArgumentNullException(nameof(expression)), propertyHandler, false);
 
     /// <summary>
     /// Property Level: Adds a property handler mapping into a data entity type property (via expression). It uses the <see cref="Activator.CreateInstance(Type)"/> method to create the instance of target property handler.

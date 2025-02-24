@@ -10,7 +10,7 @@ namespace RepoDb;
 /// </summary>
 public class OrderField : IEquatable<OrderField>
 {
-    private int? hashCode = null;
+    private int? HashCode { get; set; }
 
     /// <summary>
     /// Creates a new instance of <see cref="OrderField"/> object.
@@ -174,13 +174,14 @@ public class OrderField : IEquatable<OrderField>
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        if (this.hashCode != null)
+        if (HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            HashCode = hashCode = System.HashCode.Combine(
+                Name,
+                Order);
         }
 
-        // Set and return the hashcode
-        return (this.hashCode = HashCode.Combine(Name, Order)).Value;
+        return hashCode;
     }
 
     /// <summary>

@@ -140,7 +140,7 @@ public class BaseStatementBuilderCreateSumTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateSumIfTheTableIsNull()
     {
         // Setup
@@ -154,7 +154,7 @@ public class BaseStatementBuilderCreateSumTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateSumIfTheTableIsEmpty()
     {
         // Setup
@@ -168,7 +168,7 @@ public class BaseStatementBuilderCreateSumTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateSumIfTheTableIsWhitespace()
     {
         // Setup
@@ -182,7 +182,7 @@ public class BaseStatementBuilderCreateSumTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateSumIfTheFieldIsNull()
     {
         // Setup

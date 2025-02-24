@@ -25,15 +25,15 @@ internal class CommandParameter
     /// <summary>
     /// The field that is connected.
     /// </summary>
-    public Field Field { get; set; }
+    public Field Field { get; }
 
     /// <summary>
     /// The value of the parameter.
     /// </summary>
-    public object Value { get; set; }
+    public object Value { get; }
 
     /// <summary>
     /// The parent type where this parameter is mapped.
     /// </summary>
-    public Type MappedToType { get; set; }
+    public Type MappedToType { get; }
 }

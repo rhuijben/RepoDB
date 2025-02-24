@@ -73,7 +73,7 @@ public partial class ClassMappedNameCacheTest
     [TestMethod]
     public void TestWithMapAttributeAndWithClassMapperMapping()
     {
-        // Setup
+        // Setupg
         ClassMapper.Add<ClassMappedNameCacheTestWithMapAttribute>("[sales].[Person]");
 
         // Act
@@ -84,8 +84,8 @@ public partial class ClassMappedNameCacheTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
-    public void ThrowExcpetionOnClassMappingCacheIfTheTypeIsNull()
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+    public void ThrowExceptionOnClassMappingCacheIfTheTypeIsNull()
     {
         // Setup
         ClassMappedNameCache.Get(null);

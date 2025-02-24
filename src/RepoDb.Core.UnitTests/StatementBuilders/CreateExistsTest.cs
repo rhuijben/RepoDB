@@ -128,7 +128,7 @@ public class BaseStatementBuilderCreateExistsTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateExistsIfTheTableIsNull()
     {
         // Setup
@@ -140,7 +140,7 @@ public class BaseStatementBuilderCreateExistsTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateExistsIfTheTableIsEmpty()
     {
         // Setup
@@ -152,7 +152,7 @@ public class BaseStatementBuilderCreateExistsTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateExistsIfTheTableIsWhitespace()
     {
         // Setup

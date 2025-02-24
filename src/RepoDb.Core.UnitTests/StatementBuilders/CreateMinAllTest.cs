@@ -94,7 +94,7 @@ public class BaseStatementBuilderCreateMinAllTest
         Assert.AreEqual(expected, actual);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateMinAllIfTheTableIsNull()
     {
         // Setup
@@ -108,7 +108,7 @@ public class BaseStatementBuilderCreateMinAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateMinAllIfTheTableIsEmpty()
     {
         // Setup
@@ -122,7 +122,7 @@ public class BaseStatementBuilderCreateMinAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateMinAllIfTheTableIsWhitespace()
     {
         // Setup
@@ -136,7 +136,7 @@ public class BaseStatementBuilderCreateMinAllTest
             hints: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateMinAllIfTheFieldIsNull()
     {
         // Setup

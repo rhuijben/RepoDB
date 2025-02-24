@@ -188,7 +188,7 @@ public class OrderFieldTest
         OrderField.Parse(orderBy);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnOrderFieldIfTheParseDynamicObjectIsNull()
     {
         // Prepare

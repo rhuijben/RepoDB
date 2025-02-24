@@ -215,7 +215,7 @@ public class BaseStatementBuilderCreateInsertTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateInsertIfTheTableIsNull()
     {
         // Setup
@@ -229,7 +229,7 @@ public class BaseStatementBuilderCreateInsertTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateInsertIfTheTableIsEmpty()
     {
         // Setup
@@ -243,7 +243,7 @@ public class BaseStatementBuilderCreateInsertTest
             identityField: null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnBaseStatementBuilderCreateInsertIfTheTableIsWhitespace()
     {
         // Setup

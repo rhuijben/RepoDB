@@ -310,7 +310,7 @@ public partial class PropertyHandlerMapperTest
      * Null Properties
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyTypeHandlerMapperViaPropertyNameThatIsNull()
     {
         // Setup
@@ -318,7 +318,7 @@ public partial class PropertyHandlerMapperTest
         PropertyHandlerMapper.Add<PropertyHandlerMapperTestClass, StringPropertyHandler>((string)null, stringPropertyHandler);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyTypeHandlerMapperViaFieldThatIsNull()
     {
         // Setup
@@ -326,7 +326,7 @@ public partial class PropertyHandlerMapperTest
         PropertyHandlerMapper.Add<PropertyHandlerMapperTestClass, StringPropertyHandler>((Field)null, stringPropertyHandler);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyTypeHandlerMapperViaExpressionThatIsNull()
     {
         // Setup
@@ -358,21 +358,21 @@ public partial class PropertyHandlerMapperTest
      * Null PropertyHandler
      */
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyTypeHandlerMapperViaPropertyNameWithNullPropertyHandler()
     {
         // Setup
         PropertyHandlerMapper.Add<PropertyHandlerMapperTestClass, StringPropertyHandler>("ColumnString", null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyTypeHandlerMapperViaFieldWithNullPropertyHandler()
     {
         // Setup
         PropertyHandlerMapper.Add<PropertyHandlerMapperTestClass, StringPropertyHandler>(new Field("ColumnString"), null);
     }
 
-    [TestMethod, ExpectedException(typeof(NullReferenceException))]
+    [TestMethod, ExpectedException(typeof(ArgumentNullException))]
     public void ThrowExceptionOnPropertyTypeHandlerMapperViaExpressionWithNullPropertyHandler()
     {
         // Setup
