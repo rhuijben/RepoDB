@@ -11,4 +11,10 @@ public class IdentityFieldNotFoundException : Exception
     /// <param name="message">The exception message.</param>
     public IdentityFieldNotFoundException(string message)
         : base(message) { }
+    public IdentityFieldNotFoundException()
+    {
+    }
+    public IdentityFieldNotFoundException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

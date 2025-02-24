@@ -11,4 +11,10 @@ public class InvalidQualifiersException : Exception
     /// <param name="message">The exception message.</param>
     public InvalidQualifiersException(string message)
         : base(message) { }
+    public InvalidQualifiersException()
+    {
+    }
+    public InvalidQualifiersException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

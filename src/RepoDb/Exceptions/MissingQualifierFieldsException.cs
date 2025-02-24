@@ -11,4 +11,10 @@ public class MissingQualifierFieldsException : Exception
     /// <param name="message">The exception message.</param>
     public MissingQualifierFieldsException(string message)
         : base(message) { }
+    public MissingQualifierFieldsException()
+    {
+    }
+    public MissingQualifierFieldsException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

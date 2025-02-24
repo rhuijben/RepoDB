@@ -11,4 +11,10 @@ public class MappingExistsException : Exception
     /// <param name="message">The exception message.</param>
     public MappingExistsException(string message)
         : base(message) { }
+    public MappingExistsException()
+    {
+    }
+    public MappingExistsException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

@@ -11,4 +11,10 @@ public class InvalidParameterException : Exception
     /// <param name="message">The exception message.</param>
     public InvalidParameterException(string message)
         : base(message) { }
+    public InvalidParameterException()
+    {
+    }
+    public InvalidParameterException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

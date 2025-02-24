@@ -11,4 +11,10 @@ public class CancelledExecutionException : Exception
     /// <param name="message">The exception message.</param>
     public CancelledExecutionException(string message)
         : base(message) { }
+    public CancelledExecutionException()
+    {
+    }
+    public CancelledExecutionException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

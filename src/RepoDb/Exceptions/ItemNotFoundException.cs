@@ -11,4 +11,10 @@ public class ItemNotFoundException : Exception
     /// <param name="message">The exception message.</param>
     public ItemNotFoundException(string message)
         : base(message) { }
+    public ItemNotFoundException()
+    {
+    }
+    public ItemNotFoundException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

@@ -11,4 +11,10 @@ public class KeyFieldNotFoundException : Exception
     /// <param name="message">The exception message.</param>
     public KeyFieldNotFoundException(string message)
         : base(message) { }
+    public KeyFieldNotFoundException()
+    {
+    }
+    public KeyFieldNotFoundException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

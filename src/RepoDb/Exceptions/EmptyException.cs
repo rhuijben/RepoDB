@@ -10,4 +10,10 @@ public class EmptyException : Exception
     /// </summary>
     /// <param name="message">The exception message.</param>
     public EmptyException(string message) : base(message) { }
+    public EmptyException()
+    {
+    }
+    public EmptyException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

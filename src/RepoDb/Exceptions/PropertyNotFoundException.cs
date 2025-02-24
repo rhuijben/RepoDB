@@ -11,4 +11,10 @@ public class PropertyNotFoundException : Exception
     /// <param name="message">The exception message.</param>
     public PropertyNotFoundException(string message)
         : base(message) { }
+    public PropertyNotFoundException()
+    {
+    }
+    public PropertyNotFoundException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }

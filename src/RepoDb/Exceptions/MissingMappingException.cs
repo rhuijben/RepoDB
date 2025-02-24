@@ -11,4 +11,10 @@ public class MissingMappingException : Exception
     /// <param name="message">The exception message.</param>
     public MissingMappingException(string message)
         : base(message) { }
+    public MissingMappingException()
+    {
+    }
+    public MissingMappingException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
 }
