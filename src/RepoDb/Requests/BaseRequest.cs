@@ -29,7 +29,7 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// <summary>
     /// Gets the type.
     /// </summary>
-    public Type Type { get; internal set; }
+    public Type Type { get; init; }
 
     /// <summary>
     /// Gets the name.
@@ -53,23 +53,13 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
 
     #region Equality and comparers
 
-    private int? hashCode = null;
+    protected int? HashCode { get; set; }
 
     /// <summary>
     /// Returns the hashcode for this <see cref="BaseRequest"/>.
     /// </summary>
     /// <returns>The hashcode value.</returns>
-    public override int GetHashCode()
-    {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
-        {
-            return this.hashCode.Value;
-        }
-
-        // Set and return the hashcode
-        return (this.hashCode = GetType().GetHashCode()).Value;
-    }
+    public abstract override int GetHashCode();
 
     /// <summary>
     /// Compares the <see cref="BaseRequest"/> object equality against the given target object.
@@ -92,9 +82,15 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
         {
             return false;
         }
+        else if (other.GetHashCode() != GetHashCode())
+        {
+            return false;
+        }
 
-        return Object.ReferenceEquals(other, this);
+        return StrictEquals(other);
     }
+
+    protected abstract bool StrictEquals(BaseRequest other);
 
     /// <summary>
     /// Compares the equality of the two <see cref="BaseRequest"/> objects.

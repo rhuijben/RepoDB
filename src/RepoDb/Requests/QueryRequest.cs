@@ -1,16 +1,14 @@
-﻿using RepoDb.Extensions;
+﻿using System.Data;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System.Data;
 
 namespace RepoDb.Requests;
 
 /// <summary>
 /// A class that holds the value of the 'Query' operation arguments.
 /// </summary>
-internal class QueryRequest : BaseRequest
+internal sealed class QueryRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="QueryRequest"/> object.
     /// </summary>
@@ -81,7 +79,7 @@ internal class QueryRequest : BaseRequest
     /// <summary>
     /// Gets the list of the target fields.
     /// </summary>
-    public IEnumerable<Field> Fields { get; set; }
+    public IEnumerable<Field> Fields { get; init; }
 
     /// <summary>
     /// Gets the query expression used.
@@ -111,53 +109,44 @@ internal class QueryRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
-        }
+            // Get first the entity hash code
+            hashCode = System.HashCode.Combine(
+                typeof(QueryRequest),
+                Name,
+                Where,
+                Top,
+                Hints);
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".Query");
-
-        // Get the qualifier <see cref="Field"/> objects
-        if (Fields != null)
-        {
-            foreach (var field in Fields)
+            // Get the qualifier <see cref="Field"/> objects
+            if (Fields != null)
             {
-                hashCode = HashCode.Combine(hashCode, field);
+                foreach (var field in Fields)
+                {
+                    hashCode = System.HashCode.Combine(hashCode, field);
+                }
             }
-        }
 
-        // Add the expression
-        if (Where != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Where);
-        }
-
-        // Add the order fields
-        if (OrderBy != null)
-        {
-            foreach (var orderField in OrderBy)
+            // Add the order fields
+            if (OrderBy != null)
             {
-                hashCode = HashCode.Combine(hashCode, orderField);
+                foreach (var orderField in OrderBy)
+                {
+                    hashCode = System.HashCode.Combine(hashCode, orderField);
+                }
             }
+
+            HashCode = hashCode;
         }
 
-        // Add the filter
-        if (Top != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Top);
-        }
+        return hashCode;
+    }
 
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is QueryRequest;
     }
 
     #endregion

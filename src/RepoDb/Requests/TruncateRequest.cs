@@ -1,15 +1,13 @@
-﻿using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Requests;
 
 /// <summary>
 /// A class that holds the value of the 'Truncate' operation arguments.
 /// </summary>
-internal class TruncateRequest : BaseRequest
+internal sealed class TruncateRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="TruncateRequest"/> object.
     /// </summary>
@@ -54,18 +52,22 @@ internal class TruncateRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            // Get first the entity hash code
+            hashCode = System.HashCode.Combine(typeof(TruncateRequest), Name, ".Truncate");
+
         }
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".Truncate");
-
         // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+        return this.HashCode ??= hashCode;
     }
-    
+
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is TruncateRequest;
+    }
+
     #endregion
 }

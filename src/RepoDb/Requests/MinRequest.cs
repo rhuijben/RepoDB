@@ -1,15 +1,13 @@
-﻿using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Requests;
 
 /// <summary>
 /// A class that holds the value of the 'Min' operation arguments.
 /// </summary>
-internal class MinRequest : BaseRequest
+internal sealed class MinRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="MinRequest"/> object.
     /// </summary>
@@ -88,35 +86,24 @@ internal class MinRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            // Get first the entity hash code
+            HashCode = hashCode = System.HashCode.Combine(
+                typeof(MinRequest),
+                Name,
+                Field,
+                Where,
+                Hints);
         }
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".Min");
+        return hashCode;
+    }
 
-        // Add the field
-        if (Field != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Field);
-        }
-
-        // Add the where
-        if (Where != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Where);
-        }
-
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is MinRequest;
     }
 
     #endregion

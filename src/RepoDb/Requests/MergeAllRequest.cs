@@ -1,6 +1,6 @@
-﻿using RepoDb.Extensions;
+﻿using System.Data;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System.Data;
 
 namespace RepoDb.Requests;
 
@@ -9,8 +9,6 @@ namespace RepoDb.Requests;
 /// </summary>
 internal class MergeAllRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="MergeAllRequest"/> object.
     /// </summary>
@@ -132,47 +130,43 @@ internal class MergeAllRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
-        }
+            // Get first the entity hash code
+            hashCode = System.HashCode.Combine(
+                typeof(MergeAllRequest),
+                Name,
+                BatchSize,
+                Hints);
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".MergeAll");
-
-        // Get the qualifier <see cref="Field"/> objects
-        if (Fields != null)
-        {
-            foreach (var field in Fields)
+            // Get the qualifier <see cref="Field"/> objects
+            if (Fields != null)
             {
-                hashCode = HashCode.Combine(hashCode, field);
+                foreach (var field in Fields)
+                {
+                    hashCode = System.HashCode.Combine(hashCode, field);
+                }
             }
-        }
 
-        // Get the qualifier <see cref="Field"/> objects
-        if (Qualifiers != null) // Much faster than Qualifiers?.<Methods|Properties>
-        {
-            foreach (var field in Qualifiers)
+            // Get the qualifier <see cref="Field"/> objects
+            if (Qualifiers != null) // Much faster than Qualifiers?.<Methods|Properties>
             {
-                hashCode = HashCode.Combine(hashCode, field);
+                foreach (var field in Qualifiers)
+                {
+                    hashCode = System.HashCode.Combine(hashCode, field);
+                }
             }
+
+            HashCode = hashCode;
         }
 
-        // Get the batch size
-        if (BatchSize > 0)
-        {
-            hashCode = HashCode.Combine(hashCode, BatchSize);
-        }
+        return hashCode;
+    }
 
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is MergeAllRequest;
     }
 
     #endregion

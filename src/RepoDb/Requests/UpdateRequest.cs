@@ -1,16 +1,14 @@
-﻿using RepoDb.Extensions;
+﻿using System.Data;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System.Data;
 
 namespace RepoDb.Requests;
 
 /// <summary>
 /// A class that holds the value of the 'Update' operation arguments.
 /// </summary>
-internal class UpdateRequest : BaseRequest
+internal sealed class UpdateRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="UpdateRequest"/> object.
     /// </summary>
@@ -74,7 +72,7 @@ internal class UpdateRequest : BaseRequest
     /// <summary>
     /// Gets the target fields.
     /// </summary>
-    public IEnumerable<Field> Fields { get; set; }
+    public IEnumerable<Field> Fields { get; init; }
 
     /// <summary>
     /// Gets the hints for the table.
@@ -89,38 +87,23 @@ internal class UpdateRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            HashCode = hashCode = System.HashCode.Combine(
+                typeof(UpdateRequest),
+                Name,
+                Where,
+                Fields,
+                Hints);
         }
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".Update");
+        return hashCode;
+    }
 
-        // Get the properties hash codes
-        if (Where != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Where);
-        }
-
-        // Get the qualifier <see cref="Field"/> objects
-        if (Fields != null)
-        {
-            foreach (var field in Fields)
-            {
-                hashCode = HashCode.Combine(hashCode, field);
-            }
-        }
-
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is UpdateRequest;
     }
 
     #endregion

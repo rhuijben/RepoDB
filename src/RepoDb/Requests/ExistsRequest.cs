@@ -6,10 +6,8 @@ namespace RepoDb.Requests;
 /// <summary>
 /// A class that holds the value of the 'Exists' operation arguments.
 /// </summary>
-internal class ExistsRequest : BaseRequest
+internal sealed class ExistsRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="ExistsRequest"/> object.
     /// </summary>
@@ -77,29 +75,22 @@ internal class ExistsRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            HashCode = hashCode = System.HashCode.Combine(
+                typeof(ExistsRequest),
+                Name,
+                Where,
+                Hints);
         }
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".Exists");
+        return hashCode;
+    }
 
-        // Get the properties hash codes
-        if (Where != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Where);
-        }
-
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is ExistsRequest;
     }
 
     #endregion

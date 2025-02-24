@@ -1,16 +1,14 @@
-﻿using RepoDb.Extensions;
+﻿using System.Data;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System.Data;
 
 namespace RepoDb.Requests;
 
 /// <summary>
 /// A class that holds the value of the 'BatchQuery' operation arguments.
 /// </summary>
-internal class SkipQueryRequest : BaseRequest
+internal sealed class SkipQueryRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="BatchQueryRequest"/> object.
     /// </summary>
@@ -87,7 +85,7 @@ internal class SkipQueryRequest : BaseRequest
     /// <summary>
     /// Gets the target fields.
     /// </summary>
-    public IEnumerable<Field> Fields { get; set; }
+    public IEnumerable<Field> Fields { get; init; }
 
     /// <summary>
     /// Gets the query expression used.
@@ -122,53 +120,45 @@ internal class SkipQueryRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
-        }
+            // Get first the entity hash code
+            hashCode = System.HashCode.Combine(
+                typeof(SkipQueryRequest),
+                Name,
+                Where,
+                Skip,
+                RowsPerBatch,
+                Hints);
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".BatchQuery");
-
-        // Add the fields
-        if (Fields != null)
-        {
-            foreach (var field in Fields)
+            // Add the fields
+            if (Fields != null)
             {
-                hashCode = HashCode.Combine(hashCode, field);
+                foreach (var field in Fields)
+                {
+                    hashCode = System.HashCode.Combine(hashCode, field);
+                }
             }
-        }
 
-        // Add the expression
-        if (Where != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Where);
-        }
-
-        // Add the order fields
-        if (OrderBy != null)
-        {
-            foreach (var orderField in OrderBy)
+            // Add the order fields
+            if (OrderBy != null)
             {
-                hashCode = HashCode.Combine(hashCode, orderField);
+                foreach (var orderField in OrderBy)
+                {
+                    hashCode = System.HashCode.Combine(hashCode, orderField);
+                }
             }
+
+            HashCode = hashCode;
         }
 
-        // Add the page
-        hashCode = HashCode.Combine(hashCode, Skip);
+        return hashCode;
+    }
 
-        // Add the rows per batch
-        hashCode = HashCode.Combine(hashCode, RowsPerBatch);
-
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is SkipQueryRequest;
     }
 
     #endregion

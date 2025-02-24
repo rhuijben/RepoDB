@@ -6,10 +6,8 @@ namespace RepoDb.Requests;
 /// <summary>
 /// A class that holds the value of the 'DeleteAll' operation arguments.
 /// </summary>
-internal class DeleteAllRequest : BaseRequest
+internal sealed class DeleteAllRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="DeleteAllRequest"/> object.
     /// </summary>
@@ -66,23 +64,21 @@ internal class DeleteAllRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            HashCode = hashCode = System.HashCode.Combine(
+                typeof(DeleteAllRequest),
+                Name,
+                Hints);
         }
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".DeleteAll");
+        return hashCode;
+    }
 
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is DeleteAllRequest;
     }
 
     #endregion

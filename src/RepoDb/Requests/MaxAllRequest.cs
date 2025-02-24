@@ -6,10 +6,8 @@ namespace RepoDb.Requests;
 /// <summary>
 /// A class that holds the value of the 'MaxAll' operation arguments.
 /// </summary>
-internal class MaxAllRequest : BaseRequest
+internal sealed class MaxAllRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="MaxAllRequest"/> object.
     /// </summary>
@@ -77,29 +75,22 @@ internal class MaxAllRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            // Get first the entity hash code
+            HashCode = hashCode = System.HashCode.Combine(
+                typeof(MaxAllRequest),
+                Name,
+                Field,
+                Hints);
         }
+        return hashCode;
+    }
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".MaxAll");
-
-        // Add the field
-        if (Field != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Field);
-        }
-
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is MaxAllRequest;
     }
 
     #endregion

@@ -1,15 +1,13 @@
-﻿using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Requests;
 
 /// <summary>
 /// A class that holds the value of the 'SumAll' operation arguments.
 /// </summary>
-internal class SumAllRequest : BaseRequest
+internal sealed class SumAllRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="SumAllRequest"/> object.
     /// </summary>
@@ -77,29 +75,23 @@ internal class SumAllRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
+            // Get first the entity hash code
+            hashCode = System.HashCode.Combine(
+                typeof(SumAllRequest),
+                Name,
+                Field,
+                Hints);
         }
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".SumAll");
+        return this.HashCode ??= hashCode;
+    }
 
-        // Add the field
-        if (Field != null)
-        {
-            hashCode = HashCode.Combine(hashCode, Field);
-        }
-
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is SumAllRequest;
     }
 
     #endregion

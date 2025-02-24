@@ -1,16 +1,14 @@
-﻿using RepoDb.Extensions;
+﻿using System.Data;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System.Data;
 
 namespace RepoDb.Requests;
 
 /// <summary>
 /// A class that holds the value of the 'UpdateAll' operation arguments.
 /// </summary>
-internal class UpdateAllRequest : BaseRequest
+internal sealed class UpdateAllRequest : BaseRequest
 {
-    private int? hashCode = null;
-
     /// <summary>
     /// Creates a new instance of <see cref="UpdateAllRequest"/> object.
     /// </summary>
@@ -75,17 +73,17 @@ internal class UpdateAllRequest : BaseRequest
     /// <summary>
     /// Gets the target fields.
     /// </summary>
-    public IEnumerable<Field> Fields { get; set; }
+    public IEnumerable<Field> Fields { get; init; }
 
     /// <summary>
     /// Gets the qualifiers fields.
     /// </summary>
-    public IEnumerable<Field> Qualifiers { get; set; }
+    public IEnumerable<Field> Qualifiers { get; init; }
 
     /// <summary>
     /// Gets the size batch of the update operation.
     /// </summary>
-    public int BatchSize { get; set; }
+    public int BatchSize { get; init; }
 
     /// <summary>
     /// Gets the hints for the table.
@@ -100,47 +98,43 @@ internal class UpdateAllRequest : BaseRequest
     /// <returns>The hashcode value.</returns>
     public override int GetHashCode()
     {
-        // Make sure to return if it is already provided
-        if (this.hashCode != null)
+        if (this.HashCode is not { } hashCode)
         {
-            return this.hashCode.Value;
-        }
+            // Get first the entity hash code
+            hashCode = System.HashCode.Combine(
+                typeof(UpdateAllRequest),
+                Name,
+                BatchSize,
+                Hints);
 
-        // Get first the entity hash code
-        var hashCode = HashCode.Combine(base.GetHashCode(), Name, ".UpdateAll");
-
-        // Get the fields
-        if (Fields != null)
-        {
-            foreach (var field in Fields)
+            // Get the fields
+            if (Fields != null)
             {
-                hashCode = HashCode.Combine(hashCode, field);
+                foreach (var field in Fields)
+                {
+                    hashCode = System.HashCode.Combine(hashCode, field);
+                }
             }
-        }
 
-        // Get the qualifier <see cref="Field"/> objects
-        if (Fields != null)
-        {
-            foreach (var field in Qualifiers)
+            // Get the qualifier <see cref="Field"/> objects
+            if (Fields != null)
             {
-                hashCode = HashCode.Combine(hashCode, field);
+                foreach (var field in Qualifiers)
+                {
+                    hashCode = System.HashCode.Combine(hashCode, field);
+                }
             }
+
+            HashCode = hashCode;
         }
 
-        // Get the batch size
-        if (BatchSize > 0)
-        {
-            hashCode = HashCode.Combine(hashCode, BatchSize);
-        }
+        return hashCode;
+    }
 
-        // Add the hints
-        if (!string.IsNullOrWhiteSpace(Hints))
-        {
-            hashCode = HashCode.Combine(hashCode, Hints);
-        }
-
-        // Set and return the hashcode
-        return this.hashCode ??= hashCode;
+    protected override bool StrictEquals(BaseRequest other)
+    {
+        // TODO: Implement Equals() and use from here.
+        return other is UpdateAllRequest;
     }
 
     #endregion

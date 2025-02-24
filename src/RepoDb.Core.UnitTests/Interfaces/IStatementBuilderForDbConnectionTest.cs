@@ -362,7 +362,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<int>(),
                 It.IsAny<IEnumerable<OrderField>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<string>()), Times.Exactly(0));
+                It.IsAny<string>()), Times.Exactly(1));
     }
 
     #endregion
@@ -3642,7 +3642,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<int>(),
                 It.IsAny<IEnumerable<OrderField>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<string>()), Times.Exactly(0));
+                It.IsAny<string>()), Times.Exactly(1));
     }
 
     #endregion
@@ -4056,8 +4056,8 @@ public class IStatementBuilderForDbConnectionTest
         var statementBuilderNever = new Mock<IStatementBuilder>();
 
         // Act
-       await connection.DeleteAllAsync(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
-            statementBuilder: statementBuilderNever.Object);
+        await connection.DeleteAllAsync(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
+             statementBuilder: statementBuilderNever.Object);
 
         // Assert
         statementBuilderNever.Verify(builder =>
@@ -6588,7 +6588,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         UpdateAllExecutionContextCache.Flush();
         CommandTextCache.Flush();
-        await  connection.UpdateAllAsync<StatementBuilderEntityForCrossCall>(
+        await connection.UpdateAllAsync<StatementBuilderEntityForCrossCall>(
             new[]
             {
                 new StatementBuilderEntityForCrossCall { Name = "Name1" },
