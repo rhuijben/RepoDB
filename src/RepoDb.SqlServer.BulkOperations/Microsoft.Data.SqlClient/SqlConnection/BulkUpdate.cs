@@ -170,6 +170,9 @@ public static partial class SqlConnectionExtension
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
     {
+        if (reader is null)
+            throw new ArgumentNullException(nameof(reader));
+
         return BulkUpdateInternal(connection: connection,
             tableName: tableName,
             reader: reader,
@@ -255,6 +258,9 @@ public static partial class SqlConnectionExtension
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
     {
+        if (dataTable is null)
+            throw new ArgumentNullException(nameof(dataTable));
+
         return BulkUpdateInternal(connection: connection,
             tableName: tableName,
             dataTable: dataTable,
