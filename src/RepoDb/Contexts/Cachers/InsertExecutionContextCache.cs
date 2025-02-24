@@ -8,7 +8,7 @@ namespace RepoDb.Contexts.Cachers;
 /// </summary>
 internal static class InsertExecutionContextCache
 {
-    private static ConcurrentDictionary<string, InsertExecutionContext> cache = new();
+    private static readonly ConcurrentDictionary<string, InsertExecutionContext> cache = new();
 
     /// <summary>
     /// Flushes all the cached execution context.

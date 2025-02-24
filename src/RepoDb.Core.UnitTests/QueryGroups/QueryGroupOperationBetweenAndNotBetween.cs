@@ -7,7 +7,7 @@ namespace RepoDb.UnitTests;
 
 public partial class QueryGroupTest
 {
-    private IDbSetting m_dbSetting = new CustomDbSetting();
+    private readonly IDbSetting m_dbSetting = new CustomDbSetting();
 
     #region Between
 

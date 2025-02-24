@@ -14,13 +14,13 @@ public class DataEntityDataReader<TEntity> : DbDataReader
 {
     #region Fields
 
-    private string? tableName = null;
-    private int fieldCount = 0;
+    private readonly string? tableName = null;
+    private readonly int fieldCount = 0;
     private bool isClosed = false;
     private bool isDisposed = false;
     private int position = -1;
     private int recordsAffected = -1;
-    private bool isDictionaryStringObject = false;
+    private readonly bool isDictionaryStringObject = false;
 
     #endregion
 

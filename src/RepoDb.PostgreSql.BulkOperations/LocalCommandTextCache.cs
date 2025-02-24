@@ -7,7 +7,7 @@ namespace RepoDb.PostgreSql.BulkOperations;
 /// </summary>
 internal static class LocalCommandTextCache
 {
-    private static ConcurrentDictionary<int, string> cache = new();
+    private static readonly ConcurrentDictionary<int, string> cache = new();
 
     /// <summary>
     /// 

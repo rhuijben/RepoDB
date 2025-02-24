@@ -8,7 +8,7 @@ namespace RepoDb.UnitTests;
 [TestClass]
 public class QuotationTest
 {
-    private IDbSetting m_dbSetting = new CustomDbSetting();
+    private readonly IDbSetting m_dbSetting = new CustomDbSetting();
 
     #region AsQuoted
 

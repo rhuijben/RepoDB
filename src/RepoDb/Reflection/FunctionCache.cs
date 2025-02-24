@@ -58,7 +58,7 @@ internal static class FunctionCache
     /// <typeparam name="TResult"></typeparam>
     private static class DataReaderToTypeCache<TResult>
     {
-        private static ConcurrentDictionary<long, Func<DbDataReader, TResult>> cache = new();
+        private static readonly ConcurrentDictionary<long, Func<DbDataReader, TResult>> cache = new();
 
         /// <summary>
         /// 
@@ -109,7 +109,7 @@ internal static class FunctionCache
     /// </summary>
     private static class DataReaderToExpandoObjectCache
     {
-        private static ConcurrentDictionary<long, Func<DbDataReader, dynamic>> cache = new();
+        private static readonly ConcurrentDictionary<long, Func<DbDataReader, dynamic>> cache = new();
 
         /// <summary>
         /// 
@@ -172,7 +172,7 @@ internal static class FunctionCache
     /// </summary>
     private static class DataEntityDbParameterSetterCache
     {
-        private static ConcurrentDictionary<long, Action<DbCommand, object>> cache = new();
+        private static readonly ConcurrentDictionary<long, Action<DbCommand, object>> cache = new();
 
         /// <summary>
         /// 
@@ -265,7 +265,7 @@ internal static class FunctionCache
     /// </summary>
     private static class DataEntityListDbParameterSetterCache
     {
-        private static ConcurrentDictionary<long, Action<DbCommand, IList<object>>> cache = new();
+        private static readonly ConcurrentDictionary<long, Action<DbCommand, IList<object>>> cache = new();
 
         /// <summary>
         /// 
@@ -369,7 +369,7 @@ internal static class FunctionCache
     private static class DbCommandToPropertyCache<TEntity>
         where TEntity : class
     {
-        private static ConcurrentDictionary<long, Action<TEntity, DbCommand>> cache = new();
+        private static readonly ConcurrentDictionary<long, Action<TEntity, DbCommand>> cache = new();
 
         /// <summary>
         /// 
@@ -412,7 +412,7 @@ internal static class FunctionCache
     /// </summary>
     private static class DataEntityPropertySetterCache
     {
-        private static ConcurrentDictionary<long, Action<object, object>> cache = new();
+        private static readonly ConcurrentDictionary<long, Action<object, object>> cache = new();
 
         /// <summary>
         /// 
@@ -457,7 +457,7 @@ internal static class FunctionCache
     /// </summary>
     private static class PlainTypeToDbParametersCompiledFunctionCache
     {
-        private static ConcurrentDictionary<long, Action<DbCommand, object>> cache = new();
+        private static readonly ConcurrentDictionary<long, Action<DbCommand, object>> cache = new();
 
         /// <summary>
         /// 

@@ -87,7 +87,7 @@ public static partial class ClassExpression
     private static class GetPropertyValuesCache<TEntity, TResult>
         where TEntity : class
     {
-        private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
+        private static readonly ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
         /// <summary>
         ///

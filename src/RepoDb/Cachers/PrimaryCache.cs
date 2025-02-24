@@ -11,7 +11,7 @@ namespace RepoDb;
 public static class PrimaryCache
 {
     private static readonly ConcurrentDictionary<int, ClassProperty> cache = new();
-    private static IResolver<Type, ClassProperty> resolver = new PrimaryResolver();
+    private static readonly IResolver<Type, ClassProperty> resolver = new PrimaryResolver();
 
     #region Methods
 

@@ -8,7 +8,7 @@ namespace RepoDb.UnitTests;
 [TestClass]
 public class QueryGroupNullableEnumTests
 {
-    private IDbSetting _dbSetting = new CustomDbSetting();
+    private readonly IDbSetting _dbSetting = new CustomDbSetting();
 
     public enum Direction
     {

@@ -1,11 +1,11 @@
+using System.Data;
+using System.Data.Common;
+using System.Diagnostics;
 using Npgsql;
 using NpgsqlTypes;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System.Data;
-using System.Data.Common;
-using System.Diagnostics;
 
 namespace RepoDb.DbHelpers;
 
@@ -14,7 +14,7 @@ namespace RepoDb.DbHelpers;
 /// </summary>
 public sealed class PostgreSqlDbHelper : IDbHelper
 {
-    private IDbSetting m_dbSetting = DbSettingMapper.Get<NpgsqlConnection>();
+    private readonly IDbSetting m_dbSetting = DbSettingMapper.Get<NpgsqlConnection>();
 
     /// <summary>
     /// Creates a new instance of <see cref="PostgreSqlDbHelper"/> class.
@@ -325,9 +325,9 @@ public sealed class PostgreSqlDbHelper : IDbHelper
         }
     }
 
-#endregion
+    #endregion
 
-#endregion
+    #endregion
 
-#endregion
+    #endregion
 }

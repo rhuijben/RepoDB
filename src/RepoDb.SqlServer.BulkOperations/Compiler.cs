@@ -30,7 +30,7 @@ internal static class Compiler
     private static class MethodFuncCache<TEntity, TResult>
         where TEntity : class
     {
-        private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
+        private static readonly ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
         /// <summary>
         ///
@@ -81,7 +81,7 @@ internal static class Compiler
     private static class VoidMethodFuncCache<TEntity>
         where TEntity : class
     {
-        private static ConcurrentDictionary<int, Action<TEntity>> cache = new();
+        private static readonly ConcurrentDictionary<int, Action<TEntity>> cache = new();
 
         /// <summary>
         ///
@@ -136,7 +136,7 @@ internal static class Compiler
     private static class ParameterizedMethodFuncCache<TEntity, TResult>
         where TEntity : class
     {
-        private static ConcurrentDictionary<int, Func<TEntity, object[], TResult>> cache = new();
+        private static readonly ConcurrentDictionary<int, Func<TEntity, object[], TResult>> cache = new();
 
         /// <summary>
         ///
@@ -200,7 +200,7 @@ internal static class Compiler
     private static class ParameterizedVoidMethodFuncCache<TEntity>
         where TEntity : class
     {
-        private static ConcurrentDictionary<int, Action<TEntity, object[]>> cache = new();
+        private static readonly ConcurrentDictionary<int, Action<TEntity, object[]>> cache = new();
 
         /// <summary>
         ///
@@ -264,7 +264,7 @@ internal static class Compiler
     private static class PropertyGetterFuncCache<TEntity, TResult>
         where TEntity : class
     {
-        private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
+        private static readonly ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
         /// <summary>
         ///
@@ -310,7 +310,7 @@ internal static class Compiler
     private static class PropertySetterFuncCache<TEntity>
         where TEntity : class
     {
-        private static ConcurrentDictionary<int, Action<TEntity, object>> cache = new();
+        private static readonly ConcurrentDictionary<int, Action<TEntity, object>> cache = new();
 
         /// <summary>
         ///
@@ -367,7 +367,7 @@ internal static class Compiler
     private static class FieldGetterFuncCache<TEntity, TResult>
         where TEntity : class
     {
-        private static ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
+        private static readonly ConcurrentDictionary<int, Func<TEntity, TResult>> cache = new();
 
         /// <summary>
         ///
@@ -420,7 +420,7 @@ internal static class Compiler
     private static class EnumFuncCache<TEnum>
         where TEnum : Enum
     {
-        private static ConcurrentDictionary<int, Func<TEnum>> cache = new();
+        private static readonly ConcurrentDictionary<int, Func<TEnum>> cache = new();
 
         /// <summary>
         ///

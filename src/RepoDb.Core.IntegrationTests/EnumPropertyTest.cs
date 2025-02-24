@@ -2273,7 +2273,7 @@ public class EnumPropertyTest
 
 
     public enum CustomedStringEnum { A, B }
-    private CustomedMappingEnumPropertyHandler<string, CustomedStringEnum?> customedStringEnumHandler =
+    private readonly CustomedMappingEnumPropertyHandler<string, CustomedStringEnum?> customedStringEnumHandler =
         CreateCustomedMappingEnumPropertyHandler(new Dictionary<CustomedStringEnum?, string>
         {
             [CustomedStringEnum.A] = "Special-A",
@@ -2281,7 +2281,7 @@ public class EnumPropertyTest
         });
 
     public enum CustomedDecimalEnum { A, B }
-    private CustomedMappingEnumPropertyHandler<decimal?, CustomedDecimalEnum?> customedDecimalEnumHandler =
+    private readonly CustomedMappingEnumPropertyHandler<decimal?, CustomedDecimalEnum?> customedDecimalEnumHandler =
         CreateCustomedMappingEnumPropertyHandler(new Dictionary<CustomedDecimalEnum?, decimal?>
         {
             [CustomedDecimalEnum.A] = 5.1m,
@@ -2289,7 +2289,7 @@ public class EnumPropertyTest
         });
 
     public enum CustomedFloatEnum { A, B }
-    private CustomedMappingEnumPropertyHandler<float?, CustomedFloatEnum?> customedFloatEnumHandler =
+    private readonly CustomedMappingEnumPropertyHandler<float?, CustomedFloatEnum?> customedFloatEnumHandler =
         CreateCustomedMappingEnumPropertyHandler(new Dictionary<CustomedFloatEnum?, float?>
         {
             [CustomedFloatEnum.A] = 3.1f,
