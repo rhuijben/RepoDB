@@ -1,9 +1,10 @@
-﻿using RepoDb.Contexts.Cachers;
+﻿using System.Data;
+using System.Globalization;
+using RepoDb.Contexts.Cachers;
 using RepoDb.Contexts.Execution;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Requests;
-using System.Data;
 
 namespace RepoDb.Contexts.Providers;
 
@@ -35,7 +36,7 @@ internal static class UpdateExecutionContextProvider
             ";",
             hints,
             ";",
-            where?.GetHashCode().ToString());
+            where?.GetHashCode().ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>

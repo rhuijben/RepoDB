@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Globalization;
+using System.Linq.Expressions;
 using System.Reflection;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
@@ -62,7 +63,7 @@ public class Field : IEquatable<Field>
     /// </summary>
     /// <returns>The string value equivalent to the name of the field.</returns>
     public override string ToString() =>
-        string.Concat(Name, ", ", Type?.FullName, " (", HashCode.ToString(), ")");
+        string.Concat(Name, ", ", Type?.FullName, " (", HashCode.ToString(CultureInfo.InvariantCulture), ")");
 
 
     #endregion

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq.Expressions;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
@@ -3596,7 +3597,7 @@ public static partial class DbConnectionExtension
 
         // Get the variables needed
         var parameters = items.Select((_, index) =>
-            string.Concat(parameterName, index.ToString()).AsParameter(dbSetting));
+            string.Concat(parameterName, index.ToString(CultureInfo.InvariantCulture)).AsParameter(dbSetting));
 
         // Replace the target parameter
         return commandText.Replace(parameterName.AsParameter(dbSetting), parameters.Join(", "));

@@ -1,4 +1,5 @@
-﻿using RepoDb.Interfaces;
+﻿using System.Globalization;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Extensions;
 
@@ -110,9 +111,9 @@ public static class QueryFieldExtension
         string.IsNullOrWhiteSpace(functionFormat) ?
             string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Left AND ", queryField.Parameter.Name.AsParameter(index, dbSetting), "_Right") :
             string.Concat(
-                string.Format(functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Left")),
+                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Left")),
                 " AND ",
-                string.Format(functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Right")));
+                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Right")));
 
     /// <summary>
     /// 
@@ -144,8 +145,8 @@ public static class QueryFieldExtension
             .OfType<object>()
             .Select((_, valueIndex) =>
                 string.IsNullOrWhiteSpace(functionFormat) ?
-                    string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_In_", valueIndex.ToString()) :
-                    string.Format(functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_In_", valueIndex.ToString())))
+                    string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_In_", valueIndex.ToString(CultureInfo.InvariantCulture)) :
+                    string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_In_", valueIndex.ToString(CultureInfo.InvariantCulture))))
             .Join(", ");
         return string.Concat("(", values, ")");
     }

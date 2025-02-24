@@ -1,4 +1,5 @@
 ﻿using System.Data.Common;
+using System.Globalization;
 using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -44,7 +45,7 @@ partial class Compiler
         var name = parameterName ?? propertyName;
         var parameters = Expression.Property(dbCommandParameterExpression, dbCommandParametersProperty);
         var parameter = Expression.Call(parameters, dbParameterCollectionIndexerMethod,
-            Expression.Constant(index > 0 ? string.Concat(name, "_", index.ToString()) : name));
+            Expression.Constant(index > 0 ? string.Concat(name, "_", index.ToString(CultureInfo.InvariantCulture)) : name));
 
         // Assign the Parameter.Value into DataEntity.Property
         var value = Expression.Property(parameter, dbParameterValueProperty);

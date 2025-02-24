@@ -2010,7 +2010,7 @@ internal sealed partial class Compiler
         IDbSetting dbSetting)
     {
         var parameterName = dbField.Name.AsUnquoted(true, dbSetting).AsAlphaNumeric();
-        parameterName = entityIndex > 0 ? string.Concat(dbSetting.ParameterPrefix, parameterName, "_", entityIndex.ToString()) :
+        parameterName = entityIndex > 0 ? string.Concat(dbSetting.ParameterPrefix, parameterName, "_", entityIndex.ToString(CultureInfo.InvariantCulture)) :
             string.Concat(dbSetting.ParameterPrefix, parameterName);
         return GetDbParameterNameAssignmentExpression(dbParameterExpression, parameterName);
     }

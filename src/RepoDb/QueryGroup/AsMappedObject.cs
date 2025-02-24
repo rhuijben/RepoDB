@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using System.Dynamic;
+using System.Globalization;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
-using System.Dynamic;
 
 namespace RepoDb;
 
@@ -146,7 +147,7 @@ public partial class QueryGroup
 
         for (var i = 0; i < values.Count; i++)
         {
-            var parameterName = string.Concat(queryField.Parameter.Name, "_In_", i.ToString());
+            var parameterName = string.Concat(queryField.Parameter.Name, "_In_", i.ToString(CultureInfo.InvariantCulture));
             if (dictionary.ContainsKey(parameterName))
             {
                 continue;

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
@@ -655,7 +656,7 @@ public class QueryBuilder
         if (rows > 0)
         {
             return Append("TOP (")
-                .Append(rows.ToString(), false)
+                .Append(rows?.ToString(CultureInfo.InvariantCulture), false)
                 .Append(')');
         }
 
@@ -678,7 +679,7 @@ public class QueryBuilder
         if (take > 0)
         {
             return Append("LIMIT")
-                .Append(take.ToString());
+                .Append(take.ToString(CultureInfo.InvariantCulture));
         }
 
         return Append("LIMIT");
@@ -695,13 +696,13 @@ public class QueryBuilder
         if (skip > 0)
         {
             return Append("LIMIT")
-                .Append(skip.ToString())
+                .Append(skip?.ToString(CultureInfo.InvariantCulture))
                 .Append(',')
-                .Append(take.ToString());
+                .Append(take?.ToString(CultureInfo.InvariantCulture));
         }
 
         return Append("LIMIT")
-            .Append(take.ToString());
+            .Append(take?.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -715,14 +716,14 @@ public class QueryBuilder
         if (skip > 0)
         {
             return Append("LIMIT")
-                .Append(take.ToString())
+                .Append(take?.ToString(CultureInfo.InvariantCulture))
                 .Append("OFFSET")
-                .Append(skip.ToString());
+                .Append(skip?.ToString(CultureInfo.InvariantCulture));
         }
         else
         {
             return Append("LIMIT")
-                .Append(take.ToString());
+                .Append(take?.ToString(CultureInfo.InvariantCulture));
         }
     }
 
@@ -742,7 +743,7 @@ public class QueryBuilder
         if (skip > 0)
         {
             return Append("OFFSET")
-                .Append(skip.ToString());
+                .Append(skip?.ToString(CultureInfo.InvariantCulture));
         }
 
         return Append("OFFSET");

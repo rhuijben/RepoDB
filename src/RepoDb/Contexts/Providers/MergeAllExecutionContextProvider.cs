@@ -1,10 +1,11 @@
-﻿using RepoDb.Contexts.Cachers;
+﻿using System.Data;
+using System.Data.Common;
+using System.Globalization;
+using RepoDb.Contexts.Cachers;
 using RepoDb.Contexts.Execution;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Requests;
-using System.Data;
-using System.Data.Common;
 
 namespace RepoDb.Contexts.Providers;
 
@@ -38,7 +39,7 @@ internal static class MergeAllExecutionContextProvider
             ";",
             fields?.Select(f => f.Name).Join(","),
             ";",
-            batchSize.ToString(),
+            batchSize.ToString(CultureInfo.InvariantCulture),
             ";",
             hints);
     }
@@ -263,7 +264,7 @@ internal static class MergeAllExecutionContextProvider
         Action<object, object> keyPropertySetterFunc = null;
         var keyField = ExecutionContextProvider
             .GetTargetReturnColumnAsField(entityType, dbFields);
-        
+
         if (keyField != null)
         {
             keyPropertySetterFunc = FunctionCache

@@ -1,4 +1,5 @@
 using System.Data;
+using System.Globalization;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -548,7 +549,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
             {
                 foreach (var field in fields)
                 {
-                    field.Parameter.SetName(string.Format("T{0}_{1}", i, field.Parameter.Name));
+                    field.Parameter.SetName(string.Format(CultureInfo.InvariantCulture, "T{0}_{1}", i, field.Parameter.Name));
                 }
             }
         }
@@ -622,7 +623,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
                 if (firstQueryField.Field.Equals(secondQueryField.Field))
                 {
                     var fieldValue = secondQueryField.Parameter;
-                    fieldValue.SetName(string.Concat(secondQueryField.Parameter.Name, "_", fieldIndex.ToString()));
+                    fieldValue.SetName(string.Concat(secondQueryField.Parameter.Name, "_", fieldIndex.ToString(CultureInfo.InvariantCulture)));
                 }
             }
             secondList.RemoveAll(qf => qf.Field.Equals(firstQueryField.Field));

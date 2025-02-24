@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using RepoDb.Interfaces;
 
 namespace RepoDb.Extensions;
@@ -306,7 +307,7 @@ public static class StringExtension
         string functionFormat,
         IDbSetting dbSetting) =>
         string.IsNullOrWhiteSpace(functionFormat) ? value.AsQuoted(true, true, dbSetting) :
-            string.Format(functionFormat, value.AsQuoted(true, true, dbSetting));
+            string.Format(CultureInfo.InvariantCulture, functionFormat, value.AsQuoted(true, true, dbSetting));
 
     /// <summary>
     /// Returns the string as a parameter name in the database.
@@ -342,7 +343,7 @@ public static class StringExtension
         value = string.Concat(parameterPrefix,
             (value.StartsWith(parameterPrefix, StringComparison.OrdinalIgnoreCase) ? value.Substring(1) : value)
             .AsUnquoted(true, dbSetting).AsAlphaNumeric());
-        value = index > 0 ? string.Concat(value, "_", index.ToString()) : value;
+        value = index > 0 ? string.Concat(value, "_", index.ToString(CultureInfo.InvariantCulture)) : value;
 
         return value;
     }

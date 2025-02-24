@@ -1,4 +1,6 @@
-﻿namespace RepoDb.Extensions;
+﻿using System.Globalization;
+
+namespace RepoDb.Extensions;
 
 /// <summary>
 /// Contains the extension methods for <see cref="Object"/>.
@@ -11,7 +13,7 @@ internal static class ObjectExtension
     /// <param name="value">The value to be converted.</param>
     /// <returns>A <see cref="long"/> value of the object.</returns>
     internal static long ToNumber(this object value) =>
-        Convert.ToInt64(value);
+        Convert.ToInt64(value, CultureInfo.InvariantCulture);
 
     /// <summary>
     /// 

@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Globalization;
+using System.Linq.Expressions;
 using System.Reflection;
 using RepoDb.Exceptions;
 
@@ -358,7 +359,7 @@ public static class ExpressionExtension
                 }
 #endif
 
-                return Convert.ChangeType(value, toType);
+                return Convert.ChangeType(value, toType, CultureInfo.InvariantCulture);
             default:
                 throw new NotSupportedException($"Expression '{expression}' is currently not supported.");
         }

@@ -1,4 +1,6 @@
-﻿namespace RepoDb;
+﻿using System.Globalization;
+
+namespace RepoDb;
 
 /// <summary>
 /// A generalized converter class.
@@ -41,7 +43,7 @@ public static class Converter
         }
         return value == null || DbNullToNull(value) == null ?
             default :
-                (T)Convert.ChangeType(value, typeof(T));
+                (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
     }
 
     /// <summary>
