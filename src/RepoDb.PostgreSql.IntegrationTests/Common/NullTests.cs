@@ -19,6 +19,6 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<PostgreSqlDbInstance>
         if (expression.StartsWith("CONCAT("))
             expression = expression.Substring(7).Replace(",", " || ").TrimEnd(')');
 
-        return $"GENERATED ALWAYS AS ({expression}) STORED";
+        return $"{type} GENERATED ALWAYS AS ({expression}) STORED";
     }
 }

@@ -294,17 +294,12 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-#if NET
-        if (sql.GetType().Name is { } name && (name.Contains("Postgres", StringComparison.OrdinalIgnoreCase) || name.Contains("npgsql", StringComparison.OrdinalIgnoreCase)))
-            Assert.Inconclusive("Postgres computed column syntax in test is currently broken");
-#endif
-
         if (!GetAllTables(sql).Any(x => string.Equals(x, "WithComputed", StringComparison.OrdinalIgnoreCase)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithComputed] (
                         [ID] int NOT NULL,
                         [Writable] varchar(128) NOT NULL,
-                        [Computed] {GeneratedColumnDefinition("CONCAT('-', Writable, '-')", "varchar(130)")}
+                        [Computed] {GeneratedColumnDefinition("CONCAT('-', [Writable], '-')", "varchar(130)")}
             )");
         }
 
