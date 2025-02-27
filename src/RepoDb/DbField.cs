@@ -32,6 +32,23 @@ public sealed class DbField : IEquatable<DbField>
         string databaseType,
         bool hasDefaultValue = false,
         string provider = null)
+        : this(name, isPrimary, isIdentity, isNullable, type, size, precision, scale, databaseType, hasDefaultValue, false, provider)
+    {
+
+    }
+
+    public DbField(string name,
+        bool isPrimary,
+        bool isIdentity,
+        bool isNullable,
+        Type type,
+        int? size,
+        byte? precision,
+        byte? scale,
+        string databaseType,
+        bool hasDefaultValue,
+        bool isComputed,
+        string provider)
     {
         // Name is required
         if (string.IsNullOrWhiteSpace(name))
@@ -57,6 +74,7 @@ public sealed class DbField : IEquatable<DbField>
         Scale = scale;
         DatabaseType = databaseType;
         HasDefaultValue = hasDefaultValue;
+        IsComputed = isComputed;
         Provider = provider;
     }
 
@@ -113,6 +131,11 @@ public sealed class DbField : IEquatable<DbField>
     public bool HasDefaultValue { get; }
 
     /// <summary>
+    /// Gets the value that defines whether the column is computed by the database server
+    /// </summary>
+    public bool IsComputed { get; }
+
+    /// <summary>
     /// Gets the database provider who created this instance.
     /// </summary>
     public string Provider { get; }
@@ -157,6 +180,8 @@ public sealed class DbField : IEquatable<DbField>
                 System.HashCode.Combine(
                     Precision,
                     Scale,
+                    HasDefaultValue,
+                    IsComputed,
                     DatabaseType,
                     Provider));
         }
@@ -190,6 +215,8 @@ public sealed class DbField : IEquatable<DbField>
             && other.Size == Size
             && other.Precision == Precision
             && other.Scale == Scale
+            && other.HasDefaultValue == HasDefaultValue
+            && other.IsComputed == IsComputed
             && other.DatabaseType == DatabaseType
             && other.Provider == Provider;
     }

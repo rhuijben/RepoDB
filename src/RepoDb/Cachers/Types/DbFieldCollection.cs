@@ -1,4 +1,5 @@
-﻿using RepoDb.Extensions;
+﻿using System.Collections;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
 namespace RepoDb;
@@ -6,7 +7,7 @@ namespace RepoDb;
 /// <summary>
 /// A class the holds the collection of column definitions of the table.
 /// </summary>
-public sealed class DbFieldCollection
+public sealed class DbFieldCollection : IEnumerable<DbField>
 {
     private readonly IDbSetting dbSetting;
     private readonly IReadOnlyList<DbField> dbFields;
@@ -98,4 +99,14 @@ public sealed class DbFieldCollection
     private DbField GetIdentityDbField() => dbFields.FirstOrDefault(df => df.IsIdentity);
 
     private IEnumerable<Field> GetDbFieldsAsFields() => dbFields.AsFields();
+
+    public IEnumerator<DbField> GetEnumerator()
+    {
+        return dbFields.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)dbFields).GetEnumerator();
+    }
 }

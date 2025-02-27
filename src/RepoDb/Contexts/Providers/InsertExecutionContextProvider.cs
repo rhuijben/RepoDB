@@ -1,9 +1,9 @@
-﻿using RepoDb.Contexts.Cachers;
+﻿using System.Data;
+using RepoDb.Contexts.Cachers;
 using RepoDb.Contexts.Execution;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Requests;
-using System.Data;
 
 namespace RepoDb.Contexts.Providers;
 
@@ -64,6 +64,12 @@ internal static class InsertExecutionContextProvider
 
         // Create
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
+
+        if (dbFields?.Any(x => x.IsComputed) == true)
+        {
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+        }
+
         var request = new InsertRequest(entityType,
             tableName,
             connection,
@@ -119,6 +125,12 @@ internal static class InsertExecutionContextProvider
 
         // Create
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
+
+        if (dbFields?.Any(x => x.IsComputed) == true)
+        {
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+        }
+
         var request = new InsertRequest(tableName,
             connection,
             transaction,

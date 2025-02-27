@@ -36,29 +36,11 @@ public static class Database
         GlobalConfiguration.Setup(new())
             .UseSqlServer();
 
-        // Create databases
-        CreateDatabase();
-
         // Create tables
         CreateTables();
     }
 
     #region Methods
-
-    /// <summary>
-    /// Creates a test database for RepoDb.
-    /// </summary>
-    public static void CreateDatabase()
-    {
-        var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbBulk'))
-                BEGIN
-                    CREATE DATABASE [RepoDbBulk];
-                END";
-        using (var connection = new SqlConnection(ConnectionStringForMaster).EnsureOpen())
-        {
-            connection.ExecuteNonQuery(commandText);
-        }
-    }
 
     /// <summary>
     /// Create the necessary tables for testing.

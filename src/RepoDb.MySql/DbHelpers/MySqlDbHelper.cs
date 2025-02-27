@@ -1,9 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data;
+using System.Data.Common;
+using MySql.Data.MySqlClient;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System.Data;
-using System.Data.Common;
 
 namespace RepoDb.DbHelpers;
 
@@ -57,6 +57,7 @@ public sealed class MySqlDbHelper : IDbHelper
                 , NUMERIC_SCALE AS Scale
                 , DATA_TYPE AS DatabaseType
                 , CASE WHEN COLUMN_DEFAULT IS NOT NULL THEN 1 ELSE 0 END AS HasDefaultValue
+                , CASE WHEN EXTRA LIKE '%VIRTUAL%' OR EXTRA LIKE '%STORED%' THEN 1 ELSE 0 END AS IsComputed
             FROM INFORMATION_SCHEMA.COLUMNS
             WHERE TABLE_SCHEMA = @TableSchema
                 AND TABLE_NAME = @TableName
@@ -111,6 +112,7 @@ public sealed class MySqlDbHelper : IDbHelper
             reader.IsDBNull(7) ? null : byte.Parse(reader.GetInt32(7).ToString()),
             reader.GetString(8),
             reader.GetBoolean(9),
+            reader.GetBoolean(10),
             "MYSQL");
     }
 

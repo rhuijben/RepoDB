@@ -11,4 +11,6 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<SqlServerDbInstance>
     protected override void InitializeCore() => Database.Initialize();
 
     public override DbConnection CreateConnection() => new SqlConnection(Database.ConnectionString);
+
+    public override string GeneratedColumnDefinition(string expression, string type) => $"AS ({expression})";
 }

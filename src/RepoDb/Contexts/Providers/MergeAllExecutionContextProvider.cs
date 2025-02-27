@@ -83,6 +83,11 @@ internal static class MergeAllExecutionContextProvider
             .Get(connection, tableName, transaction);
         string commandText;
 
+        if (dbFields?.Any(x => x.IsComputed) == true)
+        {
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+        }
+
         // Create a different kind of requests
         if (batchSize > 1)
         {
@@ -165,6 +170,11 @@ internal static class MergeAllExecutionContextProvider
         // Create
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         string commandText;
+
+        if (dbFields?.Any(x => x.IsComputed) == true)
+        {
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+        }
 
         // Create a different kind of requests
         if (batchSize > 1)

@@ -26,8 +26,6 @@ public static class Database
     public static void Initialize()
     {
         Instance.ClassInitializeAsync(null).GetAwaiter().GetResult();
-        // Create databases
-        CreateDatabase();
 
         // Create tables
         CreateTables();
@@ -74,19 +72,6 @@ public static class Database
             var tables = Helper.CreateNonIdentityCompleteTables(count);
             connection.InsertAll(tables);
             return tables;
-        }
-    }
-
-    #endregion
-
-    #region CreateDatabases
-
-    private static void CreateDatabase()
-    {
-        using (var connection = new MySqlConnection(ConnectionStringForSys))
-        {
-            connection.ExecuteNonQuery(@"CREATE DATABASE IF NOT EXISTS `RepoDb`;");
-            connection.ExecuteNonQuery(@"GRANT ALL Privileges on RepoDb.* to 'root'@'%';");
         }
     }
 

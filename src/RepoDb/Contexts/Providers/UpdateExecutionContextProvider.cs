@@ -71,6 +71,12 @@ internal static class UpdateExecutionContextProvider
 
         // Create
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
+
+        if (dbFields?.Any(x => x.IsComputed) == true)
+        {
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+        }
+
         var request = new UpdateRequest(tableName,
             connection,
             transaction,
@@ -129,6 +135,12 @@ internal static class UpdateExecutionContextProvider
 
         // Create
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
+
+        if (dbFields?.Any(x => x.IsComputed) == true)
+        {
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+        }
+
         var request = new UpdateRequest(tableName,
             connection,
             transaction,

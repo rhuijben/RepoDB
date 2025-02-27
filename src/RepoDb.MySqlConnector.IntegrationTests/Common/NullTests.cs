@@ -13,4 +13,8 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<MysqlDbInstance>
     public override DbConnection CreateConnection() => new MySqlConnection(Database.ConnectionString);
 
     public override string UuidDbType => "CHAR(38)";
+
+    public override string GeneratedColumnDefinition(string expression, string type) => $"{type} {base.GeneratedColumnDefinition(expression, type)} STORED";
+
+    protected override string SchemaDatabaseColumnName => "Schema";
 }

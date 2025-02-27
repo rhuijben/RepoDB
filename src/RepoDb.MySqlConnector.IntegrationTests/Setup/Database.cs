@@ -29,9 +29,6 @@ public static class Database
         // Initialize MySql
         GlobalConfiguration.Setup(new()).UseMySqlConnector();
 
-        // Create databases
-        CreateDatabase();
-
         // Create tables
         CreateTables();
     }
@@ -70,19 +67,6 @@ public static class Database
             var tables = Helper.CreateNonIdentityCompleteTables(count);
             connection.InsertAll(tables);
             return tables;
-        }
-    }
-
-    #endregion
-
-    #region CreateDatabases
-
-    private static void CreateDatabase()
-    {
-        using (var connection = new MySqlConnection(ConnectionStringForSys))
-        {
-            connection.ExecuteNonQuery(@"CREATE DATABASE IF NOT EXISTS `RepoDbTest`;");
-            connection.ExecuteNonQuery(@"GRANT ALL Privileges on RepoDbTest.* to 'root'@'%';");
         }
     }
 

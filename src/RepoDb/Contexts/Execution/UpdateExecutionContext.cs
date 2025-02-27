@@ -10,15 +10,15 @@ internal class UpdateExecutionContext
     /// <summary>
     /// The execution command text.
     /// </summary>
-    public string CommandText { get; set; }
+    public string CommandText { get; init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<DbField> InputFields { get; set; }
+    public IEnumerable<DbField> InputFields { get; init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Action<DbCommand, object> ParametersSetterFunc { get; set; }
+    public Action<DbCommand, object> ParametersSetterFunc { get; init; }
 }

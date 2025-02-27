@@ -28,9 +28,6 @@ public static class Database
 
         GlobalConfiguration.Setup(new()).UsePostgreSql();
 
-        // Create databases
-        CreateDatabase();
-
         // Create tables
         CreateTables();
     }
@@ -42,25 +39,6 @@ public static class Database
             connection.Truncate<CompleteTable>();
             connection.Truncate<NonIdentityCompleteTable>();
             connection.Truncate<EnumTable>();
-        }
-    }
-
-    #endregion
-
-    #region CreateDatabases
-
-    private static void CreateDatabase()
-    {
-        using (var connection = new NpgsqlConnection(ConnectionStringForPostgres))
-        {
-            var recordCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDb';");
-            if (recordCount <= 0)
-            {
-                connection.ExecuteNonQuery(@"CREATE DATABASE ""RepoDb""
-                        WITH OWNER = ""postgres""
-                        ENCODING = ""UTF8""
-                        CONNECTION LIMIT = -1;");
-            }
         }
     }
 

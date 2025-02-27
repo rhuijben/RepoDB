@@ -1,9 +1,9 @@
-﻿using MySqlConnector;
+﻿using System.Data;
+using System.Data.Common;
+using MySqlConnector;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System.Data;
-using System.Data.Common;
 
 namespace RepoDb.DbHelpers;
 
@@ -57,6 +57,7 @@ public sealed class MySqlConnectorDbHelper : IDbHelper
                 , NUMERIC_SCALE AS Scale
                 , DATA_TYPE AS DatabaseType
                 , CASE WHEN COLUMN_DEFAULT IS NOT NULL THEN 1 ELSE 0 END AS HasDefaultValue
+                , CASE WHEN EXTRA LIKE '%VIRTUAL%' OR EXTRA LIKE '%STORED%' THEN 1 ELSE 0 END AS IsComputed
             FROM INFORMATION_SCHEMA.COLUMNS
             WHERE TABLE_SCHEMA = @TableSchema
                 AND TABLE_NAME = @TableName
@@ -111,6 +112,7 @@ public sealed class MySqlConnectorDbHelper : IDbHelper
             reader.IsDBNull(7) ? (byte?)null : byte.Parse(reader.GetInt32(7).ToString()),
             reader.GetString(8),
             reader.GetBoolean(9),
+            reader.GetBoolean(10),
             "MYSQLC");
     }
 
@@ -145,6 +147,7 @@ public sealed class MySqlConnectorDbHelper : IDbHelper
             await reader.IsDBNullAsync(7, cancellationToken) ? null : byte.Parse((await reader.GetFieldValueAsync<int>(7, cancellationToken)).ToString()),
             await reader.GetFieldValueAsync<string>(8, cancellationToken),
             await reader.GetFieldValueAsync<bool>(9, cancellationToken),
+            await reader.GetFieldValueAsync<bool>(10, cancellationToken),
             "MYSQLC");
     }
 

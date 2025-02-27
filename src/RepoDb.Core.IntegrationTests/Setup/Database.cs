@@ -20,9 +20,6 @@ public static class Database
         // Initialize the SqlServer
         GlobalConfiguration.Setup(new()).UseSqlServer();
 
-        // Create the database first
-        CreateDatabase();
-
         // Create the schemas
         CreateSchemas();
 
@@ -47,21 +44,6 @@ public static class Database
     public static string ConnectionStringForRepoDb => Instance.ConnectionString;
 
     #region Methods
-
-    /// <summary>
-    /// Creates a test database for RepoDb.
-    /// </summary>
-    private static void CreateDatabase()
-    {
-        var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDb'))
-                BEGIN
-                    CREATE DATABASE [RepoDb];
-                END";
-        using (var connection = new SqlConnection(ConnectionStringForMaster).EnsureOpen())
-        {
-            connection.ExecuteNonQuery(commandText);
-        }
-    }
 
     /// <summary>
     /// Create the necessary schemas for testing.

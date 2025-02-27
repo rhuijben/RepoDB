@@ -13,4 +13,12 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<PostgreSqlDbInstance>
 
     public override string UuidDbType => "CHAR(38)";
     public override string DateTimeDbType => "TIMESTAMP";
+
+    public override string GeneratedColumnDefinition(string expression, string type)
+    {
+        if (expression.StartsWith("CONCAT("))
+            expression = expression.Substring(7).Replace(",", " || ").TrimEnd(')');
+
+        return $"GENERATED ALWAYS AS ({expression}) STORED";
+    }
 }

@@ -79,7 +79,7 @@ public class Field : IEquatable<Field>
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentNullException("The field name must not be null or empty.");
+            throw new ArgumentNullException(nameof(name), "The field name must not be null or empty.");
         }
         yield return new Field(name);
     }
@@ -93,11 +93,11 @@ public class Field : IEquatable<Field>
     {
         if (fields == null)
         {
-            throw new ArgumentNullException("The list of fields must not be null.");
+            throw new ArgumentNullException(nameof(fields), "The list of fields must not be null.");
         }
         if (fields.Any(field => string.IsNullOrWhiteSpace(field)))
         {
-            throw new ArgumentNullException("The field name must not be null or empty.");
+            throw new ArgumentNullException(nameof(fields), "The field name must not be null or empty.");
         }
         foreach (var field in fields)
         {
@@ -196,12 +196,17 @@ public class Field : IEquatable<Field>
     internal static IEnumerable<Field> Parse<TEntity>(UnaryExpression expression)
         where TEntity : class
     {
-        return expression.Operand switch
+        if (expression.NodeType == ExpressionType.Convert)
         {
-            MemberExpression memberExpression => Parse<TEntity>(memberExpression),
-            BinaryExpression binaryExpression => Parse<TEntity>(binaryExpression),
-            _ => null
-        };
+            return expression.Operand switch
+            {
+                MemberExpression memberExpression => Parse<TEntity>(memberExpression),
+                BinaryExpression binaryExpression => Parse<TEntity>(binaryExpression),
+                _ => null
+            };
+        }
+        else
+            throw new InvalidExpressionException($"Expression '{expression}' is invalid.");
     }
 
     /// <summary>

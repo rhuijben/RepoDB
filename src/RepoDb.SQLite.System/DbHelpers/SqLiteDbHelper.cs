@@ -1,8 +1,8 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
 
 namespace RepoDb.DbHelpers;
 
@@ -47,7 +47,7 @@ public sealed class SqLiteDbHelper : IDbHelper
     /// <param name="tableName"></param>
     /// <returns></returns>
     private string GetCommandText(string tableName) =>
-        $"pragma table_info({DataEntityExtension.GetTableName(tableName, DbSetting).AsUnquoted(DbSetting)});";
+        $"pragma table_xinfo({DataEntityExtension.GetTableName(tableName, DbSetting).AsUnquoted(DbSetting)});";
 
     /// <summary>
     ///
@@ -68,6 +68,7 @@ public sealed class SqLiteDbHelper : IDbHelper
             null,
             null,
             !reader.IsDBNull(4),
+            reader.GetInt32(reader.FieldCount - 1) is 2 /* dynamic generated */ or 3 /* stored generated */,
             "SYSSQLITE");
     }
 
@@ -92,6 +93,7 @@ public sealed class SqLiteDbHelper : IDbHelper
             null,
             null,
             !await reader.IsDBNullAsync(4, cancellationToken),
+            await reader.GetFieldValueAsync<long>(reader.FieldCount - 1, cancellationToken) is 2 /* dynamic generated */ or 3 /* stored generated */,
             "SYSSQLITE");
     }
 

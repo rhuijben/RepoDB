@@ -29,9 +29,6 @@ public static class Database
         GlobalConfiguration.Setup(new())
             .UseSqlServer();
 
-        // Create databases
-        CreateDatabase();
-
         // Create tables
         CreateTables();
     }
@@ -42,22 +39,6 @@ public static class Database
         {
             connection.Truncate<CompleteTable>();
             connection.Truncate<NonIdentityCompleteTable>();
-        }
-    }
-
-    #endregion
-
-    #region CreateDatabases
-
-    private static void CreateDatabase()
-    {
-        var commandText = @"IF (NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'RepoDbTest'))
-                BEGIN
-                    CREATE DATABASE [RepoDbTest];
-                END";
-        using (var connection = new SqlConnection(ConnectionStringForMaster).EnsureOpen())
-        {
-            connection.ExecuteNonQuery(commandText);
         }
     }
 

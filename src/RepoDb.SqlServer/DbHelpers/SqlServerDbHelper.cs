@@ -1,9 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.Data;
+using System.Data.Common;
+using Microsoft.Data.SqlClient;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System.Data;
-using System.Data.Common;
 
 namespace RepoDb.DbHelpers;
 
@@ -59,6 +59,7 @@ public sealed class SqlServerDbHelper : IDbHelper
                     , CONVERT(TINYINT, COALESCE(TMP.precision, 1)) AS Precision
                     , CONVERT(TINYINT, COALESCE(TMP.scale, 1)) AS Scale
                     , CONVERT(BIT, IIF(C.COLUMN_DEFAULT IS NOT NULL, 1, 0)) AS DefaultValue
+                    , CONVERT(BIT, COALESCE(TMP.is_computed, 0)) AS IsComputed
                 FROM INFORMATION_SCHEMA.COLUMNS C
                 OUTER APPLY
                 (
@@ -81,6 +82,7 @@ public sealed class SqlServerDbHelper : IDbHelper
                         , SC.max_length
                         , SC.scale
                         , SC.precision
+                        , SC.is_computed
                     FROM [sys].[columns] SC
                     INNER JOIN [sys].[tables] ST ON ST.object_id = SC.object_id
                     INNER JOIN [sys].[schemas] S ON S.schema_id = ST.schema_id
@@ -110,6 +112,7 @@ public sealed class SqlServerDbHelper : IDbHelper
             reader.IsDBNull(7) ? (byte?)0 : reader.GetByte(7),
             reader.IsDBNull(7) ? "text" : reader.GetString(4),
             !reader.IsDBNull(8) && reader.GetBoolean(8),
+            !reader.IsDBNull(9) && reader.GetBoolean(9),
             "MSSQL");
     }
 
@@ -132,6 +135,7 @@ public sealed class SqlServerDbHelper : IDbHelper
             await reader.IsDBNullAsync(7, cancellationToken) ? (byte?)0 : await reader.GetFieldValueAsync<byte>(7, cancellationToken),
             await reader.IsDBNullAsync(7, cancellationToken) ? "text" : await reader.GetFieldValueAsync<string>(4, cancellationToken),
             !await reader.IsDBNullAsync(8, cancellationToken) && await reader.GetFieldValueAsync<bool>(8, cancellationToken),
+            !await reader.IsDBNullAsync(9, cancellationToken) && await reader.GetFieldValueAsync<bool>(9, cancellationToken),
             "MSSQL");
     }
 

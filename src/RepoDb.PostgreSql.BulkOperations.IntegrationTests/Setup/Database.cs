@@ -19,9 +19,6 @@ public static class Database
         // Initialize PostgreSql
         GlobalConfiguration.Setup(new());
 
-        // Create databases
-        CreateDatabase();
-
         // Create tables
         CreateTables();
     }
@@ -37,24 +34,6 @@ public static class Database
     public static string ConnectionStringForRepoDb => instance.ConnectionString;
 
     #region Methods
-
-    /// <summary>
-    /// Creates a test database for RepoDb.
-    /// </summary>
-    public static void CreateDatabase()
-    {
-        using (var connection = new NpgsqlConnection(ConnectionStringForPostgres))
-        {
-            var recordCount = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM pg_database WHERE datname = 'RepoDbBulk';");
-            if (recordCount <= 0)
-            {
-                connection.ExecuteNonQuery(@"CREATE DATABASE ""RepoDbBulk""
-                        WITH OWNER = ""postgres""
-                        ENCODING = ""UTF8""
-                        CONNECTION LIMIT = -1;");
-            }
-        }
-    }
 
     /// <summary>
     /// Create the necessary tables for testing.

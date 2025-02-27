@@ -10,30 +10,30 @@ internal class MergeAllExecutionContext
     /// <summary>
     /// 
     /// </summary>
-    public string CommandText { get; set; }
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    public IEnumerable<DbField> InputFields { get; set; }
+    public string CommandText { get; init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public int BatchSize { get; set; }
+    public IEnumerable<DbField> InputFields { get; init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Action<DbCommand, object> SingleDataEntityParametersSetterFunc { get; set; }
+    public int BatchSize { get; init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Action<DbCommand, IList<object>> MultipleDataEntitiesParametersSetterFunc { get; set; }
+    public Action<DbCommand, object> SingleDataEntityParametersSetterFunc { get; init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Action<object, object> KeyPropertySetterFunc { get; set; }
+    public Action<DbCommand, IList<object>> MultipleDataEntitiesParametersSetterFunc { get; init; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Action<object, object> KeyPropertySetterFunc { get; init; }
 }

@@ -47,6 +47,8 @@ public abstract class DbTestBase<TDbInstance> where TDbInstance : DbInstance, ne
         }
     }
 
+    protected virtual string SchemaDatabaseColumnName => "Catalog";
+
     public virtual IEnumerable<string> GetAllTables(DbConnection sql)
     {
         sql.EnsureOpen();
@@ -61,6 +63,7 @@ public abstract class DbTestBase<TDbInstance> where TDbInstance : DbInstance, ne
             yield break;
         }
 
+        var cat = tables.Columns.Cast<DataColumn>().FirstOrDefault(x => x.ColumnName.EndsWith(SchemaDatabaseColumnName, StringComparison.OrdinalIgnoreCase))?.Ordinal;
         var col = tables.Columns.Cast<DataColumn>().FirstOrDefault(x => x.ColumnName.EndsWith("Name", StringComparison.OrdinalIgnoreCase))?.Ordinal;
 
         if (!col.HasValue)
@@ -70,6 +73,9 @@ public abstract class DbTestBase<TDbInstance> where TDbInstance : DbInstance, ne
 
         while (rdr.Read())
         {
+            if (cat is { } && !string.Equals(sql.Database, rdr.GetString(cat.Value)))
+                continue;
+
             yield return rdr.GetString(col.Value);
         }
     }

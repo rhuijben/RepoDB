@@ -15,5 +15,4 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<SqliteDbInstance>
 #if NET
     public override string TimeOnlyDbType => "TEXT";
 #endif
-
 }

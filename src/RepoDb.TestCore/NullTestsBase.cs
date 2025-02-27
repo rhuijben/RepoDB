@@ -233,7 +233,14 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         if (set.ClosingQuote != "]")
             sqlText = sqlText.Replace("]", set.ClosingQuote);
 
-        await sql.ExecuteNonQueryAsync(sqlText);
+        try
+        {
+            await sql.ExecuteNonQueryAsync(sqlText);
+        }
+        catch (Exception e)
+        {
+            throw new Exception($"While performing: {sqlText}", e);
+        }
         return sqlText;
     }
 
@@ -273,5 +280,44 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     }
 #endif
 
+    record WithComputed
+    {
+        public int ID { get; set; }
+        public string Writable { get; set; }
+        public string Computed { get; set; }
+    }
 
+    public virtual string GeneratedColumnDefinition(string expression, string type) => $"GENERATED ALWAYS AS ({expression})";
+
+    [TestMethod]
+    public async Task ComputedColumnTest()
+    {
+        using var sql = await CreateOpenConnectionAsync();
+
+#if NET
+        if (sql.GetType().Name is { } name && (name.Contains("Postgres", StringComparison.OrdinalIgnoreCase) || name.Contains("npgsql", StringComparison.OrdinalIgnoreCase)))
+            Assert.Inconclusive("Postgres computed column syntax in test is currently broken");
+#endif
+
+        if (!GetAllTables(sql).Any(x => string.Equals(x, "WithComputed", StringComparison.OrdinalIgnoreCase)))
+        {
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithComputed] (
+                        [ID] int NOT NULL,
+                        [Writable] varchar(128) NOT NULL,
+                        [Computed] {GeneratedColumnDefinition("CONCAT('-', Writable, '-')", "varchar(130)")}
+            )");
+        }
+
+        var fields = await DbFieldCache.GetAsync(sql, nameof(WithComputed), transaction: null);
+        Assert.AreEqual(true, fields.First(x => x.Name == "Computed").IsComputed);
+
+        await sql.TruncateAsync<WithComputed>();
+        await sql.InsertAsync(new WithComputed() { ID = 1, Writable = "a" });
+
+        var r = (await sql.QueryAllAsync<WithComputed>()).FirstOrDefault();
+
+        Assert.AreEqual(1, r.ID);
+        Assert.AreEqual("a", r.Writable);
+        Assert.AreEqual("-a-", r.Computed);
+    }
 }
