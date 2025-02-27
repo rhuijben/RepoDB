@@ -8,22 +8,22 @@ internal class DataReaderField
     /// <summary>
     /// Gets or sets the name value.
     /// </summary>
-    public string Name { get; set; }
+    public string Name { get; init; }
 
     /// <summary>
     /// Gets or sets the column ordinal value.
     /// </summary>
-    public int Ordinal { get; set; }
+    public int Ordinal { get; init; }
 
     /// <summary>
     /// Gets or sets the <see cref="DbField"/> value.
     /// </summary>
-    public DbField DbField { get; set; }
+    public DbField DbField { get; init; }
 
     /// <summary>
     /// Gets or sets the type value.
     /// </summary>
-    public Type Type { get; set; }
+    public Type Type { get; init; }
 
     /// <summary>
     /// Returns a string that represents the current object.
