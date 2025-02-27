@@ -319,5 +319,14 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         Assert.AreEqual(1, r.ID);
         Assert.AreEqual("a", r.Writable);
         Assert.AreEqual("-a-", r.Computed);
+
+        await sql.QueryAllAsync<WithComputed>(orderBy: [OrderField.Parse<WithComputed>(x => x.Computed, Order.Ascending)]);
+
+        await sql.UpdateAsync<WithComputed>(
+            new()
+            {
+                Writable = "b"
+            },
+            where: x => x.Computed == "-a-");
     }
 }
