@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
@@ -3075,8 +3076,8 @@ public static partial class DbConnectionExtension
         var parameters = values.Select((_, index) =>
             string.Concat(parameterName, index.ToString()).AsParameter(dbSetting));
 
-        // Replace the target parameter
-        return commandText.Replace(parameterName.AsParameter(dbSetting), parameters.Join(", "));
+        // Replace the target parameter when used as parameter. (Not as prefix of longer parameter)
+        return Regex.Replace(commandText, Regex.Escape(parameterName.AsParameter(dbSetting)) + "\\b", parameters.Join(", "));
     }
 
     #region CreateDbCommandForExecution
@@ -3582,7 +3583,7 @@ public static partial class DbConnectionExtension
         IEnumerable values,
         IDbSetting dbSetting)
     {
-        if (commandText.IndexOf(parameterName, StringComparison.OrdinalIgnoreCase) < 0)
+        if (!commandText.Contains(parameterName, StringComparison.OrdinalIgnoreCase))
         {
             return commandText;
         }
@@ -3599,8 +3600,8 @@ public static partial class DbConnectionExtension
         var parameters = items.Select((_, index) =>
             string.Concat(parameterName, index.ToString(CultureInfo.InvariantCulture)).AsParameter(dbSetting));
 
-        // Replace the target parameter
-        return commandText.Replace(parameterName.AsParameter(dbSetting), parameters.Join(", "));
+        // Replace the target parameter when used as parameter. (Not as prefix of longer parameter)
+        return Regex.Replace(commandText, Regex.Escape(parameterName.AsParameter(dbSetting)) + "\\b", parameters.Join(", "));
     }
 
     /// <summary>

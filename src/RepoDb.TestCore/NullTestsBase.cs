@@ -226,12 +226,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
     private static async Task<string> PerformCreateTableAsync(System.Data.Common.DbConnection sql, string sqlText)
     {
-        var set = sql.GetDbSetting();
-
-        if (set.OpeningQuote != "[")
-            sqlText = sqlText.Replace("[", set.OpeningQuote);
-        if (set.ClosingQuote != "]")
-            sqlText = sqlText.Replace("]", set.ClosingQuote);
+        sqlText = ApplySqlRules(sql, sqlText);
 
         try
         {
@@ -241,6 +236,17 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         {
             throw new Exception($"While performing: {sqlText}", e);
         }
+        return sqlText;
+    }
+
+    protected static string ApplySqlRules(System.Data.Common.DbConnection sql, string sqlText)
+    {
+        var set = sql.GetDbSetting();
+
+        if (set.OpeningQuote != "[")
+            sqlText = sqlText.Replace("[", set.OpeningQuote);
+        if (set.ClosingQuote != "]")
+            sqlText = sqlText.Replace("]", set.ClosingQuote);
         return sqlText;
     }
 
@@ -323,5 +329,32 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
                 Writable = "b"
             },
             where: x => x.Computed == "-a-");
+    }
+
+    record WithGroupByItems
+    {
+        public int ID { get; set; }
+        public string Txt { get; set; }
+    }
+
+    [TestMethod]
+    public async Task VarPrefix()
+    {
+        using var sql = await CreateOpenConnectionAsync();
+
+        if (!GetAllTables(sql).Any(x => string.Equals(x, "WithGroupByItems", StringComparison.OrdinalIgnoreCase)))
+        {
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithGroupByItems] (
+                        [ID] int NOT NULL,
+                        [Txt] varchar(128) NOT NULL,
+                        [Nr] int NOT NULL
+            )");
+        }
+
+
+        var s = await sql.ExecuteQueryAsync<WithGroupByItems>(
+            ApplySqlRules(sql, "SELECT [Txt] from [WithGroupByItems] WHERE [Txt] IN (@a) GROUP BY [Txt] HAVING COUNT(1) = @aa"),
+            new { a = new string[] { "a" }, aa = 1 }
+            );
     }
 }
