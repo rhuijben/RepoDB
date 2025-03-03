@@ -110,7 +110,7 @@ public static class StringExtension
             return value;
         }
 
-        if (value.IndexOf(CharConstant.Period) < 0)
+        if (!value.Contains(CharConstant.Period))
         {
             return value.AsUnquotedInternal(trim, dbSetting);
         }

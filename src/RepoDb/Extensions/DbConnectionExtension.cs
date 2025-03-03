@@ -3061,7 +3061,7 @@ public static partial class DbConnectionExtension
         IDbSetting dbSetting)
     {
         // Check for the defined parameter
-        if (commandText.IndexOf(parameterName, StringComparison.OrdinalIgnoreCase) < 0)
+        if (!commandText.Contains(parameterName, StringComparison.OrdinalIgnoreCase))
         {
             return commandText;
         }
