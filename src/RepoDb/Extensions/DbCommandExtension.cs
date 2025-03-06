@@ -892,6 +892,10 @@ public static class DbCommandExtension
                 else
                     return Activator.CreateInstance(targetType);
             }
+            else if (targetType == StaticType.Object)
+            {
+                return value;
+            }
 
             try
             {

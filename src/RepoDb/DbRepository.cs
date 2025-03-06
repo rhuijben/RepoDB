@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using System.Data.Common;
-using RepoDb.Interfaces;
-using RepoDb.Enumerations;
 using System.Dynamic;
+using RepoDb.Enumerations;
+using RepoDb.Interfaces;
 
 namespace RepoDb;
 

@@ -45,6 +45,7 @@ public class SqLiteDbTypeNameToClientTypeResolver : IResolver<string, Type>
             "boolean" => typeof(long),
             "char" or "string" or "text" or "varchar" => typeof(string),
             "date" or "datetime" => typeof(DateTime),
+            "datetimeoffset" => typeof(DateTimeOffset),
             "time" => typeof(DateTime),
             "decimal" or "numeric" => typeof(decimal),
             "double" or "real" => typeof(double),

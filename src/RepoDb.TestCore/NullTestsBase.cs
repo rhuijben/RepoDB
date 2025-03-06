@@ -221,6 +221,8 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             }
         }
 
+        var l = sql.Query<DateOffsetTestData>(where: x => x.Date < DateTimeOffset.Now, transaction: t);
+
         await t.RollbackAsync();
     }
 
@@ -250,6 +252,8 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         return sqlText;
     }
 
+    public virtual string DateTimeOffsetDbType => "datetimeoffset";
+
 #if NET
     public virtual string TimeOnlyDbType => "time";
     public virtual string DateOnlyDbType => "date";
@@ -258,6 +262,8 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         public TimeOnly TOnly { get; set; }
         public DateOnly DOnly { get; set; }
+
+        public DateTimeOffset DOffset { get; set; }
     }
 
     [TestMethod]
@@ -269,13 +275,14 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [DateTimeOnlyTable] (
                         [TOnly] {TimeOnlyDbType} NOT NULL,
-                        [DOnly] {DateOnlyDbType} NOT NULL
+                        [DOnly] {DateOnlyDbType} NOT NULL,
+                        [DOffset] {DateTimeOffsetDbType} NOT NULL
             )");
         }
 
         await sql.TruncateAsync<DateTimeOnlyTable>();
 
-        await sql.InsertAsync(new DateTimeOnlyTable() { DOnly = new DateOnly(2021, 1, 1), TOnly = new TimeOnly(1, 2, 3) });
+        await sql.InsertAsync(new DateTimeOnlyTable() { DOnly = new DateOnly(2021, 1, 1), TOnly = new TimeOnly(1, 2, 3), DOffset = new DateTimeOffset(2023, 1, 1, 1, 1, 1, TimeSpan.Zero) });
 
         Assert.IsNotEmpty(await sql.QueryAllAsync<DateTimeOnlyTable>());
 
@@ -283,6 +290,13 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             return; // Case sensitive issue
 
         Assert.IsNotEmpty(await sql.ExecuteQueryAsync<DateTimeOnlyTable>("SELECT * FROM DateTimeOnlyTable"));
+
+        var today = DateOnly.FromDateTime(DateTime.Now);
+        await sql.QueryAsync<DateTimeOnlyTable>(where: x => x.DOnly < today);
+
+
+        await sql.QueryAsync<DateTimeOnlyTable>(where: x => x.DOffset < DateTime.Now);
+        await sql.QueryAsync<DateTimeOnlyTable>(where: x => x.DOffset < DateTimeOffset.Now);
     }
 #endif
 
