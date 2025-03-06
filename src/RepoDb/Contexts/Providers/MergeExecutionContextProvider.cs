@@ -23,7 +23,7 @@ internal static class MergeExecutionContextProvider
     /// <returns></returns>
     private static string GetKey(Type entityType,
         string tableName,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field> fields,
         string hints)
     {
@@ -53,7 +53,7 @@ internal static class MergeExecutionContextProvider
     public static MergeExecutionContext Create(Type entityType,
         IDbConnection connection,
         string tableName,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field> fields,
         string? hints = null,
         IDbTransaction? transaction = null,
@@ -116,7 +116,7 @@ internal static class MergeExecutionContextProvider
     public static async Task<MergeExecutionContext> CreateAsync(Type entityType,
         IDbConnection connection,
         string tableName,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field> fields,
         string? hints = null,
         IDbTransaction? transaction = null,

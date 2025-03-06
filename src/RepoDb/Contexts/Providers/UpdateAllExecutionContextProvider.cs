@@ -26,7 +26,7 @@ internal static class UpdateAllExecutionContextProvider
     /// <returns></returns>
     private static string GetKey(Type entityType,
         string tableName,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field> fields,
         int batchSize,
         string hints)
@@ -62,7 +62,7 @@ internal static class UpdateAllExecutionContextProvider
         IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         int batchSize,
         IEnumerable<Field> fields,
         string? hints = null,
@@ -132,7 +132,7 @@ internal static class UpdateAllExecutionContextProvider
         IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         int batchSize,
         IEnumerable<Field> fields,
         string? hints = null,

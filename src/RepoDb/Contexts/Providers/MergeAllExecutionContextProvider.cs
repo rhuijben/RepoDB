@@ -26,7 +26,7 @@ internal static class MergeAllExecutionContextProvider
     /// <returns></returns>
     private static string GetKey(Type entityType,
         string tableName,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field> fields,
         int batchSize,
         string hints)
@@ -62,7 +62,7 @@ internal static class MergeAllExecutionContextProvider
         IDbConnection connection,
         IEnumerable<object> entities,
         string tableName,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         int batchSize,
         IEnumerable<Field> fields,
         string? hints = null,
@@ -150,7 +150,7 @@ internal static class MergeAllExecutionContextProvider
         IDbConnection connection,
         IEnumerable<object> entities,
         string tableName,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         int batchSize,
         IEnumerable<Field> fields,
         string? hints = null,
@@ -237,7 +237,7 @@ internal static class MergeAllExecutionContextProvider
         IEnumerable<object> entities,
         DbFieldCollection dbFields,
         string tableName,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         int batchSize,
         IEnumerable<Field> fields,
         string commandText)

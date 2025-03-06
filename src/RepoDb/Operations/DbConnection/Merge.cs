@@ -1,10 +1,10 @@
-﻿using RepoDb.Contexts.Providers;
+﻿using System.Data;
+using System.Data.Common;
+using System.Linq.Expressions;
+using RepoDb.Contexts.Providers;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System.Data;
-using System.Data.Common;
-using System.Linq.Expressions;
 
 namespace RepoDb;
 
@@ -116,7 +116,7 @@ public static partial class DbConnectionExtension
     public static object Merge<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -285,7 +285,7 @@ public static partial class DbConnectionExtension
     public static TResult Merge<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -446,7 +446,7 @@ public static partial class DbConnectionExtension
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public static object Merge<TEntity>(this IDbConnection connection,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -607,7 +607,7 @@ public static partial class DbConnectionExtension
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public static TResult Merge<TEntity, TResult>(this IDbConnection connection,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -691,7 +691,7 @@ public static partial class DbConnectionExtension
     internal static TResult MergeInternal<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -881,7 +881,7 @@ public static partial class DbConnectionExtension
     public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1062,7 +1062,7 @@ public static partial class DbConnectionExtension
     public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1235,7 +1235,7 @@ public static partial class DbConnectionExtension
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1408,7 +1408,7 @@ public static partial class DbConnectionExtension
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1498,7 +1498,7 @@ public static partial class DbConnectionExtension
     internal static Task<TResult> MergeAsyncInternal<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1681,7 +1681,7 @@ public static partial class DbConnectionExtension
     public static object Merge(this IDbConnection connection,
         string tableName,
         object entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1802,7 +1802,7 @@ public static partial class DbConnectionExtension
     public static TResult Merge<TResult>(this IDbConnection connection,
         string tableName,
         object entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1931,7 +1931,7 @@ public static partial class DbConnectionExtension
     public static Task<object> MergeAsync(this IDbConnection connection,
         string tableName,
         object entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -2061,7 +2061,7 @@ public static partial class DbConnectionExtension
     public static Task<TResult> MergeAsync<TResult>(this IDbConnection connection,
         string tableName,
         object entity,
-        IEnumerable<Field> qualifiers,
+        IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int? commandTimeout = null,

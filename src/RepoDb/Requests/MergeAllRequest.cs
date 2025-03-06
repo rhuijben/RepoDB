@@ -110,7 +110,7 @@ internal class MergeAllRequest : BaseRequest
     /// <summary>
     /// Gets the qualifier <see cref="Field"/> objects.
     /// </summary>
-    public IEnumerable<Field> Qualifiers { get; set; }
+    public IEnumerable<Field>? Qualifiers { get; set; }
 
     /// <summary>
     /// Gets the size batch of the update operation.
