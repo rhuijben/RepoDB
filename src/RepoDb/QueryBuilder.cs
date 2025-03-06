@@ -478,7 +478,7 @@ public class QueryBuilder
     /// <param name="orderBy">The list of order fields to be stringified.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder OrderByFrom(IEnumerable<OrderField> orderBy, IDbSetting dbSetting) =>
+    public QueryBuilder OrderByFrom(IEnumerable<OrderField>? orderBy, IDbSetting dbSetting) =>
         OrderByFrom(orderBy, null, dbSetting);
 
     /// <summary>
@@ -488,7 +488,7 @@ public class QueryBuilder
     /// <param name="alias">The aliases to be prepended for each field.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder OrderByFrom(IEnumerable<OrderField> orderBy,
+    public QueryBuilder OrderByFrom(IEnumerable<OrderField>? orderBy,
         string alias,
         IDbSetting dbSetting)
     {

@@ -208,7 +208,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The max value of the target field.</returns>
     public static object Max<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -244,7 +244,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The max value of the target field.</returns>
     public static object Max<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -280,7 +280,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The max value of the target field.</returns>
     public static object Max<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -316,7 +316,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The max value of the target field.</returns>
     public static object Max<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -352,7 +352,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The max value of the target field.</returns>
     public static object Max<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1061,7 +1061,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
     public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1100,7 +1100,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
     public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1139,7 +1139,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
     public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1178,7 +1178,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
     public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
@@ -1217,7 +1217,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
     public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
         int? commandTimeout = null,

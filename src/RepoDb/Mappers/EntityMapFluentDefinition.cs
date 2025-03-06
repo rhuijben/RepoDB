@@ -59,7 +59,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="columnName">The name of the database column.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> Column(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> Column(Expression<Func<TEntity, object?>> expression,
         string columnName) =>
         Column(expression, columnName, false);
 
@@ -70,7 +70,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="columnName">The name of the database column.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> Column(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> Column(Expression<Func<TEntity, object?>> expression,
         string columnName,
         bool force)
     {
@@ -149,7 +149,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// </summary>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> Primary(Expression<Func<TEntity, object>> expression) =>
+    public EntityMapFluentDefinition<TEntity> Primary(Expression<Func<TEntity, object?>> expression) =>
         Primary(expression, false);
 
     /// <summary>
@@ -158,7 +158,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> Primary(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> Primary(Expression<Func<TEntity, object?>> expression,
         bool force)
     {
         PrimaryMapper.Add<TEntity>(expression, force);
@@ -228,7 +228,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// </summary>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> Identity(Expression<Func<TEntity, object>> expression) =>
+    public EntityMapFluentDefinition<TEntity> Identity(Expression<Func<TEntity, object?>> expression) =>
         Identity(expression, false);
 
     /// <summary>
@@ -237,7 +237,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> Identity(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> Identity(Expression<Func<TEntity, object?>> expression,
         bool force)
     {
         IdentityMapper.Add<TEntity>(expression, force);
@@ -308,7 +308,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="dbType">The target database type.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> DbType(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> DbType(Expression<Func<TEntity, object?>> expression,
         DbType? dbType) =>
         DbType(expression, dbType, false);
 
@@ -319,7 +319,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="dbType">The target database type.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> DbType(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> DbType(Expression<Func<TEntity, object?>> expression,
         DbType? dbType,
         bool force)
     {
@@ -449,7 +449,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <typeparam name="TPropertyHandler">The type of the <see cref="IPropertyHandler{TInput, TResult}"/>.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object>> expression)
+    public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
         where TPropertyHandler : new() =>
         PropertyHandler(expression, new TPropertyHandler());
 
@@ -461,7 +461,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object?>> expression,
         bool force)
         where TPropertyHandler : new() =>
         PropertyHandler(expression, new TPropertyHandler(), force);
@@ -473,7 +473,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="propertyHandler">The instance of the <see cref="IPropertyHandler{TInput, TResult}"/>.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object?>> expression,
         TPropertyHandler propertyHandler) =>
         PropertyHandler<TPropertyHandler>(expression, propertyHandler, false);
 
@@ -485,7 +485,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="propertyHandler">The instance of the <see cref="IPropertyHandler{TInput, TResult}"/>.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object?>> expression,
         TPropertyHandler propertyHandler,
         bool force)
     {
@@ -591,7 +591,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="attributes">The list of property value attributes to be mapped.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> PropertyValueAttributes(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> PropertyValueAttributes(Expression<Func<TEntity, object?>> expression,
         IEnumerable<PropertyValueAttribute> attributes) =>
         PropertyValueAttributes(expression, attributes, false);
 
@@ -602,7 +602,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="attributes">The list of property value attributes to be mapped.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     /// <returns>The current instance.</returns>
-    public EntityMapFluentDefinition<TEntity> PropertyValueAttributes(Expression<Func<TEntity, object>> expression,
+    public EntityMapFluentDefinition<TEntity> PropertyValueAttributes(Expression<Func<TEntity, object?>> expression,
         IEnumerable<PropertyValueAttribute> attributes,
         bool force)
     {

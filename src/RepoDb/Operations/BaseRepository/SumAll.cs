@@ -34,7 +34,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
-    public object SumAll(Expression<Func<TEntity, object>> field,
+    public object SumAll(Expression<Func<TEntity, object?>> field,
         string? hints = null,
         string traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
@@ -120,7 +120,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
-    public Task<object> SumAllAsync(Expression<Func<TEntity, object>> field,
+    public Task<object> SumAllAsync(Expression<Func<TEntity, object?>> field,
         string? hints = null,
         string traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,

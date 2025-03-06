@@ -20,7 +20,7 @@ public static partial class ClassExpression
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The values of the property of the data entities.</returns>
     public static IEnumerable<TResult> GetEntitiesPropertyValues<TEntity, TResult>(IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>> expression)
+        Expression<Func<TEntity, object?>> expression)
         where TEntity : class
     {
         var property = ExpressionExtension.GetProperty<TEntity>(expression);

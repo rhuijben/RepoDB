@@ -30,7 +30,7 @@ public static class PropertyMapper
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="columnName">The name of the database column.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         string columnName)
         where TEntity : class =>
         Add(expression ?? throw new ArgumentNullException(nameof(expression)), columnName, false);
@@ -42,7 +42,7 @@ public static class PropertyMapper
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="columnName">The name of the database column.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         string columnName,
         bool force)
         where TEntity : class =>
@@ -183,7 +183,7 @@ public static class PropertyMapper
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The mapped name of the property.</returns>
-    public static string Get<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static string Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
 
@@ -257,7 +257,7 @@ public static class PropertyMapper
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
-    public static void Remove<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static void Remove<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Remove<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
 

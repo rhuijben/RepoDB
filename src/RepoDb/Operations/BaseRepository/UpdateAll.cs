@@ -72,7 +72,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The number of affected rows during the update process.</returns>
     public int UpdateAll(IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
@@ -164,7 +164,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
     public Task<int> UpdateAllAsync(IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,

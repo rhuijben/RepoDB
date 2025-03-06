@@ -191,7 +191,7 @@ public static partial class SqlConnectionExtension
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="qualifiers"></param>
     /// <returns></returns>
-    private static IEnumerable<Field> ParseExpression<TEntity>(Expression<Func<TEntity, object>> qualifiers)
+    private static IEnumerable<Field> ParseExpression<TEntity>(Expression<Func<TEntity, object?>> qualifiers)
         where TEntity : class =>
         qualifiers != null ? Field.Parse<TEntity>(qualifiers) : default;
 

@@ -61,7 +61,7 @@ public static partial class SqlConnectionExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static int BulkDelete<TEntity>(this SqlConnection connection,
         IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -105,7 +105,7 @@ public static partial class SqlConnectionExtension
     public static int BulkDelete<TEntity>(this SqlConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -147,7 +147,7 @@ public static partial class SqlConnectionExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static int BulkDelete<TEntity>(this SqlConnection connection,
         DbDataReader reader,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -188,7 +188,7 @@ public static partial class SqlConnectionExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static int BulkDelete<TEntity>(this SqlConnection connection,
         DataTable dataTable,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         DataRowState? rowState = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
@@ -393,7 +393,7 @@ public static partial class SqlConnectionExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static async Task<int> BulkDeleteAsync<TEntity>(this SqlConnection connection,
         IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -440,7 +440,7 @@ public static partial class SqlConnectionExtension
     public static async Task<int> BulkDeleteAsync<TEntity>(this SqlConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -485,7 +485,7 @@ public static partial class SqlConnectionExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static Task<int> BulkDeleteAsync<TEntity>(this SqlConnection connection,
         DbDataReader reader,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -529,7 +529,7 @@ public static partial class SqlConnectionExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static Task<int> BulkDeleteAsync<TEntity>(this SqlConnection connection,
         DataTable dataTable,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         DataRowState? rowState = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,

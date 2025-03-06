@@ -60,7 +60,7 @@ public static partial class DbRepositoryExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static int BulkDelete<TEntity>(this DbRepository<SqlConnection> repository,
         IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -103,7 +103,7 @@ public static partial class DbRepositoryExtension
     public static int BulkDelete<TEntity>(this DbRepository<SqlConnection> repository,
         string tableName,
         IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -144,7 +144,7 @@ public static partial class DbRepositoryExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static int BulkDelete<TEntity>(this DbRepository<SqlConnection> repository,
         DbDataReader reader,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -185,7 +185,7 @@ public static partial class DbRepositoryExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static int BulkDelete<TEntity>(this DbRepository<SqlConnection> repository,
         DataTable dataTable,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         DataRowState? rowState = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
@@ -387,7 +387,7 @@ public static partial class DbRepositoryExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static async Task<int> BulkDeleteAsync<TEntity>(this DbRepository<SqlConnection> repository,
         IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -432,7 +432,7 @@ public static partial class DbRepositoryExtension
     public static async Task<int> BulkDeleteAsync<TEntity>(this DbRepository<SqlConnection> repository,
         string tableName,
         IEnumerable<TEntity> entities,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -476,7 +476,7 @@ public static partial class DbRepositoryExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static async Task<int> BulkDeleteAsync<TEntity>(this DbRepository<SqlConnection> repository,
         DbDataReader reader,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
@@ -520,7 +520,7 @@ public static partial class DbRepositoryExtension
     /// <returns>The number of rows affected by the execution.</returns>
     public static async Task<int> BulkDeleteAsync<TEntity>(this DbRepository<SqlConnection> repository,
         DataTable dataTable,
-        Expression<Func<TEntity, object>>? qualifiers = null,
+        Expression<Func<TEntity, object?>>? qualifiers = null,
         DataRowState? rowState = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,

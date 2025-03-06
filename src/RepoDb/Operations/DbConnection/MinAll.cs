@@ -59,7 +59,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The min value of the target field.</returns>
     public static object MinAll<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.MinAll,
@@ -244,7 +244,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
     public static Task<object> MinAllAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.MinAll,

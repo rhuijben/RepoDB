@@ -154,7 +154,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public object Merge<TEntity>(string tableName,
         TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -335,7 +335,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public TResult Merge<TEntity, TResult>(string tableName,
         TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -500,7 +500,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public object Merge<TEntity>(TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -669,7 +669,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public TResult Merge<TEntity, TResult>(TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -859,7 +859,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public async Task<object> MergeAsync<TEntity>(string tableName,
         TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -1052,7 +1052,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public async Task<TResult> MergeAsync<TEntity, TResult>(string tableName,
         TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -1230,7 +1230,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public async Task<object> MergeAsync<TEntity>(TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -1411,7 +1411,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public async Task<TResult> MergeAsync<TEntity, TResult>(TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,

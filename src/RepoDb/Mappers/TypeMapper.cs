@@ -154,7 +154,7 @@ public static class TypeMapper
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
     /// <param name="dbType">The target database type.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         DbType? dbType)
         where TEntity : class =>
         Add<TEntity>(expression ?? throw new ArgumentNullException(nameof(expression)), dbType, false);
@@ -166,7 +166,7 @@ public static class TypeMapper
     /// <param name="expression">The property expression.</param>
     /// <param name="dbType">The target database type.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         DbType? dbType,
         bool force)
         where TEntity : class =>
@@ -303,7 +303,7 @@ public static class TypeMapper
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
     /// <returns>The mapped <see cref="DbType"/> object of the property.</returns>
-    public static DbType? Get<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static DbType? Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
 
@@ -362,7 +362,7 @@ public static class TypeMapper
     /// </summary>
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
-    public static void Remove<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static void Remove<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Remove(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
 

@@ -28,7 +28,7 @@ public static class PropertyValueAttributeCache
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
     /// <returns>The list of <see cref="PropertyValueAttribute"/> object.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static IEnumerable<PropertyValueAttribute> Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get(ExpressionExtension.GetProperty<TEntity>(expression));
 

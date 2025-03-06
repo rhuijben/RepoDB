@@ -161,7 +161,7 @@ public class Field : IEquatable<Field>
     /// <typeparam name="TEntity">The type of the data entity that contains the property to be parsed.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>An enumerable list of <see cref="Field"/> objects.</returns>
-    public static IEnumerable<Field> Parse<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static IEnumerable<Field> Parse<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Parse<TEntity, object>(expression);
 

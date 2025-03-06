@@ -57,7 +57,7 @@ public static class TypeMapCache
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The mapped <see cref="DbType"/> object of the property.</returns>
-    public static DbType? Get<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static DbType? Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
 

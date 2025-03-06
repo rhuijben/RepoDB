@@ -90,7 +90,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public object Merge(TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -191,7 +191,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public TResult Merge<TResult>(TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -302,7 +302,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public Task<object> MergeAsync(TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,
@@ -415,7 +415,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
     public Task<TResult> MergeAsync<TResult>(TEntity entity,
-        Expression<Func<TEntity, object>> qualifiers,
+        Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.Merge,

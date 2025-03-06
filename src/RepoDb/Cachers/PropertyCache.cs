@@ -21,7 +21,7 @@ public static class PropertyCache
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The instance of cached <see cref="ClassProperty"/> object.</returns>
-    public static ClassProperty? Get<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static ClassProperty? Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression), false);
 

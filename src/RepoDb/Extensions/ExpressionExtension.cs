@@ -529,7 +529,7 @@ public static class ExpressionExtension
     /// <typeparam name="T">The target .NET CLR type.</typeparam>
     /// <param name="expression">The expression to be extracted.</param>
     /// <returns>An instance of <see cref="PropertyInfo"/> object.</returns>
-    internal static PropertyInfo GetProperty<T>(Expression<Func<T, object>> expression)
+    internal static PropertyInfo GetProperty<T>(Expression<Func<T, object?>> expression)
         where T : class
     {
         return expression.Body switch

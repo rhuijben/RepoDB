@@ -28,7 +28,7 @@ internal sealed class SkipQueryRequest : BaseRequest
         IEnumerable<Field> fields,
         int skip,
         int take,
-        IEnumerable<OrderField> orderBy,
+        IEnumerable<OrderField>? orderBy,
         QueryGroup? where = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -65,7 +65,7 @@ internal sealed class SkipQueryRequest : BaseRequest
         IEnumerable<Field> fields,
         int skip,
         int take,
-        IEnumerable<OrderField> orderBy,
+        IEnumerable<OrderField>? orderBy,
         QueryGroup? where = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -105,7 +105,7 @@ internal sealed class SkipQueryRequest : BaseRequest
     /// <summary>
     /// Gets the list of the order fields.
     /// </summary>
-    public IEnumerable<OrderField> OrderBy { get; }
+    public IEnumerable<OrderField>? OrderBy { get; }
 
     /// <summary>
     /// Gets the hints for the table.

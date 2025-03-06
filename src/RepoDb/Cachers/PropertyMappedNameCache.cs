@@ -27,7 +27,7 @@ public static class PropertyMappedNameCache
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The cached column name mappings of the property.</returns>
-    public static string Get<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static string Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
 

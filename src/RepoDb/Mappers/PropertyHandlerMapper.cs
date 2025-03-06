@@ -165,7 +165,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <typeparam name="TPropertyHandler">The type of the property handler.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
-    public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object>> expression)
+    public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class
         where TPropertyHandler : new() =>
         Add(expression, new TPropertyHandler(), false);
@@ -177,7 +177,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TPropertyHandler">The type of the property handler.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="propertyHandler">The instance of the property handler.</param>
-    public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression,
         TPropertyHandler propertyHandler)
         where TEntity : class =>
         Add(expression ?? throw new ArgumentNullException(nameof(expression)), propertyHandler, false);
@@ -190,7 +190,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TPropertyHandler">The type of the property handler.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
-    public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression,
         bool force)
         where TEntity : class
         where TPropertyHandler : new() =>
@@ -204,7 +204,7 @@ public static class PropertyHandlerMapper
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="propertyHandler">The instance of the property handler.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
-    public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression,
         TPropertyHandler propertyHandler,
         bool force)
         where TEntity : class =>
@@ -443,7 +443,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TPropertyHandler">The type of the property handler.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The mapped property handler object of the property.</returns>
-    public static TPropertyHandler Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object>> expression)
+    public static TPropertyHandler Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get<TEntity, TPropertyHandler>(ExpressionExtension.GetProperty<TEntity>(expression));
 
@@ -516,7 +516,7 @@ public static class PropertyHandlerMapper
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
-    public static void Remove<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static void Remove<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Remove<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
 

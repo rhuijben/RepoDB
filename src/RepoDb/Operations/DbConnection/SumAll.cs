@@ -59,7 +59,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public static object SumAll<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.SumAll,
@@ -244,7 +244,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public static Task<object> SumAllAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.SumAll,

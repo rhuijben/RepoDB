@@ -59,7 +59,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
     public static object AverageAll<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.AverageAll,
@@ -244,7 +244,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
     public static Task<object> AverageAllAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, object>> field,
+        Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.AverageAll,

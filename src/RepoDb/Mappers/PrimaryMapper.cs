@@ -28,7 +28,7 @@ public static class PrimaryMapper
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Add<TEntity>(expression, false);
 
@@ -38,7 +38,7 @@ public static class PrimaryMapper
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         bool force)
         where TEntity : class
     {

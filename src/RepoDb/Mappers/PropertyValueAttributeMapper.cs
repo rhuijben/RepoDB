@@ -32,7 +32,7 @@ public static class PropertyValueAttributeMapper
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
     /// <param name="attribute">The instance of <see cref="PropertyValueAttribute"/> object.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         PropertyValueAttribute attribute)
         where TEntity : class =>
         Add<TEntity>(expression, attribute, false);
@@ -44,7 +44,7 @@ public static class PropertyValueAttributeMapper
     /// <param name="expression">The property expression.</param>
     /// <param name="attribute">The instance of <see cref="PropertyValueAttribute"/> object.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         PropertyValueAttribute attribute,
         bool force)
         where TEntity : class =>
@@ -56,7 +56,7 @@ public static class PropertyValueAttributeMapper
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
     /// <param name="attributes">The list of <see cref="PropertyValueAttribute"/> object.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         IEnumerable<PropertyValueAttribute> attributes)
         where TEntity : class =>
         Add<TEntity>(expression, attributes, false);
@@ -68,7 +68,7 @@ public static class PropertyValueAttributeMapper
     /// <param name="expression">The property expression.</param>
     /// <param name="attributes">The list of <see cref="PropertyValueAttribute"/> object.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
-    public static void Add<TEntity>(Expression<Func<TEntity, object>> expression,
+    public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         IEnumerable<PropertyValueAttribute> attributes,
         bool force)
         where TEntity : class =>
@@ -304,7 +304,7 @@ public static class PropertyValueAttributeMapper
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static IEnumerable<PropertyValueAttribute> Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
 
@@ -367,7 +367,7 @@ public static class PropertyValueAttributeMapper
     /// </summary>
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
-    public static void Remove<TEntity>(Expression<Func<TEntity, object>> expression)
+    public static void Remove<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Remove(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
 

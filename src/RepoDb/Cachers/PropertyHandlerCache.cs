@@ -64,7 +64,7 @@ public static class PropertyHandlerCache
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The mapped <see cref="IPropertyHandler{TInput, TResult}"/> object of the property.</returns>
-    public static TPropertyHandler Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object>> expression)
+    public static TPropertyHandler Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get<TEntity, TPropertyHandler>(ExpressionExtension.GetProperty<TEntity>(expression));
 

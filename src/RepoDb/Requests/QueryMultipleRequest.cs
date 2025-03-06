@@ -100,7 +100,7 @@ internal sealed class QueryMultipleRequest : BaseRequest
     /// <summary>
     /// Gets the list of the order fields.
     /// </summary>
-    public IEnumerable<OrderField> OrderBy { get; }
+    public IEnumerable<OrderField>? OrderBy { get; }
 
     /// <summary>
     /// Gets the filter for the rows.
