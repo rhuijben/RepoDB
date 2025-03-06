@@ -20,7 +20,7 @@ internal sealed class MinAllRequest : BaseRequest
     public MinAllRequest(Type type,
         IDbConnection connection,
         IDbTransaction transaction,
-        Field field = null,
+        Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(ClassMappedNameCache.Get(type),
@@ -45,7 +45,7 @@ internal sealed class MinAllRequest : BaseRequest
     public MinAllRequest(string name,
         IDbConnection connection,
         IDbTransaction transaction,
-        Field field = null,
+        Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : base(name,

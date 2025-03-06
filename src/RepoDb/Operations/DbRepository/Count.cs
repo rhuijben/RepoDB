@@ -18,7 +18,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
-    public long Count<TEntity>(object where = null,
+    public long Count<TEntity>(object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
@@ -203,7 +203,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
-    public async Task<long> CountAsync<TEntity>(object where = null,
+    public async Task<long> CountAsync<TEntity>(object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
@@ -402,7 +402,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count(string tableName,
-        object where = null,
+        object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
@@ -555,7 +555,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public async Task<long> CountAsync(string tableName,
-        object where = null,
+        object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,

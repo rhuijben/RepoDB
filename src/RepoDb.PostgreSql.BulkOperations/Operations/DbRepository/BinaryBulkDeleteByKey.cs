@@ -88,7 +88,7 @@ public static partial class DbRepositoryExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         // Create a connection

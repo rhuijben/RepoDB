@@ -335,7 +335,7 @@ public static partial class NpgsqlConnectionExtension
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportMergeCommandType mergeCommandType = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -444,7 +444,7 @@ public static partial class NpgsqlConnectionExtension
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportMergeCommandType mergeCommandType = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var dbSetting = connection.GetDbSetting();
@@ -541,7 +541,7 @@ public static partial class NpgsqlConnectionExtension
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportMergeCommandType mergeCommandType = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var dbSetting = connection.GetDbSetting();

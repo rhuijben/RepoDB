@@ -35,7 +35,7 @@ public sealed class QueryMultipleExtractor : IDisposable
     /// <param name="cache">The cache object to be used.</param>
     /// <param name="isDisposeConnection">The flag that is used to define whether the associated <paramref name="connection"/> object will be disposed during the disposition process.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    internal QueryMultipleExtractor(DbConnection connection = null,
+    internal QueryMultipleExtractor(DbConnection? connection = null,
         DbDataReader? reader = null,
         object? param = null,
         string? cacheKey = null,

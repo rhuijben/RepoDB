@@ -124,7 +124,7 @@ public static partial class BaseRepositoryExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class =>
         await repository.DbRepository.BinaryBulkDeleteAsync<TEntity>(tableName: ClassMappedNameCache.Get<TEntity>(),
@@ -166,7 +166,7 @@ public static partial class BaseRepositoryExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class =>
         await repository.DbRepository.BinaryBulkDeleteAsync<TEntity>(tableName: (tableName ?? ClassMappedNameCache.Get<TEntity>()),

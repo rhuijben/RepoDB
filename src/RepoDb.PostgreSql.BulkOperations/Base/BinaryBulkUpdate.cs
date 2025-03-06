@@ -327,7 +327,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         bool keepIdentity = false,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -434,7 +434,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         bool keepIdentity = false,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var dbSetting = connection.GetDbSetting();
@@ -529,7 +529,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         bool keepIdentity = false,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var dbSetting = connection.GetDbSetting();

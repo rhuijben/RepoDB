@@ -68,7 +68,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         await BinaryBulkDeleteByKeyBaseAsync<TPrimaryKey>(connection: connection,
             tableName: tableName,

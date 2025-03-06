@@ -324,7 +324,7 @@ public static partial class DbRepositoryExtension
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -383,7 +383,7 @@ public static partial class DbRepositoryExtension
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -443,7 +443,7 @@ public static partial class DbRepositoryExtension
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         // Create a connection
@@ -501,7 +501,7 @@ public static partial class DbRepositoryExtension
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         // Create a connection
@@ -559,7 +559,7 @@ public static partial class DbRepositoryExtension
         int? bulkCopyTimeout = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         // Create a connection

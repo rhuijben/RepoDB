@@ -15,7 +15,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
-    public bool Exists(object what = null,
+    public bool Exists(object? what = null,
         string? hints = null,
         string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)

@@ -70,7 +70,7 @@ public static partial class BaseRepositoryExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class =>
         await repository.DbRepository.BinaryBulkDeleteByKeyAsync<TPrimaryKey>(tableName: tableName,

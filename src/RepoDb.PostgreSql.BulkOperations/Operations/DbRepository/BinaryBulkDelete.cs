@@ -341,7 +341,7 @@ public static partial class DbRepositoryExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -403,7 +403,7 @@ public static partial class DbRepositoryExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -466,7 +466,7 @@ public static partial class DbRepositoryExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         // Create a connection
@@ -527,7 +527,7 @@ public static partial class DbRepositoryExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         // Create a connection
@@ -588,7 +588,7 @@ public static partial class DbRepositoryExtension
         int? bulkCopyTimeout = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
 

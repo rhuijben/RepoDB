@@ -156,7 +156,7 @@ internal static class FunctionCache
         string cacheKey,
         IEnumerable<DbField> inputFields,
         IEnumerable<DbField> outputFields,
-        IDbSetting dbSetting = null,
+        IDbSetting? dbSetting = null,
         IDbHelper dbHelper = null) =>
         DataEntityDbParameterSetterCache.Get(entityType,
             cacheKey,
@@ -254,7 +254,7 @@ internal static class FunctionCache
         IEnumerable<DbField> inputFields,
         IEnumerable<DbField> outputFields,
         int batchSize,
-        IDbSetting dbSetting = null,
+        IDbSetting? dbSetting = null,
         IDbHelper dbHelper = null) =>
         DataEntityListDbParameterSetterCache.Get(entityType, cacheKey, inputFields, outputFields, batchSize, dbSetting, dbHelper);
 
@@ -283,7 +283,7 @@ internal static class FunctionCache
             IEnumerable<DbField> inputFields,
             IEnumerable<DbField> outputFields,
             int batchSize,
-            IDbSetting dbSetting = null,
+            IDbSetting? dbSetting = null,
             IDbHelper dbHelper = null)
         {
             var key = GetKey(entityType, cacheKey, inputFields, outputFields, batchSize);

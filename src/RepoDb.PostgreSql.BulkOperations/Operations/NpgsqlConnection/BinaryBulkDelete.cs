@@ -245,7 +245,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class =>
         BinaryBulkDeleteAsync<TEntity>(connection: connection,
@@ -288,7 +288,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class =>
         await BinaryBulkDeleteBaseAsync<TEntity>(connection: connection,
@@ -332,7 +332,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         BinaryBulkDeleteAsync(connection: connection,
             tableName: table?.TableName,
@@ -374,7 +374,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         await BinaryBulkDeleteBaseAsync(connection: connection,
             tableName: (tableName ?? table?.TableName),
@@ -416,7 +416,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         bool keepIdentity = true,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         await BinaryBulkDeleteBaseAsync(connection: connection,
             tableName: tableName,

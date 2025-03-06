@@ -110,7 +110,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
-        IDbSetting dbSetting = null,
+        IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
         where TEntity : class
     {
@@ -274,7 +274,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
-        IDbSetting dbSetting = null,
+        IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
     {
         var includeIdentity = (identityBehavior == BulkImportIdentityBehavior.KeepIdentity);
@@ -372,7 +372,7 @@ public static partial class NpgsqlConnectionExtension
         DbFieldCollection? dbFields = null,
         int? bulkCopyTimeout = null,
         BulkImportIdentityBehavior identityBehavior = default,
-        IDbSetting dbSetting = null,
+        IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
     {
         var includeIdentity = (identityBehavior == BulkImportIdentityBehavior.KeepIdentity);
@@ -442,7 +442,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         bool keepIdentity = false,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class =>
         BinaryImportAsync<TEntity>(connection,
@@ -479,7 +479,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         bool keepIdentity = false,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -522,8 +522,8 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
-        IDbSetting dbSetting = null,
-        NpgsqlTransaction transaction = null,
+        IDbSetting? dbSetting = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -617,7 +617,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         bool keepIdentity = false,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         BinaryImportAsync(connection,
             table?.TableName,
@@ -653,7 +653,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         bool keepIdentity = false,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         tableName ??= table?.TableName;
@@ -697,8 +697,8 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
-        IDbSetting dbSetting = null,
-        NpgsqlTransaction transaction = null,
+        IDbSetting? dbSetting = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var includeIdentity = (identityBehavior == BulkImportIdentityBehavior.KeepIdentity);
@@ -768,7 +768,7 @@ public static partial class NpgsqlConnectionExtension
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
         int? bulkCopyTimeout = null,
         bool keepIdentity = false,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         await BinaryImportAsync(connection,
             tableName,
@@ -802,8 +802,8 @@ public static partial class NpgsqlConnectionExtension
         DbFieldCollection? dbFields = null,
         int? bulkCopyTimeout = null,
         BulkImportIdentityBehavior identityBehavior = default,
-        IDbSetting dbSetting = null,
-        NpgsqlTransaction transaction = null,
+        IDbSetting? dbSetting = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var includeIdentity = (identityBehavior == BulkImportIdentityBehavior.KeepIdentity);

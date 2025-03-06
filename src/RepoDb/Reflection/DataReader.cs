@@ -106,7 +106,7 @@ public static class DataReader
     /// <returns>An array of dynamic objects.</returns>
     public static async IAsyncEnumerable<dynamic> ToEnumerableAsync(DbDataReader reader,
         DbFieldCollection? dbFields = null,
-        IDbSetting dbSetting = null,
+        IDbSetting? dbSetting = null,
         [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         if (reader?.IsClosed != false || !reader.HasRows) yield break;

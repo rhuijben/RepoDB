@@ -27,7 +27,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        IDbSetting dbSetting = null,
+        IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
     {
         var commandText = pseudoTableType == BulkImportPseudoTableType.Physical ?
@@ -59,8 +59,8 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        IDbSetting dbSetting = null,
-        NpgsqlTransaction transaction = null,
+        IDbSetting? dbSetting = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var commandText = pseudoTableType == BulkImportPseudoTableType.Physical ?
@@ -124,7 +124,7 @@ public static partial class NpgsqlConnectionExtension
     private static async Task<int> MergeToPseudoTableAsync(NpgsqlConnection connection,
         Func<string> getMergeToPseudoCommandText,
         int? bulkCopyTimeout = null,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var commandText = getMergeToPseudoCommandText();
@@ -146,7 +146,7 @@ public static partial class NpgsqlConnectionExtension
     private static async Task<IEnumerable<IdentityResult>> MergeToPseudoTableWithIdentityResultsAsync(NpgsqlConnection connection,
         Func<string> getMergeToPseudoCommandText,
         int? bulkCopyTimeout = null,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         var commandText = getMergeToPseudoCommandText();
@@ -193,7 +193,7 @@ public static partial class NpgsqlConnectionExtension
     private static async Task DropPseudoTableAsync(NpgsqlConnection connection,
         string tableName,
         int? bulkCopyTimeout = null,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(tableName))
@@ -223,7 +223,7 @@ public static partial class NpgsqlConnectionExtension
         string tableName,
         IEnumerable<Field> fields,
         int? bulkCopyTimeout = null,
-        IDbSetting dbSetting = null,
+        IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
     {
         if (fields?.Any() != true)
@@ -253,8 +253,8 @@ public static partial class NpgsqlConnectionExtension
         string tableName,
         IEnumerable<Field> fields,
         int? bulkCopyTimeout = null,
-        IDbSetting dbSetting = null,
-        NpgsqlTransaction transaction = null,
+        IDbSetting? dbSetting = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
         if (fields?.Any() != true)

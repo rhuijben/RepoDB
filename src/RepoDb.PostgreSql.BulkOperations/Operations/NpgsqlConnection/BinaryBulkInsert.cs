@@ -228,7 +228,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class =>
         BinaryBulkInsertAsync<TEntity>(connection: connection,
@@ -268,7 +268,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class =>
         await BinaryBulkInsertBaseAsync<TEntity>(connection: connection,
@@ -309,7 +309,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         BinaryBulkInsertAsync(connection: connection,
             tableName: table?.TableName,
@@ -348,7 +348,7 @@ public static partial class NpgsqlConnectionExtension
         int? batchSize = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         await BinaryBulkInsertBaseAsync(connection: connection,
             tableName: (tableName ?? table?.TableName),
@@ -387,7 +387,7 @@ public static partial class NpgsqlConnectionExtension
         int? bulkCopyTimeout = null,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
-        NpgsqlTransaction transaction = null,
+        NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
         await BinaryBulkInsertBaseAsync(connection: connection,
             tableName: tableName,
