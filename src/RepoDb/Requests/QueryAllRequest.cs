@@ -22,8 +22,8 @@ internal class QueryAllRequest : BaseRequest
     public QueryAllRequest(Type type,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(ClassMappedNameCache.Get(type),
@@ -50,8 +50,8 @@ internal class QueryAllRequest : BaseRequest
     public QueryAllRequest(string name,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : base(name,

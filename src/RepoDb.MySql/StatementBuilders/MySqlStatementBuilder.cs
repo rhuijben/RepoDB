@@ -26,7 +26,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
     /// <param name="convertFieldResolver">The resolver used when converting a field in the database layer.</param>
     /// <param name="averageableClientTypeResolver">The resolver used to identity the type for average.</param>
     public MySqlStatementBuilder(IDbSetting dbSetting,
-        IResolver<Field, IDbSetting, string> convertFieldResolver = null,
+        IResolver<Field, IDbSetting, string>? convertFieldResolver = null,
         IResolver<Type, Type> averageableClientTypeResolver = null)
         : base(dbSetting,
               convertFieldResolver,
@@ -50,7 +50,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         IEnumerable<Field> fields,
         int page,
         int rowsPerBatch,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         QueryGroup? where = null,
         string? hints = null)
     {
@@ -201,7 +201,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsert(string tableName,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         DbField? primaryField = null,
         DbField? identityField = null,
         string? hints = null)
@@ -249,7 +249,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsertAll(string tableName,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         int batchSize = 1,
         DbField? primaryField = null,
         DbField? identityField = null,
@@ -650,7 +650,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
     public override string CreateQuery(string tableName,
         IEnumerable<Field> fields,
         QueryGroup? where = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = null,
         string? hints = null)
     {
@@ -707,7 +707,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         IEnumerable<Field> fields,
         int skip,
         int take,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         QueryGroup? where = null,
         string? hints = null)
     {

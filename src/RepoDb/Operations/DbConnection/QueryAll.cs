@@ -31,8 +31,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     public static IEnumerable<TEntity> QueryAll<TEntity>(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -77,8 +77,8 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public static IEnumerable<TEntity> QueryAll<TEntity>(this IDbConnection connection,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -125,8 +125,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static IEnumerable<TEntity> QueryAllInternal<TEntity>(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -183,8 +183,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     public static Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -232,8 +232,8 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public static Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(this IDbConnection connection,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -283,8 +283,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static async Task<IEnumerable<TEntity>> QueryAllAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -341,8 +341,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     public static IEnumerable<dynamic> QueryAll(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -387,8 +387,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static IEnumerable<dynamic> QueryAllInternal(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -438,8 +438,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     public static Task<IEnumerable<dynamic>> QueryAllAsync(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -487,8 +487,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static Task<IEnumerable<dynamic>> QueryAllAsyncInternal(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -540,8 +540,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static IEnumerable<TEntity> QueryAllInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
@@ -625,8 +625,8 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static async Task<IEnumerable<TEntity>> QueryAllAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,

@@ -19,7 +19,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of affected rows during the merge process.</returns>
     public int MergeAll(IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null)
@@ -46,7 +46,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public int MergeAll(IEnumerable<TEntity> entities,
         IEnumerable<Field> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null)
@@ -74,7 +74,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public int MergeAll(IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object>> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null)
@@ -105,7 +105,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of affected rows during the merge process.</returns>
     public Task<int> MergeAllAsync(IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null,
@@ -135,7 +135,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public Task<int> MergeAllAsync(IEnumerable<TEntity> entities,
         IEnumerable<Field> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null,
@@ -166,7 +166,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public Task<int> MergeAllAsync(IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object>> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         string traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null,

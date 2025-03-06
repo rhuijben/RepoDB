@@ -17,7 +17,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="convertFieldResolver">The resolver used when converting a field in the database layer.</param>
     /// <param name="averageableClientTypeResolver">The resolver used to identity the type for average.</param>
     public BaseStatementBuilder(IDbSetting dbSetting,
-        IResolver<Field, IDbSetting, string> convertFieldResolver = null,
+        IResolver<Field, IDbSetting, string>? convertFieldResolver = null,
         IResolver<Type, Type> averageableClientTypeResolver = null)
     {
         DbSetting = dbSetting ?? throw new ArgumentNullException("The database setting cannot be null.");
@@ -342,7 +342,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public virtual string CreateInsert(string tableName,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         DbField? primaryField = null,
         DbField? identityField = null,
         string? hints = null)
@@ -416,7 +416,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public virtual string CreateInsertAll(string tableName,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         int batchSize = Constant.DefaultBatchOperationSize,
         DbField? primaryField = null,
         DbField? identityField = null,
@@ -711,7 +711,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     public virtual string CreateQuery(string tableName,
         IEnumerable<Field> fields,
         QueryGroup? where = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = null,
         string? hints = null)
     {
@@ -760,7 +760,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <returns>A sql statement for query operation.</returns>
     public virtual string CreateQueryAll(string tableName,
         IEnumerable<Field> fields,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null)
     {
         // Guard the target table
@@ -1102,7 +1102,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         IEnumerable<Field> fields,
         int page,
         int rowsPerBatch,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         QueryGroup? where = null,
         string? hints = null);
 
@@ -1169,7 +1169,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         IEnumerable<Field> fields,
         int skip,
         int take,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         QueryGroup? where = null,
         string? hints = null);
 

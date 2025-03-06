@@ -39,7 +39,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public object Sum(Field field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
@@ -83,7 +83,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public object Sum(Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
@@ -149,7 +149,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public object Sum(Expression<Func<TEntity, object>> field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
@@ -193,7 +193,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public object Sum(Expression<Func<TEntity, object>> field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
@@ -259,7 +259,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public TResult Sum<TResult>(Field field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
@@ -303,7 +303,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public TResult Sum<TResult>(Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
@@ -369,7 +369,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public TResult Sum<TResult>(Expression<Func<TEntity, TResult>> field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
@@ -413,7 +413,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public TResult Sum<TResult>(Expression<Func<TEntity, TResult>> field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
@@ -487,7 +487,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public Task<object> SumAsync(Field field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null,
@@ -537,7 +537,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public Task<object> SumAsync(Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null,
@@ -612,7 +612,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public Task<object> SumAsync(Expression<Func<TEntity, object>> field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null,
@@ -662,7 +662,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public Task<object> SumAsync(Expression<Func<TEntity, object>> field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null,
@@ -737,7 +737,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public Task<TResult> SumAsync<TResult>(Field field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null,
@@ -787,7 +787,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public Task<TResult> SumAsync<TResult>(Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null,
@@ -862,7 +862,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public Task<TResult> SumAsync<TResult>(Expression<Func<TEntity, TResult>> field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null,
@@ -912,7 +912,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public Task<TResult> SumAsync<TResult>(Expression<Func<TEntity, TResult>> field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null,

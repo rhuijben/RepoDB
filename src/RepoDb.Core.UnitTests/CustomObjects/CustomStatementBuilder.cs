@@ -16,7 +16,7 @@ public class CustomStatementBuilder : IStatementBuilder
         return string.Empty;
     }
 
-    public string CreateBatchQuery(string tableName, IEnumerable<Field> fields, int page, int rowsPerBatch, IEnumerable<OrderField> orderBy = null, QueryGroup? where = null, string? hints = null)
+    public string CreateBatchQuery(string tableName, IEnumerable<Field> fields, int page, int rowsPerBatch, IEnumerable<OrderField>? orderBy = null, QueryGroup? where = null, string? hints = null)
     {
         return string.Empty;
     }
@@ -46,12 +46,12 @@ public class CustomStatementBuilder : IStatementBuilder
         return string.Empty;
     }
 
-    public string CreateInsert(string tableName, IEnumerable<Field> fields = null, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public string CreateInsert(string tableName, IEnumerable<Field>? fields = null, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
     {
         return string.Empty;
     }
 
-    public string CreateInsertAll(string tableName, IEnumerable<Field> fields = null, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public string CreateInsertAll(string tableName, IEnumerable<Field>? fields = null, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
     {
         return string.Empty;
     }
@@ -86,17 +86,17 @@ public class CustomStatementBuilder : IStatementBuilder
         return string.Empty;
     }
 
-    public string CreateQuery(string tableName, IEnumerable<Field> fields, QueryGroup? where = null, IEnumerable<OrderField> orderBy = null, int? top = null, string? hints = null)
+    public string CreateQuery(string tableName, IEnumerable<Field> fields, QueryGroup? where = null, IEnumerable<OrderField>? orderBy = null, int? top = null, string? hints = null)
     {
         return string.Empty;
     }
 
-    public string CreateQueryAll(string tableName, IEnumerable<Field> fields, IEnumerable<OrderField> orderBy = null, string? hints = null)
+    public string CreateQueryAll(string tableName, IEnumerable<Field> fields, IEnumerable<OrderField>? orderBy = null, string? hints = null)
     {
         return string.Empty;
     }
 
-    public string CreateSkipQuery(string tableName, IEnumerable<Field> fields, int skip, int take, IEnumerable<OrderField> orderBy = null, QueryGroup? where = null, string? hints = null)
+    public string CreateSkipQuery(string tableName, IEnumerable<Field> fields, int skip, int take, IEnumerable<OrderField>? orderBy = null, QueryGroup? where = null, string? hints = null)
     {
         return string.Empty;
     }
@@ -140,14 +140,14 @@ public class CustomBaseStatementBuilder : BaseStatementBuilder
     }
 
     public CustomBaseStatementBuilder(IDbSetting dbSetting,
-        IResolver<Field, IDbSetting, string> convertFieldResolver = null,
+        IResolver<Field, IDbSetting, string>? convertFieldResolver = null,
         IResolver<Type, Type> averageableClientTypeResolver = null)
         : base(dbSetting,
               convertFieldResolver,
               averageableClientTypeResolver)
     {}
 
-    public override string CreateBatchQuery(string tableName, IEnumerable<Field> fields, int page, int rowsPerBatch, IEnumerable<OrderField> orderBy = null, QueryGroup? where = null, string? hints = null)
+    public override string CreateBatchQuery(string tableName, IEnumerable<Field> fields, int page, int rowsPerBatch, IEnumerable<OrderField>? orderBy = null, QueryGroup? where = null, string? hints = null)
     {
         return string.Empty;
     }
@@ -162,7 +162,7 @@ public class CustomBaseStatementBuilder : BaseStatementBuilder
         return string.Empty;
     }
 
-    public override string CreateSkipQuery(string tableName, IEnumerable<Field> fields, int skip, int take, IEnumerable<OrderField> orderBy = null, QueryGroup? where = null, string? hints = null)
+    public override string CreateSkipQuery(string tableName, IEnumerable<Field> fields, int skip, int take, IEnumerable<OrderField>? orderBy = null, QueryGroup? where = null, string? hints = null)
     {
         return string.Empty;
     }

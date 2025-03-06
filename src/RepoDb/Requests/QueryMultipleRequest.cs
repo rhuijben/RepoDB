@@ -26,9 +26,9 @@ internal sealed class QueryMultipleRequest : BaseRequest
         Type type,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         QueryGroup? where = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -63,9 +63,9 @@ internal sealed class QueryMultipleRequest : BaseRequest
         string name,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         QueryGroup? where = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)

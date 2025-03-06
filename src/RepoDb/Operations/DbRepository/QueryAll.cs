@@ -21,8 +21,8 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> QueryAll<TEntity>(string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         string traceKey = TraceKeys.QueryAll,
@@ -66,8 +66,8 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public IEnumerable<TEntity> QueryAll<TEntity>(IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+    public IEnumerable<TEntity> QueryAll<TEntity>(IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         string traceKey = TraceKeys.QueryAll,
@@ -117,8 +117,8 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public async Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         string traceKey = TraceKeys.QueryAll,
@@ -165,8 +165,8 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public async Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+    public async Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         string traceKey = TraceKeys.QueryAll,
@@ -216,8 +216,8 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<dynamic> QueryAll(string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         string traceKey = TraceKeys.QueryAll,
@@ -266,8 +266,8 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public async Task<IEnumerable<dynamic>> QueryAllAsync(string tableName,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
         string traceKey = TraceKeys.QueryAll,

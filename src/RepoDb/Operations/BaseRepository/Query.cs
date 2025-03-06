@@ -22,8 +22,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(string tableName,
         object what,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -57,8 +57,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query<TWhat>(string tableName,
         TWhat what,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -91,8 +91,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(string tableName,
         Expression<Func<TEntity, bool>> where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -125,8 +125,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(string tableName,
         QueryField where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -159,8 +159,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(string tableName,
         IEnumerable<QueryField> where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -193,8 +193,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(string tableName,
         QueryGroup where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -225,8 +225,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(object what,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -257,8 +257,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query<TWhat>(TWhat what,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -288,8 +288,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(Expression<Func<TEntity, bool>> where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -319,8 +319,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(QueryField where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -350,8 +350,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(IEnumerable<QueryField> where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -381,8 +381,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public IEnumerable<TEntity> Query(QueryGroup where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -419,8 +419,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(string tableName,
         object what,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -457,8 +457,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync<TWhat>(string tableName,
         TWhat what,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -494,8 +494,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(string tableName,
         Expression<Func<TEntity, bool>> where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -531,8 +531,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(string tableName,
         QueryField where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -568,8 +568,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(string tableName,
         IEnumerable<QueryField> where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -605,8 +605,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(string tableName,
         QueryGroup where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -640,8 +640,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(object what,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -675,8 +675,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync<TWhat>(TWhat what,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -709,8 +709,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(Expression<Func<TEntity, bool>> where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -743,8 +743,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(QueryField where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -777,8 +777,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(IEnumerable<QueryField> where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
@@ -811,8 +811,8 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
     public Task<IEnumerable<TEntity>> QueryAsync(QueryGroup where,
-        IEnumerable<Field> fields = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<Field>? fields = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,

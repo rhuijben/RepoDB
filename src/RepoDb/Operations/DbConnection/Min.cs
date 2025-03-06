@@ -65,7 +65,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static object Min<TEntity>(this IDbConnection connection,
         Field field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -137,7 +137,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static object Min<TEntity>(this IDbConnection connection,
         Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -245,7 +245,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static object Min<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object>> field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -317,7 +317,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static object Min<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object>> field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -478,7 +478,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static TResult Min<TEntity, TResult>(this IDbConnection connection,
         Field field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -552,7 +552,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static TResult Min<TEntity, TResult>(this IDbConnection connection,
         Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -663,7 +663,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static TResult Min<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -737,7 +737,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static TResult Min<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -906,7 +906,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static Task<object> MinAsync<TEntity>(this IDbConnection connection,
         Field field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -984,7 +984,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static Task<object> MinAsync<TEntity>(this IDbConnection connection,
         Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -1101,7 +1101,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static Task<object> MinAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object>> field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -1179,7 +1179,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static Task<object> MinAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object>> field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -1352,7 +1352,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static Task<TResult> MinAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -1432,7 +1432,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static Task<TResult> MinAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -1552,7 +1552,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static Task<TResult> MinAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -1632,7 +1632,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     public static Task<TResult> MinAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -1844,7 +1844,7 @@ public static partial class DbConnectionExtension
     public static object Min(this IDbConnection connection,
         string tableName,
         Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -2046,7 +2046,7 @@ public static partial class DbConnectionExtension
     public static TResult Min<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -2258,7 +2258,7 @@ public static partial class DbConnectionExtension
     public static Task<object> MinAsync(this IDbConnection connection,
         string tableName,
         Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,
@@ -2475,7 +2475,7 @@ public static partial class DbConnectionExtension
     public static Task<TResult> MinAsync<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Min,

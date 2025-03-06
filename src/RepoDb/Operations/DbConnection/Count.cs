@@ -60,7 +60,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static long Count<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Count,
@@ -126,7 +126,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static long Count<TEntity>(this IDbConnection connection,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Count,
@@ -281,7 +281,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static Task<long> CountAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, bool>> where = null,
+        Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Count,
@@ -353,7 +353,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static Task<long> CountAsync<TEntity>(this IDbConnection connection,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Count,
@@ -548,7 +548,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static long Count(this IDbConnection connection,
         string tableName,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Count,
@@ -743,7 +743,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static Task<long> CountAsync(this IDbConnection connection,
         string tableName,
-        IEnumerable<QueryField> where = null,
+        IEnumerable<QueryField>? where = null,
         string? hints = null,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Count,

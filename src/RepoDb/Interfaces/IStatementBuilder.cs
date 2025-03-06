@@ -55,7 +55,7 @@ public interface IStatementBuilder
         IEnumerable<Field> fields,
         int page,
         int rowsPerBatch,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         QueryGroup? where = null,
         string? hints = null);
 
@@ -78,7 +78,7 @@ public interface IStatementBuilder
         IEnumerable<Field> fields,
         int skip,
         int take,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         QueryGroup? where = null,
         string? hints = null);
 
@@ -167,7 +167,7 @@ public interface IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     string CreateInsert(string tableName,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         DbField? primaryField = null,
         DbField? identityField = null,
         string? hints = null);
@@ -187,7 +187,7 @@ public interface IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     string CreateInsertAll(string tableName,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         int batchSize = Constant.DefaultBatchOperationSize,
         DbField? primaryField = null,
         DbField? identityField = null,
@@ -318,7 +318,7 @@ public interface IStatementBuilder
     string CreateQuery(string tableName,
         IEnumerable<Field> fields,
         QueryGroup? where = null,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         int? top = null,
         string? hints = null);
 
@@ -336,7 +336,7 @@ public interface IStatementBuilder
     /// <returns>A sql statement for query operation.</returns>
     string CreateQueryAll(string tableName,
         IEnumerable<Field> fields,
-        IEnumerable<OrderField> orderBy = null,
+        IEnumerable<OrderField>? orderBy = null,
         string? hints = null);
 
     #endregion

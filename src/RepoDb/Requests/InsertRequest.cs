@@ -21,7 +21,7 @@ internal sealed class InsertRequest : BaseRequest
     public InsertRequest(Type type,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(type,
@@ -45,7 +45,7 @@ internal sealed class InsertRequest : BaseRequest
     public InsertRequest(string name,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(null,
@@ -71,7 +71,7 @@ internal sealed class InsertRequest : BaseRequest
         string name,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : base(name ?? ClassMappedNameCache.Get(type),

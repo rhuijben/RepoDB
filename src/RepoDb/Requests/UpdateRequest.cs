@@ -23,7 +23,7 @@ internal sealed class UpdateRequest : BaseRequest
         IDbConnection connection,
         IDbTransaction transaction,
         QueryGroup? where = null,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(ClassMappedNameCache.Get(type),
@@ -51,7 +51,7 @@ internal sealed class UpdateRequest : BaseRequest
         IDbConnection connection,
         IDbTransaction transaction,
         QueryGroup? where = null,
-        IEnumerable<Field> fields = null,
+        IEnumerable<Field>? fields = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : base(name,
