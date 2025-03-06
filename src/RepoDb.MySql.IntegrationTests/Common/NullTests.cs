@@ -13,7 +13,7 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<MysqlDbInstance>
     public override DbConnection CreateConnection() => new MySqlConnection(Database.ConnectionString);
 
     public override string UuidDbType => "CHAR(38)";
-    public override string DateTimeOffsetDbType => "VARCHAR"; // DateTimeOffset is not supported in MySQL
+    public override string DateTimeOffsetDbType => "varchar(64)"; // DateTimeOffset is not supported in MySQL
 
     public override string GeneratedColumnDefinition(string expression, string type) => $"{type} {base.GeneratedColumnDefinition(expression, type)} STORED";
 

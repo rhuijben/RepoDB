@@ -877,10 +877,26 @@ public static class DbCommandExtension
         {
             return dt;
         }
+        else if (fromType == StaticType.DateTime && targetType == StaticType.String)
+        {
+            return ((DateTime)value!).ToString("o", CultureInfo.InvariantCulture);
+        }
+        else if (fromType == StaticType.DateTimeOffset && targetType == StaticType.String)
+        {
+            return ((DateTimeOffset)value!).ToString("o", CultureInfo.InvariantCulture);
+        }
 #if NET
         else if (fromType == StaticType.DateOnly && targetType == StaticType.DateTime)
         {
             return AutomaticConvertDateOnlyToDateTime(value);
+        }
+        else if (fromType == StaticType.TimeOnly && targetType == StaticType.String)
+        {
+            return ((TimeOnly)value!).ToString("o", CultureInfo.InvariantCulture);
+        }
+        else if (fromType == StaticType.DateOnly && targetType == StaticType.String)
+        {
+            return ((TimeOnly)value!).ToString("d", CultureInfo.InvariantCulture);
         }
 #endif
         else
