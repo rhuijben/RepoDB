@@ -90,7 +90,7 @@ internal sealed class QueryMultipleRequest : BaseRequest
     /// <summary>
     /// Gets the list of the target fields.
     /// </summary>
-    public IEnumerable<Field> Fields { get; set; }
+    public IEnumerable<Field> Fields { get; init; }
 
     /// <summary>
     /// Gets the query expression used.

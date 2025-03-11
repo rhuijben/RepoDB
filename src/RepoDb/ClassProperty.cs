@@ -10,7 +10,7 @@ namespace RepoDb;
 /// <summary>
 /// A class that wraps the <see cref="PropertyInfo"/> object. This class is used to extract the information from the <see cref="System.Reflection.PropertyInfo"/> object in a fast and efficient manner.
 /// </summary>
-public class ClassProperty : IEquatable<ClassProperty>
+public sealed class ClassProperty : IEquatable<ClassProperty>
 {
     /// <summary>
     /// Creates a new instance of <see cref="ClassProperty"/> object.

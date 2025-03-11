@@ -115,7 +115,7 @@ public partial class QueryField : IEquatable<QueryField>
     /// <summary>
     /// Gets the in-used instance of database parameter object.
     /// </summary>
-    public IDbDataParameter DbParameter { get; set; }
+    internal IDbDataParameter DbParameter { get; set; }
 
     #endregion
 

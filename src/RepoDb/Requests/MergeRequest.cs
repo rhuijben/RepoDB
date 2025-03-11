@@ -96,12 +96,12 @@ internal sealed class MergeRequest : BaseRequest
     /// <summary>
     /// Gets the list of the target fields.
     /// </summary>
-    public IEnumerable<Field> Fields { get; set; }
+    public IEnumerable<Field> Fields { get; init; }
 
     /// <summary>
     /// Gets the qualifier <see cref="Field"/> objects.
     /// </summary>
-    public IEnumerable<Field> Qualifiers { get; set; }
+    public IEnumerable<Field> Qualifiers { get; init; }
 
     /// <summary>
     /// Gets the hints for the table.

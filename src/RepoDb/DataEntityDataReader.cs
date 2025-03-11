@@ -1,6 +1,6 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Data;
 using System.Data.Common;
-using System.Collections;
 using RepoDb.Extensions;
 
 namespace RepoDb;
@@ -153,17 +153,17 @@ public class DataEntityDataReader<TEntity> : DbDataReader
     /// <summary>
     /// Gets the type of the entities.
     /// </summary>
-    private Type EntityType { get; set; }
+    private Type EntityType { get; }
 
     /// <summary>
     /// Gets the properties of data entity object.
     /// </summary>
-    private IList<ClassProperty> Properties { get; set; }
+    private IList<ClassProperty> Properties { get; }
 
     /// <summary>
     /// Gets the fields of the dictionary.
     /// </summary>
-    private IList<Field> Fields { get; set; }
+    private IReadOnlyList<Field> Fields { get; }
 
     /// <summary>
     /// Gets a value that indicates whether the ordering column is defined.
@@ -234,7 +234,6 @@ public class DataEntityDataReader<TEntity> : DbDataReader
     {
         base.Dispose();
         Entities = null;
-        Properties = null;
         Enumerator = null;
         Close();
         isDisposed = true;
@@ -515,8 +514,14 @@ public class DataEntityDataReader<TEntity> : DbDataReader
         }
         else
         {
-            return Fields.IndexOf(Fields.FirstOrDefault(f =>
-                string.Equals(f.Name, name, StringComparison.OrdinalIgnoreCase)));
+            for (int i = 0; i < Fields.Count; i++)
+            {
+                if (string.Equals(Fields[i].Name, name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
     }
 

@@ -105,17 +105,17 @@ internal class MergeAllRequest : BaseRequest
     /// <summary>
     /// Gets the list of the target fields.
     /// </summary>
-    public IEnumerable<Field> Fields { get; set; }
+    public IEnumerable<Field> Fields { get; init; }
 
     /// <summary>
     /// Gets the qualifier <see cref="Field"/> objects.
     /// </summary>
-    public IEnumerable<Field>? Qualifiers { get; set; }
+    public IEnumerable<Field>? Qualifiers { get; init; }
 
     /// <summary>
     /// Gets the size batch of the update operation.
     /// </summary>
-    public int BatchSize { get; set; }
+    public int BatchSize { get; init; }
 
     /// <summary>
     /// Gets the hints for the table.

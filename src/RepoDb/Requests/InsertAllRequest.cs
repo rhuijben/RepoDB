@@ -96,12 +96,12 @@ internal sealed class InsertAllRequest : BaseRequest
     /// <summary>
     /// Gets the target fields.
     /// </summary>
-    public IEnumerable<Field> Fields { get; set; }
+    public IEnumerable<Field> Fields { get; init; }
 
     /// <summary>
     /// Gets the size batch of the insertion.
     /// </summary>
-    public int BatchSize { get; set; }
+    public int BatchSize { get; init; }
 
     /// <summary>
     /// Gets the hints for the table.
