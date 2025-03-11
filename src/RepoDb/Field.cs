@@ -173,7 +173,7 @@ public class Field : IEquatable<Field>
     /// <typeparam name="TResult">The type of the result and the property to be parsed.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>An enumerable list of <see cref="Field"/> objects.</returns>
-    public static IEnumerable<Field> Parse<TEntity, TResult>(Expression<Func<TEntity, TResult>> expression)
+    public static IEnumerable<Field> Parse<TEntity, TResult>(Expression<Func<TEntity, TResult?>> expression)
         where TEntity : class
     {
         return expression.Body switch
@@ -261,7 +261,7 @@ public class Field : IEquatable<Field>
                 .Select(classProperty => classProperty.PropertyInfo);
             return (classProperties ?? properties).Select(property => property.AsField());
         }
-        return null;
+        return Enumerable.Empty<Field>();
     }
 
     #endregion
