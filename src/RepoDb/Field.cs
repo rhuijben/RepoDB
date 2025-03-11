@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿#nullable enable
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using RepoDb.Exceptions;
@@ -127,7 +128,7 @@ public class Field : IEquatable<Field>
     /// Parses a type and creates an enumerable of <see cref="Field"/> objects.
     /// </summary>
     /// <returns>An enumerable of <see cref="Field"/> objects.</returns>
-    public static IEnumerable<Field> Parse(Type type)
+    public static IEnumerable<Field> Parse(Type? type)
     {
         if (type != null)
         {
@@ -202,7 +203,7 @@ public class Field : IEquatable<Field>
             {
                 MemberExpression memberExpression => Parse<TEntity>(memberExpression),
                 BinaryExpression binaryExpression => Parse<TEntity>(binaryExpression),
-                _ => null
+                _ => throw new InvalidExpressionException($"Expression '{expression}' is invalid.")
             };
         }
         else
