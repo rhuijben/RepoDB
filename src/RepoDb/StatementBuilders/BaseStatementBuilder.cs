@@ -74,7 +74,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         }
         else
         {
-            field.Type = AverageableClientTypeResolver?.Resolve(field.Type ?? DbSetting.AverageableType);
+            field = new Field(field.Name, AverageableClientTypeResolver?.Resolve(field.Type ?? DbSetting.AverageableType));
         }
 
         // Initialize the builder
@@ -123,7 +123,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         }
         else
         {
-            field.Type = AverageableClientTypeResolver?.Resolve(field.Type ?? DbSetting.AverageableType);
+            field = new(field.Name, AverageableClientTypeResolver?.Resolve(field.Type ?? DbSetting.AverageableType));
         }
 
         // Initialize the builder

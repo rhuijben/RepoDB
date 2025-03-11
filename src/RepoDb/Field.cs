@@ -28,7 +28,7 @@ public class Field : IEquatable<Field>
     /// <param name="name">The name of the field.</param>
     /// <param name="type">The type of the field.</param>
     public Field(string name,
-        Type type)
+        Type? type)
     {
         // Name is required
         if (string.IsNullOrWhiteSpace(name))
@@ -51,9 +51,9 @@ public class Field : IEquatable<Field>
     public string Name { get; }
 
     /// <summary>
-    /// Gets or sets the type of the field.
+    /// Gets the type of the field.
     /// </summary>
-    public Type Type { get; set; }
+    public Type? Type { get; }
 
     #endregion
 
