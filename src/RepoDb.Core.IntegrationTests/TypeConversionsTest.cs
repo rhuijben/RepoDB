@@ -672,6 +672,17 @@ public class TypeConversionsTest
             // Assert
             Assert.AreEqual(Direction.South, data); // Flag behavior
             Assert.AreEqual(Direction.North | Direction.West, data2); // Flag behavior
+
+
+            Assert.AreEqual(Direction.South, connection.ExecuteScalar<Direction>("SELECT 'North, East' AS Value;"));
+            Assert.AreEqual(Direction.South, connection.ExecuteScalar<Direction?>("SELECT 'North, East' AS Value;"));
+
+
+            Assert.AreEqual(Direction.South, connection.ExecuteScalar<Direction>("SELECT '3' AS Value;"));
+            Assert.AreEqual(Direction.South, connection.ExecuteScalar<Direction?>("SELECT '3' AS Value;"));
+
+            Assert.AreEqual(Direction.South, connection.ExecuteScalar<Direction>("SELECT '3' AS Value;"));
+            Assert.AreEqual(Direction.South, connection.ExecuteScalar<Direction?>("SELECT '3' AS Value;"));
         }
 
         GlobalConfiguration.Setup(new() { EnumHandling = InvalidEnumValueHandling.UseDefault });

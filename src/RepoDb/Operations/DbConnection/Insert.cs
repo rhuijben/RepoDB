@@ -2,6 +2,7 @@
 using System.Data.Common;
 using RepoDb.Contexts.Providers;
 using RepoDb.Interfaces;
+using RepoDb.Reflection;
 
 namespace RepoDb;
 

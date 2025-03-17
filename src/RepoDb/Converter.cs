@@ -23,7 +23,7 @@ public static class Converter
     /// <param name="value">The value to be checked for <see cref="DBNull.Value"/>.</param>
     /// <returns>The converted value.</returns>
     public static object DbNullToNull(object value) =>
-        ReferenceEquals(DBNull.Value, value) ? null : value;
+        Convert.IsDBNull(value) ? null : value;
 
     /// <summary>
     /// Converts a value to a target type if the value is equals to null or <see cref="DBNull.Value"/>.
@@ -33,30 +33,139 @@ public static class Converter
     /// <returns>The converted value.</returns>
     public static T ToType<T>(object value)
     {
+        value = Converter.DbNullToNull(value);
+
+        if (value is null)
+        {
+            if (!typeof(T).IsValueType)
+            {
+                return default; // null for class types
+            }
+            else if (Nullable.GetUnderlyingType(typeof(T)) is { })
+            {
+                return default; // safe for nullable
+            }
+            else
+            {
+                return default; // or the default empty value
+            }
+        }
+
         if (value is T t)
         {
             return t;
         }
-        if (typeof(T).Equals(StaticType.Guid) && value is string)
+
+
+        var type = typeof(T);
+        if (typeof(T).IsValueType)
         {
-            return (T)StringToGuidAsObject(value);
+            if (Nullable.GetUnderlyingType(type) is { } ut)
+                type = ut;
+
+            if (type.IsEnum)
+            {
+                if (value is string sv)
+                {
+                    var mode = GlobalConfiguration.Options.EnumHandling;
+
+#if NET
+                    if (Enum.TryParse(type, sv, out var parsedValue))
+                    {
+                        if (mode != Enumerations.InvalidEnumValueHandling.ThrowError)
+                            return (T)parsedValue;
+                        else if (Enum.IsDefined(type, parsedValue))
+                            return (T)parsedValue;
+
+                        if (mode == Enumerations.InvalidEnumValueHandling.ThrowError)
+                            throw new ArgumentOutOfRangeException("value", sv, $"The value '{sv}' is not defined in the enum '{type.FullName}'.");
+
+                        return default;
+                    }
+#else
+                    object r = typeof(Converter).GetMethod(nameof(EnumTryParse)).MakeGenericMethod(type).Invoke(null, new object[] { sv });
+
+                    if (r is {})
+                    {
+                        if (mode != Enumerations.InvalidEnumValueHandling.ThrowError)
+                            return (T)r;
+                        else if (Enum.IsDefined(type, r))
+                            return (T)r;
+
+                        if (mode == Enumerations.InvalidEnumValueHandling.ThrowError)
+                            throw new ArgumentOutOfRangeException("value", sv, $"The value '{sv}' is not defined in the enum '{type.FullName}'.");
+
+                        return default;
+                    }
+#endif
+
+                    if (mode == Enumerations.InvalidEnumValueHandling.ThrowError)
+                        throw new ArgumentOutOfRangeException("value", sv, $"The value '{sv}' is not defined in the enum '{type.FullName}'.");
+
+
+                    return default;
+                }
+                else if (value is int or short or long or byte or uint or ushort or ulong or sbyte)
+                {
+                    var underlyingType = Enum.GetUnderlyingType(type);
+
+                    if (underlyingType != type.GetType())
+                        value = Convert.ChangeType(value, underlyingType);
+
+                    return (T)Convert.ChangeType(value, type);
+                }
+                else
+                {
+                    if (GlobalConfiguration.Options.EnumHandling == Enumerations.InvalidEnumValueHandling.ThrowError)
+                        throw new ArgumentOutOfRangeException("value", value, $"The value '{value}' is not defined in the enum '{type.FullName}'.");
+
+                    return default;
+                }
+            }
+            else if (type == StaticType.Guid && value is string sv && Guid.TryParse(sv, out var gv))
+            {
+                return (T)(object)gv;
+            }
+            else if (type == StaticType.DateTime && value is string sv2 && DateTime.TryParse(sv2, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dv))
+            {
+                return (T)(object)dv;
+            }
+            else if (type == StaticType.DateTimeOffset && value is string sv3 && DateTimeOffset.TryParse(sv3, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dtv))
+            {
+                return (T)(object)dtv;
+            }
+            else if (type == StaticType.TimeSpan && value is string sv4 && TimeSpan.TryParse(sv4, CultureInfo.InvariantCulture, out var tsv))
+            {
+                return (T)(object)tsv;
+            }
+#if NET
+            else if (type == StaticType.DateOnly && value is string sv5 && DateOnly.TryParse(sv5, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dov))
+            {
+                return (T)(object)dov;
+            }
+            else if (type == StaticType.TimeOnly && value is string sv6 && TimeOnly.TryParse(sv6, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var tov))
+            {
+                return (T)(object)tov;
+            }
+#endif
         }
-        return value == null || DbNullToNull(value) == null ?
-            default :
-                (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+
+        try
+        {
+            return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+        }
+        catch (InvalidCastException ex)
+        {
+            throw new InvalidCastException($"While converting '{value ?? "null"}' to '{typeof(T).FullName}'", ex);
+        }
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    private static object StringToGuidAsObject(object value)
+
+    static object EnumTryParse<TEnum>(string value)
+        where TEnum : struct, Enum
     {
-        if (Guid.TryParse(value.ToString(), out var result))
-        {
+        if (Enum.TryParse<TEnum>(value, out var result))
             return result;
-        }
         return null;
     }
 

@@ -1926,7 +1926,7 @@ public static partial class DbConnectionExtension
         }
 
         // Execute
-        var result = command.ExecuteScalar() is { } v ? Converter.ToType<TResult>(v) : default;
+        var result = Converter.ToType<TResult>(command.ExecuteScalar());
 
         // After Execution
         Tracer
