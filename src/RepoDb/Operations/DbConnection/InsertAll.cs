@@ -864,7 +864,7 @@ public static partial class DbConnectionExtension
             if (hasTransaction == false)
             {
                 // Rollback for any exception
-                transaction.Rollback();
+                transaction?.Rollback();
             }
             throw;
         }
@@ -873,7 +873,7 @@ public static partial class DbConnectionExtension
             if (hasTransaction == false)
             {
                 // Rollback and dispose the transaction
-                transaction.Dispose();
+                transaction?.Dispose();
             }
         }
 

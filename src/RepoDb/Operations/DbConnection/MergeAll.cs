@@ -1461,21 +1461,12 @@ public static partial class DbConnectionExtension
                 transaction.Commit();
             }
         }
-        catch
-        {
-            if (hasTransaction == false)
-            {
-                // Rollback for any exception
-                transaction.Rollback();
-            }
-            throw;
-        }
         finally
         {
             if (hasTransaction == false)
             {
                 // Rollback and dispose the transaction
-                transaction.Dispose();
+                transaction?.Dispose();
             }
         }
 
