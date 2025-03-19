@@ -66,7 +66,7 @@ public sealed class SqLiteDbHelper : IDbHelper
             null,
             null,
             null,
-            null,
+            reader.GetString(2),
             !reader.IsDBNull(4),
             reader.GetInt32(reader.FieldCount - 1) is 2 /* dynamic generated */ or 3 /* stored generated */,
             "SYSSQLITE");
