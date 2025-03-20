@@ -18,32 +18,12 @@ public class SqLiteDbTypeNameToClientTypeResolver : IResolver<string, Type>
         {
             throw new ArgumentNullException("The DB Type name must not be null.");
         }
-        /*
-        Id : System.Int64
-        ColumnBigInt : System.Int64
-        ColumnBlob : System.Byte[]
-        ColumnBoolean : System.Boolean
-        ColumnChar : System.String
-        ColumnDate : System.DateTime
-        ColumnDateTime : System.DateTime
-        ColumnDecimal : System.Decimal
-        ColumnDouble : System.Double
-        ColumnInteger : System.Int64
-        ColumnInt : System.Int32
-        ColumnNone : System.Double
-        ColumnNumeric : System.Decimal
-        ColumnReal : System.Double
-        ColumnString : System.String
-        ColumnText : System.String
-        ColumnTime : System.DateTime
-        ColumnVarChar : System.String
-         */
         return dbTypeName.ToLowerInvariant() switch
         {
             "bigint" or "integer" => typeof(long),
             "blob" => typeof(byte[]),
             "boolean" => typeof(long),
-            "char" or "string" or "text" or "varchar" => typeof(string),
+            "char" or "string" or "text" or "varchar" or "nvarchar" or "varchar2" => typeof(string),
             "date" or "datetime" => typeof(DateTime),
             "datetimeoffset" => typeof(DateTimeOffset),
             "time" => typeof(DateTime),
@@ -51,6 +31,7 @@ public class SqLiteDbTypeNameToClientTypeResolver : IResolver<string, Type>
             "double" or "real" => typeof(double),
             "int" => typeof(int),
             "none" => typeof(object),
+            _ when (dbTypeName.IndexOfAny(new char[] { '(', ']' }) is { } p && p > 0) => Resolve(dbTypeName.Substring(0, p)), // varchar(3) => varchar, etc.
             _ => typeof(object),
         };
     }

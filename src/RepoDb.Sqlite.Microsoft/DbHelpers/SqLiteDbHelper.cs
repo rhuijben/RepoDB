@@ -58,15 +58,17 @@ public sealed class SqLiteDbHelper : IDbHelper
     private DbField ReaderToDbField(DbDataReader reader,
         string identityFieldName)
     {
+        var dbType = reader.IsDBNull(2) ? null : reader.GetString(2);
+
         return new DbField(reader.GetString(1),
             !reader.IsDBNull(5) && reader.GetBoolean(5),
             string.Equals(reader.GetString(1), identityFieldName, StringComparison.OrdinalIgnoreCase),
             reader.IsDBNull(3) || reader.GetBoolean(3) == false,
-            reader.IsDBNull(2) ? DbTypeResolver.Resolve("text") : DbTypeResolver.Resolve(reader.GetString(2)),
+            DbTypeResolver.Resolve(dbType ?? "text"),
             null,
             null,
             null,
-            null,
+            dbType,
             !reader.IsDBNull(4),
             reader.GetInt32(reader.FieldCount - 1) is 2 /* dynamic generated */ or 3 /* stored generated */,
             "MSSQLITE");
@@ -83,15 +85,17 @@ public sealed class SqLiteDbHelper : IDbHelper
         string identityFieldName,
         CancellationToken cancellationToken = default)
     {
+        var dbType = await reader.IsDBNullAsync(2, cancellationToken) ? null : await reader.GetFieldValueAsync<string>(2, cancellationToken);
+
         return new DbField(await reader.GetFieldValueAsync<string>(1, cancellationToken),
             !await reader.IsDBNullAsync(5, cancellationToken) && Convert.ToBoolean(await reader.GetFieldValueAsync<long>(5, cancellationToken)),
             string.Equals(await reader.GetFieldValueAsync<string>(1, cancellationToken), identityFieldName, StringComparison.OrdinalIgnoreCase),
             await reader.IsDBNullAsync(3, cancellationToken) || Convert.ToBoolean(await reader.GetFieldValueAsync<long>(3, cancellationToken)) == false,
-            await reader.IsDBNullAsync(2, cancellationToken) ? DbTypeResolver.Resolve("text") : DbTypeResolver.Resolve(await reader.GetFieldValueAsync<string>(2, cancellationToken)),
+            DbTypeResolver.Resolve(dbType ?? "text"),
             null,
             null,
             null,
-            null,
+            dbType,
             !await reader.IsDBNullAsync(4, cancellationToken),
             await reader.GetFieldValueAsync<long>(reader.FieldCount - 1, cancellationToken) is 2 /* dynamic generated */ or 3 /* stored generated */,
             "MSSQLITE");
@@ -112,12 +116,12 @@ public sealed class SqLiteDbHelper : IDbHelper
     {
         // Sql text
         var commandText = "SELECT sql FROM [sqlite_master] WHERE name = @TableName AND type = 'table';";
-        var sql = connection.ExecuteScalar<string>(commandText: commandText,
+        var tableDefinition = connection.ExecuteScalar<string>(commandText: commandText,
             param: new { TableName = DataEntityExtension.GetTableName(tableName, DbSetting).AsUnquoted(DbSetting) },
             transaction: transaction);
 
         // Return
-        return GetIdentityFieldNameInternal(sql)?
+        return GetIdentityFieldNameInternal(tableDefinition)?
             .AsUnquoted(connection.GetDbSetting())?
             .Replace(doubleQuote, string.Empty);
     }
@@ -139,13 +143,13 @@ public sealed class SqLiteDbHelper : IDbHelper
     {
         // Sql text
         var commandText = "SELECT sql FROM [sqlite_master] WHERE name = @TableName AND type = 'table';";
-        var sql = await connection.ExecuteScalarAsync<string>(commandText: commandText,
+        var tableDefinition = await connection.ExecuteScalarAsync<string>(commandText: commandText,
             param: new { TableName = DataEntityExtension.GetTableName(tableName, DbSetting).AsUnquoted(DbSetting) },
             transaction: transaction,
             cancellationToken: cancellationToken);
 
         // Return
-        return GetIdentityFieldNameInternal(sql)?
+        return GetIdentityFieldNameInternal(tableDefinition)?
             .AsUnquoted(connection.GetDbSetting())?
             .Replace(doubleQuote, string.Empty);
     }
@@ -157,36 +161,33 @@ public sealed class SqLiteDbHelper : IDbHelper
     /// <returns></returns>
     private string GetIdentityFieldNameInternal(string sql)
     {
-        // Sql text
-        var fields = ParseTableFieldsFromSql(sql);
+        // Get fieldname
+        var identityField = TokenizeSchema(sql.AsMemory()).FirstOrDefault(def => IsIdentity(def.Definition));
 
-        // Iterate the fields
-        if (fields?.Length > 0)
+        if (identityField.FieldName?.Equals("PRIMARY", StringComparison.OrdinalIgnoreCase) == true)
         {
-            foreach (var field in fields)
-            {
-                if (IsIdentity(field))
-                {
-                    var fieldName = field;
+            // Issue #802
+            //
+            // CREATE TABLE "Articles" (
+            //  "ID" INTEGER NOT NULL UNIQUE,
+            //  "ArticleID" TEXT,
+            //  "Title" TEXT NOT NULL,
+            //  "Description" TEXT,
+            //  "Date_Added" INTEGER NOT NULL,
+            //  "Date_Fetched" INTEGER,
+            //  PRIMARY KEY("ID" AUTOINCREMENT)
+            //  )
 
-                    // This happens if the table has been created with the PRIMARY KEY keyword
-                    // defined at the end of schema. See issue #802
-                    if (field.StartsWith("PRIMARY KEY", StringComparison.OrdinalIgnoreCase))
-                    {
-                        fieldName = fieldName
-                            .Replace("PRIMARY KEY", string.Empty)
-                            .Trim()
-                            .Replace("(", string.Empty);
-                    }
+            var def = identityField.FieldName + " " + identityField.Definition;
 
-                    // Return
-                    return fieldName.Substring(0, fieldName.IndexOf(' '));
-                }
-            }
+            def = def.Replace("PRIMARY KEY", string.Empty)
+                    .Trim()
+                    .Replace("(", string.Empty);
+
+            return def.Substring(0, def.IndexOf(' ')).Replace("\"", "");
         }
-
-        // Return null
-        return null;
+        else
+            return identityField.FieldName; // May be null as valuetuple is never null
     }
 
     /// <summary>
@@ -199,30 +200,6 @@ public sealed class SqLiteDbHelper : IDbHelper
         return field.Contains("AUTOINCREMENT", StringComparison.OrdinalIgnoreCase) ||
                (field.Contains("INTEGER", StringComparison.OrdinalIgnoreCase)
                 && field.Contains("PRIMARY KEY", StringComparison.OrdinalIgnoreCase));
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="sql"></param>
-    /// <returns></returns>
-    private string[] ParseTableFieldsFromSql(string sql)
-    {
-        if (string.IsNullOrEmpty(sql))
-        {
-            return null;
-        }
-
-        // Do parse
-        var openingTokenIndex = sql.IndexOf('(');
-        var closingTokenIndex = sql.IndexOf(')');
-        var parsed = sql.Substring((openingTokenIndex + 1), (closingTokenIndex - (openingTokenIndex + 1)));
-
-        // Simply split by comma
-        return parsed
-            .Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-            .Select(s => s.Trim())
-            .AsArray();
     }
 
     #endregion
@@ -359,6 +336,112 @@ public sealed class SqLiteDbHelper : IDbHelper
     #endregion
 
     #endregion
+
+    #endregion
+
+    #region Table Definition Parser
+
+    static IEnumerable<(string FieldName, string Definition)> TokenizeSchema(ReadOnlyMemory<char> schema)
+    {
+        {
+            int start = schema.Span.IndexOf('(');
+            if (start < 0)
+            {
+                yield break; // No valid schema content to process
+            }
+
+            schema = schema.Slice(start + 1);
+        }
+
+        int depth = 0;
+        bool inSingleQuote = false;
+        bool inDoubleQuote = false;
+        int lastSplit = 0;
+
+        for (int i = 0; i < schema.Length; i++)
+        {
+            var span = schema.Span;
+            char c = span[i];
+
+            // Handle quotes
+            if (c == '\'' && !inDoubleQuote)
+                inSingleQuote = !inSingleQuote;
+            else if (c == '\"' && !inSingleQuote)
+                inDoubleQuote = !inDoubleQuote;
+
+            // Handle parentheses and brackets
+            if ((c == '(' || c == '[') && !inSingleQuote && !inDoubleQuote)
+                depth++;
+            else if ((c == ')' || c == ']') && !inSingleQuote && !inDoubleQuote)
+                depth--;
+
+            // Check for closing parenthesis of the initial group
+            if (depth == -1)
+            {
+                if (c == ')')
+                {
+                    var field = span.Slice(lastSplit, i - lastSplit);
+                    yield return ParseField(field);
+                }
+                yield break; // End processing when the matching closing parenthesis is found
+            }
+
+            // Split on commas outside nested structures and quotes
+            if (c == ',' && depth == 0 && !inSingleQuote && !inDoubleQuote)
+            {
+                var field = span.Slice(lastSplit, i - lastSplit);
+                yield return ParseField(field);
+                lastSplit = i + 1;
+            }
+        }
+    }
+
+    static (string FieldName, string Definition) ParseField(ReadOnlySpan<char> field)
+    {
+        // Trim the span directly to avoid extra allocations
+        field = field.Trim();
+
+        // Handle escaped field names (quoted with " or [ ])
+        bool isQuoted = field.Length > 0 && field[0] is '\'' or '[';
+        int nameEnd;
+
+        if (isQuoted)
+        {
+            char closingChar = field[0] == '"' ? '"' : ']';
+            nameEnd = field.Slice(1).IndexOf(closingChar); // Find the closing quote/bracket
+            if (nameEnd != -1)
+            {
+                nameEnd += 1; // Adjust for the opening quote/bracket
+            }
+        }
+        else
+        {
+            // Find the first space outside of quotes
+            nameEnd = field.IndexOf(' ');
+        }
+
+        if (nameEnd == -1)
+        {
+            // If no valid separator is found, the entire field is the name with no definition
+            return (field.ToString(), string.Empty);
+        }
+
+        ReadOnlySpan<char> fieldNameSpan;
+        if (isQuoted)
+        {
+            // Remove enclosing quotes/brackets by slicing
+            fieldNameSpan = field.Slice(1, nameEnd - 1).Trim(); // Skip opening and closing quotes/brackets
+        }
+        else
+        {
+            fieldNameSpan = field.Slice(0, nameEnd).Trim();
+        }
+
+        var fieldName = fieldNameSpan.ToString();
+        var definition = field.Slice(nameEnd + 1).Trim().ToString();
+
+        return (fieldName, definition);
+    }
 
     #endregion
 }

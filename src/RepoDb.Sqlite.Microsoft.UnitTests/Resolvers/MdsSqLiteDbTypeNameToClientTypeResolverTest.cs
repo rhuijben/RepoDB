@@ -154,7 +154,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
         var result = resolver.Resolve("TIME");
 
         // Assert
-        Assert.AreEqual(typeof(string), result);
+        Assert.AreEqual(typeof(DateTime), result);
     }
 
     [TestMethod]
@@ -167,7 +167,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
         var result = resolver.Resolve("DECIMAL");
 
         // Assert
-        Assert.AreEqual(typeof(long), result);
+        Assert.AreEqual(typeof(decimal), result);
     }
 
     [TestMethod]
@@ -180,7 +180,7 @@ public class MdsSqLiteDbTypeNameToClientTypeResolverTest
         var result = resolver.Resolve("NUMERIC");
 
         // Assert
-        Assert.AreEqual(typeof(long), result);
+        Assert.AreEqual(typeof(decimal), result);
     }
 
     [TestMethod]

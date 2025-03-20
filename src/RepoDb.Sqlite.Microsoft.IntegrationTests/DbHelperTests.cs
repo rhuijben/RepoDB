@@ -173,6 +173,116 @@ public class DbHelperTests
         }
     }
 
+    [TestMethod]
+    public void TestDbHelperPrimaryKeyIdentity()
+    {
+        // Issue #802
+        //
+        var td = @"
+         CREATE TABLE [Articles] (
+          [ID] INTEGER NOT NULL UNIQUE,
+          [ArticleID] TEXT,
+          [Title] TEXT NOT NULL,
+          [Description] TEXT,
+          [Date_Added] INTEGER NOT NULL,
+          [Date_Fetched] INTEGER,
+          PRIMARY KEY([ID] AUTOINCREMENT)
+          )
+        ";
+
+        // ID must be ident
+        using (var connection = new SqliteConnection(Database.ConnectionString))
+        {
+            connection.ExecuteNonQueryAsync(td.Replace("Articles", "ArtV1"));
+            connection.ExecuteNonQueryAsync(td.Replace("Articles", "ArtV2").Replace('[', '"').Replace(']', '"'));
+            connection.ExecuteNonQueryAsync(td.Replace("Articles", "ArtV3").Replace("[", "").Replace("]", ""));
+
+            // Setup
+            var helper = connection.GetDbHelper();
+
+            var v1Fields = helper.GetFields(connection, "ArtV1");
+            var v2Fields = helper.GetFields(connection, "ArtV2");
+            var v3Fields = helper.GetFields(connection, "ArtV3");
+
+            Assert.AreEqual(v1Fields.Count(), v2Fields.Count());
+            Assert.AreEqual(v1Fields.Count(), v3Fields.Count());
+
+#if NET
+            foreach (var i in v1Fields.Zip(v2Fields, v3Fields))
+            {
+                Assert.AreEqual(i.First.Name, i.Second.Name);
+                Assert.AreEqual(i.First.Name, i.Third.Name);
+
+                Assert.AreEqual(i.First.IsPrimary, i.Second.IsPrimary);
+                Assert.AreEqual(i.First.IsPrimary, i.Third.IsPrimary);
+
+                Assert.AreEqual(i.First.IsIdentity, i.Second.IsIdentity);
+                Assert.AreEqual(i.First.IsIdentity, i.Third.IsIdentity);
+            }
+#endif
+
+            Assert.IsNotNull(v1Fields.FirstOrDefault(x => x.IsIdentity));
+            Assert.IsNotNull(v2Fields.FirstOrDefault(x => x.IsIdentity));
+            Assert.IsNotNull(v3Fields.FirstOrDefault(x => x.IsIdentity));
+        }
+    }
+
+    [TestMethod]
+    public void TestDbHelperPrimaryKeyIdentityV2()
+    {
+        // Using varchar in fields
+        //
+        var td = @"
+         CREATE TABLE [Articles] (
+          [ID] INTEGER NOT NULL UNIQUE,
+          [ArticleID] varchar(10),
+          [Title] [varchar](10) NOT NULL,
+          [Description] TEXT,
+          [Date_Added] INTEGER NOT NULL,
+          [Date_Fetched] INTEGER,
+          PRIMARY KEY([ID] AUTOINCREMENT)
+          )
+        ";
+
+        // ID must be ident
+        using (var connection = new SqliteConnection(Database.ConnectionString))
+        {
+            connection.ExecuteNonQueryAsync(td.Replace("Articles", "ArtV4"));
+            connection.ExecuteNonQueryAsync(td.Replace("Articles", "ArtV5").Replace('[', '"').Replace(']', '"'));
+            connection.ExecuteNonQueryAsync(td.Replace("Articles", "ArtV6").Replace("[", "").Replace("]", ""));
+
+            // Setup
+            var helper = connection.GetDbHelper();
+
+            var v1Fields = helper.GetFields(connection, "ArtV4");
+            var v2Fields = helper.GetFields(connection, "ArtV5");
+            var v3Fields = helper.GetFields(connection, "ArtV6");
+
+            Assert.AreEqual(v1Fields.Count(), v2Fields.Count());
+            Assert.AreEqual(v1Fields.Count(), v3Fields.Count());
+
+#if NET
+            foreach (var i in v1Fields.Zip(v2Fields, v3Fields))
+            {
+                Assert.AreEqual(i.First.Name, i.Second.Name);
+                Assert.AreEqual(i.First.Name, i.Third.Name);
+
+                Assert.AreEqual(i.First.IsPrimary, i.Second.IsPrimary);
+                Assert.AreEqual(i.First.IsPrimary, i.Third.IsPrimary);
+
+                Assert.AreEqual(i.First.IsIdentity, i.Second.IsIdentity);
+                Assert.AreEqual(i.First.IsIdentity, i.Third.IsIdentity);
+
+                Console.WriteLine(i.First.DatabaseType);
+            }
+#endif
+
+            Assert.IsNotNull(v1Fields.FirstOrDefault(x => x.IsIdentity));
+            Assert.IsNotNull(v2Fields.FirstOrDefault(x => x.IsIdentity));
+            Assert.IsNotNull(v3Fields.FirstOrDefault(x => x.IsIdentity));
+        }
+    }
+
     #endregion
 
     #endregion

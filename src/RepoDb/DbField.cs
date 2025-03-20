@@ -29,7 +29,7 @@ public sealed class DbField : IEquatable<DbField>
         int? size,
         byte? precision,
         byte? scale,
-        string databaseType,
+        string? databaseType,
         bool hasDefaultValue = false,
         string provider = null)
         : this(name, isPrimary, isIdentity, isNullable, type, size, precision, scale, databaseType, hasDefaultValue, false, provider)
@@ -45,10 +45,10 @@ public sealed class DbField : IEquatable<DbField>
         int? size,
         byte? precision,
         byte? scale,
-        string databaseType,
+        string? databaseType,
         bool hasDefaultValue,
         bool isComputed,
-        string provider)
+        string provider = null)
     {
         // Name is required
         if (string.IsNullOrWhiteSpace(name))
@@ -123,7 +123,7 @@ public sealed class DbField : IEquatable<DbField>
     /// <summary>
     /// Gets the database type of the column.
     /// </summary>
-    public string DatabaseType { get; }
+    public string? DatabaseType { get; }
 
     /// <summary>
     /// Gets the value that defines whether the column has a default value.
@@ -138,7 +138,7 @@ public sealed class DbField : IEquatable<DbField>
     /// <summary>
     /// Gets the database provider who created this instance.
     /// </summary>
-    public string Provider { get; }
+    public string? Provider { get; }
 
 
     /// <summary>

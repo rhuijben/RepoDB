@@ -18,34 +18,18 @@ public class SqLiteDbTypeNameToClientTypeResolver : IResolver<string, Type>
         {
             throw new ArgumentNullException("The DB Type name must not be null.");
         }
-        /*
-        Id : System.Int64
-        ColumnBigInt : System.Int64
-        ColumnBlob : System.Byte[]
-        ColumnBoolean : System.String
-        ColumnChar : System.String
-        ColumnDate : System.String
-        ColumnDateTime : System.String
-        ColumnDecimal : System.String / System.Int64 (if has value)
-        ColumnDouble : System.Double
-        ColumnInteger : System.Int64
-        ColumnInt : System.Int64
-        ColumnNone : System.String
-        ColumnNumeric : System.String / System.Int64 (if has value)
-        ColumnReal : System.Double
-        ColumnString : System.String
-        ColumnText : System.String
-        ColumnTime : System.String
-        ColumnVarChar : System.String
-         */
         return dbTypeName.ToLowerInvariant() switch
         {
-            "bigint" or "decimal" or "int" or "integer" or "numeric" => typeof(long),
-            "blob" => typeof(byte[]),
-            "double" or "real" => typeof(double),
+            "integer" or "int" or "bigint" => typeof(long),
+            "blob" or "binary" or "varbinary" or "bytea" => typeof(byte[]),
+            "text" or "boolean" or "char" or "string" or "varchar" or "nvarchar" or "varchar2" or "none" => typeof(string),
             "date" or "datetime" => typeof(DateTime),
-            "boolean" or "char" or "none" or "string" or "text" or "time" or "varchar" => typeof(string),
             "datetimeoffset" => typeof(DateTimeOffset),
+            "time" => typeof(DateTime),
+            "decimal" or "numeric" => typeof(decimal),
+            "double" or "real" => typeof(double),
+            "tinyint" or "smallint" or "bit" => typeof(int),
+            _ when (dbTypeName.IndexOfAny(new char[] { '(', ']' }) is { } p && p > 0) => Resolve(dbTypeName.Substring(0, p)), // varchar(3) => varchar, etc.
             _ => typeof(object),
         };
     }

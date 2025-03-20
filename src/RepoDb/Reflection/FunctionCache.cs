@@ -20,7 +20,7 @@ internal static class FunctionCache
     /// <returns></returns>
     private static long GetReaderFieldsHashCode(DbDataReader reader)
     {
-        long hashCode = 0;
+        int hashCode = reader?.FieldCount ?? 0;
 
         if (reader is not null)
         {
