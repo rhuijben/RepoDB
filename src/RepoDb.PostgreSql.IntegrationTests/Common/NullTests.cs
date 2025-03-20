@@ -15,6 +15,8 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<PostgreSqlDbInstance>
     public override string DateTimeDbType => "TIMESTAMP";
     public override string DateTimeOffsetDbType => "TIMESTAMPTZ";
 
+    public override string BlobDbType => "BYTEA";
+
     public override string GeneratedColumnDefinition(string expression, string type)
     {
         if (expression.StartsWith("CONCAT("))

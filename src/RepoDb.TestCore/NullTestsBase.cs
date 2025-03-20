@@ -111,9 +111,13 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
         public Guid Uuid { get; set; }
         public Guid? UuidNull { get; set; }
+
+        public byte[] BlobData { get; set; }
+        public byte[]? BlobDataNull { get; set; }
     }
 
     public virtual string UuidDbType => "[uniqueidentifier]";
+    public virtual string BlobDbType => "varbinary(128)";
 
     [TestMethod]
     public async Task GuidNullTest()
@@ -128,7 +132,9 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
                         [Txt] TEXT NOT NULL,
                         [TxtNull] varchar(128) NULL,
                         [Uuid] {UuidDbType} NOT NULL,
-                        [UuidNull] {UuidDbType} NULL
+                        [UuidNull] {UuidDbType} NULL,
+                        [BlobData] {BlobDbType} NOT NULL,
+                        [BlobDataNull] {BlobDbType} NULL
                 )";
 
             var set = sql.GetDbSetting();
@@ -146,8 +152,8 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         await sql.InsertAllAsync(
             new GuidNullData[]
             {
-                new GuidNullData(){ ID = 1, Txt = Guid.NewGuid(), TxtNull = Guid.NewGuid(), Uuid = Guid.NewGuid(), UuidNull=Guid.NewGuid()},
-                new GuidNullData(){ ID = 2, Txt = Guid.NewGuid(), Uuid = Guid.NewGuid()},
+                new GuidNullData(){ ID = 1, Txt = Guid.NewGuid(), TxtNull = Guid.NewGuid(), Uuid = Guid.NewGuid(), UuidNull=Guid.NewGuid(), BlobData = new byte[]{32}, BlobDataNull = new byte[]{65 } },
+                new GuidNullData(){ ID = 2, Txt = Guid.NewGuid(), Uuid = Guid.NewGuid(), BlobData = new byte[]{ 97 } },
             }, transaction: t);
 
         await t.RollbackAsync();
