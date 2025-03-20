@@ -113,7 +113,7 @@ public class Field : IEquatable<Field>
     /// <returns>An enumerable of <see cref="Field"/> objects.</returns>
     public static IEnumerable<Field> Parse(object? obj) =>
         TypeCache.Get(obj?.GetType()).IsDictionaryStringObject() == true ?
-            ParseDictionaryStringObject((IDictionary<string, object>)obj) : Parse(obj?.GetType());
+            ParseDictionaryStringObject((IDictionary<string, object>)obj!) : Parse(obj?.GetType());
 
     /// <summary>
     /// Parses an object and creates an enumerable of <see cref="Field"/> objects.
