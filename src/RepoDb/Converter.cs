@@ -112,7 +112,7 @@ public static class Converter
                     if (underlyingType != type.GetType())
                         value = Convert.ChangeType(value, underlyingType);
 
-                    return (T)Convert.ChangeType(value, type);
+                    return (T)Enum.ToObject(type, value);
                 }
                 else
                 {
@@ -152,11 +152,11 @@ public static class Converter
 
         try
         {
-            return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+            return (T)Convert.ChangeType(value, type, CultureInfo.InvariantCulture);
         }
         catch (InvalidCastException ex)
         {
-            throw new InvalidCastException($"While converting '{value ?? "null"}' to '{typeof(T).FullName}'", ex);
+            throw new InvalidCastException($"While converting '{value ?? "null"}' to '{type.FullName}'", ex);
         }
     }
 
