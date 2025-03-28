@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿#nullable enable
+using System.Globalization;
 
 namespace RepoDb;
 
@@ -14,7 +15,7 @@ public static class Converter
     /// </summary>
     /// <param name="value">The value to be checked for <see cref="DBNull.Value"/>.</param>
     /// <returns>The converted value.</returns>
-    public static object NullToDbNull(object value) =>
+    public static object NullToDbNull(object? value) =>
         value is null ? DBNull.Value : value;
 
     /// <summary>
@@ -22,7 +23,7 @@ public static class Converter
     /// </summary>
     /// <param name="value">The value to be checked for <see cref="DBNull.Value"/>.</param>
     /// <returns>The converted value.</returns>
-    public static object DbNullToNull(object value) =>
+    public static object? DbNullToNull(object? value) =>
         Convert.IsDBNull(value) ? null : value;
 
     /// <summary>
@@ -31,7 +32,7 @@ public static class Converter
     /// <typeparam name="T">The target type.</typeparam>
     /// <param name="value">The value to be converted.</param>
     /// <returns>The converted value.</returns>
-    public static T ToType<T>(object value)
+    public static T? ToType<T>(object? value)
     {
         value = Converter.DbNullToNull(value);
 
@@ -161,7 +162,7 @@ public static class Converter
     }
 
 
-    static object EnumTryParse<TEnum>(string value)
+    static object? EnumTryParse<TEnum>(string value)
         where TEnum : struct, Enum
     {
         if (Enum.TryParse<TEnum>(value, out var result))
