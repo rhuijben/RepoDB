@@ -715,6 +715,10 @@ internal sealed partial class Compiler
         {
             result = Expression.New(typeof(DateTimeOffset).GetConstructor([typeof(DateTime)]), [result]);
         }
+        else if (underlyingToType == StaticType.Boolean && underlyingFromType == StaticType.String)
+        {
+            result = Expression.Call(GetMethodInfo(() => StrictParseBoolean(null)), expression);
+        }
         else if (GetSystemConvertToTypeMethod(underlyingFromType, underlyingToType) is { } methodInfo)
         {
             result = Expression.Call(methodInfo, Expression.Convert(result, methodInfo.GetParameters()[0].ParameterType));
@@ -792,6 +796,23 @@ internal sealed partial class Compiler
     static MethodInfo GetMethodInfo(Expression<Action> call)
     {
         return (call.Body as MethodCallExpression).Method;
+    }
+
+    static bool StrictParseBoolean(string? value)
+    {
+        if (value is null)
+            return false;
+        else if (bool.TryParse(value, out var v))
+            return v;
+        else if (value.Length == 1)
+        {
+            if (value[0] == '1')
+                return true;
+            else if (value[0] == '0')
+                return false;
+        }
+
+        throw new FormatException($"String '{value}' was not recognized as a valid Boolean");
     }
 
     static decimal StrictParseDecimal(string value)
