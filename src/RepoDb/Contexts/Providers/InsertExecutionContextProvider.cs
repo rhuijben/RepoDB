@@ -65,9 +65,9 @@ internal static class InsertExecutionContextProvider
         // Create
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsReadOnly) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
         }
 
         var request = new InsertRequest(entityType,
@@ -126,9 +126,9 @@ internal static class InsertExecutionContextProvider
         // Create
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsReadOnly) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
         }
 
         var request = new InsertRequest(tableName,
@@ -173,7 +173,7 @@ internal static class InsertExecutionContextProvider
     {
         var dbSetting = connection.GetDbSetting();
         var dbHelper = connection.GetDbHelper();
-        var inputFields = dbFields?.GetItems()
+        var inputFields = dbFields
             .Where(dbField =>
                 dbField.IsIdentity == false)
             .Where(dbField =>

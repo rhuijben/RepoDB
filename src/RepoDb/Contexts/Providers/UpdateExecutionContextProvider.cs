@@ -72,9 +72,9 @@ internal static class UpdateExecutionContextProvider
         // Create
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsReadOnly) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
         }
 
         var request = new UpdateRequest(tableName,
@@ -136,9 +136,9 @@ internal static class UpdateExecutionContextProvider
         // Create
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsReadOnly) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
         }
 
         var request = new UpdateRequest(tableName,
@@ -187,7 +187,7 @@ internal static class UpdateExecutionContextProvider
         var inputFields = new List<DbField>();
 
         // Filter the actual properties for input fields
-        inputFields = dbFields?.GetItems()
+        inputFields = dbFields
             .Where(dbField => dbField.IsIdentity == false)
             .Where(dbField =>
                 fields.FirstOrDefault(field => string.Equals(field.Name.AsUnquoted(true, dbSetting), dbField.Name.AsUnquoted(true, dbSetting), StringComparison.OrdinalIgnoreCase)) != null)

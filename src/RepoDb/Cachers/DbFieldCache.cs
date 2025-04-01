@@ -10,7 +10,7 @@ namespace RepoDb;
 /// </summary>
 public static class DbFieldCache
 {
-    private static readonly ConcurrentDictionary<long, DbFieldCollection> cache = new();
+    private static readonly ConcurrentDictionary<int, DbFieldCollection> cache = new();
 
     #region Helpers
 
@@ -81,8 +81,7 @@ public static class DbFieldCache
         bool enableValidation)
         where TDbConnection : IDbConnection
     {
-        var type = connection.GetType();
-        var key = (long)type.GetHashCode();
+        var key = connection.GetType().GetHashCode();
 
         // Note: For SqlConnection, the ConnectionString is changing if the (Integrated Security=False). Actually for this isolation, the database name is enough.
         if (!string.IsNullOrWhiteSpace(connection.Database))
@@ -96,22 +95,18 @@ public static class DbFieldCache
             key = HashCode.Combine(key, tableName.GetHashCode());
         }
 
-        return cache.GetOrAdd(key, (_) =>
-        {
-            // Get from DB
-            var result = new DbFieldCollection(connection
-                .GetDbHelper()
+        var result = cache.GetOrAdd(key,
+            (_) => new DbFieldCollection(connection.GetDbHelper()
                 .GetFields(connection, tableName, transaction),
-                connection.GetDbSetting());
+                connection.GetDbSetting()));
 
-            // Validate
-            if (enableValidation)
-            {
-                ValidateDbFields(tableName, result);
-            }
+        // Validate
+        if (enableValidation)
+        {
+            ValidateDbFields(tableName, result);
+        }
 
-            return result;
-        });
+        return result;
     }
 
     #endregion
@@ -165,8 +160,7 @@ public static class DbFieldCache
         CancellationToken cancellationToken = default)
         where TDbConnection : IDbConnection
     {
-        var type = connection.GetType();
-        var key = (long)type.GetHashCode();
+        var key = connection.GetType().GetHashCode();
 
         // Note: For SqlConnection, the ConnectionString is changing if the (Integrated Security=False). Actually for this isolation, the database name is enough.
         if (!string.IsNullOrWhiteSpace(connection.Database))
@@ -189,14 +183,14 @@ public static class DbFieldCache
                 .GetFieldsAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false),
                 connection.GetDbSetting());
 
-            // Validate
-            if (enableValidation)
-            {
-                ValidateDbFields(tableName, result);
-            }
-
             // Add to cache
             cache.TryAdd(key, result);
+        }
+
+        // Validate
+        if (enableValidation)
+        {
+            ValidateDbFields(tableName, result);
         }
 
         // Return the value

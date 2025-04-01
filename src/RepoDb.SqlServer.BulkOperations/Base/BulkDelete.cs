@@ -180,21 +180,20 @@ public static partial class SqlConnectionExtension
             // Variables needed
             var readerFields = Enumerable.Range(0, reader.FieldCount)
                 .Select((index) => reader.GetName(index));
-            var fields = dbFields?.GetAsFields();
-            var primaryDbField = dbFields?.GetPrimary();
-            var identityDbField = dbFields?.GetIdentity();
-            var primaryOrIdentityDbField = (primaryDbField ?? identityDbField);
+            var fields = dbFields?.AsFields();
 
             // Validate the primary keys
             if (qualifiers?.Any() != true)
             {
-                if (primaryOrIdentityDbField == null)
+                var keyFields = dbFields.GetPrimaryFields() ?? dbFields.GetIdentity()?.AsEnumerable();
+
+                if (keyFields is not { })
                 {
                     throw new MissingPrimaryKeyException($"No primary key or identity key found for table '{tableName}'.");
                 }
                 else
                 {
-                    qualifiers = new[] { primaryOrIdentityDbField.AsField() };
+                    qualifiers = keyFields.AsFields();
                 }
             }
 
@@ -348,7 +347,7 @@ public static partial class SqlConnectionExtension
             // Get the DB Fields
             var tableFields = Enumerable.Range(0, dataTable.Columns.Count)
                 .Select((index) => dataTable.Columns[index].ColumnName);
-            var fields = dbFields?.GetAsFields();
+            var fields = dbFields?.AsFields();
             var primaryDbField = dbFields?.GetPrimary();
             var identityDbField = dbFields?.GetIdentity();
             var primaryOrIdentityDbField = (primaryDbField ?? identityDbField);
@@ -641,7 +640,7 @@ public static partial class SqlConnectionExtension
             // Variables needed
             var readerFields = Enumerable.Range(0, reader.FieldCount)
                 .Select((index) => reader.GetName(index));
-            var fields = dbFields?.GetAsFields();
+            var fields = dbFields?.AsFields();
             var primaryDbField = dbFields?.GetPrimary();
             var identityDbField = dbFields?.GetIdentity();
             var primaryOrIdentityDbField = (primaryDbField ?? identityDbField);
@@ -812,7 +811,7 @@ public static partial class SqlConnectionExtension
             // Variables needed
             var tableFields = Enumerable.Range(0, dataTable.Columns.Count)
                 .Select((index) => dataTable.Columns[index].ColumnName);
-            var fields = dbFields?.GetAsFields();
+            var fields = dbFields?.AsFields();
             var primaryDbField = dbFields?.GetPrimary();
             var identityDbField = dbFields?.GetIdentity();
             var primaryOrIdentityDbField = (primaryDbField ?? identityDbField);

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#nullable enable
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Reflection;
 using RepoDb.Attributes;
@@ -35,7 +37,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
         propertyHandlerAttribute = new Lazy<PropertyHandlerAttribute>(() => PropertyInfo.GetCustomAttribute<PropertyHandlerAttribute>(), true);
         dbType = new Lazy<DbType?>(() => PropertyInfo.GetDbType(), true);
         propertyValueAttributes = new Lazy<IEnumerable<PropertyValueAttribute>>(() => PropertyInfo.GetPropertyValueAttributes(GetDeclaringType()), true);
-        propertyValueAttribute = new Lazy<PropertyValueAttribute>(() =>
+        propertyValueAttribute = new(() =>
         {
             return (PropertyInfo.GetCustomAttribute<DbTypeAttribute>() ?? PropertyInfo.GetCustomAttribute<TypeMapAttribute>()) ??
                    (GetPropertyValueAttributes()
@@ -72,14 +74,14 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// the derived class type instead (if there is), otherwise the <see cref="PropertyInfo.DeclaringType"/> property.
     /// </summary>
     /// <returns>The declaring type.</returns>
-    public Type GetDeclaringType() =>
+    public Type? GetDeclaringType() =>
         (declaringType ?? PropertyInfo.DeclaringType);
 
     /*
      * AsField
      */
 
-    private Field field;
+    private Field? field;
 
     /// <summary>
     /// Convert the <see cref="ClassProperty"/> into a <see cref="Field"/> objects.
@@ -87,13 +89,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// <returns>An instance of <see cref="string"/> object.</returns>
     public Field AsField()
     {
-        if (field != null)
-        {
-            return field;
-        }
-
-        // Set the properties
-        field = new Field(GetMappedName(), PropertyInfo.PropertyType);
+        return field ??= new Field(GetMappedName(), PropertyInfo.PropertyType);
 
         // Return the value
         return field;
@@ -158,7 +154,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /*
      * GetDbTypeAttribute
      */
-    private readonly Lazy<PropertyValueAttribute> propertyValueAttribute;
+    private readonly Lazy<PropertyValueAttribute?> propertyValueAttribute;
 
     /// <summary>
     /// Gets the <see cref="PropertyValueAttribute"/> if present.
@@ -183,42 +179,10 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
         return propertyHandlerAttribute.Value;
     }
 
-    /*
-     * IsPrimary
-     */
-    private bool? isPrimary;
-
-    /// <summary>
-    /// Gets a value whether the current property is a primary property.
-    /// </summary>
-    /// <returns>True if the current property is a primary.</returns>
-    public bool? IsPrimary()
-    {
-        if (isPrimary != null)
-        {
-            return isPrimary;
-        }
-        return (isPrimary = PrimaryCache.Get(GetDeclaringType()) != null);
-    }
-
-    /*
-     * IsIdentity
-     */
-
-    private bool? isIdentity;
-
-    /// <summary>
-    /// Gets a value whether the current property is an identity or not.
-    /// </summary>
-    /// <returns>True if the current property is an identity.</returns>
-    public bool? IsIdentity()
-    {
-        if (isIdentity != null)
-        {
-            return isIdentity;
-        }
-        return (isIdentity = IdentityCache.Get(GetDeclaringType()) != null);
-    }
+    [Obsolete("Always returns true"), EditorBrowsable(EditorBrowsableState.Never)]
+    public bool? IsPrimary() => true;
+    [Obsolete("Always returns true"), EditorBrowsable(EditorBrowsableState.Never)]
+    public bool? IsIdentity() => true;
 
     /*
      * GetDbType

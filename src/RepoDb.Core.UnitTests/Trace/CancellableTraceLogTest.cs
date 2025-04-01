@@ -685,7 +685,7 @@ public class CancellableTraceLogTest
         var connection = new TraceDbConnection();
         var entities = new[]
         {
-            new { Id = 1 }
+            new { Id = 1, Name="None" }
         };
 
         // Act
@@ -700,7 +700,7 @@ public class CancellableTraceLogTest
         var connection = new TraceDbConnection();
         var entities = new[]
         {
-            new { Id = 1 }
+            new { Id = 1, Name= "One" }
         };
 
         // Act
@@ -716,9 +716,9 @@ public class CancellableTraceLogTest
         var connection = new TraceDbConnection();
         var entities = new[]
         {
-            new { Id = 1 },
-            new { Id = 2 },
-            new { Id = 3 }
+            new { Id = 1, Name="Some" },
+            new { Id = 2, Name="Some" },
+            new { Id = 3, Name="Some" }
         };
 
         // Act
@@ -733,9 +733,9 @@ public class CancellableTraceLogTest
         var connection = new TraceDbConnection();
         var entities = new[]
         {
-            new { Id = 1 },
-            new { Id = 2 },
-            new { Id = 3 }
+            new { Id = 1, Name="Other" },
+            new { Id = 2, Name="Other" },
+            new { Id = 3, Name="Other" }
         };
 
         // Act

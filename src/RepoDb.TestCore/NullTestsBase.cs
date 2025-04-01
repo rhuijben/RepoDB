@@ -330,7 +330,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         }
 
         var fields = await DbFieldCache.GetAsync(sql, nameof(WithComputed), transaction: null);
-        Assert.AreEqual(true, fields.First(x => x.Name == "Computed").IsComputed);
+        Assert.AreEqual(true, fields.First(x => x.Name == "Computed").IsGenerated);
 
         await sql.TruncateAsync<WithComputed>();
         await sql.InsertAsync(new WithComputed() { ID = 1, Writable = "a" });

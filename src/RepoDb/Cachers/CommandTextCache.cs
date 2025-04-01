@@ -1275,24 +1275,9 @@ public static class CommandTextCache
     {
         var primaryField = GetPrimaryField(request.Type, dbFields);
 
-        if (primaryField != null)
+        if (primaryField is { })
         {
-            var identityField = GetIdentityField(request.Type, dbFields);
-            var isIdentity = identityField == primaryField ||
-                string.Equals(identityField?.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase);
-
-            return new DbField(primaryField.Name,
-                true,
-                isIdentity,
-                false,
-                primaryField.Type,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                null);
+            return dbFields.GetByName(primaryField.Name);
         }
 
         return null;
@@ -1333,24 +1318,9 @@ public static class CommandTextCache
     {
         var identityField = GetIdentityField(request.Type, dbFields);
 
-        if (identityField != null)
+        if (identityField is { })
         {
-            var primaryField = GetPrimaryField(request.Type, dbFields);
-            var isPrimary = identityField == primaryField ||
-                string.Equals(primaryField?.Name, identityField.Name, StringComparison.OrdinalIgnoreCase);
-
-            return new DbField(identityField.Name,
-                isPrimary,
-                true,
-                false,
-                identityField.Type,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                null);
+            return dbFields.GetByName(identityField.Name);
         }
 
         return null;

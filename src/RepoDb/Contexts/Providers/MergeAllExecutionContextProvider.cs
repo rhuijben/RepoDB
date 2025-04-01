@@ -83,9 +83,9 @@ internal static class MergeAllExecutionContextProvider
             .Get(connection, tableName, transaction);
         string commandText;
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsReadOnly) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
         }
 
         // Create a different kind of requests
@@ -171,9 +171,9 @@ internal static class MergeAllExecutionContextProvider
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         string commandText;
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsReadOnly) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
         }
 
         // Create a different kind of requests
@@ -249,11 +249,11 @@ internal static class MergeAllExecutionContextProvider
         // Check the fields
         if (fields?.Any() != true)
         {
-            fields = dbFields?.GetAsFields();
+            fields = dbFields?.AsFields();
         }
 
         // Filter the actual properties for input fields
-        inputFields = dbFields?.GetItems()
+        inputFields = dbFields
             .Where(dbField =>
                 fields.FirstOrDefault(field =>
                     string.Equals(field.Name.AsUnquoted(true, dbSetting), dbField.Name.AsUnquoted(true, dbSetting), StringComparison.OrdinalIgnoreCase)) != null)
@@ -284,7 +284,7 @@ internal static class MergeAllExecutionContextProvider
         // Check the qualifiers
         if (qualifiers?.Any() != true)
         {
-            qualifiers = keyField?.AsEnumerable();
+            qualifiers = dbFields.GetPrimaryFields()?.AsFields() ?? keyField?.AsEnumerable();
         }
 
         // Identity which objects to set

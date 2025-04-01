@@ -396,9 +396,9 @@ public static partial class DbConnectionExtension
     {
         if (qualifiers?.Any() != true)
         {
-            var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
+            var keys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
                 GetEntityType<TEntity>(entities));
-            qualifiers = key.AsEnumerable();
+            qualifiers = keys;
         }
         if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
         {
@@ -843,9 +843,9 @@ public static partial class DbConnectionExtension
     {
         if (qualifiers?.Any() != true)
         {
-            var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
+            var keys = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
                 GetEntityType(entities), cancellationToken).ConfigureAwait(false);
-            qualifiers = key.AsEnumerable();
+            qualifiers = keys;
         }
         if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
         {

@@ -1,4 +1,5 @@
-﻿using RepoDb.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Extensions;
 
@@ -12,10 +13,11 @@ public static class FieldExtension
     /// </summary>
     /// <param name="field">The <see cref="Field"/> to be converted.</param>
     /// <returns>An <see cref="IEnumerable{T}"/> list of <see cref="Field"/> object.</returns>
-    public static IEnumerable<Field> AsEnumerable(this Field field)
-    {
-        yield return field;
-    }
+#if NET
+    [return: NotNullIfNotNull(nameof(field))]
+#endif
+    public static IEnumerable<Field>? AsEnumerable(this Field? field)
+        => field is { } v ? [v] : null;
 
     /// <summary>
     /// 

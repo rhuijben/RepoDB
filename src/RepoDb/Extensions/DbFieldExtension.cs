@@ -1,4 +1,8 @@
-﻿namespace RepoDb.Extensions;
+﻿
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+
+namespace RepoDb.Extensions;
 
 /// <summary>
 /// Contains the extension methods for <see cref="Field"/> object.
@@ -20,8 +24,8 @@ public static class DbFieldExtension
     /// </summary>
     /// <param name="dbField">The <see cref="DbField"/> to be converted.</param>
     /// <returns>An instance of <see cref="Field"/> object.</returns>
-    public static Field AsField(this DbField dbField) =>
-        new(dbField.Name, dbField.Type);
+    [EditorBrowsable(EditorBrowsableState.Never), Obsolete("Defined on DbField directly")]
+    public static Field AsField(this DbField dbField) => dbField.AsField();
 
     /// <summary>
     /// Converts the list of <see cref="DbField"/> objects into an <see cref="IEnumerable{T}"/> of <see cref="Field"/> objects.
@@ -39,18 +43,35 @@ public static class DbFieldExtension
     /// <summary>
     /// Converts the list of <see cref="DbField"/> objects into an <see cref="IReadOnlyList{T}"/> of <see cref="Field"/> objects.
     /// </summary>
-    /// <param name="dbFields">The <see cref="DbField"/> to be converted.</param>
+    /// <param name="source">The <see cref="DbField"/> to be converted.</param>
     /// <returns>An <see cref="IEnumerable{T}"/> list of <see cref="Field"/> object.</returns>
-    public static IEnumerable<Field> AsFields(this IReadOnlyList<DbField> dbFields)
+#if NET
+    [return: NotNullIfNotNull(nameof(source))]
+#endif
+    public static IEnumerable<Field>? AsFields(this IReadOnlyList<DbField>? source)
+        => source?.Select(x => x.AsField());
+
+    public static TItem? OneOrDefault<TItem>(this IEnumerable<TItem> source)
     {
-        var result = new List<Field>(dbFields.Count);
+        if (source is IReadOnlyCollection<TItem> col && col.Count == 1)
+            return source.FirstOrDefault();
+        else
+            return DoOne(source);
+    }
 
-        foreach (var dbField in dbFields)
-        {
-            result.Add(dbField.AsField());
-        }
+    public static TItem? OneOrDefault<TItem>(this IEnumerable<TItem> source, Func<TItem, bool> predicate)
+    {
+        return source.Where(predicate).OneOrDefault();
+    }
 
-        return result;
+    private static TItem? DoOne<TItem>(IEnumerable<TItem> source)
+    {
+        using var v = source.GetEnumerator();
+
+        if (!v.MoveNext() || v.Current is not { } item || v.MoveNext())
+            return default;
+
+        return item;
     }
 }
 

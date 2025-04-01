@@ -2122,9 +2122,9 @@ public static partial class DbConnectionExtension
         // Check the qualifiers
         if (qualifiers?.Any() != true)
         {
-            var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
+            var keys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
                 entity?.GetType() ?? typeof(TEntity));
-            qualifiers = key.AsEnumerable();
+            qualifiers = keys;
         }
 
         // Get the context
@@ -2211,7 +2211,7 @@ public static partial class DbConnectionExtension
         // Variables needed
         var type = entity?.GetType() ?? typeof(TEntity);
         var isDictionaryType = TypeCache.Get(type).IsDictionaryStringObject();
-        var dbFields = DbFieldCache.Get(connection, tableName, transaction);
+        var dbFields = DbFieldCache.Get(connection, tableName, transaction, true);
         var primary = dbFields?.GetPrimary();
         var properties = (IEnumerable<ClassProperty>)null;
         var primaryKey = (ClassProperty)null;
@@ -2219,14 +2219,11 @@ public static partial class DbConnectionExtension
         // Check the qualifiers
         if (qualifiers?.Any() != true)
         {
-            // Throw if there is no primary
-            if (primary == null)
-            {
-                throw new PrimaryFieldNotFoundException($"There is no primary found for '{tableName}'.");
-            }
-
             // Set the primary as the qualifier
-            qualifiers = primary.AsField().AsEnumerable();
+            qualifiers = dbFields.GetPrimaryFields()?.AsFields();
+
+            if (qualifiers is null)
+                throw new PrimaryFieldNotFoundException($"There is no primary found for '{tableName}'.");
         }
 
         // Get the properties
@@ -2372,9 +2369,9 @@ public static partial class DbConnectionExtension
         // Check the qualifiers
         if (qualifiers?.Any() != true)
         {
-            var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
+            var keys = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
                 entity?.GetType() ?? typeof(TEntity), cancellationToken).ConfigureAwait(false);
-            qualifiers = key.AsEnumerable();
+            qualifiers = keys;
         }
 
         // Get the context
@@ -2472,14 +2469,13 @@ public static partial class DbConnectionExtension
         // Check the qualifiers
         if (qualifiers?.Any() != true)
         {
-            // Throw if there is no primary
-            if (primary == null)
+            // Set the primary as the qualifier
+            qualifiers = dbFields.GetPrimaryFields()?.AsFields();
+
+            if (qualifiers is null)
             {
                 throw new PrimaryFieldNotFoundException($"There is no primary found for '{tableName}'.");
             }
-
-            // Set the primary as the qualifier
-            qualifiers = primary.AsField().AsEnumerable();
         }
 
         // Get the properties

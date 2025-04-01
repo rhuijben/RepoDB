@@ -303,7 +303,7 @@ public partial class QueryField
         }
         else if (expression.Method.Name == "Any")
         {
-            return ParseAny<TEntity>(expression, unaryNodeType)?.AsEnumerable();
+            return ParseAny<TEntity>(expression, unaryNodeType);
         }
         return null;
     }

@@ -608,7 +608,7 @@ public static partial class DbConnectionExtension
     {
         // Ensure the fields
         fields = GetQualifiedFields<TEntity>(fields) ??
-            DbFieldCache.Get(connection, tableName, transaction)?.GetAsFields();
+            DbFieldCache.Get(connection, tableName, transaction)?.AsFields();
 
         // Return
         return BatchQueryInternalBase<TEntity>(connection: connection,
@@ -1263,7 +1263,7 @@ public static partial class DbConnectionExtension
     {
         // Ensure the fields
         fields = GetQualifiedFields<TEntity>(fields) ??
-            (await DbFieldCache.GetAsync(connection, tableName, transaction, true, cancellationToken).ConfigureAwait(false))?.GetAsFields();
+            (await DbFieldCache.GetAsync(connection, tableName, transaction, true, cancellationToken).ConfigureAwait(false))?.AsFields();
 
         // Return
         return await BatchQueryAsyncInternalBase<TEntity>(connection: connection,

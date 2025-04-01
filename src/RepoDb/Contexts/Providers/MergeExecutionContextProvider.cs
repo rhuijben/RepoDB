@@ -71,9 +71,9 @@ internal static class MergeExecutionContextProvider
         // Create
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsReadOnly) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
         }
 
         var request = new MergeRequest(tableName,
@@ -135,9 +135,9 @@ internal static class MergeExecutionContextProvider
         // Create
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsReadOnly) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
         }
 
         var request = new MergeRequest(tableName,
@@ -183,7 +183,7 @@ internal static class MergeExecutionContextProvider
     {
         var dbSetting = connection.GetDbSetting();
         var dbHelper = connection.GetDbHelper();
-        var inputFields = dbFields?.GetItems()
+        var inputFields = dbFields
             .Where(dbField =>
                 fields.FirstOrDefault(field =>
                     string.Equals(field.Name.AsUnquoted(true, dbSetting), dbField.Name.AsUnquoted(true, dbSetting), StringComparison.OrdinalIgnoreCase)) != null)

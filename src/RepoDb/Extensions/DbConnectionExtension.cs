@@ -2147,6 +2147,31 @@ public static partial class DbConnectionExtension
     }
 
     /// <summary>
+    /// Retrieves a collection of database fields for a specified table from the cache.
+    /// </summary>
+    /// <param name="connection">Establishes the connection to the database for retrieving field information.</param>
+    /// <param name="tableName">Specifies the name of the table for which the fields are being retrieved.</param>
+    /// <param name="transaction">Indicates an optional transaction context for the database operation.</param>
+    /// <returns>Returns a collection of database fields associated with the specified table.</returns>
+    public static DbFieldCollection GetDbFields(this IDbConnection connection, string tableName, IDbTransaction? transaction = null)
+    {
+        return DbFieldCache.Get(connection, tableName, transaction);
+    }
+
+    /// <summary>
+    /// Retrieves database fields for a specified table asynchronously.
+    /// </summary>
+    /// <param name="connection">Establishes the connection to the database for executing the query.</param>
+    /// <param name="tableName">Specifies the name of the table from which to retrieve the fields.</param>
+    /// <param name="transaction">Allows for the execution of the operation within a specific database transaction context.</param>
+    /// <param name="cancellationToken">Enables the operation to be canceled if needed before completion.</param>
+    /// <returns>Returns a collection of database fields for the specified table.</returns>
+    public static async ValueTask<DbFieldCollection> GetDbFieldsAsync(this IDbConnection connection, string tableName, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    {
+        return await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
     /// Gets the associated <see cref="IStatementBuilder"/> object that is currently mapped on the target <see cref="IDbConnection"/> object.
     /// </summary>
     /// <param name="connection">The connection object to be used.</param>
@@ -2286,7 +2311,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection"></param>
     /// <param name="transaction"></param>
     /// <returns></returns>
-    internal static Field GetAndGuardPrimaryKeyOrIdentityKey(Type entityType,
+    internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(Type entityType,
         IDbConnection connection,
         IDbTransaction transaction) =>
         GetAndGuardPrimaryKeyOrIdentityKey(connection, ClassMappedNameCache.Get(entityType),
@@ -2300,7 +2325,7 @@ public static partial class DbConnectionExtension
     /// <param name="transaction"></param>
     /// <param name="entityType"></param>
     /// <returns></returns>
-    internal static Field GetAndGuardPrimaryKeyOrIdentityKey(IDbConnection connection,
+    internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(IDbConnection connection,
         string tableName,
         IDbTransaction transaction,
         Type entityType)
@@ -2317,13 +2342,13 @@ public static partial class DbConnectionExtension
     /// <param name="tableName"></param>
     /// <param name="transaction"></param>
     /// <returns></returns>
-    internal static DbField GetAndGuardPrimaryKeyOrIdentityKey(IDbConnection connection,
+    internal static IEnumerable<DbField> GetAndGuardPrimaryKeyOrIdentityKey(IDbConnection connection,
         string tableName,
         IDbTransaction transaction)
     {
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
-        var dbField = dbFields?.GetPrimary() ?? dbFields?.GetIdentity();
-        return GetAndGuardPrimaryKeyOrIdentityKey(tableName, dbField);
+        var keys = dbFields?.GetPrimaryFields() ?? dbFields?.GetIdentity()?.AsEnumerable();
+        return GetAndGuardPrimaryKeyOrIdentityKey(tableName, keys);
     }
 
     /// <summary>
@@ -2334,7 +2359,7 @@ public static partial class DbConnectionExtension
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static Task<Field> GetAndGuardPrimaryKeyOrIdentityKeyAsync(Type entityType,
+    internal static Task<IEnumerable<Field>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(Type entityType,
         IDbConnection connection,
         IDbTransaction transaction,
         CancellationToken cancellationToken = default) =>
@@ -2350,15 +2375,15 @@ public static partial class DbConnectionExtension
     /// <param name="entityType"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<Field> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
+    internal static async Task<IEnumerable<Field>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
         string tableName,
         IDbTransaction transaction,
         Type entityType,
         CancellationToken cancellationToken = default)
     {
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
-        var property = GetAndGuardPrimaryKeyOrIdentityKey(entityType, dbFields) ?? GetPrimaryOrIdentityKey(entityType);
-        return GetAndGuardPrimaryKeyOrIdentityKey(tableName, property);
+        var properties = GetAndGuardPrimaryKeyOrIdentityKey(entityType, dbFields) ?? GetPrimaryOrIdentityKey(entityType);
+        return GetAndGuardPrimaryKeyOrIdentityKey(tableName, properties);
     }
 
     /// <summary>
@@ -2369,7 +2394,7 @@ public static partial class DbConnectionExtension
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<DbField> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
+    internal static async Task<IEnumerable<DbField>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
         string tableName,
         IDbTransaction transaction,
         CancellationToken cancellationToken = default)
@@ -2385,9 +2410,20 @@ public static partial class DbConnectionExtension
     /// <param name="tableName"></param>
     /// <param name="dbField"></param>
     /// <returns></returns>
-    internal static DbField GetAndGuardPrimaryKeyOrIdentityKey(string tableName,
+    internal static IEnumerable<DbField> GetAndGuardPrimaryKeyOrIdentityKey(string tableName,
         DbField? dbField) =>
-        dbField ?? throw GetKeyFieldNotFoundException(tableName);
+        dbField?.AsEnumerable() ?? throw GetKeyFieldNotFoundException(tableName);
+
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="tableName"></param>
+    /// <param name="dbField"></param>
+    /// <returns></returns>
+    internal static IEnumerable<DbField> GetAndGuardPrimaryKeyOrIdentityKey(string tableName,
+        IEnumerable<DbField>? dbFields) =>
+        dbFields ?? throw GetKeyFieldNotFoundException(tableName);
 
     /// <summary>
     ///
@@ -2395,9 +2431,19 @@ public static partial class DbConnectionExtension
     /// <param name="tableName"></param>
     /// <param name="field"></param>
     /// <returns></returns>
-    internal static Field GetAndGuardPrimaryKeyOrIdentityKey(string tableName,
+    internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(string tableName,
         Field? field) =>
-        field ?? throw GetKeyFieldNotFoundException(tableName);
+        field?.AsEnumerable() ?? throw GetKeyFieldNotFoundException(tableName);
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="tableName"></param>
+    /// <param name="field"></param>
+    /// <returns></returns>
+    internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(string tableName,
+        IEnumerable<Field>? fields) =>
+        fields ?? throw GetKeyFieldNotFoundException(tableName);
 
     /// <summary>
     ///
@@ -2405,7 +2451,7 @@ public static partial class DbConnectionExtension
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     /// <returns></returns>
-    internal static Field? GetAndGuardPrimaryKeyOrIdentityKey(Type entityType,
+    internal static IEnumerable<Field>? GetAndGuardPrimaryKeyOrIdentityKey(Type entityType,
         DbFieldCollection dbFields) =>
         entityType == null ? null :
             TypeCache.Get(entityType).IsDictionaryStringObject() ?
@@ -2418,13 +2464,13 @@ public static partial class DbConnectionExtension
     /// <param name="type"></param>
     /// <param name="dbFields"></param>
     /// <returns></returns>
-    internal static Field GetAndGuardPrimaryKeyOrIdentityKeyForDictionaryStringObject(Type type,
+    internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKeyForDictionaryStringObject(Type type,
         DbFieldCollection dbFields)
     {
         // Primary/Identity
-        var dbField = dbFields?.GetPrimary() ??
-            dbFields?.GetIdentity() ??
-            dbFields?.GetByName("Id");
+        var dbField = dbFields.GetPrimaryFields() ??
+            dbFields.GetIdentity()?.AsEnumerable() ??
+            dbFields.GetByName("Id")?.AsEnumerable();
 
         // Return
         if (dbField == null)
@@ -2433,7 +2479,7 @@ public static partial class DbConnectionExtension
         }
 
         // Return
-        return dbField.AsField();
+        return dbField.AsFields();
     }
 
     /// <summary>
@@ -2442,7 +2488,7 @@ public static partial class DbConnectionExtension
     /// <param name="type"></param>
     /// <param name="dbFields"></param>
     /// <returns></returns>
-    internal static Field GetAndGuardPrimaryKeyOrIdentityKeyForEntity(Type type,
+    internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKeyForEntity(Type type,
         DbFieldCollection dbFields)
     {
         // Properties
@@ -2450,31 +2496,18 @@ public static partial class DbConnectionExtension
         var property = (ClassProperty?)null;
 
         // Primary
-        if (property == null)
+        if (dbFields?.GetPrimaryFields() is { } dbPrimary)
         {
-            var dbField = dbFields?.GetPrimary();
-            property = properties?.FirstOrDefault(p =>
-                 string.Equals(p.GetMappedName(), dbField?.Name, StringComparison.OrdinalIgnoreCase)) ??
-                 PrimaryCache.Get(type);
+            return dbPrimary.Select(f => properties.GetByMappedName(f.Name)?.AsField() ?? throw new ArgumentException());
         }
 
         // Identity
-        if (property == null)
+        if (dbFields?.GetIdentity() is { } dbIdentity)
         {
-            var dbField = dbFields?.GetIdentity();
-            property = properties?.FirstOrDefault(p =>
-                 string.Equals(p.GetMappedName(), dbField?.Name, StringComparison.OrdinalIgnoreCase)) ??
-                 PrimaryCache.Get(type);
+            return properties.GetByMappedName(dbIdentity.Name)?.AsField()?.AsEnumerable() ?? throw new ArgumentException();
         }
 
-        // Return
-        if (property == null)
-        {
-            throw GetKeyFieldNotFoundException(type);
-        }
-
-        // Return
-        return property.AsField();
+        throw GetKeyFieldNotFoundException(type);
     }
 
     /// <summary>
@@ -2522,13 +2555,20 @@ public static partial class DbConnectionExtension
             var cachedType = TypeCache.Get(whatType);
             if (cachedType.IsClassType() || cachedType.IsAnonymousType())
             {
-                var field = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction, whatType);
-                queryGroup = WhatToQueryGroup<T>(field, what);
+                var fields = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction, whatType);
+
+                if (fields.OneOrDefault() is { } field)
+                    queryGroup = WhatToQueryGroup<T>(field, what);
+                else
+                    queryGroup = WhatToQueryGroup<T>(fields, what);
             }
             else
             {
-                var dbField = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction);
-                queryGroup = WhatToQueryGroup<T>(dbField, what);
+                var dbFields = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction);
+                if (dbFields.OneOrDefault() is { } dbField)
+                    queryGroup = WhatToQueryGroup<T>(dbField, what);
+                else
+                    queryGroup = WhatToQueryGroup<T>(dbFields, what);
             }
         }
         return queryGroup;
@@ -2561,8 +2601,8 @@ public static partial class DbConnectionExtension
             var cachedType = TypeCache.Get(whatType);
             if (cachedType.IsClassType() || cachedType.IsAnonymousType())
             {
-                var field = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, whatType, cancellationToken).ConfigureAwait(false);
-                queryGroup = WhatToQueryGroup<T>(field, what);
+                var fields = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, whatType, cancellationToken).ConfigureAwait(false);
+                queryGroup = WhatToQueryGroup<T>(fields, what);
             }
             else
             {
@@ -2618,8 +2658,16 @@ public static partial class DbConnectionExtension
         {
             return queryGroup;
         }
-        var key = GetAndGuardPrimaryKeyOrIdentityKey(entityType, connection, transaction);
-        return WhatToQueryGroup(key, what);
+        var keys = GetAndGuardPrimaryKeyOrIdentityKey(entityType, connection, transaction);
+
+        if (keys.OneOrDefault() is { } key)
+        {
+            return WhatToQueryGroup(key, what);
+        }
+        else
+        {
+            return WhatToQueryGroup(keys, what);
+        }
     }
 
     /// <summary>
@@ -2666,9 +2714,7 @@ public static partial class DbConnectionExtension
         }
         var type = typeof(T);
         var properties = PropertyCache.Get(type) ?? type.GetClassProperties();
-        var property = properties?
-            .FirstOrDefault(p => string.Equals(p.GetMappedName(), dbField.Name, StringComparison.OrdinalIgnoreCase));
-        if (property != null)
+        if (properties?.GetByMappedName(dbField.Name, StringComparison.OrdinalIgnoreCase) is { } property)
         {
             return WhatToQueryGroup<T>(property.AsField(), what);
         }
@@ -2676,6 +2722,14 @@ public static partial class DbConnectionExtension
         {
             return new QueryGroup(new QueryField(dbField.Name, what));
         }
+    }
+
+    internal static QueryGroup? WhatToQueryGroup<T>(IEnumerable<DbField> dbFields,
+        T what) where T : notnull
+    {
+        return new QueryGroup(
+            dbFields.Select(x => WhatToQueryGroup<T>(x, what)!).Where(x => x is { }),
+            Conjunction.And);
     }
 
     /// <summary>
@@ -2702,6 +2756,14 @@ public static partial class DbConnectionExtension
         {
             return new QueryGroup(new QueryField(field.Name, what));
         }
+    }
+
+    internal static QueryGroup WhatToQueryGroup<T>(IEnumerable<Field> field,
+        T what) where T : notnull
+    {
+        return new QueryGroup(
+            field.Select(x => WhatToQueryGroup<T>(x, what)!).Where(x => x is { }),
+            Conjunction.And);
     }
 
     /// <summary>
@@ -2843,8 +2905,17 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var type = entity?.GetType() ?? typeof(TEntity);
-        return TypeCache.Get(type).IsDictionaryStringObject() ? ToQueryGroup(field, (IDictionary<string, object>)entity!) :
-            ToQueryGroup<TEntity>(PropertyCache.Get<TEntity>(field, true) ?? PropertyCache.Get(type, field, true), entity!);
+        return TypeCache.Get(type).IsDictionaryStringObject() ? ToQueryGroup(field, (IDictionary<string, object>)entity!)
+            : ToQueryGroup<TEntity>(PropertyCache.Get<TEntity>(field, true) ?? PropertyCache.Get(type, field, true), entity!);
+    }
+
+    internal static QueryGroup? ToQueryGroup<TEntity>(IEnumerable<Field> fields,
+        TEntity entity)
+        where TEntity : class
+    {
+        return new QueryGroup(
+            fields.Select(x => ToQueryGroup(x, entity)!).Where(x => x is { }),
+            Conjunction.And);
     }
 
     /// <summary>
@@ -2894,8 +2965,8 @@ public static partial class DbConnectionExtension
     /// </summary>
     /// <param name="entityType"></param>
     /// <returns></returns>
-    internal static Field? GetPrimaryOrIdentityKey(Type entityType) =>
-        entityType != null ? (PrimaryCache.Get(entityType) ?? IdentityCache.Get(entityType))?.AsField() : null;
+    internal static IEnumerable<Field>? GetPrimaryOrIdentityKey(Type entityType) =>
+        entityType != null ? (PrimaryCache.Get(entityType) ?? IdentityCache.Get(entityType))?.AsField()?.AsEnumerable() : null;
 
     /// <summary>
     ///

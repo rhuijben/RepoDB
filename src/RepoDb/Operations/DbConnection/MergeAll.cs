@@ -398,9 +398,9 @@ public static partial class DbConnectionExtension
         // Check the qualifiers
         if (qualifiers?.Any() != true)
         {
-            var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
+            var keys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
                 GetEntityType<TEntity>(entities));
-            qualifiers = key.AsEnumerable();
+            qualifiers = keys;
         }
 
         // Variables needed
@@ -885,9 +885,9 @@ public static partial class DbConnectionExtension
         // Check the qualifiers
         if (qualifiers?.Any() != true)
         {
-            var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
+            var keys = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
                 GetEntityType(entities), cancellationToken).ConfigureAwait(false);
-            qualifiers = key.AsEnumerable();
+            qualifiers = keys;
         }
 
         // Variables needed
@@ -906,7 +906,7 @@ public static partial class DbConnectionExtension
                     fields: GetQualifiedFields(fields, entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
-            traceKey: traceKey,
+                    traceKey: traceKey,
                     transaction: transaction,
                     trace: trace,
                     statementBuilder: statementBuilder,
@@ -922,7 +922,7 @@ public static partial class DbConnectionExtension
                     fields: GetQualifiedFields(fields, entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
-            traceKey: traceKey,
+                    traceKey: traceKey,
                     transaction: transaction,
                     trace: trace,
                     statementBuilder: statementBuilder,
