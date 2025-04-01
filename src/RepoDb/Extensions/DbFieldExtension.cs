@@ -52,5 +52,27 @@ public static class DbFieldExtension
 
         return result;
     }
+
+    internal static TItem? OneOrDefault<TItem>(this IEnumerable<TItem> source)
+    {
+#if NET
+        ArgumentNullException.ThrowIfNull(source);
+#endif
+        TItem? first = default;
+        bool isFirst = true;
+
+        foreach (var v in source)
+        {
+            if (isFirst)
+            {
+                first = v;
+                isFirst = false;
+            }
+            else
+                return default;
+        }
+
+        return isFirst ? default : first;
+    }
 }
 

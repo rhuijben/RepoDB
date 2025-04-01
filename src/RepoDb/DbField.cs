@@ -74,7 +74,7 @@ public sealed class DbField : IEquatable<DbField>
         Scale = scale;
         DatabaseType = databaseType;
         HasDefaultValue = hasDefaultValue;
-        IsComputed = isComputed;
+        IsGenerated = isComputed;
         Provider = provider;
     }
 
@@ -133,12 +133,17 @@ public sealed class DbField : IEquatable<DbField>
     /// <summary>
     /// Gets the value that defines whether the column is computed by the database server
     /// </summary>
-    public bool IsComputed { get; }
+    public bool IsGenerated { get; }
 
     /// <summary>
     /// Gets the database provider who created this instance.
     /// </summary>
     public string? Provider { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool IsReadOnly => IsGenerated || IsIdentity;
 
 
     /// <summary>
@@ -181,7 +186,7 @@ public sealed class DbField : IEquatable<DbField>
                     Precision,
                     Scale,
                     HasDefaultValue,
-                    IsComputed,
+                    IsGenerated,
                     DatabaseType,
                     Provider));
         }
@@ -216,7 +221,7 @@ public sealed class DbField : IEquatable<DbField>
             && other.Precision == Precision
             && other.Scale == Scale
             && other.HasDefaultValue == HasDefaultValue
-            && other.IsComputed == IsComputed
+            && other.IsGenerated == IsGenerated
             && other.DatabaseType == DatabaseType
             && other.Provider == Provider;
     }

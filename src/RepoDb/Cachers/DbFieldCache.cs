@@ -96,22 +96,19 @@ public static class DbFieldCache
             key = HashCode.Combine(key, tableName.GetHashCode());
         }
 
-        return cache.GetOrAdd(key, (_) =>
-        {
-            // Get from DB
-            var result = new DbFieldCollection(connection
+        var result = cache.GetOrAdd(key,
+            (_) => new DbFieldCollection(connection
                 .GetDbHelper()
                 .GetFields(connection, tableName, transaction),
-                connection.GetDbSetting());
+                connection.GetDbSetting()));
 
-            // Validate
-            if (enableValidation)
-            {
-                ValidateDbFields(tableName, result);
-            }
+        // Validate
+        if (enableValidation)
+        {
+            ValidateDbFields(tableName, result);
+        }
 
-            return result;
-        });
+        return result;
     }
 
     #endregion
@@ -189,14 +186,13 @@ public static class DbFieldCache
                 .GetFieldsAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false),
                 connection.GetDbSetting());
 
-            // Validate
-            if (enableValidation)
-            {
-                ValidateDbFields(tableName, result);
-            }
-
-            // Add to cache
             cache.TryAdd(key, result);
+        }
+
+        // Validate
+        if (enableValidation)
+        {
+            ValidateDbFields(tableName, result);
         }
 
         // Return the value

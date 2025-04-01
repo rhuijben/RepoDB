@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 using RepoDb.Extensions;
@@ -49,7 +50,7 @@ public static class PropertyCache
         bool includeMappings = false)
     {
         // Validate the presence
-        ThrowArgumentNullException(propertyName, "PropertyName");
+        ThrowArgumentNullException(propertyName, nameof(propertyName));
 
         // Return the value
         return Get(entityType)?
@@ -82,10 +83,28 @@ public static class PropertyCache
         bool includeMappings = false)
     {
         // Validate the presence
-        ThrowArgumentNullException(field, "Field");
+        ThrowArgumentNullException(field, nameof(Field));
 
         // Return the value
         return Get(entityType, field.Name, includeMappings);
+    }
+
+    /// <summary>
+    /// Gets the cached <see cref="ClassProperty"/> object of the data entity (via <see cref="Field"/> object).
+    /// </summary>
+    /// <param name="entityType">The type of the data entity.</param>
+    /// <param name="field">The instance of the <see cref="Field"/> object.</param>
+    /// <param name="includeMappings">True to evaluate the existing mappings.</param>
+    /// <returns>The instance of cached <see cref="ClassProperty"/> object.</returns>
+    public static IEnumerable<ClassProperty>? Get(Type? entityType,
+        IEnumerable<Field> fields,
+        bool includeMappings = false)
+    {
+        // Validate the presence
+        ThrowArgumentNullException(fields, nameof(fields));
+
+        // Return the value
+        return fields.Select(field => Get(entityType, field.Name, includeMappings)!);
     }
 
     /// <summary>
@@ -100,7 +119,7 @@ public static class PropertyCache
         bool includeMappings = false)
     {
         // Validate the presence
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ThrowArgumentNullException(propertyInfo, nameof(propertyInfo));
 
         // Return the value
         return Get(entityType, propertyInfo.Name, includeMappings);
@@ -155,16 +174,23 @@ public static class PropertyCache
     /// <summary>
     /// Validates the target object presence.
     /// </summary>
-    /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="obj">The object to be checked.</param>
     /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<T>(T obj,
-        string argument)
+    private static void ThrowArgumentNullException(
+#if NET
+        [NotNull]
+#endif
+    object? obj,
+    string? paramName = null)
     {
+#if NET
+        ArgumentNullException.ThrowIfNull(obj, paramName);
+#else
         if (obj == null)
         {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
+            throw new ArgumentNullException($"The argument '{paramName}' cannot be null.");
         }
+#endif
     }
 
     #endregion

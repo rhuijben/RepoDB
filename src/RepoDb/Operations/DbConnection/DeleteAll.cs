@@ -1,8 +1,8 @@
-﻿using RepoDb.Enumerations;
+﻿using System.Data;
+using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Requests;
-using System.Data;
 
 namespace RepoDb;
 
@@ -338,7 +338,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, GetEntityType(entities), cancellationToken).ConfigureAwait(false);
-        var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get<TEntity>(key, true)).AsList();
+        var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get(typeof(TEntity), key, true)).AsList();
 
         return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
@@ -457,7 +457,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entities), connection, transaction, cancellationToken).ConfigureAwait(false);
-        var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get<TEntity>(key, true))?.AsList();
+        var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get(typeof(TEntity), key, true))?.AsList();
 
         return await DeleteAllAsyncInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
@@ -748,7 +748,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction);
+        var dbKeys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction);
         var dbSetting = connection.GetDbSetting();
         var hasImplicitTransaction = false;
         var count = keys?.AsList()?.Count;
@@ -764,7 +764,7 @@ public static partial class DbConnectionExtension
             }
 
             // Call the underlying method
-            var splitted = keys?.Split(ParameterBatchCount).AsList();
+            var splitted = keys?.Chunk(ParameterBatchCount).AsList();
             if (splitted?.Any() == true)
             {
                 foreach (var keyValues in splitted)
@@ -773,13 +773,23 @@ public static partial class DbConnectionExtension
                     {
                         break;
                     }
-                    var field = new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false);
+
+                    QueryGroup where;
+                    if (dbKeys.OneOrDefault() is { } key)
+                    {
+                        where = new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false));
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+
                     deletedRows += DeleteInternal(connection: connection,
                         tableName: tableName,
-                        where: new QueryGroup(field),
+                        where: where,
                         hints: hints,
                         commandTimeout: commandTimeout,
-            traceKey: traceKey,
+                        traceKey: traceKey,
                         transaction: transaction,
                         trace: trace,
                         statementBuilder: statementBuilder);
@@ -946,7 +956,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
+        var dbKeys = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var dbSetting = connection.GetDbSetting();
         var hasImplicitTransaction = false;
         var count = keys?.AsList()?.Count;
@@ -971,13 +981,22 @@ public static partial class DbConnectionExtension
                     {
                         break;
                     }
-                    var field = new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false);
+
+                    QueryGroup where;
+                    if (dbKeys.OneOrDefault() is { } key)
+                    {
+                        where = new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false));
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
                     deletedRows += await DeleteAsyncInternal(connection: connection,
                         tableName: tableName,
-                        where: new QueryGroup(field),
+                        where: where,
                         hints: hints,
                         commandTimeout: commandTimeout,
-            traceKey: traceKey,
+                        traceKey: traceKey,
                         transaction: transaction,
                         trace: trace,
                         statementBuilder: statementBuilder,
@@ -1073,7 +1092,7 @@ public static partial class DbConnectionExtension
         // Variables
         var commandType = CommandType.Text;
         var commandText = CommandTextCache.GetDeleteAllText(request);
-        
+
         // Actual Execution
         var result = await ExecuteNonQueryAsyncInternal(connection: connection,
             commandText: commandText,

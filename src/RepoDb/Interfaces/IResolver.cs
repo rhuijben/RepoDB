@@ -1,4 +1,5 @@
-﻿namespace RepoDb.Interfaces;
+﻿#nullable enable
+namespace RepoDb.Interfaces;
 
 /// <summary>
 /// An interfaced that is used to mark a class to be a resolver.
@@ -10,7 +11,7 @@ public interface IResolver<TResult>
     /// Resolves an input value to a target result type.
     /// </summary>
     /// <returns>The resolved value.</returns>
-    TResult Resolve();
+    TResult? Resolve();
 }
 
 /// <summary>
@@ -25,7 +26,7 @@ public interface IResolver<TInput, TResult>
     /// </summary>
     /// <param name="input">The input value.</param>
     /// <returns>The resolved value.</returns>
-    TResult Resolve(TInput input);
+    TResult? Resolve(TInput input);
 }
 
 /// <summary>
@@ -42,7 +43,7 @@ public interface IResolver<TInput1, TInput2, TResult>
     /// <param name="input1">The first input value.</param>
     /// <param name="input2">The second input value.</param>
     /// <returns>The resolved value.</returns>
-    TResult Resolve(TInput1 input1,
+    TResult? Resolve(TInput1 input1,
         TInput2 input2);
 }
 
@@ -62,7 +63,7 @@ public interface IResolver<TInput1, TInput2, TInput3, TResult>
     /// <param name="input2">The second input value.</param>
     /// <param name="input3">The third input value.</param>
     /// <returns>The resolved value.</returns>
-    TResult Resolve(TInput1 input1,
+    TResult? Resolve(TInput1 input1,
         TInput2 input2,
         TInput3 input3);
 }
@@ -85,7 +86,7 @@ public interface IResolver<TInput1, TInput2, TInput3, TInput4, TResult>
     /// <param name="input3">The third input value.</param>
     /// <param name="input4">The fourth input value.</param>
     /// <returns>The resolved value.</returns>
-    TResult Resolve(TInput1 input1,
+    TResult? Resolve(TInput1 input1,
         TInput2 input2,
         TInput3 input3,
         TInput4 input4);
@@ -111,7 +112,7 @@ public interface IResolver<TInput1, TInput2, TInput3, TInput4, TInput5, TResult>
     /// <param name="input4">The fourth input value.</param>
     /// <param name="input5">The fifth input value.</param>
     /// <returns>The resolved value.</returns>
-    TResult Resolve(TInput1 input1,
+    TResult? Resolve(TInput1 input1,
         TInput2 input2,
         TInput3 input3,
         TInput4 input4,
@@ -140,7 +141,7 @@ public interface IResolver<TInput1, TInput2, TInput3, TInput4, TInput5, TInput6,
     /// <param name="input5">The fifth input value.</param>
     /// <param name="input6">The sixth input value.</param>
     /// <returns>The resolved value.</returns>
-    TResult Resolve(TInput1 input1,
+    TResult? Resolve(TInput1 input1,
         TInput2 input2,
         TInput3 input3,
         TInput4 input4,
@@ -172,7 +173,7 @@ public interface IResolver<TInput1, TInput2, TInput3, TInput4, TInput5, TInput6,
     /// <param name="input6">The sixth input value.</param>
     /// <param name="input7">The seventh input value.</param>
     /// <returns>The resolved value.</returns>
-    TResult Resolve(TInput1 input1,
+    TResult? Resolve(TInput1 input1,
         TInput2 input2,
         TInput3 input3,
         TInput4 input4,

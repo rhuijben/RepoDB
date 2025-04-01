@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 using RepoDb.Exceptions;
@@ -648,16 +649,23 @@ public static class PropertyHandlerMapper
     /// <summary>
     /// Validates the target object presence.
     /// </summary>
-    /// <typeparam name="TType">The type of the object.</typeparam>
     /// <param name="obj">The object to be checked.</param>
     /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<TType>(TType obj,
+    private static void ThrowArgumentNullException(
+#if NET
+        [NotNull]
+#endif
+    object obj,
         string argument)
     {
+#if NET
+        ArgumentNullException.ThrowIfNull(obj, argument);
+#else
         if (obj == null)
         {
             throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
         }
+#endif
     }
 
     #endregion

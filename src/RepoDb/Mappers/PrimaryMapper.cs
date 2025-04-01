@@ -1,8 +1,8 @@
-﻿using RepoDb.Attributes;
+﻿using System.Collections.Concurrent;
+using System.Linq.Expressions;
+using RepoDb.Attributes;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
-using System.Collections.Concurrent;
-using System.Linq.Expressions;
 
 namespace RepoDb;
 
@@ -13,7 +13,7 @@ public static class PrimaryMapper
 {
     #region Privates
 
-    private static readonly ConcurrentDictionary<int, ClassProperty> maps = new();
+    private static readonly ConcurrentDictionary<Type, IEnumerable<ClassProperty>> maps = new();
 
     #endregion
 
@@ -110,10 +110,16 @@ public static class PrimaryMapper
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="classProperty">The instance of <see cref="ClassProperty"/> to be mapped.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
-    internal static void Add<TEntity>(ClassProperty classProperty,
+    internal static void Add<TEntity>(IEnumerable<ClassProperty> classProperty,
         bool force)
         where TEntity : class =>
         Add(typeof(TEntity), classProperty, force);
+
+
+    internal static void Add<TEntity>(ClassProperty classProperty,
+        bool force)
+        where TEntity : class =>
+        Add(typeof(TEntity), [classProperty ?? throw new ArgumentNullException(nameof(classProperty))], force);
 
     /// <summary>
     /// Adds a primary property mapping into a <see cref="ClassProperty"/> object.
@@ -122,7 +128,7 @@ public static class PrimaryMapper
     /// <param name="classProperty">The instance of <see cref="ClassProperty"/> to be mapped.</param>
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     internal static void Add(Type type,
-        ClassProperty classProperty,
+        IEnumerable<ClassProperty> classProperty,
         bool force)
     {
         // Validate
@@ -133,11 +139,11 @@ public static class PrimaryMapper
         var key = TypeExtension.GenerateHashCode(type);
 
         // Try get the cache
-        if (maps.TryGetValue(key, out var value))
+        if (maps.TryGetValue(type, out var value))
         {
             if (force)
             {
-                maps.TryUpdate(key, classProperty, value);
+                maps.TryUpdate(type, classProperty, value);
             }
             else
             {
@@ -146,7 +152,7 @@ public static class PrimaryMapper
         }
         else
         {
-            maps.TryAdd(key, classProperty);
+            maps.TryAdd(type, classProperty);
         }
     }
 
@@ -159,7 +165,8 @@ public static class PrimaryMapper
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <returns>An instance of the mapped <see cref="ClassProperty"/> object.</returns>
-    public static ClassProperty Get<TEntity>()
+    [Obsolete("Use .GetPrimaryKeys()")]
+    public static ClassProperty? Get<TEntity>()
         where TEntity : class =>
         Get(typeof(TEntity));
 
@@ -168,16 +175,37 @@ public static class PrimaryMapper
     /// </summary>
     /// <param name="type">The target type.</param>
     /// <returns>An instance of the mapped <see cref="ClassProperty"/> object.</returns>
-    public static ClassProperty Get(Type type)
+    [Obsolete("Use .GetPrimaryKeys()")]
+    public static ClassProperty? Get(Type type)
     {
         // Validate
         ObjectExtension.ThrowIfNull(type, "Type");
 
-        // Variables
-        var key = TypeExtension.GenerateHashCode(type);
+        return GetPrimaryKeys(type)?.OneOrDefault();
+    }
+
+    /// <summary>
+    /// Retrieves the primary keys of a specified entity type.
+    /// </summary>
+    /// <typeparam name="TEntity">Represents the type of the entity for which primary keys are being retrieved.</typeparam>
+    /// <returns>Returns a collection of properties that represent the primary keys, or null if none are found.</returns>
+    public static IEnumerable<ClassProperty>? GetPrimaryKeys<TEntity>()
+    {
+        return GetPrimaryKeys(typeof(TEntity));
+    }
+
+    /// <summary>
+    /// Retrieves the primary keys for a specified type, returning a collection of class properties.
+    /// </summary>
+    /// <param name="type">A type representing a class or structure for which primary keys are being queried.</param>
+    /// <returns>A collection of class properties that represent the primary keys, or null if none are found.</returns>
+    public static IEnumerable<ClassProperty>? GetPrimaryKeys(Type type)
+    {
+        // Validate
+        ObjectExtension.ThrowIfNull(type, "Type");
 
         // Try get the value
-        maps.TryGetValue(key, out var value);
+        maps.TryGetValue(type, out var value);
 
         // Return the value
         return value;
@@ -202,13 +230,10 @@ public static class PrimaryMapper
     public static void Remove(Type type)
     {
         // Validate
-        ObjectExtension.ThrowIfNull(type, "Type");
-
-        // Variables
-        var key = TypeExtension.GenerateHashCode(type);
+        ObjectExtension.ThrowIfNull(type, nameof(type));
 
         // Try get the value
-        maps.TryRemove(key, out var _);
+        maps.TryRemove(type, out var _);
     }
 
     /*

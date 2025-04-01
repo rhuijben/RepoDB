@@ -74,9 +74,9 @@ internal static class InsertAllExecutionContextProvider
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
         string commandText;
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsGenerated) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsGenerated != true);
         }
 
         // Create a different kind of requests
@@ -156,9 +156,9 @@ internal static class InsertAllExecutionContextProvider
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         string commandText;
 
-        if (dbFields?.Any(x => x.IsComputed) == true)
+        if (dbFields?.Any(x => x.IsGenerated) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsComputed != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsGenerated != true);
         }
 
         // Create a different kind of requests

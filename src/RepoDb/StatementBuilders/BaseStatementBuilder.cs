@@ -57,6 +57,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for average operation.</returns>
     public virtual string CreateAverage(string tableName,
+        DbFieldCollection dbFields,
         Field field,
         QueryGroup? where = null,
         string? hints = null)
@@ -107,6 +108,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for average-all operation.</returns>
     public virtual string CreateAverageAll(string tableName,
+        DbFieldCollection dbFields,
         Field field,
         string? hints = null)
     {
@@ -155,6 +157,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for count operation.</returns>
     public virtual string CreateCount(string tableName,
+        DbFieldCollection dbFields,
         QueryGroup? where = null,
         string? hints = null)
     {
@@ -193,6 +196,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for count-all operation.</returns>
     public virtual string CreateCountAll(string tableName,
+        DbFieldCollection dbFields,
         string? hints = null)
     {
         // Ensure with guards
@@ -230,6 +234,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for delete operation.</returns>
     public virtual string CreateDelete(string tableName,
+        DbFieldCollection dbFields,
         QueryGroup? where = null,
         string? hints = null)
     {
@@ -266,6 +271,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for delete-all operation.</returns>
     public virtual string CreateDeleteAll(string tableName,
+        DbFieldCollection dbFields,
         string? hints = null)
     {
         // Ensure with guards
@@ -300,7 +306,9 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for exists operation.</returns>
-    public virtual string CreateExists(string tableName,
+    public virtual string CreateExists(
+        string tableName,
+        DbFieldCollection dbFields,
         QueryGroup? where = null,
         string? hints = null)
     {
@@ -342,42 +350,21 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public virtual string CreateInsert(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field>? fields = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
+        //GuardPrimary(primaryField);
+        //GuardIdentity(identityField);
 
         // Verify the fields
         if (fields?.Any() != true)
         {
             throw new EmptyException($"The list of insertable fields must not be null or empty for '{tableName}'.");
         }
-
-        // Primary Key
-        if (primaryField != null &&
-            primaryField.HasDefaultValue == false &&
-            !string.Equals(primaryField.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase))
-        {
-            var isPresent = fields
-                .FirstOrDefault(f =>
-                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
-
-            if (isPresent == false)
-            {
-                throw new PrimaryFieldNotFoundException($"Primary field '{primaryField.Name}' must be present from the list.");
-            }
-        }
-
-        // Insertable fields
-        var insertableFields = fields
-            .Where(f =>
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase));
 
         // Initialize the builder
         var builder = new QueryBuilder();
@@ -389,11 +376,11 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .OpenParen()
-            .FieldsFrom(insertableFields, DbSetting)
+            .FieldsFrom(fields, DbSetting)
             .CloseParen()
             .Values()
             .OpenParen()
-            .ParametersFrom(insertableFields, 0, DbSetting)
+            .ParametersFrom(fields, 0, DbSetting)
             .CloseParen()
             .End();
 
@@ -416,17 +403,14 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public virtual string CreateInsertAll(string tableName,
-        IEnumerable<Field>? fields = null,
+        DbFieldCollection dbFields,
+        IEnumerable<Field>? fields,
         int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
 
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
@@ -438,24 +422,17 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         }
 
         // Primary Key
-        if (primaryField != null &&
-            primaryField.HasDefaultValue == false &&
-            !string.Equals(primaryField.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase))
+        if (dbFields.GetPrimaryFields() is { } primary)
         {
-            var isPresent = fields
-                .FirstOrDefault(f =>
-                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
-
-            if (isPresent == false)
+            foreach (var primaryField in primary)
             {
-                throw new PrimaryFieldNotFoundException($"As the primary field '{primaryField.Name}' is not an identity nor has a default value, it must be present on the insert operation.");
+                if (!primaryField.HasDefaultValue && !primaryField.IsReadOnly
+                    && !fields.Any(f => string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)))
+                {
+                    throw new PrimaryFieldNotFoundException($"As the primary field '{primaryField.Name}' is not an identity nor has a default value, it must be present on the insert operation.");
+                }
             }
         }
-
-        // Insertable fields
-        var insertableFields = fields
-            .Where(f =>
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase));
 
         // Initialize the builder
         var builder = new QueryBuilder();
@@ -470,10 +447,10 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .OpenParen()
-            .FieldsFrom(insertableFields, DbSetting)
+            .FieldsFrom(fields, DbSetting)
             .CloseParen()
             .Select()
-            .FieldsFrom(insertableFields, DbSetting)
+            .FieldsFrom(fields, DbSetting)
             .From()
             .OpenParen()
             .Values();
@@ -483,7 +460,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         {
             builder
                 .OpenParen()
-                .ParametersFrom(insertableFields, index, DbSetting)
+                .ParametersFrom(fields, index, DbSetting)
                 .WriteText(
                     string.Concat(", ",
                         $"{DbSetting.ParameterPrefix}__RepoDb_OrderColumn_{index}"))
@@ -501,7 +478,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .CloseParen()
             .As("T")
             .OpenParen()
-            .FieldsFrom(insertableFields, DbSetting)
+            .FieldsFrom(fields, DbSetting)
             .WriteText(string.Concat(", ", "__RepoDb_OrderColumn".AsQuoted(DbSetting)))
             .CloseParen()
             .OrderBy()
@@ -525,6 +502,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for maximum operation.</returns>
     public virtual string CreateMax(string tableName,
+        DbFieldCollection dbFields,
         Field field,
         QueryGroup? where = null,
         string? hints = null)
@@ -571,6 +549,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for maximum-all operation.</returns>
     public virtual string CreateMaxAll(string tableName,
+        DbFieldCollection dbFields,
         Field field,
         string? hints = null)
     {
@@ -616,6 +595,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for minimum operation.</returns>
     public virtual string CreateMin(string tableName,
+        DbFieldCollection dbFields,
         Field field,
         QueryGroup? where = null,
         string? hints = null)
@@ -662,6 +642,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for minimum-all operation.</returns>
     public virtual string CreateMinAll(string tableName,
+        DbFieldCollection dbFields,
         Field field,
         string? hints = null)
     {
@@ -709,6 +690,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for query operation.</returns>
     public virtual string CreateQuery(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
@@ -759,6 +741,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for query operation.</returns>
     public virtual string CreateQueryAll(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null)
@@ -805,6 +788,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for sum operation.</returns>
     public virtual string CreateSum(string tableName,
+        DbFieldCollection dbFields,
         Field field,
         QueryGroup? where = null,
         string? hints = null)
@@ -851,6 +835,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for sum-all operation.</returns>
     public virtual string CreateSumAll(string tableName,
+        DbFieldCollection dbFields,
         Field field,
         string? hints = null)
     {
@@ -892,7 +877,8 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// </summary>
     /// <param name="tableName">The name of the target table.</param>
     /// <returns>A sql statement for truncate operation.</returns>
-    public virtual string CreateTruncate(string tableName)
+    public virtual string CreateTruncate(string tableName,
+        DbFieldCollection dbFields)
     {
         // Guard the target table
         GuardTableName(tableName);
@@ -926,22 +912,18 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for update operation.</returns>
     public virtual string CreateUpdate(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         QueryGroup? where = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
 
         // Gets the updatable fields
         var updatableFields = fields
-            .Where(f => !string.Equals(f.Name, primaryField?.Name, StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase));
+            .Where(f => dbFields.GetByName(f.Name) is { } dbf && !(dbf.IsReadOnly || dbf.IsPrimary));
 
         // Check if there are updatable fields
         if (updatableFields.Any() != true)
@@ -982,18 +964,15 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for update-all operation.</returns>
     public virtual string CreateUpdateAll(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
 
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
@@ -1019,36 +998,29 @@ public abstract class BaseStatementBuilder : IStatementBuilder
                     $"present at the given fields '{fields.Select(field => field.Name).Join(", ")}'.");
             }
         }
-        else
+        else if (dbFields.GetPrimaryFields() is { } primaryFields)
         {
-            if (primaryField != null)
+            foreach (var primaryField in primaryFields)
             {
-                // Make sure that primary is present in the list of fields before qualifying to become a qualifier
-                var isPresent = fields.FirstOrDefault(f =>
-                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
-
-                // Throw if not present
-                if (isPresent == false)
+                if (!fields.Any(f => string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)))
                 {
                     throw new InvalidQualifiersException($"There are no qualifier field objects found for '{tableName}'. Ensure that the " +
                         $"primary field is present at the given fields '{fields.Select(field => field.Name).Join(", ")}'.");
                 }
+            }
 
-                // The primary is present, use it as a default if there are no qualifiers given
-                qualifiers = primaryField.AsField().AsEnumerable();
-            }
-            else
-            {
-                // Throw exception, qualifiers are not defined
-                throw new ArgumentNullException($"There are no qualifier field objects found for '{tableName}'.");
-            }
+            // The primary is present, use it as a default if there are no qualifiers given
+            qualifiers = primaryFields.AsFields();
+        }
+        else
+        {
+            // Throw exception, qualifiers are not defined
+            throw new ArgumentNullException($"There are no qualifier field objects found for '{tableName}'.");
         }
 
         // Gets the updatable fields
         fields = fields
-            .Where(f => !string.Equals(f.Name, primaryField?.Name, StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase) &&
-                qualifiers.FirstOrDefault(q => string.Equals(q.Name, f.Name, StringComparison.OrdinalIgnoreCase)) == null);
+            .Where(f => dbFields.GetByName(f.Name) is { } dbf && !dbf.IsReadOnly && !qualifiers.Any(q => string.Equals(q.Name, f.Name, StringComparison.OrdinalIgnoreCase)));
 
         // Check if there are updatable fields
         if (fields.Any() != true)
@@ -1099,6 +1071,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for batch query operation.</returns>
     public abstract string CreateBatchQuery(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         int page,
         int rowsPerBatch,
@@ -1120,11 +1093,11 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for merge operation.</returns>
-    public abstract string CreateMerge(string tableName,
+    public abstract string CreateMerge(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         IEnumerable<Field>? qualifiers = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null);
 
     #endregion
@@ -1143,11 +1116,10 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for merge operation.</returns>
     public abstract string CreateMergeAll(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         IEnumerable<Field>? qualifiers = null,
         int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null);
 
     #endregion
@@ -1166,6 +1138,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for batch query operation.</returns>
     public abstract string CreateSkipQuery(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         int skip,
         int take,
@@ -1249,19 +1222,18 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// </summary>
     /// <param name="primaryDbField"></param>
     /// <param name="identityDbField"></param>
-    protected DbField GetReturnKeyColumnAsDbField(DbField primaryDbField,
-        DbField identityDbField)
+    protected DbField GetReturnKeyColumnAsDbField(DbFieldCollection dbFields)
     {
         switch (GlobalConfiguration.Options.KeyColumnReturnBehavior)
         {
             case KeyColumnReturnBehavior.Primary:
-                return primaryDbField;
+                return dbFields.GetPrimary();
             case KeyColumnReturnBehavior.Identity:
-                return identityDbField;
+                return dbFields.GetIdentity();
             case KeyColumnReturnBehavior.PrimaryOrElseIdentity:
-                return primaryDbField ?? identityDbField;
+                return dbFields.GetPrimary() ?? dbFields.GetIdentity();
             case KeyColumnReturnBehavior.IdentityOrElsePrimary:
-                return identityDbField ?? primaryDbField;
+                return dbFields.GetIdentity() ?? dbFields.GetPrimary();
             default:
                 throw new InvalidOperationException(nameof(GlobalConfiguration.Options.KeyColumnReturnBehavior));
         }

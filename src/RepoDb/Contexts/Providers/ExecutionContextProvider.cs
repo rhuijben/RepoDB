@@ -25,13 +25,13 @@ internal static class ExecutionContextProvider
         switch (GlobalConfiguration.Options.KeyColumnReturnBehavior)
         {
             case KeyColumnReturnBehavior.Primary:
-                return primaryField;
+                return primaryField?.OneOrDefault();
             case KeyColumnReturnBehavior.Identity:
                 return identityField;
             case KeyColumnReturnBehavior.PrimaryOrElseIdentity:
-                return primaryField ?? identityField;
+                return primaryField?.OneOrDefault() ?? identityField;
             case KeyColumnReturnBehavior.IdentityOrElsePrimary:
-                return identityField ?? primaryField;
+                return identityField ?? primaryField?.OneOrDefault();
             default:
                 throw new InvalidOperationException(nameof(GlobalConfiguration.Options.KeyColumnReturnBehavior));
         }
@@ -44,10 +44,10 @@ internal static class ExecutionContextProvider
     /// <param name="dbFields"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    private static Field GetPrimaryAsReturnKeyField(Type entityType,
+    private static IEnumerable<Field> GetPrimaryAsReturnKeyField(Type entityType,
         DbFieldCollection dbFields) =>
-        PrimaryCache.Get(entityType)?.AsField() ??
-            dbFields?.GetPrimary()?.AsField();
+        PrimaryKeyCache.Get(entityType)?.AsFields() ??
+            dbFields?.GetPrimaryFields()?.AsFields();
 
     /// <summary>
     /// 

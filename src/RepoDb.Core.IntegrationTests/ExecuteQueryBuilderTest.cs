@@ -1,10 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepoDb.Enumerations;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using RepoDb.Enumerations;
-using RepoDb.Exceptions;
 
 namespace RepoDb.IntegrationTests;
 
@@ -549,8 +549,10 @@ public class ExecuteQueryBuilderTest
 
             // Setup
             var builder = connection.GetStatementBuilder();
+            var tableName = ClassMappedNameCache.Get<IdentityTable>();
             var sql = builder.CreateAverage(
-                ClassMappedNameCache.Get<IdentityTable>(),
+                tableName,
+                DbFieldCache.Get(connection, tableName, null),
                 field: Field.Parse<IdentityTable>(e => e.ColumnInt).First(),
                 where: where);
 
@@ -578,9 +580,11 @@ public class ExecuteQueryBuilderTest
             connection.InsertAll(tables);
 
             // Setup
+            var tableName = ClassMappedNameCache.Get<IdentityTable>();
             var builder = connection.GetStatementBuilder();
             var sql = builder.CreateAverageAll(
-                ClassMappedNameCache.Get<IdentityTable>(),
+                tableName,
+                DbFieldCache.Get(connection, tableName, null),
                 field: Field.Parse<IdentityTable>(e => e.ColumnInt).First());
 
             // Act
@@ -610,8 +614,10 @@ public class ExecuteQueryBuilderTest
 
             // Setup
             var builder = connection.GetStatementBuilder();
+            var tableName = ClassMappedNameCache.Get<IdentityTable>();
             var sql = builder.CreateBatchQuery(
-                ClassMappedNameCache.Get<IdentityTable>(),
+                tableName,
+                DbFieldCache.Get(connection, tableName, null),
                 fields: fields,
                 page: 2,
                 rowsPerBatch: 2,
@@ -647,9 +653,11 @@ public class ExecuteQueryBuilderTest
             connection.InsertAll(tables);
 
             // Setup
+            var tableName = ClassMappedNameCache.Get<IdentityTable>();
             var builder = connection.GetStatementBuilder();
             var sql = builder.CreateCount(
-                ClassMappedNameCache.Get<IdentityTable>(),
+                tableName,
+                DbFieldCache.Get(connection, tableName, null),
                 where: where);
 
             // Act
@@ -676,9 +684,11 @@ public class ExecuteQueryBuilderTest
             connection.InsertAll(tables);
 
             // Setup
+            var tableName = ClassMappedNameCache.Get<IdentityTable>();
             var builder = connection.GetStatementBuilder();
             var sql = builder.CreateCountAll(
-                ClassMappedNameCache.Get<IdentityTable>());
+                tableName,
+                DbFieldCache.Get(connection, tableName, null));
 
             // Act
             var result = connection.ExecuteScalar<int>(sql);
@@ -708,9 +718,11 @@ public class ExecuteQueryBuilderTest
             Assert.AreEqual(tables.Count(), connection.CountAll<IdentityTable>());
 
             // Setup
+            var tableName = ClassMappedNameCache.Get<IdentityTable>();
             var builder = connection.GetStatementBuilder();
             var sql = builder.CreateDelete(
-                ClassMappedNameCache.Get<IdentityTable>(),
+                tableName,
+                DbFieldCache.Get(connection, tableName, null),
                 where: where);
 
             // Act
@@ -742,8 +754,10 @@ public class ExecuteQueryBuilderTest
 
             // Setup
             var builder = connection.GetStatementBuilder();
+            var tableName = ClassMappedNameCache.Get<IdentityTable>();
             var sql = builder.CreateDeleteAll(
-                ClassMappedNameCache.Get<IdentityTable>());
+                tableName,
+                DbFieldCache.Get(connection, tableName, null));
 
             // Act
             var result = connection.ExecuteNonQuery(sql);
@@ -770,10 +784,13 @@ public class ExecuteQueryBuilderTest
             connection.InsertAll(tables);
 
             // Setup
+            var tableName = ClassMappedNameCache.Get<IdentityTable>();
+            var dbFields = DbFieldCache.Get(connection, tableName, null);
             var where = new QueryGroup(new QueryField("Id", tables.Last().Id));
             var builder = connection.GetStatementBuilder();
             var sql = builder.CreateExists(
-                ClassMappedNameCache.Get<IdentityTable>(),
+                tableName,
+                dbFields,
                 where: where);
 
             // Act
@@ -802,9 +819,8 @@ public class ExecuteQueryBuilderTest
             var builder = connection.GetStatementBuilder();
             var sql = builder.CreateInsert(
                 ClassMappedNameCache.Get<IdentityTable>(),
-                fields: fields,
-                primaryField: dbFields.GetPrimary(),
-                identityField: dbFields.GetIdentity());
+                dbFields,
+                fields: fields);
 
             // Act
             var id = connection.ExecuteScalar(sql, table);
@@ -905,9 +921,8 @@ public class ExecuteQueryBuilderTest
             var sql = builder.CreateMerge(
                 ClassMappedNameCache.Get<IdentityTable>(),
                 fields: fields,
-                qualifiers: fields.Where(f => dbFields.GetItems().FirstOrDefault(df => (df.IsPrimary || df.IsIdentity) && df.Name == f.Name) != null),
-                primaryField: dbFields.GetPrimary(),
-                identityField: dbFields.GetIdentity());
+                qualifiers: fields.Where(f => dbFields.FirstOrDefault(df => (df.IsPrimary || df.IsIdentity) && df.Name == f.Name) != null),
+                dbFields);
 
             // Act
             var affectedRow = connection.ExecuteNonQuery(sql, table);
@@ -1171,7 +1186,8 @@ public class ExecuteQueryBuilderTest
             // Setup
             var builder = connection.GetStatementBuilder();
             var sql = builder.CreateTruncate(
-                ClassMappedNameCache.Get<IdentityTable>());
+                ClassMappedNameCache.Get<IdentityTable>(),
+                dbFields: default!);
 
             // Act
             connection.ExecuteNonQuery(sql);
@@ -1208,10 +1224,9 @@ public class ExecuteQueryBuilderTest
             var builder = connection.GetStatementBuilder();
             var sql = builder.CreateUpdate(
                 ClassMappedNameCache.Get<IdentityTable>(),
+                dbFields,
                 fields: fields,
-                where: where,
-                primaryField: dbFields.GetPrimary(),
-                identityField: dbFields.GetIdentity());
+                where: where);
 
             // Act
             var affectedRow = connection.ExecuteNonQuery(sql, table);

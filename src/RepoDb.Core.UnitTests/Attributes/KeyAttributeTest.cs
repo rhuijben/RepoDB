@@ -42,9 +42,9 @@ public class KeyAttributeTest
     {
         // Act
         var actual = PrimaryCache.Get<KeyAttributeCollisionTestClass>();
-        var expected = "KeyId";
+        string? expected = null;// Was "KeyId" before introducing multi-column primary key support
 
         // Assert
-        Assert.AreEqual(expected, actual.PropertyInfo.Name);
+        Assert.AreEqual(expected, actual?.PropertyInfo?.Name); // Used to return Key
     }
 }

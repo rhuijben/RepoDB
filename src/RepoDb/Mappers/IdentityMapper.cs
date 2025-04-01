@@ -1,8 +1,8 @@
-﻿using RepoDb.Attributes;
+﻿using System.Collections.Concurrent;
+using System.Linq.Expressions;
+using RepoDb.Attributes;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
-using System.Collections.Concurrent;
-using System.Linq.Expressions;
 
 namespace RepoDb;
 
@@ -13,7 +13,7 @@ public static class IdentityMapper
 {
     #region Privates
 
-    private static readonly ConcurrentDictionary<int, ClassProperty> maps = new();
+    private static readonly ConcurrentDictionary<Type, ClassProperty> maps = new();
 
     #endregion
 
@@ -129,24 +129,16 @@ public static class IdentityMapper
         ObjectExtension.ThrowIfNull(type, "Type");
         ObjectExtension.ThrowIfNull(classProperty, "ClassProperty");
 
-        // Variables
-        var key = TypeExtension.GenerateHashCode(type);
-
-        // Try get the cache
-        if (maps.TryGetValue(key, out var value))
+        if (!maps.TryAdd(type, classProperty))
         {
             if (force)
             {
-                maps.TryUpdate(key, classProperty, value);
+                maps.TryUpdate(type, classProperty, maps[type]);
             }
             else
             {
                 throw new MappingExistsException("The mapping is already existing.");
             }
-        }
-        else
-        {
-            maps.TryAdd(key, classProperty);
         }
     }
 
@@ -173,11 +165,8 @@ public static class IdentityMapper
         // Validate
         ObjectExtension.ThrowIfNull(type, "Type");
 
-        // Variables
-        var key = TypeExtension.GenerateHashCode(type);
-
         // Try get the value
-        maps.TryGetValue(key, out var value);
+        maps.TryGetValue(type, out var value);
 
         // Return the value
         return value;
@@ -204,11 +193,8 @@ public static class IdentityMapper
         // Validate
         ObjectExtension.ThrowIfNull(type, "Type");
 
-        // Variables
-        var key = TypeExtension.GenerateHashCode(type);
-
         // Try get the value
-        maps.TryRemove(key, out var _);
+        maps.TryRemove(type, out var _);
     }
 
     /*

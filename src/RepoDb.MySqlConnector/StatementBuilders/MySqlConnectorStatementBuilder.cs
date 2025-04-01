@@ -201,9 +201,8 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsert(string tableName,
-        IEnumerable<Field>? fields = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field>? fields,
+        DbFieldCollection dbFields,
         string? hints = null)
     {
         // Initialize the builder
@@ -213,12 +212,11 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         builder.WriteText(
             base.CreateInsert(tableName,
                 fields,
-                primaryField,
-                identityField,
+                dbFields,
                 hints));
 
         // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
+        var keyColumn = GetReturnKeyColumnAsDbField(dbFields);
         var returnValue = keyColumn != null ?
             keyColumn.IsIdentity ? "LAST_INSERT_ID()" :
                 keyColumn.Name.AsParameter(DbSetting) : "NULL";
@@ -249,17 +247,14 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsertAll(string tableName,
-      IEnumerable<Field>? fields = null,
+      DbFieldCollection dbFields,
+      IEnumerable<Field>? fields,
       int batchSize = 1,
-      DbField? primaryField = null,
-      DbField? identityField = null,
       string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
 
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
@@ -271,24 +266,17 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         }
 
         // Primary Key
-        if (primaryField != null &&
-            primaryField.HasDefaultValue == false &&
-            !string.Equals(primaryField.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase))
+        if (dbFields.GetPrimaryFields() is { } primary)
         {
-            var isPresent = fields
-                .FirstOrDefault(f =>
-                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
-
-            if (isPresent == false)
+            foreach (var primaryField in primary)
             {
-                throw new PrimaryFieldNotFoundException($"As the primary field '{primaryField.Name}' is not an identity nor has a default value, it must be present on the insert operation.");
+                if (!primaryField.HasDefaultValue && !primaryField.IsReadOnly
+                    && !fields.Any(f => string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)))
+                {
+                    throw new PrimaryFieldNotFoundException($"As the primary field '{primaryField.Name}' is not an identity nor has a default value, it must be present on the insert operation.");
+                }
             }
         }
-
-        // Insertable fields
-        var insertableFields = fields
-            .Where(f =>
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase));
 
         // Initialize the builder
         var builder = new QueryBuilder();
@@ -303,7 +291,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .OpenParen()
-            .FieldsFrom(insertableFields, DbSetting)
+            .FieldsFrom(fields, DbSetting)
             .CloseParen()
             .Values();
 
@@ -313,7 +301,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             builder
                 .WriteText("ROW")
                 .OpenParen()
-                .ParametersFrom(insertableFields, index, DbSetting)
+                .ParametersFrom(fields, index, DbSetting)
                 .CloseParen();
 
             if (index < batchSize - 1)
@@ -327,7 +315,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         builder
             .End();
 
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
+        var keyColumn = GetReturnKeyColumnAsDbField(dbFields);
 
         if (keyColumn?.IsIdentity == true)
         {
@@ -345,7 +333,8 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
                     .WriteText("LAST_INSERT_ID() +")
                     .WriteText($"{index}")
                     .CloseParen();
-            };
+            }
+            ;
 
             builder.End();
 
@@ -435,24 +424,21 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     /// Creates a SQL Statement for merge operation.
     /// </summary>
     /// <param name="tableName">The name of the target table.</param>
+    /// <param name="dbFields"></param>
     /// <param name="fields">The list of fields to be merged.</param>
     /// <param name="qualifiers">The list of the qualifier <see cref="Field"/> objects.</param>
-    /// <param name="primaryField">The primary field from the database.</param>
-    /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for merge operation.</returns>
     public override string CreateMerge(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
-        IEnumerable<Field>? qualifiers = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field>? qualifiers,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
+
 
         // Verify the fields
         if (fields?.Any() != true)
@@ -461,7 +447,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         }
 
         // Validate the Primary Key
-        if (primaryField == null)
+        if (dbFields.GetPrimaryFields() is null)
         {
             throw new PrimaryFieldNotFoundException($"The is no primary field from the table '{tableName}'.");
         }
@@ -487,7 +473,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             .End();
 
         // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
+        var keyColumn = GetReturnKeyColumnAsDbField(dbFields);
         var returnValue = keyColumn != null ? keyColumn.Name.AsParameter(DbSetting) : "NULL";
 
         // Set the return value
@@ -517,18 +503,15 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for merge operation.</returns>
     public override string CreateMergeAll(string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
         int batchSize = 10,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
 
         // Verify the fields
         if (fields?.Any() != true)
@@ -537,12 +520,12 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         }
 
         // Validate the Primary Key
-        if (primaryField == null)
+        if (dbFields.GetPrimaryFields() is null)
         {
             throw new PrimaryFieldNotFoundException($"The is no primary field from the table '{tableName}'.");
         }
 
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
+        var keyColumn = GetReturnKeyColumnAsDbField(dbFields);
         var builder = new QueryBuilder();
         builder.Clear();
 

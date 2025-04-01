@@ -926,7 +926,7 @@ public static partial class DbConnectionExtension
     {
         // Variables
         var commandType = CommandType.Text;
-        var commandText = CommandTextCache.GetCountText(request);
+        var commandText = await CommandTextCache.GetCountTextAsync(request, cancellationToken);
 
         // Actual Execution
         var result = await ExecuteScalarAsyncInternal<long>(connection: connection,

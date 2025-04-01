@@ -1,7 +1,7 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Exceptions;
-using RepoDb.Resolvers;
+﻿using RepoDb.Exceptions;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
+using RepoDb.Resolvers;
 
 namespace RepoDb.StatementBuilders;
 
@@ -256,22 +256,20 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsertAll(string tableName,
-        IEnumerable<Field>? fields = null,
+        IEnumerable<Field>? fields,
+        DbFieldCollection dbFields,
         int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null)
     {
         // Call the base
         var commandText = base.CreateInsertAll(tableName,
             fields,
+            dbFields,
             batchSize,
-            primaryField,
-            identityField,
             hints);
 
         // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
+        var keyColumn = GetReturnKeyColumnAsDbField(dbFields);
 
         // Set the return value
         if (keyColumn != null)

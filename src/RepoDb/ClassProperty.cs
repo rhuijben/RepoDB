@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Reflection;
 using RepoDb.Attributes;
@@ -183,42 +184,18 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
         return propertyHandlerAttribute.Value;
     }
 
-    /*
-     * IsPrimary
-     */
-    private bool? isPrimary;
+    /// <summary>
+    /// Don't use this
+    /// </summary>
+    /// <returns></returns>
+    [Obsolete("Result was undefined, 99% true", true), EditorBrowsable(EditorBrowsableState.Never)]
+    public bool? IsPrimary() => true; // Used to be true if there is some primary key. Which was always the case in all tests
 
     /// <summary>
-    /// Gets a value whether the current property is a primary property.
+    /// Don't use this
     /// </summary>
-    /// <returns>True if the current property is a primary.</returns>
-    public bool? IsPrimary()
-    {
-        if (isPrimary != null)
-        {
-            return isPrimary;
-        }
-        return (isPrimary = PrimaryCache.Get(GetDeclaringType()) != null);
-    }
-
-    /*
-     * IsIdentity
-     */
-
-    private bool? isIdentity;
-
-    /// <summary>
-    /// Gets a value whether the current property is an identity or not.
-    /// </summary>
-    /// <returns>True if the current property is an identity.</returns>
-    public bool? IsIdentity()
-    {
-        if (isIdentity != null)
-        {
-            return isIdentity;
-        }
-        return (isIdentity = IdentityCache.Get(GetDeclaringType()) != null);
-    }
+    [Obsolete("Result was undefined, 99% true", true), EditorBrowsable(EditorBrowsableState.Never)]
+    public bool? IsIdentity() => true; // Used to be true if there is some identity key. Which was always the case in all tests
 
     /*
      * GetDbType

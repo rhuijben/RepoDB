@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#nullable enable
+using System.Collections;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
@@ -7,15 +8,29 @@ namespace RepoDb;
 /// <summary>
 /// A class the holds the collection of column definitions of the table.
 /// </summary>
-public sealed class DbFieldCollection : IEnumerable<DbField>
+public sealed class DbFieldCollection : IReadOnlyList<DbField>
 {
     private readonly IDbSetting dbSetting;
     private readonly IReadOnlyList<DbField> dbFields;
     private readonly Lazy<IEnumerable<Field>> lazyFields;
-    private readonly Lazy<DbField> lazyIdentity;
+    private readonly Lazy<DbField?> lazyIdentity;
+    private readonly Lazy<DbField?> lazyPrimary;
+    private readonly Lazy<IReadOnlyList<DbField>?> lazyPrimaries;
     private readonly Lazy<Dictionary<string, DbField>> lazyMapByName;
     private readonly Lazy<Dictionary<string, DbField>> lazyMapByUnquotedName;
-    private readonly Lazy<DbField> lazyPrimary;
+
+
+    /// <summary>
+    /// Returns the number of elements in the dbFields collection. It provides a quick way to access the count of items.
+    /// </summary>
+    public int Count => dbFields.Count;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public DbField this[int index] => dbFields[index];
 
     /// <summary>
     /// Creates a new instance of <see cref="DbFieldCollection" /> object.
@@ -24,11 +39,17 @@ public sealed class DbFieldCollection : IEnumerable<DbField>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     public DbFieldCollection(IEnumerable<DbField> dbFields, IDbSetting dbSetting)
     {
+#if NET
+        ArgumentNullException.ThrowIfNull(dbFields);
+        ArgumentNullException.ThrowIfNull(dbSetting);
+#endif
+
         this.dbSetting = dbSetting;
         this.dbFields = dbFields.AsList();
 
-        lazyPrimary = new Lazy<DbField>(GetPrimaryDbField);
-        lazyIdentity = new Lazy<DbField>(GetIdentityDbField);
+        lazyPrimaries = new Lazy<IReadOnlyList<DbField>?>(GetPrimaryDbFields);
+        lazyPrimary = new Lazy<DbField?>(GetPrimaryDbField);
+        lazyIdentity = new Lazy<DbField?>(GetIdentityDbField);
         lazyMapByName = new Lazy<Dictionary<string, DbField>>(GetDbFieldsMappedByName);
         lazyMapByUnquotedName = new Lazy<Dictionary<string, DbField>>(GetDbFieldsMappedByUnquotedName);
         lazyFields = new Lazy<IEnumerable<Field>>(GetDbFieldsAsFields);
@@ -38,13 +59,19 @@ public sealed class DbFieldCollection : IEnumerable<DbField>
     /// Gets a value whether the current column definition is a primary column definition.
     /// </summary>
     /// <returns>A primary column definition.</returns>
-    public DbField GetPrimary() => lazyPrimary.Value;
+    public DbField? GetPrimary() => lazyPrimary.Value;
 
     /// <summary>
     /// Gets a value whether the current column definition is a identity column definition.
     /// </summary>
     /// <returns>A identity column definition.</returns>
-    public DbField GetIdentity() => lazyIdentity.Value;
+    public DbField? GetIdentity() => lazyIdentity.Value;
+
+    /// <summary>
+    ///Gets the list of primary fields 
+    /// </summary>
+    /// <returns></returns>
+    public IReadOnlyList<DbField>? GetPrimaryFields() => lazyPrimaries.Value;
 
     /// <summary>
     /// Gets a column definitions of the table.
@@ -81,7 +108,7 @@ public sealed class DbFieldCollection : IEnumerable<DbField>
     /// </summary>
     /// <param name="name">The name of the mapping that is equivalent to the column definition of the table.</param>
     /// <returns>A column definition of table.</returns>
-    public DbField GetByUnquotedName(string name)
+    public DbField? GetByUnquotedName(string name)
     {
         lazyMapByUnquotedName.Value.TryGetValue(name, out var dbField);
 
@@ -94,9 +121,11 @@ public sealed class DbFieldCollection : IEnumerable<DbField>
     private Dictionary<string, DbField> GetDbFieldsMappedByUnquotedName() =>
         dbFields.ToDictionary(df => df.Name.AsUnquoted(true, dbSetting), df => df, StringComparer.OrdinalIgnoreCase);
 
-    private DbField GetPrimaryDbField() => dbFields.FirstOrDefault(df => df.IsPrimary);
+    private IReadOnlyList<DbField>? GetPrimaryDbFields() => dbFields.Where(x => x.IsPrimary) is { } p ? p.Any() ? p.ToArray() : null : null;
 
-    private DbField GetIdentityDbField() => dbFields.FirstOrDefault(df => df.IsIdentity);
+    private DbField? GetPrimaryDbField() => GetPrimaryDbFields() is { } p ? (p.Count == 1 ? p.First() : null) : null;
+
+    private DbField? GetIdentityDbField() => dbFields.FirstOrDefault(df => df.IsIdentity);
 
     private IEnumerable<Field> GetDbFieldsAsFields() => dbFields.AsFields();
 

@@ -14,7 +14,13 @@ public static class EnumerableExtension
     /// <param name="value">The actual enumerable instance.</param>
     /// <param name="sizePerSplit">The sizes of the items per split.</param>
     /// <returns>An enumerable of enumerables.</returns>
-    public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> value,
+    public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> value, int size)
+    {
+        return value.Chunk(size);
+    }
+
+#if !NET
+    internal static IEnumerable<IEnumerable<T>> Chunk<T>(this IEnumerable<T> value,
         int sizePerSplit)
     {
         var count = value?.Count() ?? 0;
@@ -22,7 +28,6 @@ public static class EnumerableExtension
         {
             return new[] { value };
         }
-#if !NET
         else
         {
             var batchCount = Convert.ToInt32(count / sizePerSplit) + ((count % sizePerSplit) != 0 ? 1 : 0);
@@ -38,10 +43,8 @@ public static class EnumerableExtension
             }
             return array;
         }
-#else
-        return value.Chunk(sizePerSplit);
-#endif
     }
+#endif
 
     /// <summary>
     /// Returns the items of type <typeparamref name="TargetType"/> from the <see cref="IEnumerable{T}"/> object into a target <see cref="IEnumerable{T}"/> object.

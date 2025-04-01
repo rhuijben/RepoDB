@@ -23,14 +23,38 @@ public static class CommandTextCache
     /// <returns></returns>
     internal static string GetAverageText(AverageRequest request)
     {
-        var commandText = cache.GetOrAdd(request, (_) =>
+        if (cache.TryGetValue(request, out var commandText) == false)
         {
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
             var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
-            return statementBuilder.CreateAverage(request.Name,
+            commandText = statementBuilder.CreateAverage(request.Name,
+                dbFields,
                 request.Field,
                 request.Where,
                 request.Hints);
-        });
+            cache.TryAdd(request, commandText);
+        }
+        return commandText;
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    internal static async ValueTask<string> GetAverageTextAsync(AverageRequest request, CancellationToken cancellationToken)
+    {
+        if (cache.TryGetValue(request, out var commandText) == false)
+        {
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken);
+            var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
+            commandText = statementBuilder.CreateAverage(request.Name,
+                dbFields,
+                request.Field,
+                request.Where,
+                request.Hints);
+            cache.TryAdd(request, commandText);
+        }
         return commandText;
     }
 
@@ -47,8 +71,25 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
             var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
             commandText = statementBuilder.CreateAverageAll(request.Name,
+                dbFields,
+                request.Field,
+                request.Hints);
+            cache.TryAdd(request, commandText);
+        }
+        return commandText;
+    }
+
+    internal static async ValueTask<string> GetAverageAllTextAsync(AverageAllRequest request, CancellationToken cancellationToken)
+    {
+        if (cache.TryGetValue(request, out var commandText) == false)
+        {
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken);
+            var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
+            commandText = statementBuilder.CreateAverageAll(request.Name,
+                dbFields,
                 request.Field,
                 request.Hints);
             cache.TryAdd(request, commandText);
@@ -69,14 +110,10 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            ValidateOrderFields(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
             commandText = GetBatchQueryTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -89,22 +126,17 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetBatchQueryTextAsync(BatchQueryRequest request,
+    internal static async ValueTask<string> GetBatchQueryTextAsync(BatchQueryRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            await ValidateOrderFieldsAsync(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            commandText = GetBatchQueryTextInternal(request, fields);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
+            commandText = GetBatchQueryTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -117,10 +149,12 @@ public static class CommandTextCache
     /// <param name="fields"></param>
     /// <returns></returns>
     internal static string GetBatchQueryTextInternal(BatchQueryRequest request,
-        IEnumerable<Field> fields)
+        IEnumerable<Field> fields,
+        DbFieldCollection dbFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateBatchQuery(request.Name,
+            dbFields,
             fields,
             request.Page,
             request.RowsPerBatch,
@@ -142,8 +176,27 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
             var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
-            commandText = statementBuilder.CreateCount(request.Name,
+            commandText = statementBuilder.CreateCount(
+                request.Name,
+                dbFields,
+                request.Where,
+                request.Hints);
+            cache.TryAdd(request, commandText);
+        }
+        return commandText;
+    }
+
+    internal static async ValueTask<string> GetCountTextAsync(CountRequest request, CancellationToken cancellationToken)
+    {
+        if (cache.TryGetValue(request, out var commandText) == false)
+        {
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+            var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
+            commandText = statementBuilder.CreateCount(
+                request.Name,
+                dbFields,
                 request.Where,
                 request.Hints);
             cache.TryAdd(request, commandText);
@@ -185,8 +238,30 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
             var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
             commandText = statementBuilder.CreateDelete(request.Name,
+                dbFields,
+                request.Where,
+                request.Hints);
+            cache.TryAdd(request, commandText);
+        }
+        return commandText;
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    internal static async ValueTask<string> GetDeleteTextAsync(DeleteRequest request, CancellationToken cancellationToken)
+    {
+        if (cache.TryGetValue(request, out var commandText) == false)
+        {
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+            var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
+            commandText = statementBuilder.CreateDelete(request.Name,
+                dbFields,
                 request.Where,
                 request.Hints);
             cache.TryAdd(request, commandText);
@@ -250,13 +325,10 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetInsertTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetInsertTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -268,19 +340,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetInsertTextAsync(InsertRequest request,
+    internal static async ValueTask<string> GetInsertTextAsync(InsertRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetInsertTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetInsertTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -296,14 +365,12 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetInsertTextInternal(InsertRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        DbFieldCollection dbFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateInsert(request.Name,
             fields,
-            primaryField,
-            identityField,
+            dbFields,
             request.Hints);
     }
 
@@ -320,13 +387,10 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetInsertAllTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetInsertAllTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -338,19 +402,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetInsertAllTextAsync(InsertAllRequest request,
+    internal static async ValueTask<string> GetInsertAllTextAsync(InsertAllRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetInsertAllTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetInsertAllTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -366,15 +427,13 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetInsertAllTextInternal(InsertAllRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        DbFieldCollection? dbFields = null)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateInsertAll(request.Name,
             fields,
             request.BatchSize,
-            primaryField,
-            identityField,
+            dbFields,
             request.Hints);
     }
 
@@ -436,13 +495,11 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetMergeTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetMergeTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -454,19 +511,15 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetMergeTextAsync(MergeRequest request,
+    internal static async ValueTask<string> GetMergeTextAsync(MergeRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetMergeTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken);
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetMergeTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -482,15 +535,13 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetMergeTextInternal(MergeRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        DbFieldCollection dbFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateMerge(request.Name,
             fields,
             request.Qualifiers,
-            primaryField,
-            identityField,
+            dbFields,
             request.Hints);
     }
 
@@ -507,13 +558,11 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetMergeAllTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetMergeAllTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -525,19 +574,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetMergeAllTextAsync(MergeAllRequest request,
+    internal static async ValueTask<string> GetMergeAllTextAsync(MergeAllRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetMergeAllTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetMergeAllTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -553,16 +599,14 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetMergeAllTextInternal(MergeAllRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        DbFieldCollection dbFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateMergeAll(request.Name,
             fields,
             request.Qualifiers,
             request.BatchSize,
-            primaryField,
-            identityField,
+            dbFields,
             request.Hints);
     }
 
@@ -624,14 +668,11 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            ValidateOrderFields(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
             commandText = GetQueryTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -644,21 +685,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetQueryTextAsync(QueryRequest request,
+    internal static async ValueTask<string> GetQueryTextAsync(QueryRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            await ValidateOrderFieldsAsync(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
             commandText = GetQueryTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -696,14 +732,11 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            ValidateOrderFields(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
             commandText = GetQueryAllTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -716,21 +749,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetQueryAllTextAsync(QueryAllRequest request,
+    internal static async ValueTask<string> GetQueryAllTextAsync(QueryAllRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            await ValidateOrderFieldsAsync(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
             commandText = GetQueryAllTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -766,14 +794,11 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            ValidateOrderFields(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
             commandText = GetQueryMultipleTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -786,21 +811,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetQueryMultipleTextAsync(QueryMultipleRequest request,
+    internal static async ValueTask<string> GetQueryMultipleTextAsync(QueryMultipleRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            await ValidateOrderFieldsAsync(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
             commandText = GetQueryMultipleTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -838,14 +858,12 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            ValidateOrderFields(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
+
             commandText = GetSkipQueryTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -858,21 +876,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetSkipQueryTextAsync(SkipQueryRequest request,
+    internal static async ValueTask<string> GetSkipQueryTextAsync(SkipQueryRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            await ValidateOrderFieldsAsync(request.Connection,
-                request.Name,
-                request.OrderBy,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            ValidateOrderFields(dbFields, request.OrderBy, dbSetting);
             commandText = GetSkipQueryTextInternal(request, fields);
             cache.TryAdd(request, commandText);
         }
@@ -958,7 +971,7 @@ public static class CommandTextCache
         if (cache.TryGetValue(request, out var commandText) == false)
         {
             var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
-            commandText = statementBuilder.CreateTruncate(request.Name);
+            commandText = statementBuilder.CreateTruncate(request.Name, dbFields: default!);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -977,13 +990,11 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetUpdateTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetUpdateTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -995,19 +1006,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetUpdateTextAsync(UpdateRequest request,
+    internal static async ValueTask<string> GetUpdateTextAsync(UpdateRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetUpdateTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetUpdateTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -1023,15 +1031,13 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetUpdateTextInternal(UpdateRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        DbFieldCollection dbFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateUpdate(request.Name,
             fields,
             request.Where,
-            primaryField,
-            identityField,
+            dbFields,
             request.Hints);
     }
 
@@ -1048,13 +1054,11 @@ public static class CommandTextCache
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = GetTargetFields(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetUpdateAllTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetUpdateAllTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -1066,19 +1070,16 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetUpdateAllTextAsync(UpdateAllRequest request,
+    internal static async ValueTask<string> GetUpdateAllTextAsync(UpdateAllRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
         {
-            var fields = await GetTargetFieldsAsync(request.Connection,
-                request.Name,
-                request.Fields,
-                request.Transaction,
-                cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetUpdateAllTextInternal(request, fields, primaryField, identityField);
+            var dbSetting = request.Connection.GetDbSetting();
+            var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
+
+            var fields = GetTargetFields(dbFields, request.Fields, dbSetting);
+            commandText = GetUpdateAllTextInternal(request, fields, dbFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -1094,16 +1095,14 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetUpdateAllTextInternal(UpdateAllRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        DbFieldCollection dbFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateUpdateAll(request.Name,
             fields,
             request.Qualifiers,
             request.BatchSize,
-            primaryField,
-            identityField,
+            dbFields,
             request.Hints);
     }
 
@@ -1124,50 +1123,13 @@ public static class CommandTextCache
     /// <param name="tableName"></param>
     /// <param name="orderFields"></param>
     /// <param name="transaction"></param>
-    private static void ValidateOrderFields(IDbConnection connection,
-        string tableName,
+    private static void ValidateOrderFields(DbFieldCollection dbFields,
         IEnumerable<OrderField> orderFields,
-        IDbTransaction transaction)
-    {
-        if (orderFields?.Any() == true)
-        {
-            var dbFields = DbFieldCache.Get(connection, tableName, transaction);
-            ValidateOrderFieldsInternal(orderFields, dbFields, connection.GetDbSetting());
-        }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="tableName"></param>
-    /// <param name="orderFields"></param>
-    /// <param name="transaction"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    private static async Task ValidateOrderFieldsAsync(IDbConnection connection,
-        string tableName,
-        IEnumerable<OrderField> orderFields,
-        IDbTransaction transaction,
-        CancellationToken cancellationToken = default)
-    {
-        if (orderFields?.Any() == true)
-        {
-            var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
-            ValidateOrderFieldsInternal(orderFields, dbFields, connection.GetDbSetting());
-        }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="orderFields"></param>
-    /// <param name="dbFields"></param>
-    /// <param name="dbSetting"></param>
-    private static void ValidateOrderFieldsInternal(IEnumerable<OrderField> orderFields,
-        DbFieldCollection dbFields,
         IDbSetting dbSetting)
     {
+        if (orderFields?.Any() != true)
+            return;
+
         var unmatchesOrderFields = dbFields?.IsEmpty() == false ?
             orderFields
                 .Where(of =>
@@ -1186,40 +1148,15 @@ public static class CommandTextCache
     /// <param name="fields"></param>
     /// <param name="transaction"></param>
     /// <returns></returns>
-    private static IEnumerable<Field> GetTargetFields(IDbConnection connection,
-        string tableName,
+    private static IEnumerable<Field> GetTargetFields(DbFieldCollection dbFields,
         IEnumerable<Field> fields,
-        IDbTransaction transaction)
+        IDbSetting dbSetting)
     {
         if (fields?.Any() != true)
         {
             return null;
         }
-        var dbFields = DbFieldCache.Get(connection, tableName, transaction);
-        return GetTargetFieldsInternal(fields, dbFields, connection.GetDbSetting());
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="connection"></param>
-    /// <param name="tableName"></param>
-    /// <param name="fields"></param>
-    /// <param name="transaction"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    private static async Task<IEnumerable<Field>> GetTargetFieldsAsync(IDbConnection connection,
-        string tableName,
-        IEnumerable<Field> fields,
-        IDbTransaction transaction,
-        CancellationToken cancellationToken = default)
-    {
-        if (fields?.Any() != true)
-        {
-            return null;
-        }
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
-        return GetTargetFieldsInternal(fields, dbFields, connection.GetDbSetting());
+        return GetTargetFieldsInternal(fields, dbFields, dbSetting);
     }
 
     /// <summary>
@@ -1230,13 +1167,13 @@ public static class CommandTextCache
     /// <param name="dbSetting"></param>
     /// <returns></returns>
     private static IEnumerable<Field> GetTargetFieldsInternal(IEnumerable<Field> fields,
-        DbFieldCollection dbFields,
+        DbFieldCollection? dbFields,
         IDbSetting dbSetting)
     {
-        return dbFields?.IsEmpty() == false ?
+        return dbFields?.Count > 0 ?
             fields
                 .Where(f =>
-                    dbFields.GetByUnquotedName(f.Name.AsUnquoted(true, dbSetting)) != null) :
+                    dbFields.GetByUnquotedName(f.Name.AsUnquoted(true, dbSetting)) is { } dbf && !dbf.IsReadOnly) :
             fields;
     }
 
@@ -1245,10 +1182,10 @@ public static class CommandTextCache
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    private static DbField GetPrimaryField(BaseRequest request)
+    private static IEnumerable<DbField>? GetPrimaryFields(BaseRequest request)
     {
         var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
-        return GetPrimaryField(request, dbFields);
+        return dbFields.GetPrimaryFields();
     }
 
     /// <summary>
@@ -1257,45 +1194,11 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task<DbField> GetPrimaryFieldAsync(BaseRequest request,
+    private static async ValueTask<IEnumerable<DbField>?> GetPrimaryFieldsAsync(BaseRequest request,
         CancellationToken cancellationToken = default)
     {
         var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
-        return GetPrimaryField(request, dbFields);
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="dbFields"></param>
-    /// <returns></returns>
-    private static DbField GetPrimaryField(BaseRequest request,
-        DbFieldCollection dbFields)
-    {
-        var primaryField = GetPrimaryField(request.Type, dbFields);
-
-        if (primaryField != null)
-        {
-            var identityField = GetIdentityField(request.Type, dbFields);
-            var isIdentity = identityField == primaryField ||
-                string.Equals(identityField?.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase);
-
-            return new DbField(primaryField.Name,
-                true,
-                isIdentity,
-                false,
-                primaryField.Type,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                null);
-        }
-
-        return null;
+        return dbFields.GetPrimaryFields();
     }
 
     /// <summary>
@@ -1303,10 +1206,10 @@ public static class CommandTextCache
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    private static DbField GetIdentityField(BaseRequest request)
+    private static DbField? GetIdentityField(BaseRequest request)
     {
         var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
-        return GetIdentityField(request, dbFields);
+        return dbFields.GetIdentity();
     }
 
     /// <summary>
@@ -1315,68 +1218,12 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task<DbField> GetIdentityFieldAsync(BaseRequest request,
+    private static async ValueTask<DbField> GetIdentityFieldAsync(BaseRequest request,
         CancellationToken cancellationToken = default)
     {
         var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
-        return GetIdentityField(request, dbFields);
+        return dbFields?.GetIdentity();
     }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="dbFields"></param>
-    /// <returns></returns>
-    private static DbField GetIdentityField(BaseRequest request,
-        DbFieldCollection dbFields)
-    {
-        var identityField = GetIdentityField(request.Type, dbFields);
-
-        if (identityField != null)
-        {
-            var primaryField = GetPrimaryField(request.Type, dbFields);
-            var isPrimary = identityField == primaryField ||
-                string.Equals(primaryField?.Name, identityField.Name, StringComparison.OrdinalIgnoreCase);
-
-            return new DbField(identityField.Name,
-                isPrimary,
-                true,
-                false,
-                identityField.Type,
-                null,
-                null,
-                null,
-                null,
-                false,
-                false,
-                null);
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="type"></param>
-    /// <param name="dbFields"></param>
-    /// <returns></returns>
-    private static Field GetPrimaryField(Type type,
-        DbFieldCollection dbFields) =>
-        (type != null && type.IsObjectType() == false ? PrimaryCache.Get(type) : null)?.AsField() ??
-            dbFields?.GetPrimary()?.AsField();
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="type"></param>
-    /// <param name="dbFields"></param>
-    /// <returns></returns>
-    private static Field GetIdentityField(Type type,
-        DbFieldCollection dbFields) =>
-        (type != null && type.IsObjectType() == false ? IdentityCache.Get(type) : null)?.AsField() ??
-            dbFields?.GetIdentity()?.AsField();
 
     /// <summary>
     ///

@@ -1,13 +1,25 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using RepoDb.Interfaces;
 
 namespace RepoDb.Requests;
 
+
+internal sealed class RequestState
+{
+    public IDbConnection Connection { get; init; }
+    public IDbTransaction Transaction { get; init; }
+    public DbFieldCollection DbFields { get; init; }
+    public IStatementBuilder? StatementBuilder { get; init; }
+}
+
 /// <summary>
 /// A base class for all operational request.
 /// </summary>
-internal abstract class BaseRequest : IEquatable<BaseRequest>
+internal abstract class BaseRequest : IEquatable<BaseRequest>, IDisposable
 {
+    RequestState? requestState;
+
     /// <summary>
     /// Creates a new instance of <see cref="BaseRequest"/> object.
     /// </summary>
@@ -15,15 +27,10 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// <param name="connection">The connection object.</param>
     /// <param name="transaction">The transaction object.</param>
     /// <param name="statementBuilder">The statement builder.</param>
-    public BaseRequest(string name,
-        IDbConnection connection,
-        IDbTransaction transaction,
-        IStatementBuilder? statementBuilder = null)
+    public BaseRequest(string name, RequestState requestState)
     {
         Name = name;
-        Connection = connection;
-        Transaction = transaction;
-        StatementBuilder = statementBuilder;
+        this.requestState = requestState;
     }
 
     /// <summary>
@@ -39,17 +46,20 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// <summary>
     /// Gets the connection object.
     /// </summary>
-    public IDbConnection Connection { get; }
+    public IDbConnection? Connection => requestState?.Connection ?? throw new InvalidOperationException();
 
     /// <summary>
     /// Gets the transaction object.
     /// </summary>
-    public IDbTransaction Transaction { get; }
+    public IDbTransaction Transaction => requestState?.Transaction ?? throw new InvalidOperationException();
 
     /// <summary>
     /// Gets the statement builder.
     /// </summary>
-    public IStatementBuilder StatementBuilder { get; }
+    public IStatementBuilder StatementBuilder => requestState?.StatementBuilder ?? throw new InvalidOperationException();
+
+
+    public DbFieldCollection DbFields => requestState?.DbFields ?? throw new InvalidOperationException();
 
     #region Equality and comparers
 
@@ -91,6 +101,11 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     }
 
     protected abstract bool StrictEquals(BaseRequest other);
+
+    public void Dispose()
+    {
+        requestState = null;
+    }
 
     /// <summary>
     /// Compares the equality of the two <see cref="BaseRequest"/> objects.

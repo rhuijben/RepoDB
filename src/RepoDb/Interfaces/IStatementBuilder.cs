@@ -16,7 +16,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for average operation.</returns>
-    string CreateAverage(string tableName,
+    string CreateAverage(
+        string tableName,
+        DbFieldCollection dbFields,
         Field field,
         QueryGroup? where = null,
         string? hints = null);
@@ -32,7 +34,9 @@ public interface IStatementBuilder
     /// <param name="field">The field to be averaged.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for average-all operation.</returns>
-    string CreateAverageAll(string tableName,
+    string CreateAverageAll(
+        string tableName,
+        DbFieldCollection dbFields,
         Field field,
         string? hints = null);
 
@@ -51,7 +55,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for batch query operation.</returns>
-    string CreateBatchQuery(string tableName,
+    string CreateBatchQuery(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         int page,
         int rowsPerBatch,
@@ -74,7 +80,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for batch query operation.</returns>
-    string CreateSkipQuery(string tableName,
+    string CreateSkipQuery(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         int skip,
         int take,
@@ -93,7 +101,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for count operation.</returns>
-    string CreateCount(string tableName,
+    string CreateCount(
+        string tableName,
+        DbFieldCollection dbFields,
         QueryGroup? where = null,
         string? hints = null);
 
@@ -107,7 +117,9 @@ public interface IStatementBuilder
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for count-all operation.</returns>
-    string CreateCountAll(string tableName,
+    string CreateCountAll(
+        string tableName,
+        DbFieldCollection dbFields,
         string? hints = null);
 
     #endregion
@@ -121,7 +133,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for delete operation.</returns>
-    string CreateDelete(string tableName,
+    string CreateDelete(
+        string tableName,
+        DbFieldCollection dbFields,
         QueryGroup? where = null,
         string? hints = null);
 
@@ -135,7 +149,9 @@ public interface IStatementBuilder
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for delete-all operation.</returns>
-    string CreateDeleteAll(string tableName,
+    string CreateDeleteAll(
+        string tableName,
+        DbFieldCollection dbFields,
         string? hints = null);
 
     #endregion
@@ -149,7 +165,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for exists operation.</returns>
-    string CreateExists(string tableName,
+    string CreateExists(
+        string tableName,
+        DbFieldCollection dbFields,
         QueryGroup? where = null,
         string? hints = null);
 
@@ -166,10 +184,10 @@ public interface IStatementBuilder
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
-    string CreateInsert(string tableName,
-        IEnumerable<Field>? fields = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+    string CreateInsert(
+        string tableName,
+        DbFieldCollection dbFields,
+        IEnumerable<Field>? fields,
         string? hints = null);
 
     #endregion
@@ -186,11 +204,11 @@ public interface IStatementBuilder
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
-    string CreateInsertAll(string tableName,
-        IEnumerable<Field>? fields = null,
+    string CreateInsertAll(
+        string tableName,
+        DbFieldCollection dbFields,
+        IEnumerable<Field>? fields,
         int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null);
 
     #endregion
@@ -205,7 +223,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for maximum operation.</returns>
-    string CreateMax(string tableName,
+    string CreateMax(
+        string tableName,
+        DbFieldCollection dbFields,
         Field field,
         QueryGroup? where = null,
         string? hints = null);
@@ -221,7 +241,9 @@ public interface IStatementBuilder
     /// <param name="field">The field to be maximized.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for maximum-all operation.</returns>
-    string CreateMaxAll(string tableName,
+    string CreateMaxAll(
+        string tableName,
+        DbFieldCollection dbFields,
         Field field,
         string? hints = null);
 
@@ -239,11 +261,11 @@ public interface IStatementBuilder
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for merge operation.</returns>
-    string CreateMerge(string tableName,
+    string CreateMerge(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
-        IEnumerable<Field>? qualifiers = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field>? qualifiers,
         string? hints = null);
 
     #endregion
@@ -261,12 +283,12 @@ public interface IStatementBuilder
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for update-all operation.</returns>
-    string CreateMergeAll(string tableName,
+    string CreateMergeAll(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null);
 
     #endregion
@@ -281,7 +303,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for minimum operation.</returns>
-    string CreateMin(string tableName,
+    string CreateMin(
+        string tableName,
+        DbFieldCollection dbFields,
         Field field,
         QueryGroup? where = null,
         string? hints = null);
@@ -297,7 +321,9 @@ public interface IStatementBuilder
     /// <param name="field">The field to be minimized.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for minimum-all operation.</returns>
-    string CreateMinAll(string tableName,
+    string CreateMinAll(
+        string tableName,
+        DbFieldCollection dbFields,
         Field field,
         string? hints = null);
 
@@ -315,7 +341,9 @@ public interface IStatementBuilder
     /// <param name="top">The number of rows to be returned.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for query operation.</returns>
-    string CreateQuery(string tableName,
+    string CreateQuery(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
@@ -334,7 +362,9 @@ public interface IStatementBuilder
     /// <param name="orderBy">The list of fields for ordering.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for query operation.</returns>
-    string CreateQueryAll(string tableName,
+    string CreateQueryAll(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null);
@@ -351,7 +381,9 @@ public interface IStatementBuilder
     /// <param name="where">The query expression.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for sum operation.</returns>
-    string CreateSum(string tableName,
+    string CreateSum(
+        string tableName,
+        DbFieldCollection dbFields,
         Field field,
         QueryGroup? where = null,
         string? hints = null);
@@ -367,7 +399,9 @@ public interface IStatementBuilder
     /// <param name="field">The field to be summarized.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for sum-all operation.</returns>
-    string CreateSumAll(string tableName,
+    string CreateSumAll(
+        string tableName,
+        DbFieldCollection dbFields,
         Field field,
         string? hints = null);
 
@@ -380,7 +414,9 @@ public interface IStatementBuilder
     /// </summary>
     /// <param name="tableName">The name of the target table.</param>
     /// <returns>A sql statement for truncate operation.</returns>
-    string CreateTruncate(string tableName);
+    string CreateTruncate(
+        string tableName,
+        DbFieldCollection dbFields);
 
     #endregion
 
@@ -396,11 +432,11 @@ public interface IStatementBuilder
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for update operation.</returns>
-    string CreateUpdate(string tableName,
+    string CreateUpdate(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         QueryGroup? where = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null);
 
     #endregion
@@ -418,12 +454,12 @@ public interface IStatementBuilder
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for update-all operation.</returns>
-    string CreateUpdateAll(string tableName,
+    string CreateUpdateAll(
+        string tableName,
+        DbFieldCollection dbFields,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
         string? hints = null);
 
     #endregion

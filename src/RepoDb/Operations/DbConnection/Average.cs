@@ -2667,7 +2667,7 @@ public static partial class DbConnectionExtension
     {
         // Variables
         var commandType = CommandType.Text;
-        var commandText = CommandTextCache.GetAverageText(request);
+        var commandText = CommandTextCache.GetAverageTextAsync(request, cancellationToken);
 
         // Actual Execution
         var result = await ExecuteScalarAsyncInternal<TResult>(connection: connection,

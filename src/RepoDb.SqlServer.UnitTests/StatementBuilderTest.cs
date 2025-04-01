@@ -524,8 +524,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateInsertAll(tableName: tableName,
             fields: fields,
             batchSize: 1,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField));
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
             $"OUTPUT CONVERT(INT, [INSERTED].[Field1]) AS [Result] " +
@@ -552,8 +551,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateInsertAll(tableName: tableName,
             fields: fields,
             batchSize: 1,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField));
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
             $"OUTPUT CONVERT(BIGINT, [INSERTED].[Field1]) AS [Result] " +
@@ -580,8 +578,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateInsertAll(tableName: tableName,
             fields: fields,
             batchSize: 1,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField));
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field1], [Field3] ) " +
             $"OUTPUT CONVERT(INT, [INSERTED].[Field2]) AS [Result] " +
@@ -609,8 +606,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateInsertAll(tableName: tableName,
             fields: fields,
             batchSize: 1,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField));
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field1], [Field3] ) " +
             $"OUTPUT CONVERT(BIGINT, [INSERTED].[Field2]) AS [Result] " +
@@ -637,8 +633,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateInsertAll(tableName: tableName,
             fields: fields,
             batchSize: 3,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField));
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
             $"OUTPUT CONVERT(INT, [INSERTED].[Field1]) AS [Result] " +
@@ -667,8 +662,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateInsertAll(tableName: tableName,
             fields: fields,
             batchSize: 1,
-            primaryField: null,
-            identityField: identityField,
+            MakeDbFieldCollection(fields, identity: identityField),
             hints: SqlServerTableHints.TabLock);
         var expected = $"" +
             $"INSERT INTO [Table] WITH (TABLOCK) ( [Field2], [Field3] ) " +
@@ -696,8 +690,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateInsertAll(tableName: tableName,
             fields: fields,
             batchSize: 3,
-            primaryField: null,
-            identityField: identityField,
+            MakeDbFieldCollection(fields, identity: identityField),
             hints: SqlServerTableHints.TabLock);
         var expected = $"" +
             $"INSERT INTO [Table] WITH (TABLOCK) ( [Field2], [Field3] ) " +
@@ -729,8 +722,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field1], [Field2], [Field3] ) " +
@@ -753,8 +745,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"INSERT INTO [dbo].[Table] " +
             $"( [Field1], [Field2], [Field3] ) " +
@@ -777,8 +768,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"INSERT INTO [dbo].[Table] " +
             $"( [Field1], [Field2], [Field3] ) " +
@@ -802,8 +792,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields, primaryField));
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field1], [Field2], [Field3] ) " +
@@ -827,8 +816,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField);
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field2], [Field3] ) " +
@@ -852,8 +840,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField));
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field2], [Field3] ) " +
@@ -878,8 +865,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField);
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field1], [Field3] ) " +
@@ -904,8 +890,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField));
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field1], [Field3] ) " +
@@ -928,8 +913,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateInsert(tableName: tableName,
             fields: fields,
-            primaryField: null,
-            identityField: null,
+            MakeDbFieldCollection(fields),
             hints: SqlServerTableHints.TabLock);
         var expected = $"" +
             $"INSERT INTO [Table] WITH (TABLOCK) " +
@@ -960,8 +944,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields, null, null));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -990,8 +973,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            dbFields: MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [dbo].[Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1020,8 +1002,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            dbFields: MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [dbo].[Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1051,8 +1032,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: primaryField,
-            identityField: null);
+            dbFields: MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1084,8 +1064,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: primaryField,
-            identityField: primaryField);
+            MakeDbFieldCollection(fields, primaryField, primaryField);
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1116,8 +1095,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: primaryField,
-            identityField: null);
+            dbFields: MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1148,8 +1126,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: identityField);
+            dbFields: MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1180,8 +1157,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, null, identityField);
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1211,8 +1187,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: null,
             batchSize: 1,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields, primaryField, null);
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1243,8 +1218,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: null,
             batchSize: 1,
-            primaryField: primaryField,
-            identityField: identityField);
+            dbFields: MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1275,8 +1249,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 3,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, null, identityField));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1324,8 +1297,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null,
+            dbFields: MakeDbFieldCollection(fields),
             hints: SqlServerTableHints.TabLock);
         var expected = $"" +
             $"MERGE [Table] WITH (TABLOCK) AS T " +
@@ -1356,8 +1328,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 3,
-            primaryField: null,
-            identityField: identityField,
+            MakeDbFieldCollection(fields, null, identityField),
             hints: SqlServerTableHints.TabLock);
         var expected = $"" +
             $"MERGE [Table] WITH (TABLOCK) AS T " +
@@ -1405,8 +1376,7 @@ public class StatementBuilderTest
             fields: null,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            dbFields: MakeDbFieldCollection(qualifiers));
     }
 
     [TestMethod, ExpectedException(typeof(MissingQualifierFieldsException))]
@@ -1422,8 +1392,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: null,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            dbFields: MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(InvalidQualifiersException))]
@@ -1440,8 +1409,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(InvalidQualifiersException))]
@@ -1458,8 +1426,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: null,
             batchSize: 1,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields, primaryField, null));
     }
 
     [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -1476,8 +1443,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            dbFields: MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -1494,8 +1460,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            dbFields: MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -1512,8 +1477,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: qualifiers,
             batchSize: 1,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(InvalidOperationException))]
@@ -1530,8 +1494,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: null,
             batchSize: 1,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields, primaryField, null));
     }
 
     [TestMethod, ExpectedException(typeof(InvalidOperationException))]
@@ -1549,8 +1512,7 @@ public class StatementBuilderTest
             fields: fields,
             qualifiers: null,
             batchSize: 1,
-            primaryField: null,
-            identityField: identifyField);
+            dbFields: MakeDbFieldCollection(fields, identity: identifyField));
     }
 
     #endregion
@@ -1570,8 +1532,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1599,8 +1560,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [dbo].[Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1628,8 +1588,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [dbo].[Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1658,8 +1617,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1690,8 +1648,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: primaryField,
-            identityField: primaryField);
+            MakeDbFieldCollection(fields, primaryField, identifyField);
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1721,8 +1678,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1752,8 +1708,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields, identity: identityField);
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1783,8 +1738,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: identityField);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1813,8 +1767,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: null,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields, primaryField));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1844,8 +1797,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: null,
-            primaryField: primaryField,
-            identityField: identityField);
+            MakeDbFieldCollection(fields));
         var expected = $"" +
             $"MERGE [Table] AS T " +
             $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
@@ -1874,8 +1826,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null,
+            MakeDbFieldCollection(fields),
             hints: SqlServerTableHints.TabLock);
         var expected = $"" +
             $"MERGE [Table] WITH (TABLOCK) AS T " +
@@ -1903,8 +1854,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: null,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(qualifiers));
     }
 
     [TestMethod, ExpectedException(typeof(MissingQualifierFieldsException))]
@@ -1919,8 +1869,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: null,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(InvalidQualifiersException))]
@@ -1936,8 +1885,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(InvalidQualifiersException))]
@@ -1953,8 +1901,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: null,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields, primaryField));
     }
 
     [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -1970,8 +1917,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -1987,8 +1933,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -2004,8 +1949,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: qualifiers,
-            primaryField: null,
-            identityField: null);
+            MakeDbFieldCollection(fields));
     }
 
     [TestMethod, ExpectedException(typeof(InvalidOperationException))]
@@ -2021,8 +1965,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: null,
-            primaryField: primaryField,
-            identityField: null);
+            MakeDbFieldCollection(fields, primaryField));
     }
 
     [TestMethod, ExpectedException(typeof(InvalidOperationException))]
@@ -2039,8 +1982,7 @@ public class StatementBuilderTest
         statementBuilder.CreateMerge(tableName: tableName,
             fields: fields,
             qualifiers: null,
-            primaryField: null,
-            identityField: identifyField);
+            MakeDbFieldCollection(fields, identity: identifyField));
     }
 
     #endregion
@@ -2390,4 +2332,19 @@ public class StatementBuilderTest
             where: null);
     }
     #endregion
+
+    static DbFieldCollection MakeDbFieldCollection(IEnumerable<Field> fields, DbField? primaryKey = null, DbField? identity = null)
+     => new DbFieldCollection(fields.Select(x => new DbField(
+            x.Name,
+            (primaryKey?.Name is { } pkName && pkName == x.Name),
+            (identity?.Name is { } idName && idName == x.Name),
+            isNullable: true,
+            type: x.Type,
+            size: null,
+            precision: null,
+            scale: null,
+            databaseType: null,
+            hasDefaultValue: false,
+            isComputed: false,
+            provider: null)), default!);
 }
