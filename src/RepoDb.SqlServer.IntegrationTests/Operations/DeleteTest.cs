@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.SqlServer.IntegrationTests.Operations;
 
@@ -162,6 +163,18 @@ public class DeleteTest
 
             // Assert
             Assert.AreEqual(8, result);
+        }
+    }
+
+    [TestMethod]
+    public void TestSqlServerConnectionDeleteMultiKey()
+    {
+        // Setup
+        var tables = Database.CreateMultiKeyTables(10);
+
+        using (var connection = new SqlConnection(Database.ConnectionString))
+        {
+            Assert.AreEqual(1, connection.Delete(tables.FirstOrDefault(), trace: new DiagnosticsTracer()));
         }
     }
 

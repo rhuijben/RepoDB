@@ -1,7 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.SqlServer.IntegrationTests.Operations;
 
@@ -74,6 +75,35 @@ public class DeleteAllTest
             Assert.AreEqual(tables.Count(), result);
         }
     }
+
+    [TestMethod]
+    public void TestSqlServerConnectionDeleteAllValues()
+    {
+        // Setup
+        var tables = Database.CreateCompleteTables(10);
+
+        using (var connection = new SqlConnection(Database.ConnectionString))
+        {
+            // Act
+            var result = connection.DeleteAll<CompleteTable>(tables.Take(5), trace: new DiagnosticsTracer());
+
+            // Assert
+            Assert.AreEqual(5, result);
+        }
+    }
+
+    [TestMethod]
+    public void TestSqlServerConnectionDeleteAllMultiKey()
+    {
+        // Setup
+        var tables = Database.CreateMultiKeyTables(10);
+
+        using (var connection = new SqlConnection(Database.ConnectionString).EnsureOpen())
+        {
+            Assert.AreEqual(5, connection.DeleteAll(tables.Take(5), trace: new DiagnosticsTracer()));
+        }
+    }
+
 
     #endregion
 

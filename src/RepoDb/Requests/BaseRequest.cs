@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using RepoDb.Interfaces;
 
 namespace RepoDb.Requests;
@@ -29,7 +30,7 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// <summary>
     /// Gets the type.
     /// </summary>
-    public Type Type { get; init; }
+    public Type? Type { get; init; }
 
     /// <summary>
     /// Gets the name.
@@ -44,12 +45,12 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// <summary>
     /// Gets the transaction object.
     /// </summary>
-    public IDbTransaction Transaction { get; }
+    public IDbTransaction? Transaction { get; }
 
     /// <summary>
     /// Gets the statement builder.
     /// </summary>
-    public IStatementBuilder StatementBuilder { get; }
+    public IStatementBuilder? StatementBuilder { get; }
 
     #region Equality and comparers
 
@@ -66,7 +67,7 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// </summary>
     /// <param name="obj">The object to be compared to the current object.</param>
     /// <returns>True if the instances are equals.</returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return Equals(obj as BaseRequest);
     }
@@ -76,7 +77,7 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// </summary>
     /// <param name="other">The object to be compared to the current object.</param>
     /// <returns>True if the instances are equal.</returns>
-    public bool Equals(BaseRequest other)
+    public bool Equals(BaseRequest? other)
     {
         if ((other is null))
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
 
 namespace RepoDb;
@@ -23,11 +24,9 @@ public static partial class ClassExpression
         Expression<Func<TEntity, object?>> expression)
         where TEntity : class
     {
-        var property = ExpressionExtension.GetProperty<TEntity>(expression);
-        var propertyCache = PropertyCache.Get<TEntity>()
-            .Where(p => p.PropertyInfo == property || string.Equals(p.PropertyInfo.Name, property.Name, StringComparison.OrdinalIgnoreCase))
-            .FirstOrDefault();
-        return GetEntitiesPropertyValues<TEntity, TResult>(entities, propertyCache);
+        var property = ExpressionExtension.GetProperty<TEntity>(expression) ?? throw new PropertyNotFoundException(nameof(expression), "Property not found");
+        var classProperty = PropertyCache.Get<TEntity>().GetByName(property.Name);
+        return GetEntitiesPropertyValues<TEntity, TResult>(entities, classProperty);
     }
 
     /// <summary>
@@ -42,9 +41,7 @@ public static partial class ClassExpression
         Field field)
         where TEntity : class
     {
-        var classProperty = PropertyCache.Get<TEntity>()
-            .Where(p => string.Equals(p.PropertyInfo.Name, field.Name, StringComparison.OrdinalIgnoreCase))
-            .FirstOrDefault();
+        var classProperty = PropertyCache.Get<TEntity>().GetByName(field.Name) ?? throw new PropertyNotFoundException(nameof(field), "Property not found");
         return GetEntitiesPropertyValues<TEntity, TResult>(entities, classProperty);
     }
 
@@ -60,9 +57,7 @@ public static partial class ClassExpression
         string propertyName)
         where TEntity : class
     {
-        var classProperty = PropertyCache.Get<TEntity>()
-            .Where(p => string.Equals(p.PropertyInfo.Name, propertyName, StringComparison.OrdinalIgnoreCase))
-            .FirstOrDefault();
+        var classProperty = PropertyCache.Get<TEntity>().GetByName(propertyName) ?? throw new PropertyNotFoundException(nameof(propertyName), "Property not found");
         return GetEntitiesPropertyValues<TEntity, TResult>(entities, classProperty);
     }
 
@@ -149,10 +144,7 @@ public static partial class ClassExpression
             var key = property.GetHashCode();
 
             // Get from the cache
-            if (cache.TryGetValue(key, out var func) == false)
-            {
-                func = GetFunc(property);
-            }
+            var func = cache.GetOrAdd(key, (_) => GetFunc(property));
 
             // Extract the values
             if (entities?.Any() == true)

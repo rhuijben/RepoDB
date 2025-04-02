@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Dynamic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.SqlServer.IntegrationTests.Models;
-using System.Dynamic;
 
 namespace RepoDb.SqlServer.IntegrationTests;
 
@@ -741,5 +741,18 @@ public static class Helper
         item["SessionId"] = Guid.NewGuid();
     }
 
+    #endregion
+
+    #region MultiKeyTable
+    public static List<MultiKeyTable> CreateMultiKeyTables(int count)
+    {
+        return Enumerable.Range(0, count).Select(r =>
+            new MultiKeyTable()
+            {
+                Pk1 = r / 4,
+                Pk2 = "S" + r.ToString(),
+                ColumnVarChar = "Some bla" + r.ToString()
+            }).ToList();
+    }
     #endregion
 }

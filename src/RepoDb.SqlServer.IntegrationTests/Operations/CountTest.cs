@@ -1,8 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.SqlServer.IntegrationTests.Operations;
 
@@ -148,6 +149,19 @@ public class CountTest
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
+        }
+    }
+
+    [TestMethod]
+    public void TestSqlServerConnectionCountMultiKey()
+    {
+        // Setup
+        var tables = Database.CreateMultiKeyTables(10);
+
+        using (var connection = new SqlConnection(Database.ConnectionString))
+        {
+            // Checks all values, works as before
+            Assert.AreEqual(1, connection.Count<MultiKeyTable>(tables.FirstOrDefault(), trace: new DiagnosticsTracer()));
         }
     }
 

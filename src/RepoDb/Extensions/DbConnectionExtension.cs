@@ -2651,6 +2651,7 @@ public static partial class DbConnectionExtension
         {
             return null;
         }
+
         var queryGroup = WhatToQueryGroup(what);
         if (queryGroup != null)
         {
@@ -2662,10 +2663,12 @@ public static partial class DbConnectionExtension
         {
             return WhatToQueryGroup(key, what);
         }
-        else
+        else if (keys is { })
         {
             return WhatToQueryGroup(keys, what);
         }
+
+        return null;
     }
 
     /// <summary>
@@ -3074,18 +3077,11 @@ public static partial class DbConnectionExtension
     /// <param name="entities"></param>
     /// <param name="property"></param>
     /// <returns></returns>
-    internal static IEnumerable<object> ExtractPropertyValues<TEntity>(IEnumerable<TEntity> entities, IEnumerable<Field> keyFields) where TEntity : class
+    internal static IEnumerable<object> ExtractPropertyValues<TEntity>(IEnumerable<TEntity> entities, Field keyField) where TEntity : class
     {
-        if (keyFields?.OneOrDefault() is { } keyField)
-        {
-            var property = PropertyCache.Get(GetEntityType<TEntity>(entities), keyField, true)!;
+        var property = PropertyCache.Get(GetEntityType<TEntity>(entities), keyField, true)!;
 
-            return ClassExpression.GetEntitiesPropertyValues<TEntity, object>(entities, property);
-        }
-        else
-        {
-            throw new NotImplementedException();
-        }
+        return ClassExpression.GetEntitiesPropertyValues<TEntity, object>(entities, property);
     }
 
     /// <summary>

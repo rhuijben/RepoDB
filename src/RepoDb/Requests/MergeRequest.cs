@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
@@ -22,8 +23,8 @@ internal sealed class MergeRequest : BaseRequest
     public MergeRequest(Type type,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field>? fields = null,
-        IEnumerable<Field>? qualifiers = null,
+        IEnumerable<Field> fields,
+        IEnumerable<Field> qualifiers,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(type,
@@ -49,8 +50,8 @@ internal sealed class MergeRequest : BaseRequest
     public MergeRequest(string name,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field>? fields = null,
-        IEnumerable<Field>? qualifiers = null,
+        IEnumerable<Field> fields,
+        IEnumerable<Field> qualifiers,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(null,
@@ -74,22 +75,22 @@ internal sealed class MergeRequest : BaseRequest
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
-    public MergeRequest(Type type,
-        string name,
+    public MergeRequest(Type? type,
+        string? name,
         IDbConnection connection,
         IDbTransaction transaction,
-        IEnumerable<Field>? fields = null,
-        IEnumerable<Field>? qualifiers = null,
+        IEnumerable<Field> fields,
+        IEnumerable<Field> qualifiers,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
-        : base(name ?? ClassMappedNameCache.Get(type),
+        : base(name ?? ClassMappedNameCache.Get(type!),
             connection,
             transaction,
             statementBuilder)
     {
         Type = type;
-        Fields = fields?.AsList();
-        Qualifiers = qualifiers?.AsList();
+        Fields = fields.AsList();
+        Qualifiers = qualifiers.AsList();
         Hints = hints;
     }
 
@@ -106,7 +107,7 @@ internal sealed class MergeRequest : BaseRequest
     /// <summary>
     /// Gets the hints for the table.
     /// </summary>
-    public string Hints { get; }
+    public string? Hints { get; }
 
     #region Equality and comparers
 

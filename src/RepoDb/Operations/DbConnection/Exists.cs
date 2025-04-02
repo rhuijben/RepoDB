@@ -50,6 +50,40 @@ public static partial class DbConnectionExtension
     /// Check whether the rows are existing in the table.
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
+    /// <param name="connection">The connection object to be used.</param>
+    /// <param name="entity">The data entity object to check the key of.</param>
+    /// <param name="hints">The table hints to be used.</param>
+    /// <param name="traceKey">The tracing key to be used.</param>
+    /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+    /// <param name="transaction">The transaction to be used.</param>
+    /// <param name="trace">The trace object to be used.</param>
+    /// <param name="statementBuilder">The statement builder object to be used.</param>
+    /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
+    public static bool Exists<TEntity>(this IDbConnection connection,
+        TEntity entity,
+        string? hints = null,
+        int? commandTimeout = null,
+        string traceKey = TraceKeys.Exists,
+        IDbTransaction? transaction = null,
+        ITrace? trace = null,
+        IStatementBuilder? statementBuilder = null)
+        where TEntity : class
+    {
+        var key = GetAndGuardPrimaryKeyOrIdentityKey(GetEntityType<TEntity>(entity), connection, transaction);
+        return ExistsInternal<TEntity>(connection: connection,
+            where: ToQueryGroup(key, entity),
+            hints: hints,
+            commandTimeout: commandTimeout,
+            traceKey: traceKey,
+            transaction: transaction,
+            trace: trace,
+            statementBuilder: statementBuilder);
+    }
+
+    /// <summary>
+    /// Check whether the rows are existing in the table.
+    /// </summary>
+    /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <typeparam name="TWhat">The type of the expression or the key value.</typeparam>
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="what">The dynamic expression or the key value to be used.</param>
@@ -291,6 +325,43 @@ public static partial class DbConnectionExtension
     {
         return await ExistsAsyncInternal<TEntity>(connection: connection,
             where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
+            hints: hints,
+            commandTimeout: commandTimeout,
+            traceKey: traceKey,
+            transaction: transaction,
+            trace: trace,
+            statementBuilder: statementBuilder,
+            cancellationToken: cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Check whether the rows are existing in the table in an asynchronous way.
+    /// </summary>
+    /// <typeparam name="TEntity">The type of the data entity.</typeparam>
+    /// <param name="connection">The connection object to be used.</param>
+    /// <param name="what">The dynamic expression or the key value to be used.</param>
+    /// <param name="hints">The table hints to be used.</param>
+    /// <param name="traceKey">The tracing key to be used.</param>
+    /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
+    /// <param name="transaction">The transaction to be used.</param>
+    /// <param name="trace">The trace object to be used.</param>
+    /// <param name="statementBuilder">The statement builder object to be used.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
+    /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
+    public static async Task<bool> ExistsAsync<TEntity>(this IDbConnection connection,
+        TEntity entity,
+        string? hints = null,
+        int? commandTimeout = null,
+        string traceKey = TraceKeys.Exists,
+        IDbTransaction? transaction = null,
+        ITrace? trace = null,
+        IStatementBuilder? statementBuilder = null,
+        CancellationToken cancellationToken = default)
+        where TEntity : class
+    {
+        var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType<TEntity>(entity), connection, transaction, cancellationToken);
+        return await ExistsAsyncInternal<TEntity>(connection: connection,
+            where: ToQueryGroup(key, entity),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,

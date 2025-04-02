@@ -39,6 +39,7 @@ public static class Database
         {
             connection.Truncate<CompleteTable>();
             connection.Truncate<NonIdentityCompleteTable>();
+            connection.Truncate<MultiKeyTable>();
         }
     }
 
@@ -50,6 +51,7 @@ public static class Database
     {
         CreateCompleteTable();
         CreateNonIdentityCompleteTable();
+        CreateMultiKeyTable();
     }
 
     private static void CreateCompleteTable()
@@ -158,6 +160,28 @@ public static class Database
         }
     }
 
+    private static void CreateMultiKeyTable()
+    {
+        var commandText = @"IF (NOT EXISTS(SELECT 1 FROM [sys].[objects] WHERE type = 'U' AND name = 'MultiKeyTable'))
+                BEGIN
+                    CREATE TABLE [dbo].[MultiKeyTable]
+                    (
+                        [Pk1] INT NOT NULL,
+                        [Pk2] VARCHAR(16) NOT NULL,
+                        [ColumnVarChar] VARCHAR(MAX) NULL,
+                        CONSTRAINT [PK_MultiKeyTable] PRIMARY KEY
+                        (
+                            [Pk1] ASC,
+                            [Pk2] ASC
+                        )
+                    ) ON [PRIMARY];
+                END";
+        using (var connection = new SqlConnection(ConnectionString).EnsureOpen())
+        {
+            connection.ExecuteNonQuery(commandText);
+        }
+    }
+
     #endregion
 
     #region CompleteTable
@@ -186,5 +210,17 @@ public static class Database
         }
     }
 
+    #endregion
+
+    #region MultiKeyTable
+    public static IEnumerable<MultiKeyTable> CreateMultiKeyTables(int count)
+    {
+        using (var connection = new SqlConnection(ConnectionString))
+        {
+            var tables = Helper.CreateMultiKeyTables(count);
+            connection.InsertAll(tables);
+            return tables;
+        }
+    }
     #endregion
 }

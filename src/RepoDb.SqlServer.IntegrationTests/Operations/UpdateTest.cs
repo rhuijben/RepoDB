@@ -1,7 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.SqlServer.IntegrationTests.Operations;
 
@@ -183,6 +184,22 @@ public class UpdateTest
 
             // Assert
             Helper.AssertPropertiesEquality(table, queryResult);
+        }
+    }
+
+    [TestMethod]
+    public void TestSqlServerConnectionUpdateMultiKey()
+    {
+        // Setup
+        var tables = Database.CreateMultiKeyTables(10);
+
+        using (var connection = new SqlConnection(Database.ConnectionString))
+        {
+            var item1 = tables.First();
+
+            item1.ColumnVarChar = "Updated";
+
+            Assert.AreEqual(1, connection.Update(item1, trace: new DiagnosticsTracer()));
         }
     }
 

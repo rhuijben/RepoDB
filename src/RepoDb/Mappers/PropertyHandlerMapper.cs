@@ -48,7 +48,7 @@ public static class PropertyHandlerMapper
     /// <param name="force">A value that indicates whether to force the mapping. If one is already exists, then it will be overwritten.</param>
     public static void Add<TType, TPropertyHandler>(TPropertyHandler propertyHandler,
         bool force = false) =>
-        Add(typeof(TType), propertyHandler, force);
+        Add(typeof(TType), propertyHandler!, force);
 
     /// <summary>
     /// Type Level: Adds a mapping between a .NET CLR type and a <see cref="IPropertyHandler{TInput, TResult}"/> object.
@@ -397,7 +397,7 @@ public static class PropertyHandlerMapper
         // Validate
         ThrowArgumentNullException(propertyInfo, "PropertyInfo");
         ThrowArgumentNullException(propertyHandler, "PropertyHandler");
-        Guard(propertyHandler.GetType() ?? typeof(TPropertyHandler));
+        Guard(propertyHandler!.GetType() ?? typeof(TPropertyHandler));
 
         /*
          * Note: The reflected type of the property info if explored via expression is different, therefore, we
@@ -424,7 +424,7 @@ public static class PropertyHandlerMapper
             else
             {
                 // Throws an exception
-                throw new MappingExistsException($"A property handler mapping to '{propertyInfo.DeclaringType!.FullName}.{propertyInfo.Name}' already exists.");
+                throw new MappingExistsException($"A property handler mapping to '{propertyInfo?.DeclaringType?.FullName}.{propertyInfo?.Name}' already exists.");
             }
         }
         else
@@ -445,7 +445,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TPropertyHandler">The type of the property handler.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The mapped property handler object of the property.</returns>
-    public static TPropertyHandler Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
+    public static TPropertyHandler? Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get<TEntity, TPropertyHandler>(ExpressionExtension.GetProperty<TEntity>(expression));
 
@@ -456,9 +456,9 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TPropertyHandler">The type of the property handler.</typeparam>
     /// <param name="propertyName">The name of the property.</param>
     /// <returns>The mapped property handler object of the property.</returns>
-    public static TPropertyHandler Get<TEntity, TPropertyHandler>(string propertyName)
+    public static TPropertyHandler? Get<TEntity, TPropertyHandler>(string propertyName)
         where TEntity : class =>
-        Get<TEntity, TPropertyHandler>(TypeExtension.GetProperty<TEntity>(propertyName));
+        Get<TEntity, TPropertyHandler>(TypeExtension.GetProperty<TEntity>(propertyName) ?? throw new PropertyNotFoundException(nameof(propertyName), $"{propertyName} not found"));
 
     /// <summary>
     /// Property Level: Gets the mapped property handler object of the data entity type property (via <see cref="Field"/> object).
@@ -467,9 +467,9 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TPropertyHandler">The type of the property handler.</typeparam>
     /// <param name="field">The instance of <see cref="Field"/> object.</param>
     /// <returns>The mapped property handler object of the property.</returns>
-    public static TPropertyHandler Get<TEntity, TPropertyHandler>(Field field)
+    public static TPropertyHandler? Get<TEntity, TPropertyHandler>(Field field)
         where TEntity : class =>
-        Get<TEntity, TPropertyHandler>(TypeExtension.GetProperty<TEntity>(field.Name));
+        Get<TEntity, TPropertyHandler>(TypeExtension.GetProperty<TEntity>(field.Name) ?? throw new PropertyNotFoundException(nameof(field), $"{field.Name} not found"));
 
     /// <summary>
     /// Property Level: Gets the mapped property handler on a specific <see cref="PropertyInfo"/> object.
@@ -478,7 +478,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TPropertyHandler">The type of the property handler.</typeparam>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/>.</param>
     /// <returns>The mapped property handler object of the property.</returns>
-    internal static TPropertyHandler Get<TEntity, TPropertyHandler>(PropertyInfo propertyInfo)
+    internal static TPropertyHandler? Get<TEntity, TPropertyHandler>(PropertyInfo propertyInfo)
         where TEntity : class =>
         Get<TPropertyHandler>(typeof(TEntity), propertyInfo);
 
@@ -489,7 +489,7 @@ public static class PropertyHandlerMapper
     /// <param name="entityType">The type of the data entity.</param>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/>.</param>
     /// <returns>The mapped property handler object of the property.</returns>
-    internal static TPropertyHandler Get<TPropertyHandler>(Type entityType,
+    internal static TPropertyHandler? Get<TPropertyHandler>(Type entityType,
         PropertyInfo propertyInfo)
     {
         // Validate

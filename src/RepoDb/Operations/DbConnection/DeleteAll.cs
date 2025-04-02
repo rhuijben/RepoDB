@@ -47,17 +47,47 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction, GetEntityType<TEntity>(entities));
-        var keys = ExtractPropertyValues<TEntity>(entities, key).AsList();
 
-        return DeleteAllInternal(connection: connection,
-            tableName: tableName,
-            keys: keys,
-            hints: hints,
-            commandTimeout: commandTimeout,
-            traceKey: traceKey,
-            transaction: transaction,
-            trace: trace,
-            statementBuilder: statementBuilder);
+        if (key.OneOrDefault() is { } one)
+        {
+            var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
+
+            return DeleteAllInternal(connection: connection,
+                tableName: tableName,
+                keys: keys,
+                hints: hints,
+                commandTimeout: commandTimeout,
+                traceKey: traceKey,
+                transaction: transaction,
+                trace: trace,
+                statementBuilder: statementBuilder);
+        }
+        else
+        {
+            int chunkSize = Math.Min(1000, ParameterBatchCount) / key.Count();
+            using var myTransaction = transaction is null && chunkSize < entities.Count() ? connection.EnsureOpen().BeginTransaction() : null;
+            transaction ??= myTransaction;
+            int deleted = 0;
+
+            foreach (var group in entities.Split(chunkSize))
+            {
+                var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
+
+                deleted += DeleteInternal(
+                    connection: connection,
+                    tableName: tableName,
+                    where: where,
+                    hints: hints,
+                    commandTimeout: commandTimeout,
+                    traceKey: traceKey,
+                    transaction: transaction,
+                    trace: trace,
+                    statementBuilder: statementBuilder);
+            }
+
+            myTransaction?.Commit();
+            return deleted;
+        }
     }
 
     /// <summary>
@@ -157,9 +187,11 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = GetAndGuardPrimaryKeyOrIdentityKey(GetEntityType<TEntity>(entities), connection, transaction);
-        var keys = ExtractPropertyValues<TEntity>(entities, key)?.AsList();
+        if (key.OneOrDefault() is { } one)
+        {
+            var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
 
-        return DeleteAllInternal(connection: connection,
+            return DeleteAllInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             keys: keys?.WithType<object>(),
             hints: hints,
@@ -168,6 +200,33 @@ public static partial class DbConnectionExtension
             transaction: transaction,
             trace: trace,
             statementBuilder: statementBuilder);
+        }
+        else
+        {
+            int chunkSize = Math.Min(1000, ParameterBatchCount) / key.Count();
+            using var myTransaction = transaction is null && chunkSize < entities.Count() ? connection.EnsureOpen().BeginTransaction() : null;
+            transaction ??= myTransaction;
+            int deleted = 0;
+
+            foreach (var group in entities.Split(chunkSize))
+            {
+                var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
+
+                deleted += DeleteInternal(
+                    connection: connection,
+                    tableName: ClassMappedNameCache.Get<TEntity>(),
+                    where: where,
+                    hints: hints,
+                    commandTimeout: commandTimeout,
+                    traceKey: traceKey,
+                    transaction: transaction,
+                    trace: trace,
+                    statementBuilder: statementBuilder);
+            }
+
+            myTransaction?.Commit();
+            return deleted;
+        }
     }
 
     /// <summary>
@@ -338,9 +397,11 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, GetEntityType(entities), cancellationToken).ConfigureAwait(false);
-        var keys = ExtractPropertyValues<TEntity>(entities, key).AsList();
+        if (key.OneOrDefault() is { } one)
+        {
+            var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
 
-        return await DeleteAllAsyncInternal(connection: connection,
+            return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
             keys: keys,
             hints: hints,
@@ -350,6 +411,36 @@ public static partial class DbConnectionExtension
             trace: trace,
             statementBuilder: statementBuilder,
             cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
+        else
+        {
+            int chunkSize = Math.Min(1000, ParameterBatchCount) / key.Count();
+
+            await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
+            using var myTransaction = transaction is null && chunkSize < entities.Count() ? await connection.BeginTransactionAsync(cancellationToken) : null;
+
+            transaction ??= myTransaction;
+            int deleted = 0;
+
+            foreach (var group in entities.Split(chunkSize))
+            {
+                var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
+
+                deleted += await DeleteAsyncInternal(
+                    connection: connection,
+                    tableName: tableName,
+                    where: where,
+                    hints: hints,
+                    commandTimeout: commandTimeout,
+                    traceKey: traceKey,
+                    transaction: transaction,
+                    trace: trace,
+                    statementBuilder: statementBuilder);
+            }
+
+            myTransaction?.Commit();
+            return deleted;
+        }
     }
 
     /// <summary>
@@ -457,18 +548,50 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entities), connection, transaction, cancellationToken).ConfigureAwait(false);
-        var keys = ExtractPropertyValues<TEntity>(entities, key)?.AsList();
+        if (key.OneOrDefault() is { } one)
+        {
+            var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
 
-        return await DeleteAllAsyncInternal(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
-            keys: keys?.WithType<object>(),
-            hints: hints,
-            commandTimeout: commandTimeout,
-            traceKey: traceKey,
-            transaction: transaction,
-            trace: trace,
-            statementBuilder: statementBuilder,
-            cancellationToken: cancellationToken).ConfigureAwait(false);
+            return await DeleteAllAsyncInternal(connection: connection,
+                tableName: ClassMappedNameCache.Get<TEntity>(),
+                keys: keys?.WithType<object>(),
+                hints: hints,
+                commandTimeout: commandTimeout,
+                traceKey: traceKey,
+                transaction: transaction,
+                trace: trace,
+                statementBuilder: statementBuilder,
+                cancellationToken: cancellationToken).ConfigureAwait(false);
+        }
+        else
+        {
+            int chunkSize = Math.Min(1000, ParameterBatchCount) / key.Count();
+
+            await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
+            using var myTransaction = transaction is null && chunkSize < entities.Count() ? await connection.BeginTransactionAsync(cancellationToken) : null;
+
+            transaction ??= myTransaction;
+            int deleted = 0;
+
+            foreach (var group in entities.Split(chunkSize))
+            {
+                var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
+
+                deleted += await DeleteAsyncInternal(
+                    connection: connection,
+                    tableName: ClassMappedNameCache.Get<TEntity>(),
+                    where: where,
+                    hints: hints,
+                    commandTimeout: commandTimeout,
+                    traceKey: traceKey,
+                    transaction: transaction,
+                    trace: trace,
+                    statementBuilder: statementBuilder);
+            }
+
+            myTransaction?.Commit();
+            return deleted;
+        }
     }
 
     /// <summary>

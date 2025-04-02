@@ -116,7 +116,7 @@ internal static class MergeExecutionContextProvider
     public static async Task<MergeExecutionContext> CreateAsync(Type entityType,
         IDbConnection connection,
         string tableName,
-        IEnumerable<Field>? qualifiers,
+        IEnumerable<Field> qualifiers,
         IEnumerable<Field> fields,
         string? hints = null,
         IDbTransaction? transaction = null,

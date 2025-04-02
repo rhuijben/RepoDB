@@ -1,8 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.SqlServer.IntegrationTests.Operations;
 
@@ -148,6 +149,19 @@ public class ExistsTest
 
             // Assert
             Assert.IsTrue(result);
+        }
+    }
+
+    [TestMethod]
+    public void TestSqlServerConnectionExistsMultiKey()
+    {
+        // Setup
+        var tables = Database.CreateMultiKeyTables(10);
+
+        using (var connection = new SqlConnection(Database.ConnectionString))
+        {
+            // Checks primary key columns
+            Assert.AreEqual(true, connection.Exists(tables.FirstOrDefault(), trace: new DiagnosticsTracer()));
         }
     }
 
