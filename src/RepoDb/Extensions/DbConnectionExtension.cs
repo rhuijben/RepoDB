@@ -2492,7 +2492,7 @@ public static partial class DbConnectionExtension
         // Primary
         if (dbFields?.GetPrimaryFields() is { } dbPrimary) // Database driven
         {
-            return dbPrimary.Select(f => properties.GetByMappedName(f.Name)!).AsFields();
+            return dbPrimary.Select(f => properties.GetByMappedName(f.Name) ?? throw GetKeyFieldNotFoundException(type)).AsFields();
         }
         else if (PrimaryCache.Get(type) is { } pcPrimary) // Model driven
         {
@@ -2502,7 +2502,7 @@ public static partial class DbConnectionExtension
         // Identity
         if (dbFields?.GetIdentity() is { } dbIdentity)
         {
-            return properties.GetByMappedName(dbIdentity.Name)?.AsField()?.AsEnumerable() ?? throw new KeyFieldNotFoundException();
+            return properties.GetByMappedName(dbIdentity.Name)?.AsField()?.AsEnumerable() ?? throw GetKeyFieldNotFoundException(type);
         }
 
         throw GetKeyFieldNotFoundException(type);

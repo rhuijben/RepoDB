@@ -161,7 +161,7 @@ public class QueryBuilder
     /// <returns>The current instance.</returns>
     public QueryBuilder Average(Field field,
         IDbSetting dbSetting,
-        IResolver<Field, IDbSetting, string> convertResolver)
+        IResolver<Field, IDbSetting, string>? convertResolver)
     {
         var name = convertResolver == null
             ? field.Name.AsField(dbSetting)
@@ -265,7 +265,7 @@ public class QueryBuilder
     /// <param name="field">The instance of the <see cref="Field"/> object to be used.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder Count(Field field,
+    public QueryBuilder Count(Field? field,
         IDbSetting dbSetting)
     {
         var name = field != null ? field.Name.AsField(dbSetting) : "*";
@@ -779,7 +779,7 @@ public class QueryBuilder
     /// <param name="queryGroup">The query group to be stringified.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder WhereFrom(QueryGroup queryGroup, IDbSetting dbSetting) =>
+    public QueryBuilder WhereFrom(QueryGroup? queryGroup, IDbSetting dbSetting) =>
         WhereFrom(queryGroup, 0, dbSetting);
 
     /// <summary>
@@ -789,7 +789,7 @@ public class QueryBuilder
     /// <param name="index">The parameter index.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder WhereFrom(QueryGroup queryGroup,
+    public QueryBuilder WhereFrom(QueryGroup? queryGroup,
         int index,
         IDbSetting dbSetting)
     {
@@ -915,7 +915,7 @@ public class QueryBuilder
     /// </summary>
     /// <param name="hints">The hints to be appended.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder HintsFrom(string hints) => Append(hints);
+    public QueryBuilder HintsFrom(string? hints) => Append(hints);
 
     /// <summary>
     /// Appends a word MAX and the field to the SQL Query Statement, otherwise an empty string.
