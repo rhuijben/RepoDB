@@ -14,7 +14,6 @@ public static class ClassHandlerCache
     #region Privates
 
     private static readonly ConcurrentDictionary<int, object> cache = new();
-    private static readonly IResolver<Type, PropertyInfo, object> propertyLevelResolver = new PropertyHandlerPropertyLevelResolver();
     private static readonly IResolver<Type, object> resolver = new ClassHandlerResolver();
 
     #endregion

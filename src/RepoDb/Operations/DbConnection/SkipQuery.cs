@@ -1811,7 +1811,7 @@ public static partial class DbConnectionExtension
             hints,
             statementBuilder);
         var commandText = CommandTextCache.GetSkipQueryText(request);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Converts to property mapped object
         if (where != null)
@@ -1890,7 +1890,7 @@ public static partial class DbConnectionExtension
             hints,
             statementBuilder);
         var commandText = await CommandTextCache.GetSkipQueryTextAsync(request, cancellationToken).ConfigureAwait(false);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Converts to property mapped object
         if (where != null)

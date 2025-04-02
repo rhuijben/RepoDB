@@ -1,9 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.IntegrationTests.Setup;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace RepoDb.IntegrationTests;
 
@@ -124,7 +124,6 @@ public class DataAnnotationMappingTest
 
     private IEnumerable<MappedIdentityTable> GetMappedIdentityTables(int count = 10)
     {
-        var random = new Random();
         for (var i = 0; i < count; i++)
         {
             yield return new MappedIdentityTable

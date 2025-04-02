@@ -25,7 +25,7 @@ public class BaseStatementBuilderCreateUpdateTest
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
         var tableName = "Table";
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
-        var where = (QueryGroup)null;
+        var where = (QueryGroup?)null;
 
         // Act
         var actual = statementBuilder.CreateUpdate(tableName: tableName,
@@ -48,7 +48,7 @@ public class BaseStatementBuilderCreateUpdateTest
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
         var tableName = "[dbo].[Table]";
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
-        var where = (QueryGroup)null;
+        var where = (QueryGroup?)null;
 
         // Act
         var actual = statementBuilder.CreateUpdate(tableName: tableName,
@@ -71,7 +71,7 @@ public class BaseStatementBuilderCreateUpdateTest
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
         var tableName = "dbo.Table";
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
-        var where = (QueryGroup)null;
+        var where = (QueryGroup?)null;
 
         // Act
         var actual = statementBuilder.CreateUpdate(tableName: tableName,
@@ -345,7 +345,7 @@ public class BaseStatementBuilderCreateUpdateTest
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
         var tableName = "Table";
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
-        var where = (QueryGroup)null;
+        var where = (QueryGroup?)null;
 
         // Act
         var actual = statementBuilder.CreateUpdate(tableName: tableName,
@@ -367,7 +367,7 @@ public class BaseStatementBuilderCreateUpdateTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string)null;
+        var tableName = (string?)null;
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
 
         // Act

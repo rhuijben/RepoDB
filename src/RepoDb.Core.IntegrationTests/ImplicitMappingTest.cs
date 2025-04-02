@@ -139,7 +139,6 @@ public class ImplicitMappingTest
 
     private IEnumerable<MappedIdentityTable> GetMappedIdentityTables(int count = 10)
     {
-        var random = new Random();
         for (var i = 0; i < count; i++)
         {
             yield return new MappedIdentityTable

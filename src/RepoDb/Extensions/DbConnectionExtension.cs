@@ -197,7 +197,7 @@ public static partial class DbConnectionExtension
             skipCommandArrayParametersCheck: skipCommandArrayParametersCheck);
 
         // Variables
-        var result = (IEnumerable<dynamic>?)null;
+        IEnumerable<dynamic>? result = null;
 
         // Before Execution
         var traceResult = Tracer
@@ -2104,7 +2104,7 @@ public static partial class DbConnectionExtension
         // Check the connection
         if (connection == null)
         {
-            throw new ArgumentNullException("The connection object cannot be null.");
+            throw new ArgumentNullException(nameof(connection));
         }
 
         // Get the setting
@@ -2130,7 +2130,7 @@ public static partial class DbConnectionExtension
         // Check the connection
         if (connection == null)
         {
-            throw new ArgumentNullException("The connection object cannot be null.");
+            throw new ArgumentNullException(nameof(connection));
         }
 
         // Get the setting
@@ -2181,7 +2181,7 @@ public static partial class DbConnectionExtension
         // Check the connection
         if (connection == null)
         {
-            throw new ArgumentNullException("The connection object cannot be null.");
+            throw new ArgumentNullException(nameof(connection));
         }
 
         // Get the setting
@@ -2468,15 +2468,10 @@ public static partial class DbConnectionExtension
         DbFieldCollection dbFields)
     {
         // Primary/Identity
-        var dbField = dbFields.GetPrimaryFields() ??
+        var dbField = (dbFields.GetPrimaryFields() ??
             dbFields.GetIdentity()?.AsEnumerable() ??
-            dbFields.GetByName("Id")?.AsEnumerable();
-
-        // Return
-        if (dbField == null)
-        {
-            throw GetKeyFieldNotFoundException(type);
-        }
+            dbFields.GetByName("Id")?.AsEnumerable())
+            ?? throw GetKeyFieldNotFoundException(type);
 
         // Return
         return dbField.AsFields();
@@ -2889,11 +2884,11 @@ public static partial class DbConnectionExtension
     internal static QueryGroup? ToQueryGroup(Field field,
         IDictionary<string, object> dictionary)
     {
-        if (!dictionary.ContainsKey(field.Name))
+        if (!dictionary.TryGetValue(field.Name, out var value))
         {
             throw new MissingFieldsException(new[] { field.Name });
         }
-        return ToQueryGroup(new QueryField(field.Name, dictionary[field.Name]));
+        return ToQueryGroup(new QueryField(field.Name, value));
     }
 
     /// <summary>
@@ -3059,9 +3054,9 @@ public static partial class DbConnectionExtension
 
         foreach (var field in qualifiers)
         {
-            if (dictionary.ContainsKey(field.Name))
+            if (dictionary.TryGetValue(field.Name, out var value))
             {
-                queryFields.Add(new QueryField(field.Name, dictionary[field.Name]));
+                queryFields.Add(new QueryField(field.Name, value));
             }
         }
 
@@ -3280,7 +3275,7 @@ public static partial class DbConnectionExtension
         }
 
         // ArrayParameters
-        var commandArrayParametersText = (CommandArrayParametersText?)null;
+        CommandArrayParametersText? commandArrayParametersText = null;
         if (param != null && skipCommandArrayParametersCheck == false)
         {
             commandArrayParametersText = GetCommandArrayParametersText(commandText,
@@ -3380,7 +3375,7 @@ public static partial class DbConnectionExtension
         }
 
         // Variables
-        var commandArrayParametersText = (CommandArrayParametersText?)null;
+        CommandArrayParametersText? commandArrayParametersText = null;
 
         // CommandArrayParameters
         foreach (var property in TypeCache.Get(param.GetType()).GetProperties())
@@ -3405,10 +3400,7 @@ public static partial class DbConnectionExtension
             }
 
             // Create
-            if (commandArrayParametersText == null)
-            {
-                commandArrayParametersText = new CommandArrayParametersText();
-            }
+            commandArrayParametersText ??= new CommandArrayParametersText();
 
             // CommandText
             commandText = GetRawSqlText(commandText,
@@ -3447,7 +3439,7 @@ public static partial class DbConnectionExtension
         }
 
         // Variables
-        var commandArrayParametersText = (CommandArrayParametersText?)null;
+        CommandArrayParametersText? commandArrayParametersText = null;
 
         // CommandArrayParameters
         foreach (var kvp in dictionary)
@@ -3464,10 +3456,7 @@ public static partial class DbConnectionExtension
             }
 
             // Create
-            if (commandArrayParametersText == null)
-            {
-                commandArrayParametersText = new CommandArrayParametersText();
-            }
+            commandArrayParametersText ??= new CommandArrayParametersText();
 
             // CommandText
             commandText = GetRawSqlText(commandText,
@@ -3556,7 +3545,7 @@ public static partial class DbConnectionExtension
         }
 
         // Variables
-        var commandArrayParametersText = (CommandArrayParametersText?)null;
+        CommandArrayParametersText? commandArrayParametersText = null;
 
         // CommandArrayParameters
         foreach (var queryField in queryFields)
@@ -3579,14 +3568,11 @@ public static partial class DbConnectionExtension
             }
 
             // Create
-            if (commandArrayParametersText == null)
+            commandArrayParametersText ??= new CommandArrayParametersText()
             {
-                commandArrayParametersText = new CommandArrayParametersText()
-                {
-                    // TODO: First element from the array?
-                    DbType = queryField.Parameter.DbType
-                };
-            }
+                // TODO: First element from the array?
+                DbType = queryField.Parameter.DbType
+            };
 
             // CommandText
             commandText = GetRawSqlText(commandText,

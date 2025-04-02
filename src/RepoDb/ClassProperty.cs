@@ -19,7 +19,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// </summary>
     /// <param name="property">The wrapped property.</param>
     public ClassProperty(PropertyInfo property) :
-        this(property.DeclaringType, property)
+        this(property.DeclaringType!, property)
     { }
 
     /// <summary>
@@ -74,8 +74,8 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// the derived class type instead (if there is), otherwise the <see cref="PropertyInfo.DeclaringType"/> property.
     /// </summary>
     /// <returns>The declaring type.</returns>
-    public Type? GetDeclaringType() =>
-        (declaringType ?? PropertyInfo.DeclaringType);
+    public Type GetDeclaringType() =>
+        (declaringType ?? PropertyInfo.DeclaringType)!;
 
     /*
      * AsField
@@ -90,9 +90,6 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     public Field AsField()
     {
         return field ??= new Field(GetMappedName(), PropertyInfo.PropertyType);
-
-        // Return the value
-        return field;
     }
 
     /*
@@ -100,13 +97,13 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
      */
 
     private bool isPrimaryAttributeWasSet;
-    private PrimaryAttribute primaryAttribute;
+    private PrimaryAttribute? primaryAttribute;
 
     /// <summary>
     /// Gets the <see cref="PrimaryAttribute"/> if present.
     /// </summary>
     /// <returns>The instance of <see cref="PrimaryAttribute"/>.</returns>
-    public PrimaryAttribute GetPrimaryAttribute()
+    public PrimaryAttribute? GetPrimaryAttribute()
     {
         if (isPrimaryAttributeWasSet)
         {
@@ -121,13 +118,13 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
      * GetIdentityAttribute
      */
     private bool isIdentityAttributeWasSet;
-    private IdentityAttribute identityAttribute;
+    private IdentityAttribute? identityAttribute;
 
     /// <summary>
     /// Gets the <see cref="IdentityAttribute"/> if present.
     /// </summary>
     /// <returns>The instance of <see cref="IdentityAttribute"/>.</returns>
-    public IdentityAttribute GetIdentityAttribute()
+    public IdentityAttribute? GetIdentityAttribute()
     {
         if (isIdentityAttributeWasSet)
         {
@@ -160,7 +157,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// Gets the <see cref="PropertyValueAttribute"/> if present.
     /// </summary>
     /// <returns>The instance of <see cref="PropertyValueAttribute"/>.</returns>
-    public PropertyValueAttribute GetDbTypeAttribute()
+    public PropertyValueAttribute? GetDbTypeAttribute()
     {
         return propertyValueAttribute.Value;
     }
@@ -206,7 +203,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// Gets the mapped property handler object for the current property.
     /// </summary>
     /// <returns>The mapped property handler object.</returns>
-    public object GetPropertyHandler() =>
+    public object? GetPropertyHandler() =>
         GetPropertyHandler<object>();
 
     /// <summary>
@@ -214,7 +211,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// </summary>
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <returns>The mapped property handler object.</returns>
-    public TPropertyHandler GetPropertyHandler<TPropertyHandler>()
+    public TPropertyHandler? GetPropertyHandler<TPropertyHandler>()
     {
         return Converter.ToType<TPropertyHandler>(PropertyHandlerCache.Get<TPropertyHandler>(GetDeclaringType(), PropertyInfo));
     }
@@ -223,7 +220,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
      * GetMappedName
      */
 
-    private string mappedName;
+    private string? mappedName;
 
     /// <summary>
     /// Gets the mapped-name for the current property.
@@ -262,7 +259,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// </summary>
     /// <param name="obj">The object to be compared.</param>
     /// <returns>True if the two instance is the same.</returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return Equals(obj as ClassProperty);
     }
@@ -272,8 +269,8 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// </summary>
     /// <param name="other">The object to be compared.</param>
     /// <returns>True if the two instance is the same.</returns>
-    public bool Equals(ClassProperty other) =>
-        PropertyInfo.Equals(other.PropertyInfo);
+    public bool Equals(ClassProperty? other) =>
+        PropertyInfo.Equals(other?.PropertyInfo);
 
 
     /// <summary>

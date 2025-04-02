@@ -78,7 +78,7 @@ partial class Compiler
                 // Convert
 
                 // DbType
-                var dbType = (DbType?)null;
+                DbType? dbType = null;
                 if (valueType.IsEnum)
                 {
                     /*

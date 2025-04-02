@@ -177,7 +177,7 @@ public static partial class DbConnectionExtension
             field,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Return the result
         return AverageAllInternalBase<TResult>(connection: connection,
@@ -372,7 +372,7 @@ public static partial class DbConnectionExtension
             field,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Return the result
         return AverageAllAsyncInternalBase<TResult>(connection: connection,

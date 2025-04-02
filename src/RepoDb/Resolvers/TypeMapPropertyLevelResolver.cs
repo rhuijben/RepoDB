@@ -1,9 +1,9 @@
-﻿using RepoDb.Attributes;
+﻿using System.Data;
+using System.Reflection;
+using RepoDb.Attributes;
 using RepoDb.Attributes.Parameter;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
-using System.Data;
-using System.Reflection;
 
 namespace RepoDb.Resolvers;
 
@@ -30,10 +30,7 @@ public class TypeMapPropertyLevelResolver : IResolver<PropertyInfo, DbType?>
         }
 
         // Property Level
-        if (dbType == null)
-        {
-            dbType = TypeMapper.Get(propertyInfo.DeclaringType, propertyInfo);
-        }
+        dbType ??= TypeMapper.Get(propertyInfo.DeclaringType, propertyInfo);
 
         // Return the value
         return dbType;

@@ -1,6 +1,7 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Interfaces;
+﻿#nullable enable
 using System.Data;
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers;
 
@@ -13,7 +14,7 @@ public class DbConvertFieldResolver : IResolver<Field, IDbSetting, string>
     /// Creates a new instance of <see cref="DbConvertFieldResolver"/> class.
     /// </summary>
     public DbConvertFieldResolver(IResolver<Type, DbType?> dbTypeResolver,
-        IResolver<DbType, string> stringNameResolver)
+        IResolver<DbType, string?> stringNameResolver)
     {
         DbTypeResolver = dbTypeResolver;
         StringNameResolver = stringNameResolver;
@@ -29,7 +30,7 @@ public class DbConvertFieldResolver : IResolver<Field, IDbSetting, string>
     /// <summary>
     /// Gets the resolver that is being used to resolve the <see cref="DbType"/> and the database type string name.
     /// </summary>
-    public IResolver<DbType, string> StringNameResolver { get; }
+    public IResolver<DbType, string?> StringNameResolver { get; }
 
     #endregion
 
@@ -41,16 +42,16 @@ public class DbConvertFieldResolver : IResolver<Field, IDbSetting, string>
     /// <param name="field">The instance of the <see cref="Field"/> to be converted.</param>
     /// <param name="dbSetting">The current in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The converted name of the <see cref="Field"/> object.</returns>
-    public virtual string Resolve(Field field,
+    public virtual string? Resolve(Field field,
         IDbSetting dbSetting)
     {
         if (field?.Type != null)
         {
             var dbType = DbTypeResolver.Resolve(field.Type);
-            if (dbType != null)
+            if (dbType is { } value)
             {
-                var dbTypeName = StringNameResolver.Resolve(dbType.Value).ToUpper();
-                return string.Concat("CAST(", field.Name.AsField(dbSetting), " AS ", dbTypeName.AsQuoted(dbSetting), ")");
+                var dbTypeName = StringNameResolver.Resolve(value)?.ToUpper();
+                return string.Concat("CAST(", field.Name.AsField(dbSetting), " AS ", dbTypeName?.AsQuoted(dbSetting), ")");
             }
         }
         return field?.Name?.AsQuoted(true, true, dbSetting);

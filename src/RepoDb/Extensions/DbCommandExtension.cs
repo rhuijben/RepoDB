@@ -486,7 +486,7 @@ public static class DbCommandExtension
         {
             var dbField = GetDbField(kvp.Key, dbFields);
             var value = kvp.Value;
-            var classProperty = (ClassProperty?)null;
+            ClassProperty? classProperty = null;
 
             // CommandParameter
             if (kvp.Value is CommandParameter commandParameter)
@@ -769,7 +769,7 @@ public static class DbCommandExtension
 
         // In RepoDb, the only way the parameter has '@_' is when the time you call the QueryField.IsForUpdate()
         // method and it is only happening on update operations.
-        var isForUpdate = parameter.ParameterName.StartsWith("_") || parameter.ParameterName.StartsWith("@_");
+        var isForUpdate = parameter.ParameterName.StartsWith('_') || parameter.ParameterName.StartsWith("@_");
 
         foreach (var attribute in attributes)
         {

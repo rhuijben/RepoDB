@@ -332,7 +332,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         //var databaseType = "BIGINT";
 
         //// Set the return value
-        //var result = (string)null;
+        //var result = (string?)null;
 
         //// Check both primary and identity
         //if (identityField != null)
@@ -442,7 +442,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         //var databaseType = "BIGINT";
 
         //// Set the return value
-        //var result = (string)null;
+        //var result = (string?)null;
 
         //// Set the type
         //if (identityField != null)

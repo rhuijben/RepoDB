@@ -250,7 +250,7 @@ public partial class QueryField
         var operation = unaryNodeType == ExpressionType.Not ? Operation.NotEqual : Operation.Equal;
 
         // Value
-        var value = (object)null;
+        var value = (object?)null;
         if (expression.Type == StaticType.Boolean)
         {
             value = true;

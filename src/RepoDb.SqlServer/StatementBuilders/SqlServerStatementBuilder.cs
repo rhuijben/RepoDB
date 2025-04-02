@@ -1,7 +1,7 @@
-﻿using RepoDb.Extensions;
-using RepoDb.Exceptions;
-using RepoDb.Resolvers;
+﻿using RepoDb.Exceptions;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
+using RepoDb.Resolvers;
 
 namespace RepoDb.StatementBuilders;
 
@@ -218,7 +218,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         if (keyColumn != null)
         {
             var dbType = new ClientTypeToDbTypeResolver().Resolve(keyColumn.Type);
-            string databaseType = null;
+            string? databaseType = null;
 
             if (dbType != null)
             {

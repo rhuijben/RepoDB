@@ -127,7 +127,7 @@ public sealed class MySqlDbHelper : IDbHelper
     {
         var columnType = await reader.GetFieldValueAsync<string>(4, cancellationToken);
         var excluded = GetBlobTypes();
-        var size = (int?)null;
+        int? size;
         if (excluded.Contains(columnType.ToLowerInvariant()))
         {
             size = null;

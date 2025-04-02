@@ -279,7 +279,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An instance of the <see cref="DbConnection"/> object.</returns>
     public virtual TDbConnection CreateConnection(bool force)
     {
-        var connection = (TDbConnection)null;
+        var connection = (TDbConnection?)null;
         if (force == false && ConnectionPersistency == ConnectionPersistency.Instance)
         {
             lock (syncLock)

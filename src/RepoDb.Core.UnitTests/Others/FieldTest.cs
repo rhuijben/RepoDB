@@ -151,7 +151,7 @@ public partial class FieldTest
     public void ThrowExceptionOnFieldIfTheFromMethodFieldsParameterIsNull()
     {
         // Prepare
-        var fields = (string)null;
+        var fields = (string?)null;
 
         // Act/Assert
         Field.From(fields).AsList();

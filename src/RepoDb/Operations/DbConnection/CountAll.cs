@@ -68,7 +68,7 @@ public static partial class DbConnectionExtension
             transaction,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Return the result
         return CountAllInternalBase(connection: connection,
@@ -146,7 +146,7 @@ public static partial class DbConnectionExtension
             transaction,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Return the result
         return CountAllAsyncInternalBase(connection: connection,
@@ -221,7 +221,7 @@ public static partial class DbConnectionExtension
             transaction,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Return the result
         return CountAllInternalBase(connection: connection,
@@ -300,7 +300,7 @@ public static partial class DbConnectionExtension
             transaction,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Return the result
         return CountAllAsyncInternalBase(connection: connection,

@@ -68,7 +68,7 @@ public class BaseStatementBuilderCreateTruncateTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string)null;
+        var tableName = (string?)null;
 
         // Act
         statementBuilder.CreateTruncate(tableName: tableName);

@@ -133,7 +133,7 @@ public class BaseStatementBuilderCreateCountTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string)null;
+        var tableName = (string?)null;
 
         // Act
         statementBuilder.CreateCount(tableName: tableName,

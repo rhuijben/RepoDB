@@ -18,7 +18,7 @@ public class PropertyHandlerPropertyLevelResolver : IResolver<Type, PropertyInfo
     public object Resolve(Type entityType,
         PropertyInfo propertyInfo)
     {
-        var propertyHandler = (object)null;
+        var propertyHandler = (object?)null;
 
         // Attribute
         var attribute = propertyInfo.GetCustomAttribute<PropertyHandlerAttribute>();
@@ -28,16 +28,10 @@ public class PropertyHandlerPropertyLevelResolver : IResolver<Type, PropertyInfo
         }
 
         // Property Level
-        if (propertyHandler == null)
-        {
-            propertyHandler = PropertyHandlerMapper.Get<object>(entityType, propertyInfo);
-        }
+        propertyHandler ??= PropertyHandlerMapper.Get<object>(entityType, propertyInfo);
 
         // Type Level
-        if (propertyHandler == null)
-        {
-            propertyHandler = PropertyHandlerMapper.Get<object>(propertyInfo.PropertyType);
-        }
+        propertyHandler ??= PropertyHandlerMapper.Get<object>(propertyInfo.PropertyType);
 
         // Return the value
         return propertyHandler;

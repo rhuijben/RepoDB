@@ -2214,7 +2214,7 @@ public static partial class DbConnectionExtension
         var dbFields = DbFieldCache.Get(connection, tableName, transaction, true);
         var primary = dbFields?.GetPrimary();
         var properties = (IEnumerable<ClassProperty>)null;
-        var primaryKey = (ClassProperty)null;
+        var primaryKey = (ClassProperty?)null;
 
         // Check the qualifiers
         if (qualifiers?.Any() != true)
@@ -2244,7 +2244,7 @@ public static partial class DbConnectionExtension
         }
 
         // Expression
-        var where = (QueryGroup)null;
+        var where = (QueryGroup?)null;
         if (isDictionaryType)
         {
             where = CreateQueryGroupForUpsert((IDictionary<string, object>)entity,
@@ -2302,9 +2302,9 @@ public static partial class DbConnectionExtension
                 else
                 {
                     var dictionary = (IDictionary<string, object>)entity;
-                    if (primary != null && dictionary.ContainsKey(primary.Name))
+                    if (primary != null && dictionary.TryGetValue(primary.Name, out var value))
                     {
-                        result = Converter.ToType<TResult>(dictionary[primary.Name]);
+                        result = Converter.ToType<TResult>(value);
                     }
                 }
             }
@@ -2464,7 +2464,7 @@ public static partial class DbConnectionExtension
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var primary = dbFields?.GetPrimary();
         var properties = (IEnumerable<ClassProperty>)null;
-        var primaryKey = (ClassProperty)null;
+        var primaryKey = (ClassProperty?)null;
 
         // Check the qualifiers
         if (qualifiers?.Any() != true)
@@ -2496,7 +2496,7 @@ public static partial class DbConnectionExtension
         }
 
         // Expression
-        var where = (QueryGroup)null;
+        var where = (QueryGroup?)null;
         if (isDictionaryType)
         {
             where = CreateQueryGroupForUpsert((IDictionary<string, object>)entity,
@@ -2556,9 +2556,9 @@ public static partial class DbConnectionExtension
                 else
                 {
                     var dictionary = (IDictionary<string, object>)entity;
-                    if (primary != null && dictionary.ContainsKey(primary.Name))
+                    if (primary != null && dictionary.TryGetValue(primary.Name, out var value))
                     {
-                        result = Converter.ToType<TResult>(dictionary[primary.Name]);
+                        result = Converter.ToType<TResult>(value);
                     }
                 }
             }

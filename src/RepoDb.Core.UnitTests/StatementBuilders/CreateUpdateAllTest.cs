@@ -48,6 +48,31 @@ public class BaseStatementBuilderCreateUpdateAllTest
     }
 
     [TestMethod]
+    public void TestBaseStatementBuilderCreateUpdateAllDualPK()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
+        var qualifiers = Field.From("Field1", "Field2");
+
+        // Act
+        var actual = statementBuilder.CreateUpdateAll(tableName: tableName,
+            fields: fields,
+            qualifiers: qualifiers,
+            batchSize: 1,
+            primaryField: null,
+            identityField: null);
+        var expected = $"" +
+            $"UPDATE [Table] " +
+            $"SET [Field3] = @Field3 " +
+            $"WHERE ([Field1] = @Field1 AND [Field2] = @Field2) ;";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
     public void TestBaseStatementBuilderCreateUpdateAllWithQuotedTableSchema()
     {
         // Setup
@@ -268,7 +293,7 @@ public class BaseStatementBuilderCreateUpdateAllTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string)null;
+        var tableName = (string?)null;
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
         var qualifiers = Field.From("Field1");
 

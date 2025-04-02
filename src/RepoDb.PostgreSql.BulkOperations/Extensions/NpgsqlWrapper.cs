@@ -49,7 +49,7 @@ public static partial class NpgsqlConnectionExtension
         IDbSetting dbSetting,
         NpgsqlTransaction transaction)
     {
-        string pseudoTableName = null;
+        string? pseudoTableName = null;
         var withPseudoTable = identityBehavior == BulkImportIdentityBehavior.ReturnIdentity ||
             isBinaryBulkInsert == false;
 
@@ -164,7 +164,7 @@ public static partial class NpgsqlConnectionExtension
         NpgsqlTransaction transaction,
         CancellationToken cancellationToken = default)
     {
-        string pseudoTableName = null;
+        string? pseudoTableName = null;
         var withPseudoTable = identityBehavior == BulkImportIdentityBehavior.ReturnIdentity ||
             isBinaryBulkInsert == false;
 

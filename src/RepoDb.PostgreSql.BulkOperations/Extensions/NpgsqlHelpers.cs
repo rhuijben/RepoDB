@@ -1,13 +1,13 @@
-﻿using NpgsqlTypes;
+﻿using System.Data;
+using System.Data.Common;
+using System.Dynamic;
+using NpgsqlTypes;
 using RepoDb.Attributes.Parameter;
 using RepoDb.Attributes.Parameter.Npgsql;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.PostgreSql.BulkOperations;
 using RepoDb.Resolvers;
-using System.Data;
-using System.Data.Common;
-using System.Dynamic;
 
 namespace RepoDb;
 
@@ -532,7 +532,7 @@ public static partial class NpgsqlConnectionExtension
         where TEntity : class
     {
         var identityDbField = dbFields?.GetIdentity();
-        ClassProperty property = null;
+        ClassProperty? property = null;
 
         if (identityDbField != null)
         {

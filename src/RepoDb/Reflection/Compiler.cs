@@ -556,7 +556,7 @@ internal sealed partial class Compiler
     /// <returns></returns>
     private static Expression ConvertExpressionToNullableValue(Expression expression)
     {
-        if (Nullable.GetUnderlyingType(expression.Type) is { } underlyingType)
+        if (Nullable.GetUnderlyingType(expression.Type) is { })
         {
             return Expression.Property(expression, nameof(Nullable<int>.Value));
         }
@@ -592,14 +592,6 @@ internal sealed partial class Compiler
         }
         return expression;
     }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    private static Expression ConvertExpressionToGuidToStringExpression(Expression expression) =>
-        Expression.Call(ConvertExpressionToNullableValue(expression), StaticType.Guid.GetMethod("ToString", Array.Empty<Type>()));
 
     /// <summary>
     ///
@@ -899,7 +891,7 @@ internal sealed partial class Compiler
         Type toEnumType,
         IDbSetting dbSetting) =>
         (fromType == StaticType.String) ?
-            ConvertExpressionToEnumExpressionForString(expression, toEnumType, dbSetting) :
+            ConvertExpressionToEnumExpressionForString(expression, toEnumType) :
                 ConvertExpressionToEnumExpressionForNonString(expression, toEnumType, dbSetting);
 
     /// <summary>
@@ -909,8 +901,7 @@ internal sealed partial class Compiler
     /// <param name="toEnumType"></param>
     /// <returns></returns>
     private static Expression ConvertExpressionToEnumExpressionForString(Expression expression,
-        Type toEnumType,
-        IDbSetting dbSetting)
+        Type toEnumType)
     {
         var func = ((GlobalConfiguration.Options.EnumHandling is InvalidEnumValueHandling.Cast || toEnumType.GetCustomAttribute<FlagsAttribute>() is { }) ? GetEnumParseNullMethod() : GetEnumParseNullDefinedMethod()).MakeGenericMethod(toEnumType);
         return Expression.Coalesce(
@@ -991,9 +982,9 @@ internal sealed partial class Compiler
         var method = StaticType.Convert.GetMethod("ToString", new[] { StaticType.Object });
 
         // Variables
-        var isNullExpression = (Expression)null;
-        var trueExpression = (Expression)null;
-        var falseExpression = (Expression)null;
+        var isNullExpression = (Expression?)null;
+        var trueExpression = (Expression?)null;
+        Expression falseExpression;
 
         // Ensure (Ref/Nullable)
         if (TypeCache.Get(expression.Type).IsNullable())
@@ -1023,8 +1014,8 @@ internal sealed partial class Compiler
     private static Expression ConvertEnumExpressionToTypeExpressionForNonString(Expression expression,
         Type toType)
     {
-        var isNullExpression = (Expression)null;
-        var trueExpression = (Expression)null;
+        var isNullExpression = (Expression?)null;
+        var trueExpression = (Expression?)null;
         var falseExpression = expression;
 
         // Ensure (Ref/Nullable)
@@ -1107,7 +1098,7 @@ internal sealed partial class Compiler
         // Guid to String
         if (fromType == StaticType.Guid && toType == StaticType.String)
         {
-            var result = ConvertExpressionToGuidToStringExpression(expression);
+            var result = Expression.Call(ConvertExpressionToNullableValue(expression), StaticType.Guid.GetMethod("ToString", Array.Empty<Type>())); ;
 
             if (fromType != expression.Type)
             {
@@ -1992,7 +1983,7 @@ internal sealed partial class Compiler
     private static MethodCallExpression GetDbParameterDbTypeAssignmentExpression(ParameterExpression dbParameterExpression,
         DbType? dbType)
     {
-        var expression = (MethodCallExpression)null;
+        var expression = (MethodCallExpression?)null;
 
         // Set the DB Type
         if (dbType != null)
@@ -2236,9 +2227,9 @@ internal sealed partial class Compiler
     {
         var propertyListExpression = new List<Expression>();
         var propertyVariableListExpression = new List<ParameterExpression>();
-        var propertyVariableExpression = (ParameterExpression)null;
-        var propertyInstanceExpression = (Expression)null;
-        var classProperty = (ClassProperty)null;
+        var propertyVariableExpression = (ParameterExpression?)null;
+        var propertyInstanceExpression = (Expression?)null;
+        var classProperty = (ClassProperty?)null;
         var propertyName = fieldDirection.DbField.Name.AsUnquoted(true, dbSetting);
 
         // Set the proper assignments (property)

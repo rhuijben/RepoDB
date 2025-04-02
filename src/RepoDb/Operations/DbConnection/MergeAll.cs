@@ -1512,7 +1512,7 @@ public static partial class DbConnectionExtension
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
         var primary = dbFields?.GetPrimary();
         var properties = (IEnumerable<ClassProperty>)null;
-        var primaryKey = (ClassProperty)null;
+        var primaryKey = (ClassProperty?)null;
 
         // Get the properties
         if (type.IsGenericType == true)
@@ -1902,7 +1902,7 @@ public static partial class DbConnectionExtension
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var primary = dbFields?.GetPrimary();
         var properties = (IEnumerable<ClassProperty>)null;
-        var primaryKey = (ClassProperty)null;
+        var primaryKey = (ClassProperty?)null;
 
         // Get the properties
         if (type.IsGenericType == true)

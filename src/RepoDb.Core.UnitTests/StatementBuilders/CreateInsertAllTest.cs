@@ -273,7 +273,7 @@ public class BaseStatementBuilderCreateInsertAllTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string)null;
+        var tableName = (string?)null;
 
         // Act
         statementBuilder.CreateInsertAll(tableName: tableName,

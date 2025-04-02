@@ -192,7 +192,7 @@ public class OrderFieldTest
     public void ThrowExceptionOnOrderFieldIfTheParseDynamicObjectIsNull()
     {
         // Prepare
-        var orderBy = (object)null;
+        var orderBy = (object?)null;
 
         // Act/Assert
         OrderField.Parse(orderBy);

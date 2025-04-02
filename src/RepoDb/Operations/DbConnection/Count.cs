@@ -208,7 +208,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Converts to property mapped object
         if (where != null)
@@ -442,7 +442,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Converts to property mapped object
         if (where != null)
@@ -631,7 +631,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Converts to property mapped object
         if (where != null)
@@ -833,7 +833,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var param = (object)null;
+        var param = (object?)null;
 
         // Converts to property mapped object
         if (where != null)

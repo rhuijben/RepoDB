@@ -211,9 +211,9 @@ public static class Helper
         table.ColumnDateTimeOffset = new DateTimeOffset(now.Date).ToOffset(TimeSpan.FromHours(2));
         table.ColumnDecimal = Convert.ToDecimal(2);
         table.ColumnFloat = Convert.ToDouble(2);
-        //table.ColumnGeography = (object)null;
-        //table.ColumnGeometry = (object)null;
-        //table.ColumnHierarchyId = (object)null;
+        //table.ColumnGeography = (object?)null;
+        //table.ColumnGeometry = (object?)null;
+        //table.ColumnHierarchyId = (object?)null;
         table.ColumnImage = (byte[])null;
         table.ColumnInt = Convert.ToInt32(2);
         table.ColumnMoney = Convert.ToDecimal(2);
@@ -225,7 +225,7 @@ public static class Helper
         table.ColumnSmallDateTime = now.Date;
         table.ColumnSmallInt = Convert.ToInt16(2);
         table.ColumnSmallMoney = Convert.ToDecimal(2);
-        table.ColumnSqlVariant = (object)null;
+        table.ColumnSqlVariant = (object?)null;
         table.ColumnText = "Text - Updated";
         table.ColumnTime = now.TimeOfDay;
         //table.ColumnTimestamp = (byte[])null;
@@ -233,7 +233,7 @@ public static class Helper
         table.ColumnUniqueIdentifier = Guid.NewGuid();
         table.ColumnVarBinary = (byte[])null;
         table.ColumnVarChar = "VarChar - Updated";
-        table.ColumnXml = (string)null;
+        table.ColumnXml = (string?)null;
         table.SessionId = Guid.NewGuid();
     }
 
@@ -311,9 +311,9 @@ public static class Helper
         table.ColumnDateTimeOffset = new DateTimeOffset(now.Date).ToOffset(TimeSpan.FromHours(2));
         table.ColumnDecimal = Convert.ToDecimal(2);
         table.ColumnFloat = Convert.ToDouble(2);
-        table.ColumnGeography = (object)null;
-        table.ColumnGeometry = (object)null;
-        table.ColumnHierarchyId = (object)null;
+        table.ColumnGeography = (object?)null;
+        table.ColumnGeometry = (object?)null;
+        table.ColumnHierarchyId = (object?)null;
         table.ColumnImage = (byte[])null;
         table.ColumnInt = Convert.ToInt32(2);
         table.ColumnMoney = Convert.ToDecimal(2);
@@ -325,7 +325,7 @@ public static class Helper
         table.ColumnSmallDateTime = now.Date;
         table.ColumnSmallInt = Convert.ToInt16(2);
         table.ColumnSmallMoney = Convert.ToDecimal(2);
-        table.ColumnSqlVariant = (object)null;
+        table.ColumnSqlVariant = (object?)null;
         table.ColumnText = "Text - Updated";
         table.ColumnTime = now.TimeOfDay;
         //table.ColumnTimestamp = (byte[])null;
@@ -333,7 +333,7 @@ public static class Helper
         table.ColumnUniqueIdentifier = Guid.NewGuid();
         table.ColumnVarBinary = (byte[])null;
         table.ColumnVarChar = "VarChar - Updated";
-        table.ColumnXml = (string)null;
+        table.ColumnXml = (string?)null;
         table.SessionId = Guid.NewGuid();
     }
 
@@ -362,9 +362,9 @@ public static class Helper
             item["ColumnDateTimeOffset"] = new DateTimeOffset(now.Date).ToOffset(TimeSpan.FromHours(2));
             item["ColumnDecimal"] = Convert.ToDecimal(i);
             item["ColumnFloat"] = Convert.ToDouble(i);
-            //item["ColumnGeography"] = (object)null;
-            //item["ColumnGeometry"] = (object)null;
-            //item["ColumnHierarchyId"] = (object)null;
+            //item["ColumnGeography"] = (object?)null;
+            //item["ColumnGeometry"] = (object?)null;
+            //item["ColumnHierarchyId"] = (object?)null;
             item["ColumnImage"] = (byte[])null;
             item["ColumnInt"] = Convert.ToInt32(i);
             item["ColumnMoney"] = Convert.ToDecimal(i);
@@ -376,7 +376,7 @@ public static class Helper
             item["ColumnSmallDateTime"] = now.Date;
             item["ColumnSmallInt"] = Convert.ToInt16(i);
             item["ColumnSmallMoney"] = Convert.ToDecimal(i);
-            item["ColumnSqlVariant"] = (object)null;
+            item["ColumnSqlVariant"] = (object?)null;
             item["ColumnText"] = "Text";
             item["ColumnTime"] = now.TimeOfDay;
             //item["ColumnTimestamp"] = (byte[])null;
@@ -384,7 +384,7 @@ public static class Helper
             item["ColumnUniqueIdentifier"] = Guid.NewGuid();
             item["ColumnVarBinary"] = (byte[])null;
             item["ColumnVarChar"] = "VarChar";
-            item["ColumnXml"] = (string)null;
+            item["ColumnXml"] = (string?)null;
             item["SessionId"] = Guid.NewGuid();
             tables.Add((ExpandoObject)item);
         }
@@ -411,9 +411,9 @@ public static class Helper
         item["ColumnDateTimeOffset"] = new DateTimeOffset(now.Date).ToOffset(TimeSpan.FromHours(2));
         item["ColumnDecimal"] = Convert.ToDecimal(2);
         item["ColumnFloat"] = Convert.ToDouble(2);
-        //item["ColumnGeography"] = (object)null;
-        //item["ColumnGeometry"] = (object)null;
-        //item["ColumnHierarchyId"] = (object)null;
+        //item["ColumnGeography"] = (object?)null;
+        //item["ColumnGeometry"] = (object?)null;
+        //item["ColumnHierarchyId"] = (object?)null;
         item["ColumnImage"] = (byte[])null;
         item["ColumnInt"] = Convert.ToInt32(2);
         item["ColumnMoney"] = Convert.ToDecimal(2);
@@ -425,7 +425,7 @@ public static class Helper
         item["ColumnSmallDateTime"] = now.Date;
         item["ColumnSmallInt"] = Convert.ToInt16(2);
         item["ColumnSmallMoney"] = Convert.ToDecimal(2);
-        item["ColumnSqlVariant"] = (object)null;
+        item["ColumnSqlVariant"] = (object?)null;
         item["ColumnText"] = "Text";
         item["ColumnTime"] = now.TimeOfDay;
         //item["ColumnTimestamp"] = (byte[])null;
@@ -433,7 +433,7 @@ public static class Helper
         item["ColumnUniqueIdentifier"] = Guid.NewGuid();
         item["ColumnVarBinary"] = (byte[])null;
         item["ColumnVarChar"] = "VarChar-Updated";
-        item["ColumnXml"] = (string)null;
+        item["ColumnXml"] = (string?)null;
         item["SessionId"] = Guid.NewGuid();
     }
 
@@ -515,9 +515,9 @@ public static class Helper
         table.ColumnDateTimeOffset = new DateTimeOffset(now.Date).ToOffset(TimeSpan.FromHours(2));
         table.ColumnDecimal = Convert.ToDecimal(2);
         table.ColumnFloat = Convert.ToDouble(2);
-        //table.ColumnGeography = (object)null;
-        //table.ColumnGeometry = (object)null;
-        //table.ColumnHierarchyId = (object)null;
+        //table.ColumnGeography = (object?)null;
+        //table.ColumnGeometry = (object?)null;
+        //table.ColumnHierarchyId = (object?)null;
         table.ColumnImage = (byte[])null;
         table.ColumnInt = Convert.ToInt32(2);
         table.ColumnMoney = Convert.ToDecimal(2);
@@ -529,7 +529,7 @@ public static class Helper
         table.ColumnSmallDateTime = now.Date;
         table.ColumnSmallInt = Convert.ToInt16(2);
         table.ColumnSmallMoney = Convert.ToDecimal(2);
-        table.ColumnSqlVariant = (object)null;
+        table.ColumnSqlVariant = (object?)null;
         table.ColumnText = "Text - Updated";
         table.ColumnTime = now.TimeOfDay;
         //table.ColumnTimestamp = (byte[])null;
@@ -537,7 +537,7 @@ public static class Helper
         table.ColumnUniqueIdentifier = Guid.NewGuid();
         table.ColumnVarBinary = (byte[])null;
         table.ColumnVarChar = "VarChar - Updated";
-        table.ColumnXml = (string)null;
+        table.ColumnXml = (string?)null;
         table.SessionId = Guid.NewGuid();
     }
 
@@ -615,9 +615,9 @@ public static class Helper
         table.ColumnDateTimeOffset = new DateTimeOffset(now.Date).ToOffset(TimeSpan.FromHours(2));
         table.ColumnDecimal = Convert.ToDecimal(2);
         table.ColumnFloat = Convert.ToDouble(2);
-        table.ColumnGeography = (object)null;
-        table.ColumnGeometry = (object)null;
-        table.ColumnHierarchyId = (object)null;
+        table.ColumnGeography = (object?)null;
+        table.ColumnGeometry = (object?)null;
+        table.ColumnHierarchyId = (object?)null;
         table.ColumnImage = (byte[])null;
         table.ColumnInt = Convert.ToInt32(2);
         table.ColumnMoney = Convert.ToDecimal(2);
@@ -629,7 +629,7 @@ public static class Helper
         table.ColumnSmallDateTime = now.Date;
         table.ColumnSmallInt = Convert.ToInt16(2);
         table.ColumnSmallMoney = Convert.ToDecimal(2);
-        table.ColumnSqlVariant = (object)null;
+        table.ColumnSqlVariant = (object?)null;
         table.ColumnText = "Text - Updated";
         table.ColumnTime = now.TimeOfDay;
         //table.ColumnTimestamp = (byte[])null;
@@ -637,7 +637,7 @@ public static class Helper
         table.ColumnUniqueIdentifier = Guid.NewGuid();
         table.ColumnVarBinary = (byte[])null;
         table.ColumnVarChar = "VarChar - Updated";
-        table.ColumnXml = (string)null;
+        table.ColumnXml = (string?)null;
         table.SessionId = Guid.NewGuid();
     }
 
@@ -666,9 +666,9 @@ public static class Helper
             item["ColumnDateTimeOffset"] = new DateTimeOffset(now.Date).ToOffset(TimeSpan.FromHours(2));
             item["ColumnDecimal"] = Convert.ToDecimal(i);
             item["ColumnFloat"] = Convert.ToDouble(i);
-            //item["ColumnGeography"] = (object)null;
-            //item["ColumnGeometry"] = (object)null;
-            //item["ColumnHierarchyId"] = (object)null;
+            //item["ColumnGeography"] = (object?)null;
+            //item["ColumnGeometry"] = (object?)null;
+            //item["ColumnHierarchyId"] = (object?)null;
             item["ColumnImage"] = (byte[])null;
             item["ColumnInt"] = Convert.ToInt32(i);
             item["ColumnMoney"] = Convert.ToDecimal(i);
@@ -680,7 +680,7 @@ public static class Helper
             item["ColumnSmallDateTime"] = now.Date;
             item["ColumnSmallInt"] = Convert.ToInt16(i);
             item["ColumnSmallMoney"] = Convert.ToDecimal(i);
-            item["ColumnSqlVariant"] = (object)null;
+            item["ColumnSqlVariant"] = (object?)null;
             item["ColumnText"] = "Text";
             item["ColumnTime"] = now.TimeOfDay;
             //item["ColumnTimestamp"] = (byte[])null;
@@ -688,7 +688,7 @@ public static class Helper
             item["ColumnUniqueIdentifier"] = Guid.NewGuid();
             item["ColumnVarBinary"] = (byte[])null;
             item["ColumnVarChar"] = "VarChar";
-            item["ColumnXml"] = (string)null;
+            item["ColumnXml"] = (string?)null;
             item["SessionId"] = Guid.NewGuid();
             tables.Add((ExpandoObject)item);
         }
@@ -715,9 +715,9 @@ public static class Helper
         item["ColumnDateTimeOffset"] = new DateTimeOffset(now.Date).ToOffset(TimeSpan.FromHours(2));
         item["ColumnDecimal"] = Convert.ToDecimal(2);
         item["ColumnFloat"] = Convert.ToDouble(2);
-        //item["ColumnGeography"] = (object)null;
-        //item["ColumnGeometry"] = (object)null;
-        //item["ColumnHierarchyId"] = (object)null;
+        //item["ColumnGeography"] = (object?)null;
+        //item["ColumnGeometry"] = (object?)null;
+        //item["ColumnHierarchyId"] = (object?)null;
         item["ColumnImage"] = (byte[])null;
         item["ColumnInt"] = Convert.ToInt32(2);
         item["ColumnMoney"] = Convert.ToDecimal(2);
@@ -729,7 +729,7 @@ public static class Helper
         item["ColumnSmallDateTime"] = now.Date;
         item["ColumnSmallInt"] = Convert.ToInt16(2);
         item["ColumnSmallMoney"] = Convert.ToDecimal(2);
-        item["ColumnSqlVariant"] = (object)null;
+        item["ColumnSqlVariant"] = (object?)null;
         item["ColumnText"] = "Text";
         item["ColumnTime"] = now.TimeOfDay;
         //item["ColumnTimestamp"] = (byte[])null;
@@ -737,7 +737,7 @@ public static class Helper
         item["ColumnUniqueIdentifier"] = Guid.NewGuid();
         item["ColumnVarBinary"] = (byte[])null;
         item["ColumnVarChar"] = "VarChar-Updated";
-        item["ColumnXml"] = (string)null;
+        item["ColumnXml"] = (string?)null;
         item["SessionId"] = Guid.NewGuid();
     }
 
