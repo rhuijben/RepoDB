@@ -659,6 +659,7 @@ public static partial class DbConnectionExtension
 
         await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
         using var myTransaction = (transaction is null && Transaction.Current is null) ? await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false) : null;
+        transaction ??= myTransaction;
 
         // Get the context
         var entityType = GetEntityType<TEntity>(entities);
