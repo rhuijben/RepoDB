@@ -129,14 +129,14 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
+            commandTimeout: commandTimeout,
+            tableName: null,
+            transaction: transaction,
+            trace: trace,
+            traceKey: traceKey,
+            cache: cache,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            traceKey: traceKey,
-            commandTimeout: commandTimeout,
-            transaction: transaction,
-            cache: cache,
-            trace: trace,
-            tableName: null,
             skipCommandArrayParametersCheck: false);
     }
 
@@ -161,14 +161,14 @@ public static partial class DbConnectionExtension
         string commandText,
         object? param = null,
         CommandType? commandType = null,
-        string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        string traceKey = TraceKeys.ExecuteQuery,
         int? commandTimeout = null,
-        IDbTransaction? transaction = null,
-        ICache? cache = null,
-        ITrace? trace = null,
         string? tableName = null,
+        IDbTransaction? transaction = null,
+        ITrace? trace = null,
+        string traceKey = TraceKeys.ExecuteQuery,
+        ICache? cache = null,
+        string? cacheKey = null,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         bool skipCommandArrayParametersCheck = true)
     {
         // Get Cache
@@ -221,7 +221,7 @@ public static partial class DbConnectionExtension
             // Set Cache
             if (cache != null && cacheKey != null)
             {
-                cache.Add(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false);
+                cache.Add(cacheKey, result, cacheItemExpiration, false);
             }
         }
 
@@ -278,14 +278,14 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
-            traceKey: traceKey,
+            tableName: null,
             commandTimeout: commandTimeout,
             transaction: transaction,
-            cache: cache,
             trace: trace,
-            tableName: null,
+            traceKey: traceKey,
+            cache: cache,
+            cacheKey: cacheKey,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             skipCommandArrayParametersCheck: false,
             cancellationToken: cancellationToken);
     }
@@ -312,14 +312,14 @@ public static partial class DbConnectionExtension
         string commandText,
         object? param = null,
         CommandType? commandType = null,
-        string? cacheKey = null,
-        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        string traceKey = TraceKeys.ExecuteQuery,
+        string? tableName = null,
         int? commandTimeout = null,
         IDbTransaction? transaction = null,
-        ICache? cache = null,
         ITrace? trace = null,
-        string? tableName = null,
+        string traceKey = TraceKeys.ExecuteQuery,
+        ICache? cache = null,
+        string? cacheKey = null,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         bool skipCommandArrayParametersCheck = true,
         CancellationToken cancellationToken = default)
     {
@@ -569,12 +569,12 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: null,
-            cacheItemExpiration: null,
-            traceKey: traceKey,
             commandTimeout: commandTimeout,
             transaction: transaction,
             trace: trace,
+            traceKey: traceKey,
+            cacheKey: null,
+            cacheItemExpiration: null,
             cache: null,
             tableName: tableName,
             skipCommandArrayParametersCheck: skipCommandArrayParametersCheck).WithType<TResult>();
@@ -877,12 +877,12 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: null,
-            cacheItemExpiration: cacheItemExpiration,
-            traceKey: traceKey,
             commandTimeout: commandTimeout,
             transaction: transaction,
             trace: trace,
+            traceKey: traceKey,
+            cacheKey: null,
+            cacheItemExpiration: cacheItemExpiration,
             cache: null,
             cancellationToken: cancellationToken,
             tableName: tableName,
@@ -1870,12 +1870,12 @@ public static partial class DbConnectionExtension
     /// <param name="param"></param>
     /// <param name="commandType"></param>
     /// <param name="commandTimeout"></param>
-    /// <param name="traceKey"></param>
     /// <param name="transaction"></param>
-    /// <param name="trace"></param>
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
+    /// <param name="trace"></param>
+    /// <param name="traceKey"></param>
     /// <param name="cache"></param>
     /// <param name="cacheKey"></param>
     /// <param name="cacheItemExpiration"></param>
@@ -1885,12 +1885,12 @@ public static partial class DbConnectionExtension
         object? param,
         CommandType? commandType,
         int? commandTimeout,
-        string? traceKey,
         IDbTransaction? transaction,
-        ITrace? trace,
         Type? entityType,
         DbFieldCollection? dbFields,
         bool skipCommandArrayParametersCheck = true,
+        ITrace? trace = null,
+        string? traceKey = null,
         ICache? cache = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
@@ -2012,12 +2012,12 @@ public static partial class DbConnectionExtension
     /// <param name="param"></param>
     /// <param name="commandType"></param>
     /// <param name="commandTimeout"></param>
-    /// <param name="traceKey"></param>
     /// <param name="transaction"></param>
-    /// <param name="trace"></param>
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
+    /// <param name="trace"></param>
+    /// <param name="traceKey"></param>
     /// <param name="cache"></param>
     /// <param name="cacheKey"></param>
     /// <param name="cacheItemExpiration"></param>
@@ -2029,12 +2029,12 @@ public static partial class DbConnectionExtension
         object? param,
         CommandType? commandType,
         int? commandTimeout,
-        string traceKey,
         IDbTransaction? transaction,
-        ITrace? trace,
         Type? entityType,
         DbFieldCollection? dbFields,
         bool skipCommandArrayParametersCheck = true,
+        ITrace? trace = null,
+        string? traceKey = null,
         ICache? cache = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,

@@ -2626,11 +2626,11 @@ public static partial class DbConnectionExtension
             param: param,
             commandType: commandType,
             commandTimeout: commandTimeout,
-            traceKey: traceKey,
             transaction: transaction,
-            trace: trace,
             entityType: request.Type,
-            dbFields: DbFieldCache.Get(connection, request.Name, transaction, true));
+            dbFields: DbFieldCache.Get(connection, request.Name, transaction, true),
+            trace: trace,
+            traceKey: traceKey);
 
         // Result
         return result;
@@ -2671,11 +2671,11 @@ public static partial class DbConnectionExtension
             param: param,
             commandType: commandType,
             commandTimeout: commandTimeout,
-            traceKey: traceKey,
             transaction: transaction,
-            trace: trace,
             entityType: request.Type,
             dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken).ConfigureAwait(false),
+            trace: trace,
+            traceKey: traceKey,
             cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Result
