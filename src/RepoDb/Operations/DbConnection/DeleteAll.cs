@@ -71,6 +71,9 @@ public static partial class DbConnectionExtension
 
             foreach (var group in entities.Split(chunkSize))
             {
+                if (!group.Any())
+                    continue;
+
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
 
                 deleted += DeleteInternal(
@@ -210,6 +213,9 @@ public static partial class DbConnectionExtension
 
             foreach (var group in entities.Split(chunkSize))
             {
+                if (!group.Any())
+                    continue;
+
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
 
                 deleted += DeleteInternal(
@@ -424,6 +430,9 @@ public static partial class DbConnectionExtension
 
             foreach (var group in entities.Split(chunkSize))
             {
+                if (!group.Any())
+                    continue;
+
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
 
                 deleted += await DeleteAsyncInternal(
@@ -578,6 +587,9 @@ public static partial class DbConnectionExtension
 
             foreach (var group in entities.Split(chunkSize))
             {
+                if (!group.Any())
+                    continue;
+
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
 
                 deleted += await DeleteAsyncInternal(
@@ -890,10 +902,9 @@ public static partial class DbConnectionExtension
         {
             foreach (var keyValues in splitted)
             {
-                if (keyValues.Any() != true)
-                {
-                    break;
-                }
+                if (!keyValues.Any())
+                    continue;
+
                 var where = new QueryGroup(
                     pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
                     Conjunction.And);
@@ -902,7 +913,7 @@ public static partial class DbConnectionExtension
                     where: where,
                     hints: hints,
                     commandTimeout: commandTimeout,
-        traceKey: traceKey,
+                    traceKey: traceKey,
                     transaction: transaction,
                     trace: trace,
                     statementBuilder: statementBuilder);
@@ -1062,7 +1073,8 @@ public static partial class DbConnectionExtension
         var count = keys?.AsList()?.Count;
         var deletedRows = 0;
 
-        using var myTransaction = transaction is null && count > ParameterBatchCount ? await (await connection.EnsureOpenAsync(cancellationToken)).BeginTransactionAsync(cancellationToken) : null;
+        await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
+        using var myTransaction = transaction is null && count > ParameterBatchCount ? await connection.BeginTransactionAsync(cancellationToken) : null;
         transaction ??= myTransaction;
 
         // Call the underlying method
@@ -1071,10 +1083,9 @@ public static partial class DbConnectionExtension
         {
             foreach (var keyValues in splitted)
             {
-                if (keyValues.Any() != true)
-                {
-                    break;
-                }
+                if (!keyValues.Any())
+                    continue;
+
                 var where = new QueryGroup(
                     pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
                     Conjunction.And);
@@ -1093,7 +1104,7 @@ public static partial class DbConnectionExtension
         }
 
         if (myTransaction is { })
-            await myTransaction.CommitAsync(cancellationToken);
+            await myTransaction.CommitAsync(cancellationToken).ConfigureAwait(false);
 
         // Return the value
         return deletedRows;
