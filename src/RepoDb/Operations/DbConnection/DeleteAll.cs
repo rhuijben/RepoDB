@@ -11,14 +11,6 @@ namespace RepoDb;
 /// </summary>
 public static partial class DbConnectionExtension
 {
-    /*
-     * The supposed maximum parameters of 2100 is not working with Microsoft.Data.SqlClient.
-     * I reported this issue to SqlClient repository at Github.
-     * Link: https://github.com/dotnet/SqlClient/issues/531
-     */
-
-    private const int ParameterBatchCount = 2100 - 2;
-
     #region DeleteAll<TEntity>
 
     /// <summary>
@@ -64,7 +56,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            int chunkSize = Math.Min(1000, ParameterBatchCount) / key.Count();
+            int chunkSize = connection.GetDbSetting().ParameterBatchCount / key.Count();
             using var myTransaction = transaction is null && chunkSize < entities.Count() ? connection.EnsureOpen().BeginTransaction() : null;
             transaction ??= myTransaction;
             int deleted = 0;
@@ -206,7 +198,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            int chunkSize = Math.Min(1000, ParameterBatchCount) / key.Count();
+            int chunkSize = connection.GetDbSetting().ParameterBatchCount / key.Count();
             using var myTransaction = transaction is null && chunkSize < entities.Count() ? connection.EnsureOpen().BeginTransaction() : null;
             transaction ??= myTransaction;
             int deleted = 0;
@@ -420,7 +412,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            int chunkSize = Math.Min(1000, ParameterBatchCount) / key.Count();
+            int chunkSize = connection.GetDbSetting().ParameterBatchCount / key.Count();
 
             await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
             using var myTransaction = transaction is null && chunkSize < entities.Count() ? await connection.BeginTransactionAsync(cancellationToken) : null;
@@ -577,7 +569,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            int chunkSize = Math.Min(1000, ParameterBatchCount) / key.Count();
+            int chunkSize = connection.GetDbSetting().ParameterBatchCount / key.Count();
 
             await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
             using var myTransaction = transaction is null && chunkSize < entities.Count() ? await connection.BeginTransactionAsync(cancellationToken) : null;
@@ -893,31 +885,29 @@ public static partial class DbConnectionExtension
         var count = keys?.AsList()?.Count;
         var deletedRows = 0;
 
-        using var myTransaction = transaction is null && count > ParameterBatchCount ? connection.EnsureOpen().BeginTransaction() : null;
+        var parameterBatchCount = connection.GetDbSetting().ParameterBatchCount;
+
+        using var myTransaction = transaction is null && count > parameterBatchCount ? connection.EnsureOpen().BeginTransaction() : null;
         transaction ??= myTransaction;
 
         // Call the underlying method
-        var splitted = keys?.Split(ParameterBatchCount).AsList();
-        if (splitted?.Any() == true)
+        foreach (var keyValues in keys?.Split(parameterBatchCount) ?? [])
         {
-            foreach (var keyValues in splitted)
-            {
-                if (!keyValues.Any())
-                    continue;
+            if (!keyValues.Any())
+                continue;
 
-                var where = new QueryGroup(
-                    pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
-                    Conjunction.And);
-                deletedRows += DeleteInternal(connection: connection,
-                    tableName: tableName,
-                    where: where,
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-                    traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder);
-            }
+            var where = new QueryGroup(
+                pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
+                Conjunction.And);
+            deletedRows += DeleteInternal(connection: connection,
+                tableName: tableName,
+                where: where,
+                hints: hints,
+                commandTimeout: commandTimeout,
+                traceKey: traceKey,
+                transaction: transaction,
+                trace: trace,
+                statementBuilder: statementBuilder);
         }
 
         // Commit the transaction
@@ -1074,33 +1064,30 @@ public static partial class DbConnectionExtension
         var deletedRows = 0;
 
         await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
-        using var myTransaction = transaction is null && count > ParameterBatchCount ? await connection.BeginTransactionAsync(cancellationToken) : null;
+        var parameterBatchCount = connection.GetDbSetting().ParameterBatchCount;
+        using var myTransaction = transaction is null && count > parameterBatchCount ? await connection.BeginTransactionAsync(cancellationToken) : null;
         transaction ??= myTransaction;
 
         // Call the underlying method
-        var splitted = keys?.Split(ParameterBatchCount).AsList();
-        if (splitted?.Any() == true)
+        foreach (var keyValues in keys?.Split(parameterBatchCount) ?? [])
         {
-            foreach (var keyValues in splitted)
-            {
-                if (!keyValues.Any())
-                    continue;
+            if (!keyValues.Any())
+                continue;
 
-                var where = new QueryGroup(
-                    pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
-                    Conjunction.And);
+            var where = new QueryGroup(
+                pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
+                Conjunction.And);
 
-                deletedRows += await DeleteAsyncInternal(connection: connection,
-                    tableName: tableName,
-                    where: where,
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-                    traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
+            deletedRows += await DeleteAsyncInternal(connection: connection,
+                tableName: tableName,
+                where: where,
+                hints: hints,
+                commandTimeout: commandTimeout,
+                traceKey: traceKey,
+                transaction: transaction,
+                trace: trace,
+                statementBuilder: statementBuilder,
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
 
         if (myTransaction is { })

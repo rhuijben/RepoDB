@@ -104,6 +104,11 @@ public abstract class BaseDbSetting : IDbSetting
     /// </summary>
     public bool ForceAutomaticConversions { get; protected set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public int ParameterBatchCount { get; protected set; } = 2100 - 2;
+
     #endregion
 
     #region Equality and comparers
