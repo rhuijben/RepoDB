@@ -279,7 +279,7 @@ public static partial class DbConnectionExtension
             param: param,
             commandType: commandType,
             cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             traceKey: traceKey,
             commandTimeout: commandTimeout,
             transaction: transaction,
@@ -313,7 +313,7 @@ public static partial class DbConnectionExtension
         object? param = null,
         CommandType? commandType = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         string traceKey = TraceKeys.ExecuteQuery,
         int? commandTimeout = null,
         IDbTransaction? transaction = null,
@@ -375,7 +375,7 @@ public static partial class DbConnectionExtension
             // Set Cache
             if (cache != null && cacheKey != null)
             {
-                await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
+                await cache.AddAsync(cacheKey, result, cacheItemExpiration, false, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -495,7 +495,7 @@ public static partial class DbConnectionExtension
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: cacheItemExpiration,
+                cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 traceKey: traceKey,
                 commandTimeout: commandTimeout,
                 transaction: transaction,
@@ -511,7 +511,7 @@ public static partial class DbConnectionExtension
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: cacheItemExpiration,
+                cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 traceKey: traceKey,
                 commandTimeout: commandTimeout,
                 transaction: transaction,
@@ -545,7 +545,7 @@ public static partial class DbConnectionExtension
         object? param = null,
         CommandType? commandType = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         string traceKey = TraceKeys.ExecuteQuery,
         int? commandTimeout = null,
         IDbTransaction? transaction = null,
@@ -582,7 +582,7 @@ public static partial class DbConnectionExtension
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            cache.Add(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false);
+            cache.Add(cacheKey, result, cacheItemExpiration, false);
         }
 
         // Set the output parameters
@@ -615,7 +615,7 @@ public static partial class DbConnectionExtension
         object? param = null,
         CommandType? commandType = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         string traceKey = TraceKeys.ExecuteQuery,
         int? commandTimeout = null,
         IDbTransaction? transaction = null,
@@ -674,7 +674,7 @@ public static partial class DbConnectionExtension
             // Set Cache
             if (cache != null && cacheKey != null)
             {
-                cache.Add(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false);
+                cache.Add(cacheKey, result, cacheItemExpiration, false);
             }
         }
 
@@ -799,7 +799,7 @@ public static partial class DbConnectionExtension
                param: param,
                commandType: commandType,
                cacheKey: cacheKey,
-               cacheItemExpiration: cacheItemExpiration,
+               cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                commandTimeout: commandTimeout,
                traceKey: traceKey,
                transaction: transaction,
@@ -816,7 +816,7 @@ public static partial class DbConnectionExtension
                param: param,
                commandType: commandType,
                cacheKey: cacheKey,
-               cacheItemExpiration: cacheItemExpiration,
+               cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                commandTimeout: commandTimeout,
                traceKey: traceKey,
                transaction: transaction,
@@ -852,7 +852,7 @@ public static partial class DbConnectionExtension
         object? param = null,
         CommandType? commandType = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         string traceKey = TraceKeys.ExecuteQuery,
         int? commandTimeout = null,
         IDbTransaction? transaction = null,
@@ -878,7 +878,7 @@ public static partial class DbConnectionExtension
             param: param,
             commandType: commandType,
             cacheKey: null,
-            cacheItemExpiration: null,
+            cacheItemExpiration: cacheItemExpiration,
             traceKey: traceKey,
             commandTimeout: commandTimeout,
             transaction: transaction,
@@ -891,7 +891,7 @@ public static partial class DbConnectionExtension
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
+            await cache.AddAsync(cacheKey, result, cacheItemExpiration, false, cancellationToken).ConfigureAwait(false);
         }
 
         // Set the output parameters
@@ -925,7 +925,7 @@ public static partial class DbConnectionExtension
         object? param = null,
         CommandType? commandType = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         string traceKey = TraceKeys.ExecuteQuery,
         int? commandTimeout = null,
         IDbTransaction? transaction = null,
@@ -986,7 +986,7 @@ public static partial class DbConnectionExtension
             // Set Cache
             if (cache != null && cacheKey != null)
             {
-                await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
+                await cache.AddAsync(cacheKey, result, cacheItemExpiration, false, cancellationToken).ConfigureAwait(false);
             }
         }
 
@@ -1737,9 +1737,9 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
             traceKey: traceKey,
+            cacheKey: cacheKey,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             transaction: transaction,
             cache: cache,
@@ -1793,9 +1793,9 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
             traceKey: traceKey,
+            cacheKey: cacheKey,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             transaction: transaction,
             cache: cache,
@@ -1849,9 +1849,9 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
             traceKey: traceKey,
+            cacheKey: cacheKey,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             transaction: transaction,
             cache: cache,
@@ -1869,31 +1869,31 @@ public static partial class DbConnectionExtension
     /// <param name="commandText"></param>
     /// <param name="param"></param>
     /// <param name="commandType"></param>
-    /// <param name="cacheKey"></param>
-    /// <param name="cacheItemExpiration"></param>
     /// <param name="commandTimeout"></param>
     /// <param name="traceKey"></param>
     /// <param name="transaction"></param>
-    /// <param name="cache"></param>
     /// <param name="trace"></param>
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="cacheItemExpiration"></param>
     /// <returns></returns>
     internal static TResult? ExecuteScalarInternal<TResult>(this IDbConnection connection,
         string commandText,
         object? param,
         CommandType? commandType,
-        string? cacheKey,
-        int? cacheItemExpiration,
         int? commandTimeout,
         string? traceKey,
         IDbTransaction? transaction,
-        ICache? cache,
         ITrace? trace,
         Type? entityType,
         DbFieldCollection? dbFields,
-        bool skipCommandArrayParametersCheck)
+        bool skipCommandArrayParametersCheck = true,
+        ICache? cache = null,
+        string? cacheKey = null,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
     {
         // Get Cache
         if (cache != null && cacheKey != null)
@@ -1935,7 +1935,7 @@ public static partial class DbConnectionExtension
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            cache.Add(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false);
+            cache.Add(cacheKey, result, cacheItemExpiration, false);
         }
 
         // Set the output parameters
@@ -1990,9 +1990,9 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
             traceKey: traceKey,
+            cacheKey: cacheKey,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             transaction: transaction,
             cache: cache,
@@ -2011,33 +2011,34 @@ public static partial class DbConnectionExtension
     /// <param name="commandText"></param>
     /// <param name="param"></param>
     /// <param name="commandType"></param>
-    /// <param name="cacheKey"></param>
-    /// <param name="cacheItemExpiration"></param>
     /// <param name="commandTimeout"></param>
     /// <param name="traceKey"></param>
     /// <param name="transaction"></param>
-    /// <param name="cache"></param>
     /// <param name="trace"></param>
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
+    /// <param name="cache"></param>
+    /// <param name="cacheKey"></param>
+    /// <param name="cacheItemExpiration"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<TResult?> ExecuteScalarAsyncInternal<TResult>(this IDbConnection connection,
+    internal static async Task<TResult?> ExecuteScalarAsyncInternal<TResult>(
+        this IDbConnection connection,
         string commandText,
         object? param,
         CommandType? commandType,
-        string? cacheKey,
-        int? cacheItemExpiration,
         int? commandTimeout,
         string traceKey,
         IDbTransaction? transaction,
-        ICache? cache,
         ITrace? trace,
         Type? entityType,
         DbFieldCollection? dbFields,
-        bool skipCommandArrayParametersCheck,
-        CancellationToken cancellationToken)
+        bool skipCommandArrayParametersCheck = true,
+        ICache? cache = null,
+        string? cacheKey = null,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        CancellationToken cancellationToken = default)
     {
         // Get Cache
         if (cache != null && cacheKey != null)
@@ -2080,7 +2081,7 @@ public static partial class DbConnectionExtension
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
+            await cache.AddAsync(cacheKey, result, cacheItemExpiration, false, cancellationToken).ConfigureAwait(false);
         }
 
         // Set the output parameters

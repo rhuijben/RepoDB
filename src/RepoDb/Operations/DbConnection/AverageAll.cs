@@ -1,7 +1,7 @@
-﻿using RepoDb.Interfaces;
-using RepoDb.Requests;
-using System.Data;
+﻿using System.Data;
 using System.Linq.Expressions;
+using RepoDb.Interfaces;
+using RepoDb.Requests;
 
 namespace RepoDb;
 
@@ -657,16 +657,12 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: null,
-            cacheItemExpiration: null,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
-            cache: null,
             trace: trace,
             entityType: request.Type,
-            dbFields: DbFieldCache.Get(connection, request.Name, transaction, true),
-            skipCommandArrayParametersCheck: true);
+            dbFields: DbFieldCache.Get(connection, request.Name, transaction, true));
 
         // Result
         return result;
@@ -707,16 +703,12 @@ public static partial class DbConnectionExtension
             commandText: commandText,
             param: param,
             commandType: commandType,
-            cacheKey: null,
-            cacheItemExpiration: null,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
-            cache: null,
             trace: trace,
             entityType: request.Type,
             dbFields: await DbFieldCache.GetAsync(connection, request.Name, transaction, true, cancellationToken).ConfigureAwait(false),
-            skipCommandArrayParametersCheck: true,
             cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Result

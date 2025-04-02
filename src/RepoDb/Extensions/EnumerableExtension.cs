@@ -14,19 +14,19 @@ public static class EnumerableExtension
     /// <param name="value">The actual enumerable instance.</param>
     /// <param name="sizePerSplit">The sizes of the items per split.</param>
     /// <returns>An enumerable of enumerables.</returns>
-    public static IEnumerable<IEnumerable<T>> Split<T>(this IEnumerable<T> value,
+    public static IEnumerable<T[]> Split<T>(this IEnumerable<T> value,
         int sizePerSplit)
     {
         var count = value?.Count() ?? 0;
-        if (sizePerSplit == 0 || count <= sizePerSplit)
+        if (sizePerSplit <= 0 || count <= sizePerSplit)
         {
-            return new[] { value };
+            return new[] { value.ToArray() };
         }
 #if !NET
         else
         {
-            var batchCount = Convert.ToInt32(count / sizePerSplit) + ((count % sizePerSplit) != 0 ? 1 : 0);
-            var array = new IEnumerable<T>[batchCount];
+            var batchCount = (count / sizePerSplit) + ((count % sizePerSplit) != 0 ? 1 : 0);
+            var array = new T[batchCount][];
             for (var i = 0; i < batchCount; i++)
             {
                 array[i] = value.Where((_, index) =>
@@ -34,7 +34,7 @@ public static class EnumerableExtension
                         return index >= (sizePerSplit * i) &&
                             index < (sizePerSplit * i) + sizePerSplit;
                     })
-                    .AsList();
+                    .ToArray();
             }
             return array;
         }
@@ -42,17 +42,6 @@ public static class EnumerableExtension
         return value.Chunk(sizePerSplit);
 #endif
     }
-
-    /// <summary>
-    /// Returns the items of type <typeparamref name="TargetType"/> from the <see cref="IEnumerable{T}"/> object into a target <see cref="IEnumerable{T}"/> object.
-    /// </summary>
-    /// <typeparam name="SourceType">The source type.</typeparam>
-    /// <typeparam name="TargetType">The target type.</typeparam>
-    /// <param name="value">The actual enumerable instance.</param>
-    /// <returns>The <see cref="IEnumerable{T}"/> object in which the items are of type <typeparamref name="TargetType"/>.</returns>
-    [Obsolete("Use the 'WithType<T>' method instead.")]
-    public static IEnumerable<TargetType> OfTargetType<SourceType, TargetType>(this IEnumerable<SourceType> value) =>
-        value as IEnumerable<TargetType> ?? value.OfType<TargetType>();
 
     /// <summary>
     /// Checks whether the instance of <see cref="IEnumerable"/> is of type <see cref="IEnumerable{T}"/>, then casts it, otherwise, 

@@ -28,7 +28,7 @@ public class CacheItem<T> : IExpirable
     /// <param name="cacheItemExpiration">The expiration in minutes of the cache item.</param>
     public CacheItem(string key,
         T value,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
     {
         if (cacheItemExpiration < 0)
         {
@@ -38,7 +38,7 @@ public class CacheItem<T> : IExpirable
         Value = value;
         CacheItemExpiration = cacheItemExpiration;
         CreatedDate = DateTime.UtcNow;
-        Expiration = CreatedDate.AddMinutes(cacheItemExpiration.GetValueOrDefault());
+        Expiration = CreatedDate.AddMinutes(cacheItemExpiration);
     }
 
     #region Methods

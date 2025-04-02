@@ -1,6 +1,6 @@
-﻿using RepoDb.Interfaces;
+﻿using System.Data;
+using RepoDb.Interfaces;
 using RepoDb.Requests;
-using System.Data;
 
 namespace RepoDb;
 
@@ -149,7 +149,7 @@ public static partial class DbConnectionExtension
             orderBy: orderBy,
             hints: hints,
             cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -308,7 +308,7 @@ public static partial class DbConnectionExtension
             orderBy: orderBy,
             hints: hints,
             cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -544,7 +544,7 @@ public static partial class DbConnectionExtension
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         int? commandTimeout = null,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
@@ -574,7 +574,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
         var commandText = CommandTextCache.GetQueryAllText(request);
         var param = (object?)null;
-        
+
         // Actual Execution
         var result = ExecuteQueryInternal<TEntity>(connection: connection,
             commandText: commandText,
@@ -593,7 +593,7 @@ public static partial class DbConnectionExtension
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            cache.Add(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false);
+            cache.Add(cacheKey, result, cacheItemExpiration, false);
         }
 
         // Result
@@ -629,7 +629,7 @@ public static partial class DbConnectionExtension
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         int? commandTimeout = null,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
@@ -660,7 +660,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
         var commandText = await CommandTextCache.GetQueryAllTextAsync(request, cancellationToken).ConfigureAwait(false);
         var param = (object?)null;
-        
+
         // Actual Execution
         var result = await ExecuteQueryAsyncInternal<TEntity>(connection: connection,
             commandText: commandText,
@@ -680,7 +680,7 @@ public static partial class DbConnectionExtension
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
+            await cache.AddAsync(cacheKey, result, cacheItemExpiration, false, cancellationToken).ConfigureAwait(false);
         }
 
         // Result

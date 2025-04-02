@@ -700,7 +700,7 @@ public static partial class DbConnectionExtension
             top: top,
             hints: hints,
             cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -1439,7 +1439,7 @@ public static partial class DbConnectionExtension
             top: top,
             hints: hints,
             cacheKey: cacheKey,
-            cacheItemExpiration: cacheItemExpiration,
+            cacheItemExpiration: cacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -2133,7 +2133,7 @@ public static partial class DbConnectionExtension
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
@@ -2190,7 +2190,7 @@ public static partial class DbConnectionExtension
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            cache.Add(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false);
+            cache.Add(cacheKey, result, cacheItemExpiration, false);
         }
 
         // Result
@@ -2230,7 +2230,7 @@ public static partial class DbConnectionExtension
         int? top = 0,
         string? hints = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         int? commandTimeout = null,
         string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
@@ -2289,7 +2289,7 @@ public static partial class DbConnectionExtension
         // Set Cache
         if (cache != null && cacheKey != null)
         {
-            await cache.AddAsync(cacheKey, result, cacheItemExpiration.GetValueOrDefault(), false, cancellationToken).ConfigureAwait(false);
+            await cache.AddAsync(cacheKey, result, cacheItemExpiration, false, cancellationToken).ConfigureAwait(false);
         }
 
         // Result

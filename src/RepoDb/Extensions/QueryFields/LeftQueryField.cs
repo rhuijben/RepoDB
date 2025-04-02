@@ -1,5 +1,5 @@
-﻿using RepoDb.Enumerations;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Enumerations;
 
 namespace RepoDb.Extensions.QueryFields;
 
@@ -73,7 +73,7 @@ public sealed class LeftQueryField : FunctionalQueryField
         object value,
         DbType? dbType,
         int charCount = 0)
-        : base(fieldName, operation, value, dbType, $"LEFT({{0}}, {(charCount > 0 ? charCount : (value?.ToString().Length).GetValueOrDefault())})")
+        : base(fieldName, operation, value, dbType, $"LEFT({{0}}, {(charCount > 0 ? charCount : (value?.ToString().Length ?? 0))})")
     {
         CharCount = charCount;
     }

@@ -1,11 +1,11 @@
-﻿using Npgsql;
+﻿using System.Data;
+using System.Data.Common;
+using System.Dynamic;
+using Npgsql;
 using RepoDb.Enumerations.PostgreSql;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.PostgreSql.BulkOperations;
-using System.Data;
-using System.Data.Common;
-using System.Dynamic;
 
 namespace RepoDb;
 
@@ -139,7 +139,7 @@ public static partial class NpgsqlConnectionExtension
         int execute()
         {
             var result = 0;
-            var batches = entities.Split(batchSize.GetValueOrDefault());
+            var batches = entities.Split(batchSize ?? -1);
 
             foreach (var batch in batches)
             {
@@ -294,7 +294,7 @@ public static partial class NpgsqlConnectionExtension
         {
             var result = 0;
             var rows = GetRows(table, rowState).ToList();
-            var batches = rows.Split(batchSize.GetValueOrDefault());
+            var batches = rows.Split(batchSize ?? -1);
 
             foreach (var batch in batches)
             {
@@ -552,7 +552,7 @@ public static partial class NpgsqlConnectionExtension
         async Task<int> executeAsync()
         {
             var result = 0;
-            var batches = entities.Split(batchSize.GetValueOrDefault());
+            var batches = entities.Split(batchSize ?? -1);
 
             foreach (var batch in batches)
             {
