@@ -350,7 +350,7 @@ public class CacheTest
             entity.Id = Convert.ToInt32(connection.Insert(entity));
 
             // Act
-            var result = connection.Query<IdentityTable>(what: (object)null,
+            var result = connection.Query<IdentityTable>(what: (object?)null,
                 orderBy: (IEnumerable<OrderField>)null,
                 top: null,
                 hints: null,
@@ -528,7 +528,7 @@ public class CacheTest
 
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<IdentityTable>(),
-                what: (object)null,
+                what: (object?)null,
                 orderBy: (IEnumerable<OrderField>)null,
                 top: null,
                 hints: null,
@@ -675,7 +675,7 @@ public class CacheTest
 
             // Act
             var result = connection.Query<ExpandoObject>(ClassMappedNameCache.Get<IdentityTable>(),
-                what: (object)null,
+                what: (object?)null,
                 orderBy: (IEnumerable<OrderField>)null,
                 top: null,
                 hints: null,
@@ -822,7 +822,7 @@ public class CacheTest
 
             // Act
             var result = connection.Query<IDictionary<string, object>>(ClassMappedNameCache.Get<IdentityTable>(),
-                what: (object)null,
+                what: (object?)null,
                 orderBy: (IEnumerable<OrderField>)null,
                 top: null,
                 hints: null,
@@ -972,7 +972,7 @@ public class CacheTest
             entity.Id = Convert.ToInt32(connection.Insert(entity));
 
             // Act
-            var result = await connection.QueryAsync<IdentityTable>(what: (object)null,
+            var result = await connection.QueryAsync<IdentityTable>(what: (object?)null,
                 orderBy: (IEnumerable<OrderField>)null,
                 top: null,
                 hints: null,
@@ -1149,7 +1149,7 @@ public class CacheTest
 
             // Act
             var result = await connection.QueryAsync(ClassMappedNameCache.Get<IdentityTable>(),
-                what: (object)null,
+                what: (object?)null,
                 orderBy: (IEnumerable<OrderField>)null,
                 top: null,
                 hints: null,
@@ -1296,7 +1296,7 @@ public class CacheTest
 
             // Act
             var result = await connection.QueryAsync<ExpandoObject>(ClassMappedNameCache.Get<IdentityTable>(),
-                what: (object)null,
+                what: (object?)null,
                 orderBy: (IEnumerable<OrderField>)null,
                 top: null,
                 hints: null,
@@ -1443,7 +1443,7 @@ public class CacheTest
 
             // Act
             var result = await connection.QueryAsync<IDictionary<string, object>>(ClassMappedNameCache.Get<IdentityTable>(),
-                what: (object)null,
+                what: (object?)null,
                 orderBy: (IEnumerable<OrderField>)null,
                 top: null,
                 hints: null,

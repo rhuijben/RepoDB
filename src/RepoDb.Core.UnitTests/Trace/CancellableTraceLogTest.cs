@@ -292,7 +292,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection
-            .Average("", (Field)null, (object)null, trace: new ErroneousCancellationTrace());
+            .Average("", (Field)null, (object?)null, trace: new ErroneousCancellationTrace());
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
@@ -303,7 +303,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection
-            .AverageAsync("", (Field)null, (object)null, trace: new ErroneousCancellationTrace())
+            .AverageAsync("", (Field)null, (object?)null, trace: new ErroneousCancellationTrace())
             ;
     }
 
@@ -346,7 +346,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection
-            .BatchQuery("", 0, 100, null, (object)null, trace: new ErroneousCancellationTrace());
+            .BatchQuery("", 0, 100, null, (object?)null, trace: new ErroneousCancellationTrace());
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
@@ -357,7 +357,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection
-            .BatchQueryAsync("", 0, 100, null, (object)null, trace: new ErroneousCancellationTrace())
+            .BatchQueryAsync("", 0, 100, null, (object?)null, trace: new ErroneousCancellationTrace())
             ;
     }
 
@@ -605,7 +605,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection
-            .Max("", (Field)null, (object)null, trace: new ErroneousCancellationTrace());
+            .Max("", (Field)null, (object?)null, trace: new ErroneousCancellationTrace());
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
@@ -616,7 +616,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection
-            .MaxAsync("", (Field)null, (object)null, trace: new ErroneousCancellationTrace())
+            .MaxAsync("", (Field)null, (object?)null, trace: new ErroneousCancellationTrace())
             ;
     }
 
@@ -756,7 +756,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection
-            .Min("", (Field)null, (object)null, trace: new ErroneousCancellationTrace());
+            .Min("", (Field)null, (object?)null, trace: new ErroneousCancellationTrace());
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
@@ -767,7 +767,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection
-            .MinAsync("", (Field)null, (object)null, trace: new ErroneousCancellationTrace())
+            .MinAsync("", (Field)null, (object?)null, trace: new ErroneousCancellationTrace())
             ;
     }
 
@@ -1084,7 +1084,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection
-            .Sum("", (Field)null, (object)null, trace: new ErroneousCancellationTrace());
+            .Sum("", (Field)null, (object?)null, trace: new ErroneousCancellationTrace());
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
@@ -1095,7 +1095,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection
-            .SumAsync("", (Field)null, (object)null, trace: new ErroneousCancellationTrace())
+            .SumAsync("", (Field)null, (object?)null, trace: new ErroneousCancellationTrace())
             ;
     }
 
@@ -1418,7 +1418,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Average<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -1436,7 +1436,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Average(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -1458,7 +1458,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.AverageAsync<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -1475,7 +1475,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.AverageAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -1628,7 +1628,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection.Count<TraceEntity>(trace: trace,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -1644,7 +1644,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection.Count(ClassMappedNameCache.Get<TraceEntity>(),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -1665,7 +1665,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection.CountAsync<TraceEntity>(trace: trace,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -1681,7 +1681,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection.CountAsync(ClassMappedNameCache.Get<TraceEntity>(),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -1938,7 +1938,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection.Exists<TraceEntity>(trace: trace,
-            what: (object)null);
+            what: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -1954,7 +1954,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection.Exists(ClassMappedNameCache.Get<TraceEntity>(),
-            what: (object)null,
+            what: (object?)null,
             trace: trace);
 
         // Assert
@@ -1975,7 +1975,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection.ExistsAsync<TraceEntity>(trace: trace,
-            what: (object)null);
+            what: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -1991,7 +1991,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection.ExistsAsync(ClassMappedNameCache.Get<TraceEntity>(),
-            what: (object)null,
+            what: (object?)null,
             trace: trace);
 
         // Assert
@@ -2177,7 +2177,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Max<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -2194,7 +2194,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Max(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -2216,7 +2216,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.MaxAsync<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -2233,7 +2233,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.MaxAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -2497,7 +2497,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Min<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -2514,7 +2514,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Min(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -2536,7 +2536,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.MinAsync<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -2553,7 +2553,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.MinAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -3037,7 +3037,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Sum<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -3054,7 +3054,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Sum(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -3076,7 +3076,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.SumAsync<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.AreEqual(1, trace.BeforeExecutionInvocationCount);
@@ -3093,7 +3093,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.SumAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -3599,7 +3599,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Average<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -3616,7 +3616,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Average(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -3637,7 +3637,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.AverageAsync<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -3653,7 +3653,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.AverageAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -3799,7 +3799,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection.Count<TraceEntity>(trace: trace,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -3814,7 +3814,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection.Count(ClassMappedNameCache.Get<TraceEntity>(),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -3834,7 +3834,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection.CountAsync<TraceEntity>(trace: trace,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -3849,7 +3849,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection.CountAsync(ClassMappedNameCache.Get<TraceEntity>(),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -4093,7 +4093,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection.Exists<TraceEntity>(trace: trace,
-            what: (object)null);
+            what: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -4108,7 +4108,7 @@ public class CancellableTraceLogTest
 
         // Act
         connection.Exists(ClassMappedNameCache.Get<TraceEntity>(),
-            what: (object)null,
+            what: (object?)null,
             trace: trace);
 
         // Assert
@@ -4128,7 +4128,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection.ExistsAsync<TraceEntity>(trace: trace,
-            what: (object)null);
+            what: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -4143,7 +4143,7 @@ public class CancellableTraceLogTest
 
         // Act
         await connection.ExistsAsync(ClassMappedNameCache.Get<TraceEntity>(),
-            what: (object)null,
+            what: (object?)null,
             trace: trace);
 
         // Assert
@@ -4320,7 +4320,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Max<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -4336,7 +4336,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Max(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -4357,7 +4357,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.MaxAsync<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -4373,7 +4373,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.MaxAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -4624,7 +4624,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Min<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -4640,7 +4640,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Min(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -4661,7 +4661,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.MinAsync<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -4677,7 +4677,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.MinAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -5140,7 +5140,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Sum<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -5156,7 +5156,7 @@ public class CancellableTraceLogTest
         // Act
         connection.Sum(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert
@@ -5177,7 +5177,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.SumAsync<TraceEntity>(trace: trace,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         Assert.IsTrue(trace.IsValid);
@@ -5193,7 +5193,7 @@ public class CancellableTraceLogTest
         // Act
         await connection.SumAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace);
 
         // Assert

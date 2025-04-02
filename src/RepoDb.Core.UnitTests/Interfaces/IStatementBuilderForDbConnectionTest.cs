@@ -97,7 +97,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Average<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -113,7 +113,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         connection.Average<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -136,7 +136,7 @@ public class IStatementBuilderForDbConnectionTest
         CommandTextCache.Flush();
         connection.Average(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -153,7 +153,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         connection.Average(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -175,7 +175,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Average<StatementBuilderEntityForCrossCall>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -192,7 +192,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         connection.Average(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
             new Field("Id", typeof(int)),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -378,7 +378,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         CommandTextCache.Flush();
-        connection.Count<StatementBuilderEntity>((object)null,
+        connection.Count<StatementBuilderEntity>((object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -392,7 +392,7 @@ public class IStatementBuilderForDbConnectionTest
         var statementBuilderNever = new Mock<IStatementBuilder>();
 
         // Act
-        connection.Count<StatementBuilderEntity>((object)null,
+        connection.Count<StatementBuilderEntity>((object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -413,7 +413,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Count(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -428,7 +428,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         connection.Count(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -448,7 +448,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         CommandTextCache.Flush();
-        connection.Count<StatementBuilderEntityForCrossCall>((object)null,
+        connection.Count<StatementBuilderEntityForCrossCall>((object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -463,7 +463,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         connection.Count(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -799,7 +799,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         CommandTextCache.Flush();
-        connection.Exists<StatementBuilderEntity>((object)null,
+        connection.Exists<StatementBuilderEntity>((object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -813,7 +813,7 @@ public class IStatementBuilderForDbConnectionTest
         var statementBuilderNever = new Mock<IStatementBuilder>();
 
         // Act
-        connection.Exists<StatementBuilderEntity>((object)null,
+        connection.Exists<StatementBuilderEntity>((object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -834,7 +834,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Exists(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -849,7 +849,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         connection.Exists(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -869,7 +869,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         CommandTextCache.Flush();
-        connection.Exists<StatementBuilderEntityForCrossCall>((object)null,
+        connection.Exists<StatementBuilderEntityForCrossCall>((object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -884,7 +884,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         connection.Exists(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -1371,7 +1371,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Max<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -1387,7 +1387,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         connection.Max<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -1410,7 +1410,7 @@ public class IStatementBuilderForDbConnectionTest
         CommandTextCache.Flush();
         connection.Max(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -1427,7 +1427,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         connection.Max(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -1449,7 +1449,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Max<StatementBuilderEntityForCrossCall>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -1466,7 +1466,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         connection.Max(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
             new Field("Id", typeof(int)),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -2099,7 +2099,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Min<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -2115,7 +2115,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         connection.Min<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -2138,7 +2138,7 @@ public class IStatementBuilderForDbConnectionTest
         CommandTextCache.Flush();
         connection.Min(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -2155,7 +2155,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         connection.Min(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -2177,7 +2177,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Min<StatementBuilderEntityForCrossCall>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -2194,7 +2194,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         connection.Min(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
             new Field("Id", typeof(int)),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -2721,7 +2721,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Sum<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -2737,7 +2737,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         connection.Sum<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -2760,7 +2760,7 @@ public class IStatementBuilderForDbConnectionTest
         CommandTextCache.Flush();
         connection.Sum(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -2777,7 +2777,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         connection.Sum(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -2799,7 +2799,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         connection.Sum<StatementBuilderEntityForCrossCall>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -2816,7 +2816,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         connection.Sum(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
             new Field("Id", typeof(int)),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -3377,7 +3377,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.AverageAsync<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -3393,7 +3393,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         await connection.AverageAsync<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -3416,7 +3416,7 @@ public class IStatementBuilderForDbConnectionTest
         CommandTextCache.Flush();
         await connection.AverageAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -3433,7 +3433,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         await connection.AverageAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -3455,7 +3455,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.AverageAsync<StatementBuilderEntityForCrossCall>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -3472,7 +3472,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         await connection.AverageAsync(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
             new Field("Id", typeof(int)),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -3658,7 +3658,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         CommandTextCache.Flush();
-        await connection.CountAsync<StatementBuilderEntity>((object)null,
+        await connection.CountAsync<StatementBuilderEntity>((object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -3672,7 +3672,7 @@ public class IStatementBuilderForDbConnectionTest
         var statementBuilderNever = new Mock<IStatementBuilder>();
 
         // Act
-        await connection.CountAsync<StatementBuilderEntity>((object)null,
+        await connection.CountAsync<StatementBuilderEntity>((object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -3693,7 +3693,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.CountAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -3708,7 +3708,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         await connection.CountAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -3728,7 +3728,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         CommandTextCache.Flush();
-        await connection.CountAsync<StatementBuilderEntityForCrossCall>((object)null,
+        await connection.CountAsync<StatementBuilderEntityForCrossCall>((object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -3743,7 +3743,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         await connection.CountAsync(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -4079,7 +4079,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         CommandTextCache.Flush();
-        await connection.ExistsAsync<StatementBuilderEntity>((object)null,
+        await connection.ExistsAsync<StatementBuilderEntity>((object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -4093,7 +4093,7 @@ public class IStatementBuilderForDbConnectionTest
         var statementBuilderNever = new Mock<IStatementBuilder>();
 
         // Act
-        await connection.ExistsAsync<StatementBuilderEntity>((object)null,
+        await connection.ExistsAsync<StatementBuilderEntity>((object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -4114,7 +4114,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.ExistsAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -4129,7 +4129,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         await connection.ExistsAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -4149,7 +4149,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         CommandTextCache.Flush();
-        await connection.ExistsAsync<StatementBuilderEntityForCrossCall>((object)null,
+        await connection.ExistsAsync<StatementBuilderEntityForCrossCall>((object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -4164,7 +4164,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         await connection.ExistsAsync(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -4647,7 +4647,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.MaxAsync<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -4663,7 +4663,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         await connection.MaxAsync<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -4686,7 +4686,7 @@ public class IStatementBuilderForDbConnectionTest
         CommandTextCache.Flush();
         await connection.MaxAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -4703,7 +4703,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         await connection.MaxAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -4725,7 +4725,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.MaxAsync<StatementBuilderEntityForCrossCall>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -4742,7 +4742,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         await connection.MaxAsync(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
             new Field("Id", typeof(int)),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -5376,7 +5376,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.MinAsync<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -5392,7 +5392,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         await connection.MinAsync<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -5415,7 +5415,7 @@ public class IStatementBuilderForDbConnectionTest
         CommandTextCache.Flush();
         await connection.MinAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -5432,7 +5432,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         await connection.MinAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -5454,7 +5454,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.MinAsync<StatementBuilderEntityForCrossCall>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -5471,7 +5471,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         await connection.MinAsync(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
             new Field("Id", typeof(int)),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -5998,7 +5998,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.SumAsync<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -6014,7 +6014,7 @@ public class IStatementBuilderForDbConnectionTest
 
         // Act
         await connection.SumAsync<StatementBuilderEntity>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -6037,7 +6037,7 @@ public class IStatementBuilderForDbConnectionTest
         CommandTextCache.Flush();
         await connection.SumAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -6054,7 +6054,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         await connection.SumAsync(ClassMappedNameCache.Get<StatementBuilderEntityForTableName>(),
             new Field("Id"),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert
@@ -6076,7 +6076,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         CommandTextCache.Flush();
         await connection.SumAsync<StatementBuilderEntityForCrossCall>(e => e.Id,
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilder.Object);
 
         // Assert
@@ -6093,7 +6093,7 @@ public class IStatementBuilderForDbConnectionTest
         // Act
         await connection.SumAsync(ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>(),
             new Field("Id", typeof(int)),
-            (object)null,
+            (object?)null,
             statementBuilder: statementBuilderNever.Object);
 
         // Assert

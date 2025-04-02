@@ -35,7 +35,7 @@ public class ExistsTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            var result = connection.Exists<MdsCompleteTable>((object)null);
+            var result = connection.Exists<MdsCompleteTable>((object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -143,7 +143,7 @@ public class ExistsTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            connection.Exists<MdsCompleteTable>((object)null,
+            connection.Exists<MdsCompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -161,7 +161,7 @@ public class ExistsTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            var result = await connection.ExistsAsync<MdsCompleteTable>((object)null);
+            var result = await connection.ExistsAsync<MdsCompleteTable>((object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -269,7 +269,7 @@ public class ExistsTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            await connection.ExistsAsync<MdsCompleteTable>((object)null,
+            await connection.ExistsAsync<MdsCompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -292,7 +292,7 @@ public class ExistsTest
 
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -388,7 +388,7 @@ public class ExistsTest
 
             // Act
             connection.Exists(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -407,7 +407,7 @@ public class ExistsTest
 
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -503,7 +503,7 @@ public class ExistsTest
 
             // Act
             await connection.ExistsAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

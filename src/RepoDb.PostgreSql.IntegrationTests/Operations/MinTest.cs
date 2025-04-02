@@ -36,7 +36,7 @@ public class MinTest
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInteger,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInteger), Convert.ToInt32(result));
@@ -150,7 +150,7 @@ public class MinTest
         {
             // Act
             connection.Min<CompleteTable>(e => e.ColumnInteger,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -169,7 +169,7 @@ public class MinTest
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInteger), Convert.ToInt32(result));
@@ -283,7 +283,7 @@ public class MinTest
         {
             // Act
             await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -307,7 +307,7 @@ public class MinTest
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInteger", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInteger), Convert.ToInt32(result));
@@ -408,7 +408,7 @@ public class MinTest
             // Act
             connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInteger", typeof(int)),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -428,7 +428,7 @@ public class MinTest
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInteger", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInteger), Convert.ToInt32(result));
@@ -529,7 +529,7 @@ public class MinTest
             // Act
             await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInteger", typeof(int)),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

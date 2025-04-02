@@ -37,7 +37,7 @@ public class MinTest
 
             // Act
             var result = connection.Min<IdentityTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(t => t.ColumnInt), Convert.ToInt32(result));
@@ -169,7 +169,7 @@ public class MinTest
 
             // Act
             var result = connection.Min<IdentityTable, int?>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(t => t.ColumnInt), result);
@@ -305,7 +305,7 @@ public class MinTest
 
             // Act
             var result = await connection.MinAsync<IdentityTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(t => t.ColumnInt), Convert.ToInt32(result));
@@ -437,7 +437,7 @@ public class MinTest
 
             // Act
             var result = await connection.MinAsync<IdentityTable, int?>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(t => t.ColumnInt), result);
@@ -574,7 +574,7 @@ public class MinTest
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(t => t.ColumnInt), Convert.ToInt32(result));
@@ -691,7 +691,7 @@ public class MinTest
             // Act
             var result = connection.Min<int?>(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(t => t.ColumnInt), result);
@@ -812,7 +812,7 @@ public class MinTest
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(t => t.ColumnInt), Convert.ToInt32(result));
@@ -929,7 +929,7 @@ public class MinTest
             // Act
             var result = await connection.MinAsync<int?>(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(t => t.ColumnInt), result);

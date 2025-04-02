@@ -312,7 +312,7 @@ public class SqlConnectionOthersTest
         var entity = new
         {
             SessionId = Guid.NewGuid(),
-            ColumnHierarchyId = (object)null,
+            ColumnHierarchyId = (object?)null,
             ColumnSqlVariant = (string)null,
             ColumnUniqueIdentifier = (Guid?)null,
             ColumnXml = (string)null
@@ -374,7 +374,7 @@ public class SqlConnectionOthersTest
         var entity = new
         {
             SessionId = Guid.NewGuid(),
-            ColumnHierarchyId = (object)null,
+            ColumnHierarchyId = (object?)null,
             ColumnSqlVariant = (string)null,
             ColumnUniqueIdentifier = (Guid?)null,
             ColumnXml = (string)null

@@ -121,7 +121,7 @@ public class AnonymousTest
 
             // Act
             var result = connection.Query<TAnonymous>("[sc].[IdentityTable]",
-                what: (object)null);
+                what: (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -149,7 +149,7 @@ public class AnonymousTest
 
             // Act
             var result = await connection.QueryAsync<TAnonymous>("[sc].[IdentityTable]",
-                what: (object)null);
+                what: (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());

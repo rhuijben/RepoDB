@@ -35,7 +35,7 @@ public class DeleteTest
             var tables = Database.CreateSdsCompleteTables(10, connection);
 
             // Act
-            var result = connection.Delete<SdsCompleteTable>((object)null);
+            var result = connection.Delete<SdsCompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -178,7 +178,7 @@ public class DeleteTest
             var tables = Database.CreateSdsCompleteTables(10, connection);
 
             // Act
-            var result = await connection.DeleteAsync<SdsCompleteTable>((object)null);
+            var result = await connection.DeleteAsync<SdsCompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -325,7 +325,7 @@ public class DeleteTest
             var tables = Database.CreateSdsCompleteTables(10, connection);
 
             // Act
-            var result = connection.Delete(ClassMappedNameCache.Get<SdsCompleteTable>(), (object)null);
+            var result = connection.Delete(ClassMappedNameCache.Get<SdsCompleteTable>(), (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -436,7 +436,7 @@ public class DeleteTest
             var tables = Database.CreateSdsCompleteTables(10, connection);
 
             // Act
-            var result = await connection.DeleteAsync(ClassMappedNameCache.Get<SdsCompleteTable>(), (object)null);
+            var result = await connection.DeleteAsync(ClassMappedNameCache.Get<SdsCompleteTable>(), (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);

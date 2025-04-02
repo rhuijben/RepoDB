@@ -35,7 +35,7 @@ public class CountTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Count<CompleteTable>((object)null);
+            var result = connection.Count<CompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -143,7 +143,7 @@ public class CountTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Count<CompleteTable>((object)null,
+            var result = connection.Count<CompleteTable>((object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -164,7 +164,7 @@ public class CountTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.CountAsync<CompleteTable>((object)null);
+            var result = await connection.CountAsync<CompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -272,7 +272,7 @@ public class CountTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.CountAsync<CompleteTable>((object)null,
+            var result = await connection.CountAsync<CompleteTable>((object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -298,7 +298,7 @@ public class CountTest
         {
             // Act
             var result = connection.Count(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -394,7 +394,7 @@ public class CountTest
         {
             // Act
             var result = connection.Count(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -416,7 +416,7 @@ public class CountTest
         {
             // Act
             var result = await connection.CountAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -512,7 +512,7 @@ public class CountTest
         {
             // Act
             var result = await connection.CountAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert

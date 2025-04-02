@@ -42,7 +42,7 @@ public class SharedQueryTest
 
             // Act
             var result = connection.Query<SharedIdentityTable>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -164,7 +164,7 @@ public class SharedQueryTest
 
             // Act
             var result = await connection.QueryAsync<SharedIdentityTable>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -290,7 +290,7 @@ public class SharedQueryTest
 
             // Act
             var result = connection.Query<SharedIdentityTable>(ClassMappedNameCache.Get<NonIdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -412,7 +412,7 @@ public class SharedQueryTest
 
             // Act
             var result = await connection.QueryAsync<SharedIdentityTable>(ClassMappedNameCache.Get<NonIdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());

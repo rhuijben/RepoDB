@@ -146,7 +146,7 @@ public class ClassHandlerTest
             var result = connection.BatchQuery<ClassHandlerIdentityTable>(page: 0,
                 rowsPerBatch: 10,
                 orderBy: OrderField.Parse(new { Id = Order.Ascending }),
-                where: (object)null);
+                where: (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, handler.GetMethodCallCount);
@@ -177,7 +177,7 @@ public class ClassHandlerTest
             connection.BatchQuery<ClassHandlerIdentityTableWithTestModel>(page: 0,
                 rowsPerBatch: 10,
                 orderBy: OrderField.Parse(new { Id = Order.Ascending }),
-                where: (object)null);
+                where: (object?)null);
         }
     }
 

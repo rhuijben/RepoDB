@@ -35,7 +35,7 @@ public class CountTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            var result = connection.Count<MdsCompleteTable>((object)null);
+            var result = connection.Count<MdsCompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -143,7 +143,7 @@ public class CountTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            connection.Count<MdsCompleteTable>((object)null,
+            connection.Count<MdsCompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -161,7 +161,7 @@ public class CountTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            var result = await connection.CountAsync<MdsCompleteTable>((object)null);
+            var result = await connection.CountAsync<MdsCompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -269,7 +269,7 @@ public class CountTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            await connection.CountAsync<MdsCompleteTable>((object)null,
+            await connection.CountAsync<MdsCompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -292,7 +292,7 @@ public class CountTest
 
             // Act
             var result = connection.Count(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -388,7 +388,7 @@ public class CountTest
 
             // Act
             connection.Count(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -407,7 +407,7 @@ public class CountTest
 
             // Act
             var result = await connection.CountAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -503,7 +503,7 @@ public class CountTest
 
             // Act
             await connection.CountAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

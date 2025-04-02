@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
@@ -35,7 +35,7 @@ public class DeleteTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Delete<CompleteTable>((object)null);
+            var result = connection.Delete<CompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -178,7 +178,7 @@ public class DeleteTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.DeleteAsync<CompleteTable>((object)null);
+            var result = await connection.DeleteAsync<CompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -325,7 +325,7 @@ public class DeleteTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Delete(ClassMappedNameCache.Get<CompleteTable>(), (object)null);
+            var result = connection.Delete(ClassMappedNameCache.Get<CompleteTable>(), (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -436,7 +436,7 @@ public class DeleteTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.DeleteAsync(ClassMappedNameCache.Get<CompleteTable>(), (object)null);
+            var result = await connection.DeleteAsync(ClassMappedNameCache.Get<CompleteTable>(), (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);

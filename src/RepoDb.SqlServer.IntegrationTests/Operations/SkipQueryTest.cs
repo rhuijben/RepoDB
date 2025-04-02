@@ -39,7 +39,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -60,7 +60,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -81,7 +81,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -102,7 +102,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -123,7 +123,7 @@ public class SkipQueryTest
                 skip: 0,
                 rowsPerBatch: 3,
                 orderBy: OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                where: (object)null,
+                where: (object?)null,
                 hints: SqlServerTableHints.NoLock);
 
             // Assert
@@ -149,7 +149,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -170,7 +170,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -191,7 +191,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -212,7 +212,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -233,7 +233,7 @@ public class SkipQueryTest
                 skip: 0,
                 rowsPerBatch: 3,
                 orderBy: OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                where: (object)null,
+                where: (object?)null,
                 hints: SqlServerTableHints.NoLock);
 
             // Assert
@@ -263,7 +263,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -284,7 +284,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -305,7 +305,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -326,7 +326,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -347,7 +347,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                where: (object)null,
+                where: (object?)null,
                 hints: SqlServerTableHints.NoLock);
 
             // Assert
@@ -373,7 +373,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -394,7 +394,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -415,7 +415,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -436,7 +436,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -457,7 +457,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                where: (object)null,
+                where: (object?)null,
                 hints: SqlServerTableHints.NoLock);
 
             // Assert

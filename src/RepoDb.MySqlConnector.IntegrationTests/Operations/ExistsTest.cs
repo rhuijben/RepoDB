@@ -35,7 +35,7 @@ public class ExistsTest
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Exists<CompleteTable>((object)null);
+            var result = connection.Exists<CompleteTable>((object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -143,7 +143,7 @@ public class ExistsTest
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
             // Act
-            connection.Exists<CompleteTable>((object)null,
+            connection.Exists<CompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -161,7 +161,7 @@ public class ExistsTest
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.ExistsAsync<CompleteTable>((object)null);
+            var result = await connection.ExistsAsync<CompleteTable>((object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -269,7 +269,7 @@ public class ExistsTest
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
             // Act
-            await connection.ExistsAsync<CompleteTable>((object)null,
+            await connection.ExistsAsync<CompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -292,7 +292,7 @@ public class ExistsTest
         {
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -388,7 +388,7 @@ public class ExistsTest
         {
             // Act
             connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -407,7 +407,7 @@ public class ExistsTest
         {
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -503,7 +503,7 @@ public class ExistsTest
         {
             // Act
             await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

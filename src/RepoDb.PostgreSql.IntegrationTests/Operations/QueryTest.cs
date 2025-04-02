@@ -142,7 +142,7 @@ public class QueryTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Query<CompleteTable>((object)null,
+            var result = connection.Query<CompleteTable>((object?)null,
                 top: 2);
 
             // Assert
@@ -160,7 +160,7 @@ public class QueryTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            connection.Query<CompleteTable>((object)null,
+            connection.Query<CompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -285,7 +285,7 @@ public class QueryTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.QueryAsync<CompleteTable>((object)null,
+            var result = await connection.QueryAsync<CompleteTable>((object?)null,
                 top: 2);
 
             // Assert
@@ -303,7 +303,7 @@ public class QueryTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            await connection.QueryAsync<CompleteTable>((object)null,
+            await connection.QueryAsync<CompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -417,7 +417,7 @@ public class QueryTest
         {
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 top: 2);
 
             // Assert
@@ -436,7 +436,7 @@ public class QueryTest
         {
             // Act
             connection.Query(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -546,7 +546,7 @@ public class QueryTest
         {
             // Act
             var result = await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 top: 2);
 
             // Assert
@@ -565,7 +565,7 @@ public class QueryTest
         {
             // Act
             await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

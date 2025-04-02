@@ -276,7 +276,7 @@ public class SqlConnectionSpatialsTest
         var entity = new
         {
             SessionId = Guid.NewGuid(),
-            ColumnGeography = (object)null,
+            ColumnGeography = (object?)null,
             ColumnGeometry = (object)null
         };
 
@@ -330,7 +330,7 @@ public class SqlConnectionSpatialsTest
         var entity = new
         {
             SessionId = Guid.NewGuid(),
-            ColumnGeography = (object)null,
+            ColumnGeography = (object?)null,
             ColumnGeometry = (object)null
         };
 

@@ -36,7 +36,7 @@ public class MinTest
 
             // Act
             var result = connection.Min<SdsCompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInt), Convert.ToInt32(result));
@@ -150,7 +150,7 @@ public class MinTest
 
             // Act
             connection.Min<SdsCompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -169,7 +169,7 @@ public class MinTest
 
             // Act
             var result = await connection.MinAsync<SdsCompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInt), Convert.ToInt32(result));
@@ -283,7 +283,7 @@ public class MinTest
 
             // Act
             await connection.MinAsync<SdsCompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -307,7 +307,7 @@ public class MinTest
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<SdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInt), Convert.ToInt32(result));
@@ -408,7 +408,7 @@ public class MinTest
             // Act
             connection.Min(ClassMappedNameCache.Get<SdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -428,7 +428,7 @@ public class MinTest
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<SdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInt), Convert.ToInt32(result));
@@ -529,7 +529,7 @@ public class MinTest
             // Act
             await connection.MinAsync(ClassMappedNameCache.Get<SdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

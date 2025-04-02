@@ -36,7 +36,7 @@ public class AverageTest
         {
             // Act
             var result = connection.Average<CompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(e => e.ColumnInt), Convert.ToDouble(result));
@@ -53,7 +53,7 @@ public class AverageTest
         {
             // Act
             var result = connection.Average<CompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.TabLock);
 
             // Assert
@@ -112,7 +112,7 @@ public class AverageTest
         {
             // Act
             var result = await connection.AverageAsync<CompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(e => e.ColumnInt), Convert.ToDouble(result));
@@ -129,7 +129,7 @@ public class AverageTest
         {
             // Act
             var result = await connection.AverageAsync<CompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.TabLock);
 
             // Assert
@@ -193,7 +193,7 @@ public class AverageTest
             // Act
             var result = connection.Average(ClassMappedNameCache.Get<CompleteTable>(),
                 Field.Parse<CompleteTable>(e => e.ColumnInt).First(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(e => e.ColumnInt), Convert.ToDouble(result));
@@ -211,7 +211,7 @@ public class AverageTest
             // Act
             var result = connection.Average(ClassMappedNameCache.Get<CompleteTable>(),
                 Field.Parse<CompleteTable>(e => e.ColumnInt).First(),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.TabLock);
 
             // Assert
@@ -273,7 +273,7 @@ public class AverageTest
             // Act
             var result = await connection.AverageAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 Field.Parse<CompleteTable>(e => e.ColumnInt).First(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(e => e.ColumnInt), Convert.ToDouble(result));
@@ -291,7 +291,7 @@ public class AverageTest
             // Act
             var result = await connection.AverageAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 Field.Parse<CompleteTable>(e => e.ColumnInt).First(),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.TabLock);
 
             // Assert

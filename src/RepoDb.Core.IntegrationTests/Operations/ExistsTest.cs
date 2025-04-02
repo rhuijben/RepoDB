@@ -36,7 +36,7 @@ public class ExistsTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Exists<IdentityTable>((object)null);
+            var result = connection.Exists<IdentityTable>((object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -166,7 +166,7 @@ public class ExistsTest
             connection.InsertAll(tables);
 
             // Act
-            var result = await connection.ExistsAsync<IdentityTable>((object)null);
+            var result = await connection.ExistsAsync<IdentityTable>((object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -297,7 +297,7 @@ public class ExistsTest
 
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -413,7 +413,7 @@ public class ExistsTest
 
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.IsTrue(result);

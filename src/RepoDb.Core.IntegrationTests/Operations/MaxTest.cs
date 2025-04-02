@@ -37,7 +37,7 @@ public class MaxTest
 
             // Act
             var result = connection.Max<IdentityTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(t => t.ColumnInt), Convert.ToInt32(result));
@@ -169,7 +169,7 @@ public class MaxTest
 
             // Act
             var result = connection.Max<IdentityTable, int?>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(t => t.ColumnInt), result);
@@ -305,7 +305,7 @@ public class MaxTest
 
             // Act
             var result = await connection.MaxAsync<IdentityTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(t => t.ColumnInt), Convert.ToInt32(result));
@@ -437,7 +437,7 @@ public class MaxTest
 
             // Act
             var result = await connection.MaxAsync<IdentityTable, int?>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(t => t.ColumnInt), result);
@@ -574,7 +574,7 @@ public class MaxTest
             // Act
             var result = connection.Max(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(t => t.ColumnInt), Convert.ToInt32(result));
@@ -691,7 +691,7 @@ public class MaxTest
             // Act
             var result = connection.Max<int?>(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(t => t.ColumnInt), result);
@@ -812,7 +812,7 @@ public class MaxTest
             // Act
             var result = await connection.MaxAsync(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(t => t.ColumnInt), Convert.ToInt32(result));
@@ -929,7 +929,7 @@ public class MaxTest
             // Act
             var result = await connection.MaxAsync<int?>(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(t => t.ColumnInt), result);

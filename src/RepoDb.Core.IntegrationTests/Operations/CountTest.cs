@@ -36,7 +36,7 @@ public class CountTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Count<IdentityTable>((object)null);
+            var result = connection.Count<IdentityTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result);
@@ -166,7 +166,7 @@ public class CountTest
             connection.InsertAll(tables);
 
             // Act
-            var result = await connection.CountAsync<IdentityTable>((object)null);
+            var result = await connection.CountAsync<IdentityTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result);
@@ -297,7 +297,7 @@ public class CountTest
 
             // Act
             var result = connection.Count(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result);
@@ -413,7 +413,7 @@ public class CountTest
 
             // Act
             var result = await connection.CountAsync(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result);

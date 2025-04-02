@@ -43,7 +43,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Average<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -60,7 +60,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Average<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -77,7 +77,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Average(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -95,7 +95,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Average(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -117,7 +117,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.AverageAsync<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -135,7 +135,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.AverageAsync<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -153,7 +153,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.AverageAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -172,7 +172,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.AverageAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -512,7 +512,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         connection.Count<TraceEntity>(trace: trace.Object,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -528,7 +528,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         connection.Count<TraceEntity>(trace: trace.Object,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -544,7 +544,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         connection.Count(ClassMappedNameCache.Get<TraceEntity>(),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -561,7 +561,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         connection.Count(ClassMappedNameCache.Get<TraceEntity>(),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -582,7 +582,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         await connection.CountAsync<TraceEntity>(trace: trace.Object,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -599,7 +599,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         await connection.CountAsync<TraceEntity>(trace: trace.Object,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -616,7 +616,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         await connection.CountAsync(ClassMappedNameCache.Get<TraceEntity>(),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -634,7 +634,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         await connection.CountAsync(ClassMappedNameCache.Get<TraceEntity>(),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -1100,7 +1100,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         connection.Exists<TraceEntity>(trace: trace.Object,
-            what: (object)null);
+            what: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -1116,7 +1116,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         connection.Exists<TraceEntity>(trace: trace.Object,
-            what: (object)null);
+            what: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -1132,7 +1132,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         connection.Exists(ClassMappedNameCache.Get<TraceEntity>(),
-            what: (object)null,
+            what: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -1149,7 +1149,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         connection.Exists(ClassMappedNameCache.Get<TraceEntity>(),
-            what: (object)null,
+            what: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -1170,7 +1170,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         await connection.ExistsAsync<TraceEntity>(trace: trace.Object,
-            what: (object)null);
+            what: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -1187,7 +1187,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         await connection.ExistsAsync<TraceEntity>(trace: trace.Object,
-            what: (object)null);
+            what: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -1204,7 +1204,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         await connection.ExistsAsync(ClassMappedNameCache.Get<TraceEntity>(),
-            what: (object)null,
+            what: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -1222,7 +1222,7 @@ public class ITraceForDbConnectionTest
 
         // Act
         await connection.ExistsAsync(ClassMappedNameCache.Get<TraceEntity>(),
-            what: (object)null,
+            what: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -1553,7 +1553,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Max<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -1570,7 +1570,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Max<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -1587,7 +1587,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Max(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -1605,7 +1605,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Max(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -1627,7 +1627,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.MaxAsync<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -1645,7 +1645,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.MaxAsync<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -1663,7 +1663,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.MaxAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -1682,7 +1682,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.MaxAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -2161,7 +2161,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Min<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -2178,7 +2178,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Min<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -2195,7 +2195,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Min(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -2213,7 +2213,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Min(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -2235,7 +2235,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.MinAsync<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -2253,7 +2253,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.MinAsync<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -2271,7 +2271,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.MinAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -2290,7 +2290,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.MinAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -3193,7 +3193,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Sum<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -3210,7 +3210,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Sum<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -3227,7 +3227,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Sum(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -3245,7 +3245,7 @@ public class ITraceForDbConnectionTest
         // Act
         connection.Sum(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -3267,7 +3267,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.SumAsync<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -3285,7 +3285,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.SumAsync<TraceEntity>(trace: trace.Object,
             field: e => e.Id,
-            where: (object)null);
+            where: (object?)null);
 
         // Assert
         trace.Verify(t =>
@@ -3303,7 +3303,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.SumAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert
@@ -3322,7 +3322,7 @@ public class ITraceForDbConnectionTest
         // Act
         await connection.SumAsync(ClassMappedNameCache.Get<TraceEntity>(),
             field: new Field("Id"),
-            where: (object)null,
+            where: (object?)null,
             trace: trace.Object);
 
         // Assert

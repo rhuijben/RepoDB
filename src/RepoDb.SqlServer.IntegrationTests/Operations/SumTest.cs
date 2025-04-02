@@ -36,7 +36,7 @@ public class SumTest
         {
             // Act
             var result = connection.Sum<CompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(e => e.ColumnInt), Convert.ToInt32(result));
@@ -150,7 +150,7 @@ public class SumTest
         {
             // Act
             var result = connection.Sum<CompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -172,7 +172,7 @@ public class SumTest
         {
             // Act
             var result = await connection.SumAsync<CompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(e => e.ColumnInt), Convert.ToInt32(result));
@@ -286,7 +286,7 @@ public class SumTest
         {
             // Act
             var result = await connection.SumAsync<CompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -313,7 +313,7 @@ public class SumTest
             // Act
             var result = connection.Sum(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(e => e.ColumnInt), Convert.ToInt32(result));
@@ -414,7 +414,7 @@ public class SumTest
             // Act
             var result = connection.Sum(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -437,7 +437,7 @@ public class SumTest
             // Act
             var result = await connection.SumAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(e => e.ColumnInt), Convert.ToInt32(result));
@@ -538,7 +538,7 @@ public class SumTest
             // Act
             var result = await connection.SumAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert

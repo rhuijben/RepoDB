@@ -35,7 +35,7 @@ public class CountTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Count<CompleteTable>((object)null);
+            var result = connection.Count<CompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -143,7 +143,7 @@ public class CountTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            connection.Count<CompleteTable>((object)null,
+            connection.Count<CompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -161,7 +161,7 @@ public class CountTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.CountAsync<CompleteTable>((object)null);
+            var result = await connection.CountAsync<CompleteTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -269,7 +269,7 @@ public class CountTest
         using (var connection = new NpgsqlConnection(Database.ConnectionString))
         {
             // Act
-            await connection.CountAsync<CompleteTable>((object)null,
+            await connection.CountAsync<CompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -292,7 +292,7 @@ public class CountTest
         {
             // Act
             var result = connection.Count(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -388,7 +388,7 @@ public class CountTest
         {
             // Act
             connection.Count(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -407,7 +407,7 @@ public class CountTest
         {
             // Act
             var result = await connection.CountAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count(), result);
@@ -503,7 +503,7 @@ public class CountTest
         {
             // Act
             await connection.CountAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

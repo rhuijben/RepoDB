@@ -36,7 +36,7 @@ public class SumTest
 
             // Act
             var result = connection.Sum<SdsCompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(e => e.ColumnInt), Convert.ToInt32(result));
@@ -150,7 +150,7 @@ public class SumTest
 
             // Act
             connection.Sum<SdsCompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -169,7 +169,7 @@ public class SumTest
 
             // Act
             var result = await connection.SumAsync<SdsCompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(e => e.ColumnInt), Convert.ToInt32(result));
@@ -283,7 +283,7 @@ public class SumTest
 
             // Act
             await connection.SumAsync<SdsCompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -307,7 +307,7 @@ public class SumTest
             // Act
             var result = connection.Sum(ClassMappedNameCache.Get<SdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(e => e.ColumnInt), Convert.ToInt32(result));
@@ -408,7 +408,7 @@ public class SumTest
             // Act
             connection.Sum(ClassMappedNameCache.Get<SdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -428,7 +428,7 @@ public class SumTest
             // Act
             var result = await connection.SumAsync(ClassMappedNameCache.Get<SdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(e => e.ColumnInt), Convert.ToInt32(result));
@@ -529,7 +529,7 @@ public class SumTest
             // Act
             await connection.SumAsync(ClassMappedNameCache.Get<SdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

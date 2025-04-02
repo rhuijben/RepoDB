@@ -36,7 +36,7 @@ public class MaxTest
         {
             // Act
             var result = connection.Max<CompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(e => e.ColumnInt), Convert.ToInt32(result));
@@ -150,7 +150,7 @@ public class MaxTest
         {
             // Act
             var result = connection.Max<CompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -172,7 +172,7 @@ public class MaxTest
         {
             // Act
             var result = await connection.MaxAsync<CompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(e => e.ColumnInt), Convert.ToInt32(result));
@@ -286,7 +286,7 @@ public class MaxTest
         {
             // Act
             var result = await connection.MaxAsync<CompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -313,7 +313,7 @@ public class MaxTest
             // Act
             var result = connection.Max(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(e => e.ColumnInt), Convert.ToInt32(result));
@@ -414,7 +414,7 @@ public class MaxTest
             // Act
             var result = connection.Max(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -437,7 +437,7 @@ public class MaxTest
             // Act
             var result = await connection.MaxAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(e => e.ColumnInt), Convert.ToInt32(result));
@@ -538,7 +538,7 @@ public class MaxTest
             // Act
             var result = await connection.MaxAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert

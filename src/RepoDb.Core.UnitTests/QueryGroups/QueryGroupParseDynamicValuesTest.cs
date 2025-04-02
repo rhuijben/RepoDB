@@ -14,7 +14,7 @@ public partial class QueryGroupTest
         var actual = parsed.QueryFields.First().Parameter.Value;
 
         // Assert
-        Assert.AreEqual((object)null, actual);
+        Assert.AreEqual((object?)null, actual);
     }
 
     [TestMethod]

@@ -36,7 +36,7 @@ public class AverageTest
 
             // Act
             var result = connection.Average<MdsCompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(e => e.ColumnInt), result);
@@ -71,7 +71,7 @@ public class AverageTest
 
             // Act
             connection.Average<MdsCompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -90,7 +90,7 @@ public class AverageTest
 
             // Act
             var result = await connection.AverageAsync<MdsCompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(e => e.ColumnInt), result);
@@ -125,7 +125,7 @@ public class AverageTest
 
             // Act
             await connection.AverageAsync<MdsCompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -149,7 +149,7 @@ public class AverageTest
             // Act
             var result = connection.Average(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 Field.Parse<MdsCompleteTable>(e => e.ColumnInt).First(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(e => e.ColumnInt), result);
@@ -186,7 +186,7 @@ public class AverageTest
             // Act
             connection.Average(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 Field.Parse<MdsCompleteTable>(e => e.ColumnInt).First(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -206,7 +206,7 @@ public class AverageTest
             // Act
             var result = await connection.AverageAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 Field.Parse<MdsCompleteTable>(e => e.ColumnInt).First(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(e => e.ColumnInt), result);
@@ -243,7 +243,7 @@ public class AverageTest
             // Act
             await connection.AverageAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 Field.Parse<MdsCompleteTable>(e => e.ColumnInt).First(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

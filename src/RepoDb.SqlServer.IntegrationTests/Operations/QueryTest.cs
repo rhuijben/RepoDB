@@ -142,7 +142,7 @@ public class QueryTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Query<CompleteTable>((object)null,
+            var result = connection.Query<CompleteTable>((object?)null,
                 top: 2);
 
             // Assert
@@ -288,7 +288,7 @@ public class QueryTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.QueryAsync<CompleteTable>((object)null,
+            var result = await connection.QueryAsync<CompleteTable>((object?)null,
                 top: 2);
 
             // Assert
@@ -423,7 +423,7 @@ public class QueryTest
         {
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 top: 2);
 
             // Assert
@@ -555,7 +555,7 @@ public class QueryTest
         {
             // Act
             var result = await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 top: 2);
 
             // Assert

@@ -37,7 +37,7 @@ public class SumTest
 
             // Act
             var result = connection.Sum<IdentityTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(t => t.ColumnInt), Convert.ToInt32(result));
@@ -169,7 +169,7 @@ public class SumTest
 
             // Act
             var result = connection.Sum<IdentityTable, int?>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(t => t.ColumnInt), result);
@@ -305,7 +305,7 @@ public class SumTest
 
             // Act
             var result = await connection.SumAsync<IdentityTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(t => t.ColumnInt), Convert.ToInt32(result));
@@ -437,7 +437,7 @@ public class SumTest
 
             // Act
             var result = await connection.SumAsync<IdentityTable, int?>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(t => t.ColumnInt), result);
@@ -574,7 +574,7 @@ public class SumTest
             // Act
             var result = connection.Sum(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(t => t.ColumnInt), Convert.ToInt32(result));
@@ -691,7 +691,7 @@ public class SumTest
             // Act
             var result = connection.Sum<int?>(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(t => t.ColumnInt), result);
@@ -812,7 +812,7 @@ public class SumTest
             // Act
             var result = await connection.SumAsync(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(t => t.ColumnInt), Convert.ToInt32(result));
@@ -929,7 +929,7 @@ public class SumTest
             // Act
             var result = await connection.SumAsync<int?>(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Sum(t => t.ColumnInt), result);

@@ -38,7 +38,7 @@ public class BatchQueryTest
             var result = connection.BatchQuery<CompleteTable>(0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -58,7 +58,7 @@ public class BatchQueryTest
             var result = connection.BatchQuery<CompleteTable>(0,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -78,7 +78,7 @@ public class BatchQueryTest
             var result = connection.BatchQuery<CompleteTable>(2,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -98,7 +98,7 @@ public class BatchQueryTest
             var result = connection.BatchQuery<CompleteTable>(2,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -118,7 +118,7 @@ public class BatchQueryTest
             connection.BatchQuery<CompleteTable>(0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -139,7 +139,7 @@ public class BatchQueryTest
             var result = await connection.BatchQueryAsync<CompleteTable>(0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -159,7 +159,7 @@ public class BatchQueryTest
             var result = await connection.BatchQueryAsync<CompleteTable>(0,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -179,7 +179,7 @@ public class BatchQueryTest
             var result = await connection.BatchQueryAsync<CompleteTable>(2,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -199,7 +199,7 @@ public class BatchQueryTest
             var result = await connection.BatchQueryAsync<CompleteTable>(2,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -219,7 +219,7 @@ public class BatchQueryTest
             await connection.BatchQueryAsync<CompleteTable>(0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -245,7 +245,7 @@ public class BatchQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -266,7 +266,7 @@ public class BatchQueryTest
                 0,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -287,7 +287,7 @@ public class BatchQueryTest
                 2,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -308,7 +308,7 @@ public class BatchQueryTest
                 2,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -329,7 +329,7 @@ public class BatchQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -351,7 +351,7 @@ public class BatchQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -372,7 +372,7 @@ public class BatchQueryTest
                 0,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -393,7 +393,7 @@ public class BatchQueryTest
                 2,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -414,7 +414,7 @@ public class BatchQueryTest
                 2,
                 3,
                 OrderField.Descending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -435,7 +435,7 @@ public class BatchQueryTest
                 0,
                 3,
                 OrderField.Ascending<CompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

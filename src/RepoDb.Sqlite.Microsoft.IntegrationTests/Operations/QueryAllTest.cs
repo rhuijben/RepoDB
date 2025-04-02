@@ -125,7 +125,7 @@ public class QueryAllTest
         {
             // Act
             connection.Query(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -161,7 +161,7 @@ public class QueryAllTest
         {
             // Act
             await connection.QueryAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

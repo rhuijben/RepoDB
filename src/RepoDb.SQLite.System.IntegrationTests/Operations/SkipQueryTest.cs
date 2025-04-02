@@ -39,7 +39,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -60,7 +60,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Descending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -81,7 +81,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -102,7 +102,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Descending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -123,7 +123,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -145,7 +145,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -166,7 +166,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Descending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -187,7 +187,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -208,7 +208,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Descending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertPropertiesEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -229,7 +229,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -255,7 +255,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -276,7 +276,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Descending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -297,7 +297,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -318,7 +318,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Descending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -339,7 +339,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -361,7 +361,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(0), result.ElementAt(0));
@@ -382,7 +382,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Descending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(9), result.ElementAt(0));
@@ -403,7 +403,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(6), result.ElementAt(0));
@@ -424,7 +424,7 @@ public class SkipQueryTest
                 6,
                 3,
                 OrderField.Descending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Helper.AssertMembersEquality(tables.ElementAt(3), result.ElementAt(0));
@@ -445,7 +445,7 @@ public class SkipQueryTest
                 0,
                 3,
                 OrderField.Ascending<SdsCompleteTable>(c => c.Id).AsEnumerable(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

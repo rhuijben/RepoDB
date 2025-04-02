@@ -36,7 +36,7 @@ public class MaxTest
 
             // Act
             var result = connection.Max<MdsCompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(e => e.ColumnInt), Convert.ToInt32(result));
@@ -150,7 +150,7 @@ public class MaxTest
 
             // Act
             connection.Max<MdsCompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -169,7 +169,7 @@ public class MaxTest
 
             // Act
             var result = await connection.MaxAsync<MdsCompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(e => e.ColumnInt), Convert.ToInt32(result));
@@ -283,7 +283,7 @@ public class MaxTest
 
             // Act
             await connection.MaxAsync<MdsCompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -307,7 +307,7 @@ public class MaxTest
             // Act
             var result = connection.Max(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(e => e.ColumnInt), Convert.ToInt32(result));
@@ -408,7 +408,7 @@ public class MaxTest
             // Act
             connection.Max(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -428,7 +428,7 @@ public class MaxTest
             // Act
             var result = await connection.MaxAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Max(e => e.ColumnInt), Convert.ToInt32(result));
@@ -529,7 +529,7 @@ public class MaxTest
             // Act
             await connection.MaxAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }

@@ -40,7 +40,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query<string>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.Parse<IdentityTable>(e => e.ColumnNVarChar));
 
             // Assert
@@ -62,7 +62,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query<IdentityTable>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -87,7 +87,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query<IdentityTable>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -113,7 +113,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query<dynamic>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -139,7 +139,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query<ExpandoObject>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -165,7 +165,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query<IDictionary<string, object>>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -190,7 +190,7 @@ public class QueryTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Query<IdentityTable>((object)null);
+            var result = connection.Query<IdentityTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -214,7 +214,7 @@ public class QueryTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Query<IdentityTable>((object)null,
+            var result = connection.Query<IdentityTable>((object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -768,7 +768,7 @@ public class QueryTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Query<WithExtraFieldsIdentityTable>((object)null);
+            var result = connection.Query<WithExtraFieldsIdentityTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -1308,7 +1308,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync<string>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.Parse<IdentityTable>(e => e.ColumnNVarChar));
 
             // Assert
@@ -1330,7 +1330,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync<IdentityTable>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -1355,7 +1355,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync<IdentityTable>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -1381,7 +1381,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync<dynamic>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -1407,7 +1407,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync<ExpandoObject>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -1433,7 +1433,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync<IDictionary<string, object>>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -1458,7 +1458,7 @@ public class QueryTest
             connection.InsertAll(tables);
 
             // Act
-            var result = await connection.QueryAsync<IdentityTable>((object)null);
+            var result = await connection.QueryAsync<IdentityTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -1482,7 +1482,7 @@ public class QueryTest
             connection.InsertAll(tables);
 
             // Act
-            var result = await connection.QueryAsync<IdentityTable>((object)null,
+            var result = await connection.QueryAsync<IdentityTable>((object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -2036,7 +2036,7 @@ public class QueryTest
             connection.InsertAll(tables);
 
             // Act
-            var result = await connection.QueryAsync<WithExtraFieldsIdentityTable>((object)null);
+            var result = await connection.QueryAsync<WithExtraFieldsIdentityTable>((object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -2576,7 +2576,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query<dynamic>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -2608,7 +2608,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query<dynamic>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -2634,7 +2634,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -2666,7 +2666,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -2692,7 +2692,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 Field.From(new[] { "Id", "RowGuid", "ColumnFloat" }));
 
             // Assert
@@ -3138,7 +3138,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync<dynamic>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -3170,7 +3170,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync<dynamic>(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -3196,7 +3196,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Count, result.Count());
@@ -3228,7 +3228,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 fields: Field.From(nameof(IdentityTable.Id), nameof(IdentityTable.ColumnNVarChar)));
 
             // Assert
@@ -3254,7 +3254,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 Field.From(new[] { "Id", "RowGuid", "ColumnFloat" }));
 
             // Assert

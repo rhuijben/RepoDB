@@ -36,7 +36,7 @@ public class MinTest
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInt), Convert.ToInt32(result));
@@ -150,7 +150,7 @@ public class MinTest
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -172,7 +172,7 @@ public class MinTest
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInt), Convert.ToInt32(result));
@@ -286,7 +286,7 @@ public class MinTest
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInt,
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -313,7 +313,7 @@ public class MinTest
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInt), Convert.ToInt32(result));
@@ -414,7 +414,7 @@ public class MinTest
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -437,7 +437,7 @@ public class MinTest
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Min(e => e.ColumnInt), Convert.ToInt32(result));
@@ -538,7 +538,7 @@ public class MinTest
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
                 new Field("ColumnInt", typeof(int)),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert

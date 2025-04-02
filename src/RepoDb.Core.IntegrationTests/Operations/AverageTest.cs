@@ -37,7 +37,7 @@ public class AverageTest
 
             // Act
             var result = connection.Average<IdentityTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(t => t.ColumnInt), Convert.ToDouble(result));
@@ -169,7 +169,7 @@ public class AverageTest
 
             // Act
             var result = connection.Average<IdentityTable, double?>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(t => t.ColumnInt), result);
@@ -305,7 +305,7 @@ public class AverageTest
 
             // Act
             var result = await connection.AverageAsync<IdentityTable>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(t => t.ColumnInt), Convert.ToDouble(result));
@@ -437,7 +437,7 @@ public class AverageTest
 
             // Act
             var result = await connection.AverageAsync<IdentityTable, double?>(e => e.ColumnInt,
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(t => t.ColumnInt), result);
@@ -574,7 +574,7 @@ public class AverageTest
             // Act
             var result = connection.Average(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(t => t.ColumnInt), Convert.ToDouble(result));
@@ -691,7 +691,7 @@ public class AverageTest
             // Act
             var result = connection.Average<double?>(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(t => t.ColumnInt), result);
@@ -812,7 +812,7 @@ public class AverageTest
             // Act
             var result = await connection.AverageAsync(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(t => t.ColumnInt), Convert.ToDouble(result));
@@ -929,7 +929,7 @@ public class AverageTest
             // Act
             var result = await connection.AverageAsync<double?>(ClassMappedNameCache.Get<IdentityTable>(),
                 new Field("ColumnInt"),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(tables.Average(t => t.ColumnInt), result);

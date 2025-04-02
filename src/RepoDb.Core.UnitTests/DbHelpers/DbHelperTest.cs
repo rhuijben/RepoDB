@@ -184,7 +184,7 @@ public class DbHelperTest
         DbHelperMapper.Add<DbHelperDbConnection>(dbHelper.Object, true);
 
         // Act
-        connection.Query<DbHelperDataEntity>((object)null);
+        connection.Query<DbHelperDataEntity>((object?)null);
 
         // Assert
         dbHelper.Verify(builder =>
@@ -404,7 +404,7 @@ public class DbHelperTest
 
         // Act
         connection.Query(ClassMappedNameCache.Get<DbHelperDataEntity>(),
-            (object)null);
+            (object?)null);
 
         // Assert
         dbHelper.Verify(builder =>

@@ -162,7 +162,7 @@ public class DeleteTest
             connection.InsertAll(tables);
 
             // Act
-            var result = connection.Delete<IdentityTable>((object)null);
+            var result = connection.Delete<IdentityTable>((object?)null);
 
             // Assert
             Assert.AreEqual(10, result);
@@ -490,7 +490,7 @@ public class DeleteTest
             connection.InsertAll(tables);
 
             // Act
-            var result = await connection.DeleteAsync<IdentityTable>((object)null);
+            var result = await connection.DeleteAsync<IdentityTable>((object?)null);
 
             // Assert
             Assert.AreEqual(10, result);
@@ -758,7 +758,7 @@ public class DeleteTest
 
             // Act
             var result = connection.Delete(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(10, result);
@@ -874,7 +874,7 @@ public class DeleteTest
 
             // Act
             var result = connection.Delete(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 hints: SqlServerTableHints.TabLock);
 
             // Assert
@@ -972,7 +972,7 @@ public class DeleteTest
 
             // Act
             var result = await connection.DeleteAsync(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.AreEqual(10, result);
@@ -1089,7 +1089,7 @@ public class DeleteTest
 
             // Act
             var result = await connection.DeleteAsync(ClassMappedNameCache.Get<IdentityTable>(),
-                (object)null,
+                (object?)null,
                 hints: SqlServerTableHints.TabLock);
 
             // Assert

@@ -35,7 +35,7 @@ public class ExistsTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Exists<CompleteTable>((object)null);
+            var result = connection.Exists<CompleteTable>((object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -143,7 +143,7 @@ public class ExistsTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.Exists<CompleteTable>((object)null,
+            var result = connection.Exists<CompleteTable>((object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -164,7 +164,7 @@ public class ExistsTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.ExistsAsync<CompleteTable>((object)null);
+            var result = await connection.ExistsAsync<CompleteTable>((object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -272,7 +272,7 @@ public class ExistsTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.ExistsAsync<CompleteTable>((object)null,
+            var result = await connection.ExistsAsync<CompleteTable>((object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -298,7 +298,7 @@ public class ExistsTest
         {
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -394,7 +394,7 @@ public class ExistsTest
         {
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert
@@ -416,7 +416,7 @@ public class ExistsTest
         {
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null);
+                (object?)null);
 
             // Assert
             Assert.IsTrue(result);
@@ -512,7 +512,7 @@ public class ExistsTest
         {
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)null,
+                (object?)null,
                 SqlServerTableHints.NoLock);
 
             // Assert

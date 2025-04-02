@@ -142,7 +142,7 @@ public class QueryTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            var result = connection.Query<MdsCompleteTable>((object)null,
+            var result = connection.Query<MdsCompleteTable>((object?)null,
                 top: 2);
 
             // Assert
@@ -160,7 +160,7 @@ public class QueryTest
             var table = Database.CreateMdsCompleteTables(1, connection).First();
 
             // Act
-            connection.Query<MdsCompleteTable>((object)null,
+            connection.Query<MdsCompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -285,7 +285,7 @@ public class QueryTest
             var tables = Database.CreateMdsCompleteTables(10, connection);
 
             // Act
-            var result = await connection.QueryAsync<MdsCompleteTable>((object)null,
+            var result = await connection.QueryAsync<MdsCompleteTable>((object?)null,
                 top: 2);
 
             // Assert
@@ -303,7 +303,7 @@ public class QueryTest
             var table = Database.CreateMdsCompleteTables(1, connection).First();
 
             // Act
-            await connection.QueryAsync<MdsCompleteTable>((object)null,
+            await connection.QueryAsync<MdsCompleteTable>((object?)null,
                 hints: "WhatEver");
         }
     }
@@ -417,7 +417,7 @@ public class QueryTest
 
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 top: 2);
 
             // Assert
@@ -436,7 +436,7 @@ public class QueryTest
 
             // Act
             connection.Query(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
@@ -546,7 +546,7 @@ public class QueryTest
 
             // Act
             var result = await connection.QueryAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 top: 2);
 
             // Assert
@@ -565,7 +565,7 @@ public class QueryTest
 
             // Act
             await connection.QueryAsync(ClassMappedNameCache.Get<MdsCompleteTable>(),
-                (object)null,
+                (object?)null,
                 hints: "WhatEver");
         }
     }
