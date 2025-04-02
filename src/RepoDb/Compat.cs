@@ -43,4 +43,12 @@ internal static class NetCompatExtensions
 #endif
         return dbConnection.BeginTransaction();
     }
+
+    public static async ValueTask CommitAsync(this IDbTransaction dbTransaction, CancellationToken cancellationToken = default)
+    {
+        if (dbTransaction is DbTransaction dbTransaction1)
+            await dbTransaction1.CommitAsync(cancellationToken);
+        else
+            dbTransaction.Commit();
+    }
 }

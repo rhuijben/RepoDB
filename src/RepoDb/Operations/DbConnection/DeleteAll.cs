@@ -435,10 +435,13 @@ public static partial class DbConnectionExtension
                     traceKey: traceKey,
                     transaction: transaction,
                     trace: trace,
-                    statementBuilder: statementBuilder);
+                    statementBuilder: statementBuilder,
+                    cancellationToken: cancellationToken);
             }
 
-            myTransaction?.Commit();
+            if (myTransaction is { })
+                await myTransaction.CommitAsync(cancellationToken);
+
             return deleted;
         }
     }
@@ -589,7 +592,9 @@ public static partial class DbConnectionExtension
                     statementBuilder: statementBuilder);
             }
 
-            myTransaction?.Commit();
+            if (myTransaction is { })
+                await myTransaction.CommitAsync(cancellationToken);
+
             return deleted;
         }
     }
@@ -873,59 +878,40 @@ public static partial class DbConnectionExtension
     {
         var pkeys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction);
         var dbSetting = connection.GetDbSetting();
-        var hasImplicitTransaction = false;
         var count = keys?.AsList()?.Count;
         var deletedRows = 0;
 
-        try
-        {
-            // Creates a transaction (if needed)
-            if (transaction == null && count > ParameterBatchCount)
-            {
-                transaction = connection.EnsureOpen().BeginTransaction();
-                hasImplicitTransaction = true;
-            }
+        using var myTransaction = transaction is null && count > ParameterBatchCount ? connection.EnsureOpen().BeginTransaction() : null;
+        transaction ??= myTransaction;
 
-            // Call the underlying method
-            var splitted = keys?.Split(ParameterBatchCount).AsList();
-            if (splitted?.Any() == true)
+        // Call the underlying method
+        var splitted = keys?.Split(ParameterBatchCount).AsList();
+        if (splitted?.Any() == true)
+        {
+            foreach (var keyValues in splitted)
             {
-                foreach (var keyValues in splitted)
+                if (keyValues.Any() != true)
                 {
-                    if (keyValues.Any() != true)
-                    {
-                        break;
-                    }
-                    var where = new QueryGroup(
-                        pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
-                        Conjunction.And);
-                    deletedRows += DeleteInternal(connection: connection,
-                        tableName: tableName,
-                        where: where,
-                        hints: hints,
-                        commandTimeout: commandTimeout,
-            traceKey: traceKey,
-                        transaction: transaction,
-                        trace: trace,
-                        statementBuilder: statementBuilder);
+                    break;
                 }
-            }
-
-            // Commit the transaction
-            if (hasImplicitTransaction)
-            {
-                transaction?.Commit();
-            }
-
-        }
-        finally
-        {
-            // Dispose the transaction
-            if (hasImplicitTransaction)
-            {
-                transaction?.Dispose();
+                var where = new QueryGroup(
+                    pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
+                    Conjunction.And);
+                deletedRows += DeleteInternal(connection: connection,
+                    tableName: tableName,
+                    where: where,
+                    hints: hints,
+                    commandTimeout: commandTimeout,
+        traceKey: traceKey,
+                    transaction: transaction,
+                    trace: trace,
+                    statementBuilder: statementBuilder);
             }
         }
+
+        // Commit the transaction
+        myTransaction?.Commit();
+
 
         // Return the value
         return deletedRows;
@@ -1073,60 +1059,41 @@ public static partial class DbConnectionExtension
     {
         var pkeys = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var dbSetting = connection.GetDbSetting();
-        var hasImplicitTransaction = false;
         var count = keys?.AsList()?.Count;
         var deletedRows = 0;
 
-        try
-        {
-            // Creates a transaction (if needed)
-            if (transaction == null && count > ParameterBatchCount)
-            {
-                transaction = (await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).BeginTransaction();
-                hasImplicitTransaction = true;
-            }
+        using var myTransaction = transaction is null && count > ParameterBatchCount ? await (await connection.EnsureOpenAsync(cancellationToken)).BeginTransactionAsync(cancellationToken) : null;
+        transaction ??= myTransaction;
 
-            // Call the underlying method
-            var splitted = keys?.Split(ParameterBatchCount).AsList();
-            if (splitted?.Any() == true)
+        // Call the underlying method
+        var splitted = keys?.Split(ParameterBatchCount).AsList();
+        if (splitted?.Any() == true)
+        {
+            foreach (var keyValues in splitted)
             {
-                foreach (var keyValues in splitted)
+                if (keyValues.Any() != true)
                 {
-                    if (keyValues.Any() != true)
-                    {
-                        break;
-                    }
-                    var where = new QueryGroup(
-                        pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
-                        Conjunction.And);
-                    deletedRows += await DeleteAsyncInternal(connection: connection,
-                        tableName: tableName,
-                        where: where,
-                        hints: hints,
-                        commandTimeout: commandTimeout,
-            traceKey: traceKey,
-                        transaction: transaction,
-                        trace: trace,
-                        statementBuilder: statementBuilder,
-                        cancellationToken: cancellationToken).ConfigureAwait(false);
+                    break;
                 }
-            }
+                var where = new QueryGroup(
+                    pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
+                    Conjunction.And);
 
-            // Commit the transaction
-            if (hasImplicitTransaction)
-            {
-                transaction?.Commit();
+                deletedRows += await DeleteAsyncInternal(connection: connection,
+                    tableName: tableName,
+                    where: where,
+                    hints: hints,
+                    commandTimeout: commandTimeout,
+                    traceKey: traceKey,
+                    transaction: transaction,
+                    trace: trace,
+                    statementBuilder: statementBuilder,
+                    cancellationToken: cancellationToken).ConfigureAwait(false);
             }
+        }
 
-        }
-        finally
-        {
-            // Dispose the transaction
-            if (hasImplicitTransaction)
-            {
-                transaction?.Dispose();
-            }
-        }
+        if (myTransaction is { })
+            await myTransaction.CommitAsync(cancellationToken);
 
         // Return the value
         return deletedRows;
