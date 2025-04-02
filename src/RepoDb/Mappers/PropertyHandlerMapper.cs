@@ -1,4 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 using RepoDb.Exceptions;
@@ -96,7 +98,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TType">The target .NET CLR type.</typeparam>
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <returns>An instance of mapped property handler for .NET CLR type.</returns>
-    public static TPropertyHandler Get<TType, TPropertyHandler>() =>
+    public static TPropertyHandler? Get<TType, TPropertyHandler>() =>
         Get<TPropertyHandler>(typeof(TType));
 
     /// <summary>
@@ -105,7 +107,7 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <param name="type">The target .NET CLR type.</param>
     /// <returns>An instance of mapped property handler for .NET CLR type.</returns>
-    public static TPropertyHandler Get<TPropertyHandler>(Type type)
+    public static TPropertyHandler? Get<TPropertyHandler>(Type type)
     {
         // Check the presence
         GuardPresence(type);
@@ -114,9 +116,9 @@ public static class PropertyHandlerMapper
         maps.TryGetValue(GenerateHashCode(type), out var value);
 
         // Check the result
-        if (value == null || value is TPropertyHandler)
+        if (value is null or TPropertyHandler)
         {
-            return (TPropertyHandler)value;
+            return (TPropertyHandler?)value;
         }
 
         // Throw an exception
@@ -268,7 +270,7 @@ public static class PropertyHandlerMapper
         var property = TypeExtension.GetProperty<TEntity>(propertyName);
         if (property == null)
         {
-            throw new PropertyNotFoundException($"Property '{propertyName}' is not found at type '{typeof(TEntity).FullName}'.");
+            throw new PropertyNotFoundException(nameof(propertyName), $"Property '{propertyName}' is not found at type '{typeof(TEntity).FullName}'.");
         }
 
         // Add to the mapping
@@ -333,7 +335,7 @@ public static class PropertyHandlerMapper
         var property = TypeExtension.GetProperty<TEntity>(field.Name);
         if (property == null)
         {
-            throw new PropertyNotFoundException($"Property '{field.Name}' is not found at type '{typeof(TEntity).FullName}'.");
+            throw new PropertyNotFoundException(nameof(field), $"Property '{field.Name}' is not found at type '{typeof(TEntity).FullName}'.");
         }
 
         // Add to the mapping
@@ -395,7 +397,7 @@ public static class PropertyHandlerMapper
         // Validate
         ThrowArgumentNullException(propertyInfo, "PropertyInfo");
         ThrowArgumentNullException(propertyHandler, "PropertyHandler");
-        Guard(propertyHandler?.GetType() ?? typeof(TPropertyHandler));
+        Guard(propertyHandler.GetType() ?? typeof(TPropertyHandler));
 
         /*
          * Note: The reflected type of the property info if explored via expression is different, therefore, we
@@ -409,7 +411,7 @@ public static class PropertyHandlerMapper
         }
 
         // Variables
-        var key = GenerateHashCode(entityType, propertyInfo);
+        var key = GenerateHashCode(entityType, propertyInfo!);
 
         // Try get the cache
         if (maps.TryGetValue(key, out var value))
@@ -422,7 +424,7 @@ public static class PropertyHandlerMapper
             else
             {
                 // Throws an exception
-                throw new MappingExistsException($"A property handler mapping to '{propertyInfo.DeclaringType.FullName}.{propertyInfo.Name}' already exists.");
+                throw new MappingExistsException($"A property handler mapping to '{propertyInfo.DeclaringType!.FullName}.{propertyInfo.Name}' already exists.");
             }
         }
         else
@@ -535,7 +537,7 @@ public static class PropertyHandlerMapper
         var property = TypeExtension.GetProperty<TEntity>(propertyName);
         if (property == null)
         {
-            throw new PropertyNotFoundException($"Property '{propertyName}' is not found at type '{typeof(TEntity).FullName}'.");
+            throw new PropertyNotFoundException(nameof(propertyName), $"Property '{propertyName}' is not found at type '{typeof(TEntity).FullName}'.");
         }
 
         // Add to the mapping
@@ -557,7 +559,7 @@ public static class PropertyHandlerMapper
         var property = TypeExtension.GetProperty<TEntity>(field.Name);
         if (property == null)
         {
-            throw new PropertyNotFoundException($"Property '{field.Name}' is not found at type '{typeof(TEntity).FullName}'.");
+            throw new PropertyNotFoundException(nameof(field), $"Property '{field.Name}' is not found at type '{typeof(TEntity).FullName}'.");
         }
 
         // Add to the mapping
@@ -569,7 +571,7 @@ public static class PropertyHandlerMapper
     /// </summary>
     /// <typeparam name="TEntity">The target .NET CLR type.</typeparam>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/> to be mapped.</param>
-    internal static void Remove<TEntity>(PropertyInfo propertyInfo) =>
+    internal static bool Remove<TEntity>(PropertyInfo propertyInfo) =>
         Remove(typeof(TEntity), propertyInfo);
 
     /// <summary>
@@ -577,7 +579,7 @@ public static class PropertyHandlerMapper
     /// </summary>
     /// <param name="entityType">The target .NET CLR type.</param>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/> to be mapped.</param>
-    internal static void Remove(Type entityType,
+    internal static bool Remove(Type entityType,
         PropertyInfo propertyInfo)
     {
         // Validate
@@ -587,7 +589,7 @@ public static class PropertyHandlerMapper
         var key = GenerateHashCode(entityType, propertyInfo);
 
         // Try to remove the value
-        maps.TryRemove(key, out var _);
+        return maps.TryRemove(key, out var _);
     }
 
     #endregion
@@ -625,18 +627,26 @@ public static class PropertyHandlerMapper
     /// <summary>
     /// Throws an exception if null.
     /// </summary>
-    private static void GuardPresence(Type type)
+    private static void GuardPresence(
+#if NET
+        [NotNull]
+#endif
+        Type? type)
     {
         if (type == null)
         {
-            throw new ArgumentNullException("Property handler type.");
+            throw new ArgumentNullException(nameof(type));
         }
     }
 
     /// <summary>
     /// Throws an exception if the type does not implemented the <see cref="IPropertyHandler{TInput, TResult}"/> interface.
     /// </summary>
-    private static void Guard(Type type)
+    private static void Guard(
+#if NET
+        [NotNull]
+#endif
+    Type? type)
     {
         GuardPresence(type);
         if (type.IsInterfacedTo(StaticType.IPropertyHandler) == false)
@@ -651,12 +661,16 @@ public static class PropertyHandlerMapper
     /// <typeparam name="TType">The type of the object.</typeparam>
     /// <param name="obj">The object to be checked.</param>
     /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<TType>(TType obj,
+    private static void ThrowArgumentNullException(
+#if NET
+        [NotNull]
+#endif
+        object? obj,
         string argument)
     {
-        if (obj == null)
+        if (obj is null)
         {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
+            throw new ArgumentNullException(argument);
         }
     }
 

@@ -60,7 +60,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         // Validate order by
         if (orderBy == null || orderBy.Any() != true)
         {
-            throw new EmptyException("The argument 'orderBy' is required.");
+            throw new EmptyException(nameof(orderBy), "The argument 'orderBy' is required.");
         }
 
         // Validate the page
@@ -219,7 +219,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         // Verify the fields
         if (fields?.Any() != true)
         {
-            throw new EmptyException("The list of fields cannot be null or empty.");
+            throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
         }
 
         // Primary Key
@@ -594,7 +594,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         // Validate order by
         if (orderBy == null || orderBy.Any() != true)
         {
-            throw new EmptyException("The argument 'orderBy' is required.");
+            throw new EmptyException(nameof(orderBy), "The argument 'orderBy' is required.");
         }
 
         // Validate the skip

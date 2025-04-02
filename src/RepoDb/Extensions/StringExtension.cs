@@ -520,7 +520,7 @@ public static class StringExtension
     internal static void ThrowIfNullOrEmpty<T>(T obj,
         string argument)
     {
-        if (obj == null)
+        if (obj is null)
         {
             if (string.IsNullOrEmpty(argument))
             {

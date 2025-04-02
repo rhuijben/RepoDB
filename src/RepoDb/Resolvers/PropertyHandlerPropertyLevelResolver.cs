@@ -1,6 +1,7 @@
-﻿using RepoDb.Attributes;
-using RepoDb.Interfaces;
+﻿#nullable enable
 using System.Reflection;
+using RepoDb.Attributes;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers;
 
@@ -15,10 +16,10 @@ public class PropertyHandlerPropertyLevelResolver : IResolver<Type, PropertyInfo
     /// <param name="entityType">The type of the data entity.</param>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/> to be resolved.</param>
     /// <returns>The equivalent <see cref="IPropertyHandler{TInput, TResult}"/> object of the property.</returns>
-    public object Resolve(Type entityType,
+    public object? Resolve(Type entityType,
         PropertyInfo propertyInfo)
     {
-        var propertyHandler = (object?)null;
+        object? propertyHandler = null;
 
         // Attribute
         var attribute = propertyInfo.GetCustomAttribute<PropertyHandlerAttribute>();

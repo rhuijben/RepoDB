@@ -2494,9 +2494,9 @@ public static partial class DbConnectionExtension
         {
             return dbPrimary.Select(f => properties.GetByMappedName(f.Name) ?? throw GetKeyFieldNotFoundException(type)).AsFields();
         }
-        else if (PrimaryCache.Get(type) is { } pcPrimary) // Model driven
+        else if (PrimaryCache.GetPrimaryKeys(type) is { } pcPrimary) // Model driven
         {
-            return pcPrimary.AsField().AsEnumerable();
+            return pcPrimary.AsFields();
         }
 
         // Identity
@@ -2810,7 +2810,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static QueryGroup? ToQueryGroup(object obj)
     {
-        if (obj == null)
+        if (obj is null)
         {
             return null;
         }
@@ -2844,9 +2844,7 @@ public static partial class DbConnectionExtension
             if (TypeCache.Get(type).IsClassType())
             {
                 var properties = PropertyCache.Get(type) ?? type.GetClassProperties();
-                var property = properties?
-                    .FirstOrDefault(p => string.Equals(p.GetMappedName(), dbField.Name, StringComparison.OrdinalIgnoreCase));
-                if (property != null)
+                if (properties?.GetByMappedName(dbField.Name) is { } property)
                 {
                     return new QueryGroup(property.PropertyInfo.AsQueryField(entity));
                 }
@@ -2976,11 +2974,11 @@ public static partial class DbConnectionExtension
     {
         if (entities == null)
         {
-            throw new ArgumentNullException("The entities must not be null.");
+            throw new ArgumentNullException(nameof(entities));
         }
         if (entities.Any() == false)
         {
-            throw new EmptyException("The entities must not be empty.");
+            throw new EmptyException(nameof(entities), "The entities must not be empty.");
         }
     }
 
@@ -3076,10 +3074,19 @@ public static partial class DbConnectionExtension
     /// <param name="entities"></param>
     /// <param name="property"></param>
     /// <returns></returns>
-    internal static IEnumerable<TResult> ExtractPropertyValues<TEntity, TResult>(IEnumerable<TEntity> entities,
-        ClassProperty property)
-        where TEntity : class =>
-        ClassExpression.GetEntitiesPropertyValues<TEntity, TResult>(entities, property);
+    internal static IEnumerable<object> ExtractPropertyValues<TEntity>(IEnumerable<TEntity> entities, IEnumerable<Field> keyFields) where TEntity : class
+    {
+        if (keyFields?.OneOrDefault() is { } keyField)
+        {
+            var property = PropertyCache.Get(GetEntityType<TEntity>(entities), keyField, true)!;
+
+            return ClassExpression.GetEntitiesPropertyValues<TEntity, object>(entities, property);
+        }
+        else
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     /// <summary>
     ///
@@ -3100,7 +3107,7 @@ public static partial class DbConnectionExtension
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="fields"></param>
     /// <returns></returns>
-    internal static IEnumerable<Field>? GetQualifiedFields<TEntity>(IEnumerable<Field> fields)
+    internal static IEnumerable<Field>? GetQualifiedFields<TEntity>(IEnumerable<Field>? fields)
         where TEntity : class =>
         (fields ?? (TypeCache.Get(typeof(TEntity)).IsDictionaryStringObject() == false ? FieldCache.Get<TEntity>() : null))?.AsList();
 
@@ -3111,7 +3118,7 @@ public static partial class DbConnectionExtension
     /// <param name="fields"></param>
     /// <param name="entity"></param>
     /// <returns></returns>
-    internal static IEnumerable<Field> GetQualifiedFields<TEntity>(IEnumerable<Field> fields,
+    internal static IEnumerable<Field> GetQualifiedFields<TEntity>(IEnumerable<Field>? fields,
         TEntity entity)
         where TEntity : class =>
         (fields ?? GetQualifiedFields(entity)).AsList();

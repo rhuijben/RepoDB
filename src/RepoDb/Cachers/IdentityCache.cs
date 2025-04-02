@@ -1,6 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using RepoDb.Extensions;
-using RepoDb.Interfaces;
 using RepoDb.Resolvers;
 
 namespace RepoDb;
@@ -10,10 +8,8 @@ namespace RepoDb;
 /// </summary>
 public static class IdentityCache
 {
-    private static readonly ConcurrentDictionary<int, ClassProperty> cache = new();
-    private static readonly IResolver<Type, ClassProperty> resolver = new IdentityResolver();
-
-    #region Methods
+    private static readonly ConcurrentDictionary<Type, ClassProperty> cache = new();
+    private static readonly IdentityResolver resolver = new();
 
     /// <summary>
     /// Gets the cached identity property of the data entity.
@@ -30,31 +26,11 @@ public static class IdentityCache
     /// <param name="entityType">The type of the data entity.</param>
     /// <returns>The cached identity property.</returns>
     public static ClassProperty Get(Type entityType)
-    {
-        // Variables for the cache
-        var key = GenerateHashCode(entityType);
-
-        // Try get the value
-        return cache.GetOrAdd(key, (_) => resolver.Resolve(entityType));
-    }
-
-    #endregion
-
-    #region Helpers
+        => cache.GetOrAdd(entityType, resolver.Resolve);
 
     /// <summary>
     /// Flushes all the existing cached identity <see cref="ClassProperty"/> objects.
     /// </summary>
     public static void Flush() =>
         cache.Clear();
-
-    /// <summary>
-    /// Generates a hashcode for caching.
-    /// </summary>
-    /// <param name="type">The type of the data entity.</param>
-    /// <returns>The generated hashcode.</returns>
-    private static int GenerateHashCode(Type type) =>
-        TypeExtension.GenerateHashCode(type);
-
-    #endregion
 }

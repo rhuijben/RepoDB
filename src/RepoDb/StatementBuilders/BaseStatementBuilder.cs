@@ -21,7 +21,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         IResolver<Field, IDbSetting, string>? convertFieldResolver = null,
         IResolver<Type, Type>? averageableClientTypeResolver = null)
     {
-        DbSetting = dbSetting ?? throw new ArgumentNullException("The database setting cannot be null.");
+        DbSetting = dbSetting ?? throw new ArgumentNullException(nameof(dbSetting));
         ConvertFieldResolver = convertFieldResolver;
         AverageableClientTypeResolver = averageableClientTypeResolver;
     }
@@ -72,7 +72,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new ArgumentNullException("The field cannot be null.");
+            throw new ArgumentNullException(nameof(field));
         }
         else
         {
@@ -122,7 +122,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new ArgumentNullException("The field cannot be null.");
+            throw new ArgumentNullException(nameof(field));
         }
         else
         {
@@ -365,7 +365,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Verify the fields
         if (fields?.Any() != true)
         {
-            throw new EmptyException($"The list of insertable fields must not be null or empty for '{tableName}'.");
+            throw new EmptyException(nameof(fields), $"The list of insertable fields must not be null or empty for '{tableName}'.");
         }
 
         // Primary Key
@@ -444,7 +444,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Verify the fields
         if (fields?.Any() != true)
         {
-            throw new EmptyException("The list of fields cannot be null or empty.");
+            throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
         }
 
         // Primary Key
@@ -549,7 +549,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new ArgumentNullException("The field cannot be null.");
+            throw new ArgumentNullException(nameof(field));
         }
 
         // Initialize the builder
@@ -595,7 +595,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new ArgumentNullException("The field cannot be null.");
+            throw new ArgumentNullException(nameof(field));
         }
 
         // Initialize the builder
@@ -642,7 +642,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new ArgumentNullException("The field cannot be null.");
+            throw new ArgumentNullException(nameof(field));
         }
 
         // Initialize the builder
@@ -688,7 +688,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new ArgumentNullException("The field cannot be null.");
+            throw new ArgumentNullException(nameof(field));
         }
 
         // Initialize the builder
@@ -835,7 +835,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new ArgumentNullException("The field cannot be null.");
+            throw new ArgumentNullException(nameof(field));
         }
 
         // Initialize the builder
@@ -881,7 +881,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check the field
         if (field == null)
         {
-            throw new ArgumentNullException("The field cannot be null.");
+            throw new ArgumentNullException(nameof(field));
         }
 
         // Initialize the builder
@@ -965,7 +965,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check if there are updatable fields
         if (updatableFields.Any() != true)
         {
-            throw new EmptyException("The list of updatable fields cannot be null or empty.");
+            throw new EmptyException(nameof(updatableFields), "The list of updatable fields cannot be null or empty.");
         }
 
         // Initialize the builder
@@ -1021,7 +1021,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Ensure the fields
         if (fields?.Any() != true)
         {
-            throw new EmptyException($"The list of fields cannot be null or empty.");
+            throw new EmptyException(nameof(fields), $"The list of fields cannot be null or empty.");
         }
 
         // Check the qualifiers
@@ -1073,7 +1073,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Check if there are updatable fields
         if (fields.Any() != true)
         {
-            throw new EmptyException("The list of updatable fields cannot be null or empty.");
+            throw new EmptyException(nameof(fields), "The list of updatable fields cannot be null or empty.");
         }
 
         // Initialize the builder
@@ -1212,7 +1212,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     {
         if (string.IsNullOrWhiteSpace(tableName))
         {
-            throw new ArgumentNullException("The name of the table could be null.");
+            throw new ArgumentNullException(nameof(tableName));
         }
     }
 

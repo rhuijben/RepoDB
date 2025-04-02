@@ -1,11 +1,11 @@
-﻿using Npgsql;
+﻿using System.Collections.Concurrent;
+using System.Linq.Expressions;
+using System.Reflection;
+using Npgsql;
 using NpgsqlTypes;
 using RepoDb.Enumerations.PostgreSql;
 using RepoDb.Exceptions;
 using RepoDb.Interfaces;
-using System.Collections.Concurrent;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace RepoDb.PostgreSql.BulkOperations;
 
@@ -436,7 +436,7 @@ internal static class Compiler
         var classProperty = PropertyCache.Get(entityType, mapping.SourceColumn);
         if (classProperty == null)
         {
-            throw new PropertyNotFoundException($"Property '{mapping.SourceColumn}' is not found from type '{entityType.FullName}'.");
+            throw new PropertyNotFoundException(nameof(mapping), $"Property '{mapping.SourceColumn}' is not found from type '{entityType.FullName}'.");
         }
 
         var propertyExpression = (Expression)Expression.Property(entityExpression, mapping.SourceColumn);

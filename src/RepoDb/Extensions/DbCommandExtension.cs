@@ -443,10 +443,9 @@ public static class DbCommandExtension
         // Iterate
         foreach (var paramClassProperty in paramClassProperties)
         {
-            var entityClassProperty = (entityType == paramClassProperty.GetDeclaringType()) ?
+            var entityClassProperty = (entityType == paramClassProperty.DeclaringType) ?
                 paramClassProperty :
-                entityClassProperties?
-                    .FirstOrDefault(e => string.Equals(e.GetMappedName(), paramClassProperty.GetMappedName()));
+                entityClassProperties.GetByMappedName(paramClassProperty.GetMappedName());
             var name = paramClassProperty
                 .GetMappedName()
                 .AsUnquoted(command.Connection!.GetDbSetting());

@@ -1,62 +1,63 @@
-﻿using RepoDb.Interfaces;
+﻿#nullable enable
+using RepoDb.Extensions;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers;
 
 /// <summary>
 /// A class that is being used to resolve the primary property of the data entity type.
 /// </summary>
-public class PrimaryResolver : IResolver<Type, ClassProperty>
+public class PrimaryResolver : IResolver<Type, IEnumerable<ClassProperty>>, IResolver<Type, ClassProperty>
 {
     /// <summary>
     /// Resolves the primary <see cref="ClassProperty"/> of the data entity type.
     /// </summary>
     /// <param name="entityType">The type of the data entity.</param>
     /// <returns>The instance of the primary <see cref="ClassProperty"/> object.</returns>
-    public ClassProperty Resolve(Type entityType)
+    public IEnumerable<ClassProperty>? Resolve(Type entityType)
     {
-        var properties = PropertyCache.Get(entityType);
-
-        // Check for the properties
-        if (properties == null)
+        if (PropertyCache.Get(entityType) is not { } properties)
         {
             return null;
         }
 
-        // Get the first entry with Primary attribute
-        var property = properties
-            .FirstOrDefault(p => p.GetPrimaryAttribute() != null);
+        // Get the first entry with Primary or Key attribute
+        var pkProperties = properties
+            .Where(p => p.GetPrimaryAttribute() != null);
+
+        if (pkProperties.Any())
+            return pkProperties;
 
         // Get from the implicit mapping
-        if (property == null)
+        if (!pkProperties.Any())
         {
-            property = PrimaryMapper.Get(entityType);
+            if (PrimaryMapper.Get(entityType) is { } v)
+                return [v];
         }
 
         // Id Property
-        if (property == null)
+        if (properties.GetByName("id") is { } idProperty)
         {
-            property = properties
-                .FirstOrDefault(p =>
-                    string.Equals(p.PropertyInfo.Name, "id", StringComparison.OrdinalIgnoreCase));
+            return [idProperty];
         }
 
         // Type.Name + Id
-        if (property == null)
+        if (properties.GetByName(entityType.Name + "Id") is { } nameIdProperty)
         {
-            property = properties
-                .FirstOrDefault(p =>
-                    string.Equals(p.PropertyInfo.Name, string.Concat(p.GetDeclaringType().Name, "id"), StringComparison.OrdinalIgnoreCase));
+            return [nameIdProperty];
         }
 
         // Mapping.Name + Id
-        if (property == null)
+        if (properties.GetByName(ClassMappedNameCache.Get(entityType) + "Id") is { } mapIdProperty)
         {
-            property = properties
-                .FirstOrDefault(p =>
-                    string.Equals(p.PropertyInfo.Name, string.Concat(ClassMappedNameCache.Get(p.GetDeclaringType()), "id"), StringComparison.OrdinalIgnoreCase));
+            return [mapIdProperty];
         }
 
-        // Return the instance
-        return property;
+        return null;
+    }
+
+    ClassProperty? IResolver<Type, ClassProperty>.Resolve(Type input)
+    {
+        return Resolve(input)?.FirstOrDefault();
     }
 }

@@ -1,5 +1,6 @@
-﻿using RepoDb.Interfaces;
+﻿#nullable enable
 using System.Data;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers;
 
@@ -18,7 +19,7 @@ public class DbTypeToClientTypeResolver : IResolver<DbType, Type>
     /// </summary>
     /// <param name="dbType">The type of the database.</param>
     /// <returns>The equivalent string name.</returns>
-    public Type Resolve(DbType dbType)
+    public Type? Resolve(DbType dbType)
     {
         return dbType switch
         {

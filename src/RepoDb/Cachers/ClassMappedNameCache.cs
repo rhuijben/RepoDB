@@ -1,6 +1,4 @@
 ﻿using System.Collections.Concurrent;
-using RepoDb.Extensions;
-using RepoDb.Interfaces;
 using RepoDb.Resolvers;
 
 namespace RepoDb;
@@ -10,8 +8,8 @@ namespace RepoDb;
 /// </summary>
 public static class ClassMappedNameCache
 {
-    private static readonly ConcurrentDictionary<int, string> cache = new();
-    private static readonly IResolver<Type, string> resolver = new ClassMappedNameResolver();
+    private static readonly ConcurrentDictionary<Type, string> cache = new();
+    private static readonly ClassMappedNameResolver resolver = new();
 
     #region Methods
 
@@ -33,11 +31,8 @@ public static class ClassMappedNameCache
         // Validate
         ThrowArgumentNullException(entityType, "EntityType");
 
-        // Variables
-        var key = GenerateHashCode(entityType);
-
         // Try get the value
-        return cache.GetOrAdd(key, resolver.Resolve(entityType));
+        return cache.GetOrAdd(entityType, resolver.Resolve);
     }
 
     #endregion
@@ -51,14 +46,6 @@ public static class ClassMappedNameCache
         cache.Clear();
 
     /// <summary>
-    /// Generates a hashcode for caching.
-    /// </summary>
-    /// <param name="type">The type of the data entity.</param>
-    /// <returns>The generated hashcode.</returns>
-    private static int GenerateHashCode(Type type) =>
-        TypeExtension.GenerateHashCode(type);
-
-    /// <summary>
     /// Validates the target object presence.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
@@ -67,9 +54,9 @@ public static class ClassMappedNameCache
     private static void ThrowArgumentNullException<T>(T obj,
         string argument)
     {
-        if (obj == null)
+        if (obj is null)
         {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
+            throw new ArgumentNullException(argument);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using RepoDb.Interfaces;
+﻿#nullable enable
+using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers;
 
@@ -12,6 +13,6 @@ public class PropertyHandlerTypeLevelResolver : IResolver<Type, object>
     /// </summary>
     /// <param name="type">The .NET CLR type</param>
     /// <returns>The equivalent <see cref="IPropertyHandler{TInput, TResult}"/> object of the .NET CLR type.</returns>
-    public object Resolve(Type type) =>
+    public object? Resolve(Type type) =>
         PropertyHandlerMapper.Get<object>(type);
 }

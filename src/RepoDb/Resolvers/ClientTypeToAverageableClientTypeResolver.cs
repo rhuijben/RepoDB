@@ -17,7 +17,7 @@ public class ClientTypeToAverageableClientTypeResolver : IResolver<Type, Type?>
     {
         if (type == null)
         {
-            throw new ArgumentNullException("The type must not be null.");
+            throw new ArgumentNullException(nameof(type));
         }
 
         // Get the type

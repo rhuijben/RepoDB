@@ -77,7 +77,7 @@ internal sealed partial class Compiler
             // ClassProperty
             if (ClassProperty?.PropertyInfo != null)
             {
-                message = string.Concat(descriptiveContextString, $"PropertyInfo: {ClassProperty.PropertyInfo.Name} ({ClassProperty.PropertyInfo.PropertyType}), DeclaringType: {ClassProperty.GetDeclaringType()} ");
+                message = string.Concat(descriptiveContextString, $"PropertyInfo: {ClassProperty.PropertyInfo.Name} ({ClassProperty.PropertyInfo.PropertyType}), DeclaringType: {ClassProperty.DeclaringType} ");
             }
 
             // Return
@@ -2263,7 +2263,7 @@ internal sealed partial class Compiler
             }
             else
             {
-                throw new PropertyNotFoundException($"The property '{propertyName}' is not found from type '{entityExpression.Type}'. The current operation could not proceed.");
+                throw new PropertyNotFoundException(nameof(entityExpression), $"The property '{propertyName}' is not found from type '{entityExpression.Type}'. The current operation could not proceed.");
             }
         }
 

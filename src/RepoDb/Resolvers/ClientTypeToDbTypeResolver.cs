@@ -22,11 +22,11 @@ public class ClientTypeToDbTypeResolver : IResolver<Type, DbType?>
     {
         if (type == null)
         {
-            throw new ArgumentNullException("The type must not be null.");
+            throw new ArgumentNullException(nameof(type));
         }
         if (type.IsEnum)
         {
-            return null;
+            return null; // TODO: Maybe use GlobalSettings to return string/int ?
         }
 
         type = TypeCache.Get(type).GetUnderlyingType();

@@ -22,7 +22,7 @@ public partial class QueryGroup
         bool throwException = true)
     {
         // Check for value
-        if (obj == null)
+        if (obj is null)
         {
             throw new ArgumentNullException(nameof(obj));
         }

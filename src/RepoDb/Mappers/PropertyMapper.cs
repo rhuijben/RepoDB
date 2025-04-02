@@ -78,7 +78,7 @@ public static class PropertyMapper
         var property = TypeExtension.GetProperty<TEntity>(propertyName);
         if (property == null)
         {
-            throw new PropertyNotFoundException($"Property '{propertyName}' is not found at type '{typeof(TEntity).FullName}'.");
+            throw new PropertyNotFoundException(nameof(propertyName), $"Property '{propertyName}' is not found at type '{typeof(TEntity).FullName}'.");
         }
 
         // Add to the mapping
@@ -115,7 +115,7 @@ public static class PropertyMapper
         var property = TypeExtension.GetProperty<TEntity>(field.Name);
         if (property == null)
         {
-            throw new PropertyNotFoundException($"Property '{field.Name}' is not found at type '{typeof(TEntity).FullName}'.");
+            throw new PropertyNotFoundException(nameof(field), $"Property '{field.Name}' is not found at type '{typeof(TEntity).FullName}'.");
         }
 
         // Add to the mapping
@@ -329,7 +329,7 @@ public static class PropertyMapper
     {
         if (string.IsNullOrWhiteSpace(columnName))
         {
-            throw new ArgumentNullException("The target column name cannot be null or empty.");
+            throw new ArgumentNullException(nameof(columnName));
         }
     }
 
@@ -342,7 +342,7 @@ public static class PropertyMapper
     private static void ThrowArgumentNullException<T>(T obj,
         string argument)
     {
-        if (obj == null)
+        if (obj is null)
         {
             throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
         }

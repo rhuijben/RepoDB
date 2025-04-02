@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes;
 using RepoDb.Resolvers;
-using System.ComponentModel.DataAnnotations;
 
 namespace RepoDb.UnitTests.Resolvers;
 
@@ -69,7 +69,7 @@ public class PrimaryResolverTest
         var resolver = new PrimaryResolver();
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithPrimaryAttribute))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithPrimaryAttribute))?.FirstOrDefault()?.GetMappedName();
         var expected = "PrimaryId";
 
         // Assert
@@ -83,7 +83,7 @@ public class PrimaryResolverTest
         var resolver = new PrimaryResolver();
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithKeyAttribute))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithKeyAttribute))?.FirstOrDefault()?.GetMappedName();
         var expected = "PrimaryId";
 
         // Assert
@@ -97,7 +97,7 @@ public class PrimaryResolverTest
         var resolver = new PrimaryResolver();
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithPrimaryAndKeyAttribute))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithPrimaryAndKeyAttribute))?.FirstOrDefault()?.GetMappedName();
         var expected = "PrimaryId";
 
         // Assert
@@ -118,7 +118,7 @@ public class PrimaryResolverTest
             .Primary(e => e.SecondaryId);
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithPrimaryAttribute))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithPrimaryAttribute))?.FirstOrDefault().GetMappedName();
         var expected = "PrimaryId";
 
         // Assert
@@ -135,7 +135,7 @@ public class PrimaryResolverTest
             .Primary(e => e.SecondaryId);
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithKeyAttribute))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithKeyAttribute))?.FirstOrDefault()?.GetMappedName();
         var expected = "PrimaryId";
 
         // Assert
@@ -153,7 +153,7 @@ public class PrimaryResolverTest
         var resolver = new PrimaryResolver();
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithPrimaryProperty))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithPrimaryProperty))?.FirstOrDefault()?.GetMappedName();
         var expected = "Id";
 
         // Assert
@@ -171,7 +171,7 @@ public class PrimaryResolverTest
         var resolver = new PrimaryResolver();
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithClassAndPrimaryProperty))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithClassAndPrimaryProperty))?.FirstOrDefault()?.GetMappedName();
         var expected = "EntityModelWithClassAndPrimaryPropertyId";
 
         // Assert
@@ -189,7 +189,7 @@ public class PrimaryResolverTest
         var resolver = new PrimaryResolver();
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithMapAttributeAndPrimaryProperty))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithMapAttributeAndPrimaryProperty))?.FirstOrDefault()?.GetMappedName();
         var expected = "MapId";
 
         // Assert
@@ -207,7 +207,7 @@ public class PrimaryResolverTest
         var resolver = new PrimaryResolver();
 
         // Act
-        var result = resolver.Resolve(typeof(EntityModelWithTableAttributeAndPrimaryProperty))?.GetMappedName();
+        var result = resolver.Resolve(typeof(EntityModelWithTableAttributeAndPrimaryProperty))?.FirstOrDefault()?.GetMappedName();
         var expected = "TableId";
 
         // Assert

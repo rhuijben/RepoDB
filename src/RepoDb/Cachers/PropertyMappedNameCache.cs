@@ -117,7 +117,7 @@ public static class PropertyMappedNameCache
     private static void ThrowArgumentNullException<T>(T obj,
         string argument)
     {
-        if (obj == null)
+        if (obj is null)
         {
             throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
         }

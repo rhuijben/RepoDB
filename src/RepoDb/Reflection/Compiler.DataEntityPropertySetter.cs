@@ -16,7 +16,7 @@ partial class Compiler
         Field field)
     {
         // Get the entity property
-        var property = entityType.GetMappedProperty(field.Name)?.PropertyInfo;
+        var property = PropertyCache.Get(entityType)?.GetByMappedName(field.Name)?.PropertyInfo;
 
         // Return the function
         return CompileDataEntityPropertySetter(entityType,

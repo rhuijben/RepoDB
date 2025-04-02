@@ -16,7 +16,7 @@ public class MySqlConnectorDbTypeNameToClientTypeResolver : IResolver<string, Ty
     {
         if (dbTypeName == null)
         {
-            throw new ArgumentNullException("The DB Type name must not be null.");
+            throw new ArgumentNullException(nameof(dbTypeName));
         }
         /*
         Id (System.Int64)

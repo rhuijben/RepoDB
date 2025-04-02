@@ -1,4 +1,5 @@
-﻿using RepoDb.Interfaces;
+﻿#nullable enable
+using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers;
 
@@ -12,9 +13,12 @@ public class IdentityResolver : IResolver<Type, ClassProperty>
     /// </summary>
     /// <param name="entityType">The type of the data entity.</param>
     /// <returns>The instance of the identity <see cref="ClassProperty"/> object.</returns>
-    public ClassProperty Resolve(Type entityType)
+    public ClassProperty? Resolve(Type entityType)
     {
-        var properties = PropertyCache.Get(entityType);
+        if (PropertyCache.Get(entityType) is not { } properties)
+        {
+            return null;
+        }
 
         // Get the first entry with Identity attribute
         var property = properties?

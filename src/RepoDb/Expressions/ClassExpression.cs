@@ -1,6 +1,6 @@
-﻿using RepoDb.Extensions;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Linq.Expressions;
+using RepoDb.Extensions;
 
 namespace RepoDb;
 
@@ -123,7 +123,7 @@ public static partial class ClassExpression
             // Check the presence
             if (property == null)
             {
-                throw new ArgumentNullException("Property");
+                throw new ArgumentNullException(nameof(property));
             }
 
             // Check the type (polymorphism)

@@ -154,16 +154,6 @@ public static class TypeExtension
         type != null ? (Nullable.GetUnderlyingType(type) ?? type) : null;
 
     /// <summary>
-    /// Returns the property of the type based on the mappings equality.
-    /// </summary>
-    /// <param name="type">The current type.</param>
-    /// <param name="mappedName">The name of the property mapping.</param>
-    /// <returns>The instance of <see cref="ClassProperty"/>.</returns>
-    internal static ClassProperty? GetMappedProperty(this Type type,
-        string mappedName) =>
-        PropertyCache.Get(type)?.FirstOrDefault(p => string.Equals(p.GetMappedName(), mappedName, StringComparison.OrdinalIgnoreCase));
-
-    /// <summary>
     /// Creates a generic type of the current type based on the generic type available from the source type.
     /// </summary>
     /// <param name="currentType">The current type.</param>

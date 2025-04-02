@@ -47,7 +47,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction, GetEntityType<TEntity>(entities));
-        var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get(GetEntityType<TEntity>(entities), key.OneOrDefault(), true)).AsList();
+        var keys = ExtractPropertyValues<TEntity>(entities, key).AsList();
 
         return DeleteAllInternal(connection: connection,
             tableName: tableName,
@@ -157,7 +157,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = GetAndGuardPrimaryKeyOrIdentityKey(GetEntityType<TEntity>(entities), connection, transaction);
-        var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get(GetEntityType<TEntity>(entities), key.OneOrDefault(), true))?.AsList();
+        var keys = ExtractPropertyValues<TEntity>(entities, key)?.AsList();
 
         return DeleteAllInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
@@ -338,7 +338,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, GetEntityType(entities), cancellationToken).ConfigureAwait(false);
-        var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get<TEntity>(key.OneOrDefault(), true)).AsList();
+        var keys = ExtractPropertyValues<TEntity>(entities, key).AsList();
 
         return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
@@ -457,7 +457,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entities), connection, transaction, cancellationToken).ConfigureAwait(false);
-        var keys = ExtractPropertyValues<TEntity, object>(entities, PropertyCache.Get<TEntity>(key.OneOrDefault(), true))?.AsList();
+        var keys = ExtractPropertyValues<TEntity>(entities, key)?.AsList();
 
         return await DeleteAllAsyncInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),

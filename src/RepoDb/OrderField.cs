@@ -144,9 +144,9 @@ public class OrderField : IEquatable<OrderField>
     /// <returns>An enumerable of <see cref="OrderField"/> object that holds the ordering values for every field.</returns>
     public static IEnumerable<OrderField> Parse(object obj)
     {
-        if (obj == null)
+        if (obj is null)
         {
-            throw new ArgumentNullException("The 'obj' must not be null.");
+            throw new ArgumentNullException(nameof(obj));
         }
 
         var properties = TypeCache.Get(obj.GetType()).GetProperties();

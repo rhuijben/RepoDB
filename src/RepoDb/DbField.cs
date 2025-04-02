@@ -33,9 +33,7 @@ public sealed class DbField : IEquatable<DbField>
         bool hasDefaultValue = false,
         string provider = null)
         : this(name, isPrimary, isIdentity, isNullable, type, size, precision, scale, databaseType, hasDefaultValue, false, provider)
-    {
-
-    }
+    { }
 
     public DbField(string name,
         bool isPrimary,
@@ -53,7 +51,7 @@ public sealed class DbField : IEquatable<DbField>
         // Name is required
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentNullException("Name");
+            throw new ArgumentNullException(nameof(name));
         }
 
         // Set the properties

@@ -39,7 +39,7 @@ partial class Compiler
 
         // Get the entity property
         var propertyName = field.Name.AsUnquoted(true, dbSetting).AsAlphaNumeric();
-        var property = (typeOfEntity.GetProperty(propertyName) ?? typeOfEntity.GetMappedProperty(propertyName)?.PropertyInfo)?.SetMethod;
+        var property = (typeOfEntity.GetProperty(propertyName) ?? PropertyCache.Get(typeOfEntity)?.GetByMappedName(propertyName)?.PropertyInfo)?.SetMethod;
 
         // Get the command parameter
         var name = parameterName ?? propertyName;

@@ -170,7 +170,7 @@ public static class DataEntityExtension
         var property = TypeExtension.GetProperty(type, propertyName);
         if (property == null)
         {
-            throw new PropertyNotFoundException($"The property '{propertyName}' is not found from type '{type.FullName}'.");
+            throw new PropertyNotFoundException(nameof(propertyName), $"The property '{propertyName}' is not found from type '{type.FullName}'.");
         }
         return property;
     }
@@ -200,7 +200,7 @@ public static class DataEntityExtension
                 p => string.Equals(p.PropertyInfo.Name, propertyName, StringComparison.OrdinalIgnoreCase));
         if (property == null)
         {
-            throw new PropertyNotFoundException($"The class property '{propertyName}' is not found from type '{type.FullName}'.");
+            throw new PropertyNotFoundException(nameof(propertyName), $"The class property '{propertyName}' is not found from type '{type.FullName}'.");
         }
         return property;
     }

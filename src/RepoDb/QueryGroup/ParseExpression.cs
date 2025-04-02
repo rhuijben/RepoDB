@@ -48,7 +48,7 @@ public partial class QueryGroup
         // Guard the presence of the expression
         if (expression == null)
         {
-            throw new ArgumentNullException("Expression cannot be null.");
+            throw new ArgumentNullException(nameof(expression));
         }
 
         // Parse the expression base on type

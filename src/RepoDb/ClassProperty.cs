@@ -30,13 +30,13 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     public ClassProperty(Type parentType,
         PropertyInfo property)
     {
-        declaringType = parentType;
+        DeclaringType = parentType;
         PropertyInfo = property;
 
         typeMapAttribute = new Lazy<TypeMapAttribute>(() => PropertyInfo.GetCustomAttribute<TypeMapAttribute>(), true);
         propertyHandlerAttribute = new Lazy<PropertyHandlerAttribute>(() => PropertyInfo.GetCustomAttribute<PropertyHandlerAttribute>(), true);
         dbType = new Lazy<DbType?>(() => PropertyInfo.GetDbType(), true);
-        propertyValueAttributes = new Lazy<IEnumerable<PropertyValueAttribute>>(() => PropertyInfo.GetPropertyValueAttributes(GetDeclaringType()), true);
+        propertyValueAttributes = new Lazy<IEnumerable<PropertyValueAttribute>>(() => PropertyInfo.GetPropertyValueAttributes(DeclaringType), true);
         propertyValueAttribute = new(() =>
         {
             return (PropertyInfo.GetCustomAttribute<DbTypeAttribute>() ?? PropertyInfo.GetCustomAttribute<TypeMapAttribute>()) ??
@@ -48,14 +48,15 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     #region Properties
 
     /// <summary>
-    /// Gets the original declaring type (avoiding the interface collision).
-    /// </summary>
-    private readonly Type declaringType;
-
-    /// <summary>
     /// Gets the wrapped property of this object.
     /// </summary>
     public PropertyInfo PropertyInfo { get; }
+
+
+    /// <summary>
+    /// Gets the propertyname via <see cref="PropertyInfo"/>
+    /// </summary>
+    public string Name => PropertyInfo.Name;
 
     #endregion
 
@@ -67,15 +68,22 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// <returns>The unquoted name.</returns>
     public override string ToString() =>
         string.Concat("ClassProperty :: Name = ", GetMappedName(), " (", PropertyInfo.PropertyType.FullName, "), ",
-            "DeclaringType = ", GetDeclaringType().FullName);
+            "DeclaringType = ", DeclaringType.FullName);
 
     /// <summary>
     /// Gets the declaring parent type of the current property info. If the class inherits an interface, then this will return
     /// the derived class type instead (if there is), otherwise the <see cref="PropertyInfo.DeclaringType"/> property.
     /// </summary>
     /// <returns>The declaring type.</returns>
-    public Type GetDeclaringType() =>
-        (declaringType ?? PropertyInfo.DeclaringType)!;
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public Type GetDeclaringType() => DeclaringType;
+
+    /// <summary>
+    /// Gets the declaring parent type of the current property info. If the class inherits an interface, then this will return
+    /// the derived class type instead (if there is), otherwise the <see cref="PropertyInfo.DeclaringType"/> property.
+    /// </summary>
+    /// <returns>The declaring type.</returns>
+    public Type DeclaringType { get; }
 
     /*
      * AsField
@@ -213,7 +221,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// <returns>The mapped property handler object.</returns>
     public TPropertyHandler? GetPropertyHandler<TPropertyHandler>()
     {
-        return Converter.ToType<TPropertyHandler>(PropertyHandlerCache.Get<TPropertyHandler>(GetDeclaringType(), PropertyInfo));
+        return Converter.ToType<TPropertyHandler>(PropertyHandlerCache.Get<TPropertyHandler>(DeclaringType, PropertyInfo));
     }
 
     /*
@@ -227,7 +235,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// </summary>
     /// <returns>The mapped-name value.</returns>
     public string GetMappedName() =>
-        mappedName ??= PropertyMappedNameCache.Get(GetDeclaringType(), PropertyInfo);
+        mappedName ??= PropertyMappedNameCache.Get(DeclaringType, PropertyInfo);
 
     /*
      * PropertyHandlerAttributes
@@ -252,7 +260,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// </summary>
     /// <returns>The hash code value.</returns>
     public override int GetHashCode() =>
-        HashCode.Combine(GetDeclaringType(), PropertyInfo.GenerateCustomizedHashCode(GetDeclaringType()));
+        HashCode.Combine(DeclaringType, PropertyInfo.GenerateCustomizedHashCode(DeclaringType));
 
     /// <summary>
     /// Compare the current instance to the other object instance.

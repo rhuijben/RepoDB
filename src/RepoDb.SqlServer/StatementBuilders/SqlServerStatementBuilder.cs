@@ -70,7 +70,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         // Validate order by
         if (orderBy == null || orderBy.Any() != true)
         {
-            throw new EmptyException("The argument 'orderBy' is required.");
+            throw new EmptyException(nameof(orderBy), "The argument 'orderBy' is required.");
         }
 
         // Validate the page
@@ -619,7 +619,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         // Validate order by
         if (orderBy == null || orderBy.Any() != true)
         {
-            throw new EmptyException("The argument 'orderBy' is required.");
+            throw new EmptyException(nameof(orderBy), "The argument 'orderBy' is required.");
         }
 
         // Validate the skip
