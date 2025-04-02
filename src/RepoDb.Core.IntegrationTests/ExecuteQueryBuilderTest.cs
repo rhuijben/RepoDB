@@ -1,10 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepoDb.Enumerations;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
-using RepoDb.Enumerations;
-using RepoDb.Exceptions;
 
 namespace RepoDb.IntegrationTests;
 
@@ -905,7 +905,7 @@ public class ExecuteQueryBuilderTest
             var sql = builder.CreateMerge(
                 ClassMappedNameCache.Get<IdentityTable>(),
                 fields: fields,
-                qualifiers: fields.Where(f => dbFields.GetItems().FirstOrDefault(df => (df.IsPrimary || df.IsIdentity) && df.Name == f.Name) != null),
+                qualifiers: fields.Where(f => dbFields.Any(df => (df.IsPrimary || df.IsIdentity) && df.Name == f.Name)),
                 primaryField: dbFields.GetPrimary(),
                 identityField: dbFields.GetIdentity());
 

@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace RepoDb;
@@ -31,7 +32,10 @@ public static class Converter
     /// </summary>
     /// <typeparam name="T">The target type.</typeparam>
     /// <param name="value">The value to be converted.</param>
-    /// <returns>The converted value.</returns>
+    /// <returns>The converted value or null when <see cref="DBNull"/>.</returns>
+#if NET
+    [return: NotNullIfNotNull(nameof(value))] // Except when DBNull
+#endif
     public static T? ToType<T>(object? value)
     {
         value = Converter.DbNullToNull(value);
@@ -81,7 +85,7 @@ public static class Converter
                         if (mode == Enumerations.InvalidEnumValueHandling.ThrowError)
                             throw new ArgumentOutOfRangeException("value", sv, $"The value '{sv}' is not defined in the enum '{type.FullName}'.");
 
-                        return default;
+                        return default!;
                     }
 #else
                     object r = typeof(Converter).GetMethod(nameof(EnumTryParse)).MakeGenericMethod(type).Invoke(null, new object[] { sv });
@@ -104,7 +108,7 @@ public static class Converter
                         throw new ArgumentOutOfRangeException("value", sv, $"The value '{sv}' is not defined in the enum '{type.FullName}'.");
 
 
-                    return default;
+                    return default!;
                 }
                 else if (value is int or short or long or byte or uint or ushort or ulong or sbyte)
                 {
@@ -120,7 +124,7 @@ public static class Converter
                     if (GlobalConfiguration.Options.EnumHandling == Enumerations.InvalidEnumValueHandling.ThrowError)
                         throw new ArgumentOutOfRangeException("value", value, $"The value '{value}' is not defined in the enum '{type.FullName}'.");
 
-                    return default;
+                    return default!;
                 }
             }
             else if (type == StaticType.Guid && value is string sv && Guid.TryParse(sv, out var gv))

@@ -47,7 +47,7 @@ public sealed class DbField : IEquatable<DbField>
         byte? scale,
         string? databaseType,
         bool hasDefaultValue,
-        bool isComputed,
+        bool isGenerated,
         string provider = null)
     {
         // Name is required
@@ -74,7 +74,7 @@ public sealed class DbField : IEquatable<DbField>
         Scale = scale;
         DatabaseType = databaseType;
         HasDefaultValue = hasDefaultValue;
-        IsGenerated = isComputed;
+        IsGenerated = isGenerated;
         Provider = provider;
     }
 

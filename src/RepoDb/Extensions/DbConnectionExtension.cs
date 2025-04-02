@@ -2493,18 +2493,21 @@ public static partial class DbConnectionExtension
     {
         // Properties
         var properties = PropertyCache.Get(type) ?? type.GetClassProperties();
-        var property = (ClassProperty?)null;
 
         // Primary
-        if (dbFields?.GetPrimaryFields() is { } dbPrimary)
+        if (dbFields?.GetPrimaryFields() is { } dbPrimary) // Database driven
         {
-            return dbPrimary.Select(f => properties.GetByMappedName(f.Name)?.AsField() ?? throw new ArgumentException());
+            return dbPrimary.Select(f => properties.GetByMappedName(f.Name)!).AsFields();
+        }
+        else if (PrimaryCache.Get(type) is { } pcPrimary) // Model driven
+        {
+            return pcPrimary.AsField().AsEnumerable();
         }
 
         // Identity
         if (dbFields?.GetIdentity() is { } dbIdentity)
         {
-            return properties.GetByMappedName(dbIdentity.Name)?.AsField()?.AsEnumerable() ?? throw new ArgumentException();
+            return properties.GetByMappedName(dbIdentity.Name)?.AsField()?.AsEnumerable() ?? throw new KeyFieldNotFoundException();
         }
 
         throw GetKeyFieldNotFoundException(type);

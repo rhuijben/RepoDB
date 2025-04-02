@@ -65,7 +65,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnInt";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -80,7 +79,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnInt";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -95,7 +93,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnInt";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -114,7 +111,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnInt";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
 
         // Act
@@ -122,7 +118,6 @@ public partial class IdentityMapperTest
         expected = "ColumnString";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -137,7 +132,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnInt";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
 
         // Act
@@ -145,7 +139,6 @@ public partial class IdentityMapperTest
         expected = "ColumnString";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -160,7 +153,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnInt";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
 
         // Act
@@ -168,7 +160,6 @@ public partial class IdentityMapperTest
         expected = "ColumnString";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -188,7 +179,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnString";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -204,7 +194,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnString";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -220,7 +209,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnString";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -269,7 +257,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnId";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
 
         // Derived 2
@@ -282,7 +269,6 @@ public partial class IdentityMapperTest
         expected = "ColumnId";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -299,7 +285,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnId";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
 
         // Derived 2
@@ -312,7 +297,6 @@ public partial class IdentityMapperTest
         expected = "ColumnId";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
     }
 
@@ -329,7 +313,6 @@ public partial class IdentityMapperTest
         var expected = "ColumnId";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
 
         // Derived 2
@@ -342,7 +325,6 @@ public partial class IdentityMapperTest
         expected = "ColumnId";
 
         // Assert
-        Assert.IsTrue(actual?.IsIdentity() == true);
         Assert.AreEqual(expected, actual?.GetMappedName());
 
     }

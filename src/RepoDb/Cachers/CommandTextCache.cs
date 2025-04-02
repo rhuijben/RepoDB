@@ -1277,7 +1277,25 @@ public static class CommandTextCache
 
         if (primaryField is { })
         {
-            return dbFields.GetByName(primaryField.Name);
+            if (dbFields.GetByName(primaryField.Name) is { } dbPrimary)
+            {
+                if (dbPrimary.IsPrimary)
+                    return dbPrimary;
+
+                return new DbField(
+                    dbPrimary?.Name ?? primaryField.Name,
+                    isPrimary: true,
+                    dbPrimary.IsIdentity,
+                    dbPrimary.IsNullable,
+                    dbPrimary.Type,
+                    dbPrimary.Size,
+                    dbPrimary.Precision,
+                    dbPrimary.Scale,
+                    dbPrimary.DatabaseType,
+                    dbPrimary.HasDefaultValue,
+                    dbPrimary.IsGenerated,
+                    dbPrimary.Provider);
+            }
         }
 
         return null;
@@ -1320,7 +1338,25 @@ public static class CommandTextCache
 
         if (identityField is { })
         {
-            return dbFields.GetByName(identityField.Name);
+            if (dbFields.GetByName(identityField.Name) is { } dbIdentity)
+            {
+                if (dbIdentity.IsIdentity)
+                    return dbIdentity;
+
+                return new DbField(
+                    dbIdentity?.Name ?? identityField.Name,
+                    dbIdentity.IsPrimary,
+                    true,
+                    dbIdentity.IsNullable,
+                    dbIdentity.Type,
+                    dbIdentity.Size,
+                    dbIdentity.Precision,
+                    dbIdentity.Scale,
+                    dbIdentity.DatabaseType,
+                    dbIdentity.HasDefaultValue,
+                    dbIdentity.IsGenerated,
+                    dbIdentity.Provider);
+            }
         }
 
         return null;

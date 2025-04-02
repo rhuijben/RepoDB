@@ -83,9 +83,9 @@ internal static class MergeAllExecutionContextProvider
             .Get(connection, tableName, transaction);
         string commandText;
 
-        if (dbFields?.Any(x => x.IsReadOnly) == true)
+        if (dbFields?.Any(x => x.IsGenerated) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsGenerated != true);
         }
 
         // Create a different kind of requests
@@ -171,9 +171,10 @@ internal static class MergeAllExecutionContextProvider
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         string commandText;
 
-        if (dbFields?.Any(x => x.IsReadOnly) == true)
+        // On Merge we do want to have the identity key in the fields
+        if (dbFields?.Any(x => x.IsGenerated) == true)
         {
-            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsReadOnly != true);
+            fields = fields.Where(f => dbFields.GetByName(f.Name)?.IsGenerated != true);
         }
 
         // Create a different kind of requests
