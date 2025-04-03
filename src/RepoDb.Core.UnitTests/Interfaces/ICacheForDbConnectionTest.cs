@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq.Expressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RepoDb.Interfaces;
 using RepoDb.UnitTests.CustomObjects;
-using System.Linq.Expressions;
 
 namespace RepoDb.UnitTests.Interfaces;
 
@@ -75,7 +75,7 @@ public class ICacheForDbConnectionTest
         new CacheDbConnection().Query<CacheEntity>(what: null,
             fields: null,
             orderBy: null,
-            top: null,
+            top: 0,
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration,
@@ -353,7 +353,7 @@ public class ICacheForDbConnectionTest
         await new CacheDbConnection().QueryAsync<CacheEntity>(what: null,
             fields: null,
             orderBy: null,
-            top: null,
+            top: 0,
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration,

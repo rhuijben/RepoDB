@@ -124,7 +124,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public BaseRepository(string connectionString,
         int? commandTimeout,
         ICache cache,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
         : this(connectionString,
               commandTimeout,
               ConnectionPersistency.PerCall,
@@ -145,7 +145,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public BaseRepository(string connectionString,
         int? commandTimeout,
         ICache cache,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         ITrace? trace = null)
         : this(connectionString,
               commandTimeout,
@@ -167,7 +167,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public BaseRepository(string connectionString,
         int? commandTimeout,
         ICache cache,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
         : this(connectionString,
@@ -196,7 +196,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int? commandTimeout,
         ConnectionPersistency connectionPersistency,
         ICache cache,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {

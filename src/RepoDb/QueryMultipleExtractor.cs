@@ -20,7 +20,7 @@ public sealed class QueryMultipleExtractor : IDisposable
     private readonly bool _isDisposeConnection = false;
     private readonly object _param = null;
     private readonly string _cacheKey = null;
-    private readonly int? _cacheItemExpiration = null;
+    private readonly int _cacheItemExpiration;
     private readonly ICache _cache = null;
     private readonly List<object> _items = [];
 
@@ -39,7 +39,7 @@ public sealed class QueryMultipleExtractor : IDisposable
         DbDataReader? reader = null,
         object? param = null,
         string? cacheKey = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         ICache? cache = null,
         bool isDisposeConnection = false,
         CancellationToken cancellationToken = default)

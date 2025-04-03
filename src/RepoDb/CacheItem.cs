@@ -68,7 +68,7 @@ public class CacheItem<T> : IExpirable
     /// <param name="cacheItemExpiration">The expiration in minutes of the cache item.</param>
     /// <param name="throwException">Throws an exception if the operation has failed to update an item.</param>
     internal void Update(T value,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         bool throwException = true)
     {
         if (!IsExpired() && throwException)
@@ -78,7 +78,7 @@ public class CacheItem<T> : IExpirable
 
         Value = value;
         CreatedDate = DateTime.UtcNow;
-        Expiration = CreatedDate.AddMinutes(cacheItemExpiration.Value);
+        Expiration = CreatedDate.AddMinutes(cacheItemExpiration);
     }
 
     #endregion

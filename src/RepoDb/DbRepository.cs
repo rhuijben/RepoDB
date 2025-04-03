@@ -60,7 +60,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cacheItemExpiration">The expiration in minutes of the cache item.</param>
     public DbRepository(string connectionString,
         ICache cache,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
         : this(connectionString,
               null,
               ConnectionPersistency.PerCall,
@@ -131,7 +131,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public DbRepository(string connectionString,
         int? commandTimeout,
         ICache cache,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes)
         : this(connectionString,
               commandTimeout,
               ConnectionPersistency.PerCall,
@@ -152,7 +152,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public DbRepository(string connectionString,
         int? commandTimeout,
         ICache cache,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         ITrace? trace = null)
         : this(connectionString,
               commandTimeout,
@@ -175,7 +175,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public DbRepository(string connectionString,
         int? commandTimeout,
         ICache cache,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
         : this(connectionString,
@@ -204,7 +204,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         int? commandTimeout,
         ConnectionPersistency connectionPersistency,
         ICache? cache = null,
-        int? cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
+        int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
@@ -315,9 +315,24 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     public void Dispose()
     {
-        if (ConnectionPersistency == ConnectionPersistency.Instance)
+        try
         {
-            connection?.Dispose();
+            Dispose(true);
+        }
+        finally
+        {
+            GC.SuppressFinalize(this);
+        }
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            if (ConnectionPersistency == ConnectionPersistency.Instance)
+            {
+                connection?.Dispose();
+            }
         }
     }
 
@@ -377,7 +392,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration,
+                cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache);
@@ -430,7 +445,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration,
+                cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache,
@@ -484,7 +499,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration,
+                cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache);
@@ -539,7 +554,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration,
+                cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache,
@@ -671,7 +686,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: CacheItemExpiration,
+                cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache);
@@ -722,7 +737,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 commandTimeout: CommandTimeout,
                 cacheKey: cacheKey,
-                cacheItemExpiration: CacheItemExpiration,
+                cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 transaction: transaction,
                 cache: Cache,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -771,7 +786,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: CacheItemExpiration,
+                cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache);
@@ -822,7 +837,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 param: param,
                 commandType: commandType,
                 cacheKey: cacheKey,
-                cacheItemExpiration: CacheItemExpiration,
+                cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 commandTimeout: CommandTimeout,
                 transaction: transaction,
                 cache: Cache,
@@ -876,7 +891,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
             param: param,
             commandType: commandType,
             cacheKey: cacheKey,
-            cacheItemExpiration: CacheItemExpiration,
+            cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             transaction: transaction,
             cache: Cache,
@@ -926,7 +941,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
             param: param,
             commandType: commandType,
             cacheKey: cacheKey,
-            cacheItemExpiration: CacheItemExpiration,
+            cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
             commandTimeout: commandTimeout,
             transaction: transaction,
             cache: Cache,
