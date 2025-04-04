@@ -19,7 +19,7 @@ internal sealed class AverageAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public AverageAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -44,7 +44,7 @@ internal sealed class AverageAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public AverageAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)

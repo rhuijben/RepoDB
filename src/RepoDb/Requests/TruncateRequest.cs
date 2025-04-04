@@ -17,7 +17,7 @@ internal sealed class TruncateRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public TruncateRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IStatementBuilder? statementBuilder = null)
         : this(ClassMappedNameCache.Get(type),
             connection,
@@ -36,7 +36,7 @@ internal sealed class TruncateRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public TruncateRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IStatementBuilder? statementBuilder = null)
         : base(name,
               connection,

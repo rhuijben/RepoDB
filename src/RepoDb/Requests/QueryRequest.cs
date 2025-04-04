@@ -23,7 +23,7 @@ internal sealed class QueryRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public QueryRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
@@ -57,7 +57,7 @@ internal sealed class QueryRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public QueryRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -70,6 +71,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
+        where TWhat : notnull
     {
         return DeleteInternal<TEntity>(connection: connection,
             where: WhatToQueryGroup(typeof(TEntity), connection, what, transaction),
@@ -260,7 +262,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
     internal static int DeleteInternal<TEntity>(this IDbConnection connection,
-        QueryGroup where,
+        QueryGroup? where,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Delete,
@@ -360,6 +362,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
+        where TWhat : notnull
     {
         return await DeleteAsyncInternal<TEntity>(connection: connection,
             where: await WhatToQueryGroupAsync(typeof(TEntity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
@@ -567,7 +570,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
     internal static ValueTask<int> DeleteAsyncInternal<TEntity>(this IDbConnection connection,
-        QueryGroup where,
+        QueryGroup? where,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Delete,
@@ -630,6 +633,7 @@ public static partial class DbConnectionExtension
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
+        where TWhat : notnull
     {
         return DeleteInternal(connection: connection,
             tableName: tableName,
@@ -793,7 +797,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows that has been deleted from the table.</returns>
     internal static int DeleteInternal(this IDbConnection connection,
         string tableName,
-        QueryGroup where,
+        QueryGroup? where,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Delete,
@@ -855,6 +859,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
+        where TWhat : notnull
     {
         return await DeleteAsyncInternal(connection: connection,
             tableName: tableName,
@@ -1032,7 +1037,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows that has been deleted from the table.</returns>
     internal static ValueTask<int> DeleteAsyncInternal(this IDbConnection connection,
         string tableName,
-        QueryGroup where,
+        QueryGroup? where,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Delete,

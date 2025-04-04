@@ -18,7 +18,7 @@ internal sealed class CountAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public CountAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(ClassMappedNameCache.Get(type),
@@ -40,7 +40,7 @@ internal sealed class CountAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public CountAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : base(name,

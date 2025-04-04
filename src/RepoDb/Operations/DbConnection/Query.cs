@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -104,6 +105,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
+        where TWhat : notnull
     {
         return QueryInternal<TEntity>(connection: connection,
             tableName: tableName,
@@ -425,6 +427,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
+        where TWhat : notnull
     {
         return QueryInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
@@ -672,7 +675,7 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static IEnumerable<TEntity> QueryInternal<TEntity>(this IDbConnection connection,
         string tableName,
-        QueryGroup where,
+        QueryGroup? where,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
@@ -809,6 +812,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
+        where TWhat : notnull
     {
         return await QueryAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
@@ -1148,6 +1152,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
+        where TWhat : notnull
     {
         return await QueryAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
@@ -1410,7 +1415,7 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static async ValueTask<IEnumerable<TEntity>> QueryAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
-        QueryGroup where,
+        QueryGroup? where,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
@@ -1488,8 +1493,9 @@ public static partial class DbConnectionExtension
         ICache? cache = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
+        where TWhat : notnull
     {
-        return Query(connection: connection,
+        return QueryInternal(connection: connection,
             tableName: tableName,
             where: WhatToQueryGroup(connection, tableName, what, transaction),
             fields: fields,
@@ -1541,7 +1547,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return Query(connection: connection,
+        return QueryInternal(connection: connection,
             tableName: tableName,
             where: WhatToQueryGroup(connection, tableName, what, transaction),
             fields: fields,
@@ -1593,7 +1599,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return Query(connection: connection,
+        return QueryInternal(connection: connection,
             tableName: tableName,
             where: ToQueryGroup(where),
             fields: fields,
@@ -1645,7 +1651,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return Query(connection: connection,
+        return QueryInternal(connection: connection,
             tableName: tableName,
             where: ToQueryGroup(where),
             fields: fields,
@@ -1735,7 +1741,7 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of dynamic objects.</returns>
     internal static IEnumerable<dynamic> QueryInternal(this IDbConnection connection,
         string tableName,
-        QueryGroup where,
+        QueryGroup? where,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
@@ -1807,8 +1813,9 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
+        where TWhat : notnull
     {
-        return await QueryAsync(connection: connection,
+        return await QueryAsyncInternal(connection: connection,
             tableName: tableName,
             where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
@@ -1863,7 +1870,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await QueryAsync(connection: connection,
+        return await QueryAsyncInternal(connection: connection,
             tableName: tableName,
             where: await WhatToQueryGroupAsync(connection, tableName, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
@@ -1901,7 +1908,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of dynamic objects.</returns>
-    public static Task<IEnumerable<dynamic>> QueryAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> QueryAsync(this IDbConnection connection,
         string tableName,
         QueryField where,
         IEnumerable<Field>? fields = null,
@@ -1918,7 +1925,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryAsync(connection: connection,
+        return await QueryAsyncInternal(connection: connection,
             tableName: tableName,
             where: ToQueryGroup(where),
             fields: fields,
@@ -1956,7 +1963,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of dynamic objects.</returns>
-    public static Task<IEnumerable<dynamic>> QueryAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> QueryAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
@@ -1973,7 +1980,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryAsync(connection: connection,
+        return await QueryAsyncInternal(connection: connection,
             tableName: tableName,
             where: ToQueryGroup(where),
             fields: fields,
@@ -2068,7 +2075,7 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of dynamic objects.</returns>
     internal static ValueTask<IEnumerable<dynamic>> QueryAsyncInternal(this IDbConnection connection,
         string tableName,
-        QueryGroup where,
+        QueryGroup? where,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
@@ -2127,7 +2134,7 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static IEnumerable<TEntity> QueryInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
-        QueryGroup where,
+        QueryGroup? where,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
@@ -2224,7 +2231,7 @@ public static partial class DbConnectionExtension
     /// <returns>An enumerable list of data entity objects.</returns>
     internal static async ValueTask<IEnumerable<TEntity>> QueryAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
-        QueryGroup where,
+        QueryGroup? where,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,

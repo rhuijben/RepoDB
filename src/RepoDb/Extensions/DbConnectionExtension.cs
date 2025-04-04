@@ -1281,7 +1281,7 @@ public static partial class DbConnectionExtension
         object? param,
         CommandType commandType,
         int commandTimeout,
-        string traceKey,
+        string? traceKey,
         IDbTransaction? transaction,
         ITrace? trace,
         Type? entityType,
@@ -2314,7 +2314,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(Type entityType,
         IDbConnection connection,
-        IDbTransaction transaction) =>
+        IDbTransaction? transaction) =>
         GetAndGuardPrimaryKeyOrIdentityKey(connection, ClassMappedNameCache.Get(entityType),
             transaction, entityType);
 
@@ -2328,7 +2328,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(IDbConnection connection,
         string tableName,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Type entityType)
     {
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
@@ -2345,7 +2345,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static IEnumerable<DbField> GetAndGuardPrimaryKeyOrIdentityKey(IDbConnection connection,
         string tableName,
-        IDbTransaction transaction)
+        IDbTransaction? transaction)
     {
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
         var keys = dbFields?.GetPrimaryFields() ?? dbFields?.GetIdentity()?.AsEnumerable();
@@ -2362,7 +2362,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static ValueTask<IEnumerable<Field>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(Type entityType,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         CancellationToken cancellationToken = default) =>
         GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, ClassMappedNameCache.Get(entityType),
             transaction, entityType, cancellationToken);
@@ -2378,7 +2378,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static async ValueTask<IEnumerable<Field>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
         string tableName,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Type entityType,
         CancellationToken cancellationToken = default)
     {
@@ -2397,7 +2397,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static async ValueTask<IEnumerable<DbField>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
         string tableName,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         CancellationToken cancellationToken = default)
     {
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
@@ -2541,7 +2541,7 @@ public static partial class DbConnectionExtension
     internal static QueryGroup? WhatToQueryGroup<T>(this IDbConnection connection,
         string tableName,
         T what,
-        IDbTransaction transaction) where T : notnull
+        IDbTransaction? transaction) where T : notnull
     {
         if (what == null)
         {
@@ -2586,7 +2586,7 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<QueryGroup?> WhatToQueryGroupAsync<T>(this IDbConnection connection,
         string tableName,
         T what,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         CancellationToken cancellationToken = default) where T : notnull
     {
         if (what == null)
@@ -2646,7 +2646,7 @@ public static partial class DbConnectionExtension
     internal static QueryGroup? WhatToQueryGroup(Type entityType,
         IDbConnection connection,
         object what,
-        IDbTransaction transaction)
+        IDbTransaction? transaction)
     {
         if (what == null)
         {
@@ -2684,7 +2684,7 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<QueryGroup?> WhatToQueryGroupAsync(Type entityType,
         IDbConnection connection,
         object what,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         CancellationToken cancellationToken = default)
     {
         if (what == null)
@@ -2812,7 +2812,7 @@ public static partial class DbConnectionExtension
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    internal static QueryGroup? ToQueryGroup(object obj)
+    internal static QueryGroup? ToQueryGroup(object? obj)
     {
         if (obj is null)
         {
@@ -2867,7 +2867,7 @@ public static partial class DbConnectionExtension
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="where"></param>
     /// <returns></returns>
-    internal static QueryGroup? ToQueryGroup<TEntity>(this IDbConnection connection, Expression<Func<TEntity, bool>> where, IDbTransaction? transaction, string? tableName = null)
+    internal static QueryGroup? ToQueryGroup<TEntity>(this IDbConnection connection, Expression<Func<TEntity, bool>>? where, IDbTransaction? transaction, string? tableName = null)
         where TEntity : class
     {
         if (where == null)
@@ -2909,7 +2909,7 @@ public static partial class DbConnectionExtension
             : ToQueryGroup<TEntity>(PropertyCache.Get<TEntity>(field, true) ?? PropertyCache.Get(type, field, true), entity!);
     }
 
-    internal static QueryGroup? ToQueryGroup<TEntity>(IEnumerable<Field> fields,
+    internal static QueryGroup ToQueryGroup<TEntity>(IEnumerable<Field> fields,
         TEntity entity)
         where TEntity : class
     {
@@ -2949,7 +2949,7 @@ public static partial class DbConnectionExtension
     /// </summary>
     /// <param name="queryFields"></param>
     /// <returns></returns>
-    internal static QueryGroup? ToQueryGroup(IEnumerable<QueryField> queryFields)
+    internal static QueryGroup? ToQueryGroup(IEnumerable<QueryField>? queryFields)
     {
         if (queryFields == null)
         {
@@ -3008,7 +3008,7 @@ public static partial class DbConnectionExtension
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     internal static void WhereToCommandParameters(DbCommand command,
-        QueryGroup where,
+        QueryGroup? where,
         Type entityType,
         DbFieldCollection dbFields) =>
         DbCommandExtension.CreateParameters(command, where, null, entityType, dbFields);
@@ -3091,7 +3091,7 @@ public static partial class DbConnectionExtension
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="entity"></param>
     /// <returns></returns>
-    internal static IEnumerable<Field> GetQualifiedFields<TEntity>(TEntity entity)
+    internal static IEnumerable<Field> GetQualifiedFields<TEntity>(TEntity? entity)
         where TEntity : class
     {
         var typeOfEntity = entity?.GetType() ?? typeof(TEntity);

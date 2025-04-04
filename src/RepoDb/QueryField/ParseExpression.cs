@@ -250,7 +250,7 @@ public partial class QueryField
         var operation = unaryNodeType == ExpressionType.Not ? Operation.NotEqual : Operation.Equal;
 
         // Value
-        object? value = null;
+        object? value;
         if (expression.Type == StaticType.Boolean)
         {
             value = true;
@@ -281,7 +281,7 @@ public partial class QueryField
     {
         if (expression.Method.Name == "Equals")
         {
-            return ParseEquals<TEntity>(expression, unaryNodeType)?.AsEnumerable();
+            return ParseEquals<TEntity>(expression)?.AsEnumerable();
         }
         else if (expression.Method.Name == "CompareString")
         {
@@ -313,10 +313,9 @@ public partial class QueryField
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="expression"></param>
-    /// <param name="unaryNodeType"></param>
+    /// 
     /// <returns></returns>
-    internal static QueryField ParseEquals<TEntity>(MethodCallExpression expression,
-        ExpressionType? unaryNodeType = null)
+    internal static QueryField ParseEquals<TEntity>(MethodCallExpression expression)
         where TEntity : class
     {
         // Property

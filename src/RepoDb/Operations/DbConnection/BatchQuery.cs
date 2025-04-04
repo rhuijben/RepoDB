@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -49,7 +50,7 @@ public static partial class DbConnectionExtension
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
-            where: (QueryGroup)null,
+            where: (QueryGroup?)null,
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -333,7 +334,7 @@ public static partial class DbConnectionExtension
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
-            where: (QueryGroup)null,
+            where: (QueryGroup?)null,
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -608,7 +609,7 @@ public static partial class DbConnectionExtension
     {
         // Ensure the fields
         fields ??= GetQualifiedFields<TEntity>() ??
-            DbFieldCache.Get(connection, tableName, transaction)?.AsFields();
+            DbFieldCache.Get(connection, tableName, transaction).AsFields();
 
         // Return
         return BatchQueryInternalBase<TEntity>(connection: connection,
@@ -668,7 +669,7 @@ public static partial class DbConnectionExtension
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
-            where: (QueryGroup)null,
+            where: (QueryGroup?)null,
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -970,7 +971,7 @@ public static partial class DbConnectionExtension
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
-            where: (QueryGroup)null,
+            where: (QueryGroup?)null,
             fields: fields,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1263,7 +1264,7 @@ public static partial class DbConnectionExtension
     {
         // Ensure the fields
         fields ??= GetQualifiedFields<TEntity>() ??
-            (await DbFieldCache.GetAsync(connection, tableName, transaction, true, cancellationToken).ConfigureAwait(false))?.AsFields();
+            (await DbFieldCache.GetAsync(connection, tableName, transaction, true, cancellationToken).ConfigureAwait(false)).AsFields();
 
         // Return
         return await BatchQueryAsyncInternalBase<TEntity>(connection: connection,
@@ -1321,7 +1322,7 @@ public static partial class DbConnectionExtension
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
             fields: fields,
-            where: (QueryGroup)null,
+            where: (QueryGroup?)null,
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -1555,7 +1556,7 @@ public static partial class DbConnectionExtension
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
             fields: fields,
-            where: (QueryGroup)null,
+            where: (QueryGroup?)null,
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -1788,8 +1789,8 @@ public static partial class DbConnectionExtension
         int page,
         int rowsPerBatch,
         IEnumerable<OrderField>? orderBy,
-        QueryGroup? where = null,
-        IEnumerable<Field>? fields = null,
+        QueryGroup? where,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.BatchQuery,
@@ -1866,8 +1867,8 @@ public static partial class DbConnectionExtension
         int page,
         int rowsPerBatch,
         IEnumerable<OrderField>? orderBy,
-        QueryGroup? where = null,
-        IEnumerable<Field>? fields = null,
+        QueryGroup? where,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.BatchQuery,

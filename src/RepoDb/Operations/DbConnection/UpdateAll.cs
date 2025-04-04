@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
 using System.Transactions;
@@ -404,9 +405,9 @@ public static partial class DbConnectionExtension
         {
             return UpdateAllInternalBase<IDictionary<string, object>>(connection: connection,
                 tableName: tableName,
-                entities: entities?.WithType<IDictionary<string, object>>(),
+                entities: entities.WithType<IDictionary<string, object>>(),
                 batchSize: batchSize,
-                fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                 qualifiers: qualifiers,
                 hints: hints,
                 commandTimeout: commandTimeout,
@@ -421,7 +422,7 @@ public static partial class DbConnectionExtension
                 tableName: tableName,
                 entities: entities,
                 batchSize: batchSize,
-                fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                 qualifiers: qualifiers,
                 hints: hints,
                 commandTimeout: commandTimeout,
@@ -851,7 +852,7 @@ public static partial class DbConnectionExtension
         {
             return await UpdateAllAsyncInternalBase(connection: connection,
                 tableName: tableName,
-                entities: entities?.WithType<IDictionary<string, object>>(),
+                entities: entities.WithType<IDictionary<string, object>>(),
                 batchSize: batchSize,
                 fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                 qualifiers: qualifiers,
@@ -1178,7 +1179,7 @@ public static partial class DbConnectionExtension
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
         int batchSize,
-        IEnumerable<Field>? fields,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.UpdateAll,
@@ -1287,7 +1288,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems?.Count == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -1355,7 +1356,7 @@ public static partial class DbConnectionExtension
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
         int batchSize,
-        IEnumerable<Field>? fields,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.UpdateAll,
@@ -1466,7 +1467,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems?.Count == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }

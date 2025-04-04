@@ -517,7 +517,7 @@ public static class DbCommandExtension
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     internal static void CreateParameters(IDbCommand command,
-        QueryGroup queryGroup,
+        QueryGroup? queryGroup,
         HashSet<string>? propertiesToSkip,
         Type? entityType,
         DbFieldCollection? dbFields = null)

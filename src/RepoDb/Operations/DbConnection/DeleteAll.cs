@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -113,7 +114,7 @@ public static partial class DbConnectionExtension
     {
         return DeleteAllInternal(connection: connection,
             tableName: tableName,
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -188,7 +189,7 @@ public static partial class DbConnectionExtension
 
             return DeleteAllInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -253,7 +254,7 @@ public static partial class DbConnectionExtension
     {
         return DeleteAllInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -477,7 +478,7 @@ public static partial class DbConnectionExtension
     {
         return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -558,7 +559,7 @@ public static partial class DbConnectionExtension
 
             return await DeleteAllAsyncInternal(connection: connection,
                 tableName: ClassMappedNameCache.Get<TEntity>(),
-                keys: keys?.WithType<object>(),
+                keys: keys.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -631,7 +632,7 @@ public static partial class DbConnectionExtension
     {
         return await DeleteAllAsyncInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,

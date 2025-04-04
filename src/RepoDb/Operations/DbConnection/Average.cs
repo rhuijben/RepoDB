@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -625,7 +626,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
     public static TResult Average<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         object? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -636,7 +637,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return AverageInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -662,7 +663,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
     public static TResult Average<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -673,7 +674,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return AverageInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -699,7 +700,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
     public static TResult Average<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         QueryField? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -710,7 +711,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return AverageInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -736,7 +737,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
     public static TResult Average<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -747,7 +748,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return AverageInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -773,7 +774,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
     public static TResult Average<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -784,7 +785,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return AverageInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: where,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1511,7 +1512,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
     public static async Task<TResult> AverageAsync<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         object? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1523,7 +1524,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await AverageAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1551,7 +1552,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
     public static async Task<TResult> AverageAsync<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1563,7 +1564,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await AverageAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1591,7 +1592,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
     public static async Task<TResult> AverageAsync<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         QueryField? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1603,7 +1604,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await AverageAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1631,7 +1632,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
     public static async Task<TResult> AverageAsync<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1643,7 +1644,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await AverageAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1671,7 +1672,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
     public static async Task<TResult> AverageAsync<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1683,7 +1684,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await AverageAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: where,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -2630,7 +2631,7 @@ public static partial class DbConnectionExtension
             entityType: request.Type,
             dbFields: DbFieldCache.Get(connection, request.Name, transaction, true),
             trace: trace,
-            traceKey: traceKey);
+            traceKey: traceKey)!;
 
         // Result
         return result;
@@ -2679,7 +2680,7 @@ public static partial class DbConnectionExtension
             cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Result
-        return result;
+        return result!;
     }
 
     #endregion

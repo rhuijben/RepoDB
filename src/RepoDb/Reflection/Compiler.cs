@@ -892,7 +892,7 @@ internal sealed partial class Compiler
         IDbSetting dbSetting) =>
         (fromType == StaticType.String) ?
             ConvertExpressionToEnumExpressionForString(expression, toEnumType) :
-                ConvertExpressionToEnumExpressionForNonString(expression, toEnumType, dbSetting);
+                ConvertExpressionToEnumExpressionForNonString(expression, toEnumType);
 
     /// <summary>
     ///
@@ -924,8 +924,7 @@ internal sealed partial class Compiler
     /// <param name="toEnumType"></param>
     /// <returns></returns>
     private static Expression ConvertExpressionToEnumExpressionForNonString(Expression expression,
-        Type toEnumType,
-        IDbSetting dbSetting)
+        Type toEnumType)
     {
         if (GlobalConfiguration.Options.EnumHandling == InvalidEnumValueHandling.Cast)
         {
@@ -1937,12 +1936,11 @@ internal sealed partial class Compiler
     /// <param name="dbParameterExpression"></param>
     /// <param name="dictionaryInstanceExpression"></param>
     /// <param name="dbField"></param>
-    /// <param name="dbSetting"></param>
+    /// 
     /// <returns></returns>
     private static Expression GetDictionaryStringObjectDbParameterValueAssignmentExpression(ParameterExpression dbParameterExpression,
         Expression dictionaryInstanceExpression,
-        DbField dbField,
-        IDbSetting dbSetting)
+        DbField dbField)
     {
         var expression = GetDictionaryStringObjectPropertyValueExpression(dictionaryInstanceExpression, dbField);
 
@@ -2000,10 +1998,9 @@ internal sealed partial class Compiler
     ///
     /// </summary>
     /// <param name="dbCommandExpression"></param>
-    /// <param name="dbField"></param>
+    /// 
     /// <returns></returns>
-    private static MethodCallExpression GetDbCommandCreateParameterExpression(ParameterExpression dbCommandExpression,
-        DbField dbField)
+    private static MethodCallExpression GetDbCommandCreateParameterExpression(ParameterExpression dbCommandExpression)
     {
         var dbCommandCreateParameterMethod = StaticType.DbCommand.GetMethod(nameof(DbCommand.CreateParameter));
         return Expression.Call(dbCommandExpression, dbCommandCreateParameterMethod);
