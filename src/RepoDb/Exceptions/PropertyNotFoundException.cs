@@ -14,7 +14,7 @@ public class PropertyNotFoundException : ArgumentException
     public PropertyNotFoundException()
     {
     }
-    public PropertyNotFoundException(string message, Exception innerException) : base(message, innerException)
+    public PropertyNotFoundException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

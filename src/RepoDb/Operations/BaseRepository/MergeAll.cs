@@ -21,7 +21,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.MergeAll,
+        string? traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MergeAll<TEntity>(entities: entities,
@@ -48,7 +48,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.MergeAll,
+        string? traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MergeAll<TEntity>(entities: entities,
@@ -76,7 +76,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.MergeAll,
+        string? traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MergeAll<TEntity>(entities: entities,
@@ -107,7 +107,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.MergeAll,
+        string? traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -137,7 +137,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.MergeAll,
+        string? traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -168,7 +168,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.MergeAll,
+        string? traceKey = TraceKeys.MergeAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

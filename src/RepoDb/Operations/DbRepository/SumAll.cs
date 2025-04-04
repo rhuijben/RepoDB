@@ -20,7 +20,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The sum value of the target field.</returns>
     public object? SumAll<TEntity>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -56,7 +56,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The sum value of the target field.</returns>
     public object? SumAll<TEntity>(Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -93,7 +93,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The sum value of the target field.</returns>
     public TResult SumAll<TEntity, TResult>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -130,7 +130,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The sum value of the target field.</returns>
     public TResult SumAll<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -171,7 +171,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The sum value of the target field.</returns>
     public async Task<object?> SumAllAsync<TEntity>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -210,7 +210,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The sum value of the target field.</returns>
     public async Task<object?> SumAllAsync<TEntity>(Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -250,7 +250,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The sum value of the target field.</returns>
     public async Task<TResult> SumAllAsync<TEntity, TResult>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -290,7 +290,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The sum value of the target field.</returns>
     public async Task<TResult> SumAllAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -333,7 +333,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? SumAll(string tableName,
         Field field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -371,7 +371,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult SumAll<TResult>(string tableName,
         Field field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -413,7 +413,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> SumAllAsync(string tableName,
         Field field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -454,7 +454,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> SumAllAsync<TResult>(string tableName,
         Field field,
         string? hints = null,
-        string traceKey = TraceKeys.SumAll,
+        string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

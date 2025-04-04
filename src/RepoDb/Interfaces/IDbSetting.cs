@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿#nullable enable
+using System.Data.Common;
 
 namespace RepoDb.Interfaces;
 
@@ -61,11 +62,6 @@ public interface IDbSetting
     /// Gets the character used for the database command parameter prefixing.
     /// </summary>
     string ParameterPrefix { get; }
-
-    /// <summary>
-    /// Gets the character (or string) used for dot notation.
-    /// </summary>
-    string SchemaSeparator { get; }
 
     /// <summary>
     /// This database provider required automatic conversions, because it uses some form of duck-typing

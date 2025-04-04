@@ -14,7 +14,7 @@ public class InvalidTypeException : ArgumentOutOfRangeException
     public InvalidTypeException()
     {
     }
-    public InvalidTypeException(string message, Exception innerException) : base(message, innerException)
+    public InvalidTypeException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

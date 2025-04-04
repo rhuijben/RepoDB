@@ -14,7 +14,7 @@ public class ConverterNotFoundException : Exception
     public ConverterNotFoundException()
     {
     }
-    public ConverterNotFoundException(string message, Exception innerException) : base(message, innerException)
+    public ConverterNotFoundException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

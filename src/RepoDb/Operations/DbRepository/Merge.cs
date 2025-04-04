@@ -24,7 +24,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -67,7 +67,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -112,7 +112,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -157,7 +157,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -201,7 +201,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -246,7 +246,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -292,7 +292,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -338,7 +338,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -379,7 +379,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object Merge<TEntity>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -419,7 +419,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -461,7 +461,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -503,7 +503,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -544,7 +544,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Merge<TEntity, TResult>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -586,7 +586,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -629,7 +629,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -672,7 +672,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -719,7 +719,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -766,7 +766,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -814,7 +814,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -862,7 +862,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -909,7 +909,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -957,7 +957,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1006,7 +1006,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1055,7 +1055,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1099,7 +1099,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object> MergeAsync<TEntity>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1143,7 +1143,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1188,7 +1188,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1233,7 +1233,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1277,7 +1277,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MergeAsync<TEntity, TResult>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1322,7 +1322,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1368,7 +1368,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1414,7 +1414,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1461,7 +1461,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1503,7 +1503,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1546,7 +1546,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1588,7 +1588,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1631,7 +1631,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1675,7 +1675,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1721,7 +1721,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1766,7 +1766,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1812,7 +1812,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1857,7 +1857,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1903,7 +1903,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1950,7 +1950,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<Field> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

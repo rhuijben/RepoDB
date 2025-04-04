@@ -14,7 +14,7 @@ public class ParameterNotFoundException : ArgumentException
     public ParameterNotFoundException()
     {
     }
-    public ParameterNotFoundException(string message, Exception innerException) : base(message, innerException)
+    public ParameterNotFoundException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

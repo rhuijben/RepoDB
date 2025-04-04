@@ -20,7 +20,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.InsertAll,
+        string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.InsertAll<TEntity>(entities: entities,
@@ -50,7 +50,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.InsertAll,
+        string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

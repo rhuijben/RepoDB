@@ -19,7 +19,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public object Merge(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Merge<TEntity>(entity: entity,
@@ -43,7 +43,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Merge<TEntity>(entity: entity,
@@ -68,7 +68,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Merge<TEntity>(entity: entity,
@@ -93,7 +93,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Merge<TEntity>(entity: entity,
@@ -117,7 +117,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public TResult Merge<TResult>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Merge<TEntity, TResult>(entity: entity,
@@ -142,7 +142,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Merge<TEntity, TResult>(entity: entity,
@@ -168,7 +168,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Merge<TEntity, TResult>(entity: entity,
@@ -194,7 +194,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Merge<TEntity, TResult>(entity: entity,
@@ -222,7 +222,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public Task<object> MergeAsync(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -249,7 +249,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -277,7 +277,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -305,7 +305,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -332,7 +332,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public Task<TResult> MergeAsync<TResult>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -360,7 +360,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Field qualifier,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -389,7 +389,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -418,7 +418,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Merge,
+        string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

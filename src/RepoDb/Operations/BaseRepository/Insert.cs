@@ -18,7 +18,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public object Insert(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Insert<TEntity>(entity: entity,
@@ -41,7 +41,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public TResult Insert<TResult>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Insert<TEntity, TResult>(entity: entity,
@@ -68,7 +68,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public Task<object> InsertAsync(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -94,7 +94,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public Task<TResult> InsertAsync<TResult>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

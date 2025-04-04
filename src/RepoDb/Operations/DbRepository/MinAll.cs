@@ -20,7 +20,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The min value of the target field.</returns>
     public object? MinAll<TEntity>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -56,7 +56,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The min value of the target field.</returns>
     public object? MinAll<TEntity>(Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -93,7 +93,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The min value of the target field.</returns>
     public TResult MinAll<TEntity, TResult>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -130,7 +130,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The min value of the target field.</returns>
     public TResult MinAll<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -171,7 +171,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The min value of the target field.</returns>
     public async Task<object?> MinAllAsync<TEntity>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -210,7 +210,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The min value of the target field.</returns>
     public async Task<object?> MinAllAsync<TEntity>(Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -250,7 +250,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The min value of the target field.</returns>
     public async Task<TResult> MinAllAsync<TEntity, TResult>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -290,7 +290,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The min value of the target field.</returns>
     public async Task<TResult> MinAllAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -333,7 +333,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? MinAll(string tableName,
         Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -371,7 +371,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult MinAll<TResult>(string tableName,
         Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -413,7 +413,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAllAsync(string tableName,
         Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -454,7 +454,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAllAsync<TResult>(string tableName,
         Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

@@ -149,7 +149,7 @@ public partial class QueryField
         }
 
         // Field
-        var field = expression.GetField(out var coalesceValue);
+        var field = expression.Left.GetField(out var coalesceValue);
         var property = GetTargetProperty<TEntity>(field);
 
         // Check
@@ -163,7 +163,7 @@ public partial class QueryField
         }
 
         // Value
-        var value = expression.GetValue();
+        var value = expression.Right.GetValue();
 
         // Operation
         var operation = GetOperation(expression.NodeType);

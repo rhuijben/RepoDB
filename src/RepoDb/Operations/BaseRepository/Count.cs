@@ -17,7 +17,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count(object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Count<TEntity>(where: where,
@@ -36,7 +36,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count(Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Count<TEntity>(where: where,
@@ -55,7 +55,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count(QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Count<TEntity>(where: where,
@@ -74,7 +74,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count(IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Count<TEntity>(where: where,
@@ -93,7 +93,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count(QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Count<TEntity>(where: where,
@@ -117,7 +117,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public Task<long> CountAsync(object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -139,7 +139,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public Task<long> CountAsync(Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -161,7 +161,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public Task<long> CountAsync(QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -183,7 +183,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public Task<long> CountAsync(IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -205,7 +205,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public Task<long> CountAsync(QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

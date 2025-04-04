@@ -20,7 +20,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count<TEntity>(object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -56,7 +56,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count<TEntity>(Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -92,7 +92,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count<TEntity>(QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -128,7 +128,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count<TEntity>(IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -164,7 +164,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long Count<TEntity>(QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -205,7 +205,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public async Task<long> CountAsync<TEntity>(object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -244,7 +244,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public async Task<long> CountAsync<TEntity>(Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -283,7 +283,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public async Task<long> CountAsync<TEntity>(QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -322,7 +322,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public async Task<long> CountAsync<TEntity>(IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -361,7 +361,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public async Task<long> CountAsync<TEntity>(QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -404,7 +404,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public long Count(string tableName,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -441,7 +441,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public long Count(string tableName,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -478,7 +478,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public long Count(string tableName,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -515,7 +515,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public long Count(string tableName,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -557,7 +557,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<long> CountAsync(string tableName,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -597,7 +597,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<long> CountAsync(string tableName,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -637,7 +637,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<long> CountAsync(string tableName,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -677,7 +677,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<long> CountAsync(string tableName,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

@@ -17,7 +17,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The min value of the target field.</returns>
     public object? MinAll(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MinAll<TEntity>(field: field,
@@ -36,7 +36,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The min value of the target field.</returns>
     public object? MinAll(Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MinAll<TEntity>(field: field,
@@ -56,7 +56,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The min value of the target field.</returns>
     public TResult MinAll<TResult>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MinAll<TEntity, TResult>(field: field,
@@ -76,7 +76,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The min value of the target field.</returns>
     public TResult MinAll<TResult>(Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MinAll<TEntity, TResult>(field: field,
@@ -100,7 +100,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The min value of the target field.</returns>
     public Task<object?> MinAllAsync(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -122,7 +122,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The min value of the target field.</returns>
     public Task<object?> MinAllAsync(Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -145,7 +145,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The min value of the target field.</returns>
     public Task<TResult> MinAllAsync<TResult>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -168,7 +168,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The min value of the target field.</returns>
     public Task<TResult> MinAllAsync<TResult>(Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MinAll,
+        string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

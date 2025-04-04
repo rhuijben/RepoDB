@@ -14,7 +14,7 @@ public class CancelledExecutionException : Exception
     public CancelledExecutionException()
     {
     }
-    public CancelledExecutionException(string message, Exception innerException) : base(message, innerException)
+    public CancelledExecutionException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

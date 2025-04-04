@@ -14,7 +14,7 @@ public class MappingExistsException : Exception
     public MappingExistsException()
     {
     }
-    public MappingExistsException(string message, Exception innerException) : base(message, innerException)
+    public MappingExistsException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

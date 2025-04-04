@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿#nullable enable
+using System.Data.Common;
 using RepoDb.Interfaces;
 
 namespace RepoDb.DbSettings;
@@ -94,12 +95,6 @@ public abstract class BaseDbSetting : IDbSetting
     public string ParameterPrefix { get; protected set; }
 
     /// <summary>
-    /// Gets the character (or string) used for separating the schema.
-    /// </summary>
-    [Obsolete("This will be removed in the future releases. The schema separator will be defaulted to a 'period' character.")]
-    public string SchemaSeparator { get; protected set; }
-
-    /// <summary>
     ///
     /// </summary>
     public bool ForceAutomaticConversions { get; protected set; }
@@ -184,7 +179,7 @@ public abstract class BaseDbSetting : IDbSetting
     /// </summary>
     /// <param name="obj">The object to be compared to the current object.</param>
     /// <returns>True if the instances are equals.</returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return Equals(obj as BaseDbSetting);
     }
@@ -194,7 +189,7 @@ public abstract class BaseDbSetting : IDbSetting
     /// </summary>
     /// <param name="other">The object to be compared to the current object.</param>
     /// <returns>True if the instances are equal.</returns>
-    public bool Equals(BaseDbSetting other)
+    public bool Equals(BaseDbSetting? other)
     {
         return other is not null
             && other.AreTableHintsSupported == AreTableHintsSupported

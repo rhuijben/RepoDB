@@ -14,7 +14,7 @@ public class InvalidParameterException : ArgumentException
     public InvalidParameterException()
     {
     }
-    public InvalidParameterException(string message, Exception innerException) : base(message, innerException)
+    public InvalidParameterException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

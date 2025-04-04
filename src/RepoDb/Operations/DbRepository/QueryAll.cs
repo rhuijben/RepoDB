@@ -25,7 +25,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -70,7 +70,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -121,7 +121,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -169,7 +169,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -220,7 +220,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -270,7 +270,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

@@ -14,7 +14,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public long CountAll(string? hints = null,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.CountAll<TEntity>(hints: hints,
@@ -35,7 +35,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public Task<long> CountAllAsync(string? hints = null,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

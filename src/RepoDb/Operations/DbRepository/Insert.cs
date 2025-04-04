@@ -23,7 +23,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -66,7 +66,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -106,7 +106,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object Insert<TEntity>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -146,7 +146,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Insert<TEntity, TResult>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -192,7 +192,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -238,7 +238,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -281,7 +281,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object> InsertAsync<TEntity>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -324,7 +324,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> InsertAsync<TEntity, TResult>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -370,7 +370,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -411,7 +411,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -456,7 +456,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -500,7 +500,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Insert,
+        string? traceKey = TraceKeys.Insert,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

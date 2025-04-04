@@ -17,7 +17,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int Delete(TEntity entity,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Delete<TEntity>(entity: entity,
@@ -37,7 +37,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int Delete<TWhat>(TWhat what,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Delete<TEntity, TWhat>(what: what,
@@ -56,7 +56,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int Delete(object what,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Delete<TEntity>(what: what,
@@ -75,7 +75,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int Delete(Expression<Func<TEntity, bool>> where,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Delete<TEntity>(where: where,
@@ -94,7 +94,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int Delete(QueryField where,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Delete<TEntity>(where: where,
@@ -113,7 +113,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int Delete(IEnumerable<QueryField> where,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Delete<TEntity>(where: where,
@@ -132,7 +132,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int Delete(QueryGroup where,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Delete<TEntity>(where: where,
@@ -156,7 +156,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public Task<int> DeleteAsync(TEntity entity,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -179,7 +179,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public Task<int> DeleteAsync<TWhat>(TWhat what,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -201,7 +201,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public Task<int> DeleteAsync(object what,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -223,7 +223,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public Task<int> DeleteAsync(Expression<Func<TEntity, bool>> where,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -245,7 +245,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public Task<int> DeleteAsync(QueryField where,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -267,7 +267,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public Task<int> DeleteAsync(IEnumerable<QueryField> where,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -289,7 +289,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public Task<int> DeleteAsync(QueryGroup where,
         string? hints = null,
-        string traceKey = TraceKeys.Delete,
+        string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

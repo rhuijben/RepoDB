@@ -17,7 +17,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The max value of the target field.</returns>
     public object? MaxAll(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MaxAll,
+        string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MaxAll<TEntity>(field: field,
@@ -36,7 +36,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The max value of the target field.</returns>
     public object? MaxAll(Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MaxAll,
+        string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MaxAll<TEntity>(field: field,
@@ -56,7 +56,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The max value of the target field.</returns>
     public TResult MaxAll<TResult>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MaxAll,
+        string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MaxAll<TEntity, TResult>(field: field,
@@ -76,7 +76,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The max value of the target field.</returns>
     public TResult MaxAll<TResult>(Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MaxAll,
+        string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.MaxAll<TEntity, TResult>(field: field,
@@ -100,7 +100,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The max value of the target field.</returns>
     public Task<object?> MaxAllAsync(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MaxAll,
+        string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -122,7 +122,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The max value of the target field.</returns>
     public Task<object?> MaxAllAsync(Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MaxAll,
+        string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -145,7 +145,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The max value of the target field.</returns>
     public Task<TResult> MaxAllAsync<TResult>(Field field,
         string? hints = null,
-        string traceKey = TraceKeys.MaxAll,
+        string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -168,7 +168,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The max value of the target field.</returns>
     public Task<TResult> MaxAllAsync<TResult>(Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        string traceKey = TraceKeys.MaxAll,
+        string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

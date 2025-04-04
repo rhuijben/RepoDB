@@ -25,7 +25,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.InsertAll,
+        string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -68,7 +68,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.InsertAll,
+        string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -117,7 +117,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.InsertAll,
+        string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -163,7 +163,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.InsertAll,
+        string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -212,7 +212,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.InsertAll,
+        string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -260,7 +260,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.InsertAll,
+        string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

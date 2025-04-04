@@ -14,7 +14,7 @@ public class InvalidExpressionException : Exception
     public InvalidExpressionException()
     {
     }
-    public InvalidExpressionException(string message, Exception innerException) : base(message, innerException)
+    public InvalidExpressionException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }
