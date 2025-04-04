@@ -19,7 +19,7 @@ internal sealed class MaxAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MaxAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -44,7 +44,7 @@ internal sealed class MaxAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MaxAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)

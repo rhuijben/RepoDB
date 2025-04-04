@@ -79,7 +79,7 @@ public class DataEntityDataReader<TEntity> : DbDataReader
     public DataEntityDataReader(string tableName,
         IEnumerable<TEntity> entities,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         bool hasOrderingColumn)
     {
         if (entities == null)

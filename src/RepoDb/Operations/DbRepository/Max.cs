@@ -610,7 +610,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         object? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -650,7 +650,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -690,7 +690,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         QueryField? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -730,7 +730,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -770,7 +770,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public TResult Max<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         QueryGroup? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -1450,7 +1450,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         object? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -1493,7 +1493,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -1536,7 +1536,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         QueryField? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -1579,7 +1579,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,
@@ -1622,7 +1622,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
+    public async Task<TResult> MaxAsync<TEntity, TResult>(Expression<Func<TEntity, TResult?>> field,
         QueryGroup? where = null,
         string? hints = null,
         string? traceKey = TraceKeys.Max,

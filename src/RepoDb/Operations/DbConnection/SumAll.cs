@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Linq.Expressions;
 using RepoDb.Interfaces;
 using RepoDb.Requests;
@@ -127,7 +128,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The sum value of the target field.</returns>
     public static TResult SumAll<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.SumAll,
@@ -318,7 +319,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
     public static async Task<TResult> SumAllAsync<TEntity, TResult>(this IDbConnection connection,
-        Expression<Func<TEntity, TResult>> field,
+        Expression<Func<TEntity, TResult?>> field,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.SumAll,
@@ -662,7 +663,7 @@ public static partial class DbConnectionExtension
             entityType: request.Type,
             dbFields: DbFieldCache.Get(connection, request.Name, transaction, true),
             trace: trace,
-            traceKey: traceKey);
+            traceKey: traceKey)!;
 
         // Result
         return result;
@@ -712,7 +713,7 @@ public static partial class DbConnectionExtension
             cancellationToken: cancellationToken).ConfigureAwait(false);
 
         // Result
-        return result;
+        return result!;
     }
 
     #endregion

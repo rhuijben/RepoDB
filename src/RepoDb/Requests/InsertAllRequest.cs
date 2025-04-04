@@ -21,7 +21,7 @@ internal sealed class InsertAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public InsertAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         int batchSize = Constant.DefaultBatchOperationSize,
         string? hints = null,
@@ -48,7 +48,7 @@ internal sealed class InsertAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public InsertAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         int batchSize = Constant.DefaultBatchOperationSize,
         string? hints = null,
@@ -77,7 +77,7 @@ internal sealed class InsertAllRequest : BaseRequest
     public InsertAllRequest(Type type,
         string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         int batchSize = Constant.DefaultBatchOperationSize,
         string? hints = null,

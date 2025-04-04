@@ -19,7 +19,7 @@ internal sealed class SumAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public SumAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -44,7 +44,7 @@ internal sealed class SumAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public SumAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)

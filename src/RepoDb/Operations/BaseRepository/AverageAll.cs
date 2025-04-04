@@ -74,7 +74,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public TResult AverageAll<TResult>(Expression<Func<TEntity, TResult>> field,
+    public TResult AverageAll<TResult>(Expression<Func<TEntity, TResult?>> field,
         string? hints = null,
         string? traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null)
@@ -166,7 +166,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<TResult> AverageAllAsync<TResult>(Expression<Func<TEntity, TResult>> field,
+    public Task<TResult> AverageAllAsync<TResult>(Expression<Func<TEntity, TResult?>> field,
         string? hints = null,
         string? traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,

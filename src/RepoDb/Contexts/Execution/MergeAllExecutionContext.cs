@@ -35,5 +35,5 @@ internal class MergeAllExecutionContext
     /// <summary>
     /// 
     /// </summary>
-    public Action<object, object> KeyPropertySetterFunc { get; init; }
+    public Action<object, object?> KeyPropertySetterFunc { get; init; }
 }

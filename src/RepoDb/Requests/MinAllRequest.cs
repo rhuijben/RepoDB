@@ -19,7 +19,7 @@ internal sealed class MinAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MinAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -44,7 +44,7 @@ internal sealed class MinAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MinAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)

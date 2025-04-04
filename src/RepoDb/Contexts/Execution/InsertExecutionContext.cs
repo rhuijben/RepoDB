@@ -20,10 +20,10 @@ internal class InsertExecutionContext
     /// <summary>
     /// 
     /// </summary>
-    public Action<DbCommand, object> ParametersSetterFunc { get; init; }
+    public Action<DbCommand, object?> ParametersSetterFunc { get; init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Action<object, object> KeyPropertySetterFunc { get; init; }
+    public Action<object, object?> KeyPropertySetterFunc { get; init; }
 }

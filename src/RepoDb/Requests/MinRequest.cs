@@ -20,7 +20,7 @@ internal sealed class MinRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MinRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         QueryGroup? where = null,
         string? hints = null,
@@ -48,7 +48,7 @@ internal sealed class MinRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MinRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         Field? field = null,
         QueryGroup? where = null,
         string? hints = null,

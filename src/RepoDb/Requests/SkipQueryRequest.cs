@@ -24,7 +24,7 @@ internal sealed class SkipQueryRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public SkipQueryRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field> fields,
         int skip,
         int take,
@@ -61,7 +61,7 @@ internal sealed class SkipQueryRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public SkipQueryRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field> fields,
         int skip,
         int take,
