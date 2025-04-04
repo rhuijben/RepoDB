@@ -14,7 +14,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <returns>The number of rows affected.</returns>
-    public int Truncate<TEntity>(string traceKey = TraceKeys.Truncate)
+    public int Truncate<TEntity>(string? traceKey = TraceKeys.Truncate)
         where TEntity : class
     {
         // Create a connection
@@ -44,7 +44,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The number of rows affected.</returns>
-    public int Truncate<TEntity>(string traceKey = TraceKeys.Truncate,
+    public int Truncate<TEntity>(string? traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -77,7 +77,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <returns>The number of rows affected.</returns>
-    public async Task<int> TruncateAsync<TEntity>(string traceKey = TraceKeys.Truncate)
+    public async Task<int> TruncateAsync<TEntity>(string? traceKey = TraceKeys.Truncate)
         where TEntity : class
     {
         // Create a connection
@@ -107,7 +107,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
-    public async Task<int> TruncateAsync<TEntity>(string traceKey = TraceKeys.Truncate,
+    public async Task<int> TruncateAsync<TEntity>(string? traceKey = TraceKeys.Truncate,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
@@ -139,7 +139,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
-    public async Task<int> TruncateAsync<TEntity>(string traceKey = TraceKeys.Truncate,
+    public async Task<int> TruncateAsync<TEntity>(string? traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -175,7 +175,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <returns>The number of rows affected.</returns>
     public int Truncate(string tableName,
-        string traceKey = TraceKeys.Truncate)
+        string? traceKey = TraceKeys.Truncate)
     {
         // Create a connection
         var connection = CreateConnection();
@@ -205,7 +205,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The number of rows affected.</returns>
     public int Truncate(string tableName,
-        string traceKey = TraceKeys.Truncate,
+        string? traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -239,7 +239,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <returns>The number of rows affected.</returns>
     public async Task<int> TruncateAsync(string tableName,
-        string traceKey = TraceKeys.Truncate)
+        string? traceKey = TraceKeys.Truncate)
     {
         // Create a connection
         var connection = CreateConnection();
@@ -270,7 +270,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
     public async Task<int> TruncateAsync(string tableName,
-        string traceKey = TraceKeys.Truncate,
+        string? traceKey = TraceKeys.Truncate,
         CancellationToken cancellationToken = default)
     {
         // Create a connection
@@ -303,7 +303,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
     public async Task<int> TruncateAsync(string tableName,
-        string traceKey = TraceKeys.Truncate,
+        string? traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

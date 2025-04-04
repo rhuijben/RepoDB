@@ -19,7 +19,7 @@ internal sealed class DeleteRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public DeleteRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         QueryGroup? where = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -44,7 +44,7 @@ internal sealed class DeleteRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public DeleteRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         QueryGroup? where = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)

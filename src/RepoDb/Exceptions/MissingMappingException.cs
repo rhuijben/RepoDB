@@ -14,7 +14,7 @@ public class MissingMappingException : Exception
     public MissingMappingException()
     {
     }
-    public MissingMappingException(string message, Exception innerException) : base(message, innerException)
+    public MissingMappingException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

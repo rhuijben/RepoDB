@@ -30,7 +30,7 @@ public interface ITrace
     /// </summary>
     /// <param name="log">The cancellable trace log object referenced by the execution.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    Task BeforeExecutionAsync(CancellableTraceLog log,
+    ValueTask BeforeExecutionAsync(CancellableTraceLog log,
         CancellationToken cancellationToken = default);
 
     /// <summary>
@@ -39,7 +39,7 @@ public interface ITrace
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <param name="log">The trace log object referenced by the execution.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    Task AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log,
+    ValueTask AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log,
         CancellationToken cancellationToken = default);
 
     #endregion

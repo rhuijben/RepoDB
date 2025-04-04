@@ -36,7 +36,7 @@ partial class Compiler
 
 
         // Variable
-        var createParameterExpression = GetDbCommandCreateParameterExpression(dbCommandExpression, dbField);
+        var createParameterExpression = GetDbCommandCreateParameterExpression(dbCommandExpression);
         parameterAssignmentExpressions.AddIfNotNull(Expression.Assign(dbParameterExpression, createParameterExpression));
 
         // DbParameter.ParameterName

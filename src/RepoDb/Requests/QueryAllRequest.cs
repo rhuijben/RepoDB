@@ -21,7 +21,7 @@ internal class QueryAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public QueryAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
@@ -49,7 +49,7 @@ internal class QueryAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public QueryAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,

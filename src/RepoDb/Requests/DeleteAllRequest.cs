@@ -18,7 +18,7 @@ internal sealed class DeleteAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public DeleteAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(ClassMappedNameCache.Get(type),
@@ -40,7 +40,7 @@ internal sealed class DeleteAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public DeleteAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : base(name,

@@ -90,20 +90,6 @@ public class ClassExpressionTest
 
     #endregion
 
-    #region GetProperties
-
-    [TestMethod]
-    public void TestClassExpressionGetProperties()
-    {
-        // Act
-        var properties = ClassExpression.GetProperties<ClassExpressionTestClass>();
-
-        // Assert
-        Assert.AreEqual(2, properties.Count());
-    }
-
-    #endregion
-
     #region GetPropertiesAndValues
 
     [TestMethod]

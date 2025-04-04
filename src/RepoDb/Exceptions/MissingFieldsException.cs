@@ -27,7 +27,7 @@ public class MissingFieldsException : Exception
     /// <param name="message">The exception message.</param>
     public MissingFieldsException(string message)
         : base(!string.IsNullOrEmpty(message) ? message : "The fields cannot be null or empty.") { }
-    public MissingFieldsException(string message, Exception innerException) : base(message, innerException)
+    public MissingFieldsException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

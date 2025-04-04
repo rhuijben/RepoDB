@@ -40,6 +40,6 @@ public static class QueryGroupExtension
     /// <param name="type">The target type where the current <see cref="QueryGroup"/> is to be mapped.</param>
     /// <returns>An instance of <see cref="QueryGroupTypeMap"/> object that holds the mapping.</returns>
     internal static QueryGroupTypeMap MapTo(this QueryGroup queryGroup,
-        Type type) =>
+        Type? type) =>
         new(queryGroup, type);
 }

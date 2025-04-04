@@ -14,7 +14,7 @@ public class MissingQualifierFieldsException : Exception
     public MissingQualifierFieldsException()
     {
     }
-    public MissingQualifierFieldsException(string message, Exception innerException) : base(message, innerException)
+    public MissingQualifierFieldsException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

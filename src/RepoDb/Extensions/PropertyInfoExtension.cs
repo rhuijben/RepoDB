@@ -180,7 +180,7 @@ public static class PropertyInfoExtension
             .ToHashSet();
 
         var mappedAttributes = PropertyValueAttributeMapper
-            .Get((declaringType ?? property.DeclaringType!), property)?
+            .Get((declaringType ?? property.DeclaringType!), property)
             .Where(e => customAttributes?.Contains(e) != true) ?? PropertyValueAttributeMapper.Get(property.PropertyType);
 
         return customAttributes == null ? mappedAttributes : mappedAttributes == null ? customAttributes :

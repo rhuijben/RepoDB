@@ -22,7 +22,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Field field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -61,7 +61,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -100,7 +100,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Field field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -139,7 +139,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -178,7 +178,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Field field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -217,7 +217,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -256,7 +256,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -295,7 +295,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -334,7 +334,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -373,7 +373,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public object? Min<TEntity>(Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -413,7 +413,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Field field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -453,7 +453,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -493,7 +493,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Field field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -533,7 +533,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -573,7 +573,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Field field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -613,7 +613,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -653,7 +653,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -693,7 +693,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -733,7 +733,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -773,7 +773,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public TResult Min<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -817,7 +817,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Field field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -859,7 +859,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -901,7 +901,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Field field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -943,7 +943,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -985,7 +985,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Field field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1027,7 +1027,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1069,7 +1069,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1111,7 +1111,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1153,7 +1153,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1195,7 +1195,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<object?> MinAsync<TEntity>(Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1238,7 +1238,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Field field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1281,7 +1281,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1324,7 +1324,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Field field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1367,7 +1367,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1410,7 +1410,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Field field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1453,7 +1453,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1496,7 +1496,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1539,7 +1539,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1582,7 +1582,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1625,7 +1625,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<TResult> MinAsync<TEntity, TResult>(Expression<Func<TEntity, TResult>> field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1671,7 +1671,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1711,7 +1711,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1751,7 +1751,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1791,7 +1791,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1832,7 +1832,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1873,7 +1873,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1914,7 +1914,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1955,7 +1955,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -2000,7 +2000,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -2043,7 +2043,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -2086,7 +2086,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -2129,7 +2129,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -2173,7 +2173,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         object? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -2217,7 +2217,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         QueryField? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -2261,7 +2261,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -2305,7 +2305,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Field field,
         QueryGroup? where = null,
         string? hints = null,
-        string traceKey = TraceKeys.Min,
+        string? traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

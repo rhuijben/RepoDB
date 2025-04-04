@@ -49,7 +49,7 @@ internal static class Tracer
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static async Task<TraceResult?> InvokeBeforeExecutionAsync(string? key,
+    public static async ValueTask<TraceResult?> InvokeBeforeExecutionAsync(string? key,
         ITrace? trace,
         DbCommand command,
         CancellationToken cancellationToken = default)
@@ -115,7 +115,7 @@ internal static class Tracer
     /// <param name="value"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public static async Task InvokeAfterExecutionAsync<TResult>(TraceResult? result,
+    public static async ValueTask InvokeAfterExecutionAsync<TResult>(TraceResult? result,
         ITrace? trace,
         TResult value,
         CancellationToken cancellationToken = default)

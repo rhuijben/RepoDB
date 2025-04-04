@@ -16,7 +16,7 @@ public class EmptyException : ArgumentOutOfRangeException
     public EmptyException()
     {
     }
-    public EmptyException(string message, Exception innerException) : base(message, innerException)
+    public EmptyException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

@@ -29,7 +29,7 @@ partial class Compiler
             string.Concat("parameter", dbField.Name.AsUnquoted(true, dbSetting).AsAlphaNumeric()));
 
         // Variable
-        var createParameterExpression = GetDbCommandCreateParameterExpression(dbCommandExpression, dbField);
+        var createParameterExpression = GetDbCommandCreateParameterExpression(dbCommandExpression);
         parameterAssignmentExpressions.AddIfNotNull(Expression.Assign(dbParameterExpression, createParameterExpression));
 
         // DbParameter.Name
@@ -42,8 +42,7 @@ partial class Compiler
         // DbParameter.Value
         var valueAssignmentExpression = GetDictionaryStringObjectDbParameterValueAssignmentExpression(dbParameterExpression,
             dictionaryInstanceExpression,
-            dbField,
-            dbSetting);
+            dbField);
         parameterAssignmentExpressions.AddIfNotNull(valueAssignmentExpression);
 
         // DbParameter.DbType

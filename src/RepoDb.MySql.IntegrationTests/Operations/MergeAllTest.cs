@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using RepoDb.Extensions;
 using RepoDb.MySql.IntegrationTests.Models;
 using RepoDb.MySql.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.MySql.IntegrationTests.Operations;
 
@@ -203,7 +204,7 @@ public class MergeAllTest
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = await connection.MergeAllAsync<CompleteTable>(tables, trace: new SimpleTracer());
+            var result = await connection.MergeAllAsync<CompleteTable>(tables, trace: new DiagnosticsTracer());
 
             // Assert
             Assert.AreEqual(tables.Count, connection.CountAll<CompleteTable>());

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
 using RepoDb.Contexts.Providers;
@@ -35,7 +36,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -80,11 +81,12 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
+        where TWhat : notnull
     {
         return UpdateInternal<TEntity>(connection: connection,
             tableName: tableName,
@@ -122,7 +124,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -164,7 +166,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -206,7 +208,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -248,7 +250,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -290,7 +292,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -328,7 +330,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -370,11 +372,12 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
+        where TWhat : notnull
     {
         return UpdateInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
@@ -410,7 +413,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -450,7 +453,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -490,7 +493,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -530,7 +533,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -570,7 +573,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -608,11 +611,11 @@ public static partial class DbConnectionExtension
     internal static int UpdateInternal<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        QueryGroup where,
+        QueryGroup? where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -674,7 +677,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -722,12 +725,13 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
+        where TWhat : notnull
     {
         return await UpdateAsyncInternal(connection: connection,
             tableName: tableName,
@@ -767,7 +771,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -812,7 +816,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -857,7 +861,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -902,7 +906,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -947,7 +951,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -988,7 +992,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1033,12 +1037,13 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
+        where TWhat : notnull
     {
         return await UpdateAsyncInternal(connection: connection,
             tableName: GetMappedName(entity),
@@ -1076,7 +1081,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1119,7 +1124,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1162,7 +1167,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1205,7 +1210,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1248,7 +1253,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1289,11 +1294,11 @@ public static partial class DbConnectionExtension
     internal static ValueTask<int> UpdateAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        QueryGroup where,
+        QueryGroup? where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1356,12 +1361,12 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction, entity?.GetType());
+        var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction, entity.GetType());
         return UpdateInternal<object>(connection: connection,
             tableName: tableName,
             entity: entity,
@@ -1397,7 +1402,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -1437,7 +1442,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -1477,7 +1482,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -1517,7 +1522,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -1560,14 +1565,14 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
-            entity?.GetType(), cancellationToken).ConfigureAwait(false);
+            entity.GetType(), cancellationToken).ConfigureAwait(false);
         return await UpdateAsyncInternal(connection: connection,
             tableName: tableName,
             entity: entity,
@@ -1605,7 +1610,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1648,7 +1653,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1691,7 +1696,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1734,7 +1739,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1777,11 +1782,11 @@ public static partial class DbConnectionExtension
     internal static int UpdateInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        QueryGroup where,
-        IEnumerable<Field>? fields = null,
+        QueryGroup? where,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -1810,7 +1815,7 @@ public static partial class DbConnectionExtension
             context.ParametersSetterFunc(command, entity);
 
             // Add the fields from the query group
-            WhereToCommandParameters(command, where, entity?.GetType(),
+            WhereToCommandParameters(command, where, entity.GetType(),
                 DbFieldCache.Get(connection, tableName, transaction));
 
             // Before Execution
@@ -1859,11 +1864,11 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<int> UpdateAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        QueryGroup where,
-        IEnumerable<Field>? fields = null,
+        QueryGroup? where,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1894,7 +1899,7 @@ public static partial class DbConnectionExtension
             context.ParametersSetterFunc(command, entity);
 
             // Add the fields from the query group
-            WhereToCommandParameters(command, where, entity?.GetType(),
+            WhereToCommandParameters(command, where, entity.GetType(),
                 await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false));
 
             // Before Execution

@@ -14,7 +14,7 @@ public class KeyFieldNotFoundException : Exception
     public KeyFieldNotFoundException()
     {
     }
-    public KeyFieldNotFoundException(string message, Exception innerException) : base(message, innerException)
+    public KeyFieldNotFoundException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

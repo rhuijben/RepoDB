@@ -14,7 +14,7 @@ public class IdentityFieldNotFoundException : Exception
     public IdentityFieldNotFoundException()
     {
     }
-    public IdentityFieldNotFoundException(string message, Exception innerException) : base(message, innerException)
+    public IdentityFieldNotFoundException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

@@ -343,7 +343,7 @@ public static class PropertyValueAttributeMapper
     /// <param name="entityType">The target type.</param>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/>.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute>? Get(Type entityType,
+    public static IEnumerable<PropertyValueAttribute> Get(Type entityType,
         PropertyInfo propertyInfo)
     {
         // Validate
@@ -356,7 +356,7 @@ public static class PropertyValueAttributeMapper
         maps.TryGetValue(key, out var value);
 
         // Return the value
-        return value;
+        return value ?? [];
     }
 
     /*
@@ -506,7 +506,7 @@ public static class PropertyValueAttributeMapper
     /// </summary>
     /// <param name="type">The target type.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute>? Get(Type type)
+    public static IEnumerable<PropertyValueAttribute> Get(Type type)
     {
         // Validate
         ObjectExtension.ThrowIfNull(type, "Type");
@@ -518,7 +518,7 @@ public static class PropertyValueAttributeMapper
         maps.TryGetValue(key, out var value);
 
         // Return the value
-        return value;
+        return value ?? [];
     }
 
     #endregion

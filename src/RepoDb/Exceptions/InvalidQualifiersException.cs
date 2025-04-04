@@ -14,7 +14,7 @@ public class InvalidQualifiersException : ArgumentOutOfRangeException
     public InvalidQualifiersException()
     {
     }
-    public InvalidQualifiersException(string message, Exception innerException) : base(message, innerException)
+    public InvalidQualifiersException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

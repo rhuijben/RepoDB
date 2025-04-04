@@ -19,7 +19,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public int Update(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Update<TEntity>(entity: entity,
@@ -44,7 +44,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         TWhat what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Update<TEntity, TWhat>(entity: entity,
@@ -69,7 +69,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         object what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Update<TEntity>(entity: entity,
@@ -94,7 +94,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, bool>> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Update<TEntity>(entity: entity,
@@ -119,7 +119,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryField where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Update<TEntity>(entity: entity,
@@ -144,7 +144,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Update<TEntity>(entity: entity,
@@ -169,7 +169,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryGroup where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Update<TEntity>(entity: entity,
@@ -197,7 +197,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     public Task<int> UpdateAsync(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -225,7 +225,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         TWhat what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -253,7 +253,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         object what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -281,7 +281,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, bool>> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -309,7 +309,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryField where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -337,7 +337,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -365,7 +365,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryGroup where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.Update,
+        string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

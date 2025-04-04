@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿#nullable enable
+using System.Reflection;
 
 namespace RepoDb.Extensions;
 
@@ -13,7 +14,7 @@ internal static class MemberInfoExtension
     /// </summary>
     /// <param name="member">The member where to retrieve a name.</param>
     /// <returns>The name of the <see cref="MemberInfo"/>.</returns>
-    internal static string GetMappedName(this MemberInfo member) => 
+    internal static string GetMappedName(this MemberInfo member) =>
         member is PropertyInfo memberInfo ? PropertyMappedNameCache.Get(memberInfo) : member.Name;
 
     /// <summary>
@@ -23,9 +24,9 @@ internal static class MemberInfoExtension
     /// <param name="obj">The object whose member value will be returned.</param>
     /// <param name="parameters">The argument list of parameters if needed.</param>
     /// <returns>The extracted value from <see cref="MemberInfo"/> object.</returns>
-    internal static object GetValue(this MemberInfo member,
-        object obj,
-        object[] parameters = null)
+    internal static object? GetValue(this MemberInfo member,
+        object? obj,
+        object[]? parameters = null)
     {
         return member switch
         {
@@ -43,8 +44,8 @@ internal static class MemberInfoExtension
     /// <param name="obj">The object whose member value will be set.</param>
     /// <param name="value">The target value of the member.</param>
     internal static void SetValue(this MemberInfo member,
-        object obj,
-        object value)
+        object? obj,
+        object? value)
     {
         if (member is FieldInfo fieldInfo)
         {
@@ -57,7 +58,7 @@ internal static class MemberInfoExtension
     }
 
     #region Identification and Conversion
-    
+
     /// <summary>
     /// Converts the current instance of <see cref="MemberInfo"/> object into <see cref="PropertyInfo"/> object.
     /// </summary>
@@ -65,7 +66,7 @@ internal static class MemberInfoExtension
     /// <returns>A converted instance of <see cref="PropertyInfo"/> object.</returns>
     public static PropertyInfo ToPropertyInfo(this MemberInfo member) =>
         (PropertyInfo)member;
-    
+
     #endregion
 
     #region Helpers

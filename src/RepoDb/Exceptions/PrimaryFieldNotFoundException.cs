@@ -14,7 +14,7 @@ public class PrimaryFieldNotFoundException : Exception
     public PrimaryFieldNotFoundException()
     {
     }
-    public PrimaryFieldNotFoundException(string message, Exception innerException) : base(message, innerException)
+    public PrimaryFieldNotFoundException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 }

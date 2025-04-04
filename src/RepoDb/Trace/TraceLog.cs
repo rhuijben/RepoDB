@@ -11,7 +11,7 @@ public class TraceLog
     /// </summary>
     /// <param name="sessionId"></param>
     /// <param name="key"></param>
-    protected internal TraceLog(Guid sessionId,
+    protected internal TraceLog(long sessionId,
         string? key)
     {
         SessionId = sessionId;
@@ -23,7 +23,7 @@ public class TraceLog
     /// <summary>
     /// Gets the session identifier used by the current trace.
     /// </summary>
-    public Guid SessionId { get; }
+    public long SessionId { get; }
 
     /// <summary>
     /// Gets the actual tracing key used by the operation.

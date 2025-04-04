@@ -12,7 +12,7 @@ internal readonly struct QueryGroupTypeMap
     /// <param name="queryGroup">The <see cref="RepoDb.QueryGroup"/> object.</param>
     /// <param name="type">The type where the <see cref="RepoDb.QueryGroup"/> object is mapped.</param>
     public QueryGroupTypeMap(QueryGroup queryGroup,
-        Type type)
+        Type? type)
     {
         QueryGroup = queryGroup;
         MappedType = type;
@@ -26,5 +26,5 @@ internal readonly struct QueryGroupTypeMap
     /// <summary>
     /// Gets the type where the current <see cref="RepoDb.QueryGroup"/> is mapped.
     /// </summary>
-    public Type MappedType { get; }
+    public Type? MappedType { get; }
 }

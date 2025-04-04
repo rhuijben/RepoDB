@@ -21,7 +21,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public int DeleteAll<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -61,7 +61,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public int DeleteAll<TEntity, TKey>(string tableName,
         IEnumerable<TKey> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -100,7 +100,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public int DeleteAll<TEntity>(string tableName,
         IEnumerable<object> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -137,7 +137,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int DeleteAll<TEntity>(IEnumerable<TEntity> entities,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -174,7 +174,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int DeleteAll<TEntity, TKey>(IEnumerable<TKey> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -210,7 +210,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int DeleteAll<TEntity>(IEnumerable<object> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -244,7 +244,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int DeleteAll<TEntity>(string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -286,7 +286,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<int> DeleteAllAsync<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -329,7 +329,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<int> DeleteAllAsync<TEntity, TKey>(string tableName,
         IEnumerable<TKey> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -371,7 +371,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<int> DeleteAllAsync<TEntity>(string tableName,
         IEnumerable<object> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -411,7 +411,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public async Task<int> DeleteAllAsync<TEntity>(IEnumerable<TEntity> entities,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -451,7 +451,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public async Task<int> DeleteAllAsync<TEntity, TKey>(IEnumerable<TKey> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -490,7 +490,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public async Task<int> DeleteAllAsync<TEntity>(IEnumerable<object> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -527,7 +527,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public async Task<int> DeleteAllAsync<TEntity>(string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -569,7 +569,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public int DeleteAll(string tableName,
         IEnumerable<object> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -604,7 +604,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public int DeleteAll(string tableName,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -645,7 +645,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<int> DeleteAllAsync(string tableName,
         IEnumerable<object> keys,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -683,7 +683,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows that has been deleted from the table.</returns>
     public async Task<int> DeleteAllAsync(string tableName,
         string? hints = null,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

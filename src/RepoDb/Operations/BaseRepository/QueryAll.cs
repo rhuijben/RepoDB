@@ -22,7 +22,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.QueryAll<TEntity>(tableName: tableName,
@@ -48,7 +48,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null)
     {
         return DbRepository.QueryAll<TEntity>(fields: fields,
@@ -80,7 +80,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -109,7 +109,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
         string? cacheKey = null,
-        string traceKey = TraceKeys.QueryAll,
+        string? traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

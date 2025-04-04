@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using RepoDb.Interfaces;
 using RepoDb.Requests;
 
@@ -26,7 +27,7 @@ public static partial class DbConnectionExtension
     public static long CountAll<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -56,7 +57,7 @@ public static partial class DbConnectionExtension
     internal static long CountAllInternal<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -100,7 +101,7 @@ public static partial class DbConnectionExtension
     public static async Task<long> CountAllAsync<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -133,7 +134,7 @@ public static partial class DbConnectionExtension
     internal static ValueTask<long> CountAllAsyncInternal<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -179,7 +180,7 @@ public static partial class DbConnectionExtension
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -210,7 +211,7 @@ public static partial class DbConnectionExtension
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -254,7 +255,7 @@ public static partial class DbConnectionExtension
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -288,7 +289,7 @@ public static partial class DbConnectionExtension
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -332,7 +333,7 @@ public static partial class DbConnectionExtension
         CountAllRequest request,
         object? param,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null)
     {
@@ -376,7 +377,7 @@ public static partial class DbConnectionExtension
         CountAllRequest request,
         object? param,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.CountAll,
+        string? traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         CancellationToken cancellationToken = default)

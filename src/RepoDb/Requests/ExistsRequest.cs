@@ -19,7 +19,7 @@ internal sealed class ExistsRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public ExistsRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         QueryGroup? where = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -44,7 +44,7 @@ internal sealed class ExistsRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public ExistsRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         QueryGroup? where = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)

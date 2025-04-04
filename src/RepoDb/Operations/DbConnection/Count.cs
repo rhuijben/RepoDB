@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -30,7 +31,7 @@ public static partial class DbConnectionExtension
         object? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -63,7 +64,7 @@ public static partial class DbConnectionExtension
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -96,7 +97,7 @@ public static partial class DbConnectionExtension
         QueryField? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -129,7 +130,7 @@ public static partial class DbConnectionExtension
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -162,7 +163,7 @@ public static partial class DbConnectionExtension
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -195,7 +196,7 @@ public static partial class DbConnectionExtension
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -248,7 +249,7 @@ public static partial class DbConnectionExtension
         object? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -284,7 +285,7 @@ public static partial class DbConnectionExtension
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -320,7 +321,7 @@ public static partial class DbConnectionExtension
         QueryField? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -356,7 +357,7 @@ public static partial class DbConnectionExtension
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -392,7 +393,7 @@ public static partial class DbConnectionExtension
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -427,7 +428,7 @@ public static partial class DbConnectionExtension
     internal static ValueTask<long> CountAsyncInternal<TEntity>(this IDbConnection connection,
         QueryGroup? where = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         string? hints = null,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -483,7 +484,7 @@ public static partial class DbConnectionExtension
         object? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -517,7 +518,7 @@ public static partial class DbConnectionExtension
         QueryField? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -551,7 +552,7 @@ public static partial class DbConnectionExtension
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -585,7 +586,7 @@ public static partial class DbConnectionExtension
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -619,7 +620,7 @@ public static partial class DbConnectionExtension
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -672,7 +673,7 @@ public static partial class DbConnectionExtension
         object? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -709,7 +710,7 @@ public static partial class DbConnectionExtension
         QueryField? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -746,7 +747,7 @@ public static partial class DbConnectionExtension
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -783,7 +784,7 @@ public static partial class DbConnectionExtension
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -820,7 +821,7 @@ public static partial class DbConnectionExtension
         QueryGroup? where = null,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -871,7 +872,7 @@ public static partial class DbConnectionExtension
         CountRequest request,
         object? param,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null)
     {
@@ -915,7 +916,7 @@ public static partial class DbConnectionExtension
         CountRequest request,
         object? param,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.Count,
+        string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         CancellationToken cancellationToken = default)

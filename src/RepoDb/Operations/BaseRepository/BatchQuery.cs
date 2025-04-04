@@ -25,7 +25,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<OrderField>? orderBy,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(tableName: tableName,
@@ -58,7 +58,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         object? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(tableName: tableName,
@@ -92,7 +92,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         IEnumerable<Field>? fields = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(tableName: tableName,
@@ -126,7 +126,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryField? where = null,
         string? hints = null,
         IEnumerable<Field>? fields = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(tableName: tableName,
@@ -160,7 +160,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         IEnumerable<Field>? fields = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(tableName: tableName,
@@ -194,7 +194,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryGroup? where = null,
         string? hints = null,
         IEnumerable<Field>? fields = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(tableName: tableName,
@@ -224,7 +224,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<OrderField>? orderBy,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(page: page,
@@ -254,7 +254,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         object? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(where: where,
@@ -284,7 +284,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, bool>>? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(page: page,
@@ -315,7 +315,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryField? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(page: page,
@@ -346,7 +346,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<QueryField>? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(page: page,
@@ -377,7 +377,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryGroup? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
         return DbRepository.BatchQuery<TEntity>(page: page,
@@ -413,7 +413,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<OrderField>? orderBy,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -449,7 +449,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         object? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -486,7 +486,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         IEnumerable<Field>? fields = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -523,7 +523,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryField? where = null,
         string? hints = null,
         IEnumerable<Field>? fields = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -560,7 +560,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         IEnumerable<Field>? fields = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -597,7 +597,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryGroup? where = null,
         string? hints = null,
         IEnumerable<Field>? fields = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -630,7 +630,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<OrderField>? orderBy,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -663,7 +663,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         object? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -697,7 +697,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         Expression<Func<TEntity, bool>>? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -731,7 +731,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryField? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -765,7 +765,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IEnumerable<QueryField>? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -799,7 +799,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         QueryGroup? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string traceKey = TraceKeys.BatchQuery,
+        string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

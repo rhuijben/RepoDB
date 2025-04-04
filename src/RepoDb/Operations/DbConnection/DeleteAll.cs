@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -32,7 +33,7 @@ public static partial class DbConnectionExtension
         IEnumerable<TEntity> entities,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -105,7 +106,7 @@ public static partial class DbConnectionExtension
         IEnumerable<TKey> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -113,7 +114,7 @@ public static partial class DbConnectionExtension
     {
         return DeleteAllInternal(connection: connection,
             tableName: tableName,
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -141,7 +142,7 @@ public static partial class DbConnectionExtension
         IEnumerable<object> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -175,7 +176,7 @@ public static partial class DbConnectionExtension
         IEnumerable<TEntity> entities,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -188,7 +189,7 @@ public static partial class DbConnectionExtension
 
             return DeleteAllInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -245,7 +246,7 @@ public static partial class DbConnectionExtension
         IEnumerable<TKey> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -253,7 +254,7 @@ public static partial class DbConnectionExtension
     {
         return DeleteAllInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -279,7 +280,7 @@ public static partial class DbConnectionExtension
         IEnumerable<object> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -311,7 +312,7 @@ public static partial class DbConnectionExtension
     public static int DeleteAll<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -341,7 +342,7 @@ public static partial class DbConnectionExtension
     internal static int DeleteAllInternal<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -387,7 +388,7 @@ public static partial class DbConnectionExtension
         IEnumerable<TEntity> entities,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -463,21 +464,21 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    public static Task<int> DeleteAllAsync<TEntity, TKey>(this IDbConnection connection,
+    public static async Task<int> DeleteAllAsync<TEntity, TKey>(this IDbConnection connection,
         string tableName,
         IEnumerable<TKey> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -502,19 +503,19 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    public static Task<int> DeleteAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> DeleteAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<object> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
             keys: keys,
             hints: hints,
@@ -544,7 +545,7 @@ public static partial class DbConnectionExtension
         IEnumerable<TEntity> entities,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -558,7 +559,7 @@ public static partial class DbConnectionExtension
 
             return await DeleteAllAsyncInternal(connection: connection,
                 tableName: ClassMappedNameCache.Get<TEntity>(),
-                keys: keys?.WithType<object>(),
+                keys: keys.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -618,20 +619,20 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    public static Task<int> DeleteAllAsync<TEntity, TKey>(this IDbConnection connection,
+    public static async Task<int> DeleteAllAsync<TEntity, TKey>(this IDbConnection connection,
         IEnumerable<TKey> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
-            keys: keys?.WithType<object>(),
+            keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -655,18 +656,18 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    public static Task<int> DeleteAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> DeleteAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<object> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             keys: keys,
             hints: hints,
@@ -694,7 +695,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> DeleteAllAsync<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -727,7 +728,7 @@ public static partial class DbConnectionExtension
     internal static ValueTask<int> DeleteAllAsyncInternal<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -773,7 +774,7 @@ public static partial class DbConnectionExtension
         IEnumerable<object> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -805,7 +806,7 @@ public static partial class DbConnectionExtension
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -836,7 +837,7 @@ public static partial class DbConnectionExtension
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -875,7 +876,7 @@ public static partial class DbConnectionExtension
         IEnumerable<object> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -936,18 +937,18 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    public static Task<int> DeleteAllAsync(this IDbConnection connection,
+    public static async Task<int> DeleteAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
             keys: keys,
             hints: hints,
@@ -976,7 +977,7 @@ public static partial class DbConnectionExtension
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1010,7 +1011,7 @@ public static partial class DbConnectionExtension
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1047,12 +1048,12 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    public static async Task<int> DeleteAllAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<int> DeleteAllAsyncInternal(this IDbConnection connection,
         string tableName,
         IEnumerable<object> keys,
         string? hints = null,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -1114,7 +1115,7 @@ public static partial class DbConnectionExtension
     internal static int DeleteAllInternalBase(this IDbConnection connection,
         DeleteAllRequest request,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null)
     {
@@ -1157,7 +1158,7 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<int> DeleteAllAsyncInternalBase(this IDbConnection connection,
         DeleteAllRequest request,
         int commandTimeout = 0,
-        string traceKey = TraceKeys.DeleteAll,
+        string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         CancellationToken cancellationToken = default)

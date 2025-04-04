@@ -33,10 +33,10 @@ public class CancellableTraceLogTest
         {
         }
 
-        public Task AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log,
+        public ValueTask AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log,
             CancellationToken cancellationToken = default)
         {
-            return Task.CompletedTask;
+            return new();
         }
 
         public void BeforeExecution(CancellableTraceLog log)
@@ -44,11 +44,11 @@ public class CancellableTraceLogTest
             log.Cancel(true);
         }
 
-        public Task BeforeExecutionAsync(CancellableTraceLog log,
+        public ValueTask BeforeExecutionAsync(CancellableTraceLog log,
             CancellationToken cancellationToken = default)
         {
             log.Cancel(true);
-            return Task.CompletedTask;
+            return new();
         }
     }
 
@@ -59,11 +59,11 @@ public class CancellableTraceLogTest
             AfterExecutionInvocationCount++;
         }
 
-        public Task AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log,
+        public ValueTask AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log,
             CancellationToken cancellationToken = default)
         {
             AfterExecutionInvocationCount++;
-            return Task.CompletedTask;
+            return new();
         }
 
         public void BeforeExecution(CancellableTraceLog log)
@@ -72,12 +72,12 @@ public class CancellableTraceLogTest
             BeforeExecutionInvocationCount++;
         }
 
-        public Task BeforeExecutionAsync(CancellableTraceLog log,
+        public ValueTask BeforeExecutionAsync(CancellableTraceLog log,
             CancellationToken cancellationToken = default)
         {
             log.Cancel(false);
             BeforeExecutionInvocationCount++;
-            return Task.CompletedTask;
+            return new();
         }
 
         #region Properties
@@ -99,12 +99,12 @@ public class CancellableTraceLogTest
             IsValid = true;
         }
 
-        public Task AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log,
+        public ValueTask AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log,
             CancellationToken cancellationToken = default)
         {
             ValidateResultTraceLog(log);
             IsValid = true;
-            return Task.CompletedTask;
+            return new();
         }
 
         public void BeforeExecution(CancellableTraceLog log)
@@ -113,12 +113,12 @@ public class CancellableTraceLogTest
             IsValid = true;
         }
 
-        public Task BeforeExecutionAsync(CancellableTraceLog log,
+        public ValueTask BeforeExecutionAsync(CancellableTraceLog log,
             CancellationToken cancellationToken = default)
         {
             ValidateCancellableTraceLog(log);
             IsValid = true;
-            return Task.CompletedTask;
+            return new();
         }
 
         private void ValidateResultTraceLog<TResult>(ResultTraceLog<TResult> log)
@@ -151,7 +151,7 @@ public class CancellableTraceLogTest
             {
                 throw new ArgumentNullException(nameof(log));
             }
-            if (log.SessionId == Guid.Empty)
+            if (log.SessionId == 0)
             {
                 throw new InvalidOperationException(nameof(log.SessionId));
             }
@@ -188,7 +188,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnExecuteNonQueryAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnExecuteNonQueryAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -215,7 +215,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnExecuteQueryAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnExecuteQueryAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -242,7 +242,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnExecuteScalarAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnExecuteScalarAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -269,7 +269,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionExecuteQueryMultipleAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionExecuteQueryMultipleAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -296,7 +296,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnAverageAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnAverageAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -323,7 +323,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnAverageAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnAverageAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -350,7 +350,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnBatchQueryAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnBatchQueryAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -377,7 +377,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnCountAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnCountAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -404,7 +404,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnCountAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnCountAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -431,7 +431,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnDeleteAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnDeleteAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -458,7 +458,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnDeleteAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnDeleteAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -485,7 +485,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnExistsAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnExistsAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -512,7 +512,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnInsertAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnInsertAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -559,7 +559,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnInsertAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnInsertAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -576,7 +576,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnInsertAllAsyncMultipleEntitiesCancelledOperation()
+    public async ValueTask ThrowExceptionOnInsertAllAsyncMultipleEntitiesCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -609,7 +609,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnMaxAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnMaxAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -636,7 +636,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnMaxAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnMaxAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -663,7 +663,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnMergeAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnMergeAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -694,7 +694,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnMergeAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnMergeAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -727,7 +727,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnMergeAllMultipleEntitiesAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnMergeAllMultipleEntitiesAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -760,7 +760,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnMinAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnMinAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -787,7 +787,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnMinAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnMinAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -814,7 +814,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnQueryAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnQueryAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -841,7 +841,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnQueryAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnQueryAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -872,7 +872,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnQueryMultipleForT2AsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnQueryMultipleForT2AsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -904,7 +904,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnQueryMultipleForT3AsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnQueryMultipleForT3AsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -938,7 +938,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnQueryMultipleForT4AsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnQueryMultipleForT4AsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -974,7 +974,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnQueryMultipleForT5AsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnQueryMultipleForT5AsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1012,7 +1012,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnQueryMultipleForT6AsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnQueryMultipleForT6AsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1052,7 +1052,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnQueryMultipleForT7AsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnQueryMultipleForT7AsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1088,7 +1088,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnSumAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnSumAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1115,7 +1115,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnSumAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnSumAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1142,7 +1142,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnTruncateAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnTruncateAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1169,7 +1169,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnUpdateAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnUpdateAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1200,7 +1200,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnUpdateAllAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnUpdateAllAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1233,7 +1233,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod, ExpectedException(typeof(CancelledExecutionException))]
-    public async Task ThrowExceptionOnUpdateAllMultipleEntitiesAsyncCancelledOperation()
+    public async ValueTask ThrowExceptionOnUpdateAllMultipleEntitiesAsyncCancelledOperation()
     {
         // Prepare
         var connection = new TraceDbConnection();
@@ -1275,7 +1275,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForExecuteNonQueryAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForExecuteNonQueryAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1312,7 +1312,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForExecuteQueryAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForExecuteQueryAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1349,7 +1349,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForExecuteScalarAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForExecuteScalarAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1386,7 +1386,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForExecuteQueryMultipleAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForExecuteQueryMultipleAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1449,7 +1449,7 @@ public class CancellableTraceLogTest
     #region AverageAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForAverageAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForAverageAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1466,7 +1466,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForAverageAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForAverageAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1529,7 +1529,7 @@ public class CancellableTraceLogTest
     #region AverageAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForAverageAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForAverageAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1545,7 +1545,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForAverageAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForAverageAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1593,7 +1593,7 @@ public class CancellableTraceLogTest
     #region BatchQueryAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForBatchQueryAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForBatchQueryAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1657,7 +1657,7 @@ public class CancellableTraceLogTest
     #region CountAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForCountAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForCountAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1673,7 +1673,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForCountAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForCountAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1733,7 +1733,7 @@ public class CancellableTraceLogTest
     #region CountAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForCountAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForCountAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1748,7 +1748,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForCountAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForCountAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1812,7 +1812,7 @@ public class CancellableTraceLogTest
     #region DeleteAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForDeleteAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForDeleteAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1828,7 +1828,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForDeleteAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForDeleteAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1891,7 +1891,7 @@ public class CancellableTraceLogTest
     #region DeleteAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForDeleteAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForDeleteAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1906,7 +1906,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForDeleteAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForDeleteAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1967,7 +1967,7 @@ public class CancellableTraceLogTest
     #region ExistsAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForExistsAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForExistsAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -1983,7 +1983,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForExistsAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForExistsAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2046,7 +2046,7 @@ public class CancellableTraceLogTest
     #region InsertAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForInsertAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForInsertAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2063,7 +2063,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForInsertAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForInsertAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2126,7 +2126,7 @@ public class CancellableTraceLogTest
     #region InsertAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForInsertAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForInsertAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2142,7 +2142,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForInsertAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForInsertAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2207,7 +2207,7 @@ public class CancellableTraceLogTest
     #region MaxAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMaxAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMaxAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2224,7 +2224,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMaxAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMaxAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2287,7 +2287,7 @@ public class CancellableTraceLogTest
     #region MaxAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMaxAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMaxAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2303,7 +2303,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMaxAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMaxAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2366,7 +2366,7 @@ public class CancellableTraceLogTest
     #region MergeAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMergeAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMergeAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2383,7 +2383,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMergeAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMergeAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2446,7 +2446,7 @@ public class CancellableTraceLogTest
     #region MergeAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMergeAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMergeAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2463,7 +2463,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMergeAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMergeAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2527,7 +2527,7 @@ public class CancellableTraceLogTest
     #region MinAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMinAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMinAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2544,7 +2544,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMinAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMinAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2607,7 +2607,7 @@ public class CancellableTraceLogTest
     #region MinAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMinAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMinAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2623,7 +2623,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForMinAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForMinAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2668,7 +2668,7 @@ public class CancellableTraceLogTest
     #region QueryAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForQueryAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForQueryAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2711,7 +2711,7 @@ public class CancellableTraceLogTest
     #region QueryAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForQueryAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForQueryAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2881,7 +2881,7 @@ public class CancellableTraceLogTest
     #region T2
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT2()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT2()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2902,7 +2902,7 @@ public class CancellableTraceLogTest
     #region T3
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT3()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT3()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2924,7 +2924,7 @@ public class CancellableTraceLogTest
     #region T4
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT4()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT4()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2947,7 +2947,7 @@ public class CancellableTraceLogTest
     #region T5
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT5()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT5()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2971,7 +2971,7 @@ public class CancellableTraceLogTest
     #region T6
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT6()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT6()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -2996,7 +2996,7 @@ public class CancellableTraceLogTest
     #region T7
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT7()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForQueryMultipleAsyncForT7()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3067,7 +3067,7 @@ public class CancellableTraceLogTest
     #region SumAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForSumAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForSumAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3084,7 +3084,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForSumAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForSumAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3147,7 +3147,7 @@ public class CancellableTraceLogTest
     #region SumAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForSumAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForSumAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3163,7 +3163,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForSumAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForSumAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3223,7 +3223,7 @@ public class CancellableTraceLogTest
     #region TruncateAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForTruncateAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForTruncateAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3238,7 +3238,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForTruncateAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForTruncateAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3312,7 +3312,7 @@ public class CancellableTraceLogTest
     #region UpdateAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForUpdateAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForUpdateAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3334,7 +3334,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForUpdateAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForUpdateAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3404,7 +3404,7 @@ public class CancellableTraceLogTest
     #region UpdateAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForUpdateAllAsync()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForUpdateAllAsync()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3421,7 +3421,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTraceSilentCancellationForUpdateAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTraceSilentCancellationForUpdateAllAsyncViaTableName()
     {
         // Prepare
         var trace = new SilentCancellationTrace();
@@ -3463,7 +3463,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForExecuteNonQueryAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForExecuteNonQueryAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3498,7 +3498,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForExecuteQueryAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForExecuteQueryAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3533,7 +3533,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForExecuteScalarAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForExecuteScalarAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3568,7 +3568,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForExecuteQueryMultipleAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForExecuteQueryMultipleAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3628,7 +3628,7 @@ public class CancellableTraceLogTest
     #region AverageAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForAverageAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForAverageAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3644,7 +3644,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForAverageAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForAverageAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3704,7 +3704,7 @@ public class CancellableTraceLogTest
     #region AverageAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForAverageAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForAverageAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3719,7 +3719,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForAverageAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForAverageAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3765,7 +3765,7 @@ public class CancellableTraceLogTest
     #region BatchQueryAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForBatchQueryAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForBatchQueryAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3826,7 +3826,7 @@ public class CancellableTraceLogTest
     #region CountAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForCountAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForCountAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3841,7 +3841,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForCountAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForCountAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3898,7 +3898,7 @@ public class CancellableTraceLogTest
     #region CountAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForCountAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForCountAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3912,7 +3912,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForCountAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForCountAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3973,7 +3973,7 @@ public class CancellableTraceLogTest
     #region DeleteAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForDeleteAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForDeleteAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -3988,7 +3988,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForDeleteAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForDeleteAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4048,7 +4048,7 @@ public class CancellableTraceLogTest
     #region DeleteAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForDeleteAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForDeleteAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4062,7 +4062,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForDeleteAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForDeleteAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4120,7 +4120,7 @@ public class CancellableTraceLogTest
     #region ExistsAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForExistsAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForExistsAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4135,7 +4135,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForExistsAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForExistsAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4195,7 +4195,7 @@ public class CancellableTraceLogTest
     #region InsertAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForInsertAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForInsertAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4211,7 +4211,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForInsertAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForInsertAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4271,7 +4271,7 @@ public class CancellableTraceLogTest
     #region InsertAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForInsertAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForInsertAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4286,7 +4286,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForInsertAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForInsertAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4348,7 +4348,7 @@ public class CancellableTraceLogTest
     #region MaxAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMaxAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForMaxAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4364,7 +4364,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMaxAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForMaxAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4424,7 +4424,7 @@ public class CancellableTraceLogTest
     #region MaxAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMaxAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForMaxAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4439,7 +4439,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMaxAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForMaxAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4499,7 +4499,7 @@ public class CancellableTraceLogTest
     #region MergeAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMergeAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForMergeAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4515,7 +4515,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMergeAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForMergeAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4575,7 +4575,7 @@ public class CancellableTraceLogTest
     #region MergeAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMergeAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForMergeAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4591,7 +4591,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMergeAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForMergeAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4652,7 +4652,7 @@ public class CancellableTraceLogTest
     #region MinAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMinAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForMinAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4668,7 +4668,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMinAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForMinAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4728,7 +4728,7 @@ public class CancellableTraceLogTest
     #region MinAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMinAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForMinAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4743,7 +4743,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForMinAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForMinAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4786,7 +4786,7 @@ public class CancellableTraceLogTest
     #region QueryAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForQueryAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForQueryAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4827,7 +4827,7 @@ public class CancellableTraceLogTest
     #region QueryAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForQueryAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForQueryAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -4990,7 +4990,7 @@ public class CancellableTraceLogTest
     #region T2
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForQueryMultipleAsyncForT2()
+    public async ValueTask TestDbConnectionTracePropertiesForQueryMultipleAsyncForT2()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5010,7 +5010,7 @@ public class CancellableTraceLogTest
     #region T3
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForQueryMultipleAsyncForT3()
+    public async ValueTask TestDbConnectionTracePropertiesForQueryMultipleAsyncForT3()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5031,7 +5031,7 @@ public class CancellableTraceLogTest
     #region T4
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForQueryMultipleAsyncForT4()
+    public async ValueTask TestDbConnectionTracePropertiesForQueryMultipleAsyncForT4()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5053,7 +5053,7 @@ public class CancellableTraceLogTest
     #region T5
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForQueryMultipleAsyncForT5()
+    public async ValueTask TestDbConnectionTracePropertiesForQueryMultipleAsyncForT5()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5076,7 +5076,7 @@ public class CancellableTraceLogTest
     #region T6
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForQueryMultipleAsyncForT6()
+    public async ValueTask TestDbConnectionTracePropertiesForQueryMultipleAsyncForT6()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5100,7 +5100,7 @@ public class CancellableTraceLogTest
     #region T7
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForQueryMultipleAsyncForT7()
+    public async ValueTask TestDbConnectionTracePropertiesForQueryMultipleAsyncForT7()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5168,7 +5168,7 @@ public class CancellableTraceLogTest
     #region SumAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForSumAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForSumAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5184,7 +5184,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForSumAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForSumAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5244,7 +5244,7 @@ public class CancellableTraceLogTest
     #region SumAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForSumAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForSumAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5259,7 +5259,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForSumAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForSumAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5316,7 +5316,7 @@ public class CancellableTraceLogTest
     #region TruncateAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForTruncateAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForTruncateAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5330,7 +5330,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForTruncateAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForTruncateAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5401,7 +5401,7 @@ public class CancellableTraceLogTest
     #region UpdateAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForUpdateAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForUpdateAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5422,7 +5422,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForUpdateAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForUpdateAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5489,7 +5489,7 @@ public class CancellableTraceLogTest
     #region UpdateAllAsync
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForUpdateAllAsync()
+    public async ValueTask TestDbConnectionTracePropertiesForUpdateAllAsync()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
@@ -5505,7 +5505,7 @@ public class CancellableTraceLogTest
     }
 
     [TestMethod]
-    public async Task TestDbConnectionTracePropertiesForUpdateAllAsyncViaTableName()
+    public async ValueTask TestDbConnectionTracePropertiesForUpdateAllAsyncViaTableName()
     {
         // Prepare
         var trace = new PropertyValidatorTrace();
