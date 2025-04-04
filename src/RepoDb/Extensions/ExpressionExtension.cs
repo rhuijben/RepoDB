@@ -337,7 +337,6 @@ public static class ExpressionExtension
         }
 
         throw new NotSupportedException($"Obtaining value from binary expression '{expression}' is currently not supported.");
-        return expression.Right.GetValue();
     }
 
     /// <summary>

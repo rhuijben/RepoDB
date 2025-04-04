@@ -21,7 +21,9 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
-    <TestTargetFrameworks>net9.0</TestTargetFrameworks>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+    <EnableMSTestRunner>true</EnableMSTestRunner>
+    <TestTargetFrameworks>net9.0;net8.0;net48</TestTargetFrameworks>
   </PropertyGroup>
   <Target Name="SetGenerateBeforeBuild" BeforeTargets="Build">
     <!-- IsPackable is set in project files, so delay evaluating this -->

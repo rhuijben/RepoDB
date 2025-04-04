@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
@@ -10,6 +11,7 @@ namespace RepoDb;
 /// </summary>
 public static partial class ClassExpression
 {
+    private static readonly ConcurrentDictionary<Type, object> getPropertyValuesCache = new();
     #region GetEntitiesPropertyValues
 
     /// <summary>
@@ -25,7 +27,7 @@ public static partial class ClassExpression
         where TEntity : class
     {
         var property = ExpressionExtension.GetProperty<TEntity>(expression) ?? throw new PropertyNotFoundException(nameof(expression), "Property not found");
-        var classProperty = PropertyCache.Get<TEntity>().GetByName(property.Name);
+        var classProperty = PropertyCache.Get<TEntity>().GetByName(property.Name) ?? throw new PropertyNotFoundException(nameof(expression), "Property not found on class"); ;
         return GetEntitiesPropertyValues<TEntity, TResult>(entities, classProperty);
     }
 
@@ -95,7 +97,7 @@ public static partial class ClassExpression
             var obj = Expression.Parameter(typeof(TEntity), "obj");
 
             // Set the body
-            var body = (Expression)Expression.Property(obj, property.PropertyInfo);
+            Expression body = Expression.Property(obj, property.PropertyInfo);
 
             // Convert if necessary
             if (property.PropertyInfo.PropertyType != typeof(TResult))
@@ -122,7 +124,7 @@ public static partial class ClassExpression
             }
 
             // Check the type (polymorphism)
-            if (!property.PropertyInfo.DeclaringType.IsAssignableFrom(typeof(TEntity)))
+            if (!property.DeclaringType.IsAssignableFrom(typeof(TEntity)))
             {
                 throw new InvalidOperationException("The declaring type of the property is not equal to the target entity type.");
             }
@@ -159,51 +161,6 @@ public static partial class ClassExpression
 
     #endregion
 
-    #region GetProperties
-
-    /// <summary>
-    /// Gets the properties of the class.
-    /// </summary>
-    /// <typeparam name="TEntity">The target type.</typeparam>
-    /// <returns>The properties of the class.</returns>
-    public static IEnumerable<ClassProperty> GetProperties<TEntity>()
-        where TEntity : class =>
-        GetPropertiesCache<TEntity>.Do();
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    private static class GetPropertiesCache<TEntity>
-        where TEntity : class
-    {
-        private static Func<IEnumerable<ClassProperty>> func;
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        private static Func<IEnumerable<ClassProperty>> GetFunc()
-        {
-            var body = Expression.Constant(DataEntityExtension.GetProperties<TEntity>());
-            return Expression
-                .Lambda<Func<IEnumerable<ClassProperty>>>(body)
-                .Compile();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        public static IEnumerable<ClassProperty> Do()
-        {
-            func ??= GetFunc();
-            return func();
-        }
-    }
-
-    #endregion
-
     #region GetPropertiesAndValues
 
     /// <summary>
@@ -215,66 +172,46 @@ public static partial class ClassExpression
     public static IEnumerable<PropertyValue> GetPropertiesAndValues<TEntity>(TEntity obj)
         where TEntity : class
     {
-        return GetPropertiesValuesCache<TEntity>.Do(obj);
+        var func = (Func<TEntity, IEnumerable<PropertyValue>>)getPropertyValuesCache.GetOrAdd(typeof(TEntity), (_) => GetFunc<TEntity>());
+
+        return func(obj);
     }
 
     /// <summary>
-    ///
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    private static class GetPropertiesValuesCache<TEntity>
-        where TEntity : class
+    private static Func<TEntity, IEnumerable<PropertyValue>> GetFunc<TEntity>()
+    where TEntity : class
     {
-        private static Func<TEntity, IEnumerable<PropertyValue>> func;
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <returns></returns>
-        private static Func<TEntity, IEnumerable<PropertyValue>> GetFunc()
+        // Expressions
+        var obj = Expression.Parameter(typeof(TEntity), "obj");
+        var addMethod = StaticType.PropertyValueList.GetMethod(nameof(List<PropertyValue>.Add), new[] { StaticType.PropertyValue })!;
+        var constructor = StaticType.PropertyValue.GetConstructor(new[]
         {
-            // Expressions
-            var addMethod = StaticType.PropertyValueList.GetMethod("Add", new[] { StaticType.PropertyValue });
-            var obj = Expression.Parameter(typeof(TEntity), "obj");
-            var constructor = StaticType.PropertyValue.GetConstructor(new[]
-            {
                 StaticType.String,
                 StaticType.Object,
                 StaticType.ClassProperty
-            });
+            })!;
 
-            // Set the body
-            var properties = PropertyCache.Get<TEntity>();
-            var body = Expression.ListInit(
-                Expression.New(StaticType.PropertyValueList),
-                properties.Select(property =>
-                {
-                    var name = Expression.Constant(property.GetMappedName());
-                    var value = Expression.Convert(Expression.Property(obj, property.PropertyInfo), StaticType.Object);
-                    var propertyValue = Expression.New(constructor,
-                        name,
-                        value,
-                        Expression.Constant(property));
-                    return Expression.ElementInit(addMethod, propertyValue);
-                }));
+        // Set the body
+        var properties = PropertyCache.Get<TEntity>();
+        var body = Expression.ListInit(
+            Expression.New(StaticType.PropertyValueList),
+            properties.Select(property =>
+            {
+                var name = Expression.Constant(property.GetMappedName());
+                var value = Expression.Convert(Expression.Property(obj, property.PropertyInfo), StaticType.Object);
+                var propertyValue = Expression.New(constructor,
+                    name,
+                    value,
+                    Expression.Constant(property));
+                return Expression.ElementInit(addMethod, propertyValue);
+            }));
 
-            // Set the function value
-            return Expression
-                .Lambda<Func<TEntity, IEnumerable<PropertyValue>>>(body, obj)
-                .Compile();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static IEnumerable<PropertyValue> Do(TEntity obj)
-        {
-            func ??= GetFunc();
-            return func(obj);
-        }
+        // Set the function value
+        return Expression
+            .Lambda<Func<TEntity, IEnumerable<PropertyValue>>>(body, obj)
+            .Compile();
     }
+
 
     #endregion
 }
