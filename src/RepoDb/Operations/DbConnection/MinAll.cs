@@ -207,7 +207,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static Task<object> MinAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MinAllAsync<TEntity>(this IDbConnection connection,
         Field field,
         string? hints = null,
         int commandTimeout = 0,
@@ -218,7 +218,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MinAllAsyncInternal<TEntity, object>(connection: connection,
+        return await MinAllAsyncInternal<TEntity, object>(connection: connection,
             field: field,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -243,7 +243,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static Task<object> MinAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MinAllAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int commandTimeout = 0,
@@ -254,7 +254,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MinAllAsyncInternal<TEntity, object>(connection: connection,
+        return await MinAllAsyncInternal<TEntity, object>(connection: connection,
             field: Field.Parse<TEntity>(field).First(),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -280,7 +280,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static Task<TResult> MinAllAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MinAllAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
         string? hints = null,
         int commandTimeout = 0,
@@ -291,7 +291,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MinAllAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MinAllAsyncInternal<TEntity, TResult>(connection: connection,
             field: field,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -317,7 +317,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static Task<TResult> MinAllAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MinAllAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
         string? hints = null,
         int commandTimeout = 0,
@@ -328,7 +328,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MinAllAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MinAllAsyncInternal<TEntity, TResult>(connection: connection,
             field: Field.Parse<TEntity, TResult>(field).First(),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -354,7 +354,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    internal static Task<TResult> MinAllAsyncInternal<TEntity, TResult>(this IDbConnection connection,
+    internal static ValueTask<TResult> MinAllAsyncInternal<TEntity, TResult>(this IDbConnection connection,
         Field field,
         string? hints = null,
         int commandTimeout = 0,
@@ -518,7 +518,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static Task<object> MinAllAsync(this IDbConnection connection,
+    public static async Task<object> MinAllAsync(this IDbConnection connection,
         string tableName,
         Field field,
         string? hints = null,
@@ -529,7 +529,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MinAllAsyncInternal<object>(connection: connection,
+        return await MinAllAsyncInternal<object>(connection: connection,
             tableName: tableName,
             field: field,
             hints: hints,
@@ -556,7 +556,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static Task<TResult> MinAllAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> MinAllAsync<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
         string? hints = null,
@@ -567,7 +567,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MinAllAsyncInternal<TResult>(connection: connection,
+        return await MinAllAsyncInternal<TResult>(connection: connection,
             tableName: tableName,
             field: field,
             hints: hints,
@@ -594,7 +594,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    internal static Task<TResult> MinAllAsyncInternal<TResult>(this IDbConnection connection,
+    internal static ValueTask<TResult> MinAllAsyncInternal<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
         string? hints = null,
@@ -685,7 +685,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    internal static async Task<TResult> MinAllAsyncInternalBase<TResult>(this IDbConnection connection,
+    internal static async ValueTask<TResult> MinAllAsyncInternalBase<TResult>(this IDbConnection connection,
         MinAllRequest request,
         object param,
         int commandTimeout = 0,

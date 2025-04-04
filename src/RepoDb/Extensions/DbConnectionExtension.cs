@@ -261,7 +261,7 @@ public static partial class DbConnectionExtension
     /// <returns>
     /// An enumerable list of dynamic objects containing the converted results of the underlying <see cref="IDataReader"/> object.
     /// </returns>
-    public static Task<IEnumerable<dynamic>> ExecuteQueryAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> ExecuteQueryAsync(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -274,7 +274,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteQueryAsyncInternal(connection: connection,
+        return await ExecuteQueryAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -308,7 +308,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <returns></returns>
-    internal static async Task<IEnumerable<dynamic>> ExecuteQueryAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<IEnumerable<dynamic>> ExecuteQueryAsyncInternal(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -715,7 +715,7 @@ public static partial class DbConnectionExtension
     /// <returns>
     /// An enumerable list of the target result type instances containing the converted results of the underlying <see cref="IDataReader"/> object.
     /// </returns>
-    public static Task<IEnumerable<TResult>> ExecuteQueryAsync<TResult>(this IDbConnection connection,
+    public static async Task<IEnumerable<TResult>> ExecuteQueryAsync<TResult>(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -728,7 +728,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteQueryAsyncInternal<TResult>(connection: connection,
+        return await ExecuteQueryAsyncInternal<TResult>(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -763,7 +763,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <returns></returns>
-    internal static async Task<IEnumerable<TResult>> ExecuteQueryAsyncInternal<TResult>(this IDbConnection connection,
+    internal static async ValueTask<IEnumerable<TResult>> ExecuteQueryAsyncInternal<TResult>(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -847,7 +847,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <returns></returns>
-    private static async Task<IEnumerable<TResult>> ExecuteQueryAsyncInternalForDictionaryStringObject<TResult>(this IDbConnection connection,
+    private static async ValueTask<IEnumerable<TResult>> ExecuteQueryAsyncInternalForDictionaryStringObject<TResult>(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -920,7 +920,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <returns></returns>
-    private static async Task<IEnumerable<TResult>> ExecuteQueryAsyncInternalForType<TResult>(this IDbConnection connection,
+    private static async ValueTask<IEnumerable<TResult>> ExecuteQueryAsyncInternalForType<TResult>(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1130,7 +1130,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An instance of <see cref="QueryMultipleExtractor"/> used to extract the results.</returns>
-    public static Task<QueryMultipleExtractor> ExecuteQueryMultipleAsync(this IDbConnection connection,
+    public static async Task<QueryMultipleExtractor> ExecuteQueryMultipleAsync(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1142,7 +1142,7 @@ public static partial class DbConnectionExtension
         ICache? cache = null,
         ITrace? trace = null,
         CancellationToken cancellationToken = default) =>
-        ExecuteQueryMultipleAsyncInternal(connection,
+        await ExecuteQueryMultipleAsyncInternal(connection,
             commandText,
             param,
             commandType,
@@ -1173,7 +1173,7 @@ public static partial class DbConnectionExtension
     /// <param name="isDisposeConnection"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<QueryMultipleExtractor> ExecuteQueryMultipleAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<QueryMultipleExtractor> ExecuteQueryMultipleAsyncInternal(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1366,7 +1366,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <return>The instance of the <see cref="IDataReader"/> object.</return>
-    public static Task<IDataReader> ExecuteReaderAsync(this IDbConnection connection,
+    public static async Task<IDataReader> ExecuteReaderAsync(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1376,7 +1376,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteReaderAsyncInternal(connection: connection,
+        return await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -1407,7 +1407,7 @@ public static partial class DbConnectionExtension
     /// <param name="beforeExecutionCallbackAsync"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<IDataReader> ExecuteReaderAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<IDataReader> ExecuteReaderAsyncInternal(this IDbConnection connection,
         string commandText,
         object? param,
         CommandType commandType,
@@ -1607,7 +1607,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected by the execution.</returns>
-    public static Task<int> ExecuteNonQueryAsync(this IDbConnection connection,
+    public static async Task<int> ExecuteNonQueryAsync(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1617,7 +1617,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteNonQueryAsyncInternal(connection: connection,
+        return await ExecuteNonQueryAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -1647,7 +1647,7 @@ public static partial class DbConnectionExtension
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<int> ExecuteNonQueryAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<int> ExecuteNonQueryAsyncInternal(this IDbConnection connection,
         string commandText,
         object? param,
         CommandType commandType,
@@ -1776,7 +1776,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An object that holds the first occurrence value (first column of first row) of the execution.</returns>
-    public static Task<object?> ExecuteScalarAsync(this IDbConnection connection,
+    public static async Task<object?> ExecuteScalarAsync(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1789,7 +1789,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteScalarAsyncInternal<object>(connection: connection,
+        return await ExecuteScalarAsyncInternal<object>(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -1973,7 +1973,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A first occurrence value (first column of first row) of the execution.</returns>
-    public static Task<TResult?> ExecuteScalarAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult?> ExecuteScalarAsync<TResult>(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1986,7 +1986,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         CancellationToken cancellationToken = default)
     {
-        return ExecuteScalarAsyncInternal<TResult>(connection: connection,
+        return await ExecuteScalarAsyncInternal<TResult>(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -2023,7 +2023,7 @@ public static partial class DbConnectionExtension
     /// <param name="cacheItemExpiration"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<TResult?> ExecuteScalarAsyncInternal<TResult>(
+    internal static async ValueTask<TResult?> ExecuteScalarAsyncInternal<TResult>(
         this IDbConnection connection,
         string commandText,
         object? param,
@@ -2360,7 +2360,7 @@ public static partial class DbConnectionExtension
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static Task<IEnumerable<Field>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(Type entityType,
+    internal static ValueTask<IEnumerable<Field>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(Type entityType,
         IDbConnection connection,
         IDbTransaction transaction,
         CancellationToken cancellationToken = default) =>
@@ -2376,7 +2376,7 @@ public static partial class DbConnectionExtension
     /// <param name="entityType"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<IEnumerable<Field>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
+    internal static async ValueTask<IEnumerable<Field>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
         string tableName,
         IDbTransaction transaction,
         Type entityType,
@@ -2395,7 +2395,7 @@ public static partial class DbConnectionExtension
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<IEnumerable<DbField>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
+    internal static async ValueTask<IEnumerable<DbField>> GetAndGuardPrimaryKeyOrIdentityKeyAsync(IDbConnection connection,
         string tableName,
         IDbTransaction transaction,
         CancellationToken cancellationToken = default)
@@ -2583,7 +2583,7 @@ public static partial class DbConnectionExtension
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<QueryGroup?> WhatToQueryGroupAsync<T>(this IDbConnection connection,
+    internal static async ValueTask<QueryGroup?> WhatToQueryGroupAsync<T>(this IDbConnection connection,
         string tableName,
         T what,
         IDbTransaction transaction,
@@ -2681,7 +2681,7 @@ public static partial class DbConnectionExtension
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<QueryGroup?> WhatToQueryGroupAsync(Type entityType,
+    internal static async ValueTask<QueryGroup?> WhatToQueryGroupAsync(Type entityType,
         IDbConnection connection,
         object what,
         IDbTransaction transaction,
@@ -3210,7 +3210,7 @@ public static partial class DbConnectionExtension
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<DbCommand> CreateDbCommandForExecutionAsync(this IDbConnection connection,
+    internal static async ValueTask<DbCommand> CreateDbCommandForExecutionAsync(this IDbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,

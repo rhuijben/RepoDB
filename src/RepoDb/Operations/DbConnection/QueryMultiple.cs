@@ -4553,7 +4553,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
         Expression<Func<T1, bool>> where1,
         Expression<Func<T2, bool>> where2,
         IEnumerable<Field>? fields1 = null,
@@ -4577,7 +4577,7 @@ public static partial class DbConnectionExtension
         where T1 : class
         where T2 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             where1: connection.ToQueryGroup(where1, transaction),
             where2: connection.ToQueryGroup(where2, transaction),
             fields1: fields1,
@@ -4627,7 +4627,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
         QueryField where1,
         QueryField where2,
         IEnumerable<Field>? fields1 = null,
@@ -4651,7 +4651,7 @@ public static partial class DbConnectionExtension
         where T1 : class
         where T2 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             fields1: fields1,
@@ -4701,7 +4701,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
         IEnumerable<QueryField> where1,
         IEnumerable<QueryField> where2,
         IEnumerable<Field>? fields1 = null,
@@ -4725,7 +4725,7 @@ public static partial class DbConnectionExtension
         where T1 : class
         where T2 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             fields1: fields1,
@@ -4775,7 +4775,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
         IEnumerable<Field>? fields1 = null,
@@ -4799,7 +4799,7 @@ public static partial class DbConnectionExtension
         where T1 : class
         where T2 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             where1: where1,
             where2: where2,
             fields1: fields1,
@@ -4849,7 +4849,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    internal static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsyncInternal<T1, T2>(this IDbConnection connection,
+    internal static ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsyncInternal<T1, T2>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
         IEnumerable<Field>? fields1 = null,
@@ -5030,7 +5030,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
         Expression<Func<T1, bool>> where1,
         Expression<Func<T2, bool>> where2,
         Expression<Func<T3, bool>> where3,
@@ -5061,7 +5061,7 @@ public static partial class DbConnectionExtension
         where T2 : class
         where T3 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             where1: connection.ToQueryGroup(where1, transaction),
             where2: connection.ToQueryGroup(where2, transaction),
             where3: connection.ToQueryGroup(where3, transaction),
@@ -5124,7 +5124,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
         QueryField where1,
         QueryField where2,
         QueryField where3,
@@ -5155,7 +5155,7 @@ public static partial class DbConnectionExtension
         where T2 : class
         where T3 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -5218,7 +5218,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
         IEnumerable<QueryField> where1,
         IEnumerable<QueryField> where2,
         IEnumerable<QueryField> where3,
@@ -5249,7 +5249,7 @@ public static partial class DbConnectionExtension
         where T2 : class
         where T3 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -5312,7 +5312,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
         QueryGroup where3,
@@ -5343,7 +5343,7 @@ public static partial class DbConnectionExtension
         where T2 : class
         where T3 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             where1: where1,
             where2: where2,
             where3: where3,
@@ -5406,7 +5406,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    internal static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsyncInternal<T1, T2, T3>(this IDbConnection connection,
+    internal static ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsyncInternal<T1, T2, T3>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
         QueryGroup where3,
@@ -5629,7 +5629,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsync<T1, T2, T3, T4>(this IDbConnection connection,
         Expression<Func<T1, bool>> where1,
         Expression<Func<T2, bool>> where2,
@@ -5668,7 +5668,7 @@ public static partial class DbConnectionExtension
         where T3 : class
         where T4 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             where1: connection.ToQueryGroup(where1, transaction),
             where2: connection.ToQueryGroup(where2, transaction),
             where3: connection.ToQueryGroup(where3, transaction),
@@ -5744,7 +5744,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsync<T1, T2, T3, T4>(this IDbConnection connection,
         QueryField where1,
         QueryField where2,
@@ -5783,7 +5783,7 @@ public static partial class DbConnectionExtension
         where T3 : class
         where T4 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -5859,7 +5859,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsync<T1, T2, T3, T4>(this IDbConnection connection,
         IEnumerable<QueryField> where1,
         IEnumerable<QueryField> where2,
@@ -5898,7 +5898,7 @@ public static partial class DbConnectionExtension
         where T3 : class
         where T4 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -5974,7 +5974,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsync<T1, T2, T3, T4>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
@@ -6013,7 +6013,7 @@ public static partial class DbConnectionExtension
         where T3 : class
         where T4 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             where1: where1,
             where2: where2,
             where3: where3,
@@ -6089,7 +6089,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    internal static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    internal static ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsyncInternal<T1, T2, T3, T4>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
@@ -6354,7 +6354,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5>(this IDbConnection connection,
         Expression<Func<T1, bool>> where1,
         Expression<Func<T2, bool>> where2,
@@ -6400,7 +6400,7 @@ public static partial class DbConnectionExtension
         where T4 : class
         where T5 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             where1: connection.ToQueryGroup(where1, transaction),
             where2: connection.ToQueryGroup(where2, transaction),
             where3: connection.ToQueryGroup(where3, transaction),
@@ -6489,7 +6489,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5>(this IDbConnection connection,
         QueryField where1,
         QueryField where2,
@@ -6535,7 +6535,7 @@ public static partial class DbConnectionExtension
         where T4 : class
         where T5 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -6624,7 +6624,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5>(this IDbConnection connection,
         IEnumerable<QueryField> where1,
         IEnumerable<QueryField> where2,
@@ -6670,7 +6670,7 @@ public static partial class DbConnectionExtension
         where T4 : class
         where T5 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -6759,7 +6759,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
@@ -6805,7 +6805,7 @@ public static partial class DbConnectionExtension
         where T4 : class
         where T5 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -6894,7 +6894,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    internal static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    internal static ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
@@ -7200,7 +7200,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         Expression<Func<T1, bool>> where1,
         Expression<Func<T2, bool>> where2,
@@ -7253,7 +7253,7 @@ public static partial class DbConnectionExtension
         where T5 : class
         where T6 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             where1: connection.ToQueryGroup(where1, transaction),
             where2: connection.ToQueryGroup(where2, transaction),
             where3: connection.ToQueryGroup(where3, transaction),
@@ -7355,7 +7355,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         QueryField where1,
         QueryField where2,
@@ -7408,7 +7408,7 @@ public static partial class DbConnectionExtension
         where T5 : class
         where T6 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -7510,7 +7510,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         IEnumerable<QueryField> where1,
         IEnumerable<QueryField> where2,
@@ -7563,7 +7563,7 @@ public static partial class DbConnectionExtension
         where T5 : class
         where T6 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -7665,7 +7665,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
@@ -7718,7 +7718,7 @@ public static partial class DbConnectionExtension
         where T5 : class
         where T6 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             where1: where1,
             where2: where2,
             where3: where3,
@@ -7820,7 +7820,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    internal static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    internal static ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
@@ -8167,7 +8167,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         Expression<Func<T1, bool>> where1,
         Expression<Func<T2, bool>> where2,
@@ -8227,7 +8227,7 @@ public static partial class DbConnectionExtension
         where T6 : class
         where T7 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             where1: connection.ToQueryGroup(where1, transaction),
             where2: connection.ToQueryGroup(where2, transaction),
             where3: connection.ToQueryGroup(where3, transaction),
@@ -8342,7 +8342,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         QueryField where1,
         QueryField where2,
@@ -8402,7 +8402,7 @@ public static partial class DbConnectionExtension
         where T6 : class
         where T7 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -8517,7 +8517,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         IEnumerable<QueryField> where1,
         IEnumerable<QueryField> where2,
@@ -8577,7 +8577,7 @@ public static partial class DbConnectionExtension
         where T6 : class
         where T7 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             where1: ToQueryGroup(where1),
             where2: ToQueryGroup(where2),
             where3: ToQueryGroup(where3),
@@ -8692,7 +8692,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
@@ -8752,7 +8752,7 @@ public static partial class DbConnectionExtension
         where T6 : class
         where T7 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             where1: where1,
             where2: where2,
             where3: where3,
@@ -8867,7 +8867,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    internal static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    internal static ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         QueryGroup where1,
         QueryGroup where2,
@@ -19782,7 +19782,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
         string tableName1,
         Expression<Func<T1, bool>> where1,
         string tableName2,
@@ -19808,7 +19808,7 @@ public static partial class DbConnectionExtension
         where T1 : class
         where T2 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             tableName1: tableName1,
             where1: connection.ToQueryGroup(where1, transaction),
             tableName2: tableName2,
@@ -19862,7 +19862,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
         string tableName1,
         QueryField where1,
         string tableName2,
@@ -19888,7 +19888,7 @@ public static partial class DbConnectionExtension
         where T1 : class
         where T2 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -19942,7 +19942,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
         string tableName2,
@@ -19968,7 +19968,7 @@ public static partial class DbConnectionExtension
         where T1 : class
         where T2 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -20022,7 +20022,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsync<T1, T2>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
         string tableName2,
@@ -20048,7 +20048,7 @@ public static partial class DbConnectionExtension
         where T1 : class
         where T2 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2>(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -20102,7 +20102,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsyncInternal<T1, T2>(this IDbConnection connection,
+    internal static async ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>>> QueryMultipleAsyncInternal<T1, T2>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
         string tableName2,
@@ -20399,7 +20399,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
         string tableName1,
         Expression<Func<T1, bool>> where1,
         string tableName2,
@@ -20433,7 +20433,7 @@ public static partial class DbConnectionExtension
         where T2 : class
         where T3 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             tableName1: tableName1,
             where1: connection.ToQueryGroup(where1, transaction),
             tableName2: tableName2,
@@ -20502,7 +20502,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
         string tableName1,
         QueryField where1,
         string tableName2,
@@ -20536,7 +20536,7 @@ public static partial class DbConnectionExtension
         where T2 : class
         where T3 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -20605,7 +20605,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
         string tableName2,
@@ -20639,7 +20639,7 @@ public static partial class DbConnectionExtension
         where T2 : class
         where T3 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -20708,7 +20708,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsync<T1, T2, T3>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
         string tableName2,
@@ -20742,7 +20742,7 @@ public static partial class DbConnectionExtension
         where T2 : class
         where T3 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3>(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -20811,7 +20811,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsyncInternal<T1, T2, T3>(this IDbConnection connection,
+    internal static async ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>>> QueryMultipleAsyncInternal<T1, T2, T3>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
         string tableName2,
@@ -21183,7 +21183,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsync<T1, T2, T3, T4>(this IDbConnection connection,
         string tableName1,
         Expression<Func<T1, bool>> where1,
@@ -21226,7 +21226,7 @@ public static partial class DbConnectionExtension
         where T3 : class
         where T4 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             tableName1: tableName1,
             where1: connection.ToQueryGroup(where1, transaction),
             tableName2: tableName2,
@@ -21310,7 +21310,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsync<T1, T2, T3, T4>(this IDbConnection connection,
         string tableName1,
         QueryField where1,
@@ -21353,7 +21353,7 @@ public static partial class DbConnectionExtension
         where T3 : class
         where T4 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -21437,7 +21437,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsync<T1, T2, T3, T4>(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
@@ -21480,7 +21480,7 @@ public static partial class DbConnectionExtension
         where T3 : class
         where T4 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -21564,7 +21564,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsync<T1, T2, T3, T4>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -21607,7 +21607,7 @@ public static partial class DbConnectionExtension
         where T3 : class
         where T4 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4>(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -21691,7 +21691,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
+    internal static async ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>>>
         QueryMultipleAsyncInternal<T1, T2, T3, T4>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -22138,7 +22138,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5>(this IDbConnection connection,
         string tableName1,
         Expression<Func<T1, bool>> where1,
@@ -22189,7 +22189,7 @@ public static partial class DbConnectionExtension
         where T4 : class
         where T5 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             tableName1: tableName1,
             where1: connection.ToQueryGroup(where1, transaction),
             tableName2: tableName2,
@@ -22288,7 +22288,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5>(this IDbConnection connection,
         string tableName1,
         QueryField where1,
@@ -22339,7 +22339,7 @@ public static partial class DbConnectionExtension
         where T4 : class
         where T5 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -22438,7 +22438,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5>(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
@@ -22489,7 +22489,7 @@ public static partial class DbConnectionExtension
         where T4 : class
         where T5 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -22588,7 +22588,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -22639,7 +22639,7 @@ public static partial class DbConnectionExtension
         where T4 : class
         where T5 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -22738,7 +22738,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
+    internal static async ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>>>
         QueryMultipleAsyncInternal<T1, T2, T3, T4, T5>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -23259,7 +23259,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         string tableName1,
         Expression<Func<T1, bool>> where1,
@@ -23318,7 +23318,7 @@ public static partial class DbConnectionExtension
         where T5 : class
         where T6 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             tableName1: tableName1,
             where1: connection.ToQueryGroup(where1, transaction),
             tableName2: tableName2,
@@ -23432,7 +23432,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         string tableName1,
         QueryField where1,
@@ -23491,7 +23491,7 @@ public static partial class DbConnectionExtension
         where T5 : class
         where T6 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -23605,7 +23605,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
@@ -23664,7 +23664,7 @@ public static partial class DbConnectionExtension
         where T5 : class
         where T6 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -23778,7 +23778,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -23837,7 +23837,7 @@ public static partial class DbConnectionExtension
         where T5 : class
         where T6 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -23951,7 +23951,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
+    internal static async ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>>>
         QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -24546,7 +24546,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         string tableName1,
         Expression<Func<T1, bool>> where1,
@@ -24613,7 +24613,7 @@ public static partial class DbConnectionExtension
         where T6 : class
         where T7 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             tableName1: tableName1,
             where1: connection.ToQueryGroup(where1, transaction),
             tableName2: tableName2,
@@ -24742,7 +24742,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         string tableName1,
         QueryField where1,
@@ -24809,7 +24809,7 @@ public static partial class DbConnectionExtension
         where T6 : class
         where T7 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -24938,7 +24938,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
@@ -25005,7 +25005,7 @@ public static partial class DbConnectionExtension
         where T6 : class
         where T7 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -25134,7 +25134,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    public static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsync<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -25201,7 +25201,7 @@ public static partial class DbConnectionExtension
         where T6 : class
         where T7 : class
     {
-        return QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
+        return await QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -25330,7 +25330,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
+    internal static async ValueTask<Tuple<IEnumerable<T1>, IEnumerable<T2>, IEnumerable<T3>, IEnumerable<T4>, IEnumerable<T5>, IEnumerable<T6>, IEnumerable<T7>>>
         QueryMultipleAsyncInternal<T1, T2, T3, T4, T5, T6, T7>(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -25810,7 +25810,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryField where1,
         string tableName2,
@@ -25834,7 +25834,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -25886,7 +25886,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
         string tableName2,
@@ -25910,7 +25910,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -25962,7 +25962,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
         string tableName2,
@@ -25986,7 +25986,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -26038,7 +26038,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 2 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsyncInternal(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
         string tableName2,
@@ -26324,7 +26324,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryField where1,
         string tableName2,
@@ -26355,7 +26355,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -26421,7 +26421,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
         string tableName2,
@@ -26452,7 +26452,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -26518,7 +26518,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
         string tableName2,
@@ -26549,7 +26549,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -26615,7 +26615,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 3 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>> QueryMultipleAsyncInternal(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
         string tableName2,
@@ -26972,7 +26972,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryField where1,
@@ -27011,7 +27011,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -27091,7 +27091,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
@@ -27130,7 +27130,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -27210,7 +27210,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -27249,7 +27249,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -27329,7 +27329,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 4 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    internal static async ValueTask<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsyncInternal(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -27757,7 +27757,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryField where1,
@@ -27803,7 +27803,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -27897,7 +27897,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
@@ -27943,7 +27943,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -28037,7 +28037,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -28083,7 +28083,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -28177,7 +28177,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 5 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    internal static async ValueTask<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsyncInternal(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -28675,7 +28675,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryField where1,
@@ -28728,7 +28728,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -28836,7 +28836,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
@@ -28889,7 +28889,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -28997,7 +28997,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -29050,7 +29050,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -29158,7 +29158,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 6 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    internal static async ValueTask<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsyncInternal(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -29726,7 +29726,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryField where1,
@@ -29786,7 +29786,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -29908,7 +29908,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         IEnumerable<QueryField> where1,
@@ -29968,7 +29968,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: ToQueryGroup(where1),
             tableName2: tableName2,
@@ -30090,7 +30090,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    public static Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    public static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsync(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -30150,7 +30150,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryMultipleAsyncInternal(connection: connection,
+        return await QueryMultipleAsyncInternal(connection: connection,
             tableName1: tableName1,
             where1: where1,
             tableName2: tableName2,
@@ -30272,7 +30272,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A tuple of 7 enumerable target data entity types.</returns>
-    internal static async Task<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
+    internal static async ValueTask<Tuple<IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>, IEnumerable<dynamic>>>
         QueryMultipleAsyncInternal(this IDbConnection connection,
         string tableName1,
         QueryGroup where1,
@@ -30753,7 +30753,7 @@ public static partial class DbConnectionExtension
     /// <param name="queryGroups"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task<IEnumerable<T>> QueryMultipleAsyncInternal<T>(string cacheKey,
+    private static async ValueTask<IEnumerable<T>> QueryMultipleAsyncInternal<T>(string cacheKey,
         ICache cache,
         QueryGroup where,
         List<QueryGroup> queryGroups,
@@ -30784,7 +30784,7 @@ public static partial class DbConnectionExtension
     /// <param name="queryGroups"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task<IEnumerable<dynamic>> QueryMultipleAsyncInternal(string cacheKey,
+    private static async ValueTask<IEnumerable<dynamic>> QueryMultipleAsyncInternal(string cacheKey,
         ICache cache,
         QueryGroup where,
         List<QueryGroup> queryGroups,
@@ -30820,7 +30820,7 @@ public static partial class DbConnectionExtension
     /// <param name="forwardToNextResult"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task<IEnumerable<T>> QueryMultipleAsyncInternal<T>(IDbConnection connection,
+    private static async ValueTask<IEnumerable<T>> QueryMultipleAsyncInternal<T>(IDbConnection connection,
         DbDataReader reader,
         IEnumerable<T> items,
         string? cacheKey = null,

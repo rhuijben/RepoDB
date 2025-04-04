@@ -181,7 +181,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
@@ -197,7 +197,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return QueryAllAsyncInternal<TEntity>(connection: connection,
+        return await QueryAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             fields: fields,
             orderBy: orderBy,
@@ -231,7 +231,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> QueryAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
         string? hints = null,
@@ -246,7 +246,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return QueryAllAsyncInternal<TEntity>(connection: connection,
+        return await QueryAllAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             fields: fields,
             orderBy: orderBy,
@@ -281,7 +281,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    internal static async Task<IEnumerable<TEntity>> QueryAllAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<IEnumerable<TEntity>> QueryAllAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
@@ -436,7 +436,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<dynamic>> QueryAllAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> QueryAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
@@ -451,7 +451,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return QueryAllAsyncInternal<dynamic>(connection: connection,
+        return await QueryAllAsyncInternal<dynamic>(connection: connection,
             tableName: tableName,
             fields: fields,
             orderBy: orderBy,
@@ -485,7 +485,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    internal static Task<IEnumerable<dynamic>> QueryAllAsyncInternal(this IDbConnection connection,
+    internal static ValueTask<IEnumerable<dynamic>> QueryAllAsyncInternal(this IDbConnection connection,
         string tableName,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,
@@ -623,7 +623,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    internal static async Task<IEnumerable<TEntity>> QueryAllAsyncInternalBase<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<IEnumerable<TEntity>> QueryAllAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<Field>? fields = null,
         IEnumerable<OrderField>? orderBy = null,

@@ -89,7 +89,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetBatchQueryTextAsync(BatchQueryRequest request,
+    internal static async ValueTask<string> GetBatchQueryTextAsync(BatchQueryRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -268,7 +268,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetInsertTextAsync(InsertRequest request,
+    internal static async ValueTask<string> GetInsertTextAsync(InsertRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -338,7 +338,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetInsertAllTextAsync(InsertAllRequest request,
+    internal static async ValueTask<string> GetInsertAllTextAsync(InsertAllRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -454,7 +454,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetMergeTextAsync(MergeRequest request,
+    internal static async ValueTask<string> GetMergeTextAsync(MergeRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -525,7 +525,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetMergeAllTextAsync(MergeAllRequest request,
+    internal static async ValueTask<string> GetMergeAllTextAsync(MergeAllRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -644,7 +644,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetQueryTextAsync(QueryRequest request,
+    internal static async ValueTask<string> GetQueryTextAsync(QueryRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -716,7 +716,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetQueryAllTextAsync(QueryAllRequest request,
+    internal static async ValueTask<string> GetQueryAllTextAsync(QueryAllRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -786,7 +786,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetQueryMultipleTextAsync(QueryMultipleRequest request,
+    internal static async ValueTask<string> GetQueryMultipleTextAsync(QueryMultipleRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -858,7 +858,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetSkipQueryTextAsync(SkipQueryRequest request,
+    internal static async ValueTask<string> GetSkipQueryTextAsync(SkipQueryRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -995,7 +995,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetUpdateTextAsync(UpdateRequest request,
+    internal static async ValueTask<string> GetUpdateTextAsync(UpdateRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -1066,7 +1066,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async Task<string> GetUpdateAllTextAsync(UpdateAllRequest request,
+    internal static async ValueTask<string> GetUpdateAllTextAsync(UpdateAllRequest request,
         CancellationToken cancellationToken = default)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -1145,7 +1145,7 @@ public static class CommandTextCache
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task ValidateOrderFieldsAsync(IDbConnection connection,
+    private static async ValueTask ValidateOrderFieldsAsync(IDbConnection connection,
         string tableName,
         IEnumerable<OrderField> orderFields,
         IDbTransaction transaction,
@@ -1208,7 +1208,7 @@ public static class CommandTextCache
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task<IEnumerable<Field>> GetTargetFieldsAsync(IDbConnection connection,
+    private static async ValueTask<IEnumerable<Field>> GetTargetFieldsAsync(IDbConnection connection,
         string tableName,
         IEnumerable<Field> fields,
         IDbTransaction transaction,
@@ -1257,7 +1257,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task<DbField> GetPrimaryFieldAsync(BaseRequest request,
+    private static async ValueTask<DbField> GetPrimaryFieldAsync(BaseRequest request,
         CancellationToken cancellationToken = default)
     {
         var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
@@ -1318,7 +1318,7 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async Task<DbField> GetIdentityFieldAsync(BaseRequest request,
+    private static async ValueTask<DbField> GetIdentityFieldAsync(BaseRequest request,
         CancellationToken cancellationToken = default)
     {
         var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);

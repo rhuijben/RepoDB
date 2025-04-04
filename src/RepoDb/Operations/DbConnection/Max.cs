@@ -865,7 +865,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Field field,
         object? where = null,
         string? hints = null,
@@ -877,7 +877,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: field,
             where: ToQueryGroup(where),
             hints: hints,
@@ -904,7 +904,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
@@ -916,7 +916,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: field,
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
@@ -943,7 +943,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Field field,
         QueryField? where = null,
         string? hints = null,
@@ -955,7 +955,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: field,
             where: ToQueryGroup(where),
             hints: hints,
@@ -982,7 +982,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
@@ -994,7 +994,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: field,
             where: ToQueryGroup(where),
             hints: hints,
@@ -1021,7 +1021,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Field field,
         QueryGroup? where = null,
         string? hints = null,
@@ -1033,7 +1033,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: field,
             where: where,
             hints: hints,
@@ -1060,7 +1060,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
@@ -1072,7 +1072,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: Field.Parse<TEntity>(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
@@ -1099,7 +1099,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
@@ -1111,7 +1111,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: Field.Parse<TEntity>(field).First(),
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
@@ -1138,7 +1138,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
@@ -1150,7 +1150,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: Field.Parse<TEntity>(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
@@ -1177,7 +1177,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
@@ -1189,7 +1189,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: Field.Parse<TEntity>(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
@@ -1216,7 +1216,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MaxAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
@@ -1228,7 +1228,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity>(connection: connection,
+        return await MaxAsyncInternal<TEntity>(connection: connection,
             field: Field.Parse<TEntity>(field).First(),
             where: where,
             hints: hints,
@@ -1255,7 +1255,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    internal static Task<object> MaxAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static ValueTask<object> MaxAsyncInternal<TEntity>(this IDbConnection connection,
         Field field,
         QueryGroup? where = null,
         int commandTimeout = 0,
@@ -1310,7 +1310,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
         object? where = null,
         string? hints = null,
@@ -1322,7 +1322,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: field,
             where: ToQueryGroup(where),
             hints: hints,
@@ -1350,7 +1350,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
@@ -1362,7 +1362,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: field,
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
@@ -1390,7 +1390,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
         QueryField? where = null,
         string? hints = null,
@@ -1402,7 +1402,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: field,
             where: ToQueryGroup(where),
             hints: hints,
@@ -1430,7 +1430,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
@@ -1442,7 +1442,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: field,
             where: ToQueryGroup(where),
             hints: hints,
@@ -1470,7 +1470,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
         QueryGroup? where = null,
         string? hints = null,
@@ -1482,7 +1482,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: field,
             where: where,
             hints: hints,
@@ -1510,7 +1510,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
         object? where = null,
         string? hints = null,
@@ -1522,7 +1522,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: Field.Parse<TEntity, TResult>(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
@@ -1550,7 +1550,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
@@ -1562,7 +1562,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: Field.Parse<TEntity, TResult>(field).First(),
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
@@ -1590,7 +1590,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
         QueryField? where = null,
         string? hints = null,
@@ -1602,7 +1602,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: Field.Parse<TEntity, TResult>(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
@@ -1630,7 +1630,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
@@ -1642,7 +1642,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: Field.Parse<TEntity, TResult>(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
@@ -1670,7 +1670,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
         QueryGroup? where = null,
         string? hints = null,
@@ -1682,7 +1682,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MaxAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MaxAsyncInternal<TEntity, TResult>(connection: connection,
             field: Field.Parse<TEntity, TResult>(field).First(),
             where: where,
             hints: hints,
@@ -1710,7 +1710,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    internal static Task<TResult> MaxAsyncInternal<TEntity, TResult>(this IDbConnection connection,
+    internal static ValueTask<TResult> MaxAsyncInternal<TEntity, TResult>(this IDbConnection connection,
         Field field,
         QueryGroup? where = null,
         int commandTimeout = 0,
@@ -2175,7 +2175,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync(this IDbConnection connection,
+    public static async Task<object> MaxAsync(this IDbConnection connection,
         string tableName,
         Field field,
         object? where = null,
@@ -2187,7 +2187,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MaxAsyncInternal(connection: connection,
+        return await MaxAsyncInternal(connection: connection,
             tableName: tableName,
             field: field,
             where: ToQueryGroup(where),
@@ -2215,7 +2215,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync(this IDbConnection connection,
+    public static async Task<object> MaxAsync(this IDbConnection connection,
         string tableName,
         Field field,
         QueryField? where = null,
@@ -2227,7 +2227,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MaxAsyncInternal(connection: connection,
+        return await MaxAsyncInternal(connection: connection,
             tableName: tableName,
             field: field,
             where: ToQueryGroup(where),
@@ -2255,7 +2255,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync(this IDbConnection connection,
+    public static async Task<object> MaxAsync(this IDbConnection connection,
         string tableName,
         Field field,
         IEnumerable<QueryField>? where = null,
@@ -2267,7 +2267,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MaxAsyncInternal(connection: connection,
+        return await MaxAsyncInternal(connection: connection,
             tableName: tableName,
             field: field,
             where: ToQueryGroup(where),
@@ -2295,7 +2295,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<object> MaxAsync(this IDbConnection connection,
+    public static async Task<object> MaxAsync(this IDbConnection connection,
         string tableName,
         Field field,
         QueryGroup? where = null,
@@ -2307,7 +2307,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MaxAsyncInternal(connection: connection,
+        return await MaxAsyncInternal(connection: connection,
             tableName: tableName,
             field: field,
             where: where,
@@ -2335,7 +2335,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    internal static Task<object> MaxAsyncInternal(this IDbConnection connection,
+    internal static ValueTask<object> MaxAsyncInternal(this IDbConnection connection,
         string tableName,
         Field field,
         QueryGroup? where = null,
@@ -2390,7 +2390,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
         object? where = null,
@@ -2402,7 +2402,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MaxAsyncInternal<TResult>(connection: connection,
+        return await MaxAsyncInternal<TResult>(connection: connection,
             tableName: tableName,
             field: field,
             where: ToQueryGroup(where),
@@ -2431,7 +2431,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
         QueryField? where = null,
@@ -2443,7 +2443,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MaxAsyncInternal<TResult>(connection: connection,
+        return await MaxAsyncInternal<TResult>(connection: connection,
             tableName: tableName,
             field: field,
             where: ToQueryGroup(where),
@@ -2472,7 +2472,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
         IEnumerable<QueryField>? where = null,
@@ -2484,7 +2484,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MaxAsyncInternal<TResult>(connection: connection,
+        return await MaxAsyncInternal<TResult>(connection: connection,
             tableName: tableName,
             field: field,
             where: ToQueryGroup(where),
@@ -2513,7 +2513,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public static Task<TResult> MaxAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> MaxAsync<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
         QueryGroup? where = null,
@@ -2525,7 +2525,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MaxAsyncInternal<TResult>(connection: connection,
+        return await MaxAsyncInternal<TResult>(connection: connection,
             tableName: tableName,
             field: field,
             where: where,
@@ -2554,7 +2554,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    internal static Task<TResult> MaxAsyncInternal<TResult>(this IDbConnection connection,
+    internal static ValueTask<TResult> MaxAsyncInternal<TResult>(this IDbConnection connection,
         string tableName,
         Field field,
         QueryGroup? where = null,
@@ -2652,7 +2652,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    internal static async Task<TResult> MaxAsyncInternalBase<TResult>(this IDbConnection connection,
+    internal static async ValueTask<TResult> MaxAsyncInternalBase<TResult>(this IDbConnection connection,
         MaxRequest request,
         object param,
         int commandTimeout = 0,

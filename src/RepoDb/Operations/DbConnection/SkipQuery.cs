@@ -648,7 +648,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -663,7 +663,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -698,7 +698,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -714,7 +714,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -749,7 +749,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -765,7 +765,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -800,7 +800,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -816,7 +816,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -851,7 +851,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -867,7 +867,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -902,7 +902,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -918,7 +918,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -951,7 +951,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         int skip,
         int rowsPerBatch,
         IEnumerable<OrderField>? orderBy,
@@ -965,7 +965,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -999,7 +999,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         int skip,
         int rowsPerBatch,
         IEnumerable<OrderField>? orderBy,
@@ -1014,7 +1014,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1048,7 +1048,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         int skip,
         int rowsPerBatch,
         IEnumerable<OrderField>? orderBy,
@@ -1063,7 +1063,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1097,7 +1097,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         int skip,
         int rowsPerBatch,
         IEnumerable<OrderField>? orderBy,
@@ -1112,7 +1112,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1146,7 +1146,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         int skip,
         int rowsPerBatch,
         IEnumerable<OrderField>? orderBy,
@@ -1161,7 +1161,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1195,7 +1195,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    public static Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
+    public static async Task<IEnumerable<TEntity>> SkipQueryAsync<TEntity>(this IDbConnection connection,
         int skip,
         int rowsPerBatch,
         IEnumerable<OrderField>? orderBy,
@@ -1210,7 +1210,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return SkipQueryAsyncInternal<TEntity>(connection: connection,
+        return await SkipQueryAsyncInternal<TEntity>(connection: connection,
             tableName: ClassMappedNameCache.Get<TEntity>(),
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1245,7 +1245,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    internal static async Task<IEnumerable<TEntity>> SkipQueryAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<IEnumerable<TEntity>> SkipQueryAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -1535,7 +1535,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of dynamic objects.</returns>
-    public static Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -1549,7 +1549,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return SkipQueryAsyncInternal<dynamic>(connection,
+        return await SkipQueryAsyncInternal<dynamic>(connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1583,7 +1583,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of dynamic objects.</returns>
-    public static Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -1598,7 +1598,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return SkipQueryAsyncInternal<dynamic>(connection: connection,
+        return await SkipQueryAsyncInternal<dynamic>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1632,7 +1632,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of dynamic objects.</returns>
-    public static Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -1647,7 +1647,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return SkipQueryAsyncInternal<dynamic>(connection: connection,
+        return await SkipQueryAsyncInternal<dynamic>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1681,7 +1681,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of dynamic objects.</returns>
-    public static Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -1696,7 +1696,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return SkipQueryAsyncInternal<dynamic>(connection: connection,
+        return await SkipQueryAsyncInternal<dynamic>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1730,7 +1730,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of dynamic objects.</returns>
-    public static Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
+    public static async Task<IEnumerable<dynamic>> SkipQueryAsync(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,
@@ -1745,7 +1745,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return SkipQueryAsyncInternal<dynamic>(connection: connection,
+        return await SkipQueryAsyncInternal<dynamic>(connection: connection,
             tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
@@ -1861,7 +1861,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An enumerable list of data entity objects.</returns>
-    internal static async Task<IEnumerable<TEntity>> SkipQueryAsyncInternalBase<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<IEnumerable<TEntity>> SkipQueryAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         int skip,
         int rowsPerBatch,

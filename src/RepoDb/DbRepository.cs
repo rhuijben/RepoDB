@@ -919,7 +919,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An instance of <see cref="QueryMultipleExtractor"/> used to extract the results.</returns>
-    public Task<QueryMultipleExtractor> ExecuteQueryMultipleAsync(string commandText,
+    public async Task<QueryMultipleExtractor> ExecuteQueryMultipleAsync(string commandText,
         object? param = null,
         CommandType commandType = default,
         string? cacheKey = null,
@@ -937,7 +937,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
          */
 
         // Call the method
-        return connection.ExecuteQueryMultipleAsyncInternal(commandText: commandText,
+        return await connection.ExecuteQueryMultipleAsyncInternal(commandText: commandText,
             param: param,
             commandType: commandType,
             cacheKey: cacheKey,

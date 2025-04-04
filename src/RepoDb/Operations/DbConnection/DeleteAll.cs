@@ -691,7 +691,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    public static Task<int> DeleteAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> DeleteAllAsync<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
         string traceKey = TraceKeys.DeleteAll,
@@ -701,7 +701,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return DeleteAllAsyncInternal<TEntity>(connection: connection,
+        return await DeleteAllAsyncInternal<TEntity>(connection: connection,
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -724,7 +724,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    internal static Task<int> DeleteAllAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static ValueTask<int> DeleteAllAsyncInternal<TEntity>(this IDbConnection connection,
         string? hints = null,
         int commandTimeout = 0,
         string traceKey = TraceKeys.DeleteAll,
@@ -972,7 +972,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    public static Task<int> DeleteAllAsync(this IDbConnection connection,
+    public static async Task<int> DeleteAllAsync(this IDbConnection connection,
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
@@ -982,7 +982,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1006,7 +1006,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    internal static Task<int> DeleteAllAsyncInternal(this IDbConnection connection,
+    internal static ValueTask<int> DeleteAllAsyncInternal(this IDbConnection connection,
         string tableName,
         string? hints = null,
         int commandTimeout = 0,
@@ -1154,7 +1154,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows that has been deleted from the table.</returns>
-    internal static async Task<int> DeleteAllAsyncInternalBase(this IDbConnection connection,
+    internal static async ValueTask<int> DeleteAllAsyncInternalBase(this IDbConnection connection,
         DeleteAllRequest request,
         int commandTimeout = 0,
         string traceKey = TraceKeys.DeleteAll,

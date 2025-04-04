@@ -176,7 +176,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of inserted rows in the table.</returns>
-    public static Task<int> InsertAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> InsertAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -190,7 +190,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return InsertAllAsyncInternal(connection: connection,
+        return await InsertAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             batchSize: batchSize,
@@ -220,7 +220,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of inserted rows in the table.</returns>
-    public static Task<int> InsertAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> InsertAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
@@ -233,7 +233,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return InsertAllAsyncInternal<TEntity>(connection: connection,
+        return await InsertAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             batchSize: batchSize,
@@ -264,7 +264,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of inserted rows in the table.</returns>
-    internal static Task<int> InsertAllAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static ValueTask<int> InsertAllAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -374,7 +374,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of inserted rows in the table.</returns>
-    public static Task<int> InsertAllAsync(this IDbConnection connection,
+    public static async Task<int> InsertAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -387,7 +387,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return InsertAllAsyncInternal<object>(connection: connection,
+        return await InsertAllAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entities: entities,
             batchSize: batchSize,
@@ -631,7 +631,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of inserted rows in the table.</returns>
-    internal static async Task<int> InsertAllAsyncInternalBase<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<int> InsertAllAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,

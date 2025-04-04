@@ -805,7 +805,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         Expression<Func<TEntity, bool>> where,
@@ -819,7 +819,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entity: entity,
             where: connection.ToQueryGroup(where, transaction),
@@ -850,7 +850,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         QueryField where,
@@ -864,7 +864,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entity: entity,
             where: where != null ? new QueryGroup(where.AsEnumerable()) : null,
@@ -895,7 +895,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<QueryField> where,
@@ -909,7 +909,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entity: entity,
             where: ToQueryGroup(where),
@@ -940,7 +940,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         QueryGroup where,
@@ -954,7 +954,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entity: entity,
             where: where,
@@ -1113,7 +1113,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         Expression<Func<TEntity, bool>> where,
         IEnumerable<Field>? fields = null,
@@ -1126,7 +1126,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             where: connection.ToQueryGroup(where, transaction),
@@ -1156,7 +1156,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         QueryField where,
         IEnumerable<Field>? fields = null,
@@ -1169,7 +1169,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             where: ToQueryGroup(where),
@@ -1199,7 +1199,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
@@ -1212,7 +1212,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             where: ToQueryGroup(where),
@@ -1242,7 +1242,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         QueryGroup where,
         IEnumerable<Field>? fields = null,
@@ -1255,7 +1255,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             where: where,
@@ -1286,7 +1286,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    internal static Task<int> UpdateAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static ValueTask<int> UpdateAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         QueryGroup where,
@@ -1598,7 +1598,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync(this IDbConnection connection,
+    public static async Task<int> UpdateAsync(this IDbConnection connection,
         string tableName,
         object entity,
         object where,
@@ -1611,7 +1611,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return UpdateAsyncInternal<object>(connection: connection,
+        return await UpdateAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entity: entity,
             where: ToQueryGroup(where),
@@ -1641,7 +1641,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync(this IDbConnection connection,
+    public static async Task<int> UpdateAsync(this IDbConnection connection,
         string tableName,
         object entity,
         QueryField where,
@@ -1654,7 +1654,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return UpdateAsyncInternal<object>(connection: connection,
+        return await UpdateAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entity: entity,
             where: ToQueryGroup(where),
@@ -1684,7 +1684,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync(this IDbConnection connection,
+    public static async Task<int> UpdateAsync(this IDbConnection connection,
         string tableName,
         object entity,
         IEnumerable<QueryField> where,
@@ -1697,7 +1697,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return UpdateAsyncInternal<object>(connection: connection,
+        return await UpdateAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entity: entity,
             where: ToQueryGroup(where),
@@ -1727,7 +1727,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAsync(this IDbConnection connection,
+    public static async Task<int> UpdateAsync(this IDbConnection connection,
         string tableName,
         object entity,
         QueryGroup where,
@@ -1740,7 +1740,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return UpdateAsyncInternal<object>(connection: connection,
+        return await UpdateAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entity: entity,
             where: where,
@@ -1856,7 +1856,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    internal static async Task<int> UpdateAsyncInternalBase<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<int> UpdateAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         QueryGroup where,

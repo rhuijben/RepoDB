@@ -88,7 +88,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
-    public static Task<int> TruncateAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> TruncateAsync<TEntity>(this IDbConnection connection,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
@@ -97,7 +97,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return TruncateAsyncInternal<TEntity>(connection: connection,
+        return await TruncateAsyncInternal<TEntity>(connection: connection,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -118,7 +118,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
-    internal static Task<int> TruncateAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static ValueTask<int> TruncateAsyncInternal<TEntity>(this IDbConnection connection,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
@@ -225,7 +225,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
-    public static Task<int> TruncateAsync(this IDbConnection connection,
+    public static async Task<int> TruncateAsync(this IDbConnection connection,
         string tableName,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Truncate,
@@ -234,7 +234,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return TruncateAsyncInternal(connection: connection,
+        return await TruncateAsyncInternal(connection: connection,
             tableName: tableName,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -256,7 +256,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
-    internal static Task<int> TruncateAsyncInternal(this IDbConnection connection,
+    internal static ValueTask<int> TruncateAsyncInternal(this IDbConnection connection,
         string tableName,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Truncate,
@@ -338,7 +338,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of rows affected.</returns>
-    internal static async Task<int> TruncateAsyncInternalBase(this IDbConnection connection,
+    internal static async ValueTask<int> TruncateAsyncInternalBase(this IDbConnection connection,
         TruncateRequest request,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Truncate,

@@ -453,7 +453,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -467,7 +467,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -500,7 +500,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         Field qualifier,
@@ -515,7 +515,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -548,7 +548,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
@@ -563,7 +563,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -596,7 +596,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
@@ -611,7 +611,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: fields,
@@ -642,7 +642,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
@@ -655,7 +655,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             qualifiers: null,
@@ -687,7 +687,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Field qualifier,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -701,7 +701,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -733,7 +733,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -747,7 +747,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             qualifiers: qualifiers,
@@ -779,7 +779,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -793,7 +793,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             qualifiers: Field.Parse<TEntity>(qualifiers),
@@ -826,7 +826,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    internal static async Task<int> UpdateAllAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<int> UpdateAllAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
@@ -1032,7 +1032,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -1045,7 +1045,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return UpdateAllAsyncInternal<object>(connection: connection,
+        return await UpdateAllAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -1077,7 +1077,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
         Field qualifier,
@@ -1091,7 +1091,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return UpdateAllAsyncInternal<object>(connection: connection,
+        return await UpdateAllAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1123,7 +1123,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    public static Task<int> UpdateAllAsync(this IDbConnection connection,
+    public static async Task<int> UpdateAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
         IEnumerable<Field>? qualifiers,
@@ -1137,7 +1137,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return UpdateAllAsyncInternal<object>(connection: connection,
+        return await UpdateAllAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -1350,7 +1350,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the update process.</returns>
-    internal static async Task<int> UpdateAllAsyncInternalBase<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<int> UpdateAllAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,

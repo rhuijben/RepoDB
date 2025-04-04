@@ -789,7 +789,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? fields = null,
@@ -802,7 +802,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, object>(connection: connection,
+        return await MergeAsyncInternal<TEntity, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: null,
@@ -833,7 +833,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         Field qualifier,
@@ -847,7 +847,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, object>(connection: connection,
+        return await MergeAsyncInternal<TEntity, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
@@ -878,7 +878,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? qualifiers,
@@ -892,7 +892,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, object>(connection: connection,
+        return await MergeAsyncInternal<TEntity, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: qualifiers,
@@ -923,7 +923,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         Expression<Func<TEntity, object?>> qualifiers,
@@ -937,7 +937,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, object>(connection: connection,
+        return await MergeAsyncInternal<TEntity, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: Field.Parse<TEntity>(qualifiers),
@@ -968,7 +968,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? fields = null,
@@ -981,7 +981,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: null,
@@ -1013,7 +1013,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         Field qualifier,
@@ -1027,7 +1027,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1059,7 +1059,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? qualifiers,
@@ -1073,7 +1073,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: qualifiers,
@@ -1105,7 +1105,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         Expression<Func<TEntity, object?>> qualifiers,
@@ -1119,7 +1119,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: Field.Parse<TEntity>(qualifiers),
@@ -1148,7 +1148,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
@@ -1160,7 +1160,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, object>(connection: connection,
+        return await MergeAsyncInternal<TEntity, object>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             qualifiers: null,
@@ -1190,7 +1190,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         Field qualifier,
         IEnumerable<Field>? fields = null,
@@ -1203,7 +1203,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, object>(connection: connection,
+        return await MergeAsyncInternal<TEntity, object>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1233,7 +1233,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
@@ -1246,7 +1246,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, object>(connection: connection,
+        return await MergeAsyncInternal<TEntity, object>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             qualifiers: qualifiers,
@@ -1276,7 +1276,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> MergeAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
@@ -1289,7 +1289,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, object>(connection: connection,
+        return await MergeAsyncInternal<TEntity, object>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             qualifiers: Field.Parse<TEntity>(qualifiers),
@@ -1319,7 +1319,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
@@ -1331,7 +1331,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             qualifiers: null,
@@ -1362,7 +1362,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         TEntity entity,
         Field qualifier,
         IEnumerable<Field>? fields = null,
@@ -1375,7 +1375,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1406,7 +1406,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         TEntity entity,
         IEnumerable<Field>? qualifiers,
         IEnumerable<Field>? fields = null,
@@ -1419,7 +1419,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             qualifiers: qualifiers,
@@ -1450,7 +1450,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TEntity, TResult>(this IDbConnection connection,
         TEntity entity,
         Expression<Func<TEntity, object?>> qualifiers,
         IEnumerable<Field>? fields = null,
@@ -1463,7 +1463,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAsyncInternal<TEntity, TResult>(connection: connection,
+        return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             qualifiers: Field.Parse<TEntity>(qualifiers),
@@ -1495,7 +1495,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    internal static Task<TResult> MergeAsyncInternal<TEntity, TResult>(this IDbConnection connection,
+    internal static ValueTask<TResult> MergeAsyncInternal<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? qualifiers,
@@ -1843,7 +1843,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync(this IDbConnection connection,
+    public static async Task<object> MergeAsync(this IDbConnection connection,
         string tableName,
         object entity,
         IEnumerable<Field>? fields = null,
@@ -1855,7 +1855,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAsyncInternal<object, object>(connection: connection,
+        return await MergeAsyncInternal<object, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: null,
@@ -1885,7 +1885,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync(this IDbConnection connection,
+    public static async Task<object> MergeAsync(this IDbConnection connection,
         string tableName,
         object entity,
         Field qualifier,
@@ -1898,7 +1898,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAsyncInternal<object, object>(connection: connection,
+        return await MergeAsyncInternal<object, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1928,7 +1928,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> MergeAsync(this IDbConnection connection,
+    public static async Task<object> MergeAsync(this IDbConnection connection,
         string tableName,
         object entity,
         IEnumerable<Field>? qualifiers,
@@ -1941,7 +1941,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAsyncInternal<object, object>(connection: connection,
+        return await MergeAsyncInternal<object, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: qualifiers,
@@ -1971,7 +1971,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TResult>(this IDbConnection connection,
         string tableName,
         object entity,
         IEnumerable<Field>? fields = null,
@@ -1983,7 +1983,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAsyncInternal<object, TResult>(connection: connection,
+        return await MergeAsyncInternal<object, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: null,
@@ -2014,7 +2014,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TResult>(this IDbConnection connection,
         string tableName,
         object entity,
         Field qualifier,
@@ -2027,7 +2027,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAsyncInternal<object, TResult>(connection: connection,
+        return await MergeAsyncInternal<object, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
@@ -2058,7 +2058,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> MergeAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> MergeAsync<TResult>(this IDbConnection connection,
         string tableName,
         object entity,
         IEnumerable<Field>? qualifiers,
@@ -2071,7 +2071,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAsyncInternal<object, TResult>(connection: connection,
+        return await MergeAsyncInternal<object, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             qualifiers: qualifiers,
@@ -2352,7 +2352,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    internal static async Task<TResult> MergeAsyncInternalBase<TEntity, TResult>(this IDbConnection connection,
+    internal static async ValueTask<TResult> MergeAsyncInternalBase<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? fields = null,
@@ -2444,7 +2444,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    internal static async Task<TResult> UpsertAsyncInternalBase<TEntity, TResult>(this IDbConnection connection,
+    internal static async ValueTask<TResult> UpsertAsyncInternalBase<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? qualifiers = null,

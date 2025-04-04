@@ -2,7 +2,6 @@
 using System.Data.Common;
 using RepoDb.Contexts.Providers;
 using RepoDb.Interfaces;
-using RepoDb.Reflection;
 
 namespace RepoDb;
 
@@ -243,7 +242,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> InsertAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> InsertAsync<TEntity>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? fields = null,
@@ -256,7 +255,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return InsertAsyncInternal<TEntity, object>(connection: connection,
+        return await InsertAsyncInternal<TEntity, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             fields: fields,
@@ -286,7 +285,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> InsertAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> InsertAsync<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? fields = null,
@@ -299,7 +298,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return InsertAsyncInternal<TEntity, TResult>(connection: connection,
+        return await InsertAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             fields: fields,
@@ -327,7 +326,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> InsertAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object> InsertAsync<TEntity>(this IDbConnection connection,
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
@@ -339,7 +338,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return InsertAsyncInternal<TEntity, object>(connection: connection,
+        return await InsertAsyncInternal<TEntity, object>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             fields: fields,
@@ -368,7 +367,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> InsertAsync<TEntity, TResult>(this IDbConnection connection,
+    public static async Task<TResult> InsertAsync<TEntity, TResult>(this IDbConnection connection,
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
@@ -380,7 +379,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return InsertAsyncInternal<TEntity, TResult>(connection: connection,
+        return await InsertAsyncInternal<TEntity, TResult>(connection: connection,
             tableName: GetMappedName<TEntity>(entity),
             entity: entity,
             fields: fields,
@@ -410,7 +409,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    internal static Task<TResult> InsertAsyncInternal<TEntity, TResult>(this IDbConnection connection,
+    internal static async ValueTask<TResult> InsertAsyncInternal<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? fields = null,
@@ -425,7 +424,7 @@ public static partial class DbConnectionExtension
     {
         if (TypeCache.Get(GetEntityType(entity)).IsDictionaryStringObject() == true)
         {
-            return InsertAsyncInternalBase<IDictionary<string, object>, TResult>(connection: connection,
+            return await InsertAsyncInternalBase<IDictionary<string, object>, TResult>(connection: connection,
                 tableName: tableName,
                 entity: (IDictionary<string, object>)entity,
                 fields: GetQualifiedFields<TEntity>(fields, entity),
@@ -439,7 +438,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            return InsertAsyncInternalBase<TEntity, TResult>(connection: connection,
+            return await InsertAsyncInternalBase<TEntity, TResult>(connection: connection,
                 tableName: tableName,
                 entity: entity,
                 fields: GetQualifiedFields<TEntity>(fields, entity),
@@ -552,7 +551,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<object> InsertAsync(this IDbConnection connection,
+    public static async Task<object> InsertAsync(this IDbConnection connection,
         string tableName,
         object entity,
         IEnumerable<Field>? fields = null,
@@ -564,7 +563,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return InsertAsyncInternal<object, object>(connection: connection,
+        return await InsertAsyncInternal<object, object>(connection: connection,
             tableName: tableName,
             entity: entity,
             fields: fields,
@@ -593,7 +592,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    public static Task<TResult> InsertAsync<TResult>(this IDbConnection connection,
+    public static async Task<TResult> InsertAsync<TResult>(this IDbConnection connection,
         string tableName,
         object entity,
         IEnumerable<Field>? fields = null,
@@ -605,7 +604,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return InsertAsyncInternal<object, TResult>(connection: connection,
+        return await InsertAsyncInternal<object, TResult>(connection: connection,
             tableName: tableName,
             entity: entity,
             fields: fields,
@@ -720,7 +719,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The value of the identity field if present, otherwise, the value of the primary field.</returns>
-    internal async static Task<TResult> InsertAsyncInternalBase<TEntity, TResult>(this IDbConnection connection,
+    internal static async ValueTask<TResult> InsertAsyncInternalBase<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
         IEnumerable<Field>? fields = null,

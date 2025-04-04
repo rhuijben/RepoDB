@@ -494,7 +494,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -508,7 +508,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -541,7 +541,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         Field qualifier,
@@ -556,7 +556,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier.AsEnumerable(),
@@ -589,7 +589,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
@@ -604,7 +604,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -637,7 +637,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
@@ -652,7 +652,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal<TEntity>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: Field.Parse<TEntity>(qualifiers),
@@ -683,7 +683,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
         IEnumerable<Field>? fields = null,
@@ -696,7 +696,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             qualifiers: null,
@@ -728,7 +728,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Field qualifier,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -742,7 +742,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             qualifiers: qualifier.AsEnumerable(),
@@ -774,7 +774,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -788,7 +788,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             qualifiers: qualifiers,
@@ -820,7 +820,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -834,7 +834,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal<TEntity>(connection: connection,
             tableName: GetMappedName<TEntity>(entities),
             entities: entities,
             qualifiers: Field.Parse<TEntity>(qualifiers),
@@ -867,7 +867,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    internal static async Task<int> MergeAllAsyncInternal<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<int> MergeAllAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
@@ -1115,7 +1115,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -1128,7 +1128,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAllAsyncInternal<object>(connection: connection,
+        return await MergeAllAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -1160,7 +1160,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
         Field qualifier,
@@ -1174,7 +1174,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAllAsyncInternal<object>(connection: connection,
+        return await MergeAllAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1206,7 +1206,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    public static Task<int> MergeAllAsync(this IDbConnection connection,
+    public static async Task<int> MergeAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
         IEnumerable<Field>? qualifiers,
@@ -1220,7 +1220,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return MergeAllAsyncInternal<object>(connection: connection,
+        return await MergeAllAsyncInternal<object>(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -1578,7 +1578,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    internal static async Task<int> MergeAllAsyncInternalBase<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<int> MergeAllAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
@@ -1802,7 +1802,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
-    internal static async Task<int> UpsertAllAsyncInternalBase<TEntity>(this IDbConnection connection,
+    internal static async ValueTask<int> UpsertAllAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers = null,
