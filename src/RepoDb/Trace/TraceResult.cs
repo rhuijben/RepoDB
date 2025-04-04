@@ -7,7 +7,7 @@ namespace RepoDb;
 /// <summary>
 /// 
 /// </summary>
-internal class TraceResult
+internal sealed class TraceResult
 {
     /// <summary>
     /// 
@@ -25,7 +25,7 @@ internal class TraceResult
     /// <summary>
     /// 
     /// </summary>
-    public Guid SessionId { get; }
+    public long SessionId { get; }
 
     /// <summary>
     /// 
@@ -41,6 +41,8 @@ internal class TraceResult
 
     #region Methods
 
+    static long _nextSessionId = 1;
+
     /// <summary>
     /// 
     /// </summary>
@@ -50,7 +52,7 @@ internal class TraceResult
     public static TraceResult Create(string? key,
         DbCommand command) =>
         new TraceResult(
-            new CancellableTraceLog(Guid.NewGuid(),
+            new CancellableTraceLog(Interlocked.Increment(ref _nextSessionId),
                 key, command.CommandText, GetParameters(command)));
 
     /// <summary>

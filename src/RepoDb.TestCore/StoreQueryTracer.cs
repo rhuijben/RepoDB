@@ -8,18 +8,18 @@ public sealed class StoreQueryTracer : ITrace
     {
     }
 
-    public Task AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log, CancellationToken cancellationToken = default) => Task.CompletedTask;
+    public ValueTask AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log, CancellationToken cancellationToken = default) => new();
 
     public void BeforeExecution(CancellableTraceLog log)
     {
         Traces.Add(log.Statement);
     }
 
-    public Task BeforeExecutionAsync(CancellableTraceLog log, CancellationToken cancellationToken = default)
+    public ValueTask BeforeExecutionAsync(CancellableTraceLog log, CancellationToken cancellationToken = default)
     {
         Traces.Add(log.Statement);
 
-        return Task.CompletedTask;
+        return new();
     }
 
     public List<string> Traces = [];

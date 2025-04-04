@@ -28,9 +28,9 @@ public sealed class DiagnosticsTracer : ITrace
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public Task AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log, CancellationToken cancellationToken = default)
+    public ValueTask AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log, CancellationToken cancellationToken = default)
     {
-        return Task.CompletedTask;
+        return new();
     }
 
     /// <summary>
@@ -48,10 +48,10 @@ public sealed class DiagnosticsTracer : ITrace
     /// <param name="log"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public Task BeforeExecutionAsync(CancellableTraceLog log, CancellationToken cancellationToken = default)
+    public ValueTask BeforeExecutionAsync(CancellableTraceLog log, CancellationToken cancellationToken = default)
     {
         SystemDiagnosticsTrace.WriteLine(log);
 
-        return Task.CompletedTask;
+        return new();
     }
 }

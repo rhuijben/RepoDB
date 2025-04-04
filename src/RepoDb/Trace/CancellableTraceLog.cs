@@ -14,7 +14,7 @@ public class CancellableTraceLog : TraceLog
     /// <param name="key"></param>
     /// <param name="statement"></param>
     /// <param name="parameters"></param>
-    protected internal CancellableTraceLog(Guid sessionId,
+    protected internal CancellableTraceLog(long sessionId,
         string? key,
         string statement,
         IEnumerable<IDbDataParameter> parameters = null)
@@ -39,7 +39,7 @@ public class CancellableTraceLog : TraceLog
     /// <summary>
     /// Gets the actual date/time value of when the actual execution has started.
     /// </summary>
-    public DateTime StartTime => DateTime.UtcNow;
+    public DateTime StartTime { get; } = DateTime.UtcNow;
 
     /// <summary>
     /// Gets a value whether the operation is cancelled.
