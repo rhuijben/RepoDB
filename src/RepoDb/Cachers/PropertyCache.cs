@@ -11,7 +11,7 @@ namespace RepoDb;
 /// </summary>
 public static class PropertyCache
 {
-    private static readonly ConcurrentDictionary<int, IEnumerable<ClassProperty>> cache = new();
+    private static readonly ConcurrentDictionary<Type, IEnumerable<ClassProperty>> cache = new();
 
     #region Methods
 
@@ -48,8 +48,7 @@ public static class PropertyCache
         string propertyName,
         bool includeMappings = false)
     {
-        // Validate the presence
-        ThrowArgumentNullException(propertyName, "PropertyName");
+        ObjectExtension.ThrowIfNull(propertyName, nameof(propertyName));
 
         // Return the value
         return Get(entityType)?
@@ -82,7 +81,7 @@ public static class PropertyCache
         bool includeMappings = false)
     {
         // Validate the presence
-        ThrowArgumentNullException(field, "Field");
+        ObjectExtension.ThrowIfNull(field, nameof(field));
 
         // Return the value
         return Get(entityType, field.Name, includeMappings);
@@ -100,7 +99,7 @@ public static class PropertyCache
         bool includeMappings = false)
     {
         // Validate the presence
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Return the value
         return Get(entityType, propertyInfo.Name, includeMappings);
@@ -127,11 +126,7 @@ public static class PropertyCache
             return [];
         }
 
-        // Variables
-        var key = GenerateHashCode(entityType);
-
-        // Try get the value
-        return cache.GetOrAdd(key, (_) => entityType.GetClassProperties().AsList());
+        return cache.GetOrAdd(entityType, (_) => entityType.GetClassProperties().AsList());
     }
 
     #endregion
@@ -143,29 +138,6 @@ public static class PropertyCache
     /// </summary>
     public static void Flush() =>
         cache.Clear();
-
-    /// <summary>
-    /// Generates a hashcode for caching.
-    /// </summary>
-    /// <param name="type">The type of the data entity.</param>
-    /// <returns>The generated hashcode.</returns>
-    private static int GenerateHashCode(Type type) =>
-        TypeExtension.GenerateHashCode(type);
-
-    /// <summary>
-    /// Validates the target object presence.
-    /// </summary>
-    /// <typeparam name="T">The type of the object.</typeparam>
-    /// <param name="obj">The object to be checked.</param>
-    /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<T>(T obj,
-        string argument)
-    {
-        if (obj is null)
-        {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
-        }
-    }
 
     #endregion
 }

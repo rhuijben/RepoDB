@@ -1,7 +1,8 @@
-﻿using RepoDb.Interfaces;
+﻿#nullable enable
 using System.Collections;
 using System.Collections.Concurrent;
 using RepoDb.Exceptions;
+using RepoDb.Interfaces;
 
 namespace RepoDb;
 
@@ -10,7 +11,7 @@ namespace RepoDb;
 /// </summary>
 public class MemoryCache : ICache
 {
-    private readonly ConcurrentDictionary<string, object> _cache = new();
+    private readonly ConcurrentDictionary<string, IExpirable> _cache = new();
 
     #region Sync
 
@@ -72,12 +73,12 @@ public class MemoryCache : ICache
     /// <returns>A boolean value that signifies the presence of the key from the collection.</returns>
     public bool Contains(string key)
     {
-        if (_cache.TryGetValue(key, out var value) == true)
+        if (_cache.TryGetValue(key, out var value))
         {
-            if (value is IExpirable expirable)
-            {
-                return expirable.IsExpired() == false;
-            }
+            if (!value.IsExpired())
+                return true;
+
+            _cache.TryRemove(key, out var _);
         }
         return false;
     }
@@ -89,7 +90,7 @@ public class MemoryCache : ICache
     /// <param name="key">The key of the cache object to be retrieved.</param>
     /// <returns>A cached item object from the cache collection based on the given key.</returns>
     /// <param name="throwException">Throws an exception if the item is not found.</param>
-    public CacheItem<T> Get<T>(string key,
+    public CacheItem<T>? Get<T>(string key,
         bool throwException = true)
     {
         CacheItem<T>? item = null;
@@ -101,6 +102,7 @@ public class MemoryCache : ICache
         {
             return item;
         }
+        _cache.TryRemove(key, out var _);
         return null;
     }
 
@@ -109,13 +111,17 @@ public class MemoryCache : ICache
     /// </summary>
     /// <param name="key">The key of the item to be removed from the cache collection.</param>
     /// <param name="throwException">Throws an exception if the operation has failed to remove an item.</param>
-    public void Remove(string key,
+    public bool Remove(string key,
         bool throwException = true)
     {
-        if (_cache.TryRemove(key, out var _) == false && throwException == true)
-        {
+        bool removed = _cache.TryRemove(key, out var _);
+
+        if (removed)
+            return true;
+        else if (throwException == true)
             throw new ItemNotFoundException($"Failed to remove an item with key '{key}'.");
-        }
+
+        return false;
     }
 
     #endregion
@@ -131,7 +137,7 @@ public class MemoryCache : ICache
     /// <param name="expiration">The expiration in minutes of the cache item.</param>
     /// <param name="throwException">Throws an exception if the operation has failed to add an item.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    public Task AddAsync<T>(string key,
+    public ValueTask AddAsync<T>(string key,
         T value,
         int expiration = Constant.DefaultCacheItemExpirationInMinutes,
         bool throwException = true,
@@ -145,22 +151,22 @@ public class MemoryCache : ICache
     /// <param name="item">The cache item to be added in the collection.</param>
     /// <param name="throwException">Throws an exception if the operation has failed to add an item.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    public Task AddAsync<T>(CacheItem<T> item,
+    public ValueTask AddAsync<T>(CacheItem<T> item,
         bool throwException = true,
         CancellationToken cancellationToken = default)
     {
         Add(item, throwException);
-        return Task.CompletedTask;
+        return new();
     }
 
     /// <summary>
     /// Clears the collection of the cache in an asynchronous way.
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// </summary>
-    public Task ClearAsync(CancellationToken cancellationToken = default)
+    public ValueTask ClearAsync(CancellationToken cancellationToken = default)
     {
         _cache.Clear();
-        return Task.CompletedTask;
+        return new();
     }
 
     /// <summary>
@@ -169,9 +175,9 @@ public class MemoryCache : ICache
     /// <param name="key">The name of the key to be checked.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A boolean value that signifies the presence of the key from the collection.</returns>
-    public Task<bool> ContainsAsync(string key,
+    public ValueTask<bool> ContainsAsync(string key,
         CancellationToken cancellationToken = default) =>
-        Task.FromResult(Contains(key));
+        new(Contains(key));
 
     /// <summary>
     /// Gets an object from the cache collection in an asynchronous way.
@@ -181,10 +187,10 @@ public class MemoryCache : ICache
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <param name="key">The key of the cache object to be retrieved.</param>
     /// <returns>A cached item object from the cache collection based on the given key.</returns>
-    public Task<CacheItem<T>> GetAsync<T>(string key,
+    public ValueTask<CacheItem<T>?> GetAsync<T>(string key,
         bool throwException = true,
         CancellationToken cancellationToken = default) =>
-        Task.FromResult(Get<T>(key, throwException));
+        new(Get<T>(key, throwException));
 
     /// <summary>
     /// Removes the item from the cache collection in an asynchronous way.
@@ -192,12 +198,11 @@ public class MemoryCache : ICache
     /// <param name="key">The key of the item to be removed from the cache collection.</param>
     /// <param name="throwException">Throws an exception if the operation has failed to remove an item.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    public Task RemoveAsync(string key,
+    public ValueTask<bool> RemoveAsync(string key,
         bool throwException = true,
         CancellationToken cancellationToken = default)
     {
-        Remove(key, throwException);
-        return Task.CompletedTask;
+        return new(Remove(key, throwException));
     }
 
     #endregion

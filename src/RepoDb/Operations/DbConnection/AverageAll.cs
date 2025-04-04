@@ -207,7 +207,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public static async Task<object> AverageAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> AverageAllAsync<TEntity>(this IDbConnection connection,
         Field field,
         string? hints = null,
         int commandTimeout = 0,
@@ -243,7 +243,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public static async Task<object> AverageAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> AverageAllAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int commandTimeout = 0,
@@ -518,7 +518,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public static async Task<object> AverageAllAsync(this IDbConnection connection,
+    public static async Task<object?> AverageAllAsync(this IDbConnection connection,
         string tableName,
         Field field,
         string? hints = null,
@@ -642,7 +642,7 @@ public static partial class DbConnectionExtension
     /// <returns>The average value of the target field.</returns>
     internal static TResult AverageAllInternalBase<TResult>(this IDbConnection connection,
         AverageAllRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
@@ -687,7 +687,7 @@ public static partial class DbConnectionExtension
     /// <returns>The average value of the target field.</returns>
     internal static async ValueTask<TResult> AverageAllAsyncInternalBase<TResult>(this IDbConnection connection,
         AverageAllRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,

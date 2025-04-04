@@ -1,8 +1,9 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
-using RepoDb.Interfaces;
 using RepoDb.Resolvers;
 
 namespace RepoDb;
@@ -15,7 +16,7 @@ public static class PropertyMappedNameCache
     #region Privates
 
     private static readonly ConcurrentDictionary<int, string> cache = new();
-    private static readonly IResolver<PropertyInfo, Type, string> resolver = new PropertyMappedNameResolver();
+    private static readonly PropertyMappedNameResolver resolver = new PropertyMappedNameResolver();
 
     #endregion
 
@@ -39,7 +40,7 @@ public static class PropertyMappedNameCache
     /// <returns>The cached column name mappings of the property.</returns>
     public static string Get<TEntity>(string propertyName)
         where TEntity : class =>
-        Get<TEntity>(TypeExtension.GetProperty<TEntity>(propertyName));
+        Get<TEntity>(TypeExtension.GetProperty<TEntity>(propertyName) ?? throw new PropertyNotFoundException(nameof(propertyName), "Property not found"));
 
     /// <summary>
     /// Gets the cached column name mappings of the property (via <see cref="Field"/> object).
@@ -49,7 +50,7 @@ public static class PropertyMappedNameCache
     /// <returns>The cached column name mappings of the property.</returns>
     public static string Get<TEntity>(Field field)
         where TEntity : class =>
-        Get<TEntity>(TypeExtension.GetProperty<TEntity>((field ?? throw new ArgumentNullException(nameof(field))).Name));
+        Get<TEntity>((TypeExtension.GetProperty<TEntity>(field?.Name ?? throw new ArgumentNullException(nameof(field))) ?? throw new PropertyNotFoundException(nameof(field), "Property not found")));
 
     /// <summary>
     /// Gets the cached column name mappings of the property.
@@ -67,7 +68,7 @@ public static class PropertyMappedNameCache
     /// <param name="propertyInfo">The target property.</param>
     /// <returns>The cached column name mappings of the property.</returns>
     internal static string Get(PropertyInfo propertyInfo) =>
-        Get(propertyInfo.DeclaringType, propertyInfo);
+        Get(propertyInfo.DeclaringType!, propertyInfo);
 
     /// <summary>
     /// Gets the cached column name mappings of the property.
@@ -79,7 +80,7 @@ public static class PropertyMappedNameCache
         PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
@@ -107,21 +108,6 @@ public static class PropertyMappedNameCache
     private static int GenerateHashCode(Type entityType,
         PropertyInfo propertyInfo) =>
         TypeExtension.GenerateHashCode(entityType, propertyInfo);
-
-    /// <summary>
-    /// Validates the target object presence.
-    /// </summary>
-    /// <typeparam name="T">The type of the object.</typeparam>
-    /// <param name="obj">The object to be checked.</param>
-    /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<T>(T obj,
-        string argument)
-    {
-        if (obj is null)
-        {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
-        }
-    }
 
     #endregion
 }

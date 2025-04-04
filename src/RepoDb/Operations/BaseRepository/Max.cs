@@ -16,7 +16,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Field field,
+    public object? Max(Field field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -38,7 +38,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Field field,
+    public object? Max(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -60,7 +60,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Field field,
+    public object? Max(Field field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -82,7 +82,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Field field,
+    public object? Max(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -104,7 +104,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Field field,
+    public object? Max(Field field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -126,7 +126,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Expression<Func<TEntity, object?>> field,
+    public object? Max(Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -148,7 +148,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Expression<Func<TEntity, object?>> field,
+    public object? Max(Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -170,7 +170,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Expression<Func<TEntity, object?>> field,
+    public object? Max(Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -192,7 +192,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Expression<Func<TEntity, object?>> field,
+    public object? Max(Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -214,7 +214,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The max value of the target field.</returns>
-    public object Max(Expression<Func<TEntity, object?>> field,
+    public object? Max(Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -461,7 +461,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Field field,
+    public Task<object?> MaxAsync(Field field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -486,7 +486,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Field field,
+    public Task<object?> MaxAsync(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -511,7 +511,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Field field,
+    public Task<object?> MaxAsync(Field field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -536,7 +536,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Field field,
+    public Task<object?> MaxAsync(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -561,7 +561,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Field field,
+    public Task<object?> MaxAsync(Field field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -586,7 +586,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MaxAsync(Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -611,7 +611,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MaxAsync(Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -636,7 +636,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MaxAsync(Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -661,7 +661,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MaxAsync(Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,
@@ -686,7 +686,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The max value of the target field.</returns>
-    public Task<object> MaxAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MaxAsync(Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Max,

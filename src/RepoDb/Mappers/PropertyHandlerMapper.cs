@@ -264,7 +264,7 @@ public static class PropertyHandlerMapper
         where TEntity : class
     {
         // Validates
-        ThrowArgumentNullException(propertyName, "PropertyName");
+        ObjectExtension.ThrowIfNull(propertyName, nameof(propertyName));
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(propertyName);
@@ -329,7 +329,7 @@ public static class PropertyHandlerMapper
         where TEntity : class
     {
         // Validates
-        ThrowArgumentNullException(field, "Field");
+        ObjectExtension.ThrowIfNull(field, nameof(field));
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(field.Name);
@@ -395,8 +395,8 @@ public static class PropertyHandlerMapper
         bool force)
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
-        ThrowArgumentNullException(propertyHandler, "PropertyHandler");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
+        ObjectExtension.ThrowIfNull(propertyHandler, nameof(propertyHandler));
         Guard(propertyHandler!.GetType() ?? typeof(TPropertyHandler));
 
         /*
@@ -493,7 +493,7 @@ public static class PropertyHandlerMapper
         PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
@@ -531,7 +531,7 @@ public static class PropertyHandlerMapper
         where TEntity : class
     {
         // Validates
-        ThrowArgumentNullException(propertyName, "PropertyName");
+        ObjectExtension.ThrowIfNull(propertyName, nameof(propertyName));
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(propertyName);
@@ -553,7 +553,7 @@ public static class PropertyHandlerMapper
         where TEntity : class
     {
         // Validates
-        ThrowArgumentNullException(field, "Field");
+        ObjectExtension.ThrowIfNull(field, nameof(field));
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(field.Name);
@@ -583,7 +583,7 @@ public static class PropertyHandlerMapper
         PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
@@ -652,25 +652,6 @@ public static class PropertyHandlerMapper
         if (type.IsInterfacedTo(StaticType.IPropertyHandler) == false)
         {
             throw new InvalidTypeException($"Type '{type.FullName}' must implement the '{StaticType.IPropertyHandler.FullName}' interface.");
-        }
-    }
-
-    /// <summary>
-    /// Validates the target object presence.
-    /// </summary>
-    /// <typeparam name="TType">The type of the object.</typeparam>
-    /// <param name="obj">The object to be checked.</param>
-    /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException(
-#if NET
-        [NotNull]
-#endif
-        object? obj,
-        string argument)
-    {
-        if (obj is null)
-        {
-            throw new ArgumentNullException(argument);
         }
     }
 

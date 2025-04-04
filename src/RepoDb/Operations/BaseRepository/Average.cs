@@ -16,7 +16,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Field field,
+    public object? Average(Field field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -38,7 +38,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Field field,
+    public object? Average(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -60,7 +60,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Field field,
+    public object? Average(Field field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -82,7 +82,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Field field,
+    public object? Average(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -104,7 +104,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Field field,
+    public object? Average(Field field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -126,7 +126,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Expression<Func<TEntity, object?>> field,
+    public object? Average(Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -148,7 +148,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Expression<Func<TEntity, object?>> field,
+    public object? Average(Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -170,7 +170,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Expression<Func<TEntity, object?>> field,
+    public object? Average(Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -192,7 +192,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Expression<Func<TEntity, object?>> field,
+    public object? Average(Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -214,7 +214,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public object Average(Expression<Func<TEntity, object?>> field,
+    public object? Average(Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -461,7 +461,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Field field,
+    public Task<object?> AverageAsync(Field field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -486,7 +486,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Field field,
+    public Task<object?> AverageAsync(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -511,7 +511,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Field field,
+    public Task<object?> AverageAsync(Field field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -536,7 +536,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Field field,
+    public Task<object?> AverageAsync(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -561,7 +561,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Field field,
+    public Task<object?> AverageAsync(Field field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -586,7 +586,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> AverageAsync(Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -611,7 +611,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> AverageAsync(Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -636,7 +636,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> AverageAsync(Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -661,7 +661,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> AverageAsync(Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,
@@ -686,7 +686,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The average value of the target field.</returns>
-    public Task<object> AverageAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> AverageAsync(Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Average,

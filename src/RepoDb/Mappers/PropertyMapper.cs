@@ -72,7 +72,7 @@ public static class PropertyMapper
         where TEntity : class
     {
         // Validates
-        ThrowArgumentNullException(propertyName, "PropertyName");
+        ObjectExtension.ThrowIfNull(propertyName, nameof(propertyName));
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(propertyName);
@@ -109,7 +109,7 @@ public static class PropertyMapper
         where TEntity : class
     {
         // Validates
-        ThrowArgumentNullException(field, "Field");
+        ObjectExtension.ThrowIfNull(field, nameof(field));
 
         // Get the property
         var property = TypeExtension.GetProperty<TEntity>(field.Name);
@@ -146,7 +146,7 @@ public static class PropertyMapper
         where TEntity : class
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
         ValidateTargetColumnName(columnName);
 
         // Variables
@@ -236,7 +236,7 @@ public static class PropertyMapper
         PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
@@ -288,7 +288,7 @@ public static class PropertyMapper
         where TEntity : class
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Variables
         var key = GenerateHashCode(typeof(TEntity), propertyInfo);
@@ -330,21 +330,6 @@ public static class PropertyMapper
         if (string.IsNullOrWhiteSpace(columnName))
         {
             throw new ArgumentNullException(nameof(columnName));
-        }
-    }
-
-    /// <summary>
-    /// Validates the target object presence.
-    /// </summary>
-    /// <typeparam name="T">The type of the object.</typeparam>
-    /// <param name="obj">The object to be checked.</param>
-    /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<T>(T obj,
-        string argument)
-    {
-        if (obj is null)
-        {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
         }
     }
 

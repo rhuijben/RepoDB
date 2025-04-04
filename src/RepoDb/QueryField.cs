@@ -84,7 +84,7 @@ public partial class QueryField : IEquatable<QueryField>
     /// <param name="prependUnderscore">The value to identify whether the underscore prefix will be appended to the parameter name.</param>
     internal QueryField(Field field,
         Operation operation,
-        object value,
+        object? value,
         DbType? dbType,
         bool prependUnderscore = false)
     {

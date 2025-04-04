@@ -170,7 +170,7 @@ public static class DbCommandExtension
     /// <param name="param">The object to be used when creating the parameters.</param>
     /// <param name="entityType">The type of the data entity.</param>
     public static void CreateParameters(this IDbCommand command,
-        object param,
+        object? param,
         Type? entityType) =>
         CreateParameters(command, param, null, entityType, null);
 
@@ -183,7 +183,7 @@ public static class DbCommandExtension
     /// <param name="entityType"></param>
     /// <param name="dbFields"></param>
     internal static void CreateParameters(this IDbCommand command,
-        object param,
+        object? param,
         HashSet<string>? propertiesToSkip,
         Type? entityType,
         DbFieldCollection? dbFields = null)

@@ -16,7 +16,7 @@ public class PropertyMappedNameResolver : IResolver<PropertyInfo, Type, string>
     /// <param name="propertyInfo">The target property.</param>
     /// <param name="declaringType">The declaring type of the target property. Usually, the type of the parent derived class, not the base class.</param>
     /// <returns>The cached column name mappings of the property.</returns>
-    public string? Resolve(PropertyInfo propertyInfo,
+    public string Resolve(PropertyInfo propertyInfo,
         Type declaringType) =>
         PropertyInfoExtension.GetMappedName(propertyInfo, declaringType ?? propertyInfo.DeclaringType!);
 }

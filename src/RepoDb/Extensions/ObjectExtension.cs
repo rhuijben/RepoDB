@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace RepoDb.Extensions;
 
@@ -26,23 +28,26 @@ internal static class ObjectExtension
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="obj"></param>
     /// <param name="argument"></param>
-    internal static void ThrowIfNull<T>(T obj,
-        string argument)
+    /// <param name="parameterName"></param>
+    internal static void ThrowIfNull(
+#if NET
+        [NotNull]
+#endif
+    object? argument,
+#if NET
+        [CallerArgumentExpression(nameof(argument))]
+#endif
+        string? paramName = null)
     {
-        if (obj != null)
+#if NET
+        ArgumentNullException.ThrowIfNull(argument, paramName);
+#else
+        if (argument != null)
         {
             return;
         }
-        if (string.IsNullOrEmpty(argument))
-        {
-            throw new ArgumentNullException();
-        }
-        else
-        {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
-        }
+        throw new ArgumentNullException(paramName: paramName);
+#endif
     }
 }

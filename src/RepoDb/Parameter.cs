@@ -18,7 +18,7 @@ public sealed class Parameter : IEquatable<Parameter>
     /// <param name="name">The name of the parameter.</param>
     /// <param name="value">The value of the parameter.</param>
     public Parameter(string name,
-        object value)
+        object? value)
         : this(name, value, null, false)
     { }
 
@@ -29,7 +29,7 @@ public sealed class Parameter : IEquatable<Parameter>
     /// <param name="value">The value of the parameter.</param>
     /// <param name="dbType">The database type of the parameter.</param>
     public Parameter(string name,
-        object value,
+        object? value,
         DbType? dbType)
         : this(name, value, dbType, false)
     { }
@@ -42,7 +42,7 @@ public sealed class Parameter : IEquatable<Parameter>
     /// <param name="dbType">The database type of the parameter.</param>
     /// <param name="prependUnderscore">The value to identify whether the underscope prefix will be prepended.</param>
     internal Parameter(string name,
-        object value,
+        object? value,
         DbType? dbType,
         bool prependUnderscore)
     {
@@ -81,12 +81,12 @@ public sealed class Parameter : IEquatable<Parameter>
     /// <summary>
     /// Gets the value of the parameter.
     /// </summary>
-    public object Value { get; private set; }
+    public object? Value { get; private set; }
 
     /// <summary>
     /// Gets the original value of the parameter.
     /// </summary>
-    private object OriginalValue { get; }
+    private object? OriginalValue { get; }
 
     /// <summary>
     /// Gets the database type of the parameter.

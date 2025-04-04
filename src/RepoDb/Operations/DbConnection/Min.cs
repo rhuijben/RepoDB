@@ -865,7 +865,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Field field,
         object? where = null,
         string? hints = null,
@@ -904,7 +904,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
@@ -943,7 +943,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Field field,
         QueryField? where = null,
         string? hints = null,
@@ -982,7 +982,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
@@ -1021,7 +1021,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Field field,
         QueryGroup? where = null,
         string? hints = null,
@@ -1060,7 +1060,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
@@ -1099,7 +1099,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
@@ -1138,7 +1138,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
@@ -1177,7 +1177,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
@@ -1216,7 +1216,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> MinAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
@@ -2175,7 +2175,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync(this IDbConnection connection,
+    public static async Task<object?> MinAsync(this IDbConnection connection,
         string tableName,
         Field field,
         object? where = null,
@@ -2215,7 +2215,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync(this IDbConnection connection,
+    public static async Task<object?> MinAsync(this IDbConnection connection,
         string tableName,
         Field field,
         QueryField? where = null,
@@ -2255,7 +2255,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync(this IDbConnection connection,
+    public static async Task<object?> MinAsync(this IDbConnection connection,
         string tableName,
         Field field,
         IEnumerable<QueryField>? where = null,
@@ -2295,7 +2295,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public static async Task<object> MinAsync(this IDbConnection connection,
+    public static async Task<object?> MinAsync(this IDbConnection connection,
         string tableName,
         Field field,
         QueryGroup? where = null,
@@ -2610,7 +2610,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     internal static TResult MinInternalBase<TResult>(this IDbConnection connection,
         MinRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,
@@ -2654,7 +2654,7 @@ public static partial class DbConnectionExtension
     /// <returns>The min value of the target field.</returns>
     internal static async ValueTask<TResult> MinAsyncInternalBase<TResult>(this IDbConnection connection,
         MinRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Min,
         IDbTransaction? transaction = null,

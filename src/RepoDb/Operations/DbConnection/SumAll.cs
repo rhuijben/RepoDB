@@ -25,7 +25,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The sum value of the target field.</returns>
-    public static object SumAll<TEntity>(this IDbConnection connection,
+    public static object? SumAll<TEntity>(this IDbConnection connection,
         Field field,
         string? hints = null,
         int commandTimeout = 0,
@@ -58,7 +58,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The sum value of the target field.</returns>
-    public static object SumAll<TEntity>(this IDbConnection connection,
+    public static object? SumAll<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int commandTimeout = 0,
@@ -207,7 +207,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
-    public static async Task<object> SumAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> SumAllAsync<TEntity>(this IDbConnection connection,
         Field field,
         string? hints = null,
         int commandTimeout = 0,
@@ -243,7 +243,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
-    public static async Task<object> SumAllAsync<TEntity>(this IDbConnection connection,
+    public static async Task<object?> SumAllAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         string? hints = null,
         int commandTimeout = 0,
@@ -402,7 +402,7 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The sum value of the target field.</returns>
-    public static object SumAll(this IDbConnection connection,
+    public static object? SumAll(this IDbConnection connection,
         string tableName,
         Field field,
         string? hints = null,
@@ -518,7 +518,7 @@ public static partial class DbConnectionExtension
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The sum value of the target field.</returns>
-    public static async Task<object> SumAllAsync(this IDbConnection connection,
+    public static async Task<object?> SumAllAsync(this IDbConnection connection,
         string tableName,
         Field field,
         string? hints = null,
@@ -642,7 +642,7 @@ public static partial class DbConnectionExtension
     /// <returns>The sum value of the target field.</returns>
     internal static TResult SumAllInternalBase<TResult>(this IDbConnection connection,
         SumAllRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,
@@ -687,7 +687,7 @@ public static partial class DbConnectionExtension
     /// <returns>The sum value of the target field.</returns>
     internal static async ValueTask<TResult> SumAllAsyncInternalBase<TResult>(this IDbConnection connection,
         SumAllRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null,

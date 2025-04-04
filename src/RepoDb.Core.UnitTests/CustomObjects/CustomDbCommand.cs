@@ -40,7 +40,7 @@ public class CustomDbCommand : DbCommand, IDbCommand
         return default;
     }
 
-    public override object ExecuteScalar()
+    public override object? ExecuteScalar()
     {
         return default;
     }

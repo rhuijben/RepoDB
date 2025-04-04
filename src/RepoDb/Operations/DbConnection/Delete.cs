@@ -1084,7 +1084,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows that has been deleted from the table.</returns>
     internal static int DeleteInternalBase(this IDbConnection connection,
         DeleteRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
@@ -1129,7 +1129,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows that has been deleted from the table.</returns>
     internal static async ValueTask<int> DeleteAsyncInternalBase(this IDbConnection connection,
         DeleteRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,

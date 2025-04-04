@@ -670,7 +670,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>An object that holds the first occurrence value (first column of first row) of the execution.</returns>
-    public object ExecuteScalar(string commandText,
+    public object? ExecuteScalar(string commandText,
         object? param = null,
         CommandType commandType = default,
         string? cacheKey = null,
@@ -719,7 +719,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An object that holds the first occurrence value (first column of first row) of the execution.</returns>
-    public async Task<object> ExecuteScalarAsync(string commandText,
+    public async Task<object?> ExecuteScalarAsync(string commandText,
         object? param = null,
         CommandType commandType = default,
         string? cacheKey = null,

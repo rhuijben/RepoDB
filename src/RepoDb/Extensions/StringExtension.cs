@@ -154,7 +154,7 @@ public static class StringExtension
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The quoted string.</returns>
     public static string AsQuoted(this string value,
-        IDbSetting dbSetting) =>
+        IDbSetting? dbSetting) =>
         AsQuoted(value, false, false, dbSetting);
 
     /// <summary>
@@ -166,7 +166,7 @@ public static class StringExtension
     /// <returns>The quoted string.</returns>
     public static string AsQuoted(this string value,
         bool trim,
-        IDbSetting dbSetting) =>
+        IDbSetting? dbSetting) =>
         AsQuoted(value, trim, false, dbSetting);
 
     /// <summary>
@@ -180,7 +180,7 @@ public static class StringExtension
     public static string AsQuoted(this string value,
         bool trim,
         bool ignoreSchema,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         if (dbSetting == null)
         {

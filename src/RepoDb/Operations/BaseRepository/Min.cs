@@ -16,7 +16,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Field field,
+    public object? Min(Field field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -38,7 +38,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Field field,
+    public object? Min(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -60,7 +60,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Field field,
+    public object? Min(Field field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -82,7 +82,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Field field,
+    public object? Min(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -104,7 +104,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Field field,
+    public object? Min(Field field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -126,7 +126,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Expression<Func<TEntity, object?>> field,
+    public object? Min(Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -148,7 +148,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Expression<Func<TEntity, object?>> field,
+    public object? Min(Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -170,7 +170,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Expression<Func<TEntity, object?>> field,
+    public object? Min(Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -192,7 +192,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Expression<Func<TEntity, object?>> field,
+    public object? Min(Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -214,7 +214,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The min value of the target field.</returns>
-    public object Min(Expression<Func<TEntity, object?>> field,
+    public object? Min(Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -461,7 +461,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Field field,
+    public Task<object?> MinAsync(Field field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -486,7 +486,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Field field,
+    public Task<object?> MinAsync(Field field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -511,7 +511,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Field field,
+    public Task<object?> MinAsync(Field field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -536,7 +536,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Field field,
+    public Task<object?> MinAsync(Field field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -561,7 +561,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Field field,
+    public Task<object?> MinAsync(Field field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -586,7 +586,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MinAsync(Expression<Func<TEntity, object?>> field,
         object? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -611,7 +611,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MinAsync(Expression<Func<TEntity, object?>> field,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -636,7 +636,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MinAsync(Expression<Func<TEntity, object?>> field,
         QueryField? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -661,7 +661,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MinAsync(Expression<Func<TEntity, object?>> field,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,
@@ -686,7 +686,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <param name="transaction">The transaction to be used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The min value of the target field.</returns>
-    public Task<object> MinAsync(Expression<Func<TEntity, object?>> field,
+    public Task<object?> MinAsync(Expression<Func<TEntity, object?>> field,
         QueryGroup? where = null,
         string? hints = null,
         string traceKey = TraceKeys.Min,

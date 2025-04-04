@@ -33,8 +33,8 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
         DeclaringType = parentType;
         PropertyInfo = property;
 
-        typeMapAttribute = new Lazy<TypeMapAttribute>(() => PropertyInfo.GetCustomAttribute<TypeMapAttribute>(), true);
-        propertyHandlerAttribute = new Lazy<PropertyHandlerAttribute>(() => PropertyInfo.GetCustomAttribute<PropertyHandlerAttribute>(), true);
+        typeMapAttribute = new(() => PropertyInfo.GetCustomAttribute<TypeMapAttribute>(), true);
+        propertyHandlerAttribute = new(() => PropertyInfo.GetCustomAttribute<PropertyHandlerAttribute>(), true);
         dbType = new Lazy<DbType?>(() => PropertyInfo.GetDbType(), true);
         propertyValueAttributes = new Lazy<IEnumerable<PropertyValueAttribute>>(() => PropertyInfo.GetPropertyValueAttributes(DeclaringType), true);
         propertyValueAttribute = new(() =>
@@ -145,13 +145,13 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /*
      * GetTypeMapAttribute
      */
-    private readonly Lazy<TypeMapAttribute> typeMapAttribute;
+    private readonly Lazy<TypeMapAttribute?> typeMapAttribute;
 
     /// <summary>
     /// Gets the <see cref="TypeMapAttribute"/> if present.
     /// </summary>
     /// <returns>The instance of <see cref="TypeMapAttribute"/>.</returns>
-    public TypeMapAttribute GetTypeMapAttribute()
+    public TypeMapAttribute? GetTypeMapAttribute()
     {
         return typeMapAttribute.Value;
     }
@@ -173,13 +173,13 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /*
      * GetPropertyHandlerAttribute
      */
-    private readonly Lazy<PropertyHandlerAttribute> propertyHandlerAttribute;
+    private readonly Lazy<PropertyHandlerAttribute?> propertyHandlerAttribute;
 
     /// <summary>
     /// Gets the <see cref="PropertyHandlerAttribute"/> if present.
     /// </summary>
     /// <returns>The instance of <see cref="PropertyHandlerAttribute"/>.</returns>
-    public PropertyHandlerAttribute GetPropertyHandlerAttribute()
+    public PropertyHandlerAttribute? GetPropertyHandlerAttribute()
     {
         return propertyHandlerAttribute.Value;
     }

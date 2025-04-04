@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using RepoDb.Resolvers;
 
 namespace RepoDb;
@@ -8,7 +9,7 @@ namespace RepoDb;
 /// </summary>
 public static class IdentityCache
 {
-    private static readonly ConcurrentDictionary<Type, ClassProperty> cache = new();
+    private static readonly ConcurrentDictionary<Type, ClassProperty?> cache = new();
     private static readonly IdentityResolver resolver = new();
 
     /// <summary>
@@ -16,7 +17,7 @@ public static class IdentityCache
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <returns>The cached identity property.</returns>
-    public static ClassProperty Get<TEntity>()
+    public static ClassProperty? Get<TEntity>()
         where TEntity : class =>
         Get(typeof(TEntity));
 
@@ -25,7 +26,7 @@ public static class IdentityCache
     /// </summary>
     /// <param name="entityType">The type of the data entity.</param>
     /// <returns>The cached identity property.</returns>
-    public static ClassProperty Get(Type entityType)
+    public static ClassProperty? Get(Type entityType)
         => cache.GetOrAdd(entityType, resolver.Resolve);
 
     /// <summary>

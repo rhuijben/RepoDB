@@ -1,7 +1,9 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
 using RepoDb.Attributes.Parameter;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Resolvers;
 
@@ -40,7 +42,7 @@ public static class PropertyValueAttributeCache
     /// <returns>The list of <see cref="PropertyValueAttribute"/> object.</returns>
     public static IEnumerable<PropertyValueAttribute> Get<TEntity>(string propertyName)
         where TEntity : class =>
-        Get(TypeExtension.GetProperty<TEntity>(propertyName));
+        Get(TypeExtension.GetProperty<TEntity>(propertyName) ?? throw new PropertyNotFoundException(nameof(propertyName), "Property not found"));
 
     /// <summary>
     /// Property Level: Gets the list of cached <see cref="PropertyValueAttribute"/> objects that is currently mapped to the class property (via <see cref="Field"/> object).
@@ -50,7 +52,7 @@ public static class PropertyValueAttributeCache
     /// <returns>The list of <see cref="PropertyValueAttribute"/> object.</returns>
     public static IEnumerable<PropertyValueAttribute> Get<TEntity>(Field field)
         where TEntity : class =>
-        Get(TypeExtension.GetProperty<TEntity>(field.Name));
+        Get(TypeExtension.GetProperty<TEntity>(field.Name) ?? throw new PropertyNotFoundException(nameof(field), "Property not found"));
 
     /// <summary>
     /// Property Level: Gets the list of cached <see cref="PropertyValueAttribute"/> objects that is currently mapped to the <see cref="PropertyInfo"/> object.
@@ -58,7 +60,7 @@ public static class PropertyValueAttributeCache
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/> object.</param>
     /// <returns>The list of <see cref="PropertyValueAttribute"/> object.</returns>
     internal static IEnumerable<PropertyValueAttribute> Get(PropertyInfo propertyInfo) =>
-        Get(propertyInfo?.DeclaringType, propertyInfo);
+        Get(propertyInfo.DeclaringType!, propertyInfo);
 
     /// <summary>
     /// Property Level: Gets the list of cached <see cref="PropertyValueAttribute"/> objects that is currently mapped to the <see cref="PropertyInfo"/> object.
@@ -70,8 +72,8 @@ public static class PropertyValueAttributeCache
         PropertyInfo propertyInfo)
     {
         // Validate
-        ObjectExtension.ThrowIfNull(entityType, "EntityType");
-        ObjectExtension.ThrowIfNull(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(entityType, nameof(entityType));
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Variables
         var key = TypeExtension.GenerateHashCode(entityType, propertyInfo);

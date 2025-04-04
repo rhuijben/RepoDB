@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using RepoDb.Extensions;
 
 namespace RepoDb;
@@ -8,7 +9,7 @@ namespace RepoDb;
 /// </summary>
 public static class FieldCache
 {
-    private static readonly ConcurrentDictionary<int, IEnumerable<Field>> cache = new();
+    private static readonly ConcurrentDictionary<Type, IEnumerable<Field>> cache = new();
 
     #region Methods
 
@@ -17,7 +18,7 @@ public static class FieldCache
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <returns>The cached list <see cref="Field"/> objects.</returns>
-    public static IEnumerable<Field> Get<TEntity>()
+    public static IEnumerable<Field>? Get<TEntity>()
         where TEntity : class =>
         Get(typeof(TEntity));
 
@@ -26,18 +27,15 @@ public static class FieldCache
     /// </summary>
     /// <param name="entityType">The type of the data entity.</param>
     /// <returns>The cached list <see cref="Field"/> objects.</returns>
-    public static IEnumerable<Field> Get(Type entityType)
+    public static IEnumerable<Field>? Get(Type entityType)
     {
         if (TypeCache.Get(entityType).IsClassType() == false)
         {
             return null;
         }
 
-        // Variables
-        var key = GenerateHashCode(entityType);
-
         // Try get the value
-        return cache.GetOrAdd(key, (_) => entityType.AsFields());
+        return cache.GetOrAdd(entityType, TypeExtension.AsFields);
     }
 
     #endregion
@@ -49,14 +47,6 @@ public static class FieldCache
     /// </summary>
     public static void Flush() =>
         cache.Clear();
-
-    /// <summary>
-    /// Generates a hashcode for caching.
-    /// </summary>
-    /// <param name="type">The type of the data entity.</param>
-    /// <returns>The generated hashcode.</returns>
-    private static int GenerateHashCode(Type type) =>
-        TypeExtension.GenerateHashCode(type);
 
     #endregion
 }

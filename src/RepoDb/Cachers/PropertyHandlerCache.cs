@@ -1,6 +1,8 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
@@ -14,9 +16,9 @@ public static class PropertyHandlerCache
 {
     #region Privates
 
-    private static readonly ConcurrentDictionary<int, object> cache = new();
-    private static readonly IResolver<Type, PropertyInfo, object> propertyLevelResolver = new PropertyHandlerPropertyLevelResolver();
-    private static readonly IResolver<Type, object> typeLevelResolver = new PropertyHandlerTypeLevelResolver();
+    private static readonly ConcurrentDictionary<int, object?> cache = new();
+    private static readonly PropertyHandlerPropertyLevelResolver propertyLevelResolver = new();
+    private static readonly PropertyHandlerTypeLevelResolver typeLevelResolver = new();
 
     #endregion
 
@@ -30,7 +32,7 @@ public static class PropertyHandlerCache
     /// <typeparam name="TType">The .NET CLR type.</typeparam>
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <returns>The mapped <see cref="IPropertyHandler{TInput, TResult}"/> object of the .NET CLR type.</returns>
-    public static TPropertyHandler Get<TType, TPropertyHandler>() =>
+    public static TPropertyHandler? Get<TType, TPropertyHandler>() =>
         Get<TPropertyHandler>(typeof(TType));
 
     /// <summary>
@@ -39,10 +41,10 @@ public static class PropertyHandlerCache
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <param name="type">The target .NET CLR type.</param>
     /// <returns>The mapped <see cref="IPropertyHandler{TInput, TResult}"/> object of the .NET CLR type.</returns>
-    public static TPropertyHandler Get<TPropertyHandler>(Type type)
+    public static TPropertyHandler? Get<TPropertyHandler>(Type type)
     {
         // Validate
-        ThrowArgumentNullException(type, "Type");
+        ObjectExtension.ThrowIfNull(type, nameof(type));
 
         // Variables
         var key = GenerateHashCode(type);
@@ -64,7 +66,7 @@ public static class PropertyHandlerCache
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <param name="expression">The expression to be parsed.</param>
     /// <returns>The mapped <see cref="IPropertyHandler{TInput, TResult}"/> object of the property.</returns>
-    public static TPropertyHandler Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
+    public static TPropertyHandler? Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get<TEntity, TPropertyHandler>(ExpressionExtension.GetProperty<TEntity>(expression));
 
@@ -75,9 +77,9 @@ public static class PropertyHandlerCache
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <param name="propertyName">The name of the property.</param>
     /// <returns>The mapped <see cref="IPropertyHandler{TInput, TResult}"/> object of the property.</returns>
-    public static TPropertyHandler Get<TEntity, TPropertyHandler>(string propertyName)
+    public static TPropertyHandler? Get<TEntity, TPropertyHandler>(string propertyName)
         where TEntity : class =>
-        Get<TEntity, TPropertyHandler>(TypeExtension.GetProperty<TEntity>(propertyName));
+        Get<TEntity, TPropertyHandler>(TypeExtension.GetProperty<TEntity>(propertyName) ?? throw new PropertyNotFoundException(nameof(propertyName), "Property not found"));
 
     /// <summary>
     /// Property Level: Gets the cached <see cref="IPropertyHandler{TInput, TResult}"/> object that is being mapped on a specific class property (via <see cref="Field"/> object).
@@ -86,9 +88,9 @@ public static class PropertyHandlerCache
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <param name="field">The instance of <see cref="Field"/> object.</param>
     /// <returns>The mapped <see cref="IPropertyHandler{TInput, TResult}"/> object of the property.</returns>
-    public static TPropertyHandler Get<TEntity, TPropertyHandler>(Field field)
+    public static TPropertyHandler? Get<TEntity, TPropertyHandler>(Field field)
         where TEntity : class =>
-        Get<TEntity, TPropertyHandler>(TypeExtension.GetProperty<TEntity>(field.Name));
+        Get<TEntity, TPropertyHandler>(TypeExtension.GetProperty<TEntity>(field.Name) ?? throw new PropertyNotFoundException(nameof(field), "Property not found"));
 
 
     /// <summary>
@@ -98,7 +100,7 @@ public static class PropertyHandlerCache
     /// <typeparam name="TPropertyHandler">The type of the handler.</typeparam>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/>.</param>
     /// <returns>The mapped <see cref="IPropertyHandler{TInput, TResult}"/> object of the property.</returns>
-    internal static TPropertyHandler Get<TEntity, TPropertyHandler>(PropertyInfo propertyInfo)
+    internal static TPropertyHandler? Get<TEntity, TPropertyHandler>(PropertyInfo propertyInfo)
         where TEntity : class =>
         Get<TPropertyHandler>(typeof(TEntity), propertyInfo);
 
@@ -109,11 +111,10 @@ public static class PropertyHandlerCache
     /// <param name="entityType">The type of the data entity.</param>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/>.</param>
     /// <returns>The mapped <see cref="IPropertyHandler{TInput, TResult}"/> object of the property.</returns>
-    internal static TPropertyHandler Get<TPropertyHandler>(Type entityType,
-        PropertyInfo propertyInfo)
+    internal static TPropertyHandler? Get<TPropertyHandler>(Type entityType, PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
@@ -153,21 +154,6 @@ public static class PropertyHandlerCache
     private static int GenerateHashCode(Type entityType,
         PropertyInfo propertyInfo) =>
         TypeExtension.GenerateHashCode(entityType, propertyInfo);
-
-    /// <summary>
-    /// Validates the target object presence.
-    /// </summary>
-    /// <typeparam name="T">The type of the object.</typeparam>
-    /// <param name="obj">The object to be checked.</param>
-    /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<T>(T obj,
-        string argument)
-    {
-        if (obj is null)
-        {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
-        }
-    }
 
     #endregion
 }

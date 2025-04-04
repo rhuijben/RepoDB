@@ -30764,7 +30764,7 @@ public static partial class DbConnectionExtension
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            item = (await (cache?.GetAsync<IEnumerable<T>>(cacheKey, false, cancellationToken)).ConfigureAwait(false))?.Value;
+            item = (await (cache.GetAsync<IEnumerable<T>>(cacheKey, false, cancellationToken)).ConfigureAwait(false))?.Value;
         }
 
         if (item == null)
@@ -30794,7 +30794,7 @@ public static partial class DbConnectionExtension
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            item = (await (cache?.GetAsync<IEnumerable<dynamic>>(cacheKey, false, cancellationToken)).ConfigureAwait(false))?.Value;
+            item = (await (cache.GetAsync<IEnumerable<dynamic>>(cacheKey, false, cancellationToken)).ConfigureAwait(false))?.Value;
         }
 
         if (item == null)
@@ -30844,7 +30844,7 @@ public static partial class DbConnectionExtension
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            await (cache?.AddAsync(cacheKey, items, cacheItemExpiration, false, cancellationToken)).ConfigureAwait(false);
+            await (cache.AddAsync(cacheKey, items, cacheItemExpiration, false, cancellationToken)).ConfigureAwait(false);
         }
 
         return items;

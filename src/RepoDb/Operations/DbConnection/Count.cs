@@ -869,7 +869,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     internal static long CountInternalBase(this IDbConnection connection,
         CountRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
@@ -913,7 +913,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     internal static async ValueTask<long> CountAsyncInternalBase(this IDbConnection connection,
         CountRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,

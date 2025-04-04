@@ -1,4 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
+using RepoDb.Extensions;
 using RepoDb.Resolvers;
 
 namespace RepoDb;
@@ -29,7 +31,7 @@ public static class ClassMappedNameCache
     public static string Get(Type entityType)
     {
         // Validate
-        ThrowArgumentNullException(entityType, "EntityType");
+        ObjectExtension.ThrowIfNull(entityType, nameof(entityType));
 
         // Try get the value
         return cache.GetOrAdd(entityType, resolver.Resolve);
@@ -44,21 +46,6 @@ public static class ClassMappedNameCache
     /// </summary>
     public static void Flush() =>
         cache.Clear();
-
-    /// <summary>
-    /// Validates the target object presence.
-    /// </summary>
-    /// <typeparam name="T">The type of the object.</typeparam>
-    /// <param name="obj">The object to be checked.</param>
-    /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<T>(T obj,
-        string argument)
-    {
-        if (obj is null)
-        {
-            throw new ArgumentNullException(argument);
-        }
-    }
 
     #endregion
 }

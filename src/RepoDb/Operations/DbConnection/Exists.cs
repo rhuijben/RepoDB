@@ -1084,7 +1084,7 @@ public static partial class DbConnectionExtension
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     internal static bool ExistsInternalBase(this IDbConnection connection,
         ExistsRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
@@ -1128,7 +1128,7 @@ public static partial class DbConnectionExtension
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     internal static async ValueTask<bool> ExistsAsyncInternalBase(this IDbConnection connection,
         ExistsRequest request,
-        object param,
+        object? param,
         int commandTimeout = 0,
         string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,

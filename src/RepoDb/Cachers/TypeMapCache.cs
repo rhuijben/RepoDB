@@ -1,7 +1,9 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using System.Data;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Resolvers;
 
@@ -15,6 +17,8 @@ public static class TypeMapCache
     #region Privates
 
     private static readonly ConcurrentDictionary<int, DbType?> cache = new();
+    private static readonly TypeMapTypeLevelResolver typeResolver = new();
+    private static readonly TypeMapPropertyLevelResolver propertyResolver = new();
 
     #endregion
 
@@ -38,13 +42,13 @@ public static class TypeMapCache
     public static DbType? Get(Type type)
     {
         // Validate
-        ThrowArgumentNullException(type, "Type");
+        ObjectExtension.ThrowIfNull(type, nameof(type));
 
         // Variables
         var key = GenerateHashCode(type);
 
         // Try get the value
-        return cache.GetOrAdd(key, (_) => new TypeMapTypeLevelResolver().Resolve(type));
+        return cache.GetOrAdd(key, (_) => typeResolver.Resolve(type));
     }
 
     #endregion
@@ -69,7 +73,7 @@ public static class TypeMapCache
     /// <returns>The mapped <see cref="DbType"/> object of the property.</returns>
     public static DbType? Get<TEntity>(string propertyName)
         where TEntity : class =>
-        Get<TEntity>(TypeExtension.GetProperty<TEntity>(propertyName));
+        Get<TEntity>(TypeExtension.GetProperty<TEntity>(propertyName) ?? throw new PropertyNotFoundException(nameof(propertyName), "Property not found"));
 
     /// <summary>
     /// Property Level: Gets the cached <see cref="DbType"/> object that is being mapped on a specific class property (via <see cref="Field"/> object).
@@ -79,7 +83,7 @@ public static class TypeMapCache
     /// <returns>The mapped <see cref="DbType"/> object of the property.</returns>
     public static DbType? Get<TEntity>(Field field)
         where TEntity : class =>
-        Get<TEntity>(TypeExtension.GetProperty<TEntity>(field.Name));
+        Get<TEntity>(TypeExtension.GetProperty<TEntity>(field.Name) ?? throw new PropertyNotFoundException(nameof(field), "Property not found"));
 
     /// <summary>
     /// Property Level: Gets the cached <see cref="DbType"/> object that is being mapped on a specific <see cref="PropertyInfo"/> object.
@@ -101,13 +105,13 @@ public static class TypeMapCache
         PropertyInfo propertyInfo)
     {
         // Validate
-        ThrowArgumentNullException(propertyInfo, "PropertyInfo");
+        ObjectExtension.ThrowIfNull(propertyInfo, nameof(propertyInfo));
 
         // Variables
         var key = GenerateHashCode(entityType, propertyInfo);
 
         // Try get the value
-        return cache.GetOrAdd(key, (_) => new TypeMapPropertyLevelResolver().Resolve(propertyInfo));
+        return cache.GetOrAdd(key, (_) => propertyResolver.Resolve(propertyInfo));
     }
 
     #endregion
@@ -139,21 +143,6 @@ public static class TypeMapCache
     private static int GenerateHashCode(Type entityType,
         PropertyInfo propertyInfo) =>
         TypeExtension.GenerateHashCode(entityType, propertyInfo);
-
-    /// <summary>
-    /// Validates the target object presence.
-    /// </summary>
-    /// <typeparam name="T">The type of the object.</typeparam>
-    /// <param name="obj">The object to be checked.</param>
-    /// <param name="argument">The name of the argument.</param>
-    private static void ThrowArgumentNullException<T>(T obj,
-        string argument)
-    {
-        if (obj is null)
-        {
-            throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
-        }
-    }
 
     #endregion
 }
