@@ -651,12 +651,12 @@ public class QueryBuilder
     /// </summary>
     /// <param name="rows">The number of rows.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder TopFrom(int? rows)
+    public QueryBuilder TopFrom(int rows)
     {
         if (rows > 0)
         {
             return Append("TOP (")
-                .Append(rows?.ToString(CultureInfo.InvariantCulture), false)
+                .Append(rows.ToString(CultureInfo.InvariantCulture), false)
                 .Append(')');
         }
 
@@ -667,19 +667,19 @@ public class QueryBuilder
     /// Appends a word LIMIT to the SQL Query Statement.
     /// </summary>
     /// <returns>The current instance.</returns>
-    public QueryBuilder Limit() => Limit(null);
+    public QueryBuilder Limit() => Limit(0);
 
     /// <summary>
     /// Appends a word LIMIT to the SQL Query Statement.
     /// </summary>
     /// <param name="take">The number of rows to be taken.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder Limit(int? take)
+    public QueryBuilder Limit(int take)
     {
         if (take > 0)
         {
             return Append("LIMIT")
-                .Append(take?.ToString(CultureInfo.InvariantCulture));
+                .Append(take.ToString(CultureInfo.InvariantCulture));
         }
 
         return Append("LIMIT");
@@ -691,18 +691,18 @@ public class QueryBuilder
     /// <param name="take">The number of rows to be taken.</param>
     /// <param name="skip">The number of rows to be skipped.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder LimitTake(int? take, int? skip)
+    public QueryBuilder LimitTake(int take, int skip)
     {
         if (skip > 0)
         {
             return Append("LIMIT")
-                .Append(skip?.ToString(CultureInfo.InvariantCulture))
+                .Append(skip > 0 ? skip.ToString(CultureInfo.InvariantCulture) : "")
                 .Append(',')
-                .Append(take?.ToString(CultureInfo.InvariantCulture));
+                .Append(take > 0 ? take.ToString(CultureInfo.InvariantCulture) : "");
         }
 
         return Append("LIMIT")
-            .Append(take?.ToString(CultureInfo.InvariantCulture));
+            .Append(take > 0 ? take.ToString(CultureInfo.InvariantCulture) : "");
     }
 
     /// <summary>
@@ -711,19 +711,19 @@ public class QueryBuilder
     /// <param name="take">The number of rows to be taken.</param>
     /// <param name="skip">The number of rows to be skipped.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder LimitOffset(int? take, int? skip)
+    public QueryBuilder LimitOffset(int take, int skip)
     {
         if (skip > 0)
         {
             return Append("LIMIT")
-                .Append(take?.ToString(CultureInfo.InvariantCulture))
+                .Append(take > 0 ? take.ToString(CultureInfo.InvariantCulture) : "")
                 .Append("OFFSET")
-                .Append(skip?.ToString(CultureInfo.InvariantCulture));
+                .Append(skip > 0 ? skip.ToString(CultureInfo.InvariantCulture) : "");
         }
         else
         {
             return Append("LIMIT")
-                .Append(take?.ToString(CultureInfo.InvariantCulture));
+                .Append(take > 0 ? take.ToString(CultureInfo.InvariantCulture) : "");
         }
     }
 
@@ -731,19 +731,19 @@ public class QueryBuilder
     /// Appends a word OFFSET to the SQL Query Statement.
     /// </summary>
     /// <returns>The current instance.</returns>
-    public QueryBuilder Offset() => Offset(null);
+    public QueryBuilder Offset() => Offset(0);
 
     /// <summary>
     /// Appends a word OFFSET to the SQL Query Statement.
     /// </summary>
     /// <param name="skip">The number of rows to be skipped.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder Offset(int? skip)
+    public QueryBuilder Offset(int skip)
     {
         if (skip > 0)
         {
             return Append("OFFSET")
-                .Append(skip?.ToString(CultureInfo.InvariantCulture));
+                .Append(skip.ToString(CultureInfo.InvariantCulture));
         }
 
         return Append("OFFSET");

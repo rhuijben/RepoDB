@@ -727,7 +727,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         IEnumerable<Field> fields,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
-        int? top = null,
+        int top = 0,
         string? hints = null)
     {
         // Ensure with guards

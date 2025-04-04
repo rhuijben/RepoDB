@@ -26,7 +26,7 @@ public static partial class DbRepositoryExtension
     public static int BulkDelete<TEntity>(this DbRepository<SqlConnection> repository,
         IEnumerable<object> primaryKeys,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -37,7 +37,7 @@ public static partial class DbRepositoryExtension
         // Call the method
         return bulkDbConnector.Connection.BulkDelete<TEntity>(primaryKeys: primaryKeys,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction);
@@ -64,7 +64,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -78,7 +78,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction);
@@ -107,7 +107,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -122,7 +122,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction);
@@ -148,7 +148,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -162,7 +162,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction);
@@ -190,7 +190,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -205,7 +205,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction);
@@ -230,7 +230,7 @@ public static partial class DbRepositoryExtension
         string tableName,
         IEnumerable<object> primaryKeys,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
     {
@@ -241,7 +241,7 @@ public static partial class DbRepositoryExtension
         return bulkDbConnector.Connection.BulkDelete(tableName: tableName,
             primaryKeys: primaryKeys,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction);
@@ -268,7 +268,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
     {
@@ -282,7 +282,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction);
@@ -311,7 +311,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
     {
@@ -326,7 +326,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction);
@@ -351,7 +351,7 @@ public static partial class DbRepositoryExtension
     public static async Task<int> BulkDeleteAsync<TEntity>(this DbRepository<SqlConnection> repository,
         IEnumerable<object> primaryKeys,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -363,7 +363,7 @@ public static partial class DbRepositoryExtension
         // Call the method
         return await bulkDbConnector.Connection.BulkDeleteAsync<TEntity>(primaryKeys: primaryKeys,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction,
@@ -391,7 +391,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -406,7 +406,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction,
@@ -436,7 +436,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -452,7 +452,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction,
@@ -480,7 +480,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -495,7 +495,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction,
@@ -525,7 +525,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -541,7 +541,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction,
@@ -568,7 +568,7 @@ public static partial class DbRepositoryExtension
         string tableName,
         IEnumerable<object> primaryKeys,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -580,7 +580,7 @@ public static partial class DbRepositoryExtension
         return await bulkDbConnector.Connection.BulkDeleteAsync(tableName: tableName,
             primaryKeys: primaryKeys,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction,
@@ -609,7 +609,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -624,7 +624,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction,
@@ -655,7 +655,7 @@ public static partial class DbRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -671,7 +671,7 @@ public static partial class DbRepositoryExtension
             mappings: mappings,
             options: options,
             hints: hints,
-            bulkCopyTimeout: repository.CommandTimeout,
+            bulkCopyTimeout: repository.CommandTimeout ?? 0,
             batchSize: batchSize,
             usePhysicalPseudoTempTable: usePhysicalPseudoTempTable,
             transaction: transaction,

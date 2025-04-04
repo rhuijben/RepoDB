@@ -105,7 +105,7 @@ public class BaseStatementBuilderCreateDeleteTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
 
         // Act
         statementBuilder.CreateDelete(tableName: tableName);

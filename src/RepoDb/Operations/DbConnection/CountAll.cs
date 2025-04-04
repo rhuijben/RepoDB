@@ -25,7 +25,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static long CountAll<TEntity>(this IDbConnection connection,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -55,7 +55,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     internal static long CountAllInternal<TEntity>(this IDbConnection connection,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -68,7 +68,7 @@ public static partial class DbConnectionExtension
             transaction,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Return the result
         return CountAllInternalBase(connection: connection,
@@ -99,7 +99,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static Task<long> CountAllAsync<TEntity>(this IDbConnection connection,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -132,7 +132,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     internal static Task<long> CountAllAsyncInternal<TEntity>(this IDbConnection connection,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -146,7 +146,7 @@ public static partial class DbConnectionExtension
             transaction,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Return the result
         return CountAllAsyncInternalBase(connection: connection,
@@ -178,7 +178,7 @@ public static partial class DbConnectionExtension
     public static long CountAll(this IDbConnection connection,
         string tableName,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -209,7 +209,7 @@ public static partial class DbConnectionExtension
     internal static long CountAllInternal(this IDbConnection connection,
         string tableName,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -221,7 +221,7 @@ public static partial class DbConnectionExtension
             transaction,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Return the result
         return CountAllInternalBase(connection: connection,
@@ -253,7 +253,7 @@ public static partial class DbConnectionExtension
     public static Task<long> CountAllAsync(this IDbConnection connection,
         string tableName,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -287,7 +287,7 @@ public static partial class DbConnectionExtension
     internal static Task<long> CountAllAsyncInternal(this IDbConnection connection,
         string tableName,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -300,7 +300,7 @@ public static partial class DbConnectionExtension
             transaction,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Return the result
         return CountAllAsyncInternalBase(connection: connection,
@@ -331,7 +331,7 @@ public static partial class DbConnectionExtension
     internal static long CountAllInternalBase(this IDbConnection connection,
         CountAllRequest request,
         object param,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null)
@@ -375,7 +375,7 @@ public static partial class DbConnectionExtension
     internal static async Task<long> CountAllAsyncInternalBase(this IDbConnection connection,
         CountAllRequest request,
         object param,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.CountAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,

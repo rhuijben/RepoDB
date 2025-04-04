@@ -982,8 +982,8 @@ internal sealed partial class Compiler
         var method = StaticType.Convert.GetMethod("ToString", new[] { StaticType.Object });
 
         // Variables
-        var isNullExpression = (Expression?)null;
-        var trueExpression = (Expression?)null;
+        Expression? isNullExpression = null;
+        Expression? trueExpression = null;
         Expression falseExpression;
 
         // Ensure (Ref/Nullable)
@@ -1014,8 +1014,8 @@ internal sealed partial class Compiler
     private static Expression ConvertEnumExpressionToTypeExpressionForNonString(Expression expression,
         Type toType)
     {
-        var isNullExpression = (Expression?)null;
-        var trueExpression = (Expression?)null;
+        Expression? isNullExpression = null;
+        Expression? trueExpression = null;
         var falseExpression = expression;
 
         // Ensure (Ref/Nullable)
@@ -1983,7 +1983,7 @@ internal sealed partial class Compiler
     private static MethodCallExpression GetDbParameterDbTypeAssignmentExpression(ParameterExpression dbParameterExpression,
         DbType? dbType)
     {
-        var expression = (MethodCallExpression?)null;
+        MethodCallExpression? expression = null;
 
         // Set the DB Type
         if (dbType != null)
@@ -2227,9 +2227,9 @@ internal sealed partial class Compiler
     {
         var propertyListExpression = new List<Expression>();
         var propertyVariableListExpression = new List<ParameterExpression>();
-        var propertyVariableExpression = (ParameterExpression?)null;
-        var propertyInstanceExpression = (Expression?)null;
-        var classProperty = (ClassProperty?)null;
+        ParameterExpression? propertyVariableExpression = null;
+        Expression? propertyInstanceExpression = null;
+        ClassProperty? classProperty = null;
         var propertyName = fieldDirection.DbField.Name.AsUnquoted(true, dbSetting);
 
         // Set the proper assignments (property)

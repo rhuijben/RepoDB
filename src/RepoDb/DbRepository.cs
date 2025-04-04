@@ -279,7 +279,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An instance of the <see cref="DbConnection"/> object.</returns>
     public virtual TDbConnection CreateConnection(bool force)
     {
-        var connection = (TDbConnection?)null;
+        TDbConnection? connection = null;
         if (force == false && ConnectionPersistency == ConnectionPersistency.Instance)
         {
             lock (syncLock)
@@ -377,7 +377,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </returns>
     public IEnumerable<dynamic> ExecuteQuery(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         int? cacheItemExpiration = null,
         IDbTransaction? transaction = null)
@@ -393,7 +393,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 cacheKey: cacheKey,
                 cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction,
                 cache: Cache);
         }
@@ -429,7 +429,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </returns>
     public async Task<IEnumerable<dynamic>> ExecuteQueryAsync(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         int? cacheItemExpiration = null,
         IDbTransaction? transaction = null,
@@ -446,7 +446,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 cacheKey: cacheKey,
                 cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction,
                 cache: Cache,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -483,7 +483,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </returns>
     public IEnumerable<TEntity> ExecuteQuery<TEntity>(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         int? cacheItemExpiration = null,
         IDbTransaction? transaction = null)
@@ -500,7 +500,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 cacheKey: cacheKey,
                 cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction,
                 cache: Cache);
         }
@@ -537,7 +537,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </returns>
     public async Task<IEnumerable<TEntity>> ExecuteQueryAsync<TEntity>(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         int? cacheItemExpiration = null,
         IDbTransaction? transaction = null,
@@ -555,7 +555,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 cacheKey: cacheKey,
                 cacheItemExpiration: cacheItemExpiration ?? CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction,
                 cache: Cache,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -585,7 +585,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows affected by the execution.</returns>
     public int ExecuteNonQuery(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -597,7 +597,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
             return connection.ExecuteNonQuery(commandText: commandText,
                 param: param,
                 commandType: commandType,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction);
         }
         finally
@@ -626,7 +626,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of rows affected by the execution.</returns>
     public async Task<int> ExecuteNonQueryAsync(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -639,7 +639,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
             return await connection.ExecuteNonQueryAsync(commandText: commandText,
                 param: param,
                 commandType: commandType,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
         }
@@ -672,7 +672,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An object that holds the first occurrence value (first column of first row) of the execution.</returns>
     public object ExecuteScalar(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
     {
@@ -687,7 +687,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 cacheKey: cacheKey,
                 cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction,
                 cache: Cache);
         }
@@ -721,7 +721,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An object that holds the first occurrence value (first column of first row) of the execution.</returns>
     public async Task<object> ExecuteScalarAsync(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -735,7 +735,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
             return await connection.ExecuteScalarAsync(commandText: commandText,
                 param: param,
                 commandType: commandType,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 cacheKey: cacheKey,
                 cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
                 transaction: transaction,
@@ -772,7 +772,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A first occurrence occurrence (first column of first row) of the execution.</returns>
     public TResult ExecuteScalar<TResult>(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
     {
@@ -787,7 +787,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 cacheKey: cacheKey,
                 cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction,
                 cache: Cache);
         }
@@ -822,7 +822,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A first occurrence value (first column of first row) of the execution.</returns>
     public async Task<TResult> ExecuteScalarAsync<TResult>(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -838,7 +838,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
                 commandType: commandType,
                 cacheKey: cacheKey,
                 cacheItemExpiration: CacheItemExpiration ?? Constant.DefaultCacheItemExpirationInMinutes,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 transaction: transaction,
                 cache: Cache,
                 cancellationToken: cancellationToken).ConfigureAwait(false);
@@ -872,9 +872,9 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An instance of <see cref="QueryMultipleExtractor"/> used to extract the results.</returns>
     public QueryMultipleExtractor ExecuteQueryMultiple(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -921,9 +921,9 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>An instance of <see cref="QueryMultipleExtractor"/> used to extract the results.</returns>
     public Task<QueryMultipleExtractor> ExecuteQueryMultipleAsync(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

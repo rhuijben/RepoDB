@@ -212,7 +212,7 @@ public class StatementBuilderTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
         var fields = Field.From(new[] { "Field1", "Field2" });
 
         // Act/Assert
@@ -1467,7 +1467,7 @@ public class StatementBuilderTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
         var qualifiers = Field.From("Field1");
 
@@ -1962,7 +1962,7 @@ public class StatementBuilderTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
         var qualifiers = Field.From("Field1");
 
@@ -2274,7 +2274,7 @@ public class StatementBuilderTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
         var fields = Field.From(new[] { "Field1", "Field2" });
 
         // Act/Assert

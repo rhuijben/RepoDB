@@ -332,7 +332,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         //var databaseType = "BIGINT";
 
         //// Set the return value
-        //var result = (string?)null;
+        //string? result = null;
 
         //// Check both primary and identity
         //if (identityField != null)
@@ -442,7 +442,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         //var databaseType = "BIGINT";
 
         //// Set the return value
-        //var result = (string?)null;
+        //string? result = null;
 
         //// Set the type
         //if (identityField != null)
@@ -519,7 +519,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         IEnumerable<Field> fields,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
-        int? top = null,
+        int top = 0,
         string? hints = null)
     {
         // Ensure with guards

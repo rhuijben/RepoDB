@@ -25,10 +25,10 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public static object AverageAll<TEntity>(this IDbConnection connection,
+    public static object? AverageAll<TEntity>(this IDbConnection connection,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -58,10 +58,10 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public static object AverageAll<TEntity>(this IDbConnection connection,
+    public static object? AverageAll<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -95,7 +95,7 @@ public static partial class DbConnectionExtension
     public static TResult AverageAll<TEntity, TResult>(this IDbConnection connection,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -129,7 +129,7 @@ public static partial class DbConnectionExtension
     public static TResult AverageAll<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -163,7 +163,7 @@ public static partial class DbConnectionExtension
     internal static TResult AverageAllInternal<TEntity, TResult>(this IDbConnection connection,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -177,7 +177,7 @@ public static partial class DbConnectionExtension
             field,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Return the result
         return AverageAllInternalBase<TResult>(connection: connection,
@@ -210,7 +210,7 @@ public static partial class DbConnectionExtension
     public static Task<object> AverageAllAsync<TEntity>(this IDbConnection connection,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -246,7 +246,7 @@ public static partial class DbConnectionExtension
     public static Task<object> AverageAllAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, object?>> field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -283,7 +283,7 @@ public static partial class DbConnectionExtension
     public static Task<TResult> AverageAllAsync<TEntity, TResult>(this IDbConnection connection,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -320,7 +320,7 @@ public static partial class DbConnectionExtension
     public static Task<TResult> AverageAllAsync<TEntity, TResult>(this IDbConnection connection,
         Expression<Func<TEntity, TResult>> field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -357,7 +357,7 @@ public static partial class DbConnectionExtension
     internal static Task<TResult> AverageAllAsyncInternal<TEntity, TResult>(this IDbConnection connection,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -372,7 +372,7 @@ public static partial class DbConnectionExtension
             field,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Return the result
         return AverageAllAsyncInternalBase<TResult>(connection: connection,
@@ -402,11 +402,11 @@ public static partial class DbConnectionExtension
     /// <param name="trace">The trace object to be used.</param>
     /// <param name="statementBuilder">The statement builder object to be used.</param>
     /// <returns>The average value of the target field.</returns>
-    public static object AverageAll(this IDbConnection connection,
+    public static object? AverageAll(this IDbConnection connection,
         string tableName,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -441,7 +441,7 @@ public static partial class DbConnectionExtension
         string tableName,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -476,7 +476,7 @@ public static partial class DbConnectionExtension
         string tableName,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -522,7 +522,7 @@ public static partial class DbConnectionExtension
         string tableName,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -560,7 +560,7 @@ public static partial class DbConnectionExtension
         string tableName,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -598,7 +598,7 @@ public static partial class DbConnectionExtension
         string tableName,
         Field field,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -643,7 +643,7 @@ public static partial class DbConnectionExtension
     internal static TResult AverageAllInternalBase<TResult>(this IDbConnection connection,
         AverageAllRequest request,
         object param,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null)
@@ -688,7 +688,7 @@ public static partial class DbConnectionExtension
     internal static async Task<TResult> AverageAllAsyncInternalBase<TResult>(this IDbConnection connection,
         AverageAllRequest request,
         object param,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null,
         ITrace? trace = null,

@@ -33,8 +33,8 @@ public static partial class NpgsqlConnectionExtension
     public static int BinaryImport<TEntity>(this NpgsqlConnection connection,
         IEnumerable<TEntity> entities,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool keepIdentity = false,
         NpgsqlTransaction transaction = null)
         where TEntity : class =>
@@ -67,8 +67,8 @@ public static partial class NpgsqlConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool keepIdentity = false,
         NpgsqlTransaction transaction = null)
         where TEntity : class
@@ -107,8 +107,8 @@ public static partial class NpgsqlConnectionExtension
         IEnumerable<TEntity> entities,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
         DbFieldCollection? dbFields = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         BulkImportIdentityBehavior identityBehavior = default,
         IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
@@ -139,7 +139,7 @@ public static partial class NpgsqlConnectionExtension
         int execute()
         {
             var result = 0;
-            var batches = entities.Split(batchSize ?? -1);
+            var batches = entities.Split(batchSize);
 
             foreach (var batch in batches)
             {
@@ -197,8 +197,8 @@ public static partial class NpgsqlConnectionExtension
         DataTable table,
         DataRowState? rowState = null,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool keepIdentity = false,
         NpgsqlTransaction transaction = null) =>
         BinaryImport(connection,
@@ -230,8 +230,8 @@ public static partial class NpgsqlConnectionExtension
         DataTable table,
         DataRowState? rowState = null,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool keepIdentity = false,
         NpgsqlTransaction transaction = null)
     {
@@ -271,8 +271,8 @@ public static partial class NpgsqlConnectionExtension
         DataRowState? rowState = null,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
         DbFieldCollection? dbFields = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         BulkImportIdentityBehavior identityBehavior = default,
         IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
@@ -294,7 +294,7 @@ public static partial class NpgsqlConnectionExtension
         {
             var result = 0;
             var rows = GetRows(table, rowState).ToList();
-            var batches = rows.Split(batchSize ?? -1);
+            var batches = rows.Split(batchSize);
 
             foreach (var batch in batches)
             {
@@ -339,7 +339,7 @@ public static partial class NpgsqlConnectionExtension
         string tableName,
         DbDataReader reader,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         bool keepIdentity = false,
         NpgsqlTransaction transaction = null) =>
         BinaryImport(connection,
@@ -370,7 +370,7 @@ public static partial class NpgsqlConnectionExtension
         DbDataReader reader,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
         DbFieldCollection? dbFields = null,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         BulkImportIdentityBehavior identityBehavior = default,
         IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
@@ -439,8 +439,8 @@ public static partial class NpgsqlConnectionExtension
     public static Task<int> BinaryImportAsync<TEntity>(this NpgsqlConnection connection,
         IEnumerable<TEntity> entities,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool keepIdentity = false,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -476,8 +476,8 @@ public static partial class NpgsqlConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool keepIdentity = false,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -519,8 +519,8 @@ public static partial class NpgsqlConnectionExtension
         IEnumerable<TEntity> entities,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
         DbFieldCollection? dbFields = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         BulkImportIdentityBehavior identityBehavior = default,
         IDbSetting? dbSetting = null,
         NpgsqlTransaction? transaction = null,
@@ -552,7 +552,7 @@ public static partial class NpgsqlConnectionExtension
         async Task<int> executeAsync()
         {
             var result = 0;
-            var batches = entities.Split(batchSize ?? -1);
+            var batches = entities.Split(batchSize);
 
             foreach (var batch in batches)
             {
@@ -614,8 +614,8 @@ public static partial class NpgsqlConnectionExtension
         DataTable table,
         DataRowState? rowState = null,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool keepIdentity = false,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
@@ -650,8 +650,8 @@ public static partial class NpgsqlConnectionExtension
         DataTable table,
         DataRowState? rowState = null,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool keepIdentity = false,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -694,8 +694,8 @@ public static partial class NpgsqlConnectionExtension
         DataRowState? rowState = null,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
         DbFieldCollection? dbFields = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         BulkImportIdentityBehavior identityBehavior = default,
         IDbSetting? dbSetting = null,
         NpgsqlTransaction? transaction = null,
@@ -718,7 +718,7 @@ public static partial class NpgsqlConnectionExtension
         {
             var result = 0;
             var rows = GetRows(table, rowState).ToList();
-            var batches = rows.Split(batchSize.GetValueOrDefault());
+            var batches = rows.Split(batchSize);
 
             foreach (var batch in batches)
             {
@@ -766,7 +766,7 @@ public static partial class NpgsqlConnectionExtension
         string tableName,
         DbDataReader reader,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         bool keepIdentity = false,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>
@@ -800,7 +800,7 @@ public static partial class NpgsqlConnectionExtension
         DbDataReader reader,
         IEnumerable<NpgsqlBulkInsertMapItem>? mappings = null,
         DbFieldCollection? dbFields = null,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         BulkImportIdentityBehavior identityBehavior = default,
         IDbSetting? dbSetting = null,
         NpgsqlTransaction? transaction = null,

@@ -245,7 +245,7 @@ internal static class MergeAllExecutionContextProvider
     {
         var dbSetting = connection.GetDbSetting();
         var dbHelper = connection.GetDbHelper();
-        var inputFields = (IEnumerable<DbField>)null;
+        IEnumerable<DbField>? inputFields = null;
 
         // Check the fields
         if (fields?.Any() != true)

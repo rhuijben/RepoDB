@@ -221,7 +221,7 @@ internal static class InsertAllExecutionContextProvider
     {
         var dbSetting = connection.GetDbSetting();
         var dbHelper = connection.GetDbHelper();
-        var inputFields = (IEnumerable<DbField>)null;
+        IEnumerable<DbField>? inputFields = null;
 
         // Filter the actual properties for input fields
         inputFields = dbFields

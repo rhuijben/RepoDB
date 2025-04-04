@@ -338,7 +338,7 @@ public interface IStatementBuilder
         IEnumerable<Field> fields,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
-        int? top = null,
+        int top = 0,
         string? hints = null);
 
     #endregion

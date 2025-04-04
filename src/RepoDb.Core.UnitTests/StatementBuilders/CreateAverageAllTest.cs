@@ -156,7 +156,7 @@ public class BaseStatementBuilderCreateAverageAllTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
         var field = new Field("Value");
 
         // Act

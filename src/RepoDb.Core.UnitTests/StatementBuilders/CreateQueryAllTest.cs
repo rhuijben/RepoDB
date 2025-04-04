@@ -155,7 +155,7 @@ public class BaseStatementBuilderCreateQueryAllTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
 
         // Act

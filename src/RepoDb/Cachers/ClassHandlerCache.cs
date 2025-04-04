@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
 
@@ -9,7 +10,7 @@ namespace RepoDb;
 /// </summary>
 public static class ClassHandlerCache
 {
-    private static readonly ConcurrentDictionary<Type, object> cache = new();
+    private static readonly ConcurrentDictionary<Type, object?> cache = new();
     private static readonly ClassHandlerResolver resolver = new();
 
     /// <summary>
@@ -18,7 +19,7 @@ public static class ClassHandlerCache
     /// <typeparam name="TType">The .NET CLR type.</typeparam>
     /// <typeparam name="TClassHandler">The type of the handler.</typeparam>
     /// <returns>The mapped <see cref="IClassHandler{TEntity}"/> object of the .NET CLR type.</returns>
-    public static TClassHandler Get<TType, TClassHandler>() =>
+    public static TClassHandler? Get<TType, TClassHandler>() =>
         Get<TClassHandler>(typeof(TType));
 
     /// <summary>
@@ -27,7 +28,7 @@ public static class ClassHandlerCache
     /// <typeparam name="TClassHandler">The type of the handler.</typeparam>
     /// <param name="type">The target .NET CLR type.</param>
     /// <returns>The mapped <see cref="IClassHandler{TEntity}"/> object of the .NET CLR type.</returns>
-    public static TClassHandler Get<TClassHandler>(Type type)
+    public static TClassHandler? Get<TClassHandler>(Type type)
     {
         var value = cache.GetOrAdd(type, resolver.Resolve);
 

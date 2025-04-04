@@ -24,7 +24,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         {
             // Call the method
             return connection.Truncate<TEntity>(
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: null,
                 trace: Trace,
@@ -54,7 +54,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Truncate<TEntity>(commandTimeout: CommandTimeout,
+            return connection.Truncate<TEntity>(commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: Trace,
@@ -86,7 +86,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.TruncateAsync<TEntity>(commandTimeout: CommandTimeout,
+            return await connection.TruncateAsync<TEntity>(commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: null,
                 trace: Trace,
@@ -117,7 +117,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.TruncateAsync<TEntity>(commandTimeout: CommandTimeout,
+            return await connection.TruncateAsync<TEntity>(commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: null,
                 trace: Trace,
@@ -150,7 +150,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return await connection.TruncateAsync<TEntity>(commandTimeout: CommandTimeout,
+            return await connection.TruncateAsync<TEntity>(commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: Trace,
@@ -184,7 +184,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         {
             // Call the method
             return connection.Truncate(tableName: tableName,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: null,
                 trace: Trace,
@@ -215,7 +215,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         {
             // Call the method
             return connection.Truncate(tableName: tableName,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: Trace,
@@ -248,7 +248,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         {
             // Call the method
             return await connection.TruncateAsync(tableName: tableName,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: null,
                 trace: Trace,
@@ -280,7 +280,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         {
             // Call the method
             return await connection.TruncateAsync(tableName: tableName,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: null,
                 trace: Trace,
@@ -314,7 +314,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         {
             // Call the method
             return await connection.TruncateAsync(tableName: tableName,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: Trace,

@@ -560,8 +560,6 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            null,
-            null,
             null);
         var expected = "SELECT [Id], [Name], [Address] FROM [Table] ;";
 
@@ -579,8 +577,6 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             QueryGroup.Parse(new { Id = 1, Name = "Michael" }),
-            null,
-            null,
             null);
         var expected = "SELECT [Id], [Name], [Address] FROM [Table] WHERE ([Id] = @Id AND [Name] = @Name) ;";
 
@@ -617,9 +613,7 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            OrderField.Parse(new { Id = Order.Ascending }),
-            null,
-            null);
+            OrderField.Parse(new { Id = Order.Ascending }));
         var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC ;";
 
         // Assert
@@ -636,9 +630,7 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            OrderField.Parse(new { Id = Order.Ascending, Name = Order.Ascending }),
-            null,
-            null);
+            OrderField.Parse(new { Id = Order.Ascending, Name = Order.Ascending }));
         var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC, [Name] ASC ;";
 
         // Assert
@@ -655,9 +647,7 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            OrderField.Parse(new { Id = Order.Descending }),
-            null,
-            null);
+            OrderField.Parse(new { Id = Order.Descending }));
         var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] DESC ;";
 
         // Assert
@@ -674,9 +664,7 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            OrderField.Parse(new { Id = Order.Descending, Name = Order.Descending }),
-            null,
-            null);
+            OrderField.Parse(new { Id = Order.Descending, Name = Order.Descending }));
         var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] DESC, [Name] DESC ;";
 
         // Assert
@@ -693,9 +681,7 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            OrderField.Parse(new { Id = Order.Ascending, Name = Order.Descending }),
-            null,
-            null);
+            OrderField.Parse(new { Id = Order.Ascending, Name = Order.Descending }));
         var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC, [Name] DESC ;";
 
         // Assert
@@ -713,8 +699,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             null,
-            null,
-            "WhatEver");
+            hints: "WhatEver");
     }
 
     #endregion

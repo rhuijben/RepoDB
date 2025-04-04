@@ -91,7 +91,7 @@ public class BaseStatementBuilderCreateCountAllTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
 
         // Act
         statementBuilder.CreateCountAll(tableName: tableName,

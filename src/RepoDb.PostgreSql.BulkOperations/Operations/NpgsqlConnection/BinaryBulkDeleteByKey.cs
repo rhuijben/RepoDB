@@ -28,8 +28,8 @@ public static partial class NpgsqlConnectionExtension
     public static int BinaryBulkDeleteByKey<TPrimaryKey>(this NpgsqlConnection connection,
         string tableName,
         IEnumerable<TPrimaryKey> primaryKeys,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         BulkImportPseudoTableType pseudoTableType = default,
         NpgsqlTransaction transaction = null) =>
         BinaryBulkDeleteByKeyBase<TPrimaryKey>(connection: connection,
@@ -65,8 +65,8 @@ public static partial class NpgsqlConnectionExtension
     public static async Task<int> BinaryBulkDeleteByKeyAsync<TPrimaryKey>(this NpgsqlConnection connection,
         string tableName,
         IEnumerable<TPrimaryKey> primaryKeys,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         BulkImportPseudoTableType pseudoTableType = default,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default) =>

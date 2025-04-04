@@ -37,7 +37,7 @@ public class MemoryCache : ICache
     public void Add<T>(CacheItem<T> item,
         bool throwException = true)
     {
-        var cacheItem = (CacheItem<T>)null;
+        CacheItem<T>? cacheItem = null;
         if (_cache.TryGetValue(item.Key, out var value))
         {
             cacheItem = value as CacheItem<T>;
@@ -92,7 +92,7 @@ public class MemoryCache : ICache
     public CacheItem<T> Get<T>(string key,
         bool throwException = true)
     {
-        var item = (CacheItem<T>)null;
+        CacheItem<T>? item = null;
         if (_cache.TryGetValue(key, out var value))
         {
             item = value as CacheItem<T>;

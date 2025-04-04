@@ -27,7 +27,7 @@ internal sealed class QueryRequest : BaseRequest
         IEnumerable<Field>? fields = null,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
-        int? top = null,
+        int top = 0,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : this(ClassMappedNameCache.Get(type),
@@ -61,7 +61,7 @@ internal sealed class QueryRequest : BaseRequest
         IEnumerable<Field>? fields = null,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
-        int? top = null,
+        int top = 0,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
         : base(name,
@@ -94,7 +94,7 @@ internal sealed class QueryRequest : BaseRequest
     /// <summary>
     /// Gets the filter for the rows.
     /// </summary>
-    public int? Top { get; }
+    public int Top { get; }
 
     /// <summary>
     /// Gets the hints for the table.

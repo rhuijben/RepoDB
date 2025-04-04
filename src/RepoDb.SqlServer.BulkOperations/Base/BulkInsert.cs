@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
-using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
 namespace RepoDb;
@@ -33,8 +32,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool isReturnIdentity = false,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
@@ -173,8 +172,8 @@ public static partial class SqlConnectionExtension
         DbDataReader reader,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         SqlTransaction? transaction = null)
     {
         // Validate
@@ -279,8 +278,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool isReturnIdentity = false,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
@@ -438,8 +437,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool isReturnIdentity = false,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
@@ -583,8 +582,8 @@ public static partial class SqlConnectionExtension
         DbDataReader reader,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -692,8 +691,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool isReturnIdentity = false,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,

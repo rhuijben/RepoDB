@@ -36,7 +36,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -82,7 +82,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -130,7 +130,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -188,7 +188,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -237,7 +237,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -288,7 +288,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -346,7 +346,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -392,7 +392,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -443,7 +443,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -492,7 +492,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -545,7 +545,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -573,7 +573,7 @@ public static partial class DbConnectionExtension
             hints,
             statementBuilder);
         var commandText = CommandTextCache.GetQueryAllText(request);
-        var param = (object?)null;
+        object? param = null;
 
         // Actual Execution
         var result = ExecuteQueryInternal<TEntity>(connection: connection,
@@ -630,7 +630,7 @@ public static partial class DbConnectionExtension
         string? hints = null,
         string? cacheKey = null,
         int cacheItemExpiration = Constant.DefaultCacheItemExpirationInMinutes,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.QueryAll,
         IDbTransaction? transaction = null,
         ICache? cache = null,
@@ -659,7 +659,7 @@ public static partial class DbConnectionExtension
             hints,
             statementBuilder);
         var commandText = await CommandTextCache.GetQueryAllTextAsync(request, cancellationToken).ConfigureAwait(false);
-        var param = (object?)null;
+        object? param = null;
 
         // Actual Execution
         var result = await ExecuteQueryAsyncInternal<TEntity>(connection: connection,

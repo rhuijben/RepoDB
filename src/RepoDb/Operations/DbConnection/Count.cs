@@ -29,7 +29,7 @@ public static partial class DbConnectionExtension
     public static long Count<TEntity>(this IDbConnection connection,
         object? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -62,7 +62,7 @@ public static partial class DbConnectionExtension
     public static long Count<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -95,7 +95,7 @@ public static partial class DbConnectionExtension
     public static long Count<TEntity>(this IDbConnection connection,
         QueryField? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -128,7 +128,7 @@ public static partial class DbConnectionExtension
     public static long Count<TEntity>(this IDbConnection connection,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -161,7 +161,7 @@ public static partial class DbConnectionExtension
     public static long Count<TEntity>(this IDbConnection connection,
         QueryGroup? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -194,7 +194,7 @@ public static partial class DbConnectionExtension
     internal static long CountInternal<TEntity>(this IDbConnection connection,
         QueryGroup? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -208,7 +208,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Converts to property mapped object
         if (where != null)
@@ -247,7 +247,7 @@ public static partial class DbConnectionExtension
     public static Task<long> CountAsync<TEntity>(this IDbConnection connection,
         object? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -283,7 +283,7 @@ public static partial class DbConnectionExtension
     public static Task<long> CountAsync<TEntity>(this IDbConnection connection,
         Expression<Func<TEntity, bool>>? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -319,7 +319,7 @@ public static partial class DbConnectionExtension
     public static Task<long> CountAsync<TEntity>(this IDbConnection connection,
         QueryField? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -355,7 +355,7 @@ public static partial class DbConnectionExtension
     public static Task<long> CountAsync<TEntity>(this IDbConnection connection,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -391,7 +391,7 @@ public static partial class DbConnectionExtension
     public static Task<long> CountAsync<TEntity>(this IDbConnection connection,
         QueryGroup? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -426,7 +426,7 @@ public static partial class DbConnectionExtension
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     internal static Task<long> CountAsyncInternal<TEntity>(this IDbConnection connection,
         QueryGroup? where = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         string? hints = null,
         IDbTransaction? transaction = null,
@@ -442,7 +442,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Converts to property mapped object
         if (where != null)
@@ -482,7 +482,7 @@ public static partial class DbConnectionExtension
         string tableName,
         object? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -516,7 +516,7 @@ public static partial class DbConnectionExtension
         string tableName,
         QueryField? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -550,7 +550,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -584,7 +584,7 @@ public static partial class DbConnectionExtension
         string tableName,
         QueryGroup? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -618,7 +618,7 @@ public static partial class DbConnectionExtension
         string tableName,
         QueryGroup? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -631,7 +631,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Converts to property mapped object
         if (where != null)
@@ -671,7 +671,7 @@ public static partial class DbConnectionExtension
         string tableName,
         object? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -708,7 +708,7 @@ public static partial class DbConnectionExtension
         string tableName,
         QueryField? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -745,7 +745,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<QueryField>? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -782,7 +782,7 @@ public static partial class DbConnectionExtension
         string tableName,
         QueryGroup? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -819,7 +819,7 @@ public static partial class DbConnectionExtension
         string tableName,
         QueryGroup? where = null,
         string? hints = null,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
@@ -833,7 +833,7 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        var param = (object?)null;
+        object? param = null;
 
         // Converts to property mapped object
         if (where != null)
@@ -870,7 +870,7 @@ public static partial class DbConnectionExtension
     internal static long CountInternalBase(this IDbConnection connection,
         CountRequest request,
         object param,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null)
@@ -914,7 +914,7 @@ public static partial class DbConnectionExtension
     internal static async Task<long> CountAsyncInternalBase(this IDbConnection connection,
         CountRequest request,
         object param,
-        int? commandTimeout = null,
+        int commandTimeout = 0,
         string traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null,
         ITrace? trace = null,

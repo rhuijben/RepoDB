@@ -133,7 +133,7 @@ public class BaseStatementBuilderCreateExistsTest
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<BaseStatementBuilderDbConnection>();
-        var tableName = (string?)null;
+        string? tableName = null;
 
         // Act
         statementBuilder.CreateExists(tableName: tableName,

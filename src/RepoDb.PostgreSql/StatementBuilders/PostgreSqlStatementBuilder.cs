@@ -1,9 +1,9 @@
-﻿using Npgsql;
+﻿using System.Data;
+using Npgsql;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
-using System.Data;
 
 namespace RepoDb.StatementBuilders;
 
@@ -598,7 +598,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         IEnumerable<Field> fields,
         QueryGroup? where = null,
         IEnumerable<OrderField>? orderBy = null,
-        int? top = null,
+        int top = 0,
         string? hints = null)
     {
         // Ensure with guards

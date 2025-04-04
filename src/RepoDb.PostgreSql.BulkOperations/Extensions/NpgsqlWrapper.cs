@@ -35,7 +35,7 @@ public static partial class NpgsqlConnectionExtension
     /// <returns></returns>
     private static int PseudoBasedBinaryImport(this NpgsqlConnection connection,
         string tableName,
-        int? bulkCopyTimeout,
+        int bulkCopyTimeout,
         DbFieldCollection dbFields,
         Func<string> getPseudoTableName,
         Func<IEnumerable<NpgsqlBulkInsertMapItem>> getMappings,
@@ -149,7 +149,7 @@ public static partial class NpgsqlConnectionExtension
     /// <returns></returns>
     private static async Task<int> PseudoBasedBinaryImportAsync(this NpgsqlConnection connection,
         string tableName,
-        int? bulkCopyTimeout,
+        int bulkCopyTimeout,
         DbFieldCollection dbFields,
         Func<string> getPseudoTableName,
         Func<IEnumerable<NpgsqlBulkInsertMapItem>> getMappings,

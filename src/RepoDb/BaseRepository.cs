@@ -310,7 +310,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// </returns>
     public IEnumerable<TEntity> ExecuteQuery(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         int? cacheItemExpiration = null,
         IDbTransaction? transaction = null)
@@ -348,7 +348,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// </returns>
     public Task<IEnumerable<TEntity>> ExecuteQueryAsync(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         int? cacheItemExpiration = null,
         IDbTransaction? transaction = null,
@@ -381,7 +381,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows affected by the execution.</returns>
     public int ExecuteNonQuery(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         IDbTransaction? transaction = null)
     {
         return DbRepository.ExecuteNonQuery(commandText: commandText,
@@ -409,7 +409,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>The number of rows affected by the execution.</returns>
     public Task<int> ExecuteNonQueryAsync(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -442,7 +442,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An object that holds the first occurrence value (first column of first row) of the execution.</returns>
     public object ExecuteScalar(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
     {
@@ -476,7 +476,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>An object that holds the first occurrence value (first column of first row) of the execution.</returns>
     public Task<object> ExecuteScalarAsync(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -512,7 +512,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>A first occurrence value (first column of first row) of the execution.</returns>
     public TResult ExecuteScalar<TResult>(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
     {
@@ -547,7 +547,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
     /// <returns>A first occurrence value (first column of first row) of the execution.</returns>
     public Task<TResult> ExecuteScalarAsync<TResult>(string commandText,
         object? param = null,
-        CommandType? commandType = null,
+        CommandType commandType = default,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)

@@ -29,8 +29,8 @@ public static partial class DbRepositoryExtension
     public static int BinaryBulkDeleteByKey<TPrimaryKey>(this DbRepository<NpgsqlConnection> repository,
         string tableName,
         IEnumerable<TPrimaryKey> primaryKeys,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         BulkImportPseudoTableType pseudoTableType = default,
         NpgsqlTransaction transaction = null)
     {
@@ -85,8 +85,8 @@ public static partial class DbRepositoryExtension
     public static async Task<int> BinaryBulkDeleteByKeyAsync<TPrimaryKey>(this DbRepository<NpgsqlConnection> repository,
         string tableName,
         IEnumerable<TPrimaryKey> primaryKeys,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         BulkImportPseudoTableType pseudoTableType = default,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)

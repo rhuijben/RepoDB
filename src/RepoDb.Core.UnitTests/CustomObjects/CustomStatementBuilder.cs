@@ -86,7 +86,7 @@ public class CustomStatementBuilder : IStatementBuilder
         return string.Empty;
     }
 
-    public string CreateQuery(string tableName, IEnumerable<Field> fields, QueryGroup? where = null, IEnumerable<OrderField>? orderBy = null, int? top = null, string? hints = null)
+    public string CreateQuery(string tableName, IEnumerable<Field> fields, QueryGroup? where = null, IEnumerable<OrderField>? orderBy = null, int top = 0, string? hints = null)
     {
         return string.Empty;
     }

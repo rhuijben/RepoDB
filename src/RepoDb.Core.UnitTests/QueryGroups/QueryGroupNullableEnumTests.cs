@@ -34,7 +34,7 @@ public class QueryGroupNullableEnumTests
         GlobalConfiguration.Setup(GlobalConfiguration.Options with { ExpressionNullSemantics = setting });
 
         var dir = Direction.Up;
-        var dir2 = (Direction?)null;
+        Direction? dir2 = null;
         var v = QueryGroup.Parse<Map>(x => x.Direction == dir && x.AdditionalDirection == dir2);
 
         Assert.AreEqual(

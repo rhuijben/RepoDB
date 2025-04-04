@@ -34,8 +34,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -78,8 +78,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -120,8 +120,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -165,8 +165,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
     {
@@ -209,8 +209,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -253,8 +253,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
     {
@@ -301,8 +301,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -348,8 +348,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -393,8 +393,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -441,8 +441,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -485,8 +485,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -532,8 +532,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -579,8 +579,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null) =>
         BulkUpdateInternalBase(connection,
@@ -619,8 +619,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null) =>
         BulkUpdateInternalBase(connection,
@@ -664,8 +664,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         ITrace? trace = null,
@@ -710,8 +710,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         ITrace? trace = null,

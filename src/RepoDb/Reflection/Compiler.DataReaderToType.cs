@@ -97,7 +97,7 @@ partial class Compiler
 
         // Initialize the members
         var constructorInfo = typeOfResult.GetConstructorWithMostArguments();
-        var entityExpression = (Expression?)null;
+        Expression? entityExpression = null;
 
         // Validate arguments equality
         if (arguments?.Any() == true)

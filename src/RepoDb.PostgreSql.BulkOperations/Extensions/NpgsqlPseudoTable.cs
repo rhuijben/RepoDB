@@ -24,7 +24,7 @@ public static partial class NpgsqlConnectionExtension
         string tableName,
         string pseudoTableName,
         IEnumerable<NpgsqlBulkInsertMapItem> mappings,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
         IDbSetting? dbSetting = null,
@@ -56,7 +56,7 @@ public static partial class NpgsqlConnectionExtension
         string tableName,
         string pseudoTableName,
         IEnumerable<NpgsqlBulkInsertMapItem> mappings,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         BulkImportIdentityBehavior identityBehavior = default,
         BulkImportPseudoTableType pseudoTableType = default,
         IDbSetting? dbSetting = null,
@@ -83,7 +83,7 @@ public static partial class NpgsqlConnectionExtension
     /// <returns></returns>
     private static int MergeToPseudoTable(NpgsqlConnection connection,
         Func<string> getMergeToPseudoCommandText,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         NpgsqlTransaction transaction = null)
     {
         var commandText = getMergeToPseudoCommandText();
@@ -103,7 +103,7 @@ public static partial class NpgsqlConnectionExtension
     /// <returns></returns>
     private static IEnumerable<IdentityResult> MergeToPseudoTableWithIdentityResults(NpgsqlConnection connection,
         Func<string> getMergeToPseudoCommandText,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         NpgsqlTransaction transaction = null)
     {
         var commandText = getMergeToPseudoCommandText();
@@ -123,7 +123,7 @@ public static partial class NpgsqlConnectionExtension
     /// <param name="cancellationToken"></param>
     private static async Task<int> MergeToPseudoTableAsync(NpgsqlConnection connection,
         Func<string> getMergeToPseudoCommandText,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -145,7 +145,7 @@ public static partial class NpgsqlConnectionExtension
     /// <param name="cancellationToken"></param>
     private static async Task<IEnumerable<IdentityResult>> MergeToPseudoTableWithIdentityResultsAsync(NpgsqlConnection connection,
         Func<string> getMergeToPseudoCommandText,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -166,7 +166,7 @@ public static partial class NpgsqlConnectionExtension
     /// <param name="transaction"></param>
     private static void DropPseudoTable(NpgsqlConnection connection,
         string tableName,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         NpgsqlTransaction transaction = null)
     {
         if (string.IsNullOrWhiteSpace(tableName))
@@ -192,7 +192,7 @@ public static partial class NpgsqlConnectionExtension
     /// <param name="cancellationToken"></param>
     private static async Task DropPseudoTableAsync(NpgsqlConnection connection,
         string tableName,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -222,7 +222,7 @@ public static partial class NpgsqlConnectionExtension
     private static void CreatePseudoTableIndex(NpgsqlConnection connection,
         string tableName,
         IEnumerable<Field> fields,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         IDbSetting? dbSetting = null,
         NpgsqlTransaction transaction = null)
     {
@@ -252,7 +252,7 @@ public static partial class NpgsqlConnectionExtension
     private static async Task CreatePseudoTableIndexAsync(NpgsqlConnection connection,
         string tableName,
         IEnumerable<Field> fields,
-        int? bulkCopyTimeout = null,
+        int bulkCopyTimeout = 0,
         IDbSetting? dbSetting = null,
         NpgsqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)

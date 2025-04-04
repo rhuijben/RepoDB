@@ -24,7 +24,7 @@ public static partial class BaseRepositoryExtension
     public static int BulkDelete<TEntity>(this BaseRepository<TEntity, SqlConnection> repository,
         IEnumerable<object> primaryKeys,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -56,7 +56,7 @@ public static partial class BaseRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -93,7 +93,7 @@ public static partial class BaseRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null)
         where TEntity : class
@@ -128,7 +128,7 @@ public static partial class BaseRepositoryExtension
     public static Task<int> BulkDeleteAsync<TEntity>(this BaseRepository<TEntity, SqlConnection> repository,
         IEnumerable<object> primaryKeys,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -163,7 +163,7 @@ public static partial class BaseRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -203,7 +203,7 @@ public static partial class BaseRepositoryExtension
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
         string? hints = null,
-        int? batchSize = null,
+        int batchSize = 0,
         bool usePhysicalPseudoTempTable = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)

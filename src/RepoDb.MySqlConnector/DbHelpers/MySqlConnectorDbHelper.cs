@@ -93,7 +93,7 @@ public sealed class MySqlConnectorDbHelper : IDbHelper
     {
         var columnType = reader.GetString(4);
         var excluded = GetBlobTypes();
-        var size = (int?)null;
+        int? size = null;
         if (excluded.Contains(columnType.ToLowerInvariant()))
         {
             size = null;

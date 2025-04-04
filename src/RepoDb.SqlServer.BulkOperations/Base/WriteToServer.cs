@@ -31,8 +31,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<TEntity> entities,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool hasOrderingColumn = false,
         SqlTransaction? transaction = null,
         ITrace? trace = null)
@@ -54,15 +54,15 @@ public static partial class SqlConnectionExtension
             Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
 
             // Set the timeout
-            if (bulkCopyTimeout.HasValue)
+            if (bulkCopyTimeout > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout);
             }
 
             // Set the batch size
-            if (batchSize.HasValue)
+            if (batchSize > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize);
             }
 
             // Add the order column
@@ -114,8 +114,8 @@ public static partial class SqlConnectionExtension
         DbDataReader reader,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         SqlTransaction? transaction = null)
     {
         // Throw an error if there are no mappings
@@ -134,15 +134,15 @@ public static partial class SqlConnectionExtension
             Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
 
             // Set the timeout
-            if (bulkCopyTimeout.HasValue)
+            if (bulkCopyTimeout > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout);
             }
 
             // Set the batch size
-            if (batchSize.HasValue)
+            if (batchSize > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize);
             }
 
             // Add the mappings
@@ -184,8 +184,8 @@ public static partial class SqlConnectionExtension
         DataRowState? rowState = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool hasOrderingColumn = false,
         SqlTransaction? transaction = null)
     {
@@ -205,15 +205,15 @@ public static partial class SqlConnectionExtension
             Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
 
             // Set the timeout
-            if (bulkCopyTimeout.HasValue)
+            if (bulkCopyTimeout > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout);
             }
 
             // Set the batch size
-            if (batchSize.HasValue)
+            if (batchSize > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize);
             }
 
             // Add the order column
@@ -271,8 +271,8 @@ public static partial class SqlConnectionExtension
         IEnumerable<TEntity> entities,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool hasOrderingColumn = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -294,15 +294,15 @@ public static partial class SqlConnectionExtension
             Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
 
             // Set the timeout
-            if (bulkCopyTimeout.HasValue)
+            if (bulkCopyTimeout > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout);
             }
 
             // Set the batch size
-            if (batchSize.HasValue)
+            if (batchSize > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize);
             }
 
             // Add the order column
@@ -355,8 +355,8 @@ public static partial class SqlConnectionExtension
         DbDataReader reader,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -376,15 +376,15 @@ public static partial class SqlConnectionExtension
             Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
 
             // Set the timeout
-            if (bulkCopyTimeout.HasValue)
+            if (bulkCopyTimeout > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout);
             }
 
             // Set the batch size
-            if (batchSize.HasValue)
+            if (batchSize > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize);
             }
 
             // Add the mappings
@@ -426,8 +426,8 @@ public static partial class SqlConnectionExtension
         DataRowState? rowState = null,
         IEnumerable<BulkInsertMapItem>? mappings = null,
         SqlBulkCopyOptions options = default,
-        int? bulkCopyTimeout = null,
-        int? batchSize = null,
+        int bulkCopyTimeout = 0,
+        int batchSize = 0,
         bool hasOrderingColumn = false,
         SqlTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -448,15 +448,15 @@ public static partial class SqlConnectionExtension
             Compiler.SetProperty(sqlBulkCopy, "DestinationTableName", tableName);
 
             // Set the timeout
-            if (bulkCopyTimeout.HasValue)
+            if (bulkCopyTimeout > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BulkCopyTimeout", bulkCopyTimeout);
             }
 
             // Set the batch size
-            if (batchSize.HasValue)
+            if (batchSize > 0)
             {
-                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize.Value);
+                Compiler.SetProperty(sqlBulkCopy, "BatchSize", batchSize);
             }
 
             // Add the order column

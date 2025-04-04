@@ -19,7 +19,7 @@ public class TypeMapPropertyLevelResolver : IResolver<PropertyInfo, DbType?>
     /// <returns>The equivalent <see cref="DbType"/> object of the property.</returns>
     public DbType? Resolve(PropertyInfo propertyInfo)
     {
-        var dbType = (DbType?)null;
+        DbType? dbType = null;
 
         // Attribute Level
         var attribute = propertyInfo.GetCustomAttribute<TypeMapAttribute>() ??

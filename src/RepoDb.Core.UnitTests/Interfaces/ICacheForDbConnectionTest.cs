@@ -49,7 +49,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -79,7 +79,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -109,7 +109,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -139,7 +139,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -169,7 +169,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -199,7 +199,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -231,7 +231,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -259,7 +259,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -287,7 +287,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -325,7 +325,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -357,7 +357,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -389,7 +389,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -421,7 +421,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -453,7 +453,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -485,7 +485,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -519,7 +519,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -549,7 +549,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration: cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);
@@ -579,7 +579,7 @@ public class ICacheForDbConnectionTest
             hints: null,
             cacheKey: cacheKey,
             cacheItemExpiration,
-            commandTimeout: null,
+            commandTimeout: 0,
             transaction: null,
             cache: cache.Object,
             trace: null);

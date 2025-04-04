@@ -28,7 +28,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         {
             // Call the method
             return connection.CountAll<TEntity>(hints: hints,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: Trace,
@@ -67,7 +67,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         {
             // Call the method
             return await connection.CountAllAsync<TEntity>(hints: hints,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: Trace,
@@ -106,7 +106,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
             // Call the method
             return connection.CountAll(tableName: tableName,
                 hints: hints,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: Trace,
@@ -146,7 +146,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
             // Call the method
             return await connection.CountAllAsync(tableName: tableName,
                 hints: hints,
-                commandTimeout: CommandTimeout,
+                commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
                 transaction: transaction,
                 trace: Trace,
