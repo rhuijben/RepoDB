@@ -22,7 +22,7 @@ internal sealed class UpdateAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public UpdateAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         IEnumerable<Field>? qualifiers = null,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -53,7 +53,7 @@ internal sealed class UpdateAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public UpdateAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         IEnumerable<Field>? qualifiers = null,
         int batchSize = Constant.DefaultBatchOperationSize,

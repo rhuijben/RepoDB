@@ -22,7 +22,7 @@ internal class MergeAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MergeAllRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         IEnumerable<Field>? qualifiers = null,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -52,7 +52,7 @@ internal class MergeAllRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MergeAllRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         IEnumerable<Field>? qualifiers = null,
         int batchSize = Constant.DefaultBatchOperationSize,
@@ -84,7 +84,7 @@ internal class MergeAllRequest : BaseRequest
     public MergeAllRequest(Type type,
         string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         IEnumerable<Field>? qualifiers = null,
         int batchSize = Constant.DefaultBatchOperationSize,

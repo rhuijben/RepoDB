@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
 using System.Transactions;
@@ -413,7 +414,7 @@ public static partial class DbConnectionExtension
             {
                 return MergeAllInternalBase<IDictionary<string, object>>(connection: connection,
                     tableName: tableName,
-                    entities: entities?.WithType<IDictionary<string, object>>(),
+                    entities: entities.WithType<IDictionary<string, object>>(),
                     qualifiers: qualifiers,
                     batchSize: batchSize,
                     fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
@@ -446,7 +447,7 @@ public static partial class DbConnectionExtension
             {
                 return UpsertAllInternalBase<IDictionary<string, object>>(connection: connection,
                     tableName: tableName,
-                    entities: entities?.WithType<IDictionary<string, object>>(),
+                    entities: entities.WithType<IDictionary<string, object>>(),
                     qualifiers: qualifiers,
                     fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
                     hints: hints,
@@ -900,7 +901,7 @@ public static partial class DbConnectionExtension
             {
                 return await MergeAllAsyncInternalBase(connection: connection,
                     tableName: tableName,
-                    entities: entities?.WithType<IDictionary<string, object>>(),
+                    entities: entities.WithType<IDictionary<string, object>>(),
                     qualifiers: qualifiers,
                     batchSize: batchSize,
                     fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
@@ -935,7 +936,7 @@ public static partial class DbConnectionExtension
             {
                 return await UpsertAllAsyncInternalBase(connection: connection,
                     tableName: tableName,
-                    entities: entities?.WithType<IDictionary<string, object>>(),
+                    entities: entities.WithType<IDictionary<string, object>>(),
                     qualifiers: qualifiers,
                     fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                     hints: hints,
@@ -1379,7 +1380,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems?.Count == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -1476,8 +1477,8 @@ public static partial class DbConnectionExtension
     internal static int UpsertAllInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        IEnumerable<Field>? qualifiers = null,
-        IEnumerable<Field>? fields = null,
+        IEnumerable<Field>? qualifiers,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.MergeAll,
@@ -1705,7 +1706,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems?.Count == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -1805,8 +1806,8 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<int> UpsertAllAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        IEnumerable<Field>? qualifiers = null,
-        IEnumerable<Field>? fields = null,
+        IEnumerable<Field>? qualifiers,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.MergeAll,

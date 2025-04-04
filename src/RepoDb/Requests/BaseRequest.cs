@@ -18,7 +18,7 @@ internal abstract class BaseRequest : IEquatable<BaseRequest>
     /// <param name="statementBuilder">The statement builder.</param>
     public BaseRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IStatementBuilder? statementBuilder = null)
     {
         Name = name;

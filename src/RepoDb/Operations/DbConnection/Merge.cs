@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Data.Common;
 using System.Linq.Expressions;
 using RepoDb.Contexts.Providers;
@@ -2109,8 +2110,8 @@ public static partial class DbConnectionExtension
     internal static TResult MergeInternalBase<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field>? qualifiers = null,
-        IEnumerable<Field>? fields = null,
+        IEnumerable<Field>? qualifiers,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Merge,
@@ -2123,12 +2124,12 @@ public static partial class DbConnectionExtension
         if (qualifiers?.Any() != true)
         {
             var keys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
-                entity?.GetType() ?? typeof(TEntity));
+                entity.GetType());
             qualifiers = keys;
         }
 
         // Get the context
-        var entityType = entity?.GetType() ?? typeof(TEntity);
+        var entityType = entity.GetType() ?? typeof(TEntity);
         var context = MergeExecutionContextProvider.Create(entityType,
             connection,
             tableName,
@@ -2137,7 +2138,7 @@ public static partial class DbConnectionExtension
             hints,
             transaction,
             statementBuilder);
-        var result = default(TResult);
+        var result = default(TResult)!;
 
         // Create the command
         using (var command = (DbCommand)connection.EnsureOpen().CreateCommand(context.CommandText,
@@ -2157,7 +2158,7 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = Converter.ToType<TResult>(command.ExecuteScalar());
+            result = Converter.ToType<TResult>(command.ExecuteScalar())!;
 
             // After Execution
             Tracer
@@ -2209,10 +2210,10 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         // Variables needed
-        var type = entity?.GetType() ?? typeof(TEntity);
+        var type = entity.GetType();
         var isDictionaryType = TypeCache.Get(type).IsDictionaryStringObject();
         var dbFields = DbFieldCache.Get(connection, tableName, transaction, true);
-        var primary = dbFields?.GetPrimary();
+        var primary = dbFields.GetPrimary();
         IEnumerable<ClassProperty>? properties = null;
         ClassProperty? primaryKey = null;
 
@@ -2227,6 +2228,7 @@ public static partial class DbConnectionExtension
         }
 
         // Get the properties
+        QueryGroup? where = null;
         if (isDictionaryType == false)
         {
             if (type.IsGenericType == true)
@@ -2239,21 +2241,16 @@ public static partial class DbConnectionExtension
             }
 
             // Set the primary key
-            primaryKey = properties?.FirstOrDefault(p =>
+            primaryKey = properties.FirstOrDefault(p =>
                 string.Equals(primary?.Name, p.GetMappedName(), StringComparison.OrdinalIgnoreCase));
-        }
 
-        // Expression
-        QueryGroup? where = null;
-        if (isDictionaryType)
-        {
-            where = CreateQueryGroupForUpsert((IDictionary<string, object>)entity,
+            where = CreateQueryGroupForUpsert(entity,
+                properties,
                 qualifiers);
         }
         else
         {
-            where = CreateQueryGroupForUpsert(entity,
-                properties,
+            where = CreateQueryGroupForUpsert((IDictionary<string, object>)entity,
                 qualifiers);
         }
 
@@ -2323,11 +2320,11 @@ public static partial class DbConnectionExtension
                 statementBuilder: statementBuilder);
 
             // Set the result
-            result = Converter.ToType<TResult>(insertResult);
+            result = Converter.ToType<TResult>(insertResult)!;
         }
 
         // Return the result
-        return result;
+        return result!;
     }
 
     #endregion
@@ -2355,7 +2352,7 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<TResult> MergeAsyncInternalBase<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field>? fields = null,
+        IEnumerable<Field> fields,
         IEnumerable<Field>? qualifiers = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -2370,12 +2367,12 @@ public static partial class DbConnectionExtension
         if (qualifiers?.Any() != true)
         {
             var keys = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
-                entity?.GetType() ?? typeof(TEntity), cancellationToken).ConfigureAwait(false);
+                entity.GetType() ?? typeof(TEntity), cancellationToken).ConfigureAwait(false);
             qualifiers = keys;
         }
 
         // Get the context
-        var entityType = entity?.GetType() ?? typeof(TEntity);
+        var entityType = entity.GetType() ?? typeof(TEntity);
         var context = await MergeExecutionContextProvider.CreateAsync(entityType,
             connection,
             tableName,
@@ -2385,7 +2382,7 @@ public static partial class DbConnectionExtension
             transaction,
             statementBuilder,
             cancellationToken).ConfigureAwait(false);
-        var result = default(TResult);
+        var result = default(TResult)!;
 
         // Create the command
         using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).CreateCommand(context.CommandText,
@@ -2405,7 +2402,7 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
+            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false))!;
 
             // After Execution
             await Tracer
@@ -2459,10 +2456,10 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         // Variables needed
-        var type = entity?.GetType() ?? typeof(TEntity);
+        var type = entity.GetType() ?? typeof(TEntity);
         var isDictionaryType = TypeCache.Get(type).IsDictionaryStringObject();
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
-        var primary = dbFields?.GetPrimary();
+        var primary = dbFields.GetPrimary();
         IEnumerable<ClassProperty>? properties = null;
         ClassProperty? primaryKey = null;
 
@@ -2479,6 +2476,7 @@ public static partial class DbConnectionExtension
         }
 
         // Get the properties
+        QueryGroup? where = null;
         if (isDictionaryType == false)
         {
             if (type.IsGenericType == true)
@@ -2491,21 +2489,16 @@ public static partial class DbConnectionExtension
             }
 
             // Set the primary key
-            primaryKey = properties?.FirstOrDefault(p =>
+            primaryKey = properties.FirstOrDefault(p =>
                 string.Equals(primary?.Name, p.GetMappedName(), StringComparison.OrdinalIgnoreCase));
-        }
 
-        // Expression
-        QueryGroup? where = null;
-        if (isDictionaryType)
-        {
-            where = CreateQueryGroupForUpsert((IDictionary<string, object>)entity,
+            where = CreateQueryGroupForUpsert(entity,
+                properties,
                 qualifiers);
         }
         else
         {
-            where = CreateQueryGroupForUpsert(entity,
-                properties,
+            where = CreateQueryGroupForUpsert((IDictionary<string, object>)entity,
                 qualifiers);
         }
 
@@ -2516,7 +2509,7 @@ public static partial class DbConnectionExtension
         }
 
         // Execution variables
-        var result = default(TResult);
+        var result = default(TResult)!;
         var exists = await connection.ExistsAsync(tableName,
             where,
             hints: hints,
@@ -2550,7 +2543,7 @@ public static partial class DbConnectionExtension
                 {
                     if (primaryKey != null)
                     {
-                        result = Converter.ToType<TResult>(primaryKey.PropertyInfo.GetValue(entity));
+                        result = Converter.ToType<TResult>(primaryKey.PropertyInfo.GetValue(entity))!;
                     }
                 }
                 else
@@ -2558,7 +2551,7 @@ public static partial class DbConnectionExtension
                     var dictionary = (IDictionary<string, object>)entity;
                     if (primary != null && dictionary.TryGetValue(primary.Name, out var value))
                     {
-                        result = Converter.ToType<TResult>(value);
+                        result = Converter.ToType<TResult>(value)!;
                     }
                 }
             }
@@ -2578,7 +2571,7 @@ public static partial class DbConnectionExtension
                 cancellationToken: cancellationToken).ConfigureAwait(false);
 
             // Set the result
-            result = Converter.ToType<TResult>(insertResult);
+            result = Converter.ToType<TResult>(insertResult)!;
         }
 
         // Return the result

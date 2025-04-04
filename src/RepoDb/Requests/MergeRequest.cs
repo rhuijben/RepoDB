@@ -22,7 +22,7 @@ internal sealed class MergeRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MergeRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
         string? hints = null,
@@ -49,7 +49,7 @@ internal sealed class MergeRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public MergeRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
         string? hints = null,
@@ -78,7 +78,7 @@ internal sealed class MergeRequest : BaseRequest
     public MergeRequest(Type? type,
         string? name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
         string? hints = null,

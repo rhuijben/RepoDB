@@ -21,7 +21,7 @@ internal sealed class UpdateRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public UpdateRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         QueryGroup? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,
@@ -49,7 +49,7 @@ internal sealed class UpdateRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public UpdateRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         QueryGroup? where = null,
         IEnumerable<Field>? fields = null,
         string? hints = null,

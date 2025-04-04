@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Data.Common;
 using System.Transactions;
 using RepoDb.Contexts.Providers;
@@ -129,7 +130,7 @@ public static partial class DbConnectionExtension
         {
             return InsertAllInternalBase<IDictionary<string, object>>(connection: connection,
                 tableName: tableName,
-                entities: entities?.WithType<IDictionary<string, object>>(),
+                entities: entities.WithType<IDictionary<string, object>>(),
                 batchSize: batchSize,
                 fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
                 hints: hints,
@@ -282,7 +283,7 @@ public static partial class DbConnectionExtension
         {
             return InsertAllAsyncInternalBase<IDictionary<string, object>>(connection: connection,
                 tableName: tableName,
-                entities: entities?.WithType<IDictionary<string, object>>(),
+                entities: entities.WithType<IDictionary<string, object>>(),
                 batchSize: batchSize,
                 fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
                 hints: hints,
@@ -424,8 +425,8 @@ public static partial class DbConnectionExtension
     internal static int InsertAllInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
-        IEnumerable<Field>? fields = null,
+        int batchSize,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.InsertAll,
@@ -538,7 +539,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems?.Count == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -634,8 +635,8 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<int> InsertAllAsyncInternalBase<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
-        IEnumerable<Field>? fields = null,
+        int batchSize,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.InsertAll,
@@ -750,7 +751,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems?.Count == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }

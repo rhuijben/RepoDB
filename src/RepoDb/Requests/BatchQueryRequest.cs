@@ -24,7 +24,7 @@ internal sealed class BatchQueryRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public BatchQueryRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field> fields,
         int page,
         int rowsPerBatch,

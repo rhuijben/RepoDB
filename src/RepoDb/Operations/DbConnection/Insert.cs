@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Data.Common;
 using RepoDb.Contexts.Providers;
 using RepoDb.Interfaces;
@@ -640,7 +641,7 @@ public static partial class DbConnectionExtension
     internal static TResult InsertInternalBase<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field>? fields = null,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Insert,
@@ -653,7 +654,7 @@ public static partial class DbConnectionExtension
         var dbSetting = connection.GetDbSetting();
 
         // Get the context
-        var entityType = entity?.GetType() ?? typeof(TEntity);
+        var entityType = entity.GetType();
         var context = InsertExecutionContextProvider.Create(entityType,
             connection,
             tableName,
@@ -661,7 +662,7 @@ public static partial class DbConnectionExtension
             hints,
             transaction,
             statementBuilder);
-        var result = default(TResult);
+        var result = default(TResult)!;
 
         // Create the command
         using (var command = (DbCommand)connection.EnsureOpen().CreateCommand(context.CommandText,
@@ -681,7 +682,7 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = Converter.ToType<TResult>(command.ExecuteScalar());
+            result = Converter.ToType<TResult>(command.ExecuteScalar())!;
 
             // After Execution
             Tracer
@@ -722,7 +723,7 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<TResult> InsertAsyncInternalBase<TEntity, TResult>(this IDbConnection connection,
         string tableName,
         TEntity entity,
-        IEnumerable<Field>? fields = null,
+        IEnumerable<Field> fields,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Insert,
@@ -736,7 +737,7 @@ public static partial class DbConnectionExtension
         var dbSetting = connection.GetDbSetting();
 
         // Get the context
-        var entityType = entity?.GetType() ?? typeof(TEntity);
+        var entityType = entity.GetType();
         var context = await InsertExecutionContextProvider.CreateAsync(entityType,
             connection,
             tableName,
@@ -745,7 +746,7 @@ public static partial class DbConnectionExtension
             transaction,
             statementBuilder,
             cancellationToken).ConfigureAwait(false);
-        var result = default(TResult);
+        var result = default(TResult)!;
 
         // Create the command
         using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).CreateCommand(context.CommandText,
@@ -765,7 +766,7 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
+            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false))!;
 
             // After Execution
             await Tracer

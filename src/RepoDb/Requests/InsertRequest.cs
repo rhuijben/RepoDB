@@ -20,7 +20,7 @@ internal sealed class InsertRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public InsertRequest(Type type,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -44,7 +44,7 @@ internal sealed class InsertRequest : BaseRequest
     /// <param name="statementBuilder">The statement builder.</param>
     public InsertRequest(string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
@@ -70,7 +70,7 @@ internal sealed class InsertRequest : BaseRequest
     public InsertRequest(Type type,
         string name,
         IDbConnection connection,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)

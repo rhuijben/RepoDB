@@ -1148,7 +1148,7 @@ public static class CommandTextCache
     private static async ValueTask ValidateOrderFieldsAsync(IDbConnection connection,
         string tableName,
         IEnumerable<OrderField> orderFields,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         CancellationToken cancellationToken = default)
     {
         if (orderFields?.Any() == true)
@@ -1211,7 +1211,7 @@ public static class CommandTextCache
     private static async ValueTask<IEnumerable<Field>> GetTargetFieldsAsync(IDbConnection connection,
         string tableName,
         IEnumerable<Field> fields,
-        IDbTransaction transaction,
+        IDbTransaction? transaction,
         CancellationToken cancellationToken = default)
     {
         if (fields?.Any() != true)
