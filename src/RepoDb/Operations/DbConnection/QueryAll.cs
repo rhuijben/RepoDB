@@ -139,7 +139,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         // Ensure the fields
-        fields = GetQualifiedFields<TEntity>(fields) ??
+        fields ??= GetQualifiedFields<TEntity>() ??
             DbFieldCache.Get(connection, tableName, transaction)?.AsFields();
 
         // Return
@@ -298,7 +298,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         // Ensure the fields
-        fields = GetQualifiedFields<TEntity>(fields) ??
+        fields ??= GetQualifiedFields<TEntity>() ??
             (await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false))?.AsFields();
 
         // Return

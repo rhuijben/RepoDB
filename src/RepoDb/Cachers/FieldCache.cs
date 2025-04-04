@@ -18,7 +18,7 @@ public static class FieldCache
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <returns>The cached list <see cref="Field"/> objects.</returns>
-    public static IEnumerable<Field>? Get<TEntity>()
+    public static IEnumerable<Field> Get<TEntity>()
         where TEntity : class =>
         Get(typeof(TEntity));
 
@@ -27,12 +27,10 @@ public static class FieldCache
     /// </summary>
     /// <param name="entityType">The type of the data entity.</param>
     /// <returns>The cached list <see cref="Field"/> objects.</returns>
-    public static IEnumerable<Field>? Get(Type entityType)
+    public static IEnumerable<Field> Get(Type entityType)
     {
-        if (TypeCache.Get(entityType).IsClassType() == false)
-        {
-            return null;
-        }
+        if (!TypeCache.Get(entityType).IsClassType())
+            throw new ArgumentOutOfRangeException(nameof(entityType));
 
         // Try get the value
         return cache.GetOrAdd(entityType, TypeExtension.AsFields);

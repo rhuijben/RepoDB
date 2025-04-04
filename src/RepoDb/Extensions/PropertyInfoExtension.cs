@@ -124,7 +124,7 @@ public static class PropertyInfoExtension
     internal static string AsFieldAndAliasField(this PropertyInfo property,
         string alias,
         IDbSetting? dbSetting) =>
-        string.Concat(AsFieldAsString(property, dbSetting), " = ", alias, CharConstant.Period, AsFieldAsString(property, dbSetting));
+        string.Concat(AsFieldAsString(property, dbSetting), " = ", alias, ".", AsFieldAsString(property, dbSetting));
 
     /// <summary>
     /// Generates a hashcode of the <see cref="PropertyInfo"/> object based on the parent class name and its own name.
@@ -217,12 +217,11 @@ public static class PropertyInfoExtension
     /// <param name="parameterName"></param>
     /// <returns></returns>
     internal static PropertyValueAttribute? GetPropertyValueAttributeByParameterName(this PropertyInfo property,
-        Type declaringType,
+        Type? declaringType,
         string parameterName) =>
         PropertyValueAttributeMapper
             .Get(declaringType ?? property.DeclaringType!, property)
-            .Where(e => string.Equals(parameterName, e.PropertyName, StringComparison.OrdinalIgnoreCase))
-            .LastOrDefault();
+            ?.LastOrDefault(e => string.Equals(parameterName, e.PropertyName, StringComparison.OrdinalIgnoreCase));
 
     /// <summary>
     /// Returns the value of the data entity property. If the property handler is defined in the property, then the
@@ -247,7 +246,9 @@ public static class PropertyInfoExtension
         object entity,
         Type declaringType)
     {
-        var classProperty = PropertyCache.Get((declaringType ?? property?.DeclaringType), property, true);
+        ObjectExtension.ThrowIfNull(property, nameof(property));
+
+        var classProperty = PropertyCache.Get((declaringType ?? property.DeclaringType), property, true);
         var propertyHandler = classProperty?.GetPropertyHandler();
         var value = property?.GetValue(entity);
         if (propertyHandler != null)

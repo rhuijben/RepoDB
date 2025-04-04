@@ -1,9 +1,10 @@
-﻿using RepoDb.Attributes.Parameter;
-using RepoDb.Exceptions;
-using RepoDb.Extensions;
+﻿#nullable enable
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Attributes.Parameter;
+using RepoDb.Exceptions;
+using RepoDb.Extensions;
 
 namespace RepoDb;
 
@@ -220,7 +221,7 @@ public static class PropertyValueAttributeMapper
     public static void Add(PropertyInfo propertyInfo,
         IEnumerable<PropertyValueAttribute> attributes,
         bool force) =>
-        Add(propertyInfo.DeclaringType, propertyInfo, attributes, force);
+        Add(propertyInfo.DeclaringType!, propertyInfo, attributes, force);
 
     /// <summary>
     /// Property Level: Adds a mapping between a <see cref="PropertyInfo"/> object and an instance of <see cref="PropertyValueAttribute"/> object.
@@ -304,7 +305,7 @@ public static class PropertyValueAttributeMapper
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="expression">The property expression.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get<TEntity>(Expression<Func<TEntity, object?>> expression)
+    public static IEnumerable<PropertyValueAttribute>? Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
         Get(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
 
@@ -314,9 +315,9 @@ public static class PropertyValueAttributeMapper
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="propertyName">The name of the target class property.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get<TEntity>(string propertyName)
+    public static IEnumerable<PropertyValueAttribute>? Get<TEntity>(string propertyName)
         where TEntity : class =>
-        Get(typeof(TEntity), TypeExtension.GetProperty<TEntity>(propertyName));
+        Get(typeof(TEntity), TypeExtension.GetProperty<TEntity>(propertyName) ?? throw new PropertyNotFoundException(nameof(propertyName), "Property not found"));
 
     /// <summary>
     /// Get the list of mapped <see cref="PropertyValueAttribute"/> objects of the class property (via <see cref="Field"/> object).
@@ -324,7 +325,7 @@ public static class PropertyValueAttributeMapper
     /// <typeparam name="TEntity">The target type.</typeparam>
     /// <param name="field">The instance of <see cref="Field"/> object.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get<TEntity>(Field field)
+    public static IEnumerable<PropertyValueAttribute>? Get<TEntity>(Field field)
         where TEntity : class =>
         Get(typeof(TEntity), TypeExtension.GetProperty<TEntity>(field.Name));
 
@@ -333,8 +334,8 @@ public static class PropertyValueAttributeMapper
     /// </summary>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/>.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get(PropertyInfo propertyInfo) =>
-        Get(propertyInfo.DeclaringType, propertyInfo);
+    public static IEnumerable<PropertyValueAttribute>? Get(PropertyInfo propertyInfo) =>
+        Get(propertyInfo.DeclaringType!, propertyInfo);
 
     /// <summary>
     /// Get the list of mapped <see cref="PropertyValueAttribute"/> objects of the <see cref="PropertyInfo"/> object.
@@ -342,7 +343,7 @@ public static class PropertyValueAttributeMapper
     /// <param name="entityType">The target type.</param>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/>.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get(Type entityType,
+    public static IEnumerable<PropertyValueAttribute>? Get(Type entityType,
         PropertyInfo propertyInfo)
     {
         // Validate
@@ -394,7 +395,7 @@ public static class PropertyValueAttributeMapper
     /// </summary>
     /// <param name="propertyInfo">The instance of <see cref="PropertyInfo"/>.</param>
     public static void Remove(PropertyInfo propertyInfo) =>
-        Remove(propertyInfo.DeclaringType, propertyInfo);
+        Remove(propertyInfo.DeclaringType!, propertyInfo);
 
     /// <summary>
     /// Removes the existing mapped <see cref="PropertyValueAttribute"/> objects of the <see cref="PropertyInfo"/> object.
@@ -497,7 +498,7 @@ public static class PropertyValueAttributeMapper
     /// </summary>
     /// <typeparam name="TType">The target type.</typeparam>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get<TType>() =>
+    public static IEnumerable<PropertyValueAttribute>? Get<TType>() =>
         Get(typeof(TType));
 
     /// <summary>
@@ -505,7 +506,7 @@ public static class PropertyValueAttributeMapper
     /// </summary>
     /// <param name="type">The target type.</param>
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
-    public static IEnumerable<PropertyValueAttribute> Get(Type type)
+    public static IEnumerable<PropertyValueAttribute>? Get(Type type)
     {
         // Validate
         ObjectExtension.ThrowIfNull(type, "Type");

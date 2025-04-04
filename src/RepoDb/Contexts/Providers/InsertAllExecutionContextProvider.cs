@@ -250,7 +250,7 @@ internal static class InsertAllExecutionContextProvider
         {
             singleEntityParametersSetterFunc = FunctionCache
                 .GetDataEntityDbParameterSetterCompiledFunction(entityType,
-                    string.Concat(entityType.FullName, CharConstant.Period, tableName, ".InsertAll"),
+                    string.Concat(entityType.FullName, ".", tableName, ".InsertAll"),
                     inputFields,
                     null,
                     dbSetting,
@@ -260,7 +260,7 @@ internal static class InsertAllExecutionContextProvider
         {
             multipleEntitiesParametersSetterFunc = FunctionCache
                 .GetDataEntityListDbParameterSetterCompiledFunction(entityType,
-                    string.Concat(entityType.FullName, CharConstant.Period, tableName, ".InsertAll"),
+                    string.Concat(entityType.FullName, ".", tableName, ".InsertAll"),
                     inputFields,
                     null,
                     batchSize,

@@ -296,7 +296,7 @@ internal static class MergeAllExecutionContextProvider
         {
             singleEntityParametersSetterFunc = FunctionCache
                 .GetDataEntityDbParameterSetterCompiledFunction(entityType,
-                    string.Concat(entityType.FullName, CharConstant.Period, tableName, ".MergeAll"),
+                    string.Concat(entityType.FullName, ".", tableName, ".MergeAll"),
                     inputFields,
                     null,
                     dbSetting,
@@ -306,7 +306,7 @@ internal static class MergeAllExecutionContextProvider
         {
             multipleEntitiesParametersSetterFunc = FunctionCache
                 .GetDataEntityListDbParameterSetterCompiledFunction(entityType,
-                    string.Concat(entityType.FullName, CharConstant.Period, tableName, ".MergeAll"),
+                    string.Concat(entityType.FullName, ".", tableName, ".MergeAll"),
                     inputFields,
                     null,
                     batchSize,

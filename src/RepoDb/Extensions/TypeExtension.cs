@@ -3,6 +3,7 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using RepoDb.Attributes.Parameter;
+using RepoDb.Exceptions;
 
 namespace RepoDb.Extensions;
 
@@ -234,7 +235,7 @@ public static class TypeExtension
     /// <typeparam name="T">The target .NET CLR type.</typeparam>
     /// <param name="propertyName">The name of the class property to be mapped.</param>
     /// <returns>An instance of <see cref="PropertyInfo"/> object.</returns>
-    public static PropertyInfo? GetProperty<T>(string propertyName)
+    public static PropertyInfo GetProperty<T>(string propertyName)
         where T : class =>
         GetProperty(typeof(T), propertyName);
 
@@ -244,13 +245,14 @@ public static class TypeExtension
     /// <param name="type">The target .NET CLR type.</param>
     /// <param name="propertyName">The name of the target class property.</param>
     /// <returns>An instance of <see cref="PropertyInfo"/> object.</returns>
-    public static PropertyInfo? GetProperty(Type type,
+    public static PropertyInfo GetProperty(Type type,
         string propertyName) =>
         TypeCache.Get(type)
             .GetProperties()
             .FirstOrDefault(p =>
                 string.Equals(p.Name, propertyName, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(p.GetMappedName(), propertyName, StringComparison.OrdinalIgnoreCase));
+                string.Equals(p.GetMappedName(), propertyName, StringComparison.OrdinalIgnoreCase))
+        ?? throw new PropertyNotFoundException(nameof(propertyName), $"Property {propertyName} not found on {type}");
 
     #endregion
 

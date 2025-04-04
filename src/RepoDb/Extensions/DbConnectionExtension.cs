@@ -3095,7 +3095,11 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         var typeOfEntity = entity?.GetType() ?? typeof(TEntity);
-        return TypeCache.Get(typeOfEntity).IsClassType() == false ? Field.Parse(entity) : FieldCache.Get(typeOfEntity);
+
+        if (TypeCache.Get(typeOfEntity).IsClassType())
+            return FieldCache.Get(typeOfEntity);
+        else
+            return Field.Parse(entity);
     }
 
     /// <summary>
@@ -3104,21 +3108,14 @@ public static partial class DbConnectionExtension
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="fields"></param>
     /// <returns></returns>
-    internal static IEnumerable<Field>? GetQualifiedFields<TEntity>(IEnumerable<Field>? fields)
-        where TEntity : class =>
-        (fields ?? (TypeCache.Get(typeof(TEntity)).IsDictionaryStringObject() == false ? FieldCache.Get<TEntity>() : null))?.AsList();
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <param name="fields"></param>
-    /// <param name="entity"></param>
-    /// <returns></returns>
-    internal static IEnumerable<Field> GetQualifiedFields<TEntity>(IEnumerable<Field>? fields,
-        TEntity entity)
-        where TEntity : class =>
-        (fields ?? GetQualifiedFields(entity)).AsList();
+    internal static IEnumerable<Field>? GetQualifiedFields<TEntity>()
+        where TEntity : class
+    {
+        if (TypeCache.Get(typeof(TEntity)).IsClassType())
+            return FieldCache.Get(typeof(TEntity));
+        else
+            return null;
+    }
 
     /// <summary>
     ///

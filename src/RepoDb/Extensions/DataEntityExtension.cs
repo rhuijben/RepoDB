@@ -48,7 +48,7 @@ public static class DataEntityExtension
         {
             return tableAttribute.Name;
         }
-        return string.Concat(tableAttribute.Schema, CharConstant.Period, tableAttribute.Name);
+        return string.Concat(tableAttribute.Schema, ".", tableAttribute.Name);
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ public static class DataEntityExtension
     {
         if (tableName.IsOpenQuoted(dbSetting))
         {
-            var index = tableName.IndexOf(string.Concat(dbSetting.ClosingQuote, CharConstant.Period), StringComparison.OrdinalIgnoreCase);
+            var index = tableName.IndexOf(string.Concat(dbSetting.ClosingQuote, "."), StringComparison.OrdinalIgnoreCase);
             if (index >= 0)
             {
                 return tableName.Substring(0, index + 1);
@@ -98,7 +98,7 @@ public static class DataEntityExtension
         }
         else
         {
-            var index = tableName.IndexOf(CharConstant.Period);
+            var index = tableName.IndexOf('.');
             if (index >= 0)
             {
                 return tableName.Substring(0, index);
@@ -129,7 +129,7 @@ public static class DataEntityExtension
     {
         if (tableName.IsOpenQuoted(dbSetting))
         {
-            var index = tableName.IndexOf(string.Concat(dbSetting.ClosingQuote, CharConstant.Period), StringComparison.OrdinalIgnoreCase);
+            var index = tableName.IndexOf(string.Concat(dbSetting.ClosingQuote, "."), StringComparison.OrdinalIgnoreCase);
             if (index >= 0 && tableName.Length > index + 2)
             {
                 return tableName.Substring(index + 2);
@@ -137,7 +137,7 @@ public static class DataEntityExtension
         }
         else
         {
-            var index = tableName.IndexOf(CharConstant.Period);
+            var index = tableName.IndexOf('.');
             if (index >= 0 && tableName.Length > index)
             {
                 return tableName.Substring(index + 1);

@@ -200,7 +200,7 @@ internal static class InsertExecutionContextProvider
             InputFields = inputFields,
             ParametersSetterFunc = FunctionCache
                 .GetDataEntityDbParameterSetterCompiledFunction(entityType,
-                    string.Concat(entityType.FullName, CharConstant.Period, tableName, ".Insert"),
+                    string.Concat(entityType.FullName, ".", tableName, ".Insert"),
                     inputFields?.AsList(),
                     null,
                     dbSetting,

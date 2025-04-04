@@ -110,14 +110,14 @@ public static class StringExtension
             return value;
         }
 
-        if (!value.Contains(CharConstant.Period))
+        if (!value.Contains('.'))
         {
             return value.AsUnquotedInternal(trim, dbSetting);
         }
         else
         {
-            var splitted = value.Split(CharConstant.Period);
-            return splitted.Select(s => s.AsUnquotedInternal(trim, dbSetting)).Join(CharConstant.Period.ToString());
+            var splitted = value.Split('.');
+            return splitted.Select(s => s.AsUnquotedInternal(trim, dbSetting)).Join(".");
         }
     }
 
@@ -190,7 +190,7 @@ public static class StringExtension
         {
             value = value.Trim();
         }
-        var firstIndex = value.IndexOf(CharConstant.Period);
+        var firstIndex = value.IndexOf('.');
         if (ignoreSchema || firstIndex < 0)
         {
             return value.AsQuotedInternal(dbSetting);
@@ -211,7 +211,7 @@ public static class StringExtension
         IDbSetting dbSetting)
     {
         // TODO: Refactor this method
-        var splitted = value.Split(CharConstant.Period);
+        var splitted = value.Split('.');
         if (splitted.Length > 2)
         {
             var list = new List<string>(splitted.Length);
@@ -223,7 +223,7 @@ public static class StringExtension
                     if (current.StartsWith(dbSetting.OpeningQuote, StringComparison.OrdinalIgnoreCase)
                         && item.EndsWith(dbSetting.ClosingQuote, StringComparison.OrdinalIgnoreCase))
                     {
-                        list.Add(string.Concat(current, CharConstant.Period, item));
+                        list.Add(string.Concat(current, ".", item));
                         current = null;
                     }
                 }
@@ -251,17 +251,17 @@ public static class StringExtension
                 list.Add(current.AsQuotedInternal(dbSetting));
             }
 #if !NET
-            return string.Join(CharConstant.Period.ToString(), list);
+            return string.Join(".", list);
 #else
-            return string.Join(CharConstant.Period, list);
+            return string.Join('.', list);
 #endif
         }
         else
         {
 #if !NET
-            return string.Join(CharConstant.Period.ToString(), splitted.Select(item => item.AsQuotedInternal(dbSetting)));
+            return string.Join(".", splitted.Select(item => item.AsQuotedInternal(dbSetting)));
 #else
-            return string.Join(CharConstant.Period, splitted.Select(item => item.AsQuotedInternal(dbSetting)));
+            return string.Join('.', splitted.Select(item => item.AsQuotedInternal(dbSetting)));
 #endif
         }
     }
@@ -393,8 +393,8 @@ public static class StringExtension
         string leftAlias,
         string rightAlias,
         IDbSetting dbSetting) =>
-        string.Concat(leftAlias, CharConstant.Period, value.AsQuoted(true, true, dbSetting), " = ",
-            rightAlias, CharConstant.Period, value.AsQuoted(true, true, dbSetting));
+        string.Concat(leftAlias, ".", value.AsQuoted(true, true, dbSetting), " = ",
+            rightAlias, ".", value.AsQuoted(true, true, dbSetting));
 
     /// <summary>
     /// 
@@ -410,8 +410,8 @@ public static class StringExtension
         IDbSetting dbSetting)
     {
         var qualifiersWithoutNullChecks = AsJoinQualifierWithoutNullChecks(value, leftAlias, rightAlias, dbSetting);
-        var qualifiersWithNullChecks = string.Concat("(", leftAlias, CharConstant.Period, value.AsQuoted(true, true, dbSetting), " IS NULL",
-            " AND ", rightAlias, CharConstant.Period, value.AsQuoted(true, true, dbSetting), " IS NULL)");
+        var qualifiersWithNullChecks = string.Concat("(", leftAlias, ".", value.AsQuoted(true, true, dbSetting), " IS NULL",
+            " AND ", rightAlias, ".", value.AsQuoted(true, true, dbSetting), " IS NULL)");
         return string.Concat("(", qualifiersWithoutNullChecks, " OR ", qualifiersWithNullChecks, ")");
     }
 
@@ -425,7 +425,7 @@ public static class StringExtension
     internal static string AsAliasField(this string value,
         string alias,
         IDbSetting dbSetting) =>
-        string.Concat(alias, CharConstant.Period, value.AsQuoted(true, true, dbSetting));
+        string.Concat(alias, ".", value.AsQuoted(true, true, dbSetting));
 
     /// <summary>
     /// 
@@ -464,8 +464,8 @@ public static class StringExtension
         string rightAlias,
         IDbSetting dbSetting) =>
         string.Concat(
-            (string.IsNullOrWhiteSpace(leftAlias) ? string.Empty : string.Concat(leftAlias, CharConstant.Period)), AsField(value, dbSetting), " = ",
-            (string.IsNullOrWhiteSpace(rightAlias) ? string.Empty : string.Concat(rightAlias, CharConstant.Period)), AsField(value, dbSetting));
+            (string.IsNullOrWhiteSpace(leftAlias) ? string.Empty : string.Concat(leftAlias, ".")), AsField(value, dbSetting), " = ",
+            (string.IsNullOrWhiteSpace(rightAlias) ? string.Empty : string.Concat(rightAlias, ".")), AsField(value, dbSetting));
 
     /// <summary>
     /// 

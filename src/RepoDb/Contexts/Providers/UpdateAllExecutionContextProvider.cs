@@ -234,7 +234,7 @@ internal static class UpdateAllExecutionContextProvider
         if (batchSize <= 1)
         {
             singleEntityParametersSetterFunc = FunctionCache.GetDataEntityDbParameterSetterCompiledFunction(entityType,
-                string.Concat(entityType.FullName, CharConstant.Period, tableName, ".UpdateAll"),
+                string.Concat(entityType.FullName, ".", tableName, ".UpdateAll"),
                 inputFields,
                 null,
                 dbSetting,
@@ -243,7 +243,7 @@ internal static class UpdateAllExecutionContextProvider
         else
         {
             multipleEntitiesParametersSetterFunc = FunctionCache.GetDataEntityListDbParameterSetterCompiledFunction(entityType,
-                string.Concat(entityType.FullName, CharConstant.Period, tableName, ".UpdateAll"),
+                string.Concat(entityType.FullName, ".", tableName, ".UpdateAll"),
                 inputFields,
                 null,
                 batchSize,

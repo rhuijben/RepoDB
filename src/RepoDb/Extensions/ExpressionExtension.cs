@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿#nullable enable
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using RepoDb.Exceptions;
@@ -65,7 +66,7 @@ public static class ExpressionExtension
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public static Field GetField(this BinaryExpression expression, out object coalesceValue)
+    public static Field GetField(this BinaryExpression expression, out object? coalesceValue)
     {
         coalesceValue = null;
         return expression.Left switch
@@ -82,12 +83,12 @@ public static class ExpressionExtension
     /// <param name="expression"></param>
     /// <returns></returns>
     /// <exception cref="NotSupportedException"></exception>
-    public static Field GetField(this UnaryExpression expression, out object coalesceValue)
+    public static Field GetField(this UnaryExpression expression, out object? coalesceValue)
     {
         return FieldFrom(expression.Operand, out coalesceValue);
     }
 
-    private static Field FieldFrom(Expression expression, out object coalesceValue)
+    private static Field FieldFrom(Expression expression, out object? coalesceValue)
     {
         coalesceValue = null;
         return expression switch
@@ -96,7 +97,7 @@ public static class ExpressionExtension
             MemberExpression memberExpression => memberExpression.GetField(),
             BinaryExpression { NodeType: ExpressionType.Coalesce } b when (
                 FieldFrom(b.Left, out coalesceValue /* ignored */) is { } field
-                && b.Right.GetValue() is { } value) => (coalesceValue = value) == value ? field : null,
+                && b.Right.GetValue() is { } value) => (coalesceValue = value) == value ? field : throw new NotSupportedException($"Expression '{expression}' is currently not supported."),
             UnaryExpression { NodeType: ExpressionType.Convert } un when (un.GetField(out coalesceValue) is { } cv) => cv,
             _ => throw new NotSupportedException($"Expression '{expression}' is currently not supported.")
         };
@@ -284,7 +285,7 @@ public static class ExpressionExtension
     /// </summary>
     /// <param name="expression">The instance of <see cref="Expression"/> object where the value is to be extracted.</param>
     /// <returns>The extracted value from <see cref="Expression"/> object.</returns>
-    public static object GetValue(this Expression expression)
+    public static object? GetValue(this Expression expression)
     {
         return expression switch
         {
@@ -309,7 +310,7 @@ public static class ExpressionExtension
     /// </summary>
     /// <param name="expression">The instance of <see cref="BinaryExpression"/> object where the value is to be extracted.</param>
     /// <returns>The extracted value from <see cref="BinaryExpression"/> object.</returns>
-    public static object GetValue(this BinaryExpression expression)
+    public static object? GetValue(this BinaryExpression expression)
     {
         if (IsMathematical(expression))
         {
@@ -323,7 +324,7 @@ public static class ExpressionExtension
     /// </summary>
     /// <param name="expression">The instance of <see cref="ConstantExpression"/> object where the value is to be extracted.</param>
     /// <returns>The extracted value from <see cref="ConstantExpression"/> object.</returns>
-    public static object GetValue(this ConstantExpression expression) =>
+    public static object? GetValue(this ConstantExpression expression) =>
         expression.Value;
 
     /// <summary>
@@ -331,7 +332,7 @@ public static class ExpressionExtension
     /// </summary>
     /// <param name="expression">The instance of <see cref="UnaryExpression"/> object where the value is to be extracted.</param>
     /// <returns>The extracted value from <see cref="UnaryExpression"/> object.</returns>
-    public static object GetValue(this UnaryExpression expression)
+    public static object? GetValue(this UnaryExpression expression)
     {
         var value = expression.Operand.GetValue();
         switch (expression.NodeType)
@@ -370,7 +371,7 @@ public static class ExpressionExtension
     /// </summary>
     /// <param name="expression">The instance of <see cref="MethodCallExpression"/> object where the value is to be extracted.</param>
     /// <returns>The extracted value from <see cref="MethodCallExpression"/> object.</returns>
-    public static object GetValue(this MethodCallExpression expression) =>
+    public static object? GetValue(this MethodCallExpression expression) =>
         expression.Method.GetValue(expression.Object?.GetValue(), expression.Arguments.Select(argExpression => argExpression.GetValue()).ToArray());
 
     /// <summary>
@@ -378,7 +379,7 @@ public static class ExpressionExtension
     /// </summary>
     /// <param name="expression">The instance of <see cref="MemberExpression"/> object where the value is to be extracted.</param>
     /// <returns>The extracted value from <see cref="MemberExpression"/> object.</returns>
-    public static object GetValue(this MemberExpression expression) =>
+    public static object? GetValue(this MemberExpression expression) =>
         expression.Member.GetValue(expression.Expression?.GetValue());
 
     /// <summary>
@@ -386,7 +387,7 @@ public static class ExpressionExtension
     /// </summary>
     /// <param name="expression">The instance of <see cref="NewArrayExpression"/> object where the value is to be extracted.</param>
     /// <returns>The extracted value from <see cref="NewArrayExpression"/> object.</returns>
-    public static object GetValue(this NewArrayExpression expression)
+    public static object? GetValue(this NewArrayExpression expression)
     {
         var arrayType = expression.Type.HasElementType ? expression.Type.GetElementType() : expression.Type;
         var array = Array.CreateInstance(arrayType, expression.Expressions.Count);
