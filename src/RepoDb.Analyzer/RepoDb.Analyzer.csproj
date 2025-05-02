@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>RepoDb Roslyn Analyzer</Title>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <LangVersion>latest</LangVersion>
+    <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
+    <Description>Analyzer to validate some usages that will throw errors on runtime.</Description>
+    <ImplicitUsings>true</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Existing properties... -->
+    <IncludeAnalyzerReleaseTrackingFiles>true</IncludeAnalyzerReleaseTrackingFiles>
+    <AnalyzerReleaseTrackingFiles>AnalyzerReleases.Unshipped.md</AnalyzerReleaseTrackingFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectCapability Include="RoslynAnalyzer" />
+  </ItemGroup>
+</Project>

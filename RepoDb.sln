@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoDb.TestCore", "src\Repo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Z-DirectoryFiles", "Z-DirectoryFiles", "{8C9AFA86-5DF5-49D9-821B-6D3CA3615058}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoDb.Analyzer", "src\RepoDb.Analyzer\RepoDb.Analyzer.csproj", "{9DEDD6AF-53A2-4E32-AECF-0599F15AC495}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,6 +181,10 @@ Global
 		{75A883C2-7E1A-05EC-4D02-E2502EC17D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75A883C2-7E1A-05EC-4D02-E2502EC17D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75A883C2-7E1A-05EC-4D02-E2502EC17D64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DEDD6AF-53A2-4E32-AECF-0599F15AC495}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DEDD6AF-53A2-4E32-AECF-0599F15AC495}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DEDD6AF-53A2-4E32-AECF-0599F15AC495}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DEDD6AF-53A2-4E32-AECF-0599F15AC495}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -211,6 +217,7 @@ Global
 		{2AA37AB5-E623-B444-6547-1711D042434A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{AFBFA733-E4BE-5CB1-89E2-B147D37697CE} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{75A883C2-7E1A-05EC-4D02-E2502EC17D64} = {A4765CB7-62F6-4588-A43E-DE2C58DBEDD6}
+		{9DEDD6AF-53A2-4E32-AECF-0599F15AC495} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D15A7161-5524-45B7-A22A-EA6C877AA840}
