@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿#nullable enable
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using RepoDb.Attributes;
 using RepoDb.Exceptions;
@@ -38,7 +39,7 @@ public static class DataEntityExtension
     /// </summary>
     /// <param name="tableAttribute">The table attribute to be checked.</param>
     /// <returns>The mapped name for the data entity.</returns>
-    internal static string GetMappedName(TableAttribute tableAttribute)
+    internal static string? GetMappedName(TableAttribute? tableAttribute)
     {
         if (tableAttribute == null)
         {
@@ -57,9 +58,9 @@ public static class DataEntityExtension
     /// </summary>
     /// <param name="type">The type of the data entity where to get the mapped name.</param>
     /// <returns>The mapped name for the data entity.</returns>
-    public static string GetMappedName(Type type) =>
+    public static string? GetMappedName(Type type) =>
         type.GetCustomAttribute<MapAttribute>()?.Name ?? GetMappedName(type.GetCustomAttribute<TableAttribute>()) ??
-            ClassMapper.Get(type) ?? type.Name;
+            ClassMapper.Get(type) ?? (type.Name is { } typeName && !typeName.Contains('`') ? typeName : null);
 
     /// <summary>
     /// Gets the mapped name of the data entity. This will return the value of <see cref="MapAttribute.Name"/> and/or <see cref="TableAttribute.Name"/> property.
@@ -67,7 +68,7 @@ public static class DataEntityExtension
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity where to get the mapped name.</typeparam>
     /// <returns>The mapped name for the data entity.</returns>
-    public static string GetMappedName<TEntity>() =>
+    public static string? GetMappedName<TEntity>() =>
         GetMappedName(typeof(TEntity));
 
     /// <summary>
@@ -76,7 +77,7 @@ public static class DataEntityExtension
     /// <param name="tableName">The name of the table.</param>
     /// <returns>The schema of the passed table name.</returns>
     [Obsolete("Use the overloaded method instead.")]
-    public static string GetSchema(string tableName) =>
+    public static string? GetSchema(string tableName) =>
         GetSchema(tableName, null);
 
     /// <summary>
@@ -85,8 +86,8 @@ public static class DataEntityExtension
     /// <param name="tableName">The name of the table.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The schema of the table name.</returns>
-    public static string GetSchema(string tableName,
-        IDbSetting dbSetting)
+    public static string? GetSchema(string tableName,
+        IDbSetting? dbSetting)
     {
         if (tableName.IsOpenQuoted(dbSetting))
         {
@@ -125,7 +126,7 @@ public static class DataEntityExtension
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The actual table name.</returns>
     public static string GetTableName(string tableName,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         if (tableName.IsOpenQuoted(dbSetting))
         {

@@ -22,6 +22,13 @@ partial class Compiler
         var typeOfResult = typeof(TResult);
 
         // EntityModel/Class
+#if NET
+        if (typeof(System.Runtime.CompilerServices.ITuple).IsAssignableFrom(typeOfResult))
+        {
+            throw new NotImplementedException("Tuple is not supported yet.");
+        }
+        else
+#endif
         if (TypeCache.Get(typeOfResult).IsClassType())
         {
             return CompileDataReaderToDataEntity<TResult>(reader, dbFields, dbSetting);
