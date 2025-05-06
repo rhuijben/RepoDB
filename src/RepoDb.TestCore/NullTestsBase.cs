@@ -392,7 +392,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             )");
         }
 
-
+        // This used to trigger an escaping issue between @a and @aa (which starts with '@a')
         var s = await sql.ExecuteQueryAsync<WithGroupByItems>(
             ApplySqlRules(sql, "SELECT [Txt] from [WithGroupByItems] WHERE [Txt] IN (@a) GROUP BY [Txt] HAVING COUNT(1) = @aa"),
             new { a = new string[] { "a" }, aa = 1 }
