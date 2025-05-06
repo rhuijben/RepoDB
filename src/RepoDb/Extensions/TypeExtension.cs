@@ -2,6 +2,7 @@
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using RepoDb.Attributes.Parameter;
 using RepoDb.Exceptions;
 
@@ -153,6 +154,17 @@ public static class TypeExtension
 #endif
     public static Type? GetUnderlyingType(this Type? type) =>
         type != null ? (Nullable.GetUnderlyingType(type) ?? type) : null;
+
+
+    public static bool IsTuple(this Type type)
+    {
+#if NET
+        return typeof(ITuple).IsAssignableFrom(type);
+#else
+        return type.IsGenericType &&
+               type.GetGenericTypeDefinition().FullName is {} fn && (fn.StartsWith("System.ValueTuple`", StringComparison.Ordinal) || fn.StartsWith("System.Tuple`", StringComparison.Ordinal));
+#endif
+    }
 
     /// <summary>
     /// Creates a generic type of the current type based on the generic type available from the source type.

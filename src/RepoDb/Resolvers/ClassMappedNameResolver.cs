@@ -14,6 +14,6 @@ public class ClassMappedNameResolver : IResolver<Type, string>
     /// </summary>
     /// <param name="entityType">The type of the data entity.</param>
     /// <returns>The mapped database object name.</returns>
-    public string Resolve(Type entityType) =>
+    public string? Resolve(Type entityType) =>
         DataEntityExtension.GetMappedName(entityType);
 }

@@ -71,7 +71,7 @@ public static class StringExtension
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>True if the value is open-quoted.</returns>
     public static bool IsOpenQuoted(this string value,
-        IDbSetting dbSetting) =>
+        IDbSetting? dbSetting) =>
         dbSetting != null ? value.StartsWith(dbSetting.OpeningQuote) : false;
 
     /// <summary>

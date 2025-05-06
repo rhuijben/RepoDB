@@ -22,14 +22,11 @@ partial class Compiler
         var typeOfResult = typeof(TResult);
 
         // EntityModel/Class
-#if NET
-        if (typeof(System.Runtime.CompilerServices.ITuple).IsAssignableFrom(typeOfResult))
+        if (TypeCache.Get(typeOfResult).IsTuple())
         {
-            throw new NotImplementedException("Tuple is not supported yet.");
+            return CompileDataReaderToTuple<TResult>(reader, dbFields, dbSetting);
         }
-        else
-#endif
-        if (TypeCache.Get(typeOfResult).IsClassType())
+        else if (TypeCache.Get(typeOfResult).IsClassType())
         {
             return CompileDataReaderToDataEntity<TResult>(reader, dbFields, dbSetting);
         }
@@ -41,7 +38,7 @@ partial class Compiler
         }
 
         // Throw an exception
-        throw new InvalidOperationException($"No compiled expression found for '{typeOfResult.FullName}' type.");
+        throw new NotSupportedException($"No compiled expression found for '{typeOfResult.FullName}' type.");
     }
 
     /// <summary>
@@ -131,6 +128,68 @@ partial class Compiler
             // Bind the members
             entityExpression = memberAssignments?.Any() == true ?
                 Expression.MemberInit((NewExpression)entityExpression, memberAssignments) : entityExpression;
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Compiler: Failed to initialize the member properties or the constructor arguments.", ex);
+        }
+
+        // Class handler
+        entityExpression = ConvertExpressionToClassHandlerGetExpression<TResult>(entityExpression,
+                readerParameterExpression);
+
+        // Set the function value
+        return Expression
+            .Lambda<Func<DbDataReader, TResult>>(entityExpression, readerParameterExpression)
+            .Compile();
+    }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="reader"></param>
+    /// <param name="dbFields"></param>
+    /// <param name="dbSetting"></param>
+    /// <returns></returns>
+    private static Func<DbDataReader, TResult> CompileDataReaderToTuple<TResult>(DbDataReader reader,
+        DbFieldCollection dbFields,
+        IDbSetting dbSetting)
+    {
+        var readerParameterExpression = Expression.Parameter(StaticType.DbDataReader, "reader");
+        var readerFields = GetDataReaderFields(reader, dbFields, dbSetting);
+        var typeOfResult = typeof(TResult);
+        var constructorInfo = typeOfResult.GetConstructorWithMostArguments();
+        var parameters = constructorInfo.GetParameters();
+
+        if (parameters.Length > readerFields.Count())
+        {
+            throw new InvalidOperationException("Tuple has more arguments than reader");
+        }
+
+        List<Expression> arguments = new();
+
+        foreach (var a in parameters.Zip(readerFields, (p, f) => new { p, f }))
+        {
+            var classPropertyParameterInfo = new ClassPropertyParameterInfo
+            {
+                ParameterInfo = a.p,
+            };
+            var expression = GetClassPropertyParameterInfoValueExpression(readerParameterExpression,
+                classPropertyParameterInfo, a.f, dbSetting, a.p.ParameterType);
+            arguments.Add(expression);
+        }
+
+
+        // Initialize the members
+
+        Expression? entityExpression = null;
+
+        // Validate arguments equality
+        try
+        {
+            // Constructor arguments
+            entityExpression = Expression.New(constructorInfo, arguments);
         }
         catch (Exception ex)
         {

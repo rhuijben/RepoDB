@@ -10,7 +10,7 @@ namespace RepoDb;
 /// </summary>
 public static class ClassMappedNameCache
 {
-    private static readonly ConcurrentDictionary<Type, string> cache = new();
+    private static readonly ConcurrentDictionary<Type, string?> cache = new();
     private static readonly ClassMappedNameResolver resolver = new();
 
     #region Methods
@@ -20,7 +20,7 @@ public static class ClassMappedNameCache
     /// </summary>
     /// <typeparam name="T">The type of the target type.</typeparam>
     /// <returns>The cached mapped name of the data entity.</returns>
-    public static string Get<T>() =>
+    public static string? Get<T>() =>
         Get(typeof(T));
 
     /// <summary>
@@ -28,7 +28,7 @@ public static class ClassMappedNameCache
     /// </summary>
     /// <param name="entityType">The type of the data entity.</param>
     /// <returns>The cached mapped name of the data entity.</returns>
-    public static string Get(Type entityType)
+    public static string? Get(Type entityType)
     {
         // Validate
         ObjectExtension.ThrowIfNull(entityType, nameof(entityType));

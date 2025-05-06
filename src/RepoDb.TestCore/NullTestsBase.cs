@@ -351,6 +351,27 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             where: x => x.Computed == "-a-");
     }
 
+    [TestMethod]
+    public void TestReadTuple()
+    {
+        var sql = CreateConnection().EnsureOpen();
+
+        var t = sql.ExecuteQuery<Tuple<int, string>>("SELECT 1, 'a'").FirstOrDefault();
+        Assert.AreEqual(1, t.Item1);
+        Assert.AreEqual("a", t.Item2);
+    }
+
+    [TestMethod]
+    public void TestReadValueTuple()
+    {
+        var sql = CreateConnection().EnsureOpen();
+
+        var t = sql.ExecuteQuery<(int v1, string c2)>("SELECT 1, 'a'").FirstOrDefault();
+
+        Assert.AreEqual(1, t.Item1);
+        Assert.AreEqual("a", t.Item2);
+    }
+
     record WithGroupByItems
     {
         public int ID { get; set; }

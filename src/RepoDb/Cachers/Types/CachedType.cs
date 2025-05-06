@@ -16,6 +16,7 @@ public class CachedType
     private readonly Lazy<bool> lazyIsDictionaryStringObject;
     private readonly Lazy<bool> lazyIsNullable;
     private readonly Lazy<bool> lazyHasNullValue;
+    private readonly Lazy<bool> lazyIsTuple;
 
     /// <summary>
     /// Creates a new instance of <see cref="CachedType" /> object.
@@ -33,6 +34,7 @@ public class CachedType
         lazyIsDictionaryStringObject = new(type.IsDictionaryStringObject);
         lazyIsNullable = new(() => this.GetUnderlyingType() != type);
         lazyHasNullValue = new(() => !type.IsValueType || this.IsNullable());
+        lazyIsTuple = new(() => type.IsTuple());
     }
 
     private CachedType()
@@ -92,4 +94,10 @@ public class CachedType
     /// </summary>
     /// <returns></returns>
     public bool HasNullValue() => lazyHasNullValue.Value;
+
+    /// <summary>
+    /// Gets a boolean indictating whether this type is a tuple (typically System.Tuple or System.ValueTuple)
+    /// </summary>
+    /// <returns></returns>
+    public bool IsTuple() => lazyIsTuple.Value;
 }

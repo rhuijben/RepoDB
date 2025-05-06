@@ -9,7 +9,7 @@ public sealed class SqLiteDbSetting : BaseDbSetting
     /// Creates a new instance of <see cref="SqLiteDbSetting"/> class.
     /// </summary>
     public SqLiteDbSetting()
-        : this(true)
+        : this(false)
     { }
 
     /// <summary>

@@ -30,22 +30,22 @@ internal sealed partial class Compiler
         /// <summary>
         /// Gets the instance of <see cref="RepoDb.ClassProperty"/> object in used.
         /// </summary>
-        public ClassProperty ClassProperty { get; set; }
+        public ClassProperty? ClassProperty { get; init; }
 
         /// <summary>
         /// Gets the instance of <see cref="System.Reflection.ParameterInfo"/> object in used.
         /// </summary>
-        public ParameterInfo ParameterInfo { get; set; }
+        public ParameterInfo? ParameterInfo { get; init; }
 
         /// <summary>
         /// Gets the instance of <see cref="RepoDb.ClassProperty"/> object that is mapped to the current <see cref="ParameterInfo"/>.
         /// </summary>
-        public ClassProperty ParameterInfoMappedClassProperty { get; set; }
+        public ClassProperty? ParameterInfoMappedClassProperty { get; init; }
 
         /// <summary>
         /// Gets the target type.
         /// </summary>
-        public Type TargetType { get; set; }
+        public Type? TargetType { get; init; }
 
         /// <summary>
         /// Gets the target type based on the combinations.
@@ -1921,7 +1921,7 @@ internal sealed partial class Compiler
         }
 
         // Nullable? -> Convert to DBNull when necessary
-        if (TypeCache.Get(expression.Type) is { } returnType && (returnType.IsClassType() || expression.Type == StaticType.Object || returnType.IsNullable()))
+        if (TypeCache.Get(expression.Type) is { } returnType && returnType.HasNullValue())
         {
             expression = ConvertExpressionToDbNullExpression(expression);
         }
