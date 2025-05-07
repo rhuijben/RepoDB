@@ -6,7 +6,7 @@
 
 RepoDB is an open-source .NET ORM library that bridges the gaps of micro-ORMs and full-ORMs. It helps you simplify the switch-over of when to use the BASIC and ADVANCE operations during the development.
 
-*This is a fork of the now mostly inactive original repository*
+**This is a fork of the now mostly inactive original repository**
 
 ## Benefits/Advantages
 
@@ -100,7 +100,7 @@ Please note that we are releasing an actual next released-version if the changes
 You can always target the version when installing the library, even it is on a semantic release.
 
 ```csharp
-> Install-Package RepoDb -version 1.x.x-betaX
+> Install-Package AmpScm.RepoDb -version 1.x.x-betaX
 ```
 
 ## .NET Type Coercion
