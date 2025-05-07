@@ -52,8 +52,15 @@ jobs:
       - name: test for .Net 8.0
         run: dotnet test -c Release -f net8.0 --no-build -p:TestingPlatformShowTestsFailure=true -p:TestingPlatformCaptureOutput=false
 
-      - name: pack packages
-        run: dotnet pack -c Release -p Version="1.14.0-dev-${{ github.run_number }}" -p PackagePrefix=AmpScm. -o release
+      - name: Set version variables
+        id: version
+        run: |
+          DATE=$(date +'%y%m.%d')
+          BUILD_NUM=$(printf "%02d" $(( ${{ github.run_number }} % 100 )))
+          echo "version=1.14.${DATE}${BUILD_NUM}" >> $GITHUB_OUTPUT
+
+      - name: Pack packages
+        run: dotnet pack -c Release -p:Version=${{ steps.version.outputs.version }} -p:PackagePrefix=AmpScm. -o release
 
       - name: Package nupkg files
         uses: actions/upload-artifact@v4
