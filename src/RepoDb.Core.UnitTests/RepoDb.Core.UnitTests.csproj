@@ -8,7 +8,6 @@
   <ItemGroup>
     <PackageReference Include="Moq" />
     <PackageReference Include="MSTest" />
-    <PackageReference Include="System.Dynamic.Runtime" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RepoDb\RepoDb.csproj" />

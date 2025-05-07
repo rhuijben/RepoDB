@@ -39,13 +39,15 @@ public class CachedType
 
     private CachedType()
     {
+        var lazyFalse = new Lazy<bool>(() => false);
         lazyGetUnderlyingType = new(() => null!);
         lazyGetProperties = new(() => null!);
-        lazyIsAnonymousType = new(() => false);
-        lazyIsClassType = new(() => false);
-        lazyIsDictionaryStringObject = new(() => false);
-        lazyIsNullable = new(() => false);
-        lazyHasNullValue = new(() => false);
+        lazyIsAnonymousType = lazyFalse;
+        lazyIsClassType = lazyFalse;
+        lazyIsDictionaryStringObject = lazyFalse;
+        lazyIsNullable = lazyFalse;
+        lazyHasNullValue = lazyFalse;
+        lazyIsTuple = lazyFalse;
     }
 
     public static readonly CachedType Null = new();

@@ -3704,7 +3704,7 @@ public static partial class DbConnectionExtension
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="entities"></param>
     /// <returns></returns>
-    internal static string GetMappedName<TEntity>(IEnumerable<TEntity>? entities)
+    internal static string? GetMappedName<TEntity>(IEnumerable<TEntity>? entities)
         where TEntity : class =>
         GetMappedName<TEntity>(entities?.FirstOrDefault());
 
@@ -3714,9 +3714,19 @@ public static partial class DbConnectionExtension
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="entity"></param>
     /// <returns></returns>
-    internal static string GetMappedName<TEntity>(TEntity? entity)
+    internal static string? GetMappedName<TEntity>(TEntity? entity)
         where TEntity : class =>
         entity != null ? ClassMappedNameCache.Get(entity.GetType()) : ClassMappedNameCache.Get<TEntity>();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    internal static string GetMappedNameOrThrow<TEntity>(TEntity? entity)
+        where TEntity : class =>
+        GetMappedName(entity) ?? throw new InvalidOperationException($"Can't map table name for '{(entity?.GetType() ?? typeof(TEntity)).FullName}'.");
 
     /// <summary>
     /// 

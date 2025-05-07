@@ -378,7 +378,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return MergeInternal<TEntity, object>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: null,
             fields: fields,
@@ -458,7 +458,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return MergeInternal<TEntity, object>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: qualifiers,
             fields: fields,
@@ -578,7 +578,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return MergeInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
             fields: fields,
@@ -619,7 +619,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return MergeInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: qualifiers,
             fields: fields,
@@ -660,7 +660,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return MergeInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: Field.Parse<TEntity>(qualifiers),
             fields: fields,
@@ -1162,7 +1162,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MergeAsyncInternal<TEntity, object>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: null,
             fields: fields,
@@ -1205,7 +1205,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MergeAsyncInternal<TEntity, object>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
             fields: fields,
@@ -1248,7 +1248,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MergeAsyncInternal<TEntity, object>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: qualifiers,
             fields: fields,
@@ -1291,7 +1291,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MergeAsyncInternal<TEntity, object>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: Field.Parse<TEntity>(qualifiers),
             fields: fields,
@@ -1333,7 +1333,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: null,
             fields: fields,
@@ -1377,7 +1377,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: qualifier?.AsEnumerable(),
             fields: fields,
@@ -1421,7 +1421,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: qualifiers,
             fields: fields,
@@ -1465,7 +1465,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MergeAsyncInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedNameOrThrow(entity),
             entity: entity,
             qualifiers: Field.Parse<TEntity>(qualifiers),
             fields: fields,

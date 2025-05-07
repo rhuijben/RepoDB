@@ -552,13 +552,14 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
+        string tableName = GetMappedNameOrThrow(entities.FirstOrDefault());
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entities), connection, transaction, cancellationToken).ConfigureAwait(false);
         if (key.OneOrDefault() is { } one)
         {
             var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
 
             return await DeleteAllAsyncInternal(connection: connection,
-                tableName: ClassMappedNameCache.Get<TEntity>(),
+                tableName: tableName,
                 keys: keys.WithType<object>(),
                 hints: hints,
                 commandTimeout: commandTimeout,
@@ -587,7 +588,7 @@ public static partial class DbConnectionExtension
 
                 deleted += await DeleteAsyncInternal(
                     connection: connection,
-                    tableName: ClassMappedNameCache.Get<TEntity>(),
+                    tableName: tableName,
                     where: where,
                     hints: hints,
                     commandTimeout: commandTimeout,

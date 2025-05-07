@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿#nullable enable
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using RepoDb.Interfaces;
 
@@ -70,8 +72,7 @@ public static class StringExtension
     /// <param name="value">The string value to be checked.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>True if the value is open-quoted.</returns>
-    public static bool IsOpenQuoted(this string value,
-        IDbSetting? dbSetting) =>
+    public static bool IsOpenQuoted(this string value, [NotNullWhen(true)] IDbSetting? dbSetting) =>
         dbSetting != null ? value.StartsWith(dbSetting.OpeningQuote) : false;
 
     /// <summary>
@@ -80,8 +81,7 @@ public static class StringExtension
     /// <param name="value">The string value to be checked.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>True if the value is close-quoted.</returns>
-    public static bool IsCloseQuoted(this string value,
-        IDbSetting dbSetting) =>
+    public static bool IsCloseQuoted(this string value, [NotNullWhen(true)] IDbSetting? dbSetting) =>
         dbSetting != null ? value.EndsWith(dbSetting.ClosingQuote) : false;
 
     /// <summary>
@@ -91,7 +91,7 @@ public static class StringExtension
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The unquoted string.</returns>
     public static string AsUnquoted(this string value,
-        IDbSetting dbSetting) =>
+        IDbSetting? dbSetting) =>
         AsUnquoted(value, false, dbSetting);
 
     /// <summary>
@@ -101,9 +101,7 @@ public static class StringExtension
     /// <param name="trim">The boolean value that indicates whether to trim the string before unquoting.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The unquoted string.</returns>
-    public static string AsUnquoted(this string value,
-        bool trim,
-        IDbSetting dbSetting)
+    public static string AsUnquoted(this string value, bool trim, IDbSetting? dbSetting)
     {
         if (dbSetting == null)
         {
@@ -128,9 +126,7 @@ public static class StringExtension
     /// <param name="trim">The boolean value that indicates whether to trim the string before quoting.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The unquoted string.</returns>
-    private static string AsUnquotedInternal(this string value,
-        bool trim,
-        IDbSetting dbSetting)
+    private static string AsUnquotedInternal(this string value, bool trim, IDbSetting dbSetting)
     {
         if (!string.IsNullOrWhiteSpace(dbSetting.OpeningQuote))
         {
@@ -153,8 +149,7 @@ public static class StringExtension
     /// <param name="value">The string value to be quoted.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The quoted string.</returns>
-    public static string AsQuoted(this string value,
-        IDbSetting? dbSetting) =>
+    public static string AsQuoted(this string value, IDbSetting? dbSetting) =>
         AsQuoted(value, false, false, dbSetting);
 
     /// <summary>
@@ -164,9 +159,7 @@ public static class StringExtension
     /// <param name="trim">The boolean value that indicates whether to trim the string before quoting.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The quoted string.</returns>
-    public static string AsQuoted(this string value,
-        bool trim,
-        IDbSetting? dbSetting) =>
+    public static string AsQuoted(this string value, bool trim, IDbSetting? dbSetting) =>
         AsQuoted(value, trim, false, dbSetting);
 
     /// <summary>
@@ -177,10 +170,7 @@ public static class StringExtension
     /// <param name="ignoreSchema">The boolean value that indicates whether to ignore the schema.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The quoted string.</returns>
-    public static string AsQuoted(this string value,
-        bool trim,
-        bool ignoreSchema,
-        IDbSetting? dbSetting)
+    public static string AsQuoted(this string value, bool trim, bool ignoreSchema, IDbSetting? dbSetting)
     {
         if (dbSetting == null)
         {
@@ -207,20 +197,19 @@ public static class StringExtension
     /// <param name="value">The string value to be quoted.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The quoted string.</returns>
-    private static string AsQuotedForDatabaseSchemaTableInternal(this string value,
-        IDbSetting dbSetting)
+    private static string AsQuotedForDatabaseSchemaTableInternal(this string value, IDbSetting dbSetting)
     {
         // TODO: Refactor this method
         var splitted = value.Split('.');
         if (splitted.Length > 2)
         {
             var list = new List<string>(splitted.Length);
-            var current = default(string);
+            string? current = null;
             foreach (var item in splitted)
             {
                 if (!string.IsNullOrWhiteSpace(current))
                 {
-                    if (current.StartsWith(dbSetting.OpeningQuote, StringComparison.OrdinalIgnoreCase)
+                    if (current!.StartsWith(dbSetting.OpeningQuote, StringComparison.OrdinalIgnoreCase)
                         && item.EndsWith(dbSetting.ClosingQuote, StringComparison.OrdinalIgnoreCase))
                     {
                         list.Add(string.Concat(current, ".", item));
@@ -303,9 +292,7 @@ public static class StringExtension
     /// <param name="functionFormat"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    public static string AsField(this string value,
-        string functionFormat,
-        IDbSetting dbSetting) =>
+    public static string AsField(this string value, string? functionFormat, IDbSetting dbSetting) =>
         string.IsNullOrWhiteSpace(functionFormat) ? value.AsQuoted(true, true, dbSetting) :
             string.Format(CultureInfo.InvariantCulture, functionFormat, value.AsQuoted(true, true, dbSetting));
 
@@ -336,7 +323,7 @@ public static class StringExtension
     /// <returns>The string value represented as database parameter.</returns>
     public static string AsParameter(this string value,
         int index,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         var parameterPrefix = dbSetting?.ParameterPrefix ?? "@";
 
@@ -473,9 +460,8 @@ public static class StringExtension
     /// <param name="values"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    internal static IEnumerable<string> AsFields(this IEnumerable<string> values,
-        IDbSetting dbSetting) =>
-        values?.Select(value => value.AsField(dbSetting));
+    internal static IEnumerable<string> AsFields(this IEnumerable<string> values, IDbSetting dbSetting) =>
+        values.Select(value => value.AsField(dbSetting));
 
     /// <summary>
     /// 
@@ -484,10 +470,8 @@ public static class StringExtension
     /// <param name="alias"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    internal static IEnumerable<string> AsAliasFields(this IEnumerable<string> values,
-        string alias,
-        IDbSetting dbSetting) =>
-        values?.Select(value => value.AsAliasField(alias, dbSetting));
+    internal static IEnumerable<string> AsAliasFields(this IEnumerable<string> values, string alias, IDbSetting dbSetting) =>
+        values.Select(value => value.AsAliasField(alias, dbSetting));
 
     /// <summary>
     /// 
@@ -497,48 +481,8 @@ public static class StringExtension
     /// <param name="rightAlias"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    internal static IEnumerable<string> AsFieldsAndAliasFields(this IEnumerable<string> values,
-        string leftAlias,
-        string rightAlias,
-        IDbSetting dbSetting) =>
-        values?.Select(value => value.AsFieldAndAliasField(leftAlias, rightAlias, dbSetting));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="obj"></param>
-    internal static void ThrowIfNullOrEmpty<T>(T obj) =>
-        ThrowIfNullOrEmpty(obj, null);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="obj"></param>
-    /// <param name="argument"></param>
-    internal static void ThrowIfNullOrEmpty<T>(T obj,
-        string argument)
-    {
-        if (obj is null)
-        {
-            if (string.IsNullOrEmpty(argument))
-            {
-                throw new ArgumentNullException();
-            }
-            else
-            {
-                throw new ArgumentNullException($"The argument '{argument}' cannot be null.");
-            }
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="value"></param>
-    internal static void ThrowIfNullOrWhiteSpace(string value) =>
-        ThrowIfNullOrWhiteSpace(value, null);
+    internal static IEnumerable<string> AsFieldsAndAliasFields(this IEnumerable<string> values, string leftAlias, string rightAlias, IDbSetting dbSetting) =>
+        values.Select(value => value.AsFieldAndAliasField(leftAlias, rightAlias, dbSetting));
 
     /// <summary>
     /// 
@@ -549,16 +493,6 @@ public static class StringExtension
         string argument)
     {
         if (!string.IsNullOrWhiteSpace(value))
-        {
-            return;
-        }
-        if (string.IsNullOrWhiteSpace(argument))
-        {
-            throw new ArgumentNullException();
-        }
-        else
-        {
-            throw new ArgumentNullException($"The argument '{argument}' is either null or whitespace.");
-        }
+            throw new ArgumentNullException(argument);
     }
 }

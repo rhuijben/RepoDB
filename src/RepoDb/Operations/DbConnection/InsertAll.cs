@@ -85,7 +85,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return InsertAllInternal<TEntity>(connection: connection,
-            tableName: GetMappedName<TEntity>(entities),
+            tableName: GetMappedNameOrThrow(entities),
             entities: entities,
             batchSize: batchSize,
             fields: fields,
