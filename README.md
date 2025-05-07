@@ -1,16 +1,12 @@
-
-[![SolutionBuilds](https://img.shields.io/appveyor/ci/mikependon/repodb-h87g9?&logo=appveyor&label=sln%20builds)](https://ci.appveyor.com/project/mikependon/repodb-h87g9)
-[![Version](https://img.shields.io/nuget/v/RepoDb?&logo=nuget)](https://www.nuget.org/packages/RepoDb)
-[![Releases](https://img.shields.io/badge/releases-core-important?&logo=nuget)](http://repodb.net/release/core)
-[![UnitTests](https://img.shields.io/appveyor/tests/mikependon/repodb-yf1cx?&logo=appveyor&label=unit%20tests)](https://ci.appveyor.com/project/mikependon/repodb-yf1cx/build/tests)
-[![IntegrationTests](https://img.shields.io/appveyor/tests/mikependon/repodb-qksas?&logo=appveyor&label=integration%20tests)](https://ci.appveyor.com/project/mikependon/repodb-qksas/build/tests)
+[![MSBuild-CI](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml/badge.svg)](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml)
+[![Version](https://img.shields.io/nuget/v/AmpScm.RepoDb?&logo=nuget)](https://www.nuget.org/packages/RepoDb)
 [![GitterChat](https://img.shields.io/gitter/room/mikependon/RepoDb?&logo=gitter&color=48B293)](https://gitter.im/RepoDb/community)
 
 # [RepoDB](http://repodb.net) - a hybrid ORM Library for .NET.
 
 RepoDB is an open-source .NET ORM library that bridges the gaps of micro-ORMs and full-ORMs. It helps you simplify the switch-over of when to use the BASIC and ADVANCE operations during the development.
 
-To get the latest updates about this library, follow us on [Twitter](https://twitter.com/mike_pendon)!
+*This is a fork of the now mostly inactive original repository*
 
 ## Benefits/Advantages
 
