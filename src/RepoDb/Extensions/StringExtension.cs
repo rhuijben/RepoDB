@@ -492,7 +492,7 @@ public static class StringExtension
     internal static void ThrowIfNullOrWhiteSpace(string value,
         string argument)
     {
-        if (!string.IsNullOrWhiteSpace(value))
+        if (string.IsNullOrWhiteSpace(value))
             throw new ArgumentNullException(argument);
     }
 }

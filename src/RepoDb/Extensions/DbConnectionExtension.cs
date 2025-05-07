@@ -338,7 +338,10 @@ public static partial class DbConnectionExtension
             await DbFieldCache.GetAsync(connection, tableName, transaction, false, cancellationToken).ConfigureAwait(false) : null;
 
         // Execute the actual method
-        using var command = await CreateDbCommandForExecutionAsync(connection: connection,
+#if NET
+        await
+#endif
+            using var command = await CreateDbCommandForExecutionAsync(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -950,7 +953,10 @@ public static partial class DbConnectionExtension
             await DbFieldCache.GetAsync(connection, tableName, transaction, false, cancellationToken).ConfigureAwait(false) : null;
 
         // Execute the actual method
-        using var command = await CreateDbCommandForExecutionAsync(connection: connection,
+#if NET
+        await
+#endif
+            using var command = await CreateDbCommandForExecutionAsync(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -1660,7 +1666,10 @@ public static partial class DbConnectionExtension
         bool skipCommandArrayParametersCheck,
         CancellationToken cancellationToken)
     {
-        using var command = await CreateDbCommandForExecutionAsync(connection: connection,
+#if NET
+        await
+#endif
+            using var command = await CreateDbCommandForExecutionAsync(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -2050,7 +2059,10 @@ public static partial class DbConnectionExtension
             }
         }
 
-        using var command = await CreateDbCommandForExecutionAsync(connection: connection,
+#if NET
+        await
+#endif
+            using var command = await CreateDbCommandForExecutionAsync(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -2327,11 +2339,11 @@ public static partial class DbConnectionExtension
     /// <param name="entityType"></param>
     /// <returns></returns>
     internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(IDbConnection connection,
-        string tableName,
+        string? tableName,
         IDbTransaction? transaction,
         Type entityType)
     {
-        var dbFields = DbFieldCache.Get(connection, tableName, transaction);
+        var dbFields = DbFieldCache.Get(connection, tableName, transaction, true);
         var key = GetAndGuardPrimaryKeyOrIdentityKey(entityType, dbFields) ?? GetPrimaryOrIdentityKey(entityType);
         return GetAndGuardPrimaryKeyOrIdentityKey(tableName, key);
     }
@@ -3702,31 +3714,23 @@ public static partial class DbConnectionExtension
     /// 
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    internal static string GetMappedName<TEntity>(TEntity? entity)
+        where TEntity : class =>
+        (entity != null ? ClassMappedNameCache.Get(entity.GetType()) : ClassMappedNameCache.Get<TEntity>()) ?? throw new ArgumentException($"Can't map table name for '{(entity?.GetType() ?? typeof(TEntity)).FullName}'.", nameof(entity));
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     /// <param name="entities"></param>
     /// <returns></returns>
-    internal static string? GetMappedName<TEntity>(IEnumerable<TEntity>? entities)
+    /// <exception cref="ArgumentException"></exception>
+    internal static string GetMappedName<TEntity>(IEnumerable<TEntity> entities)
         where TEntity : class =>
-        GetMappedName<TEntity>(entities?.FirstOrDefault());
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <param name="entity"></param>
-    /// <returns></returns>
-    internal static string? GetMappedName<TEntity>(TEntity? entity)
-        where TEntity : class =>
-        entity != null ? ClassMappedNameCache.Get(entity.GetType()) : ClassMappedNameCache.Get<TEntity>();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <param name="entity"></param>
-    /// <returns></returns>
-    internal static string GetMappedNameOrThrow<TEntity>(TEntity? entity)
-        where TEntity : class =>
-        GetMappedName(entity) ?? throw new InvalidOperationException($"Can't map table name for '{(entity?.GetType() ?? typeof(TEntity)).FullName}'.");
+        (entities.FirstOrDefault() is { } entity ? ClassMappedNameCache.Get(entity.GetType()) : ClassMappedNameCache.Get<TEntity>()) ?? throw new ArgumentException($"Can't map table name for '{typeof(TEntity).FullName}'.", nameof(entities));
 
     /// <summary>
     /// 
