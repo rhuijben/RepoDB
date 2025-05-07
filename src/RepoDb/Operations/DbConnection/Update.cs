@@ -338,7 +338,7 @@ public static partial class DbConnectionExtension
     {
         var key = GetAndGuardPrimaryKeyOrIdentityKey(GetEntityType<TEntity>(entity), connection, transaction);
         return UpdateInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: ToQueryGroup<TEntity>(key, entity),
             fields: fields,
@@ -380,7 +380,7 @@ public static partial class DbConnectionExtension
         where TWhat : notnull
     {
         return UpdateInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: WhatToQueryGroup(GetEntityType<TEntity>(entity), connection, what, transaction),
             fields: fields,
@@ -420,7 +420,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: WhatToQueryGroup(GetEntityType<TEntity>(entity), connection, what, transaction),
             fields: fields,
@@ -460,7 +460,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: connection.ToQueryGroup(where, transaction),
             fields: fields,
@@ -500,7 +500,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateInternal<TEntity>(connection: connection,
-            tableName: GetMappedName<TEntity>(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: where != null ? new QueryGroup(where.AsEnumerable()) : null,
             fields: fields,
@@ -540,7 +540,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: ToQueryGroup(where),
             fields: fields,
@@ -580,7 +580,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: where,
             fields: fields,
@@ -1001,7 +1001,7 @@ public static partial class DbConnectionExtension
     {
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entity), connection, transaction, cancellationToken).ConfigureAwait(false);
         return await UpdateAsyncInternal(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: ToQueryGroup(key, entity),
             fields: fields,
@@ -1046,7 +1046,7 @@ public static partial class DbConnectionExtension
         where TWhat : notnull
     {
         return await UpdateAsyncInternal(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: await WhatToQueryGroupAsync(GetEntityType(entity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
@@ -1089,7 +1089,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAsyncInternal(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: await WhatToQueryGroupAsync(GetEntityType(entity), connection, what, transaction, cancellationToken).ConfigureAwait(false),
             fields: fields,
@@ -1132,7 +1132,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: connection.ToQueryGroup(where, transaction),
             fields: fields,
@@ -1175,7 +1175,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: ToQueryGroup(where),
             fields: fields,
@@ -1218,7 +1218,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: ToQueryGroup(where),
             fields: fields,
@@ -1261,7 +1261,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             where: where,
             fields: fields,

@@ -188,7 +188,7 @@ public static partial class DbConnectionExtension
             var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
 
             return DeleteAllInternal(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: GetMappedName(entities),
             keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -213,7 +213,7 @@ public static partial class DbConnectionExtension
 
                 deleted += DeleteInternal(
                     connection: connection,
-                    tableName: ClassMappedNameCache.Get<TEntity>(),
+                    tableName: GetMappedName(entities),
                     where: where,
                     hints: hints,
                     commandTimeout: commandTimeout,
@@ -552,7 +552,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        string tableName = GetMappedNameOrThrow(entities.FirstOrDefault());
+        string tableName = GetMappedName(entities);
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entities), connection, transaction, cancellationToken).ConfigureAwait(false);
         if (key.OneOrDefault() is { } one)
         {

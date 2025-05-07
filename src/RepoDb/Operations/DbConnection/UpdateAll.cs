@@ -222,7 +222,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateAllInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entities.FirstOrDefault()),
+            tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: null,
             batchSize: batchSize,
@@ -265,7 +265,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateAllInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entities.FirstOrDefault()),
+            tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
             batchSize: batchSize,
@@ -308,7 +308,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateAllInternal<TEntity>(connection: connection,
-            tableName: GetMappedName<TEntity>(entities),
+            tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifiers,
             batchSize: batchSize,
@@ -351,7 +351,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return UpdateAllInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entities.FirstOrDefault()),
+            tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: Field.Parse<TEntity>(qualifiers),
             batchSize: batchSize,
@@ -657,7 +657,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAllAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entities.FirstOrDefault()),
+            tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: null,
             batchSize: batchSize,
@@ -703,7 +703,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAllAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedName<TEntity>(entities),
+            tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
             batchSize: batchSize,
@@ -749,7 +749,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAllAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entities.FirstOrDefault()),
+            tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifiers,
             batchSize: batchSize,
@@ -795,7 +795,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await UpdateAllAsyncInternal<TEntity>(connection: connection,
-            tableName: GetMappedNameOrThrow(entities.FirstOrDefault()),
+            tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: Field.Parse<TEntity>(qualifiers),
             batchSize: batchSize,

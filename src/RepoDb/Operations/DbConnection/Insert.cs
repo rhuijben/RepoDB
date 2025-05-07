@@ -118,7 +118,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return InsertInternal<TEntity, object>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             fields: fields,
             hints: hints,
@@ -156,7 +156,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return InsertInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             fields: fields,
             hints: hints,
@@ -340,7 +340,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await InsertAsyncInternal<TEntity, object>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             fields: fields,
             hints: hints,
@@ -381,7 +381,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await InsertAsyncInternal<TEntity, TResult>(connection: connection,
-            tableName: GetMappedNameOrThrow(entity),
+            tableName: GetMappedName(entity),
             entity: entity,
             fields: fields,
             hints: hints,
