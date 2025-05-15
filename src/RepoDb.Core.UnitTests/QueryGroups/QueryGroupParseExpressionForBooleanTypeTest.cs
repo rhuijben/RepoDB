@@ -105,4 +105,48 @@ public partial class QueryGroupTest
         // Assert
         Assert.AreEqual(expected, actual);
     }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionTrue()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBoolean).GetString(m_dbSetting);
+        var expected = "([PropertyBoolean] = @PropertyBoolean)";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionFalse()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => !e.PropertyBoolean).GetString(m_dbSetting);
+        var expected = "([PropertyBoolean] <> @PropertyBoolean)";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionTrueAnd()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => e.PropertyBoolean && e.PropertyString == "Q").GetString(m_dbSetting);
+        var expected = "(([PropertyBoolean] = @PropertyBoolean) AND ([PropertyString] = @PropertyString))";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestQueryGroupParseExpressionFalseAnd()
+    {
+        // Act
+        var actual = QueryGroup.Parse<QueryGroupTestExpressionClass>(e => !e.PropertyBoolean && e.PropertyString == "R").GetString(m_dbSetting);
+        var expected = "(([PropertyBoolean] <> @PropertyBoolean) AND ([PropertyString] = @PropertyString))";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 }

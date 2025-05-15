@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿#nullable enable
+using System.Data;
 using System.Linq.Expressions;
+using System.Reflection;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 
@@ -75,7 +77,7 @@ public partial class QueryGroup
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    private static QueryGroup Parse<TEntity>(Expression expression)
+    private static QueryGroup? Parse<TEntity>(Expression expression)
         where TEntity : class
     {
         return expression switch
@@ -84,8 +86,20 @@ public partial class QueryGroup
             BinaryExpression binaryExpression => Parse<TEntity>(binaryExpression),
             UnaryExpression unaryExpression => Parse<TEntity>(unaryExpression),
             MethodCallExpression methodCallExpression => Parse<TEntity>(methodCallExpression),
+            MemberExpression memberExpression when (memberExpression.Type == StaticType.Boolean && memberExpression.Member is PropertyInfo) => ParseDirectBool<TEntity>(memberExpression),
             _ => null
         };
+    }
+
+    private static QueryGroup? ParseDirectBool<TEntity>(MemberExpression memberExpression)
+        where TEntity : class
+    {
+        var qf = QueryField.Parse<TEntity>(memberExpression);
+
+        if (qf is null)
+            return null;
+
+        return new QueryGroup(qf);
     }
 
     /*
@@ -110,21 +124,25 @@ public partial class QueryGroup
         // Variables
         var leftQueryGroup = Parse<TEntity>(expression.Left);
 
+        if (leftQueryGroup is null)
+            throw new NotSupportedException($"Expression {expression.Left} is currently not supported");
+
         // IsNot
-        if (expression.Right.Type == StaticType.Boolean && expression.IsExtractable() == true)
+        if (expression.Right.Type == StaticType.Boolean && expression.IsExtractable() == true
+            && expression.Right.GetValue() is bool rightValue)
         {
-            var rightValue = (bool)expression.Right.GetValue();
             var isNot = (expression.NodeType == ExpressionType.Equal && rightValue == false) ||
                 (expression.NodeType == ExpressionType.NotEqual && rightValue == true);
+
             leftQueryGroup?.SetIsNot(isNot);
         }
         else
         {
             var rightQueryGroup = Parse<TEntity>(expression.Right);
-            if (rightQueryGroup != null)
-            {
-                return new QueryGroup(new[] { leftQueryGroup, rightQueryGroup }, GetConjunction(expression));
-            }
+            if (rightQueryGroup is null)
+                throw new NotSupportedException($"Expression {expression.Right} is currently not supported");
+
+            return new QueryGroup(new[] { leftQueryGroup, rightQueryGroup }, GetConjunction(expression));
         }
 
         // Return
@@ -161,7 +179,7 @@ public partial class QueryGroup
                 return new QueryGroup(r, true);
             }
             else
-                return new QueryGroup(r, false);
+                throw new NotSupportedException($"Unary operation '{expression.NodeType}' is currently not supported.");
         }
         else
         {
@@ -228,9 +246,12 @@ public partial class QueryGroup
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    private static Conjunction GetConjunction(BinaryExpression expression) =>
-        expression.NodeType == ExpressionType.Or || expression.NodeType == ExpressionType.OrElse ?
-        Conjunction.Or : Conjunction.And;
+    private static Conjunction GetConjunction(BinaryExpression expression) => expression.NodeType switch
+    {
+        ExpressionType.Or or ExpressionType.OrElse => Conjunction.Or,
+        ExpressionType.And or ExpressionType.AndAlso => Conjunction.And,
+        _ => throw new NotSupportedException($"Unsupported expression for conjunction: {expression}")
+    };
 
     /// <summary>
     /// 
