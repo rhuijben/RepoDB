@@ -49,34 +49,10 @@ public abstract class DbTestBase<TDbInstance> where TDbInstance : DbInstance, ne
 
     protected virtual string SchemaDatabaseColumnName => "Catalog";
 
-    public virtual IEnumerable<string> GetAllTables(DbConnection sql)
+    public IEnumerable<string> GetAllTables(DbConnection sql)
     {
         sql.EnsureOpen();
 
-        DataTable tables;
-        try
-        {
-            tables = sql.GetSchema("Tables");
-        }
-        catch (ArgumentException)
-        {
-            yield break;
-        }
-
-        var cat = tables.Columns.Cast<DataColumn>().FirstOrDefault(x => x.ColumnName.EndsWith(SchemaDatabaseColumnName, StringComparison.OrdinalIgnoreCase))?.Ordinal;
-        var col = tables.Columns.Cast<DataColumn>().FirstOrDefault(x => x.ColumnName.EndsWith("Name", StringComparison.OrdinalIgnoreCase))?.Ordinal;
-
-        if (!col.HasValue)
-            yield break;
-
-        using var rdr = tables.CreateDataReader();
-
-        while (rdr.Read())
-        {
-            if (cat is { } && !string.Equals(sql.Database, rdr.GetString(cat.Value)))
-                continue;
-
-            yield return rdr.GetString(col.Value);
-        }
+        return sql.GetDbHelper().GetSchemaObjects(sql).Where(t => t.Type == Enumerations.DbSchemaType.Table).Select(x => x.Name);
     }
 }

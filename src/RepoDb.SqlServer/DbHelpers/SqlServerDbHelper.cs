@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
+using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
@@ -219,6 +220,43 @@ public sealed class SqlServerDbHelper : IDbHelper
     }
 
     #endregion
+
+    #region GetSchemaObjects
+    const string GetSchemaQuery = @"
+        SELECT
+            o.type AS [Type],
+            o.name AS [Name],
+            s.name AS [Schema]
+        FROM sys.objects o
+        JOIN sys.schemas s ON o.schema_id = s.schema_id
+        WHERE o.type IN ('U', 'V') AND is_ms_shipped = 0";
+
+    public IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+    {
+        return connection.ExecuteQuery<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction)
+                         .Select(MapSchemaQueryResult);
+    }
+
+    public async Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    {
+        var results = await connection.ExecuteQueryAsync<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction);
+        return results.Select(MapSchemaQueryResult);
+    }
+
+    private static DbSchemaObject MapSchemaQueryResult((string Type, string Name, string Schema) r) =>
+        new DbSchemaObject
+        {
+            Type = r.Type switch
+            {
+                "U" or "U " => DbSchemaType.Table,
+                "V" or "V " => DbSchemaType.View,
+                _ => throw new NotSupportedException($"Unsupported schema object type: {r.Type}")
+            },
+            Name = r.Name,
+            Schema = r.Schema
+        };
+    #endregion
+
 
     #region GetScopeIdentity
 

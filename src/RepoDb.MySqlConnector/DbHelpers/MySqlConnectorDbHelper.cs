@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.Common;
 using MySqlConnector;
+using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
@@ -230,6 +231,41 @@ public sealed class MySqlConnectorDbHelper : IDbHelper
         return dbFields;
     }
 
+    #endregion
+
+    #region GetSchemaObjects
+    const string GetSchemaQuery = @"
+        SELECT
+            table_type AS `Type`,
+            table_name AS `Name`,
+            table_schema AS `Schema`
+        FROM information_schema.tables
+        WHERE table_schema = DATABASE()";
+
+    public IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+    {
+        return connection.ExecuteQuery<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction)
+                         .Select(MapSchemaQueryResult);
+    }
+
+    public async Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    {
+        var results = await connection.ExecuteQueryAsync<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction);
+        return results.Select(MapSchemaQueryResult);
+    }
+
+    private static DbSchemaObject MapSchemaQueryResult((string Type, string Name, string Schema) r) =>
+        new DbSchemaObject
+        {
+            Type = r.Type switch
+            {
+                "BASE TABLE" => DbSchemaType.Table,
+                "VIEW" => DbSchemaType.View,
+                _ => throw new NotSupportedException($"Unsupported schema object type: {r.Type}")
+            },
+            Name = r.Name,
+            Schema = r.Schema
+        };
     #endregion
 
     #region GetScopeIdentity

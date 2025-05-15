@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.Common;
 using Microsoft.Data.Sqlite;
+using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
@@ -442,6 +443,33 @@ public sealed class SqLiteDbHelper : IDbHelper
 
         return (fieldName, definition);
     }
+
+    const string GetSchemaQuery = "SELECT type, name FROM sqlite_master WHERE (type = 'table' OR type = 'view')";
+
+    public IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+    {
+        // Using tuple helper as that doesn't call the helper to fetch columns
+        return connection.ExecuteQuery<(string Type, string Name)>(GetSchemaQuery).Select(MapSchemaQueryResult);
+    }
+
+    public async Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    {
+        // Using tuple helper as that doesn't call the helper to fetch columns
+        return (await connection.ExecuteQueryAsync<(string Type, string Name)>(GetSchemaQuery)).Select(MapSchemaQueryResult);
+    }
+
+    private static DbSchemaObject MapSchemaQueryResult((string Type, string Name) r) =>
+    new DbSchemaObject()
+    {
+        Type = r.Type switch
+        {
+            "table" => DbSchemaType.Table,
+            "view" => DbSchemaType.View,
+            _ => throw new NotSupportedException($"Unsupported schema object type: {r.Type}")
+        },
+        Name = r.Name,
+        Schema = null,
+    };
 
     #endregion
 }

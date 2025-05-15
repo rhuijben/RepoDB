@@ -12,7 +12,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql" />
-    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RepoDb\RepoDb.csproj" />

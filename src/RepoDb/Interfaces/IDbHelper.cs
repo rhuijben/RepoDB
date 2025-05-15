@@ -41,6 +41,15 @@ public interface IDbHelper
 
     #endregion
 
+    #region GetSchemaObjects
+    IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection,
+        IDbTransaction? transaction = null);
+
+    Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection,
+        IDbTransaction? transaction = null,
+        CancellationToken cancellationToken = default);
+    #endregion
+
     #region GetScopeIdentity
 
     /// <summary>

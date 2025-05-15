@@ -1,5 +1,5 @@
-﻿using RepoDb.Interfaces;
-using System.Data;
+﻿using System.Data;
+using RepoDb.Interfaces;
 
 namespace RepoDb.UnitTests.CustomObjects;
 
@@ -46,5 +46,15 @@ public class CustomDbHelper : IDbHelper
         string key)
     {
         // Do nothing
+    }
+
+    public IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+    {
+        return [];
+    }
+
+    public async Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    {
+        return [];
     }
 }

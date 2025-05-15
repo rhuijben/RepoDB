@@ -83,7 +83,7 @@ internal sealed class MergeRequest : BaseRequest
         IEnumerable<Field> qualifiers,
         string? hints = null,
         IStatementBuilder? statementBuilder = null)
-        : base(name ?? ClassMappedNameCache.Get(type!),
+        : base(name ?? ClassMappedNameCache.Get(type!)!,
             connection,
             transaction,
             statementBuilder)
