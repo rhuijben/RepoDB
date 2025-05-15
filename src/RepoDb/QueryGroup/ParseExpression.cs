@@ -128,13 +128,14 @@ public partial class QueryGroup
             throw new NotSupportedException($"Expression {expression.Left} is currently not supported");
 
         // IsNot
-        if (expression.Right.Type == StaticType.Boolean && expression.IsExtractable() == true
+        if (expression.NodeType is ExpressionType.Equal or ExpressionType.NotEqual
+            && expression.Right.Type == StaticType.Boolean && expression.IsExtractable() == true
             && expression.Right.GetValue() is bool rightValue)
         {
             var isNot = (expression.NodeType == ExpressionType.Equal && rightValue == false) ||
                 (expression.NodeType == ExpressionType.NotEqual && rightValue == true);
 
-            leftQueryGroup?.SetIsNot(isNot);
+            leftQueryGroup.SetIsNot(isNot);
         }
         else
         {
@@ -198,7 +199,7 @@ public partial class QueryGroup
     /// <param name="expression"></param>
     /// <param name="unaryNodeType"></param>
     /// <returns></returns>
-    private static QueryGroup Parse<TEntity>(MemberExpression expression,
+    private static QueryGroup? Parse<TEntity>(MemberExpression expression,
         ExpressionType? unaryNodeType = null)
         where TEntity : class
     {
@@ -216,10 +217,10 @@ public partial class QueryGroup
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    private static QueryGroup Parse<TEntity>(MethodCallExpression expression)
+    private static QueryGroup? Parse<TEntity>(MethodCallExpression expression)
         where TEntity : class
     {
-        var unaryNodeType = (expression?.Object?.Type == StaticType.String) ? GetNodeType(expression.Object.ToMember()) :
+        var unaryNodeType = (expression.Object?.Type == StaticType.String) ? GetNodeType(expression.Object.ToMember()) :
             GetNodeType(expression.Arguments.LastOrDefault());
         return Parse<TEntity>(expression, unaryNodeType);
     }
@@ -231,7 +232,7 @@ public partial class QueryGroup
     /// <param name="expression"></param>
     /// <param name="unaryNodeType"></param>
     /// <returns></returns>
-    private static QueryGroup Parse<TEntity>(MethodCallExpression expression,
+    private static QueryGroup? Parse<TEntity>(MethodCallExpression expression,
         ExpressionType? unaryNodeType = null)
         where TEntity : class
     {
@@ -270,7 +271,7 @@ public partial class QueryGroup
     /// </summary>
     /// <param name="expression"></param>
     /// <returns></returns>
-    internal static ExpressionType? GetNodeType(Expression expression)
+    internal static ExpressionType? GetNodeType(Expression? expression)
     {
         return expression switch
         {
