@@ -21,7 +21,6 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net48'">
     <PackageReference Include="System.ComponentModel.Annotations" />
-    <PackageReference Include="System.Data.Common" />
     <PackageReference Include="System.Dynamic.Runtime" />
     <PackageReference Include="Microsoft.Bcl.HashCode" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />

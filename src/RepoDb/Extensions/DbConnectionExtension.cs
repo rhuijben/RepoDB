@@ -2339,7 +2339,7 @@ public static partial class DbConnectionExtension
     /// <param name="entityType"></param>
     /// <returns></returns>
     internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(IDbConnection connection,
-        string? tableName,
+        string tableName,
         IDbTransaction? transaction,
         Type entityType)
     {

@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
@@ -548,6 +549,12 @@ internal sealed partial class Compiler
             return null;
     }
 
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static T ThrowNullableValueIsNull<T>(string expressionDescription)
+    {
+        throw new InvalidOperationException($"Required Nullable<{typeof(T).Name}> property {expressionDescription} evaluated to null.");
+    }
+
     /// <summary>
     ///
     /// </summary>
@@ -556,11 +563,30 @@ internal sealed partial class Compiler
     /// <returns></returns>
     private static Expression ConvertExpressionToNullableValue(Expression expression)
     {
-        if (Nullable.GetUnderlyingType(expression.Type) is { })
+        var underlyingType = Nullable.GetUnderlyingType(expression.Type);
+        if (underlyingType is null)
         {
-            return Expression.Property(expression, nameof(Nullable<int>.Value));
+            return expression; // Already non-nullable
         }
-        return expression;
+
+        var temp = Expression.Variable(expression.Type, "temp");
+        var assign = Expression.Assign(temp, expression);
+
+        var hasValue = Expression.Property(temp, nameof(Nullable<int>.HasValue));
+        var value = Expression.Property(temp, nameof(Nullable<int>.Value));
+
+        var description = Expression.Constant(
+            (expression as MemberExpression)?.Member.Name ?? expression.ToString());
+
+        var throwCall = Expression.Call(
+            GetMethodInfo(() => ThrowNullableValueIsNull<int?>(""))
+                .GetGenericMethodDefinition()
+                .MakeGenericMethod(underlyingType),
+            description);
+
+        var conditional = Expression.Condition(hasValue, value, throwCall);
+
+        return Expression.Block(new[] { temp }, assign, conditional);
     }
 
     private static Expression ConvertExpressionToNullableGetValueOrDefaultExpression(Func<Expression, Expression> converter, Expression expression)
@@ -577,20 +603,6 @@ internal sealed partial class Compiler
         }
 
         return converter(expression);
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="expression"></param>
-    /// <returns></returns>
-    private static Expression ConvertExpressionToNullableValueExpression(Expression expression)
-    {
-        if (Nullable.GetUnderlyingType(expression.Type) != null)
-        {
-            Expression.Call(expression, expression.Type.GetProperty(nameof(Nullable<int>.Value)).GetMethod, expression);
-        }
-        return expression;
     }
 
     /// <summary>

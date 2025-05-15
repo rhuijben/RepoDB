@@ -398,4 +398,37 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             new { a = new string[] { "a" }, aa = 1 }
             );
     }
+
+    class id2record
+    {
+
+        public int ID { get; set; }
+        public int ID2 { get; set; }
+    }
+    class id2recordNullable
+    {
+        public int ID { get; set; }
+        public int? ID2 { get; set; }
+    }
+
+    const string IntNotNullable = nameof(IntNotNullable);
+    [TestMethod]
+    public async Task NullableIntError()
+    {
+        using var sql = await CreateOpenConnectionAsync();
+
+        if (!GetAllTables(sql).Any(x => string.Equals(x, IntNotNullable, StringComparison.OrdinalIgnoreCase)))
+        {
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [{IntNotNullable}] (
+                        [ID] int NOT NULL,
+                        [ID2] int NOT NULL
+            )");
+        }
+
+        await sql.InsertAsync(tableName: IntNotNullable, new id2record { ID = 1, ID2 = 2 });
+
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await sql.InsertAsync(tableName: IntNotNullable, new id2recordNullable { ID = 3, ID2 = null }),
+            "Required Nullable<Int32> property ID2 evaluated to null.");
+    }
 }
