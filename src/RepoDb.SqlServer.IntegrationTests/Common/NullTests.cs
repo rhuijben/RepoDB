@@ -13,4 +13,9 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<SqlServerDbInstance>
     public override DbConnection CreateConnection() => new SqlConnection(Database.ConnectionString);
 
     public override string GeneratedColumnDefinition(string expression, string type) => $"AS ({expression})";
+
+    public override string AltVarChar => "nvarchar";
+
+    protected override string IdentityDefinition => "INT IDENTITY(1,1) NOT NULL";
+
 }

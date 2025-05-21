@@ -52,11 +52,7 @@ public sealed class SqlServerDbHelper : IDbHelper
                     , CONVERT(BIT, COALESCE(TMP.is_identity, 1)) AS IsIdentity
                     , CONVERT(BIT, COALESCE(TMP.is_nullable, 1)) AS IsNullable
                     , C.DATA_TYPE AS DataType
-                    , CASE WHEN TMP.max_length > COALESCE(C.CHARACTER_MAXIMUM_LENGTH, TMP.max_length) THEN
-                        TMP.max_length
-                      ELSE
-                        COALESCE(C.CHARACTER_MAXIMUM_LENGTH, TMP.max_length)
-                      END AS Size
+                    , COALESCE(C.CHARACTER_MAXIMUM_LENGTH, TMP.max_length)  AS Size
                     , CONVERT(TINYINT, COALESCE(TMP.precision, 1)) AS Precision
                     , CONVERT(TINYINT, COALESCE(TMP.scale, 1)) AS Scale
                     , CONVERT(BIT, IIF(C.COLUMN_DEFAULT IS NOT NULL, 1, 0)) AS DefaultValue
@@ -80,7 +76,7 @@ public sealed class SqlServerDbHelper : IDbHelper
                     SELECT SC.name
                         , SC.is_identity
                         , SC.is_nullable
-                        , SC.max_length
+                        ,  SC.max_length
                         , SC.scale
                         , SC.precision
                         , SC.is_computed

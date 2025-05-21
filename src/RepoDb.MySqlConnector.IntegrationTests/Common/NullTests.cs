@@ -17,5 +17,5 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<MysqlDbInstance>
 
     public override string GeneratedColumnDefinition(string expression, string type) => $"{type} {base.GeneratedColumnDefinition(expression, type)} STORED";
 
-    protected override string SchemaDatabaseColumnName => "Schema";
+    protected override string IdentityDefinition => "INT NOT NULL AUTO_INCREMENT";
 }

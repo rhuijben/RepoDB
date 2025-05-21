@@ -346,37 +346,11 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
                     .WriteText($"{index}")
                     .CloseParen();
             }
-            ;
 
             builder.End();
-
-            return builder.GetString();
         }
-        else
-        {
-            var commandText = builder.GetString();
 
-            // Variables needed
-            var commandTexts = new List<string>();
-            var splitted = commandText.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-
-            // Iterate the indexes
-            for (var index = 0; index < splitted.Length; index++)
-            {
-                var returnValue = keyColumn != null ?
-                    keyColumn.IsIdentity ? "LAST_INSERT_ID()" :
-                        keyColumn.Name.AsParameter(index, DbSetting) : "NULL";
-                var line = splitted[index].Trim();
-                commandTexts.Add(string.Concat(line, " ; SELECT ", returnValue, " AS ", "Result".AsQuoted(DbSetting), ";"));
-            }
-
-            // Set the command text
-            commandText = commandTexts.Join(" ");
-
-            // Return the query
-            return commandText;
-        }
+        return builder.GetString();
     }
 
     #endregion

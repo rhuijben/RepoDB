@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
+using System.Text.RegularExpressions;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -10,7 +11,7 @@ namespace RepoDb.DbHelpers;
 /// <summary>
 /// A helper class for database specially for the direct access. This class is only meant for SqLite.
 /// </summary>
-public sealed class SqLiteDbHelper : IDbHelper
+public sealed partial class SqLiteDbHelper : IDbHelper
 {
     private const string doubleQuote = "\"";
 
@@ -59,14 +60,14 @@ public sealed class SqLiteDbHelper : IDbHelper
     private DbField ReaderToDbField(DbDataReader reader,
         string identityFieldName)
     {
-        var dbType = reader.IsDBNull(2) ? null : reader.GetString(2);
+        var dbType = SplitDbType(reader.IsDBNull(2) ? null : reader.GetString(2), out var size);
 
         return new DbField(reader.GetString(1),
             !reader.IsDBNull(5) && reader.GetBoolean(5),
             string.Equals(reader.GetString(1), identityFieldName, StringComparison.OrdinalIgnoreCase),
             reader.IsDBNull(3) || reader.GetBoolean(3) == false,
             DbTypeResolver.Resolve(dbType ?? "text"),
-            null,
+            size,
             null,
             null,
             dbType,
@@ -86,20 +87,46 @@ public sealed class SqLiteDbHelper : IDbHelper
         string identityFieldName,
         CancellationToken cancellationToken = default)
     {
-        var dbType = await reader.IsDBNullAsync(2, cancellationToken) ? null : await reader.GetFieldValueAsync<string>(2, cancellationToken);
+        var rawDbType = await reader.IsDBNullAsync(2, cancellationToken) ? null : await reader.GetFieldValueAsync<string>(2, cancellationToken);
+        var dbType = SplitDbType(rawDbType, out var size);
 
         return new DbField(await reader.GetFieldValueAsync<string>(1, cancellationToken),
             !await reader.IsDBNullAsync(5, cancellationToken) && Convert.ToBoolean(await reader.GetFieldValueAsync<long>(5, cancellationToken)),
             string.Equals(await reader.GetFieldValueAsync<string>(1, cancellationToken), identityFieldName, StringComparison.OrdinalIgnoreCase),
             await reader.IsDBNullAsync(3, cancellationToken) || Convert.ToBoolean(await reader.GetFieldValueAsync<long>(3, cancellationToken)) == false,
             DbTypeResolver.Resolve(dbType ?? "text"),
-            null,
+            size,
             null,
             null,
             dbType,
             !await reader.IsDBNullAsync(4, cancellationToken),
             await reader.GetFieldValueAsync<long>(reader.FieldCount - 1, cancellationToken) is 2 /* dynamic generated */ or 3 /* stored generated */,
             "SYSSQLITE");
+    }
+
+#if NET
+    [GeneratedRegex(@"\((\d+)(,(\d+))*\)$")]
+    private static partial Regex FieldTypeRegex();
+#else
+    static readonly Regex re = new Regex(@"\((\d+)(,(\d+))*\)$", RegexOptions.Compiled);
+    private static Regex FieldTypeRegex() => re;
+#endif
+
+    private string? SplitDbType(string v, out int? size)
+    {
+        size = null;
+
+        if (FieldTypeRegex().Match(v) is { } r && r.Success)
+        {
+            // Get the size
+            if (int.TryParse(r.Groups[1].Value, out var s))
+            {
+                size = s;
+            }
+            v = v.Substring(0, r.Index);
+        }
+
+        return v;
     }
 
     /// <summary>

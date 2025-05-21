@@ -309,7 +309,7 @@ public class StatementBuilderTest
             null,
             null);
         var expected = "INSERT INTO `Table` ( `Id`, `Name`, `Address` ) VALUES ROW ( @Id, @Name, @Address ) ," +
-            " ROW ( @Id_1, @Name_1, @Address_1 ) , ROW ( @Id_2, @Name_2, @Address_2 ) ; SELECT NULL AS `Result`;";
+            " ROW ( @Id_1, @Name_1, @Address_1 ) , ROW ( @Id_2, @Name_2, @Address_2 ) ;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -328,7 +328,7 @@ public class StatementBuilderTest
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
         var expected = "INSERT INTO `Table` ( `Id`, `Name`, `Address` ) VALUES ROW ( @Id, @Name, @Address ) , ROW ( @Id_1, @Name_1, @Address_1 ) ," +
-            " ROW ( @Id_2, @Name_2, @Address_2 ) ; SELECT @Id AS `Result`;";
+            " ROW ( @Id_2, @Name_2, @Address_2 ) ;";
 
         // Assert
         Assert.AreEqual(expected, query);

@@ -278,7 +278,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
 
         // Set the return value
-        if (keyColumn != null)
+        if (keyColumn?.IsIdentity == true)
         {
             var dbType = new ClientTypeToDbTypeResolver().Resolve(keyColumn.Type);
             var databaseType = (dbType != null) ? new DbTypeToSqLiteStringNameResolver().Resolve(dbType.Value) : null;

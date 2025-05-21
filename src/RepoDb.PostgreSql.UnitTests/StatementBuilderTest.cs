@@ -319,7 +319,7 @@ public class StatementBuilderTest
     }
 
     [TestMethod]
-    public void TestPostgreSqlStatementBuilderCreateInserAlltWithPrimary()
+    public void TestPostgreSqlStatementBuilderCreateInsertAllWithPrimary()
     {
         // Setup
         var builder = StatementBuilderMapper.Get<NpgsqlConnection>();
@@ -334,8 +334,7 @@ public class StatementBuilderTest
             "VALUES " +
             "( @Id, @Name, @Address ) , " +
             "( @Id_1, @Name_1, @Address_1 ) , " +
-            "( @Id_2, @Name_2, @Address_2 ) " +
-            "RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\" ;";
+            "( @Id_2, @Name_2, @Address_2 ) ;";
 
         // Assert
         Assert.AreEqual(expected, query);

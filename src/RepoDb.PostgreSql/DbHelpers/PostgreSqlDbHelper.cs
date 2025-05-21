@@ -60,6 +60,7 @@ public sealed class PostgreSqlDbHelper : IDbHelper
                             END AS IsIdentity,
                        CAST(C.is_nullable AS BOOLEAN) AS IsNullable,
                        C.data_type AS DataType,
+                       C.character_maximum_length AS Size,
                        CASE WHEN C.column_default IS NOT NULL THEN
                             true
                             ELSE
@@ -92,17 +93,19 @@ public sealed class PostgreSqlDbHelper : IDbHelper
     /// <returns></returns>
     private DbField ReaderToDbField(DbDataReader reader)
     {
+        var dbType = reader.IsDBNull(4) ? "text" : reader.GetString(4);
+
         return new DbField(reader.GetString(0),
             !reader.IsDBNull(1) && reader.GetBoolean(1),
             !reader.IsDBNull(2) && reader.GetBoolean(2),
             !reader.IsDBNull(3) && reader.GetBoolean(3),
-            reader.IsDBNull(4) ? DbTypeResolver.Resolve("text") : DbTypeResolver.Resolve(reader.GetString(4)),
+            DbTypeResolver.Resolve(dbType),
+            reader.IsDBNull(5) ? null : reader.GetInt32(5),
             null,
             null,
-            null,
-            reader.IsDBNull(4) ? "text" : reader.GetString(4),
-            !reader.IsDBNull(5) && reader.GetBoolean(5),
+            dbType,
             !reader.IsDBNull(6) && reader.GetBoolean(6),
+            !reader.IsDBNull(7) && reader.GetBoolean(7),
             "PGSQL");
     }
 
@@ -115,17 +118,19 @@ public sealed class PostgreSqlDbHelper : IDbHelper
     private async Task<DbField> ReaderToDbFieldAsync(DbDataReader reader,
         CancellationToken cancellationToken = default)
     {
+        var dbType = await reader.IsDBNullAsync(4, cancellationToken) ? "text" : await reader.GetFieldValueAsync<string>(4, cancellationToken);
+
         return new DbField(await reader.GetFieldValueAsync<string>(0, cancellationToken),
             !await reader.IsDBNullAsync(1, cancellationToken) && await reader.GetFieldValueAsync<bool>(1, cancellationToken),
             !await reader.IsDBNullAsync(2, cancellationToken) && await reader.GetFieldValueAsync<bool>(2, cancellationToken),
             !await reader.IsDBNullAsync(3, cancellationToken) && await reader.GetFieldValueAsync<bool>(3, cancellationToken),
-            await reader.IsDBNullAsync(4, cancellationToken) ? DbTypeResolver.Resolve("text") : DbTypeResolver.Resolve(await reader.GetFieldValueAsync<string>(4, cancellationToken)),
+            DbTypeResolver.Resolve(dbType),
+            await reader.IsDBNullAsync(5) ? null : await reader.GetFieldValueAsync<int>(5, cancellationToken),
             null,
             null,
-            null,
-            await reader.IsDBNullAsync(4, cancellationToken) ? "text" : reader.GetString(4),
-            !await reader.IsDBNullAsync(5, cancellationToken) && await reader.GetFieldValueAsync<bool>(5, cancellationToken),
+            dbType,
             !await reader.IsDBNullAsync(6, cancellationToken) && await reader.GetFieldValueAsync<bool>(6, cancellationToken),
+            !await reader.IsDBNullAsync(7, cancellationToken) && await reader.GetFieldValueAsync<bool>(7, cancellationToken),
             "PGSQL");
     }
 

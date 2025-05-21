@@ -17,6 +17,8 @@ public class NullTests : RepoDb.TestCore.NullTestsBase<PostgreSqlDbInstance>
 
     public override string BlobDbType => "BYTEA";
 
+    public override string VarCharName => "character varying";
+
     public override string GeneratedColumnDefinition(string expression, string type)
     {
         if (expression.StartsWith("CONCAT("))

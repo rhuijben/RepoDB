@@ -238,7 +238,7 @@ public class StatementBuilderTest
     }
 
     [TestMethod]
-    public void TestMdsSqLiteStatementBuilderCreateInserAlltWithPrimary()
+    public void TestMdsSqLiteStatementBuilderCreateInsertAllWithPrimary()
     {
         // Setup
         var builder = StatementBuilderMapper.Get<SqliteConnection>();
@@ -250,7 +250,7 @@ public class StatementBuilderTest
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
         var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ," +
-            " ( @Id_1, @Name_1, @Address_1 ) , ( @Id_2, @Name_2, @Address_2 ) RETURNING CAST([Id] AS INT) AS [Result] ;";
+            " ( @Id_1, @Name_1, @Address_1 ) , ( @Id_2, @Name_2, @Address_2 ) ;";
 
         // Assert
         Assert.AreEqual(expected, query);

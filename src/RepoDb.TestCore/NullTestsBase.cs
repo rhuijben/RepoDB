@@ -431,4 +431,167 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             await sql.InsertAsync(tableName: IntNotNullable, new id2recordNullable { ID = 3, ID2 = null }),
             "Required Nullable<Int32> property ID2 evaluated to null.");
     }
+
+
+    class FieldLengthTable
+    {
+        public string ID { get; set; }
+        public string ID2 { get; set; }
+        public string? VAL3 { get; set; }
+    }
+
+    public virtual string AltVarChar => "varchar";
+    public virtual string VarCharName => "varchar";
+
+    [TestMethod]
+    public async Task FieldLengthTest()
+    {
+        using var sql = await CreateOpenConnectionAsync();
+
+        if (!GetAllTables(sql).Any(x => string.Equals(x, nameof(FieldLengthTable), StringComparison.OrdinalIgnoreCase)))
+        {
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(FieldLengthTable)}] (
+                    [ID] varchar(36) NOT NULL,
+                    [ID2] {AltVarChar}(37) NOT NULL,
+                    [VAL3] {AltVarChar}(38) NULL,
+                    CONSTRAINT [PK_{nameof(FieldLengthTable)}] PRIMARY KEY
+                    (
+                        [ID], [ID2]
+                    )
+            )");
+        }
+        else
+        {
+            await sql.TruncateAsync<FieldLengthTable>();
+        }
+
+        var fd = await sql.GetDbHelper().GetFieldsAsync(sql, nameof(FieldLengthTable));
+
+        var id1 = fd.First(x => x.Name == "ID");
+        var id2 = fd.First(x => x.Name == "ID2");
+        var val3 = fd.First(x => x.Name == "VAL3");
+        Assert.AreEqual("ID", id1?.Name);
+        Assert.AreEqual("ID2", id2?.Name);
+        Assert.AreEqual("VAL3", val3?.Name);
+        Assert.AreEqual(typeof(string), id1?.Type);
+        Assert.AreEqual(typeof(string), id2?.Type);
+        Assert.AreEqual(typeof(string), val3?.Type);
+
+        Assert.AreEqual(VarCharName, id1?.DatabaseType);
+        Assert.AreEqual(AltVarChar == "varchar" ? VarCharName : AltVarChar, id2?.DatabaseType);
+        Assert.AreEqual(AltVarChar == "varchar" ? VarCharName : AltVarChar, val3?.DatabaseType);
+
+        Assert.AreEqual(36, id1?.Size);
+        Assert.AreEqual(37, id2?.Size);
+        Assert.AreEqual(38, val3?.Size);
+
+        Assert.AreEqual(true, id1?.IsPrimary);
+        Assert.AreEqual(true, id2?.IsPrimary);
+        Assert.AreEqual(false, val3?.IsPrimary);
+
+        Assert.AreEqual(false, id1?.IsIdentity);
+        Assert.AreEqual(false, id2?.IsIdentity);
+        Assert.AreEqual(false, val3?.IsIdentity);
+
+        Assert.AreEqual(false, id1?.IsNullable);
+        Assert.AreEqual(false, id2?.IsNullable);
+        Assert.AreEqual(true, val3?.IsNullable);
+
+        var ftf = new FieldLengthTable[]
+        {
+            new FieldLengthTable { ID = "a12345678901234567890123456789012345", ID2 = "b12345678901234567890123456789012345", VAL3 = "c" },
+            new FieldLengthTable { ID = "d12345678901234567890123456789012345", ID2 = "e12345678901234567890123456789012345", VAL3 = null }
+        };
+
+        Assert.AreEqual(2, await sql.InsertAllAsync(ftf, trace: new DiagnosticsTracer()));
+
+        var data = (await sql.QueryAllAsync<FieldLengthTable>()).ToArray();
+
+        Assert.AreEqual(2, data.Count());
+        Assert.AreEqual(ftf[0].ID, data[0].ID);
+    }
+
+    class MorePrimaryKeyTable
+    {
+        public string ID { get; set; }
+        public int ID2 { get; set; }
+        public string? Value { get; set; }
+    }
+
+    protected virtual string IdentityDefinition => "INT GENERATED ALWAYS AS IDENTITY";
+
+
+
+    [TestMethod]
+    public async Task MultiKeyReturnIdentity()
+    {
+        using var sql = await CreateOpenConnectionAsync();
+
+        if (sql.GetType().Name.Contains("iteConnection"))
+            return;
+
+        if (!GetAllTables(sql).Any(x => string.Equals(x, nameof(MorePrimaryKeyTable), StringComparison.OrdinalIgnoreCase)))
+        {
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(MorePrimaryKeyTable)}] (
+                    [ID] VARCHAR(20) NOT NULL,
+                    [ID2] {IdentityDefinition},
+                    [Value] {AltVarChar}(38) NULL,
+                    CONSTRAINT [PK_{nameof(MorePrimaryKeyTable)}] PRIMARY KEY
+                    (
+                        [ID2], [ID]
+                    )
+            )");
+        }
+        else
+        {
+            await sql.TruncateAsync<MorePrimaryKeyTable>();
+        }
+
+        var fd = await sql.GetDbHelper().GetFieldsAsync(sql, nameof(MorePrimaryKeyTable));
+
+        var id1 = fd.First(x => x.Name == "ID");
+        var id2 = fd.First(x => x.Name == "ID2");
+        var val3 = fd.First(x => x.Name == "Value");
+        Assert.AreEqual("ID", id1?.Name);
+        Assert.AreEqual("ID2", id2?.Name);
+        Assert.AreEqual("Value", val3?.Name);
+        Assert.AreEqual(typeof(string), id1?.Type);
+        Assert.AreEqual(typeof(int), id2?.Type);
+        Assert.AreEqual(typeof(string), val3?.Type);
+
+        Assert.AreEqual(VarCharName, id1?.DatabaseType);
+        //Assert.AreEqual("INT", id2?.DatabaseType); // Or 'int' or 'integer', or ...
+        Assert.AreEqual(AltVarChar == "varchar" ? VarCharName : AltVarChar, val3?.DatabaseType);
+
+        Assert.AreEqual(true, id1?.IsPrimary);
+        Assert.AreEqual(true, id2?.IsPrimary);
+        Assert.AreEqual(false, val3?.IsPrimary);
+
+        Assert.AreEqual(false, id1?.IsIdentity);
+        Assert.AreEqual(true, id2?.IsIdentity);
+        Assert.AreEqual(false, val3?.IsIdentity);
+
+        Assert.AreEqual(false, id1?.IsNullable);
+        Assert.AreEqual(false, id2?.IsNullable);
+        Assert.AreEqual(true, val3?.IsNullable);
+
+        var ftf = new MorePrimaryKeyTable[]
+        {
+            new MorePrimaryKeyTable { ID = "A", ID2 = 0, Value = "c" },
+            new MorePrimaryKeyTable { ID = "B", ID2 = 0, Value = null }
+        };
+
+        Assert.AreEqual(2, await sql.InsertAllAsync(ftf, trace: new DiagnosticsTracer()));
+
+        var data = (await sql.QueryAllAsync<MorePrimaryKeyTable>()).ToArray();
+
+        Assert.AreEqual(2, data.Count());
+        Assert.AreEqual(ftf[0].ID, data[0].ID);
+        Assert.AreEqual(ftf[1].ID, data[1].ID);
+        Assert.AreEqual(ftf[0].ID2, data[0].ID2);
+        Assert.AreEqual(ftf[1].ID2, data[1].ID2);
+        Assert.AreNotEqual(ftf[0].ID2, ftf[1].ID2);
+        Assert.AreEqual(ftf[0].Value, data[0].Value);
+        Assert.AreEqual(ftf[1].Value, data[1].Value);
+    }
 }
