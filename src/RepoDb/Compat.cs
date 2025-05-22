@@ -19,7 +19,12 @@ internal static class CompatExtensions
 {
     public static bool StartsWith(this string v, char value)
     {
-        return v.StartsWith(value.ToString());
+        return v.Length > 0 && v[0] == value;
+    }
+
+    public static bool EndsWith(this string v, char value)
+    {
+        return v.Length > 0 && v[v.Length-1] == value;
     }
 }
 

@@ -178,7 +178,7 @@ internal static class InsertExecutionContextProvider
                 dbField.IsIdentity == false)
             .Where(dbField =>
                 fields.FirstOrDefault(field =>
-                    string.Equals(field.Name.AsUnquoted(true, dbSetting), dbField.Name.AsUnquoted(true, dbSetting), StringComparison.OrdinalIgnoreCase)) != null)
+                    string.Equals(field.Name.AsUnquoted(true, dbSetting), dbField.Name, StringComparison.OrdinalIgnoreCase)) != null)
             .AsList();
 
         // Variables for the entity action
