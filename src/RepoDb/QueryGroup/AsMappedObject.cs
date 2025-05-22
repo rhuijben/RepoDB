@@ -71,15 +71,17 @@ public partial class QueryGroup
     {
         foreach (var queryField in queryFields)
         {
-            if (queryField.Operation == Operation.Between ||
-                queryField.Operation == Operation.NotBetween)
+            if (queryField.Operation is Operation.Between or Operation.NotBetween)
             {
                 AsMappedObjectForBetweenQueryField(dictionary, queryGroupTypeMap, queryField);
             }
-            else if (queryField.Operation == Operation.In ||
-                queryField.Operation == Operation.NotIn)
+            else if (queryField.Operation is Operation.In or Operation.NotIn)
             {
                 AsMappedObjectForInQueryField(dictionary, queryGroupTypeMap, queryField);
+            }
+            else if (queryField.Operation is Operation.IsNotNull or Operation.IsNull)
+            {
+                // No params needed
             }
             else
             {
