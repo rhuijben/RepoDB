@@ -19,7 +19,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <param name="averageableClientTypeResolver">The resolver used to identity the type for average.</param>
     public BaseStatementBuilder(IDbSetting dbSetting,
         IResolver<Field, IDbSetting, string>? convertFieldResolver = null,
-        IResolver<Type, Type>? averageableClientTypeResolver = null)
+        IResolver<Type, Type?>? averageableClientTypeResolver = null)
     {
         DbSetting = dbSetting ?? throw new ArgumentNullException(nameof(dbSetting));
         ConvertFieldResolver = convertFieldResolver;
@@ -41,7 +41,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// <summary>
     /// Gets the resolver that is being used to resolve the type to be averageable type.
     /// </summary>
-    protected IResolver<Type, Type>? AverageableClientTypeResolver { get; }
+    protected IResolver<Type, Type?>? AverageableClientTypeResolver { get; }
 
     #endregion
 

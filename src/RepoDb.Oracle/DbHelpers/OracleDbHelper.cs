@@ -11,8 +11,6 @@ using RepoDb.Resolvers;
 namespace RepoDb.DbHelpers;
 public sealed class OracleDbHelper : BaseDbHelper
 {
-    private readonly IDbSetting m_dbSetting = DbSettingMapper.Get<OracleConnection>();
-
     public OracleDbHelper(IDbSetting dbSetting)
         : base(new OracleDbTypeToClientTypeResolver())
     {
@@ -23,9 +21,9 @@ public sealed class OracleDbHelper : BaseDbHelper
 
     public override void DynamicHandler<TEventInstance>(TEventInstance instance, string key)
     {
-        if (key == "RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]")
+        if (key == "RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]" && instance is OracleParameter op)
         {
-            HandleDbParameterPostCreation(instance as OracleParameter);
+            HandleDbParameterPostCreation(op);
         }
 
         void HandleDbParameterPostCreation(OracleParameter oracleParameter)
@@ -83,8 +81,8 @@ ORDER BY C.COLUMN_ID
         var commandText = GetFieldsQuery;
         var param = new
         {
-            Schema = DataEntityExtension.GetSchema(tableName, m_dbSetting).AsUnquoted(m_dbSetting).ToUpperInvariant(),
-            TableName = DataEntityExtension.GetTableName(tableName, m_dbSetting).AsUnquoted(m_dbSetting)
+            Schema = DataEntityExtension.GetSchema(tableName, DbSetting)?.AsUnquoted(DbSetting).ToUpperInvariant(),
+            TableName = DataEntityExtension.GetTableName(tableName, DbSetting).AsUnquoted(DbSetting)
         };
         var param2 = (param.Schema == "USER") ? (object)new { param.TableName } : null;
         if (param2 is { })
@@ -112,8 +110,8 @@ ORDER BY C.COLUMN_ID
         var commandText = GetFieldsQuery;
         var param = new
         {
-            Schema = DataEntityExtension.GetSchema(tableName, m_dbSetting).AsUnquoted(m_dbSetting).ToUpperInvariant(),
-            TableName = DataEntityExtension.GetTableName(tableName, m_dbSetting).AsUnquoted(m_dbSetting)
+            Schema = DataEntityExtension.GetSchema(tableName, DbSetting)?.AsUnquoted(DbSetting).ToUpperInvariant(),
+            TableName = DataEntityExtension.GetTableName(tableName, DbSetting).AsUnquoted(DbSetting)
         };
         var param2 = (param.Schema == "USER") ? (object)new { param.TableName } : null;
         if (param2 is { })
@@ -163,7 +161,7 @@ ORDER BY C.COLUMN_ID
             !reader.IsDBNull(1) && reader.GetInt32(1) == 1,    // IsPrimary
             !reader.IsDBNull(2) && reader.GetInt32(2) == 1,    // IsIdentity
             !reader.IsDBNull(3) && reader.GetInt32(3) == 1,    // IsNullable
-            DbTypeResolver.Resolve(dbType),
+            DbTypeResolver.Resolve(dbType) ?? typeof(object),
             reader.IsDBNull(5) ? null : reader.GetInt32(5),    // Size
             reader.IsDBNull(6) ? null : (byte)reader.GetInt32(6), // Precision
             reader.IsDBNull(7) ? null : (byte)reader.GetInt32(7), // Scale

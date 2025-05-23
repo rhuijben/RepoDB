@@ -176,7 +176,7 @@ public static class Converter
         }
         catch (InvalidCastException ex)
         {
-            throw new InvalidCastException($"While converting '{value ?? "null"}' ({value.GetType()}) to '{type.FullName}'", ex);
+            throw new InvalidCastException($"While converting '{value ?? "null"}' ({value?.GetType()}) to '{type.FullName}'", ex);
         }
     }
 

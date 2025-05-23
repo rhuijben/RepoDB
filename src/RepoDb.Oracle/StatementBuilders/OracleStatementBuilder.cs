@@ -1,5 +1,4 @@
-﻿using Oracle.ManagedDataAccess.Client;
-using RepoDb.Exceptions;
+﻿using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
@@ -14,8 +13,8 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
     /// <summary>
     /// Creates a new instance of <see cref="OracleStatementBuilder"/> object.
     /// </summary>
-    public OracleStatementBuilder()
-        : this(DbSettingMapper.Get<OracleConnection>(),
+    public OracleStatementBuilder(IDbSetting setting)
+        : this(setting,
               new OracleConvertFieldResolver(),
               new ClientTypeToAverageableClientTypeResolver())
     { }
@@ -28,7 +27,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
     /// <param name="averageableClientTypeResolver">The resolver used to identity the type for average.</param>
     public OracleStatementBuilder(IDbSetting dbSetting,
         IResolver<Field, IDbSetting, string>? convertFieldResolver = null,
-        IResolver<Type, Type>? averageableClientTypeResolver = null)
+        IResolver<Type, Type?>? averageableClientTypeResolver = null)
         : base(dbSetting,
               convertFieldResolver,
               averageableClientTypeResolver)

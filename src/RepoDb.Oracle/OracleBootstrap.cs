@@ -47,7 +47,7 @@ internal static class OracleBootstrap
         DbHelperMapper.Add<OracleConnection>(new OracleDbHelper(setting), true);
 
         // Map the Statement Builder
-        StatementBuilderMapper.Add<OracleConnection>(new OracleStatementBuilder(), true);
+        StatementBuilderMapper.Add<OracleConnection>(new OracleStatementBuilder(setting), true);
 
         // Set the flag
         IsInitialized = true;

@@ -2327,7 +2327,7 @@ public static partial class DbConnectionExtension
     internal static IEnumerable<Field> GetAndGuardPrimaryKeyOrIdentityKey(Type entityType,
         IDbConnection connection,
         IDbTransaction? transaction) =>
-        GetAndGuardPrimaryKeyOrIdentityKey(connection, ClassMappedNameCache.Get(entityType),
+        GetAndGuardPrimaryKeyOrIdentityKey(connection, ClassMappedNameCache.Get(entityType) ?? throw new ArgumentException($"Can't map {entityType} to valid tablename"),
             transaction, entityType);
 
     /// <summary>
@@ -2376,7 +2376,7 @@ public static partial class DbConnectionExtension
         IDbConnection connection,
         IDbTransaction? transaction,
         CancellationToken cancellationToken = default) =>
-        GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, ClassMappedNameCache.Get(entityType),
+        GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, ClassMappedNameCache.Get(entityType) ?? throw new ArgumentException($"Can't map {entityType} to valid tablename"),
             transaction, entityType, cancellationToken);
 
     /// <summary>
@@ -3333,7 +3333,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
         object param,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         if (param == null)
         {
@@ -3380,7 +3380,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     private static CommandArrayParametersText? GetCommandArrayParametersTextInternal(string commandText,
         object param,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         if (param == null)
         {
@@ -3444,7 +3444,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     private static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
         IDictionary<string, object> dictionary,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         if (dictionary == null)
         {
@@ -3500,7 +3500,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     private static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
         QueryField queryField,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         if (queryField == null)
         {
@@ -3550,7 +3550,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     private static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
         IEnumerable<QueryField> queryFields,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         if (queryFields == null)
         {
@@ -3616,7 +3616,7 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     private static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
         QueryGroup queryGroup,
-        IDbSetting dbSetting) =>
+        IDbSetting? dbSetting) =>
         GetCommandArrayParametersText(commandText, queryGroup.GetFields(true), dbSetting);
 
     /// <summary>
@@ -3654,7 +3654,7 @@ public static partial class DbConnectionExtension
     internal static string GetRawSqlText(string commandText,
         string parameterName,
         IEnumerable values,
-        IDbSetting dbSetting)
+        IDbSetting? dbSetting)
     {
         if (!commandText.Contains(parameterName, StringComparison.OrdinalIgnoreCase))
         {

@@ -330,7 +330,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return BatchQueryInternal<TEntity>(connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -376,7 +376,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return BatchQueryInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -422,7 +422,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return BatchQueryInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -468,7 +468,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return BatchQueryInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -514,7 +514,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return BatchQueryInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -560,7 +560,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return BatchQueryInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -967,7 +967,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await BatchQueryAsyncInternal<TEntity>(connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -1016,7 +1016,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await BatchQueryAsyncInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -1065,7 +1065,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await BatchQueryAsyncInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -1114,7 +1114,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await BatchQueryAsyncInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -1163,7 +1163,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await BatchQueryAsyncInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -1212,7 +1212,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await BatchQueryAsyncInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             page: page,
             rowsPerBatch: rowsPerBatch,
             where: where,
