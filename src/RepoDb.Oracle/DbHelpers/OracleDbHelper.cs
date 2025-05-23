@@ -216,11 +216,11 @@ ORDER BY C.COLUMN_ID
 
     public override Func<object?> PrepareForIdentityOutput(DbCommand command)
     {
-        if (command.CommandText.Contains(":RepoDbResult", StringComparison.Ordinal))
+        if (command.CommandText.EndsWith(":RepoDb_Result", StringComparison.Ordinal))
         {
             var p = new OracleParameter()
             {
-                ParameterName = ":RepoDbResult",
+                ParameterName = ":RepoDb_Result",
                 Direction = ParameterDirection.Output,
                 OracleDbType = OracleDbType.Int32
             };

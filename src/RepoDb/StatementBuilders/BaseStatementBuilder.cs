@@ -1273,8 +1273,8 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// </summary>
     /// <param name="primaryDbField"></param>
     /// <param name="identityDbField"></param>
-    protected DbField GetReturnKeyColumnAsDbField(DbField primaryDbField,
-        DbField identityDbField)
+    protected DbField? GetReturnKeyColumnAsDbField(DbField? primaryDbField,
+        DbField? identityDbField)
     {
         switch (GlobalConfiguration.Options.KeyColumnReturnBehavior)
         {

@@ -1,6 +1,5 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using RepoDb.Exceptions;
-using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
 
@@ -76,19 +75,17 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
 
         // If no return value is needed, return the base SQL
-        if (keyColumn == null)
+        if (keyColumn is { })
         {
-            return builder.GetString().TrimEnd(';');
+            // Oracle requires RETURNING <column> INTO :outParam
+            builder
+                .Returning()
+                .FieldFrom(keyColumn.AsField(), DbSetting)
+                .Into()
+                .WriteText(":RepoDb_Result");
         }
 
-        // Oracle requires RETURNING <column> INTO :outParam
-        var returnClause = $" RETURNING {keyColumn.Name.AsQuoted(DbSetting)} INTO :RepoDbResult";
-
-        // Trim ending semicolon (if base added it)
-        var sql = builder.GetString().TrimEnd(';', ' ');
-
-        // Return full statement with RETURNING clause
-        return sql + returnClause;
+        return builder.GetString();
     }
 
     /// <inheritdoc cref="BaseStatementBuilder.CreateQuery"/>
