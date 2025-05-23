@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.UnitTests.CustomObjects;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepoDb.UnitTests.Attributes;
 
@@ -12,12 +12,14 @@ public class ColumnAttributeTest
     public void Initialize()
     {
         DbSettingMapper.Add<CustomDbConnection>(new CustomDbSetting(), true);
+        DbHelperMapper.Add<CustomDbConnection>(new CustomDbHelper(), true);
     }
 
     [TestCleanup]
     public void Cleanup()
     {
         DbSettingMapper.Clear();
+        DbHelperMapper.Clear();
     }
 
     #region Classes

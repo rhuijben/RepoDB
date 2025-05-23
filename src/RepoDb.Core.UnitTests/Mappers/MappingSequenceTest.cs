@@ -26,6 +26,7 @@ public class MappingSequenceTest
     {
         Cleanup();
         DbSettingMapper.Add<PrivateDbConnection>(new CustomDbSetting(), true);
+        DbHelperMapper.Add<PrivateDbConnection>(new CustomDbHelper(), true);
     }
 
     [TestCleanup]

@@ -13,12 +13,14 @@ public class DbCommandExtensionsTest
     public void Initialize()
     {
         DbSettingMapper.Add<PropertyHandlerConnection>(new CustomDbSetting(), true);
+        DbHelperMapper.Add<PropertyHandlerConnection>(new CustomDbHelper(), true);
     }
 
     [TestCleanup]
     public void Cleanup()
     {
         DbSettingMapper.Clear();
+        DbHelperMapper.Clear();
         PropertyHandlerMapper.Clear();
         PropertyHandlerCache.Flush();
     }
@@ -219,6 +221,7 @@ public class DbCommandExtensionsTest
     public void TestSqlConnectionExecuteQueryViaDynamicsWithEmptyArrayParameters()
     {
         DbSettingMapper.Add<PrivateDbConnection>(new CustomDbSetting(), true);
+        DbHelperMapper.Add<PrivateDbConnection>(new CustomDbHelper(), true);
         using (var connection = new PrivateDbConnection())
         {
             var sql = @"

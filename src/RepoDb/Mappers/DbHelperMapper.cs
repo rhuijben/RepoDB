@@ -63,14 +63,14 @@ public static class DbHelperMapper
     /// </summary>
     /// <typeparam name="TDbConnection">The type of <see cref="IDbConnection"/>.</typeparam>
     /// <returns>The instance of existing mapped <see cref="IDbHelper"/> object.</returns>
-    public static IDbHelper Get<TDbConnection>()
+    public static IDbHelper? Get<TDbConnection>()
         where TDbConnection : IDbConnection
     {
         // get the value
         maps.TryGetValue(typeof(TDbConnection), out var value);
 
         // Return the value
-        return value ?? throw new ArgumentException($"No DbHelper registered for {typeof(TDbConnection)}");
+        return value;
     }
 
     /// <summary>
