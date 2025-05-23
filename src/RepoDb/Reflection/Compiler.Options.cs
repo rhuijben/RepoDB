@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System.Linq.Expressions;
 using System.Reflection;
+using RepoDb.Options;
 
 namespace RepoDb.Reflection;
 
@@ -16,8 +17,7 @@ partial class Compiler
     private static Expression CreateClassHandlerGetOptionsExpression(Expression readerExpression)
     {
         // Get the 'Create' method
-        var method = StaticType.ClassHandlerGetOptions.GetMethod("Create",
-            BindingFlags.Static | BindingFlags.NonPublic);
+        var method = GetMethodInfo(() => ClassHandlerGetOptions.Create(null!));
 
         // Set to default
         readerExpression ??= Expression.Default(StaticType.DbDataReader);
@@ -34,8 +34,7 @@ partial class Compiler
     private static Expression CreateClassHandlerSetOptionsExpression(Expression commandExpression)
     {
         // Get the 'Create' method
-        var method = StaticType.ClassHandlerSetOptions.GetMethod("Create",
-            BindingFlags.Static | BindingFlags.NonPublic);
+        var method = GetMethodInfo(() => ClassHandlerSetOptions.Create(null!));
 
         // Set to default
         commandExpression ??= Expression.Default(StaticType.IDbDataParameter);

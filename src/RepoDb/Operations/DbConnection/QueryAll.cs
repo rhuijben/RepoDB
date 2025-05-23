@@ -92,7 +92,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return QueryAllInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             fields: fields,
             orderBy: orderBy,
             hints: hints,
@@ -248,7 +248,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await QueryAllAsyncInternal<TEntity>(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             fields: fields,
             orderBy: orderBy,
             hints: hints,

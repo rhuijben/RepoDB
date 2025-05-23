@@ -25,7 +25,7 @@ partial class Compiler
         Expression entityExpression,
         ParameterExpression propertyExpression,
         DbField dbField,
-        ClassProperty classProperty,
+        ClassProperty? classProperty,
         ParameterDirection direction,
         IDbSetting dbSetting,
         IDbHelper dbHelper)

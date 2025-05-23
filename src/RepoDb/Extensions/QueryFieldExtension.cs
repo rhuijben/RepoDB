@@ -57,7 +57,7 @@ public static class QueryFieldExtension
     /// <param name="dbSetting"></param>
     /// <returns></returns>
     internal static string AsField(this QueryField queryField,
-        string functionFormat,
+        string? functionFormat,
         IDbSetting dbSetting) =>
         queryField.Field.Name.AsField(functionFormat, dbSetting);
 
@@ -108,7 +108,7 @@ public static class QueryFieldExtension
     /// <returns></returns>
     internal static string AsBetweenParameter(this QueryField queryField,
         int index,
-        string functionFormat,
+        string? functionFormat,
         IDbSetting dbSetting) =>
         string.IsNullOrWhiteSpace(functionFormat) ?
             string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Left AND ", queryField.Parameter.Name.AsParameter(index, dbSetting), "_Right") :
@@ -139,10 +139,10 @@ public static class QueryFieldExtension
     /// <returns></returns>
     internal static string AsInParameter(this QueryField queryField,
         int index,
-        string functionFormat,
+        string? functionFormat,
         IDbSetting dbSetting)
     {
-        var enumerable = (System.Collections.IEnumerable)queryField.Parameter.Value;
+        var enumerable = (System.Collections.IEnumerable)queryField.Parameter.Value!;
         var values = enumerable
             .OfType<object>()
             .Select((_, valueIndex) =>
@@ -201,7 +201,7 @@ public static class QueryFieldExtension
     /// <returns></returns>
     internal static string AsFieldAndParameterForIn(this QueryField queryField,
         int index,
-        string functionFormat,
+        string? functionFormat,
         IDbSetting dbSetting)
     {
         var enumerable = (queryField.Parameter.Value as System.Collections.IEnumerable)?.WithType<object>();

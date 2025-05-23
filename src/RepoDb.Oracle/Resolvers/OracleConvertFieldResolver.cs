@@ -34,7 +34,7 @@ public class OracleConvertFieldResolver : DbConvertFieldResolver
     /// <param name="field">The instance of the <see cref="Field"/> to be converted.</param>
     /// <param name="dbSetting">The current in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The converted name of the <see cref="Field"/> object for PostgreSql.</returns>
-    public override string Resolve(Field field,
+    public override string? Resolve(Field field,
         IDbSetting dbSetting)
     {
         if (field?.Type != null)
@@ -42,7 +42,7 @@ public class OracleConvertFieldResolver : DbConvertFieldResolver
             var dbType = DbTypeResolver.Resolve(field.Type);
             if (dbType != null)
             {
-                var dbTypeName = StringNameResolver.Resolve(dbType.Value).ToUpper();
+                var dbTypeName = StringNameResolver.Resolve(dbType.Value)?.ToUpper();
                 return string.Concat("CAST(", field.Name.AsField(dbSetting), " AS ", dbTypeName, ")");
             }
         }

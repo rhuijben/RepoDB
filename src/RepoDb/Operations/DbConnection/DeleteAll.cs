@@ -253,7 +253,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return DeleteAllInternal(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -287,7 +287,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return DeleteAllInternal(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             keys: keys,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -631,8 +631,9 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await DeleteAllAsyncInternal(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+        return await DeleteAllAsyncInternal(
+            connection: connection,
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             keys: keys.WithType<object>(),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -669,7 +670,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await DeleteAllAsyncInternal(connection: connection,
-            tableName: ClassMappedNameCache.Get<TEntity>(),
+            tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             keys: keys,
             hints: hints,
             commandTimeout: commandTimeout,

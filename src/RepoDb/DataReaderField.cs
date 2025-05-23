@@ -18,7 +18,7 @@ internal class DataReaderField
     /// <summary>
     /// Gets or sets the <see cref="DbField"/> value.
     /// </summary>
-    public DbField DbField { get; init; }
+    public DbField? DbField { get; init; }
 
     /// <summary>
     /// Gets or sets the type value.
