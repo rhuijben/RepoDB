@@ -44,10 +44,10 @@ Or, visit our [installation](http://repodb.net/tutorial/installation) page for m
 
 ## Get Started
 
-First, the bootstrapper must be initialized.
+First, RepoDB must be configured and SqlServer support loaded.
 
 ```csharp
-RepoDb.SqlServerBootstrap.Initialize();
+GlobalConfiguration.Setup().UseSqlServer();
 ```
 
 **Note:** The call must be done once.

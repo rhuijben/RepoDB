@@ -44,10 +44,10 @@ Or, visit our [installation](http://repodb.net/tutorial/installation) page for m
 
 ## Get Started
 
-First, the bootstrapper must be initialized.
+First, RepoDB must be configured and SqLite support loaded.
 
 ```csharp
-RepoDb.SQLiteBootstrap.Initialize();
+GlobalConfiguration.Setup().UseSQLite();
 ```
 
 **Note:** The call must be done once.

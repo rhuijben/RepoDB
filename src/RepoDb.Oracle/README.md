@@ -37,10 +37,10 @@ Or, visit our [installation](http://repodb.net/tutorial/installation) page for m
 
 ## Get Started
 
-First, the bootstrapper must be initialized.
+First, RepoDB must be configured and Oracle support loaded.
 
 ```csharp
-RepoDb.OracleBootstrap.Initialize();
+GlobalConfiguration.Setup().UseOracle();
 ```
 
 **Note:** The call must be done once.

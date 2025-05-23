@@ -44,10 +44,10 @@ Or, visit our [installation](http://repodb.net/tutorial/installation) page for m
 
 ## Get Started
 
-First, the bootstrapper must be initialized.
+First, RepoDB must be configured and MySqlConnector support loaded.
 
 ```csharp
-RepoDb.PostgreSqlBootstrap.Initialize();
+GlobalConfiguration.Setup().UsePostgreSql();
 ```
 
 **Note:** The call must be done once.
