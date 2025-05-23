@@ -1,8 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Attributes.Parameter;
 using RepoDb.Extensions;
 using RepoDb.UnitTests.CustomObjects;
-using System.Data;
 
 namespace RepoDb.UnitTests.Attributes.Parameter;
 
@@ -13,12 +13,14 @@ public class DbTypeAttributeTest
     public void Initialize()
     {
         DbSettingMapper.Add<CustomDbConnection>(new CustomDbSetting(), true);
+        DbHelperMapper.Add<CustomDbConnection>(new CustomDbHelper(), true);
     }
 
     [TestCleanup]
     public void Cleanup()
     {
         DbSettingMapper.Clear();
+        DbHelperMapper.Clear();
     }
 
     #region Classes

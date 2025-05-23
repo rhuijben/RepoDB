@@ -12,13 +12,16 @@ public class PrecisionAttributeTest
     public void Initialize()
     {
         DbSettingMapper.Add<CustomDbConnection>(new CustomDbSetting(), true);
+        DbHelperMapper.Add<CustomDbConnection>(new CustomDbHelper(), true);
     }
 
     [TestCleanup]
     public void Cleanup()
     {
         DbSettingMapper.Clear();
+        DbHelperMapper.Clear();
     }
+
 
     #region Classes
 
