@@ -21,7 +21,7 @@ public class OracleConvertFieldResolver : DbConvertFieldResolver
     /// Creates a new instance of <see cref="PostgreSqlConvertFieldResolver"/> class.
     /// </summary>
     public OracleConvertFieldResolver(IResolver<Type, DbType?> dbTypeResolver,
-        IResolver<DbType, string> stringNameResolver)
+        IResolver<DbType, string?> stringNameResolver)
         : base(dbTypeResolver,
               stringNameResolver)
     { }
