@@ -42,7 +42,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, "CommonNullTestData", StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, "CommonNullTestData"))
         {
             var sqlText = @$"CREATE TABLE [CommonNullTestData] (
                         [ID] int NOT NULL,
@@ -126,7 +126,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         // Regression test. Failed on sqlite and sqlserver before this commit
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, "GuidNullData", StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, "GuidNullData"))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [GuidNullData] (
                         [ID] int NOT NULL,
@@ -177,7 +177,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         if (sql.GetType().Name is { } name && (name.Contains("Postgre") || name.Contains("Npgsql")))
             return;
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, "CommonDateTimeNullTestData", StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, "CommonDateTimeNullTestData"))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [CommonDateTimeNullTestData] (
                         [ID] int NOT NULL,
@@ -273,18 +273,20 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, "DateTimeOnlyTable", StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, nameof(DateTimeOnlyTable)))
         {
-            await PerformCreateTableAsync(sql, $@"CREATE TABLE [DateTimeOnlyTable] (
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(DateTimeOnlyTable)}] (
                         [TOnly] {TimeOnlyDbType} NOT NULL,
                         [DOnly] {DateOnlyDbType} NOT NULL,
                         [DOffset] {DateTimeOffsetDbType} NOT NULL
             )");
         }
+        else
+        {
+            await sql.TruncateAsync<DateTimeOnlyTable>();
+        }
 
-        await sql.TruncateAsync<DateTimeOnlyTable>();
-
-        await sql.InsertAsync(new DateTimeOnlyTable() { DOnly = new DateOnly(2021, 1, 1), TOnly = new TimeOnly(1, 2, 3), DOffset = new DateTimeOffset(2023, 1, 1, 1, 1, 1, TimeSpan.Zero) });
+        await sql.InsertAsync(new DateTimeOnlyTable() { DOnly = new DateOnly(2021, 1, 1), TOnly = new TimeOnly(1, 2, 3), DOffset = new DateTimeOffset(2023, 1, 1, 1, 1, 1, TimeSpan.Zero) }, trace: new DiagnosticsTracer());
 
         Assert.IsNotEmpty(await sql.QueryAllAsync<DateTimeOnlyTable>());
 
@@ -316,12 +318,12 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, "WithComputed", StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, "WithComputed"))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithComputed] (
                         [ID] int NOT NULL,
                         [Writable] {VarCharName}(128) NOT NULL,
-                        [Computed] {GeneratedColumnDefinition("CONCAT('-', CONCAT([Writable], '-'))", $"{VarCharName}(130)")}
+                        [Computed] {GeneratedColumnDefinition("CONCAT('--', [Writable])", $"{VarCharName}(130)")}
             )");
         }
         else
@@ -338,7 +340,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
         Assert.AreEqual(1, r.ID);
         Assert.AreEqual("a", r.Writable);
-        Assert.AreEqual("-a-", r.Computed);
+        Assert.AreEqual("--a", r.Computed);
 
         await sql.QueryAllAsync<WithComputed>(orderBy: [OrderField.Parse<WithComputed>(x => x.Computed, Order.Ascending)]);
 
@@ -347,7 +349,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             {
                 Writable = "b"
             },
-            where: x => x.Computed == "-a-",
+            where: x => x.Computed == "--a",
             trace: new DiagnosticsTracer());
     }
 
@@ -383,7 +385,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, "WithGroupByItems", StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, "WithGroupByItems"))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithGroupByItems] (
                         [ID] int NOT NULL,
@@ -417,7 +419,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, IntNotNullable, StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, nameof(IntNotNullable)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{IntNotNullable}] (
                         [ID] int NOT NULL,
@@ -448,7 +450,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, nameof(FieldLengthTable), StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, nameof(FieldLengthTable)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(FieldLengthTable)}] (
                     [ID] {VarCharName}(36) NOT NULL,
@@ -530,7 +532,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         if (sql.GetType().Name.Contains("iteConnection"))
             return;
 
-        if (!GetAllTables(sql).Any(x => string.Equals(x, nameof(MorePrimaryKeyTable), StringComparison.OrdinalIgnoreCase)))
+        if (!await TableExistsAsync(sql, nameof(MorePrimaryKeyTable)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(MorePrimaryKeyTable)}] (
                     [ID] {VarCharName}(20) NOT NULL,

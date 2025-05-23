@@ -1,0 +1,38 @@
+<Solution>
+  <Folder Name="/Source/">
+    <Project Path="src/RepoDb.Analyzer/RepoDb.Analyzer.csproj" />
+    <Project Path="src/RepoDb.MySql/RepoDb.MySql.csproj" />
+    <Project Path="src/RepoDb.MySqlConnector/RepoDb.MySqlConnector.csproj" />
+    <Project Path="src/RepoDb.Oracle/RepoDb.Oracle.csproj" />
+    <Project Path="src/RepoDb.PostgreSql.BulkOperations/RepoDb.PostgreSql.BulkOperations.csproj" />
+    <Project Path="src/RepoDb.PostgreSql/RepoDb.PostgreSql.csproj" />
+    <Project Path="src/RepoDb.Sqlite.Microsoft/RepoDb.Sqlite.Microsoft.csproj" />
+    <Project Path="src/RepoDb.SQLite.System/RepoDb.SQLite.System.csproj" />
+    <Project Path="src/RepoDb.SqlServer.BulkOperations/RepoDb.SqlServer.BulkOperations.csproj" />
+    <Project Path="src/RepoDb.SqlServer/RepoDb.SqlServer.csproj" />
+    <Project Path="src/RepoDb/RepoDb.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="src/RepoDb.Core.IntegrationTests/RepoDb.Core.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.Core.UnitTests/RepoDb.Core.UnitTests.csproj" />
+    <Project Path="src/RepoDb.MySql.IntegrationTests/RepoDb.MySql.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.MySql.UnitTests/RepoDb.MySql.UnitTests.csproj" />
+    <Project Path="src/RepoDb.MySqlConnector.IntegrationTests/RepoDb.MySqlConnector.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.MySqlConnector.UnitTests/RepoDb.MySqlConnector.UnitTests.csproj" />
+    <Project Path="src/RepoDb.PostgreSql.BulkOperations.IntegrationTests/RepoDb.PostgreSql.BulkOperations.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.PostgreSql.IntegrationTests/RepoDb.PostgreSql.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.PostgreSql.UnitTests/RepoDb.PostgreSql.UnitTests.csproj" />
+    <Project Path="src/RepoDb.Sqlite.Microsoft.IntegrationTests/RepoDb.Sqlite.Microsoft.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.Sqlite.Microsoft.UnitTests/RepoDb.Sqlite.Microsoft.UnitTests.csproj" />
+    <Project Path="src/RepoDb.SQLite.System.IntegrationTests/RepoDb.SQLite.System.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.SQLite.System.UnitTests/RepoDb.SQLite.System.UnitTests.csproj" />
+    <Project Path="src/RepoDb.SqlServer.BulkOperations.IntegrationTests/RepoDb.SqlServer.BulkOperations.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.SqlServer.IntegrationTests/RepoDb.SqlServer.IntegrationTests.csproj" />
+    <Project Path="src/RepoDb.SqlServer.UnitTests/RepoDb.SqlServer.UnitTests.csproj" />
+    <Project Path="src/RepoDb.TestCore/RepoDb.TestCore.csproj" />
+  </Folder>
+  <Folder Name="/Z-Benchmarks/">
+    <Project Path="src/RepoDb.Benchmarks.PostgreSql/RepoDb.Benchmarks.PostgreSql.csproj" />
+  </Folder>
+  <Folder Name="/Z-DirectoryFiles/" />
+</Solution>

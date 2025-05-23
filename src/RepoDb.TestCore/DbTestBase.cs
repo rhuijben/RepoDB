@@ -1,6 +1,6 @@
-﻿using System.Data;
-using System.Data.Common;
+﻿using System.Data.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RepoDb.Enumerations;
 
 namespace RepoDb.TestCore;
 
@@ -47,12 +47,12 @@ public abstract class DbTestBase<TDbInstance> where TDbInstance : DbInstance, ne
         }
     }
 
-    protected virtual string SchemaDatabaseColumnName => "Catalog";
-
-    public IEnumerable<string> GetAllTables(DbConnection sql)
+    public async ValueTask<bool> TableExistsAsync(DbConnection sql, string tableName)
     {
-        sql.EnsureOpen();
+        await sql.EnsureOpenAsync();
 
-        return sql.GetDbHelper().GetSchemaObjects(sql).Where(t => t.Type == Enumerations.DbSchemaType.Table).Select(x => x.Name).ToArray();
+        var tables = await sql.GetDbHelper().GetSchemaObjectsAsync(sql);
+
+        return tables.Any(x => x.Type == DbSchemaType.Table && x.Name == tableName);
     }
 }
