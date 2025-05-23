@@ -843,7 +843,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
                     Explore(qg);
                 }
             }
-        };
+        }
 
         // Explore
         Explore(this);

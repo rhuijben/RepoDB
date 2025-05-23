@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿#nullable enable
+using System.Diagnostics.CodeAnalysis;
 using RepoDb.Interfaces;
 
 namespace RepoDb.Extensions;
@@ -38,8 +39,21 @@ public static class FieldExtension
     /// <returns></returns>
     private static string AsParameter(this Field field,
         int index,
-        IDbSetting dbSetting) =>
+        IDbSetting? dbSetting) =>
         field.Name.AsParameter(index, dbSetting);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="field"></param>
+    /// <param name="index"></param>
+    /// <param name="dbSetting"></param>
+    /// <returns></returns>
+    private static string AsParameter(this Field field,
+        int index,
+        bool quote,
+        IDbSetting? dbSetting) =>
+        field.Name.AsParameter(index, quote, dbSetting);
 
     /// <summary>
     /// 
@@ -62,8 +76,9 @@ public static class FieldExtension
     /// <returns></returns>
     private static string AsParameterAsField(this Field field,
         int index,
+        bool quote,
         IDbSetting dbSetting) =>
-        field.Name.AsParameterAsField(index, dbSetting);
+        field.Name.AsParameterAsField(index, quote, dbSetting);
 
     /// <summary>
     /// 
@@ -74,8 +89,9 @@ public static class FieldExtension
     /// <returns></returns>
     private static string AsFieldAndParameter(this Field field,
         int index,
+        bool quote,
         IDbSetting dbSetting) =>
-        field.Name.AsFieldAndParameter(index, dbSetting);
+        field.Name.AsFieldAndParameter(index, quote, dbSetting);
 
     /// <summary>
     /// 
@@ -115,7 +131,7 @@ public static class FieldExtension
     /// <returns></returns>
     internal static IEnumerable<string> AsFields(this IEnumerable<Field> fields,
         IDbSetting dbSetting) =>
-        fields?.Select(field => field.AsField(dbSetting));
+        fields.Select(field => field.AsField(dbSetting));
 
     /// <summary>
     /// 
@@ -127,7 +143,21 @@ public static class FieldExtension
     internal static IEnumerable<string> AsParameters(this IEnumerable<Field> fields,
         int index,
         IDbSetting dbSetting) =>
-        fields?.Select(field => field.AsParameter(index, dbSetting));
+        fields.Select(field => field.AsParameter(index, dbSetting));
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="fields"></param>
+    /// <param name="index"></param>
+    /// <param name="dbSetting"></param>
+    /// <returns></returns>
+    internal static IEnumerable<string> AsParameters(this IEnumerable<Field> fields,
+        int index,
+        bool quote,
+        IDbSetting dbSetting) =>
+        fields.Select(field => field.AsParameter(index, quote, dbSetting));
 
     /// <summary>
     /// 
@@ -139,19 +169,20 @@ public static class FieldExtension
     internal static IEnumerable<string> AsAliasFields(this IEnumerable<Field> fields,
         string alias,
         IDbSetting dbSetting) =>
-        fields?.Select(field => field.AsAliasField(alias, dbSetting));
+        fields.Select(field => field.AsAliasField(alias, dbSetting));
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="fields"></param>
     /// <param name="index"></param>
-    /// <param name="dbSetting"></param>
+    /// <param name="quote"></param>
     /// <returns></returns>
+    /// <param name="dbSetting"></param>
     internal static IEnumerable<string> AsParametersAsFields(this IEnumerable<Field> fields,
         int index,
-        IDbSetting dbSetting) =>
-        fields?.Select(field => field.AsParameterAsField(index, dbSetting));
+        bool quote, IDbSetting dbSetting) =>
+        fields.Select(field => field.AsParameterAsField(index, quote, dbSetting));
 
     /// <summary>
     /// 
@@ -162,8 +193,9 @@ public static class FieldExtension
     /// <returns></returns>
     internal static IEnumerable<string> AsFieldsAndParameters(this IEnumerable<Field> fields,
         int index,
+        bool quote,
         IDbSetting dbSetting) =>
-        fields?.Select(field => field.AsFieldAndParameter(index, dbSetting));
+        fields.Select(field => field.AsFieldAndParameter(index, quote, dbSetting));
 
     /// <summary>
     /// 
@@ -177,6 +209,6 @@ public static class FieldExtension
         string leftAlias,
         string rightAlias,
         IDbSetting dbSetting) =>
-        fields?.Select(field => field.AsFieldAndAliasField(leftAlias, rightAlias, dbSetting));
+        fields.Select(field => field.AsFieldAndAliasField(leftAlias, rightAlias, dbSetting));
 }
 

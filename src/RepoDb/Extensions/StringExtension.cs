@@ -9,9 +9,19 @@ namespace RepoDb.Extensions;
 /// <summary>
 /// Contains the extension methods for <see cref="String"/>.
 /// </summary>
-public static class StringExtension
+public static partial class StringExtension
 {
-    private static readonly Regex alphaNumericRegex = new(@"[^a-zA-Z0-9]", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+#if NET9_0_OR_GREATER
+    [GeneratedRegex(@"[^a-zA-Z0-9]", RegexOptions.ExplicitCapture)]
+    private static partial
+#else
+    private static
+#endif
+    Regex AlphaNumericRegex
+    { get; }
+#if !NET9_0_OR_GREATER
+        = new(@"[^a-zA-Z0-9]", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+#endif
 
     /// <summary>
     /// Joins an array string with a given separator.
@@ -63,7 +73,7 @@ public static class StringExtension
             value = value.Trim();
         }
 
-        return alphaNumericRegex.Replace(value, "_");
+        return AlphaNumericRegex.Replace(value, "_");
     }
 
     /// <summary>
@@ -302,7 +312,7 @@ public static class StringExtension
     /// <param name="value">The string to be converted.</param>
     /// <returns>The string value represented as database parameter.</returns>
     public static string AsParameter(this string value) =>
-        AsParameter(value, 0, null);
+        AsParameter(value, 0, false, null);
 
     /// <summary>
     /// Returns the string as a parameter name in the database.
@@ -311,8 +321,15 @@ public static class StringExtension
     /// <param name="dbSetting">The <see cref="IDbSetting"/> object to be used.</param>
     /// <returns>The string value represented as database parameter.</returns>
     public static string AsParameter(this string value,
-        IDbSetting dbSetting) =>
-        AsParameter(value, 0, dbSetting);
+        IDbSetting? dbSetting) =>
+        AsParameter(value, 0, false, dbSetting);
+
+    public static string AsParameter(this string value, bool quoteParameters, IDbSetting? dbSetting) =>
+        AsParameter(value, 0, quoteParameters, dbSetting);
+
+    public static string AsParameter(this string value,
+        int index,
+        IDbSetting? dbSetting) => AsParameter(value, index, false, dbSetting);
 
     /// <summary>
     /// Returns the string as a parameter name in the database.
@@ -323,33 +340,25 @@ public static class StringExtension
     /// <returns>The string value represented as database parameter.</returns>
     public static string AsParameter(this string value,
         int index,
+        bool quote,
         IDbSetting? dbSetting)
     {
         var parameterPrefix = dbSetting?.ParameterPrefix ?? "@";
+        quote = quote && dbSetting?.QuoteParameterNames == true;
+
+        if (quote)
+            parameterPrefix += dbSetting!.OpeningQuote;
 
         value = string.Concat(parameterPrefix,
             (value.StartsWith(parameterPrefix, StringComparison.OrdinalIgnoreCase) ? value.Substring(1) : value)
             .AsUnquoted(true, dbSetting).AsAlphaNumeric());
         value = index > 0 ? string.Concat(value, "_", index.ToString(CultureInfo.InvariantCulture)) : value;
 
+        if (quote)
+            value += dbSetting!.ClosingQuote;
+
         return value;
     }
-
-#if !NET
-    /// <summary>
-    /// Returns a value indicating whether a specified string occurs within this string, using the specified comparison rules.
-    /// </summary>
-    /// <param name="value">The string to be contained.</param>
-    /// <param name="stringToSeek">The string to seek.</param>
-    /// <param name="comparisonType">One of the enumeration values that specifies the rules to use in the comparison.</param>
-    /// <returns>true if the value parameter occurs within this string, or if value is the empty string (""); otherwise, false.</returns>
-    public static bool Contains(this string value,
-        string stringToSeek,
-        StringComparison comparisonType)
-    {
-        return value?.IndexOf(stringToSeek, comparisonType) >= 0;
-    }
-#endif
 
     /// <summary>
     /// 
@@ -423,8 +432,9 @@ public static class StringExtension
     /// <returns></returns>
     internal static string AsParameterAsField(this string value,
         int index,
+        bool quote,
         IDbSetting dbSetting) =>
-        string.Concat(AsParameter(value, index, dbSetting), " AS ", AsField(value, dbSetting));
+        string.Concat(AsParameter(value, index, quote, dbSetting), " AS ", AsField(value, dbSetting));
 
     /// <summary>
     /// 
@@ -435,8 +445,9 @@ public static class StringExtension
     /// <returns></returns>
     internal static string AsFieldAndParameter(this string value,
         int index,
+        bool quote,
         IDbSetting dbSetting) =>
-        string.Concat(AsField(value, dbSetting), " = ", AsParameter(value, index, dbSetting));
+        string.Concat(AsField(value, dbSetting), " = ", AsParameter(value, index, quote, dbSetting));
 
     /// <summary>
     /// 

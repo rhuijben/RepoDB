@@ -1,5 +1,7 @@
-﻿using System.Collections.Concurrent;
+﻿#nullable enable
+using System.Collections.Concurrent;
 using System.Data;
+using RepoDb.DbSettings;
 using RepoDb.Exceptions;
 using RepoDb.Interfaces;
 
@@ -12,7 +14,7 @@ public static class DbSettingMapper
 {
     #region Privates
 
-    private static readonly ConcurrentDictionary<Type, IDbSetting> maps = new();
+    private static readonly ConcurrentDictionary<Type, BaseDbSetting> maps = new();
 
     #endregion
 
@@ -39,16 +41,16 @@ public static class DbSettingMapper
         {
             if (force)
             {
-                maps.TryUpdate(type, dbSetting, existing);
+                maps.TryUpdate(type, (BaseDbSetting)dbSetting, existing);
             }
             else
             {
-                throw new MappingExistsException(type.FullName);
+                throw new MappingExistsException(type.FullName!);
             }
         }
         else
         {
-            maps.TryAdd(type, dbSetting);
+            maps.TryAdd(type, (BaseDbSetting)dbSetting);
         }
     }
 
@@ -61,7 +63,7 @@ public static class DbSettingMapper
     /// </summary>
     /// <typeparam name="TDbConnection">The type of <see cref="IDbConnection"/>.</typeparam>
     /// <returns>The instance of existing mapped <see cref="IDbSetting"/> object.</returns>
-    public static IDbSetting Get<TDbConnection>()
+    public static IDbSetting? Get<TDbConnection>()
         where TDbConnection : IDbConnection
     {
         // get the value
@@ -77,7 +79,7 @@ public static class DbSettingMapper
     /// <typeparam name="TDbConnection">The type of <see cref="IDbConnection"/>.</typeparam>
     /// <param name="connection">The instance of <see cref="IDbConnection"/>.</param>
     /// <returns>The instance of existing mapped <see cref="IDbSetting"/> object.</returns>
-    public static IDbSetting Get<TDbConnection>(TDbConnection connection)
+    public static IDbSetting? Get<TDbConnection>(TDbConnection connection)
         where TDbConnection : IDbConnection
     {
         // get the value

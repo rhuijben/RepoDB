@@ -141,7 +141,15 @@ public class QueryBuilder
     /// Appends a character ";" to the SQL Query Statement.
     /// </summary>
     /// <returns>The current instance.</returns>
-    public QueryBuilder End() => Append(";");
+    public QueryBuilder End() => End(null);
+
+    public QueryBuilder End(IDbSetting? dbSetting)
+    {
+        if (dbSetting?.GenerateFinalSemiColon != false)
+            return Append(";");
+        else
+            return this;
+    }
 
     /// <summary>
     /// Appends a word AVG to the SQL Query Statement.
@@ -347,7 +355,7 @@ public class QueryBuilder
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
     public QueryBuilder FieldsAndParametersFrom(IEnumerable<Field> fields, int index, IDbSetting dbSetting) =>
-        AppendJoin(fields?.AsFieldsAndParameters(index, dbSetting));
+        AppendJoin(fields?.AsFieldsAndParameters(index, true, dbSetting));
 
     /// <summary>
     /// Appends a stringified fields and parameters to the SQL Query Statement with aliases.
@@ -439,7 +447,7 @@ public class QueryBuilder
             .Append(')')
             .Append(queryField.Operation.GetText())
             .Append(',')
-            .Append(queryField.AsParameter(index, dbSetting));
+            .Append(queryField.AsParameter(index, false, dbSetting));
     }
 
     /// <summary>
@@ -604,7 +612,7 @@ public class QueryBuilder
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
     public QueryBuilder ParametersFrom(IEnumerable<Field> fields, int index, IDbSetting dbSetting) =>
-        AppendJoin(fields?.AsParameters(index, dbSetting));
+        AppendJoin(fields?.AsParameters(index, true, dbSetting));
 
     /// <summary>
     /// Append the stringified parameter as fields to the SQL Query Statement.
@@ -632,7 +640,7 @@ public class QueryBuilder
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
     public QueryBuilder ParametersAsFieldsFrom(IEnumerable<Field> fields, int index, IDbSetting dbSetting) =>
-        AppendJoin(fields?.AsParametersAsFields(index, dbSetting));
+        AppendJoin(fields?.AsParametersAsFields(index, false, dbSetting));
 
     /// <summary>
     /// Appends a word SELECT to the SQL Query Statement.
@@ -816,7 +824,7 @@ public class QueryBuilder
         if (fields.IsNullOrEmpty()) return this;
 
         return Append("WHERE (")
-            .AppendJoin(fields.Select(f => f.Name.AsFieldAndParameter(index, dbSetting)), " AND ", false)
+            .AppendJoin(fields.Select(f => f.Name.AsFieldAndParameter(index, true, dbSetting)), " AND ", false)
             .Append(')');
     }
 

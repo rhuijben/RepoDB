@@ -33,6 +33,7 @@ public abstract class BaseDbSetting : IDbSetting
         IsUseUpsert = false;
         OpeningQuote = "[";
         ParameterPrefix = "@";
+        GenerateFinalSemiColon = true;
     }
 
     #endregion
@@ -42,67 +43,74 @@ public abstract class BaseDbSetting : IDbSetting
     /// <summary>
     /// Gets the value that indicates whether the table hints are supported.
     /// </summary>
-    public bool AreTableHintsSupported { get; protected set; }
+    public bool AreTableHintsSupported { get; protected init; }
 
     /// <summary>
     /// Gets the character (or string) used for closing quote.
     /// </summary>
-    public string ClosingQuote { get; protected set; }
+    public string ClosingQuote { get; protected init; }
 
     /// <summary>
     /// Gets the default averageable .NET CLR types for the database.
     /// </summary>
-    public Type AverageableType { get; protected set; }
+    public Type AverageableType { get; protected init; }
 
     /// <summary>
     /// Gets the default schema of the database.
     /// </summary>
-    public string DefaultSchema { get; protected set; }
+    public string DefaultSchema { get; protected init; }
 
     /// <summary>
     /// Gets a value that indicates whether setting of the value of <see cref="DbParameter.Direction"/> object is supported.
     /// </summary>
-    public bool IsDirectionSupported { get; protected set; }
+    public bool IsDirectionSupported { get; protected init; }
 
     /// <summary>
     /// Gets a value that indicates whether the <see cref="DbCommand"/> object must be disposed after calling the <see cref="DbCommand.ExecuteReader()"/> method.
     /// </summary>
-    public bool IsExecuteReaderDisposable { get; protected set; }
+    public bool IsExecuteReaderDisposable { get; protected init; }
 
     /// <summary>
     /// Gets a value whether the multiple statement execution is supported.
     /// </summary>
-    public bool IsMultiStatementExecutable { get; protected set; }
+    public bool IsMultiStatementExecutable { get; protected init; }
 
     /// <summary>
     /// Gets a value that indicates whether the current DB Provider supports the <see cref="DbCommand.Prepare()"/> calls.
     /// </summary>
-    public bool IsPreparable { get; protected set; }
+    public bool IsPreparable { get; protected init; }
 
     /// <summary>
     /// Gets a value that indicates whether the Insert/Update operation will be used for Merge operation.
     /// </summary>
-    public bool IsUseUpsert { get; protected set; }
+    public bool IsUseUpsert { get; protected init; }
 
     /// <summary>
     /// Gets the character (or string) used for opening quote.
     /// </summary>
-    public string OpeningQuote { get; protected set; }
+    public string OpeningQuote { get; protected init; }
 
     /// <summary>
     /// Gets the character (or string) used for the database command parameter quoting.
     /// </summary>
-    public string ParameterPrefix { get; protected set; }
+    public string ParameterPrefix { get; protected init; }
 
     /// <summary>
     ///
     /// </summary>
-    public bool ForceAutomaticConversions { get; protected set; }
+    public bool ForceAutomaticConversions { get; protected init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public int ParameterBatchCount { get; protected set; } = 2100 - 2;
+    public int ParameterBatchCount { get; protected init; } = 2100 - 2;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool GenerateFinalSemiColon { get; protected init; }
+
+    public bool QuoteParameterNames { get; protected init; }
 
     #endregion
 

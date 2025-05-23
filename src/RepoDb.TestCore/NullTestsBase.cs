@@ -44,10 +44,10 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
         if (!GetAllTables(sql).Any(x => string.Equals(x, "CommonNullTestData", StringComparison.OrdinalIgnoreCase)))
         {
-            var sqlText = @"CREATE TABLE [CommonNullTestData] (
+            var sqlText = @$"CREATE TABLE [CommonNullTestData] (
                         [ID] int NOT NULL,
-                        [Txt] varchar(128) NOT NULL,
-                        [TxtNull] varchar(128) NULL,
+                        [Txt] {VarCharName}(128) NOT NULL,
+                        [TxtNull] {VarCharName}(128) NULL,
                         [Nr] int NOT NULL,
                         [NrNull] int NULL
                 )";
@@ -118,6 +118,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
     public virtual string UuidDbType => "[uniqueidentifier]";
     public virtual string BlobDbType => "varbinary(128)";
+    public virtual string TextDbType => "TEXT";
 
     [TestMethod]
     public async Task GuidNullTest()
@@ -127,24 +128,15 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
 
         if (!GetAllTables(sql).Any(x => string.Equals(x, "GuidNullData", StringComparison.OrdinalIgnoreCase)))
         {
-            var sqlText = $@"CREATE TABLE [GuidNullData] (
+            await PerformCreateTableAsync(sql, $@"CREATE TABLE [GuidNullData] (
                         [ID] int NOT NULL,
-                        [Txt] TEXT NOT NULL,
-                        [TxtNull] varchar(128) NULL,
+                        [Txt] {TextDbType} NOT NULL,
+                        [TxtNull] {VarCharName}(128) NULL,
                         [Uuid] {UuidDbType} NOT NULL,
                         [UuidNull] {UuidDbType} NULL,
                         [BlobData] {BlobDbType} NOT NULL,
                         [BlobDataNull] {BlobDbType} NULL
-                )";
-
-            var set = sql.GetDbSetting();
-
-            if (set.OpeningQuote != "[")
-                sqlText = sqlText.Replace("[", set.OpeningQuote);
-            if (set.ClosingQuote != "]")
-                sqlText = sqlText.Replace("]", set.ClosingQuote);
-
-            await sql.ExecuteNonQueryAsync(sqlText);
+                )");
         }
 
         var t = await sql.BeginTransactionAsync();
@@ -189,7 +181,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [CommonDateTimeNullTestData] (
                         [ID] int NOT NULL,
-                        [Txt] varchar(128) NULL,
+                        [Txt] {VarCharName}(128) NULL,
                         [Date] {DateTimeDbType} NULL
                 )");
         }
@@ -201,7 +193,9 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             {
                 new DateTestData(){ ID = 1, Txt = new DateTime(2001, 1,1,1,1,1, DateTimeKind.Utc), Date = new DateTime(2002, 1,2,2,2,2, DateTimeKind.Utc)},
                 new DateTestData(){ ID = 2, Txt =null, Date = null }
-            }, transaction: t);
+            },
+            trace: new DiagnosticsTracer(),
+            transaction: t);
         await sql.InsertAllAsync(
             new[]
             {
@@ -255,6 +249,8 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             sqlText = sqlText.Replace("[", set.OpeningQuote);
         if (set.ClosingQuote != "]")
             sqlText = sqlText.Replace("]", set.ClosingQuote);
+        if (set.ParameterPrefix != "@")
+            sqlText = sqlText.Replace("@", set.ParameterPrefix);
         return sqlText;
     }
 
@@ -324,15 +320,18 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithComputed] (
                         [ID] int NOT NULL,
-                        [Writable] varchar(128) NOT NULL,
-                        [Computed] {GeneratedColumnDefinition("CONCAT('-', [Writable], '-')", "varchar(130)")}
+                        [Writable] {VarCharName}(128) NOT NULL,
+                        [Computed] {GeneratedColumnDefinition("CONCAT('-', CONCAT([Writable], '-'))", $"{VarCharName}(130)")}
             )");
+        }
+        else
+        {
+            await sql.TruncateAsync<WithComputed>(trace: new DiagnosticsTracer());
         }
 
         var fields = await DbFieldCache.GetAsync(sql, nameof(WithComputed), transaction: null);
         Assert.AreEqual(true, fields.First(x => x.Name == "Computed").IsGenerated);
 
-        await sql.TruncateAsync<WithComputed>();
         await sql.InsertAsync(new WithComputed() { ID = 1, Writable = "a" });
 
         var r = (await sql.QueryAllAsync<WithComputed>()).FirstOrDefault();
@@ -348,7 +347,8 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             {
                 Writable = "b"
             },
-            where: x => x.Computed == "-a-");
+            where: x => x.Computed == "-a-",
+            trace: new DiagnosticsTracer());
     }
 
     [TestMethod]
@@ -387,7 +387,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithGroupByItems] (
                         [ID] int NOT NULL,
-                        [Txt] varchar(128) NOT NULL,
+                        [Txt] {VarCharName}(128) NOT NULL,
                         [Nr] int NOT NULL
             )");
         }
@@ -451,7 +451,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         if (!GetAllTables(sql).Any(x => string.Equals(x, nameof(FieldLengthTable), StringComparison.OrdinalIgnoreCase)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(FieldLengthTable)}] (
-                    [ID] varchar(36) NOT NULL,
+                    [ID] {VarCharName}(36) NOT NULL,
                     [ID2] {AltVarChar}(37) NOT NULL,
                     [VAL3] {AltVarChar}(38) NULL,
                     CONSTRAINT [PK_{nameof(FieldLengthTable)}] PRIMARY KEY
@@ -533,7 +533,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         if (!GetAllTables(sql).Any(x => string.Equals(x, nameof(MorePrimaryKeyTable), StringComparison.OrdinalIgnoreCase)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(MorePrimaryKeyTable)}] (
-                    [ID] VARCHAR(20) NOT NULL,
+                    [ID] {VarCharName}(20) NOT NULL,
                     [ID2] {IdentityDefinition},
                     [Value] {AltVarChar}(38) NULL,
                     CONSTRAINT [PK_{nameof(MorePrimaryKeyTable)}] PRIMARY KEY
@@ -555,13 +555,14 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         Assert.AreEqual("ID", id1?.Name);
         Assert.AreEqual("ID2", id2?.Name);
         Assert.AreEqual("Value", val3?.Name);
-        Assert.AreEqual(typeof(string), id1?.Type);
-        Assert.AreEqual(typeof(int), id2?.Type);
-        Assert.AreEqual(typeof(string), val3?.Type);
 
         Assert.AreEqual(VarCharName, id1?.DatabaseType);
         //Assert.AreEqual("INT", id2?.DatabaseType); // Or 'int' or 'integer', or ...
         Assert.AreEqual(AltVarChar == "varchar" ? VarCharName : AltVarChar, val3?.DatabaseType);
+
+        Assert.AreEqual(typeof(string), id1?.Type);
+        Assert.IsTrue(id2?.Type == typeof(int) || id2?.Type == typeof(decimal));
+        Assert.AreEqual(typeof(string), val3?.Type);
 
         Assert.AreEqual(true, id1?.IsPrimary);
         Assert.AreEqual(true, id2?.IsPrimary);

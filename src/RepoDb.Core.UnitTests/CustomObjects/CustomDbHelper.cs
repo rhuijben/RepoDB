@@ -52,9 +52,8 @@ public class CustomDbHelper : IDbHelper
     {
         return [];
     }
-
-    public async Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    public Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
     {
-        return [];
+        return Task.FromResult(Enumerable.Empty<DbSchemaObject>());
     }
 }

@@ -6,27 +6,44 @@ using System.Runtime.CompilerServices;
 namespace System.Runtime.CompilerServices
 {
 
-// Required to allow init properties in netstandard
-internal sealed class IsExternalInit : Attribute
-{
-}
+    // Required to allow init properties in netstandard
+    internal sealed class IsExternalInit : Attribute
+    {
+    }
 }
 
 namespace System
 {
 
-internal static class CompatExtensions
-{
-    public static bool StartsWith(this string v, char value)
+    internal static class CompatExtensions
     {
-        return v.Length > 0 && v[0] == value;
-    }
+        public static bool StartsWith(this string v, char value)
+        {
+            return v.Length > 0 && v[0] == value;
+        }
 
-    public static bool EndsWith(this string v, char value)
-    {
-        return v.Length > 0 && v[v.Length-1] == value;
+        public static bool EndsWith(this string v, char value)
+        {
+            return v.Length > 0 && v[v.Length-1] == value;
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether a specified string occurs within this string, using the specified comparison rules.
+        /// </summary>
+        /// <param name="value">The string to be contained.</param>
+        /// <param name="stringToSeek">The string to seek.</param>
+        /// <param name="comparisonType">One of the enumeration values that specifies the rules to use in the comparison.</param>
+        /// <returns>true if the value parameter occurs within this string, or if value is the empty string (""); otherwise, false.</returns>
+        public static bool Contains(this string value,
+            string stringToSeek,
+            StringComparison comparisonType)
+        {
+            if (comparisonType == StringComparison.Ordinal)
+                return value.Contains(stringToSeek);
+            else
+                return value.IndexOf(stringToSeek, comparisonType) >= 0;
+        }
     }
-}
 
 }
 

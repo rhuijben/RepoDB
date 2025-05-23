@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿#nullable enable
+using System.Globalization;
 using RepoDb.Interfaces;
 
 namespace RepoDb.Extensions;
@@ -35,7 +36,7 @@ public static class QueryFieldExtension
     /// </summary>
     internal static void PrependAnUnderscoreAtParameter(this QueryField queryField)
     {
-        queryField.Parameter?.PrependAnUnderscore();
+        queryField.Parameter?.PrependAnUnderscoreAtParameter();
     }
 
     /// <summary>
@@ -65,11 +66,12 @@ public static class QueryFieldExtension
     /// </summary>
     /// <param name="queryField"></param>
     /// <param name="index"></param>
-    /// <param name="dbSetting"></param>
+    /// <param name="quote"></param>
     /// <returns></returns>
+    /// <param name="dbSetting"></param>
     internal static string AsParameter(this QueryField queryField,
         int index,
-        IDbSetting dbSetting) =>
+        bool quote, IDbSetting? dbSetting) =>
         queryField.Parameter.Name.AsParameter(index, dbSetting);
 
     /// <summary>
@@ -82,7 +84,7 @@ public static class QueryFieldExtension
     internal static string AsParameterAsField(this QueryField queryField,
         int index,
         IDbSetting dbSetting) =>
-        string.Concat(queryField.AsParameter(index, dbSetting), " AS ", queryField.AsField(dbSetting));
+        string.Concat(queryField.AsParameter(index, true, dbSetting), " AS ", queryField.AsField(dbSetting));
 
     /// <summary>
     /// 
@@ -111,9 +113,9 @@ public static class QueryFieldExtension
         string.IsNullOrWhiteSpace(functionFormat) ?
             string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Left AND ", queryField.Parameter.Name.AsParameter(index, dbSetting), "_Right") :
             string.Concat(
-                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Left")),
+                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting), "_Left")),
                 " AND ",
-                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Right")));
+                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting), "_Right")));
 
     /// <summary>
     /// 
@@ -145,8 +147,8 @@ public static class QueryFieldExtension
             .OfType<object>()
             .Select((_, valueIndex) =>
                 string.IsNullOrWhiteSpace(functionFormat) ?
-                    string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_In_", valueIndex.ToString(CultureInfo.InvariantCulture)) :
-                    string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_In_", valueIndex.ToString(CultureInfo.InvariantCulture))))
+                    string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting), "_In_", valueIndex.ToString(CultureInfo.InvariantCulture)) :
+                    string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting), "_In_", valueIndex.ToString(CultureInfo.InvariantCulture))))
             .Join(", ");
         return string.Concat("(", values, ")");
     }
@@ -209,7 +211,7 @@ public static class QueryFieldExtension
         }
         else
         {
-            return string.Concat(queryField.AsField(functionFormat, dbSetting), " ", queryField.Operation.GetText(), " ", queryField.AsInParameter(index /*, functionFormat*/, dbSetting));
+            return string.Concat(queryField.AsField(functionFormat, dbSetting), " ", queryField.Operation.GetText(), " ", queryField.AsInParameter(index, /*, functionFormat*/ dbSetting));
         }
     }
 }

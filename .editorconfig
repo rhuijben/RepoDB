@@ -17,6 +17,8 @@ indent_size = 2
 dotnet_separate_import_directive_groups = false
 dotnet_sort_system_directives_first = true
 
+csharp_style_namespace_declarations = file_scoped:suggestion
+
 [*.cs]
 # CS1574: XML comment has cref attribute that could not be resolved
 dotnet_diagnostic.CS1574.severity = none

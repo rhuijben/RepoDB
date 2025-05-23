@@ -73,4 +73,14 @@ public interface IDbSetting
     /// </summary>
     /// <remarks>SqlServer supports 2100-2 = 2098 parameters</remarks>
     int ParameterBatchCount { get; }
+
+    /// <summary>
+    /// This database provider allows a final semicolon in the command text
+    /// </summary>
+    bool GenerateFinalSemiColon { get; }
+
+    /// <summary>
+    /// Quote parameter names
+    /// </summary>
+    bool QuoteParameterNames { get; }
 }

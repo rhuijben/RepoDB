@@ -60,7 +60,7 @@ public sealed class Parameter : IEquatable<Parameter>
         DbType = dbType;
         if (prependUnderscore)
         {
-            PrependAnUnderscore();
+            PrependAnUnderscoreAtParameter();
         }
     }
 
@@ -100,11 +100,11 @@ public sealed class Parameter : IEquatable<Parameter>
     /// <summary>
     /// Prepend an underscore on the current parameter object.
     /// </summary>
-    internal void PrependAnUnderscore()
+    internal void PrependAnUnderscoreAtParameter()
     {
-        if (!Name.StartsWith("_", StringComparison.OrdinalIgnoreCase))
+        if (!Name.StartsWith('_'))
         {
-            Name = string.Concat("_", Name);
+            Name = '_' + Name;
         }
     }
 

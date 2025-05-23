@@ -177,7 +177,7 @@ public partial class QueryField : IEquatable<QueryField>
         // [Column] = @Column
         else
         {
-            return string.Concat(this.AsField(functionFormat, dbSetting), " ", Operation.GetText(), " ", this.AsParameter(index /*, functionFormat*/, dbSetting));
+            return string.Concat(this.AsField(functionFormat, dbSetting), " ", Operation.GetText(), " ", this.AsParameter(index /*, functionFormat*/, true, dbSetting));
         }
     }
 

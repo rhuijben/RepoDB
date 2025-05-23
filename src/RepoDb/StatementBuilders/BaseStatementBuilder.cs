@@ -91,7 +91,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .WhereFrom(where, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -140,7 +140,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .From()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -180,7 +180,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .WhereFrom(where, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -217,7 +217,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .From()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -255,7 +255,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .WhereFrom(where, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -290,7 +290,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .From()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -330,7 +330,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .WhereFrom(where, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -404,7 +404,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .OpenParen()
             .ParametersFrom(insertableFields, 0, DbSetting)
             .CloseParen()
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -516,7 +516,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .CloseParen()
             .OrderBy()
             .WriteText("__RepoDb_OrderColumn".AsQuoted(DbSetting))
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -564,7 +564,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .WhereFrom(where, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -609,7 +609,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .From()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -657,7 +657,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .WhereFrom(where, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -702,7 +702,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .From()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -755,7 +755,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .HintsFrom(hints)
             .WhereFrom(where, DbSetting)
             .OrderByFrom(orderBy, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -802,7 +802,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .OrderByFrom(orderBy, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -850,7 +850,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
             .WhereFrom(where, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -895,7 +895,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .From()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -923,7 +923,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .Truncate()
             .Table()
             .TableNameFrom(tableName, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -979,7 +979,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .Set()
             .FieldsAndParametersFrom(updatableFields, 0, DbSetting)
             .WhereFrom(where, DbSetting)
-            .End();
+            .End(DbSetting);
 
         // Return the query
         return builder.GetString();
@@ -1092,7 +1092,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
                 .Set()
                 .FieldsAndParametersFrom(fields, index, DbSetting)
                 .WhereFrom(qualifiers, index, DbSetting)
-                .End();
+                .End(DbSetting);
         }
 
         // Return the query

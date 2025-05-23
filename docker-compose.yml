@@ -21,3 +21,14 @@ services:
       - 127.0.0.1:43306:3306
     environment:
       MYSQL_ROOT_PASSWORD: ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2
+
+  oracle:
+    image: gvenzl/oracle-free:23-faststart
+    ports:
+      - 127.0.0.1:41521:1521
+      - 127.0.0.1:45500:5500
+    environment:
+      ORACLE_PASSWORD: "oracle"
+      ORACLE_ALLOW_REMOTE: "true"
+    restart: unless-stopped
+    shm_size: '1gb'

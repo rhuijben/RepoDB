@@ -531,16 +531,15 @@ public static partial class NpgsqlConnectionExtension
         IDbSetting dbSetting)
         where TEntity : class
     {
-        var identityDbField = dbFields?.GetIdentity();
         ClassProperty? property = null;
 
-        if (identityDbField != null)
+        if (dbFields?.GetIdentity() is { } identityDbField)
         {
             property = PropertyCache
                .Get<TEntity>()
                .FirstOrDefault(p =>
                    string.Equals(p.GetMappedName().AsUnquoted(true, dbSetting),
-                       identityDbField.Name.AsUnquoted(true, dbSetting), StringComparison.OrdinalIgnoreCase));
+                       identityDbField.Name, StringComparison.OrdinalIgnoreCase));
         }
 
         return property;

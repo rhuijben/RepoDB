@@ -1,6 +1,8 @@
+#nullable enable
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -698,6 +700,14 @@ internal sealed partial class Compiler
                 if (result.Type != underlyingToType)
                     result = Expression.Convert(result, underlyingToType);
             }
+            else if (underlyingToType == StaticType.Decimal)
+            {
+                // Oracle loves decimal
+                result = Expression.Convert(result, Enum.GetUnderlyingType(underlyingFromType));
+
+                if (result.Type != underlyingToType)
+                    result = Expression.Convert(result, underlyingToType);
+            }
             else
                 return result; // Will fail
         }
@@ -799,7 +809,7 @@ internal sealed partial class Compiler
 
     static MethodInfo GetMethodInfo(Expression<Action> call)
     {
-        return (call.Body as MethodCallExpression).Method;
+        return ((MethodCallExpression)call.Body).Method;
     }
 
     static bool StrictParseBoolean(string? value)
@@ -912,21 +922,40 @@ internal sealed partial class Compiler
     /// <param name="expression"></param>
     /// <param name="toEnumType"></param>
     /// <returns></returns>
-    private static Expression ConvertExpressionToEnumExpressionForString(Expression expression,
-        Type toEnumType)
+    private static Expression ConvertExpressionToEnumExpressionForString(Expression expression, Type toEnumType)
     {
-        var func = ((GlobalConfiguration.Options.EnumHandling is InvalidEnumValueHandling.Cast || toEnumType.GetCustomAttribute<FlagsAttribute>() is { }) ? GetEnumParseNullMethod() : GetEnumParseNullDefinedMethod()).MakeGenericMethod(toEnumType);
-        return Expression.Coalesce(
-                    Expression.Call(func, expression),
+        var options = GlobalConfiguration.Options.EnumHandling;
+        var parseMethod = (
+            options is InvalidEnumValueHandling.Cast || toEnumType.GetCustomAttribute<FlagsAttribute>() is not null
+                ? GetEnumParseNullMethod()
+                : GetEnumParseNullDefinedMethod()
+        ).MakeGenericMethod(toEnumType);
 
-                    (GlobalConfiguration.Options.EnumHandling == InvalidEnumValueHandling.UseDefault)
-                    ? Expression.Default(toEnumType)
-                    : Expression.Throw(Expression.New(
-                        typeof(ArgumentOutOfRangeException).GetConstructor(new[] { StaticType.String, StaticType.Object, StaticType.String }),
-                        Expression.Constant("value"),
-                        expression,
-                        Expression.Constant($"Invalid value for {toEnumType.Name}")),
-                        toEnumType));
+        var parseCall = Expression.Call(parseMethod, expression);
+
+        Expression fallbackExpression;
+        if (options == InvalidEnumValueHandling.UseDefault)
+        {
+            fallbackExpression = Expression.Default(toEnumType);
+        }
+        else
+        {
+            // Create static helper call for throwing, but typed as `toEnumType`
+            fallbackExpression = Expression.Call(
+                GetMethodInfo(() => ThrowInvalidEnumValue<DbType>(default!)).GetGenericMethodDefinition().MakeGenericMethod(toEnumType),
+                expression);
+        }
+
+        return Expression.Coalesce(parseCall, fallbackExpression);
+    }
+
+#if NET
+    [DoesNotReturn]
+#endif
+    private static TEnum ThrowInvalidEnumValue<TEnum>(object value)
+        where TEnum : struct, Enum
+    {
+        throw new ArgumentOutOfRangeException("value", value, $"Invalid value for {typeof(TEnum).Name}");
     }
 
     /// <summary>
@@ -1038,9 +1067,20 @@ internal sealed partial class Compiler
         }
 
         // Casting
-        if (cachedType.GetUnderlyingType() != TypeCache.Get(toType).GetUnderlyingType())
+        if (TypeCache.Get(toType).GetUnderlyingType() is { } tt && cachedType.GetUnderlyingType() != tt)
         {
-            falseExpression = ConvertExpressionToTypeExpression(expression, toType);
+            if (tt != StaticType.Decimal)
+            {
+                falseExpression = ConvertExpressionToTypeExpression(expression, tt);
+            }
+            else
+            {
+                // Oracle loves decimal
+                falseExpression =
+                    ConvertExpressionToTypeExpression(
+                        ConvertExpressionToTypeExpression(expression, Enum.GetUnderlyingType(cachedType.GetUnderlyingType())),
+                        tt);
+            }
         }
 
         // Nullable
@@ -1228,8 +1268,8 @@ internal sealed partial class Compiler
     /// <param name="targetType"></param>
     /// <returns></returns>
     private static Expression ConvertExpressionToPropertyHandlerSetExpression(Expression expression,
-        Expression parameterExpression,
-        ClassProperty classProperty,
+        Expression? parameterExpression,
+        ClassProperty? classProperty,
         Type targetType) =>
         ConvertExpressionToPropertyHandlerSetExpressionTuple(expression, parameterExpression, classProperty, targetType).convertedExpression;
 
@@ -1242,8 +1282,8 @@ internal sealed partial class Compiler
     /// <param name="targetType"></param>
     /// <returns></returns>
     private static (Expression convertedExpression, Type? handlerSetReturnType) ConvertExpressionToPropertyHandlerSetExpressionTuple(Expression expression,
-        Expression parameterExpression,
-        ClassProperty classProperty,
+        Expression? parameterExpression,
+        ClassProperty? classProperty,
         Type targetType)
     {
         var handlerInstance = classProperty?.GetPropertyHandler() ??
@@ -1481,7 +1521,7 @@ internal sealed partial class Compiler
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Compiler.DataReader.IsDbNull.FalseExpression: Failed to convert the value expression into enum type '{targetType.GetUnderlyingType()}'. " +
+                    throw new InvalidOperationException($"Failed to convert the value expression into enum type '{targetType.GetUnderlyingType()}'. " +
                         $"{classPropertyParameterInfo.GetDescriptiveContextString()}", ex);
                 }
 
@@ -1938,8 +1978,32 @@ internal sealed partial class Compiler
             expression = ConvertExpressionToDbNullExpression(expression);
         }
 
-        // Set the value
-        return Expression.Call(dbParameterExpression, GetDbParameterValueSetMethod(), expression);
+        // Create the method call to set the parameter
+        var setValueCall = Expression.Call(dbParameterExpression, GetDbParameterValueSetMethod(), expression);
+
+        // Use a static helper to throw the exception (to avoid closure allocation)
+        var exceptionHelperMethod = GetMethodInfo(() => ThrowParameterAssignmentException("", default!));
+
+        var ex = Expression.Parameter(typeof(ArgumentException), "ex");
+        return Expression.TryCatch(setValueCall, Expression.Catch(ex,
+            Expression.Call(exceptionHelperMethod,
+                Expression.Constant(classProperty?.Name ?? dbField?.Name), ex)));
+    }
+
+    static ConstructorInfo GetConstructor(Expression<Func<object>> expression)
+    {
+        return ((NewExpression)expression.Body).Constructor!;
+    }
+
+#if NET
+    [DoesNotReturn]
+#endif
+    private static void ThrowParameterAssignmentException(string fieldName, ArgumentException ex)
+    {
+        if (ex is ArgumentOutOfRangeException)
+            throw new ArgumentOutOfRangeException($"While setting {fieldName}", ex);
+        else
+            throw new ArgumentException($"While setting {fieldName}", ex);
     }
 
     /// <summary>
@@ -2030,7 +2094,7 @@ internal sealed partial class Compiler
         int entityIndex,
         IDbSetting dbSetting)
     {
-        var parameterName = dbField.Name.AsUnquoted(true, dbSetting).AsAlphaNumeric();
+        var parameterName = dbField.Name.AsAlphaNumeric();
         parameterName = entityIndex > 0 ? string.Concat(dbSetting.ParameterPrefix, parameterName, "_", entityIndex.ToString(CultureInfo.InvariantCulture)) :
             string.Concat(dbSetting.ParameterPrefix, parameterName);
         return GetDbParameterNameAssignmentExpression(dbParameterExpression, parameterName);
@@ -2239,7 +2303,7 @@ internal sealed partial class Compiler
         ParameterExpression? propertyVariableExpression = null;
         Expression? propertyInstanceExpression = null;
         ClassProperty? classProperty = null;
-        var propertyName = fieldDirection.DbField.Name.AsUnquoted(true, dbSetting);
+        var propertyName = fieldDirection.DbField.Name;
 
         // Set the proper assignments (property)
         if (TypeCache.Get(entityExpression.Type).IsClassType() == false)

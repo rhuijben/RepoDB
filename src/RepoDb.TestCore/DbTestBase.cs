@@ -53,6 +53,6 @@ public abstract class DbTestBase<TDbInstance> where TDbInstance : DbInstance, ne
     {
         sql.EnsureOpen();
 
-        return sql.GetDbHelper().GetSchemaObjects(sql).Where(t => t.Type == Enumerations.DbSchemaType.Table).Select(x => x.Name);
+        return sql.GetDbHelper().GetSchemaObjects(sql).Where(t => t.Type == Enumerations.DbSchemaType.Table).Select(x => x.Name).ToArray();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿#nullable enable
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace RepoDb.Reflection;
@@ -65,11 +66,11 @@ partial class Compiler
     /// <param name="classPropertyExpression"></param>
     /// <returns></returns>
     private static Expression CreatePropertyHandlerGetOptionsExpression(Expression readerExpression,
-        Expression classPropertyExpression)
+        Expression? classPropertyExpression)
     {
         // Get the 'Create' method
         var method = StaticType.PropertyHandlerGetOptions.GetMethod("Create",
-            BindingFlags.Static | BindingFlags.NonPublic);
+            BindingFlags.Static | BindingFlags.NonPublic)!;
 
         // Set to default
         readerExpression ??= Expression.Default(StaticType.DbDataReader);
@@ -85,8 +86,8 @@ partial class Compiler
     /// <param name="parameterExpression"></param>
     /// <param name="classProperty"></param>
     /// <returns></returns>
-    private static Expression CreatePropertyHandlerSetOptionsExpression(Expression parameterExpression,
-        ClassProperty classProperty) =>
+    private static Expression CreatePropertyHandlerSetOptionsExpression(Expression? parameterExpression,
+        ClassProperty? classProperty) =>
         CreatePropertyHandlerSetOptionsExpression(parameterExpression,
             classProperty == null ? null : Expression.Constant(classProperty));
 
@@ -96,12 +97,12 @@ partial class Compiler
     /// <param name="parameterExpression"></param>
     /// <param name="classPropertyExpression"></param>
     /// <returns></returns>
-    private static Expression CreatePropertyHandlerSetOptionsExpression(Expression parameterExpression,
-        Expression classPropertyExpression)
+    private static Expression CreatePropertyHandlerSetOptionsExpression(Expression? parameterExpression,
+        Expression? classPropertyExpression)
     {
         // Get the 'Create' method
-        var method = StaticType.PropertyHandlerSetOptions.GetMethod(nameof(RepoDb.Options.PropertyHandlerSetOptions.Create),
-            BindingFlags.Static | BindingFlags.NonPublic);
+        var method = StaticType.PropertyHandlerSetOptions.GetMethod(nameof(Options.PropertyHandlerSetOptions.Create),
+            BindingFlags.Static | BindingFlags.NonPublic)!;
 
         // Set to default
         parameterExpression ??= Expression.Default(StaticType.IDbDataParameter);

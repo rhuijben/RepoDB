@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(TestTargetFrameworks)</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MSTest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RepoDb\RepoDb.csproj" />
+    <ProjectReference Include="..\RepoDb.TestCore\RepoDb.TestCore.csproj" />
+    <ProjectReference Include="..\RepoDb.Oracle\RepoDb.Oracle.csproj" />
+  </ItemGroup>
+</Project>
