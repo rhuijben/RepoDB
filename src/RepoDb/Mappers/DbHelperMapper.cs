@@ -45,7 +45,7 @@ public static class DbHelperMapper
             }
             else
             {
-                throw new MappingExistsException(type.FullName);
+                throw new MappingExistsException(type.FullName!);
             }
         }
         else
@@ -70,7 +70,7 @@ public static class DbHelperMapper
         maps.TryGetValue(typeof(TDbConnection), out var value);
 
         // Return the value
-        return value;
+        return value ?? throw new ArgumentException($"No DbHelper registered for {typeof(TDbConnection)}");
     }
 
     /// <summary>
@@ -79,14 +79,14 @@ public static class DbHelperMapper
     /// <typeparam name="TDbConnection">The type of <see cref="IDbConnection"/>.</typeparam>
     /// <param name="connection">The instance of <see cref="IDbConnection"/>.</param>
     /// <returns>The instance of exising mapped <see cref="IDbHelper"/> object.</returns>
-    public static IDbHelper? Get<TDbConnection>(TDbConnection connection)
+    public static IDbHelper Get<TDbConnection>(TDbConnection connection)
         where TDbConnection : IDbConnection
     {
         // get the value
         maps.TryGetValue(connection.GetType(), out var value);
 
         // Return the value
-        return value;
+        return value ?? throw new ArgumentException($"No DbHelper registered for {connection.GetType()}");
     }
 
     /*

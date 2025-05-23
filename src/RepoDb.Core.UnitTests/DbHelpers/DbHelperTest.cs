@@ -1,9 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using RepoDb.DbSettings;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.UnitTests.CustomObjects;
-using System.Data;
 
 namespace RepoDb.UnitTests.DbHelpers;
 
@@ -40,9 +41,39 @@ public class DbHelperTest
         };
     }
 
-    private Mock<IDbHelper> GetMockedDbHelper()
+    public class MyDbHelper : BaseDbHelper
     {
-        var dbHelper = new Mock<IDbHelper>();
+        public MyDbHelper() : base(new MyDbResolver())
+        {
+        }
+
+        public override IEnumerable<DbField> GetFields(IDbConnection connection, string tableName, IDbTransaction? transaction = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override T GetScopeIdentity<T>(IDbConnection connection, IDbTransaction? transaction = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        private class MyDbResolver : IResolver<string, Type>
+        {
+            public Type? Resolve(string input)
+            {
+                throw new NotImplementedException();
+            }
+        }
+    }
+
+    private Mock<MyDbHelper> GetMockedDbHelper()
+    {
+        var dbHelper = new Mock<MyDbHelper>();
         dbHelper
             .Setup(e => e.GetFields(It.IsAny<IDbConnection>(), It.IsAny<string>(), It.IsAny<IDbTransaction>()))
             .Returns(GetDbFields());

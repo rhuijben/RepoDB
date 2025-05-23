@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using System.Data.Common;
 using System.Text.RegularExpressions;
-using Microsoft.Data.Sqlite;
 using RepoDb.DbSettings;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
@@ -322,38 +321,6 @@ public sealed partial class SqLiteDbHelper : BaseDbHelper
         return await connection.ExecuteScalarAsync<T>("SELECT last_insert_rowid();", transaction: transaction,
             cancellationToken: cancellationToken);
     }
-
-    #endregion
-
-    #region DynamicHandler
-
-    /// <summary>
-    /// A backdoor access from the core library used to handle an instance of an object to whatever purpose within the extended library.
-    /// </summary>
-    /// <typeparam name="TEventInstance">The type of the event instance to handle.</typeparam>
-    /// <param name="instance">The instance of the event object to handle.</param>
-    /// <param name="key">The key of the event to handle.</param>
-    public override void DynamicHandler<TEventInstance>(TEventInstance instance,
-        string key)
-    {
-        if (key == "RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]")
-        {
-            HandleDbParameterPostCreation((SqliteParameter)(object)instance);
-        }
-    }
-
-    #region Handlers
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="parameter"></param>
-    private void HandleDbParameterPostCreation(SqliteParameter parameter)
-    {
-        // Do nothing for now
-    }
-
-    #endregion
 
     #endregion
 

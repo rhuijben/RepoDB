@@ -1,6 +1,5 @@
 ﻿using System.Data;
 using System.Data.Common;
-using System.Data.SQLite;
 using System.Text.RegularExpressions;
 using RepoDb.DbSettings;
 using RepoDb.Enumerations;
@@ -269,7 +268,7 @@ public sealed partial class SqLiteDbHelper : BaseDbHelper
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A list of <see cref="DbField"/> of the target table.</returns>
-    public async ValueTask<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
+    public override async ValueTask<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
         string tableName,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -325,38 +324,6 @@ public sealed partial class SqLiteDbHelper : BaseDbHelper
         return await connection.ExecuteScalarAsync<T>("SELECT last_insert_rowid();", transaction: transaction,
             cancellationToken: cancellationToken);
     }
-
-    #endregion
-
-    #region DynamicHandler
-
-    /// <summary>
-    /// A backdoor access from the core library used to handle an instance of an object to whatever purpose within the extended library.
-    /// </summary>
-    /// <typeparam name="TEventInstance">The type of the event instance to handle.</typeparam>
-    /// <param name="instance">The instance of the event object to handle.</param>
-    /// <param name="key">The key of the event to handle.</param>
-    public void DynamicHandler<TEventInstance>(TEventInstance instance,
-        string key)
-    {
-        if (key == "RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]")
-        {
-            HandleDbParameterPostCreation((SQLiteParameter)(object)instance);
-        }
-    }
-
-    #region Handlers
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="parameter"></param>
-    private void HandleDbParameterPostCreation(SQLiteParameter parameter)
-    {
-        // Do nothing for now
-    }
-
-    #endregion
 
     #endregion
 
