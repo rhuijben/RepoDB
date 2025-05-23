@@ -72,7 +72,7 @@ public class QueryBuilder
     /// </summary>
     /// <param name="text">The text to be written.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder WriteText(string text) => Append(text);
+    public QueryBuilder WriteText(string? text) => Append(text);
 
     /// <summary>
     /// 
@@ -80,7 +80,7 @@ public class QueryBuilder
     /// <param name="value"></param>
     /// <param name="spaceBefore"></param>
     /// <returns></returns>
-    private QueryBuilder Append(string value,
+    private QueryBuilder Append(string? value,
         bool spaceBefore = true)
     {
         if (string.IsNullOrWhiteSpace(value)) return this;

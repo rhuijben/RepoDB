@@ -569,6 +569,10 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         Assert.AreEqual(ftf[0].Value, data[0].Value);
         Assert.AreEqual(ftf[1].Value, data[1].Value);
 
-        Assert.IsTrue(sql.Exists<MorePrimaryKeyTable>(where: x => x.ID == "A" && x.ID2 == data[0].ID2, trace: new DiagnosticsTracer()));
+
+        // More smoke tests // TODO: Create separate tests
+        Assert.IsTrue(sql.Exists<MorePrimaryKeyTable>(where: x => x.ID == "A" && x.ID2 == data[0].ID2));
+
+        await sql.MergeAsync(ftf[0]);
     }
 }

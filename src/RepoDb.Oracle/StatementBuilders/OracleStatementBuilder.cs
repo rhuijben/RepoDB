@@ -28,7 +28,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
     /// <param name="averageableClientTypeResolver">The resolver used to identity the type for average.</param>
     public OracleStatementBuilder(IDbSetting dbSetting,
         IResolver<Field, IDbSetting, string>? convertFieldResolver = null,
-        IResolver<Type, Type> averageableClientTypeResolver = null)
+        IResolver<Type, Type>? averageableClientTypeResolver = null)
         : base(dbSetting,
               convertFieldResolver,
               averageableClientTypeResolver)
@@ -39,9 +39,94 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         throw new NotImplementedException();
     }
 
-    public override string CreateMerge(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public override string CreateMerge(string tableName,
+                                   IEnumerable<Field> fields,
+                                   IEnumerable<Field>? qualifiers = null,
+                                   DbField? primaryField = null,
+                                   DbField? identityField = null,
+                                   string? hints = null)
     {
-        throw new NotImplementedException();
+        if (tableName == null)
+            throw new ArgumentNullException(nameof(tableName));
+        if (fields == null)
+            throw new ArgumentNullException(nameof(fields));
+
+        var fieldList = fields.ToList();
+        if (fieldList.Count == 0)
+            throw new InvalidOperationException("No fields to merge.");
+
+        var qualifierList = qualifiers?.ToList() ?? new List<Field>();
+
+        // Ensure qualifiers exist
+        if (qualifierList.Count == 0)
+            throw new InvalidOperationException("Qualifiers must be specified for MERGE operation in Oracle.");
+
+        // Create SELECT :param AS Col1, :param AS Col2 ...
+        var sourceColumns = string.Join(", ", fieldList.Select(f => $"{f.Name.AsParameter(true, DbSetting)} AS {f.Name.AsQuoted(DbSetting)}"));
+
+        // ON condition
+        var onConditions = string.Join(" AND ", qualifierList.Select(q =>
+            $"T.{q.Name.AsQuoted(DbSetting)} = S.{q.Name.AsQuoted(DbSetting)}"));
+
+        // UPDATE SET T.ColX = S.ColX (exclude qualifiers and identity fields)
+        var updateFields = fieldList
+            .Where(f => !qualifierList.Any(q => q.Name == f.Name) &&
+                        (identityField == null || identityField.Name != f.Name))
+            .ToList();
+
+        // INSERT clause
+        var insertColumns = fieldList
+            .Where(f => identityField == null || identityField.Name != f.Name)
+            .ToList();
+
+        var builder = new QueryBuilder();
+        builder
+            .Merge()
+            .Into()
+            .TableNameFrom(tableName, DbSetting)
+            .WriteText("T")
+            .Using()
+            .OpenParen()
+                .Select()
+                .WriteText(sourceColumns)
+                .From()
+                .WriteText("DUAL")
+            .CloseParen()
+            .WriteText("S")
+            .On()
+            .OpenParen()
+            .WriteText(onConditions)
+            .CloseParen();
+
+        if (updateFields.Any())
+        {
+            builder
+                .When()
+                .Matched()
+                .Then()
+                .Update()
+                .Set()
+                .WriteText(string.Join(", ", updateFields.Select(f => $"T.{f.Name.AsQuoted(DbSetting)} = S.{f.Name.AsQuoted(DbSetting)}")));
+        }
+
+        if (insertColumns.Any())
+        {
+            builder
+                .When()
+                .Not()
+                .Matched()
+                .Then()
+                .Insert()
+                .OpenParen()
+                .WriteText(string.Join(", ", insertColumns.Select(f => f.Name.AsQuoted(DbSetting))))
+                .CloseParen()
+                .Values()
+                .OpenParen()
+                .WriteText(string.Join(", ", insertColumns.Select(f => $"S.{f.Name.AsQuoted(DbSetting)}")))
+                .CloseParen();
+        }
+
+        return builder.ToString();
     }
 
     public override string CreateMergeAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
