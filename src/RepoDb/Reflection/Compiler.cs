@@ -1149,7 +1149,7 @@ internal sealed partial class Compiler
         // Guid to String
         if (fromType == StaticType.Guid && toType == StaticType.String)
         {
-            var result = Expression.Call(ConvertExpressionToNullableValue(expression), StaticType.Guid.GetMethod("ToString", Array.Empty<Type>())); ;
+            var result = Expression.Call(ConvertExpressionToNullableValue(expression), GetMethodInfo<Guid>(x => x.ToString()));
 
             if (fromType != expression.Type)
             {
@@ -1163,7 +1163,22 @@ internal sealed partial class Compiler
             else
                 expression = result;
         }
+        else if (fromType == StaticType.Guid && toType == StaticType.ByteArray)
+        {
+            var result = Expression.Call(ConvertExpressionToNullableValue(expression), GetMethodInfo<Guid>(x => x.ToByteArray()));
 
+            if (fromType != expression.Type)
+            {
+                // Handle nullability
+                expression = Expression.Condition(
+                    Expression.Property(expression, nameof(Nullable<Guid>.HasValue)),
+                    result,
+                    Expression.Constant(null, StaticType.ByteArray)
+                    );
+            }
+            else
+                expression = result;
+        }
         // String to Guid
         else if (fromType == StaticType.String && toType == StaticType.Guid)
             expression = ConvertExpressionToNullableGetValueOrDefaultExpression(ConvertExpressionToStringToGuid, expression);
@@ -1982,28 +1997,25 @@ internal sealed partial class Compiler
         var setValueCall = Expression.Call(dbParameterExpression, GetDbParameterValueSetMethod(), expression);
 
         // Use a static helper to throw the exception (to avoid closure allocation)
-        var exceptionHelperMethod = GetMethodInfo(() => ThrowParameterAssignmentException("", default!));
+        var exceptionHelperMethod = GetMethodInfo(() => ThrowParameterAssignmentException("", default, default!));
 
         var ex = Expression.Parameter(typeof(ArgumentException), "ex");
         return Expression.TryCatch(setValueCall, Expression.Catch(ex,
             Expression.Call(exceptionHelperMethod,
-                Expression.Constant(classProperty?.Name ?? dbField?.Name), ex)));
-    }
-
-    static ConstructorInfo GetConstructor(Expression<Func<object>> expression)
-    {
-        return ((NewExpression)expression.Body).Constructor!;
+                Expression.Constant(classProperty?.Name ?? dbField?.Name),
+                expression,
+                ex)));
     }
 
 #if NET
     [DoesNotReturn]
 #endif
-    private static void ThrowParameterAssignmentException(string fieldName, ArgumentException ex)
+    private static void ThrowParameterAssignmentException(string fieldName, object? value, ArgumentException ex)
     {
         if (ex is ArgumentOutOfRangeException)
-            throw new ArgumentOutOfRangeException($"While setting {fieldName}", ex);
+            throw new ArgumentOutOfRangeException($"While setting {fieldName} to {value} ({value?.GetType()})", ex);
         else
-            throw new ArgumentException($"While setting {fieldName}", ex);
+            throw new ArgumentException($"While setting {fieldName} to {value} ({value?.GetType()})", ex);
     }
 
     /// <summary>

@@ -72,7 +72,7 @@ public static class QueryFieldExtension
     internal static string AsParameter(this QueryField queryField,
         int index,
         bool quote, IDbSetting? dbSetting) =>
-        queryField.Parameter.Name.AsParameter(index, dbSetting);
+        queryField.Parameter.Name.AsParameter(index, quote, dbSetting);
 
     /// <summary>
     /// 
