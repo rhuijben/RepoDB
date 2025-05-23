@@ -714,6 +714,32 @@ public class QueryBuilder
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="take"></param>
+    /// <returns></returns>
+    public QueryBuilder FetchFirstRowsOnly(int take)
+    {
+        if (take > 0)
+            return WriteText($"FETCH FIRST {take} ROWS ONLY");
+
+        return this;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="skip"></param>
+    /// <returns></returns>
+    public QueryBuilder OffsetRows(int skip)
+    {
+        if (skip > 0)
+            return WriteText($"OFFSET {skip} ROWS");
+
+        return this;
+    }
+
+    /// <summary>
     /// Appends a word LIMIT with the number of rows to be skipped and return the SQL Query Statement.
     /// </summary>
     /// <param name="take">The number of rows to be taken.</param>

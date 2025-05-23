@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Enumerations;
+using RepoDb.Schema;
 using RepoDb.Trace;
 
 namespace RepoDb.TestCore;
@@ -42,7 +43,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!await TableExistsAsync(sql, "CommonNullTestData"))
+        if (!await sql.SchemaObjectExistsAsync("CommonNullTestData"))
         {
             var sqlText = @$"CREATE TABLE [CommonNullTestData] (
                         [ID] int NOT NULL,
@@ -126,7 +127,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         // Regression test. Failed on sqlite and sqlserver before this commit
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!await TableExistsAsync(sql, "GuidNullData"))
+        if (!await sql.SchemaObjectExistsAsync("GuidNullData"))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [GuidNullData] (
                         [ID] int NOT NULL,
@@ -177,7 +178,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         if (sql.GetType().Name is { } name && (name.Contains("Postgre") || name.Contains("Npgsql")))
             return;
 
-        if (!await TableExistsAsync(sql, "CommonDateTimeNullTestData"))
+        if (!await sql.SchemaObjectExistsAsync("CommonDateTimeNullTestData"))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [CommonDateTimeNullTestData] (
                         [ID] int NOT NULL,
@@ -245,7 +246,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!await TableExistsAsync(sql, nameof(DateTimeOnlyTable)))
+        if (!await sql.SchemaObjectExistsAsync(nameof(DateTimeOnlyTable)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(DateTimeOnlyTable)}] (
                         [TOnly] {TimeOnlyDbType} NOT NULL,
@@ -289,7 +290,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!await TableExistsAsync(sql, "WithComputed"))
+        if (!await sql.SchemaObjectExistsAsync("WithComputed"))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithComputed] (
                         [ID] int NOT NULL,
@@ -356,7 +357,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!await TableExistsAsync(sql, "WithGroupByItems"))
+        if (!await sql.SchemaObjectExistsAsync("WithGroupByItems"))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [WithGroupByItems] (
                         [ID] int NOT NULL,
@@ -390,7 +391,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!await TableExistsAsync(sql, nameof(IntNotNullable)))
+        if (!await sql.SchemaObjectExistsAsync(nameof(IntNotNullable)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{IntNotNullable}] (
                         [ID] int NOT NULL,
@@ -421,7 +422,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
     {
         using var sql = await CreateOpenConnectionAsync();
 
-        if (!await TableExistsAsync(sql, nameof(FieldLengthTable)))
+        if (!await sql.SchemaObjectExistsAsync(nameof(FieldLengthTable)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(FieldLengthTable)}] (
                     [ID] {VarCharName}(36) NOT NULL,
@@ -503,7 +504,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         if (sql.GetType().Name.Contains("iteConnection"))
             return;
 
-        if (!await TableExistsAsync(sql, nameof(MorePrimaryKeyTable)))
+        if (!await sql.SchemaObjectExistsAsync(nameof(MorePrimaryKeyTable)))
         {
             await PerformCreateTableAsync(sql, $@"CREATE TABLE [{nameof(MorePrimaryKeyTable)}] (
                     [ID] {VarCharName}(20) NOT NULL,
@@ -555,7 +556,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             new MorePrimaryKeyTable { ID = "B", ID2 = 0, Value = null }
         };
 
-        Assert.AreEqual(2, await sql.InsertAllAsync(ftf, trace: new DiagnosticsTracer()));
+        Assert.AreEqual(2, await sql.InsertAllAsync(ftf));
 
         var data = (await sql.QueryAllAsync<MorePrimaryKeyTable>()).ToArray();
 
@@ -567,5 +568,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         Assert.AreNotEqual(ftf[0].ID2, ftf[1].ID2);
         Assert.AreEqual(ftf[0].Value, data[0].Value);
         Assert.AreEqual(ftf[1].Value, data[1].Value);
+
+        Assert.IsTrue(sql.Exists<MorePrimaryKeyTable>(where: x => x.ID == "A" && x.ID2 == data[0].ID2, trace: new DiagnosticsTracer()));
     }
 }

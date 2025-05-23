@@ -335,6 +335,16 @@ public static class ExpressionExtension
 
             return Equals(left, right) == (expression.NodeType is ExpressionType.Equal);
         }
+        else if (expression.NodeType is ExpressionType.ArrayIndex)
+        {
+            var left = expression.Left.GetValue();
+            var right = expression.Right.GetValue();
+
+            if (left is object[] arr && right is int index && index >= 0 && index < arr.Length)
+            {
+                return arr[index];
+            }
+        }
 
         throw new NotSupportedException($"Obtaining value from binary expression '{expression}' is currently not supported.");
     }

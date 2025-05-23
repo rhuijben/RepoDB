@@ -1,6 +1,5 @@
 ﻿using System.Data.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.Enumerations;
 
 namespace RepoDb.TestCore;
 
@@ -45,15 +44,6 @@ public abstract class DbTestBase<TDbInstance> where TDbInstance : DbInstance, ne
 #endif
             throw;
         }
-    }
-
-    public async ValueTask<bool> TableExistsAsync(DbConnection sql, string tableName)
-    {
-        await sql.EnsureOpenAsync();
-
-        var tables = await sql.GetDbHelper().GetSchemaObjectsAsync(sql);
-
-        return tables.Any(x => x.Type == DbSchemaType.Table && x.Name == tableName);
     }
 
     protected static async Task<string> PerformCreateTableAsync(System.Data.Common.DbConnection sql, string sqlText)

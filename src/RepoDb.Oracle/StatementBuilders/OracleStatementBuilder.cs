@@ -1,5 +1,6 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using RepoDb.Exceptions;
+using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
 
@@ -122,8 +123,34 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
 
         if (top > 0)
         {
-            builder.WriteText($"FETCH FIRST {top} ROWS ONLY");
+            builder
+                .FetchFirstRowsOnly(top);
         }
+
+        // Return the query
+        return builder.GetString();
+    }
+
+    public override string CreateExists(string tableName, QueryGroup? where = null, string? hints = null)
+    {
+        // Ensure with guards
+        GuardTableName(tableName);
+
+        // Validate the hints
+        GuardHints(hints);
+
+        // Initialize the builder
+        var builder = new QueryBuilder();
+
+        // Build the query
+        builder.Clear()
+            .Select()
+            .WriteText($"1 AS {("ExistsValue").AsQuoted(DbSetting)}")
+            .From()
+            .TableNameFrom(tableName, DbSetting)
+            .HintsFrom(hints)
+            .WhereFrom(where, DbSetting)
+            .FetchFirstRowsOnly(1);
 
         // Return the query
         return builder.GetString();

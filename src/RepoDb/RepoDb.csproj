@@ -17,8 +17,6 @@
   <ItemGroup>
     <InternalsVisibleTo Include="RepoDb.Core.UnitTests" />
   </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net48'">
     <PackageReference Include="System.ComponentModel.Annotations" />
     <PackageReference Include="System.Dynamic.Runtime" />
