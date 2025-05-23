@@ -83,4 +83,9 @@ public interface IDbSetting
     /// Quote parameter names
     /// </summary>
     bool QuoteParameterNames { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    bool IdentityViaOutputParameter { get; }
 }

@@ -38,11 +38,13 @@ internal static class OracleBootstrap
             return;
         }
 
+        var setting = new OracleDbSetting();
+
         // Map the DbSetting
-        DbSettingMapper.Add<OracleConnection>(new OracleDbSetting(), true);
+        DbSettingMapper.Add<OracleConnection>(setting, true);
 
         // Map the DbHelper
-        DbHelperMapper.Add<OracleConnection>(new OracleDbHelper(), true);
+        DbHelperMapper.Add<OracleConnection>(new OracleDbHelper(setting), true);
 
         // Map the Statement Builder
         StatementBuilderMapper.Add<OracleConnection>(new OracleStatementBuilder(), true);

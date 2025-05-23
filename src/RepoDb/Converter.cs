@@ -119,6 +119,17 @@ public static class Converter
 
                     return (T)Enum.ToObject(type, value);
                 }
+                else if (value is decimal d)
+                {
+                    value = (long)d;
+
+                    var underlyingType = Enum.GetUnderlyingType(type);
+
+                    if (underlyingType != type.GetType())
+                        value = Convert.ChangeType(value, underlyingType);
+
+                    return (T)Enum.ToObject(type, value);
+                }
                 else
                 {
                     if (GlobalConfiguration.Options.EnumHandling == Enumerations.InvalidEnumValueHandling.ThrowError)
@@ -143,6 +154,10 @@ public static class Converter
             {
                 return (T)(object)tsv;
             }
+            else if (value is decimal d && type.IsPrimitive)
+            {
+                return (T)Convert.ChangeType((long)d, type, CultureInfo.InvariantCulture);
+            }
 #if NET
             else if (type == StaticType.DateOnly && value is string sv5 && DateOnly.TryParse(sv5, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dov))
             {
@@ -161,7 +176,7 @@ public static class Converter
         }
         catch (InvalidCastException ex)
         {
-            throw new InvalidCastException($"While converting '{value ?? "null"}' to '{type.FullName}'", ex);
+            throw new InvalidCastException($"While converting '{value ?? "null"}' ({value.GetType()}) to '{type.FullName}'", ex);
         }
     }
 

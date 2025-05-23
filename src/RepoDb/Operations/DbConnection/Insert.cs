@@ -682,7 +682,19 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = Converter.ToType<TResult>(command.ExecuteScalar())!;
+            if (!dbSetting.IdentityViaOutputParameter)
+            {
+                result = Converter.ToType<TResult>(command.ExecuteScalar())!;
+            }
+            else
+            {
+                var fetch = GetDbHelper(connection).PrepareForIdentityOutput(command);
+
+                command.ExecuteNonQuery();
+
+                result = Converter.ToType<TResult>(fetch?.Invoke())!;
+
+            }
 
             // After Execution
             Tracer
@@ -766,7 +778,18 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false))!;
+            if (!dbSetting.IdentityViaOutputParameter)
+            {
+                result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false))!;
+            }
+            else
+            {
+                var fetch = GetDbHelper(connection).PrepareForIdentityOutput(command);
+
+                await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+
+                result = Converter.ToType<TResult>(fetch?.Invoke())!;
+            }
 
             // After Execution
             await Tracer

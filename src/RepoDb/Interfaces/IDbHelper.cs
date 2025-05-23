@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Data;
+using System.Data.Common;
 
 namespace RepoDb.Interfaces;
 
@@ -34,7 +35,7 @@ public interface IDbHelper
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A list of <see cref="DbField"/> of the target table.</returns>
-    Task<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
+    ValueTask<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
         string tableName,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default);
@@ -45,7 +46,7 @@ public interface IDbHelper
     IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection,
         IDbTransaction? transaction = null);
 
-    Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection,
+    ValueTask<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default);
     #endregion
@@ -70,7 +71,7 @@ public interface IDbHelper
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The newly generated identity from the database.</returns>
-    Task<T> GetScopeIdentityAsync<T>(IDbConnection connection,
+    ValueTask<T> GetScopeIdentityAsync<T>(IDbConnection connection,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default);
 
@@ -86,6 +87,7 @@ public interface IDbHelper
     /// <param name="key">The key of the event to handle.</param>
     void DynamicHandler<TEventInstance>(TEventInstance instance,
         string key);
+    Func<object?> PrepareForIdentityOutput(DbCommand command);
 
     #endregion
 }

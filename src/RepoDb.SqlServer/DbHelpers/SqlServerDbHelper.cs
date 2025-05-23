@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
+using RepoDb.DbSettings;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -11,7 +12,7 @@ namespace RepoDb.DbHelpers;
 /// <summary>
 /// A helper class for database specially for the direct access. This class is only meant for SQL Server.
 /// </summary>
-public sealed class SqlServerDbHelper : IDbHelper
+public sealed class SqlServerDbHelper : BaseDbHelper
 {
     /// <summary>
     /// Creates a new instance of <see cref="SqlServerDbHelper"/> class.
@@ -25,18 +26,10 @@ public sealed class SqlServerDbHelper : IDbHelper
     /// </summary>
     /// <param name="dbTypeResolver">The type resolver to be used.</param>
     public SqlServerDbHelper(IResolver<string, Type> dbTypeResolver)
+        : base(dbTypeResolver)
     {
-        DbTypeResolver = dbTypeResolver;
     }
 
-    #region Properties
-
-    /// <summary>
-    /// Gets the type resolver used by this <see cref="SqlServerDbHelper"/> instance.
-    /// </summary>
-    public IResolver<string, Type> DbTypeResolver { get; }
-
-    #endregion
 
     #region Helpers
 
@@ -149,7 +142,7 @@ public sealed class SqlServerDbHelper : IDbHelper
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <returns>A list of <see cref="DbField"/> of the target table.</returns>
-    public IEnumerable<DbField> GetFields(IDbConnection connection,
+    public override IEnumerable<DbField> GetFields(IDbConnection connection,
         string tableName,
         IDbTransaction? transaction = null)
     {
@@ -185,7 +178,7 @@ public sealed class SqlServerDbHelper : IDbHelper
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A list of <see cref="DbField"/> of the target table.</returns>
-    public async Task<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
+    public override async ValueTask<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
         string tableName,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -227,13 +220,13 @@ public sealed class SqlServerDbHelper : IDbHelper
         JOIN sys.schemas s ON o.schema_id = s.schema_id
         WHERE o.type IN ('U', 'V') AND is_ms_shipped = 0";
 
-    public IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+    public override IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
     {
         return connection.ExecuteQuery<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction)
                          .Select(MapSchemaQueryResult);
     }
 
-    public async Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    public override async ValueTask<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
     {
         var results = await connection.ExecuteQueryAsync<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction);
         return results.Select(MapSchemaQueryResult);
@@ -263,7 +256,7 @@ public sealed class SqlServerDbHelper : IDbHelper
     /// <param name="connection">The instance of the connection object.</param>
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <returns>The newly generated identity from the database.</returns>
-    public T GetScopeIdentity<T>(IDbConnection connection,
+    public override T GetScopeIdentity<T>(IDbConnection connection,
         IDbTransaction? transaction = null)
     {
         return connection.ExecuteScalar<T>("SELECT COALESCE(SCOPE_IDENTITY(), @@IDENTITY);",
@@ -278,7 +271,7 @@ public sealed class SqlServerDbHelper : IDbHelper
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The newly generated identity from the database.</returns>
-    public async Task<T> GetScopeIdentityAsync<T>(IDbConnection connection,
+    public override async ValueTask<T> GetScopeIdentityAsync<T>(IDbConnection connection,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

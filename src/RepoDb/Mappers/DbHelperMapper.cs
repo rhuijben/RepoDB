@@ -1,7 +1,9 @@
-﻿using RepoDb.Exceptions;
-using RepoDb.Interfaces;
+﻿#nullable enable
 using System.Collections.Concurrent;
 using System.Data;
+using RepoDb.DbSettings;
+using RepoDb.Exceptions;
+using RepoDb.Interfaces;
 
 namespace RepoDb;
 
@@ -12,7 +14,7 @@ public static class DbHelperMapper
 {
     #region Privates
 
-    private static readonly ConcurrentDictionary<Type, IDbHelper> maps = new();
+    private static readonly ConcurrentDictionary<Type, BaseDbHelper> maps = new();
 
     #endregion
 
@@ -33,13 +35,13 @@ public static class DbHelperMapper
         where TDbConnection : IDbConnection
     {
         var type = typeof(TDbConnection);
-        
+
         // Try get the mappings
         if (maps.TryGetValue(type, out var existing))
         {
             if (force)
             {
-                maps.TryUpdate(type, dbHelper, existing);
+                maps.TryUpdate(type, (BaseDbHelper)dbHelper, existing);
             }
             else
             {
@@ -48,7 +50,7 @@ public static class DbHelperMapper
         }
         else
         {
-            maps.TryAdd(type, dbHelper);
+            maps.TryAdd(type, (BaseDbHelper)dbHelper);
         }
     }
 
@@ -77,7 +79,7 @@ public static class DbHelperMapper
     /// <typeparam name="TDbConnection">The type of <see cref="IDbConnection"/>.</typeparam>
     /// <param name="connection">The instance of <see cref="IDbConnection"/>.</param>
     /// <returns>The instance of exising mapped <see cref="IDbHelper"/> object.</returns>
-    public static IDbHelper Get<TDbConnection>(TDbConnection connection)
+    public static IDbHelper? Get<TDbConnection>(TDbConnection connection)
         where TDbConnection : IDbConnection
     {
         // get the value

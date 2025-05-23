@@ -286,18 +286,17 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             await sql.TruncateAsync<DateTimeOnlyTable>();
         }
 
-        await sql.InsertAsync(new DateTimeOnlyTable() { DOnly = new DateOnly(2021, 1, 1), TOnly = new TimeOnly(1, 2, 3), DOffset = new DateTimeOffset(2023, 1, 1, 1, 1, 1, TimeSpan.Zero) }, trace: new DiagnosticsTracer());
+        await sql.InsertAsync(new DateTimeOnlyTable() { DOnly = new DateOnly(2021, 1, 1), TOnly = new TimeOnly(1, 2, 3), DOffset = new DateTimeOffset(2023, 1, 1, 1, 1, 1, TimeSpan.Zero) });
 
         Assert.IsNotEmpty(await sql.QueryAllAsync<DateTimeOnlyTable>());
 
-        if (sql.GetType().Name is { } name && (name.Contains("Postgre") || name.Contains("Npgsql")))
-            return; // Case sensitive issue
-
-        Assert.IsNotEmpty(await sql.ExecuteQueryAsync<DateTimeOnlyTable>("SELECT * FROM DateTimeOnlyTable"));
+        Assert.IsNotEmpty(await sql.ExecuteQueryAsync<DateTimeOnlyTable>(ApplySqlRules(sql, "SELECT * FROM [DateTimeOnlyTable]")));
 
         var today = DateOnly.FromDateTime(DateTime.Now);
-        await sql.QueryAsync<DateTimeOnlyTable>(where: x => x.DOnly < today);
+        await sql.QueryAsync<DateTimeOnlyTable>(where: x => x.DOnly < today, trace: new DiagnosticsTracer());
 
+        if (sql.GetType().Name is { } name && (name.Contains("Postgre") || name.Contains("Npgsql")))
+            return; // Limitations of PostgreSQL DateTimeOffset
 
         await sql.QueryAsync<DateTimeOnlyTable>(where: x => x.DOffset < DateTime.Now);
         await sql.QueryAsync<DateTimeOnlyTable>(where: x => x.DOffset < DateTimeOffset.Now);

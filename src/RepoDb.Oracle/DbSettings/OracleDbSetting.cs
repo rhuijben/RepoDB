@@ -19,5 +19,6 @@ public sealed class OracleDbSetting : BaseDbSetting
         ParameterBatchCount = 32766;
         GenerateFinalSemiColon = false;
         QuoteParameterNames = true;
+        IdentityViaOutputParameter = true;
     }
 }

@@ -2,6 +2,7 @@
 using System.Data;
 using System.Globalization;
 using RepoDb.Attributes.Parameter;
+using RepoDb.DbSettings;
 using RepoDb.Enumerations;
 using RepoDb.Exceptions;
 using RepoDb.Interfaces;
@@ -57,7 +58,13 @@ public static class DbCommandExtension
         var parameter = command.CreateParameter();
 
         // Set the values
-        parameter.ParameterName = name.AsParameter(DbSettingMapper.Get(command.Connection!));
+        parameter.ParameterName = name.AsParameter(index: 0, quote: false, DbSettingMapper.Get(command.Connection!));
+
+        if (DbHelperMapper.Get(command.Connection!) is BaseDbHelper dbh)
+        {
+            value = dbh.ParameterValueToDb(value);
+        }
+
         parameter.Value = value ?? DBNull.Value;
 
         // The DB Type is auto set when setting the values
@@ -487,24 +494,31 @@ public static class DbCommandExtension
             var value = kvp.Value;
             ClassProperty? classProperty = null;
 
-            // CommandParameter
-            if (kvp.Value is CommandParameter commandParameter)
+            try
             {
-                value = commandParameter.Value;
-                dbField ??= GetDbField(commandParameter.Field.Name, dbFields);
-                classProperty = PropertyCache.Get(commandParameter.MappedToType, commandParameter.Field.Name, true);
+                // CommandParameter
+                if (kvp.Value is CommandParameter commandParameter)
+                {
+                    value = commandParameter.Value;
+                    dbField ??= GetDbField(commandParameter.Field.Name, dbFields);
+                    classProperty = PropertyCache.Get(commandParameter.MappedToType, commandParameter.Field.Name, true);
+                }
+                var parameter = CreateParameterIf(kvp.Key, value) ??
+                    CreateParameter(command,
+                        kvp.Key,
+                        value,
+                        dbField?.Size,
+                        classProperty,
+                        dbField,
+                        null,
+                        null,
+                        null);
+                command.Parameters.Add(parameter);
             }
-            var parameter = CreateParameterIf(kvp.Key, value) ??
-                CreateParameter(command,
-                    kvp.Key,
-                    value,
-                    dbField?.Size,
-                    classProperty,
-                    dbField,
-                    null,
-                    null,
-                    null);
-            command.Parameters.Add(parameter);
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException($"While setting {kvp.Key} to {value} ({value?.GetType()})", ex);
+            }
         }
     }
 

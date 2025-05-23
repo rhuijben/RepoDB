@@ -2,6 +2,7 @@
 using System.Data.Common;
 using System.Data.SQLite;
 using System.Text.RegularExpressions;
+using RepoDb.DbSettings;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -11,7 +12,7 @@ namespace RepoDb.DbHelpers;
 /// <summary>
 /// A helper class for database specially for the direct access. This class is only meant for SqLite.
 /// </summary>
-public sealed partial class SqLiteDbHelper : IDbHelper
+public sealed partial class SqLiteDbHelper : BaseDbHelper
 {
     private const string doubleQuote = "\"";
 
@@ -20,11 +21,10 @@ public sealed partial class SqLiteDbHelper : IDbHelper
     /// </summary>
     /// <param name="dbTypeResolver">The type resolver to be used.</param>
     /// <param name="dbSetting">The instance of the <see cref="IDbSetting"/> object to be used.</param>
-    public SqLiteDbHelper(IDbSetting dbSetting,
-        IResolver<string, Type> dbTypeResolver)
+    public SqLiteDbHelper(IDbSetting dbSetting, IResolver<string, Type> dbTypeResolver)
+        : base(dbTypeResolver)
     {
         DbSetting = dbSetting;
-        DbTypeResolver = dbTypeResolver;
     }
 
     #region Properties
@@ -33,11 +33,6 @@ public sealed partial class SqLiteDbHelper : IDbHelper
     /// Gets the database setting used by this <see cref="SqLiteDbHelper"/> instance.
     /// </summary>
     public IDbSetting DbSetting { get; }
-
-    /// <summary>
-    /// Gets the type resolver used by this <see cref="SqLiteDbHelper"/> instance.
-    /// </summary>
-    public IResolver<string, Type> DbTypeResolver { get; }
 
     #endregion
 
@@ -83,7 +78,7 @@ public sealed partial class SqLiteDbHelper : IDbHelper
     /// <param name="identityFieldName"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private async Task<DbField> ReaderToDbFieldAsync(DbDataReader reader,
+    private async ValueTask<DbField> ReaderToDbFieldAsync(DbDataReader reader,
         string identityFieldName,
         CancellationToken cancellationToken = default)
     {
@@ -163,7 +158,7 @@ public sealed partial class SqLiteDbHelper : IDbHelper
     /// <param name="transaction"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private async Task<string> GetIdentityFieldNameAsync<TDbConnection>(TDbConnection connection,
+    private async ValueTask<string> GetIdentityFieldNameAsync<TDbConnection>(TDbConnection connection,
         string tableName,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -243,7 +238,7 @@ public sealed partial class SqLiteDbHelper : IDbHelper
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <returns>A list of <see cref="DbField"/> of the target table.</returns>
-    public IEnumerable<DbField> GetFields(IDbConnection connection,
+    public override IEnumerable<DbField> GetFields(IDbConnection connection,
         string tableName,
         IDbTransaction? transaction = null)
     {
@@ -274,7 +269,7 @@ public sealed partial class SqLiteDbHelper : IDbHelper
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>A list of <see cref="DbField"/> of the target table.</returns>
-    public async Task<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
+    public async ValueTask<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
         string tableName,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -309,7 +304,7 @@ public sealed partial class SqLiteDbHelper : IDbHelper
     /// <param name="connection">The instance of the connection object.</param>
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <returns>The newly generated identity from the database.</returns>
-    public T GetScopeIdentity<T>(IDbConnection connection,
+    public override T GetScopeIdentity<T>(IDbConnection connection,
         IDbTransaction? transaction = null)
     {
         return connection.ExecuteScalar<T>("SELECT last_insert_rowid();", transaction: transaction);
@@ -323,11 +318,11 @@ public sealed partial class SqLiteDbHelper : IDbHelper
     /// <param name="transaction">The transaction object that is currently in used.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The newly generated identity from the database.</returns>
-    public Task<T> GetScopeIdentityAsync<T>(IDbConnection connection,
+    public override async ValueTask<T> GetScopeIdentityAsync<T>(IDbConnection connection,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return connection.ExecuteScalarAsync<T>("SELECT last_insert_rowid();", transaction: transaction,
+        return await connection.ExecuteScalarAsync<T>("SELECT last_insert_rowid();", transaction: transaction,
             cancellationToken: cancellationToken);
     }
 
@@ -473,13 +468,13 @@ public sealed partial class SqLiteDbHelper : IDbHelper
 
     const string GetSchemaQuery = "SELECT type, name FROM sqlite_master WHERE (type = 'table' OR type = 'view')";
 
-    public IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+    public override IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
     {
         // Using tuple helper as that doesn't call the helper to fetch columns
         return connection.ExecuteQuery<(string Type, string Name)>(GetSchemaQuery).Select(MapSchemaQueryResult);
     }
 
-    public async Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    public override async ValueTask<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
     {
         // Using tuple helper as that doesn't call the helper to fetch columns
         return (await connection.ExecuteQueryAsync<(string Type, string Name)>(GetSchemaQuery)).Select(MapSchemaQueryResult);

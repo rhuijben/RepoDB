@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.Common;
 using System.Transactions;
 using RepoDb.Contexts.Providers;
+using RepoDb.DbSettings;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
@@ -471,11 +472,14 @@ public static partial class DbConnectionExtension
             // Directly execute if the entities is only 1 (performance)
             if (context.BatchSize == 1)
             {
+                BaseDbHelper? dbh = null;
+
                 foreach (var entity in entities.AsList())
                 {
                     // Set the values
                     context.SingleDataEntityParametersSetterFunc?.Invoke(command, entity);
 
+                    var fetchIdentity = dbSetting.IdentityViaOutputParameter ? (dbh ??= (BaseDbHelper)GetDbHelper(connection!)).PrepareForIdentityOutput(command) : null;
                     // Prepare the command
                     if (dbSetting.IsPreparable)
                     {
@@ -493,7 +497,16 @@ public static partial class DbConnectionExtension
                     }
 
                     // Actual Execution
-                    var returnValue = Converter.DbNullToNull(command.ExecuteScalar());
+                    object? returnValue;
+
+                    if (fetchIdentity is not { })
+                        returnValue = Converter.DbNullToNull(command.ExecuteScalar());
+                    else
+                    {
+                        command.ExecuteNonQuery();
+
+                        returnValue = fetchIdentity();
+                    }
 
                     // After Execution
                     Tracer
@@ -682,10 +695,13 @@ public static partial class DbConnectionExtension
             // Directly execute if the entities is only 1 (performance)
             if (context.BatchSize == 1)
             {
+                BaseDbHelper? dbh = null;
                 foreach (var entity in entities.AsList())
                 {
                     // Set the values
                     context.SingleDataEntityParametersSetterFunc?.Invoke(command, entity);
+
+                    var fetchIdentity = dbSetting.IdentityViaOutputParameter ? (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutput(command) : null;
 
                     // Prepare the command
                     if (dbSetting.IsPreparable)
@@ -704,7 +720,15 @@ public static partial class DbConnectionExtension
                     }
 
                     // Actual Execution
-                    var returnValue = Converter.DbNullToNull(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
+                    object? returnValue;
+
+                    if (fetchIdentity is not { })
+                        returnValue = Converter.DbNullToNull(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false));
+                    else
+                    {
+                        await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+                        returnValue = Converter.DbNullToNull(fetchIdentity());
+                    }
 
                     // After Execution
                     await Tracer

@@ -1,13 +1,18 @@
 ﻿using System.Data;
+using RepoDb.DbSettings;
 using RepoDb.Interfaces;
 
 namespace RepoDb.UnitTests.CustomObjects;
 
-public class CustomDbHelper : IDbHelper
+public class CustomDbHelper : BaseDbHelper
 {
-    public IResolver<string, Type> DbTypeResolver { get; set; }
+    public CustomDbHelper()
+        : base(new MyResolver())
+    {
 
-    public IEnumerable<DbField> GetFields(IDbConnection connection,
+    }
+
+    public override IEnumerable<DbField> GetFields(IDbConnection connection,
         string tableName,
         IDbTransaction? transaction = null)
     {
@@ -18,42 +23,22 @@ public class CustomDbHelper : IDbHelper
         };
     }
 
-    public Task<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection,
-        string tableName,
-        IDbTransaction? transaction = null,
-        CancellationToken cancellationToken = default)
-    {
-        return Task.FromResult<IEnumerable<DbField>>(new[]
-        {
-            new DbField("Id", true, true, false, typeof(int), null, null, null, null),
-            new DbField("Name", false, false, true, typeof(string), null, null, null, null)
-        });
-    }
-
-    public T GetScopeIdentity<T>(IDbConnection connection,
+    public override T GetScopeIdentity<T>(IDbConnection connection,
         IDbTransaction? transaction = null)
     {
         return default;
     }
 
-    public Task<T> GetScopeIdentityAsync<T>(IDbConnection connection,
-        IDbTransaction? transaction = null,
-        CancellationToken cancellationToken = default)
-    {
-        return Task.FromResult<T>(default);
-    }
-    public void DynamicHandler<TEventInstance>(TEventInstance instance,
-        string key)
-    {
-        // Do nothing
-    }
-
-    public IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+    public override IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
     {
         return [];
     }
-    public Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+
+    private sealed class MyResolver : IResolver<string, Type>
     {
-        return Task.FromResult(Enumerable.Empty<DbSchemaObject>());
+        public Type? Resolve(string input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

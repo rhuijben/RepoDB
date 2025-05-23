@@ -1,30 +1,27 @@
 ﻿using System.Data;
 using System.Data.Common;
 using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
+using RepoDb.DbSettings;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Resolvers;
 
 namespace RepoDb.DbHelpers;
-public sealed class OracleDbHelper : IDbHelper
+public sealed class OracleDbHelper : BaseDbHelper
 {
     private readonly IDbSetting m_dbSetting = DbSettingMapper.Get<OracleConnection>();
 
-    public OracleDbHelper()
-        : this(new OracleDbTypeToClientTypeResolver())
+    public OracleDbHelper(IDbSetting dbSetting)
+        : base(new OracleDbTypeToClientTypeResolver())
     {
-
+        DbSetting = dbSetting ?? throw new ArgumentNullException(nameof(dbSetting));
     }
 
-    public OracleDbHelper(IResolver<string, Type> dbTypeResolver)
-    {
-        DbTypeResolver = dbTypeResolver ?? throw new ArgumentNullException(nameof(dbTypeResolver));
-    }
+    public IDbSetting DbSetting { get; }
 
-    public IResolver<string, Type> DbTypeResolver { get; }
-
-    public void DynamicHandler<TEventInstance>(TEventInstance instance, string key)
+    public override void DynamicHandler<TEventInstance>(TEventInstance instance, string key)
     {
         if (key == "RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]")
         {
@@ -36,6 +33,10 @@ public sealed class OracleDbHelper : IDbHelper
             if (oracleParameter.Value is string)
             {
                 oracleParameter.OracleDbType = OracleDbType.Varchar2;
+            }
+            else if (oracleParameter.Value is TimeSpan)
+            {
+                oracleParameter.OracleDbType = OracleDbType.IntervalDS;
             }
         }
     }
@@ -76,7 +77,7 @@ public sealed class OracleDbHelper : IDbHelper
 ORDER BY C.COLUMN_ID
     ";
 
-    public IEnumerable<DbField> GetFields(IDbConnection connection, string tableName, IDbTransaction? transaction = null)
+    public override IEnumerable<DbField> GetFields(IDbConnection connection, string tableName, IDbTransaction? transaction = null)
     {
         // Variables
         var commandText = GetFieldsQuery;
@@ -106,7 +107,7 @@ ORDER BY C.COLUMN_ID
         return dbFields;
     }
 
-    public async Task<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection, string tableName, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    public override async ValueTask<IEnumerable<DbField>> GetFieldsAsync(IDbConnection connection, string tableName, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
     {
         var commandText = GetFieldsQuery;
         var param = new
@@ -173,15 +174,15 @@ ORDER BY C.COLUMN_ID
         );
     }
 
-    public IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
+    public override IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
     {
         return connection.ExecuteQuery<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction)
                          .Select(MapSchemaQueryResult);
     }
 
-    public async Task<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    public override async ValueTask<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
     {
-        var results = await connection.ExecuteQueryAsync<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction);
+        var results = await connection.ExecuteQueryAsync<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction, cancellationToken: cancellationToken);
         return results.Select(MapSchemaQueryResult);
     }
 
@@ -199,13 +200,47 @@ ORDER BY C.COLUMN_ID
         };
     #endregion
 
-    public T GetScopeIdentity<T>(IDbConnection connection, IDbTransaction? transaction = null)
+    public override T GetScopeIdentity<T>(IDbConnection connection, IDbTransaction? transaction = null)
     {
         throw new NotImplementedException();
     }
 
-    public Task<T> GetScopeIdentityAsync<T>(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
+    public override object? ParameterValueToDb(object? value) => value switch
     {
-        throw new NotImplementedException();
+#if NET
+        DateOnly dateOnly => dateOnly.ToDateTime(TimeOnly.MinValue),
+        TimeOnly to => to.ToTimeSpan(),
+#endif
+        _ => value,
+    };
+
+    public override Func<object?> PrepareForIdentityOutput(DbCommand command)
+    {
+        if (command.CommandText.Contains(":RepoDbResult", StringComparison.Ordinal))
+        {
+            var p = new OracleParameter()
+            {
+                ParameterName = ":RepoDbResult",
+                Direction = ParameterDirection.Output,
+                OracleDbType = OracleDbType.Int32
+            };
+            command.Parameters.Add(p);
+
+            return () =>
+            {
+                var value = p.Value;
+
+                if (value is OracleDecimal od)
+                {
+                    return od.ToInt64();
+                }
+
+                return value;
+            };
+        }
+        else
+        {
+            return static () => null;
+        }
     }
 }

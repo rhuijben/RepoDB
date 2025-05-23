@@ -19,6 +19,7 @@
     <Project Path="src/RepoDb.MySql.UnitTests/RepoDb.MySql.UnitTests.csproj" />
     <Project Path="src/RepoDb.MySqlConnector.IntegrationTests/RepoDb.MySqlConnector.IntegrationTests.csproj" />
     <Project Path="src/RepoDb.MySqlConnector.UnitTests/RepoDb.MySqlConnector.UnitTests.csproj" />
+    <Project Path="src/RepoDb.Oracle.IntegrationTests/RepoDb.Oracle.IntegrationTests.csproj" />
     <Project Path="src/RepoDb.PostgreSql.BulkOperations.IntegrationTests/RepoDb.PostgreSql.BulkOperations.IntegrationTests.csproj" />
     <Project Path="src/RepoDb.PostgreSql.IntegrationTests/RepoDb.PostgreSql.IntegrationTests.csproj" />
     <Project Path="src/RepoDb.PostgreSql.UnitTests/RepoDb.PostgreSql.UnitTests.csproj" />

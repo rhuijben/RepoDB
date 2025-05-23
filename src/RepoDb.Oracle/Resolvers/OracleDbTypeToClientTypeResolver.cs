@@ -1,9 +1,23 @@
-﻿using RepoDb.Interfaces;
+﻿using System.Text.RegularExpressions;
+using RepoDb.Interfaces;
 
 namespace RepoDb.Resolvers;
 
-public class OracleDbTypeToClientTypeResolver : IResolver<string, Type>
+public sealed partial class OracleDbTypeToClientTypeResolver : IResolver<string, Type>
 {
+#if NET9_0_OR_GREATER
+    [GeneratedRegex(@"\([0-9 ,]*\)", RegexOptions.Compiled)]
+    private static partial
+#else
+    private static
+#endif
+    Regex RemoveParens
+    { get; }
+#if !NET9_0_OR_GREATER
+        = new Regex(@"\([0-9 ,]*\)", RegexOptions.Compiled);
+#endif
+
+
     /// <inheritdoc/>
     public Type Resolve(string dbTypeName)
     {
@@ -59,6 +73,7 @@ public class OracleDbTypeToClientTypeResolver : IResolver<string, Type>
             "json" => typeof(string),
 
             // Defaults
+            _ when RemoveParens.IsMatch(dbTypeName) => Resolve(RemoveParens.Replace(dbTypeName, "")),
             _ => typeof(object),
         };
     }

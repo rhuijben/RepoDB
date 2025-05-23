@@ -82,7 +82,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         }
 
         // Oracle requires RETURNING <column> INTO :outParam
-        var returnClause = $" RETURNING {keyColumn.Name.AsQuoted(DbSetting)} INTO :Result";
+        var returnClause = $" RETURNING {keyColumn.Name.AsQuoted(DbSetting)} INTO :RepoDbResult";
 
         // Trim ending semicolon (if base added it)
         var sql = builder.GetString().TrimEnd(';', ' ');

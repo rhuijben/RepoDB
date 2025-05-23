@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Title>RepoDb.Oracle</Title>
     <TargetFrameworks>net9.0;net8.0;net48</TargetFrameworks>
-    <Nullable>annotations</Nullable>
+    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Description>A hybrid .NET ORM library for Oracle.</Description>
     <PackageTags>orm hybrid-orm micro-orm Oracle npgsql</PackageTags>
@@ -16,6 +16,7 @@
     <ProjectReference Include="..\RepoDb\RepoDb.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\RepoDb\Compat.cs" />
     <None Include="..\..\LICENSE.txt" Pack="True" PackagePath="\" />
     <None Include="README.md" Pack="True" PackagePath="\" />
   </ItemGroup>

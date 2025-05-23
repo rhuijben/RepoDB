@@ -1,11 +1,12 @@
-name: Build & Run Tests (Push)
+name: MSBuild (Push)
 on: 
   push
 
 env:
-  REPODB_SQLSERVER_CONSTR_MASTER: "Server=tcp:127.0.0.1,41433;Database=master;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;"
-  REPODB_POSTGRESQL_CONSTR_POSTGRESDB: "Server=127.0.0.1;Port=45432;Database=postgres;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;"
   REPODB_MYSQL_CONSTR_SYS: "Server=127.0.0.1;Port=43306;Database=sys;User ID=root;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;"
+  REPODB_ORACLE_CONSTR_MASTER: "Data Source=127.0.0.1:41521/FREEPDB1;User Id=system;Password=oracle;"
+  REPODB_POSTGRESQL_CONSTR_POSTGRESDB: "Server=127.0.0.1;Port=45432;Database=postgres;User Id=postgres;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;"
+  REPODB_SQLSERVER_CONSTR_MASTER: "Server=tcp:127.0.0.1,41433;Database=master;User ID=sa;Password=ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2;TrustServerCertificate=True;"
 
 jobs:
   build:
@@ -13,21 +14,6 @@ jobs:
 
     # Services. See docker-compose.yml
     services:
-        mssql:
-          image: mcr.microsoft.com/mssql/server:2022-latest
-          ports:
-            - 127.0.0.1:41433:1433
-          env:
-            ACCEPT_EULA: true
-            MSSQL_SA_PASSWORD: ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2
-      
-        postgresql:
-          image: postgres:latest
-          ports:
-            - 127.0.0.1:45432:5432
-          env:
-            POSTGRES_PASSWORD: ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2
-      
         mysql:
           image: mysql:latest
           ports:
@@ -43,6 +29,21 @@ jobs:
            env:
              ORACLE_PASSWORD: "oracle"
              ORACLE_ALLOW_REMOTE: "true"
+
+        postgresql:
+          image: postgres:latest
+          ports:
+            - 127.0.0.1:45432:5432
+          env:
+            POSTGRES_PASSWORD: ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2
+
+        sqlserver:
+          image: mcr.microsoft.com/mssql/server:2022-latest
+          ports:
+            - 127.0.0.1:41433:1433
+          env:
+            ACCEPT_EULA: true
+            MSSQL_SA_PASSWORD: ddd53e85-b15e-4da8-91e5-a7d3b00a0ab2
 
     steps:
       - name: Check out repository code

@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using System.Data.Common;
 using RepoDb.Interfaces;
 
 namespace RepoDb.DbSettings;
@@ -7,7 +6,7 @@ namespace RepoDb.DbSettings;
 /// <summary>
 /// A base class to be used when implementing an <see cref="IDbSetting"/>-based object to support a specific RDBMS data provider.
 /// </summary>
-public abstract class BaseDbSetting : IDbSetting
+public abstract class BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
 {
     #region Privates
 
@@ -40,77 +39,53 @@ public abstract class BaseDbSetting : IDbSetting
 
     #region Properties
 
-    /// <summary>
-    /// Gets the value that indicates whether the table hints are supported.
-    /// </summary>
+    /// <inheritdoc />
     public bool AreTableHintsSupported { get; protected init; }
 
-    /// <summary>
-    /// Gets the character (or string) used for closing quote.
-    /// </summary>
+    /// <inheritdoc />
     public string ClosingQuote { get; protected init; }
 
-    /// <summary>
-    /// Gets the default averageable .NET CLR types for the database.
-    /// </summary>
+    /// <inheritdoc />
     public Type AverageableType { get; protected init; }
 
-    /// <summary>
-    /// Gets the default schema of the database.
-    /// </summary>
+    /// <inheritdoc />
     public string DefaultSchema { get; protected init; }
 
-    /// <summary>
-    /// Gets a value that indicates whether setting of the value of <see cref="DbParameter.Direction"/> object is supported.
-    /// </summary>
+    /// <inheritdoc />
     public bool IsDirectionSupported { get; protected init; }
 
-    /// <summary>
-    /// Gets a value that indicates whether the <see cref="DbCommand"/> object must be disposed after calling the <see cref="DbCommand.ExecuteReader()"/> method.
-    /// </summary>
+    /// <inheritdoc />
     public bool IsExecuteReaderDisposable { get; protected init; }
 
-    /// <summary>
-    /// Gets a value whether the multiple statement execution is supported.
-    /// </summary>
+    /// <inheritdoc />
     public bool IsMultiStatementExecutable { get; protected init; }
 
-    /// <summary>
-    /// Gets a value that indicates whether the current DB Provider supports the <see cref="DbCommand.Prepare()"/> calls.
-    /// </summary>
+    /// <inheritdoc />
     public bool IsPreparable { get; protected init; }
 
-    /// <summary>
-    /// Gets a value that indicates whether the Insert/Update operation will be used for Merge operation.
-    /// </summary>
+    /// <inheritdoc />
     public bool IsUseUpsert { get; protected init; }
 
-    /// <summary>
-    /// Gets the character (or string) used for opening quote.
-    /// </summary>
+    /// <inheritdoc />
     public string OpeningQuote { get; protected init; }
 
-    /// <summary>
-    /// Gets the character (or string) used for the database command parameter quoting.
-    /// </summary>
+    /// <inheritdoc />
     public string ParameterPrefix { get; protected init; }
 
-    /// <summary>
-    ///
-    /// </summary>
+    /// <inheritdoc />
     public bool ForceAutomaticConversions { get; protected init; }
 
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <inheritdoc />
     public int ParameterBatchCount { get; protected init; } = 2100 - 2;
 
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <inheritdoc />
     public bool GenerateFinalSemiColon { get; protected init; }
 
+    /// <inheritdoc />
     public bool QuoteParameterNames { get; protected init; }
+
+    /// <inheritdoc />
+    public bool IdentityViaOutputParameter { get; protected init; }
 
     #endregion
 
@@ -152,16 +127,7 @@ public abstract class BaseDbSetting : IDbSetting
         }
 
         // IsDirectionSupported
-        hashCode = HashCode.Combine(hashCode, IsDirectionSupported);
-
-        // IsExecuteReaderDisposable
-        hashCode = HashCode.Combine(hashCode, IsExecuteReaderDisposable);
-
-        // IsMultiStatementExecutable
-        hashCode = HashCode.Combine(hashCode, IsMultiStatementExecutable);
-
-        // IsPreparable
-        hashCode = HashCode.Combine(hashCode, IsPreparable);
+        hashCode = HashCode.Combine(hashCode, IsDirectionSupported, IsExecuteReaderDisposable, IsMultiStatementExecutable, IsPreparable);
 
         // IsUseUpsert
         hashCode = HashCode.Combine(hashCode, IsUseUpsert);
@@ -177,6 +143,8 @@ public abstract class BaseDbSetting : IDbSetting
         {
             hashCode = HashCode.Combine(hashCode, ParameterPrefix);
         }
+
+        hashCode = HashCode.Combine(hashCode, ParameterBatchCount, GenerateFinalSemiColon, QuoteParameterNames, IdentityViaOutputParameter);
 
         // Set and return the hashcode
         return this.hashCode ??= hashCode;
@@ -210,7 +178,11 @@ public abstract class BaseDbSetting : IDbSetting
             && other.IsPreparable == IsPreparable
             && other.IsUseUpsert == IsUseUpsert
             && other.OpeningQuote == OpeningQuote
-            && other.ParameterPrefix == ParameterPrefix;
+            && other.ParameterPrefix == ParameterPrefix
+            && other.ParameterBatchCount == ParameterBatchCount
+            && other.GenerateFinalSemiColon == GenerateFinalSemiColon
+            && other.QuoteParameterNames == QuoteParameterNames
+            && other.IdentityViaOutputParameter == IdentityViaOutputParameter;
     }
 
     /// <summary>
