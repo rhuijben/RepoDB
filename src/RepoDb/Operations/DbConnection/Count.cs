@@ -282,7 +282,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static async Task<long> CountAsync<TEntity>(this IDbConnection connection,
-        Expression<Func<TEntity, bool>>? where = null,
+        Expression<Func<TEntity, bool>>? where,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Count,
@@ -318,7 +318,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static async Task<long> CountAsync<TEntity>(this IDbConnection connection,
-        QueryField? where = null,
+        QueryField? where,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Count,
@@ -354,7 +354,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static async Task<long> CountAsync<TEntity>(this IDbConnection connection,
-        IEnumerable<QueryField>? where = null,
+        IEnumerable<QueryField>? where,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Count,
@@ -390,7 +390,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     public static async Task<long> CountAsync<TEntity>(this IDbConnection connection,
-        QueryGroup? where = null,
+        QueryGroup? where,
         string? hints = null,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Count,
@@ -426,7 +426,7 @@ public static partial class DbConnectionExtension
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>An integer value that holds the number of rows from the table.</returns>
     internal static ValueTask<long> CountAsyncInternal<TEntity>(this IDbConnection connection,
-        QueryGroup? where = null,
+        QueryGroup? where,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Count,
         string? hints = null,
