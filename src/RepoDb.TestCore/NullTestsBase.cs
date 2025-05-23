@@ -226,34 +226,6 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         await t.RollbackAsync();
     }
 
-    private static async Task<string> PerformCreateTableAsync(System.Data.Common.DbConnection sql, string sqlText)
-    {
-        sqlText = ApplySqlRules(sql, sqlText);
-
-        try
-        {
-            await sql.ExecuteNonQueryAsync(sqlText);
-        }
-        catch (Exception e)
-        {
-            throw new Exception($"While performing: {sqlText}", e);
-        }
-        return sqlText;
-    }
-
-    protected static string ApplySqlRules(System.Data.Common.DbConnection sql, string sqlText)
-    {
-        var set = sql.GetDbSetting();
-
-        if (set.OpeningQuote != "[")
-            sqlText = sqlText.Replace("[", set.OpeningQuote);
-        if (set.ClosingQuote != "]")
-            sqlText = sqlText.Replace("]", set.ClosingQuote);
-        if (set.ParameterPrefix != "@")
-            sqlText = sqlText.Replace("@", set.ParameterPrefix);
-        return sqlText;
-    }
-
     public virtual string DateTimeOffsetDbType => "datetimeoffset";
 
 #if NET
