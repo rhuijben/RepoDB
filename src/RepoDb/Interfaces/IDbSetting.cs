@@ -26,7 +26,7 @@ public interface IDbSetting
     /// <summary>
     /// Gets the default schema of the database.
     /// </summary>
-    string DefaultSchema { get; }
+    string? DefaultSchema { get; }
 
     /// <summary>
     /// Gets a value that indicates whether setting the value of <see cref="DbParameter.Direction"/> object is supported.
@@ -83,9 +83,4 @@ public interface IDbSetting
     /// Quote parameter names
     /// </summary>
     bool QuoteParameterNames { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    bool IdentityViaOutputParameter { get; }
 }

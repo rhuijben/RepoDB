@@ -49,7 +49,7 @@ public abstract class BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
     public Type AverageableType { get; protected init; }
 
     /// <inheritdoc />
-    public string DefaultSchema { get; protected init; }
+    public string? DefaultSchema { get; protected init; }
 
     /// <inheritdoc />
     public bool IsDirectionSupported { get; protected init; }

@@ -87,7 +87,10 @@ public interface IDbHelper
     /// <param name="key">The key of the event to handle.</param>
     void DynamicHandler<TEventInstance>(TEventInstance instance,
         string key);
-    Func<object?> PrepareForIdentityOutput(DbCommand command);
+
+    Func<object?>? PrepareForIdentityOutput(DbCommand command);
+
+    Func<CancellationToken, ValueTask<object?>>? PrepareForIdentityOutputAsync(DbCommand command);
 
     #endregion
 }

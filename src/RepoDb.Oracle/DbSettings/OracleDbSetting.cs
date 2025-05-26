@@ -8,7 +8,7 @@ public sealed class OracleDbSetting : BaseDbSetting
         OpeningQuote = "\"";
         ClosingQuote = "\"";
         AverageableType = typeof(decimal);
-        DefaultSchema = "USER";
+        DefaultSchema = null;
         IsDirectionSupported = true;
         IsExecuteReaderDisposable = false;
         IsMultiStatementExecutable = false;

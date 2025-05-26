@@ -479,7 +479,7 @@ public static partial class DbConnectionExtension
                     // Set the values
                     context.SingleDataEntityParametersSetterFunc?.Invoke(command, entity);
 
-                    var fetchIdentity = dbSetting.IdentityViaOutputParameter ? (dbh ??= (BaseDbHelper)GetDbHelper(connection!)).PrepareForIdentityOutput(command) : null;
+                    var fetchIdentity = (dbh ??= (BaseDbHelper)GetDbHelper(connection!)).PrepareForIdentityOutput(command);
                     // Prepare the command
                     if (dbSetting.IsPreparable)
                     {
@@ -701,7 +701,7 @@ public static partial class DbConnectionExtension
                     // Set the values
                     context.SingleDataEntityParametersSetterFunc?.Invoke(command, entity);
 
-                    var fetchIdentity = dbSetting.IdentityViaOutputParameter ? (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutput(command) : null;
+                    var fetchIdentity = (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutputAsync(command);
 
                     // Prepare the command
                     if (dbSetting.IsPreparable)
@@ -727,7 +727,7 @@ public static partial class DbConnectionExtension
                     else
                     {
                         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
-                        returnValue = Converter.DbNullToNull(fetchIdentity());
+                        returnValue = Converter.DbNullToNull(await fetchIdentity(cancellationToken).ConfigureAwait(false));
                     }
 
                     // After Execution

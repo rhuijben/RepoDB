@@ -77,14 +77,13 @@ ORDER BY C.COLUMN_ID
 
     public override IEnumerable<DbField> GetFields(IDbConnection connection, string tableName, IDbTransaction? transaction = null)
     {
-        // Variables
         var commandText = GetFieldsQuery;
         var param = new
         {
             Schema = DataEntityExtension.GetSchema(tableName, DbSetting)?.AsUnquoted(DbSetting).ToUpperInvariant(),
             TableName = DataEntityExtension.GetTableName(tableName, DbSetting).AsUnquoted(DbSetting)
         };
-        var param2 = (param.Schema == "USER") ? (object)new { param.TableName } : null;
+        var param2 = string.IsNullOrWhiteSpace(param.Schema) ? (object)new { param.TableName } : null;
         if (param2 is { })
         {
             commandText = commandText.Replace(":Schema", "USER");
@@ -113,7 +112,7 @@ ORDER BY C.COLUMN_ID
             Schema = DataEntityExtension.GetSchema(tableName, DbSetting)?.AsUnquoted(DbSetting).ToUpperInvariant(),
             TableName = DataEntityExtension.GetTableName(tableName, DbSetting).AsUnquoted(DbSetting)
         };
-        var param2 = (param.Schema == "USER") ? (object)new { param.TableName } : null;
+        var param2 = string.IsNullOrWhiteSpace(param.Schema) ? (object)new { param.TableName } : null;
         if (param2 is { })
         {
             commandText = commandText.Replace(":Schema", "USER");
@@ -140,7 +139,8 @@ ORDER BY C.COLUMN_ID
         SELECT
             object_type ""Type"",
             object_name ""Name"",
-            owner ""Schema""
+            owner ""Schema"",
+            (owner = USER) AS ""IsCurrentUser""
         FROM all_objects
         WHERE object_type IN ('TABLE', 'VIEW')
           AND owner NOT IN (
@@ -174,18 +174,19 @@ ORDER BY C.COLUMN_ID
 
     public override IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
     {
-        return connection.ExecuteQuery<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction)
-                         .Select(MapSchemaQueryResult);
+        return connection.ExecuteQuery<(string Type, string Name, string Schema, bool IsCurrentUser)>(GetSchemaQuery, transaction)
+                         .SelectMany(MapSchemaQueryResult);
     }
 
     public override async ValueTask<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default)
     {
-        var results = await connection.ExecuteQueryAsync<(string Type, string Name, string Schema)>(GetSchemaQuery, transaction, cancellationToken: cancellationToken);
-        return results.Select(MapSchemaQueryResult);
+        var results = await connection.ExecuteQueryAsync<(string Type, string Name, string Schema, bool IsCurrentUser)>(GetSchemaQuery, transaction, cancellationToken: cancellationToken);
+        return results.SelectMany(MapSchemaQueryResult);
     }
 
-    private static DbSchemaObject MapSchemaQueryResult((string Type, string Name, string Schema) r) =>
-        new DbSchemaObject
+    private static IEnumerable<DbSchemaObject> MapSchemaQueryResult((string Type, string Name, string Schema, bool IsCurrentUser) r)
+    {
+        var rr = new DbSchemaObject
         {
             Type = r.Type switch
             {
@@ -196,6 +197,12 @@ ORDER BY C.COLUMN_ID
             Name = r.Name,
             Schema = r.Schema
         };
+
+        yield return rr;
+
+        if (r.IsCurrentUser)
+            yield return rr with { Schema = null };
+    }
     #endregion
 
     public override T GetScopeIdentity<T>(IDbConnection connection, IDbTransaction? transaction = null)
@@ -240,5 +247,15 @@ ORDER BY C.COLUMN_ID
         {
             return static () => null;
         }
+    }
+
+    public override Func<CancellationToken, ValueTask<object?>>? PrepareForIdentityOutputAsync(DbCommand command)
+    {
+        if (base.PrepareForIdentityOutput(command) is { } cb)
+        {
+            return (c) => new ValueTask<object?>(cb());
+        }
+        else
+            return null;
     }
 }

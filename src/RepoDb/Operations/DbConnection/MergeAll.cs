@@ -420,7 +420,7 @@ public static partial class DbConnectionExtension
                     fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
-            traceKey: traceKey,
+                    traceKey: traceKey,
                     transaction: transaction,
                     trace: trace,
                     statementBuilder: statementBuilder);
@@ -435,7 +435,7 @@ public static partial class DbConnectionExtension
                     fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
-            traceKey: traceKey,
+                    traceKey: traceKey,
                     transaction: transaction,
                     trace: trace,
                     statementBuilder: statementBuilder);
@@ -452,7 +452,7 @@ public static partial class DbConnectionExtension
                     fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
-            traceKey: traceKey,
+                    traceKey: traceKey,
                     transaction: transaction,
                     trace: trace,
                     statementBuilder: statementBuilder);
@@ -466,7 +466,7 @@ public static partial class DbConnectionExtension
                     fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
-            traceKey: traceKey,
+                    traceKey: traceKey,
                     transaction: transaction,
                     trace: trace,
                     statementBuilder: statementBuilder);
