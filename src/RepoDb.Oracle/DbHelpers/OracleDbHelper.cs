@@ -251,7 +251,7 @@ ORDER BY C.COLUMN_ID
 
     public override Func<CancellationToken, ValueTask<object?>>? PrepareForIdentityOutputAsync(DbCommand command)
     {
-        if (base.PrepareForIdentityOutput(command) is { } cb)
+        if (this.PrepareForIdentityOutput(command) is { } cb)
         {
             return (c) => new ValueTask<object?>(cb());
         }
