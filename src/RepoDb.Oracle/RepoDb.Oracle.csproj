@@ -7,7 +7,7 @@
     <Description>A hybrid .NET ORM library for Oracle.</Description>
     <PackageTags>orm hybrid-orm micro-orm Oracle npgsql</PackageTags>
     <PackageReleaseNotes>http://repodb.net/release/Oracle</PackageReleaseNotes>
-    <PackageProjectUrl>https://repodb.net/tutorial/get-started-Oracle</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/AmpScm/RepoDB/tree/master/src/RepoDb.Oracle/</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>
   <ItemGroup>

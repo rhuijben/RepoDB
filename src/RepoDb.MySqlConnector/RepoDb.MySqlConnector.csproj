@@ -7,7 +7,7 @@
     <Description>A hybrid .NET ORM library for MySQL (using MySqlConnector).</Description>
     <PackageTags>orm hybrid-orm micro-orm mysql mysqlconnector</PackageTags>
     <PackageReleaseNotes>http://repodb.net/release/mysqlconnector</PackageReleaseNotes>
-    <PackageProjectUrl>https://repodb.net/tutorial/get-started-mysql</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/AmpScm/RepoDB/tree/master/src/RepoDb.MySqlConnector/</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>
   <ItemGroup>

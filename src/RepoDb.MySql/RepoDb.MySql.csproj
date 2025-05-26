@@ -7,7 +7,7 @@
     <Description>A hybrid .NET ORM library for MySQL (using MySql.Data).</Description>
     <PackageTags>orm hybrid-orm micro-orm mysql</PackageTags>
     <PackageReleaseNotes>http://repodb.net/release/mysql</PackageReleaseNotes>
-    <PackageProjectUrl>https://repodb.net/tutorial/get-started-mysql</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/AmpScm/RepoDB/tree/master/src/RepoDb.MySql/</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>
   <ItemGroup>

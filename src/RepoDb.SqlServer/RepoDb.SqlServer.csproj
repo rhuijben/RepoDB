@@ -7,7 +7,7 @@
     <Description>A hybrid .NET ORM library for SQL Server.</Description>
     <PackageTags>orm hybrid-orm micro-orm sqlserver</PackageTags>
     <PackageReleaseNotes>http://repodb.net/release/sqlserver</PackageReleaseNotes>
-    <PackageProjectUrl>https://repodb.net/tutorial/get-started-sqlserver</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/AmpScm/RepoDB/tree/master/src/RepoDb.SqlServer/</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>
   <ItemGroup>

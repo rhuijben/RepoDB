@@ -7,7 +7,7 @@
     <Description>A hybrid .NET ORM library for SQLite (using System.Data.SQLite.Core).</Description>
     <PackageTags>orm hybrid-orm micro-orm sqlite</PackageTags>
     <PackageReleaseNotes>http://repodb.net/release/sqlite</PackageReleaseNotes>
-    <PackageProjectUrl>https://repodb.net/tutorial/get-started-sqlite</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/AmpScm/RepoDB/tree/master/src/RepoDb.SQLite.System/</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>
   <ItemGroup>

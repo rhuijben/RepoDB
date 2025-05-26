@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Description>An extension library that contains the official Bulk Operations of RepoDb for SQL Server.</Description>
     <PackageTags>orm hybrid-orm micro-orm sqlserver bulkoperations</PackageTags>
-    <PackageReleaseNotes>http://repodb.net/release/sqlserverbulk</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/AmpScm/RepoDB/tree/master/src/RepoDb.SqlServer.BulkOperations/</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>
   <ItemGroup>
