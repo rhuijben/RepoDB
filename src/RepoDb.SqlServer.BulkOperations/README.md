@@ -1,8 +1,6 @@
-[![SqlServerBulkBuild](https://img.shields.io/appveyor/ci/mikependon/repodb-uai8a?&logo=appveyor)](https://ci.appveyor.com/project/mikependon/repodb-uai8a)
-[![SqlServerBulkHome](https://img.shields.io/badge/home-github-important?&logo=github)](https://github.com/mikependon/RepoDb)
-[![SqlServerBulkVersion](https://img.shields.io/nuget/v/repodb.sqlserver.bulkoperations?&logo=nuget)](https://www.nuget.org/packages/RepoDb.SqlServer.BulkOperations)
-[![SqlServerBulkReleases](https://img.shields.io/badge/releases-core-important?&logo=nuget)](https://repodb.net/release/sqlserverbulk)
-[![SqlServerBulkIntegrationTests](https://img.shields.io/appveyor/tests/mikependon/repodb-oap1j?&logo=appveyor&label=integration%20tests)](https://ci.appveyor.com/project/mikependon/repodb-oap1j/build/tests)
+[![MSBuild-CI](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml/badge.svg)](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml)
+[![Version](https://img.shields.io/nuget/v/AmpScm.RepoDb?&logo=nuget)](https://www.nuget.org/packages/AmpScm.RepoDb.SqlServer.BulkOperations)
+[![GitterChat](https://img.shields.io/gitter/room/mikependon/RepoDb?&logo=gitter&color=48B293)](https://gitter.im/RepoDb/community)
 
 # [RepoDb.SqlServer.BulkOperations](https://www.nuget.org/packages/RepoDb.SqlServer.BulkOperations)
 

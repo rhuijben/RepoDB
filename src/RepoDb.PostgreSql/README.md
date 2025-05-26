@@ -1,9 +1,6 @@
-[![PostgreSqlBuild](https://img.shields.io/appveyor/ci/mikependon/repodb-xb4rk?&logo=appveyor)](https://ci.appveyor.com/project/mikependon/repodb-xb4rk)
-[![PostgreSqlHome](https://img.shields.io/badge/home-github-important?&logo=github)](https://github.com/mikependon/RepoDb)
-[![PostgreSqlVersion](https://img.shields.io/nuget/v/RepoDb.PostgreSql?&logo=nuget)](https://www.nuget.org/packages/RepoDb.PostgreSql)
-[![PostgreSqlReleases](https://img.shields.io/badge/releases-core-important?&logo=nuget)](http://repodb.net/release/postgresql)
-[![PostgreSqlUnitTests](https://img.shields.io/appveyor/tests/mikependon/repodb-a63f5?&logo=appveyor&label=unit%20tests)](https://ci.appveyor.com/project/mikependon/repodb-a63f5/build/tests)
-[![PostgreSqlIntegrationTests](https://img.shields.io/appveyor/tests/mikependon/repodb-uf6o7?&logo=appveyor&label=integration%20tests)](https://ci.appveyor.com/project/mikependon/repodb-uf6o7/build/tests)
+[![MSBuild-CI](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml/badge.svg)](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml)
+[![Version](https://img.shields.io/nuget/v/AmpScm.RepoDb?&logo=nuget)](https://www.nuget.org/packages/AmpScm.RepoDb.PostgreSql)
+[![GitterChat](https://img.shields.io/gitter/room/mikependon/RepoDb?&logo=gitter&color=48B293)](https://gitter.im/RepoDb/community)
 
 # [RepoDb.PostgreSql](https://repodb.net/tutorial/get-started-postgresql) - a hybrid .NET ORM library for PostgreSQL.
 

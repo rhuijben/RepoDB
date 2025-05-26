@@ -1,9 +1,6 @@
-[![SqLiteSystemBuild](https://img.shields.io/appveyor/ci/mikependon/repodb-n4lwf?&logo=appveyor)](https://ci.appveyor.com/project/mikependon/repodb-n4lwf)
-[![SqLiteSystemHome](https://img.shields.io/badge/home-github-important?&logo=github)](https://github.com/mikependon/RepoDb)
-[![SqLiteSystemVersion](https://img.shields.io/nuget/v/RepoDb.SQLite.System?&logo=nuget)](https://www.nuget.org/packages/RepoDb.SQLite.System)
-[![SqLiteSystemReleases](https://img.shields.io/badge/releases-core-important?&logo=nuget)](http://repodb.net/release/sqlite)
-[![SqLiteSystemUnitTests](https://img.shields.io/appveyor/tests/mikependon/repodb-pb8kh?&logo=appveyor&label=unit%20tests)](https://ci.appveyor.com/project/mikependon/repodb-pb8kh/build/tests)
-[![SqLiteSystemIntegrationTests](https://img.shields.io/appveyor/tests/mikependon/repodb-n01df?&logo=appveyor&label=integration%20tests)](https://ci.appveyor.com/project/mikependon/repodb-n01df/build/tests)
+[![MSBuild-CI](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml/badge.svg)](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml)
+[![Version](https://img.shields.io/nuget/v/AmpScm.RepoDb?&logo=nuget)](https://www.nuget.org/packages/AmpScm.RepoDb.SQLite.System)
+[![GitterChat](https://img.shields.io/gitter/room/mikependon/RepoDb?&logo=gitter&color=48B293)](https://gitter.im/RepoDb/community)
 
 # [RepoDb.SQLite.System](https://repodb.net/tutorial/get-started-sqlite) - a hybrid .NET ORM library for SQLite (using System.Data.SQLite.Core).
 

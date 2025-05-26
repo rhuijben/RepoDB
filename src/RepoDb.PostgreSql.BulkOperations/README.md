@@ -1,8 +1,6 @@
-[![PostgreSqlBulkBuild](https://img.shields.io/appveyor/ci/mikependon/repodb-ninm5?&logo=appveyor)](https://ci.appveyor.com/project/mikependon/repodb-ninm5)
-[![PostgreSqlBulkHome](https://img.shields.io/badge/home-github-important?&logo=github)](https://github.com/mikependon/RepoDb)
-[![PostgreSqlBulkVersion](https://img.shields.io/nuget/v/repodb.postgresql.bulkoperations?&logo=nuget)](https://www.nuget.org/packages/RepoDb.PostgreSql.BulkOperations)
-[![PostgreSqlBulkReleases](https://img.shields.io/badge/releases-core-important?&logo=nuget)](https://repodb.net/release/postgresqlbulk)
-[![PostgreSqlBulkIntegrationTests](https://img.shields.io/appveyor/tests/mikependon/repodb-ck79r?&logo=appveyor&label=integration%20tests)](https://ci.appveyor.com/project/mikependon/repodb-ck79r/build/tests)
+[![MSBuild-CI](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml/badge.svg)](https://github.com/AmpScm/RepoDB/actions/workflows/build.yml)
+[![Version](https://img.shields.io/nuget/v/AmpScm.RepoDb?&logo=nuget)](https://www.nuget.org/packages/AmpScm.RepoDb.PostgreSql.BulkOperations)
+[![GitterChat](https://img.shields.io/gitter/room/mikependon/RepoDb?&logo=gitter&color=48B293)](https://gitter.im/RepoDb/community)
 
 # [RepoDb.PostgreSql.BulkOperations](https://www.nuget.org/packages/RepoDb.PostgreSql.BulkOperations)
 
