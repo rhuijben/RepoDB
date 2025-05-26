@@ -2,7 +2,7 @@
 [![Version](https://img.shields.io/nuget/v/AmpScm.RepoDb?&logo=nuget)](https://www.nuget.org/packages/AmpScm.RepoDb)
 [![GitterChat](https://img.shields.io/gitter/room/mikependon/RepoDb?&logo=gitter&color=48B293)](https://gitter.im/RepoDb/community)
 
-# [RepoDB](http://repodb.net) - a hybrid ORM Library for .NET.
+# [RepoDB](https://repodb.net) - a hybrid ORM Library for .NET.
 
 RepoDB is an open-source .NET ORM library that bridges the gaps of micro-ORMs and full-ORMs. It helps you simplify the switch-over of when to use the BASIC and ADVANCE operations during the development.
 
@@ -43,53 +43,54 @@ RepoDB also does support the different way-of-executions (the [atomic](https://g
 
 Please click any of the link below to fast-track your learnings.
 
-- [SqlServer](http://repodb.net/tutorial/get-started-sqlserver)
-- [SqLite](http://repodb.net/tutorial/get-started-sqlite)
-- [MySql](http://repodb.net/tutorial/get-started-mysql)
-- [PostgreSql](http://repodb.net/tutorial/get-started-postgresql)
+- [SqlServer](https://repodb.net/tutorial/get-started-sqlserver)
+- [SqLite](https://repodb.net/tutorial/get-started-sqlite)
+- [MySql](https://repodb.net/tutorial/get-started-mysql)
+- [PostgreSql](https://repodb.net/tutorial/get-started-postgresql)
+- [Oracle](https://github.com/AmpScm/RepoDB/tree/master/src/RepoDb.Oracle/)
 
 Or, learn a specific feature.
 
-- [Batch Operations](http://repodb.net/feature/batchoperations)
-- [Bulk Operations](http://repodb.net/feature/bulkoperations)
-- [Caching](http://repodb.net/feature/caching)
-- [Class Handlers](http://repodb.net/feature/classhandlers)
-- [Class Mapping](http://repodb.net/feature/classmapping)
-- [Dynamics](http://repodb.net/feature/dynamics)
-- [Connection Persistency](http://repodb.net/feature/connectionpersistency)
-- [Enumeration](http://repodb.net/feature/enumeration)
-- [Expression Trees](http://repodb.net/feature/expressiontrees)
-- [Hints](http://repodb.net/feature/hints)
-- [Implicit Mapping](http://repodb.net/feature/implicitmapping)
-- [Multiple Query](http://repodb.net/feature/multiplequery)
-- [Property Handlers](http://repodb.net/feature/propertyhandlers)
-- [Repositories](http://repodb.net/feature/repositories)
-- [Targeted Operations](http://repodb.net/feature/targeted)
-- [Tracing](http://repodb.net/feature/tracing)
-- [Transaction](http://repodb.net/feature/transaction)
-- [Type Mapping](http://repodb.net/feature/typemapping)
+- [Batch Operations](https://repodb.net/feature/batchoperations)
+- [Bulk Operations](https://repodb.net/feature/bulkoperations)
+- [Caching](https://repodb.net/feature/caching)
+- [Class Handlers](https://repodb.net/feature/classhandlers)
+- [Class Mapping](https://repodb.net/feature/classmapping)
+- [Dynamics](https://repodb.net/feature/dynamics)
+- [Connection Persistency](https://repodb.net/feature/connectionpersistency)
+- [Enumeration](https://repodb.net/feature/enumeration)
+- [Expression Trees](https://repodb.net/feature/expressiontrees)
+- [Hints](https://repodb.net/feature/hints)
+- [Implicit Mapping](https://repodb.net/feature/implicitmapping)
+- [Multiple Query](https://repodb.net/feature/multiplequery)
+- [Property Handlers](https://repodb.net/feature/propertyhandlers)
+- [Repositories](https://repodb.net/feature/repositories)
+- [Targeted Operations](https://repodb.net/feature/targeted)
+- [Tracing](https://repodb.net/feature/tracing)
+- [Transaction](https://repodb.net/feature/transaction)
+- [Type Mapping](https://repodb.net/feature/typemapping)
 
-Otherwise, please visit our [documentation](http://repodb.net/docs) page to learn more.
+Otherwise, please visit our [documentation](https://repodb.net/docs) page to learn more.
 
 ## Supported Databases
 
 The execute methods below support all the RDBMS data providers.
 
-- [ExecuteQuery](http://repodb.net/operation/executequery)
-- [ExecuteNonQuery](http://repodb.net/operation/executenonquery)
-- [ExecuteScalar](http://repodb.net/operation/executescalar)
-- [ExecuteReader](http://repodb.net/operation/executereader)
-- [ExecuteQueryMultiple](http://repodb.net/operation/executequerymultiple)
+- [ExecuteQuery](https://repodb.net/operation/executequery)
+- [ExecuteNonQuery](https://repodb.net/operation/executenonquery)
+- [ExecuteScalar](https://repodb.net/operation/executescalar)
+- [ExecuteReader](https://repodb.net/operation/executereader)
+- [ExecuteQueryMultiple](https://repodb.net/operation/executequerymultiple)
 
 Whereas the fluent methods below only support the [SQL Server](https://www.nuget.org/packages/RepoDb.SqlServer), [SQLite](https://www.nuget.org/packages/RepoDb.SqLite), [MySQL](https://www.nuget.org/packages/RepoDb.MySql) and [PostgreSQL](https://www.nuget.org/packages/RepoDb.PostgreSql) RDBMS data providers.
 
-- [Query](http://repodb.net/operation/query)
-- [Insert](http://repodb.net/operation/insert)
-- [Merge](http://repodb.net/operation/merge)
-- [Delete](http://repodb.net/operation/delete)
-- [Update](http://repodb.net/operation/update)
+- [Query](https://repodb.net/operation/query)
+- [Insert](https://repodb.net/operation/insert)
+- [Merge](https://repodb.net/operation/merge)
+- [Delete](https://repodb.net/operation/delete)
+- [Update](https://repodb.net/operation/update)
  
-Click [here](http://repodb.net/operation) to see all the operations.
+Click [here](https://repodb.net/operation) to see all the operations.
 
 ## Package Referencing
 
