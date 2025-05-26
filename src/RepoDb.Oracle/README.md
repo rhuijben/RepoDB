@@ -9,7 +9,7 @@ RepoDB is an open-source .NET ORM library that bridges the gaps of micro-ORMs an
 ## Important Pages
 
 - [GitHub Home Page](https://github.com/mikependon/RepoDb) - to learn more about the core library.
-- [Website](http://repodb.net) - docs, features, classes, references, releases and blogs.
+- [Website](https://repodb.net) - docs, features, classes, references, releases and blogs.
 
 ## Community Engagements
 
@@ -25,7 +25,7 @@ RepoDB is an open-source .NET ORM library that bridges the gaps of micro-ORMs an
 
 ## License
 
-[Apache-2.0](http://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2025 - now - [Bert Huijben](https://github.com/rhuijben)
+[Apache-2.0](https://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2025 - now - [Bert Huijben](https://github.com/rhuijben)
 
 --------
 
@@ -37,7 +37,7 @@ At the Package Manager Console, write the command below.
 > Install-Package RepoDb.Oracle
 ```
 
-Or, visit our [installation](http://repodb.net/tutorial/installation) page for more information.
+Or, visit our [installation](https://repodb.net/tutorial/installation) page for more information.
 
 ## Get Started
 
@@ -51,7 +51,7 @@ GlobalConfiguration.Setup().UseOracle();
 
 After the bootstrap initialization, any library operation can then be called.
 
-Or, visit the official [get-started](http://repodb.net/tutorial/get-started-Oracle) page for Oracle.
+Or, visit the official [get-started](https://repodb.net/tutorial/get-started-Oracle) page for Oracle.
 
 ### Query
 

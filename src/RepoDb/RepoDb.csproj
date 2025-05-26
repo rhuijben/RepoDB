@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Description>A hybrid ORM library for .NET.</Description>
     <PackageTags>orm hybrid-orm micro-orm</PackageTags>
-    <PackageReleaseNotes>http://repodb.net/release/core</PackageReleaseNotes>
+    <PackageReleaseNotes>https://repodb.net/release/core</PackageReleaseNotes>
     <PackageProjectUrl>https://repodb.net/</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>

@@ -9,7 +9,7 @@ An extension library that contains the official Bulk Operations of RepoDB for SQ
 ## Important Pages
 
 - [GitHub Home Page](https://github.com/mikependon/RepoDb) - to learn more about the core library.
-- [Website](http://repodb.net) - docs, features, classes, references, releases and blogs.
+- [Website](https://repodb.net) - docs, features, classes, references, releases and blogs.
 
 ## Why use the Bulk Operations?
 
@@ -38,8 +38,8 @@ The bulk operations can hugely improve the performance by more than 90% when pro
 
 ## License
 
-[Apache-2.0](http://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2020 - 2024 - [Michael Camara Pendon](https://twitter.com/mike_pendon)
-[Apache-2.0](http://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2025 - now - [Bert Huijben](https://github.com/rhuijben)
+[Apache-2.0](https://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2020 - 2024 - [Michael Camara Pendon](https://twitter.com/mike_pendon)
+[Apache-2.0](https://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2025 - now - [Bert Huijben](https://github.com/rhuijben)
 
 --------
 

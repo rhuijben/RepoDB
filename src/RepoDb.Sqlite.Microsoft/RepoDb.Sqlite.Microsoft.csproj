@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Description>A hybrid .NET ORM library for SQLite (using Microsoft.Data.Sqlite).</Description>
     <PackageTags>orm hybrid-orm micro-orm sqlite</PackageTags>
-    <PackageReleaseNotes>http://repodb.net/release/sqlite</PackageReleaseNotes>
+    <PackageReleaseNotes>https://repodb.net/release/sqlite</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/AmpScm/RepoDB/tree/master/src/RepoDb.Sqlite.Microsoft/</PackageProjectUrl>
     <PackageId>$(PackagePrefix)$(AssemblyName)</PackageId>
   </PropertyGroup>

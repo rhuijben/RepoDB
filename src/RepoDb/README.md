@@ -2,35 +2,35 @@
 [![Version](https://img.shields.io/nuget/v/AmpScm.RepoDb?&logo=nuget)](https://www.nuget.org/packages/AmpScm.RepoDb)
 [![GitterChat](https://img.shields.io/gitter/room/mikependon/RepoDb?&logo=gitter&color=48B293)](https://gitter.im/RepoDb/community)
 
-# [RepoDB](http://repodb.net) - a hybrid ORM library for .NET.
+# [RepoDB](https://repodb.net) - a hybrid ORM library for .NET.
 
 RepoDB is an open-source .NET ORM library that bridges the gaps of micro-ORMs and full-ORMs. It helps you simplify the switch-over of when to use the BASIC and ADVANCE operations during the development.
 
 ## Important Pages
 
 - [GitHub Home Page](https://github.com/mikependon/RepoDb) - to learn more about the core library.
-- [Website](http://repodb.net) - docs, features, classes, references, releases and blogs.
+- [Website](https://repodb.net) - docs, features, classes, references, releases and blogs.
 
 ## Core Features
  
-- [Batch Operations](http://repodb.net/feature/batchoperations)
-- [Bulk Operations](http://repodb.net/feature/bulkoperations)
-- [Caching](http://repodb.net/feature/caching)
-- [Class Handlers](http://repodb.net/feature/classhandlers)
-- [Class Mapping](http://repodb.net/feature/classmapping)
-- [Dynamics](http://repodb.net/feature/dynamics)
-- [Connection Persistency](http://repodb.net/feature/connectionpersistency)
-- [Enumeration](http://repodb.net/feature/enumeration)
-- [Expression Trees](http://repodb.net/feature/expressiontrees)
-- [Hints](http://repodb.net/feature/hints)
-- [Implicit Mapping](http://repodb.net/feature/implicitmapping)
-- [Multiple Query](http://repodb.net/feature/multiplequery)
-- [Property Handlers](http://repodb.net/feature/propertyhandlers)
-- [Repositories](http://repodb.net/feature/repositories)
-- [Targeted Operations](http://repodb.net/feature/targeted)
-- [Tracing](http://repodb.net/feature/tracing)
-- [Transaction](http://repodb.net/feature/transaction)
-- [Type Mapping](http://repodb.net/feature/typemapping)
+- [Batch Operations](https://repodb.net/feature/batchoperations)
+- [Bulk Operations](https://repodb.net/feature/bulkoperations)
+- [Caching](https://repodb.net/feature/caching)
+- [Class Handlers](https://repodb.net/feature/classhandlers)
+- [Class Mapping](https://repodb.net/feature/classmapping)
+- [Dynamics](https://repodb.net/feature/dynamics)
+- [Connection Persistency](https://repodb.net/feature/connectionpersistency)
+- [Enumeration](https://repodb.net/feature/enumeration)
+- [Expression Trees](https://repodb.net/feature/expressiontrees)
+- [Hints](https://repodb.net/feature/hints)
+- [Implicit Mapping](https://repodb.net/feature/implicitmapping)
+- [Multiple Query](https://repodb.net/feature/multiplequery)
+- [Property Handlers](https://repodb.net/feature/propertyhandlers)
+- [Repositories](https://repodb.net/feature/repositories)
+- [Targeted Operations](https://repodb.net/feature/targeted)
+- [Tracing](https://repodb.net/feature/tracing)
+- [Transaction](https://repodb.net/feature/transaction)
+- [Type Mapping](https://repodb.net/feature/typemapping)
 
 ## Community Engagements
 
@@ -41,7 +41,8 @@ RepoDB is an open-source .NET ORM library that bridges the gaps of micro-ORMs an
 
 ## License
 
-[Apache-2.0](http://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2019 - [Michael Camara Pendon](https://twitter.com/mike_pendon)
+[Apache-2.0](https://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2019 - 2024 - [Michael Camara Pendon](https://twitter.com/mike_pendon)
+[Apache-2.0](https://apache.org/licenses/LICENSE-2.0.html) - Copyright © 2025 - now - [Bert Huijben](https://github.com/rhuijben)
 
 --------
 
@@ -53,7 +54,7 @@ At the Package Manager Console, write the command below.
 Install-Package RepoDB
 ```
 
-Or, visit our [installation](http://repodb.net/tutorial/installation) page for more information.
+Or, visit our [installation](https://repodb.net/tutorial/installation) page for more information.
 
 ## Get Started
 
@@ -125,4 +126,4 @@ using (var connection = new SqlConnection(ConnectionString))
 }
 ```
 
-Or, visit the official [get-started](http://repodb.net/tutorial/get-started-sqlserver) page for SQL Server.
+Or, visit the official [get-started](https://repodb.net/tutorial/get-started-sqlserver) page for SQL Server.
