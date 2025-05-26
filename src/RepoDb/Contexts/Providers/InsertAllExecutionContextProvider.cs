@@ -276,7 +276,7 @@ internal static class InsertAllExecutionContextProvider
             BatchSize = batchSize,
             SingleDataEntityParametersSetterFunc = singleEntityParametersSetterFunc,
             MultipleDataEntitiesParametersSetterFunc = multipleEntitiesParametersSetterFunc,
-            KeyPropertySetterFunc = keyPropertySetterFunc
+            IdentitySetterFunc = keyPropertySetterFunc
         };
     }
 }

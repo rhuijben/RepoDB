@@ -11,7 +11,7 @@ public sealed class OracleDbSetting : BaseDbSetting
         DefaultSchema = null;
         IsDirectionSupported = true;
         IsExecuteReaderDisposable = false;
-        IsMultiStatementExecutable = false;
+        IsMultiStatementExecutable = true;
         IsPreparable = true;
         IsUseUpsert = false;
         ParameterPrefix = ":";
@@ -19,6 +19,5 @@ public sealed class OracleDbSetting : BaseDbSetting
         ParameterBatchCount = 32766;
         GenerateFinalSemiColon = false;
         QuoteParameterNames = true;
-        IdentityViaOutputParameter = true;
     }
 }

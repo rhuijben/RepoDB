@@ -156,21 +156,53 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
                 identityField,
                 hints));
 
-        // Get the key column to return
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-
-        // If no return value is needed, return the base SQL
-        if (keyColumn is { })
+        // If an identityField is present, add output handling
+        if (identityField is { })
         {
             // Oracle requires RETURNING <column> INTO :outParam
             builder
                 .Returning()
-                .FieldFrom(keyColumn.AsField(), DbSetting)
+                .FieldFrom(identityField.AsField(), DbSetting)
                 .Into()
                 .WriteText(":RepoDb_Result");
         }
 
         return builder.GetString();
+    }
+
+    public override string CreateInsertAll(string tableName, IEnumerable<Field>? fields = null, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    {
+        // Ensure with guards
+        GuardTableName(tableName);
+        GuardHints(hints);
+        GuardPrimary(primaryField);
+        GuardIdentity(identityField);
+
+        // Validate the multiple statement execution
+        ValidateMultipleStatementExecution(batchSize);
+
+        // Verify the fields
+        if (fields?.Any() != true)
+        {
+            throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
+        }
+
+        // Primary Key
+        if (primaryField != null &&
+            primaryField.HasDefaultValue == false &&
+            !string.Equals(primaryField.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase))
+        {
+            var isPresent = fields
+                .FirstOrDefault(f =>
+                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
+
+            if (isPresent == false)
+            {
+                throw new PrimaryFieldNotFoundException($"As the primary field '{primaryField.Name}' is not an identity nor has a default value, it must be present on the insert operation.");
+            }
+        }
+
+        return "/*FORALL*/" + CreateInsert(tableName, fields, primaryField, identityField, hints);
     }
 
     /// <inheritdoc cref="BaseStatementBuilder.CreateQuery"/>

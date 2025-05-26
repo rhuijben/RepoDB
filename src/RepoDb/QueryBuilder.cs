@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿#nullable enable
+using System.Globalization;
 using System.Text;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -38,7 +39,7 @@ public class QueryBuilder
     /// <returns>The current instance.</returns>
     public string GetString()
     {
-        return stringBuilder.Length > 0 ? stringBuilder.ToString(1, stringBuilder.Length - 1) : null;
+        return stringBuilder.Length > 0 ? stringBuilder.ToString(1, stringBuilder.Length - 1) : "";
     }
 
     /// <summary>

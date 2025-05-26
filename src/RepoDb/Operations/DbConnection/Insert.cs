@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using RepoDb.Contexts.Providers;
+using RepoDb.DbSettings;
 using RepoDb.Interfaces;
 
 namespace RepoDb;
@@ -682,7 +683,7 @@ public static partial class DbConnectionExtension
             }
 
             // Actual Execution
-            var fetch = GetDbHelper(connection).PrepareForIdentityOutput(command);
+            var fetch = ((BaseDbHelper)GetDbHelper(connection)).PrepareForIdentityOutput(command);
             if (fetch is not { })
             {
                 result = Converter.ToType<TResult>(command.ExecuteScalar())!;
@@ -699,7 +700,7 @@ public static partial class DbConnectionExtension
             // Set the return value
             if (result != null)
             {
-                context.KeyPropertySetterFunc?.Invoke(entity, result);
+                context.IdentitySetterFunc?.Invoke(entity, result);
             }
         }
 
@@ -775,13 +776,13 @@ public static partial class DbConnectionExtension
 
             // Actual Execution
 
-            var fetch = GetDbHelper(connection).PrepareForIdentityOutputAsync(command);
+            var fetch = ((BaseDbHelper)GetDbHelper(connection)).PrepareForIdentityOutput(command);
 
             if (fetch is { })
             {
                 await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
 
-                result = Converter.ToType<TResult>(await fetch(cancellationToken).ConfigureAwait(false))!;
+                result = Converter.ToType<TResult>(fetch())!;
             }
             else
             {
@@ -795,7 +796,7 @@ public static partial class DbConnectionExtension
             // Set the return value
             if (result != null)
             {
-                context.KeyPropertySetterFunc?.Invoke(entity, result);
+                context.IdentitySetterFunc?.Invoke(entity, result);
             }
         }
 

@@ -205,7 +205,7 @@ internal static class InsertExecutionContextProvider
                     null,
                     dbSetting,
                     dbHelper),
-            KeyPropertySetterFunc = keyPropertySetterFunc
+            IdentitySetterFunc = keyPropertySetterFunc
         };
     }
 }

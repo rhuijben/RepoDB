@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using System.Data;
-using System.Data.Common;
 
 namespace RepoDb.Interfaces;
 
@@ -87,10 +86,6 @@ public interface IDbHelper
     /// <param name="key">The key of the event to handle.</param>
     void DynamicHandler<TEventInstance>(TEventInstance instance,
         string key);
-
-    Func<object?>? PrepareForIdentityOutput(DbCommand command);
-
-    Func<CancellationToken, ValueTask<object?>>? PrepareForIdentityOutputAsync(DbCommand command);
 
     #endregion
 }

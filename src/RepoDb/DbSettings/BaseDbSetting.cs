@@ -84,9 +84,6 @@ public abstract class BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
     /// <inheritdoc />
     public bool QuoteParameterNames { get; protected init; }
 
-    /// <inheritdoc />
-    public bool IdentityViaOutputParameter { get; protected init; }
-
     #endregion
 
     #region Equality and comparers
@@ -144,7 +141,7 @@ public abstract class BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
             hashCode = HashCode.Combine(hashCode, ParameterPrefix);
         }
 
-        hashCode = HashCode.Combine(hashCode, ParameterBatchCount, GenerateFinalSemiColon, QuoteParameterNames, IdentityViaOutputParameter);
+        hashCode = HashCode.Combine(hashCode, ParameterBatchCount, GenerateFinalSemiColon, QuoteParameterNames);
 
         // Set and return the hashcode
         return this.hashCode ??= hashCode;
@@ -181,8 +178,7 @@ public abstract class BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
             && other.ParameterPrefix == ParameterPrefix
             && other.ParameterBatchCount == ParameterBatchCount
             && other.GenerateFinalSemiColon == GenerateFinalSemiColon
-            && other.QuoteParameterNames == QuoteParameterNames
-            && other.IdentityViaOutputParameter == IdentityViaOutputParameter;
+            && other.QuoteParameterNames == QuoteParameterNames;
     }
 
     /// <summary>

@@ -186,6 +186,10 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
                         [Date] {DateTimeDbType} NULL
                 )");
         }
+        else
+        {
+            await sql.TruncateAsync(tableName: "CommonDateTimeNullTestData");
+        }
 
         var t = await sql.BeginTransactionAsync();
 
@@ -556,7 +560,7 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             new MorePrimaryKeyTable { ID = "B", ID2 = 0, Value = null }
         };
 
-        Assert.AreEqual(2, await sql.InsertAllAsync(ftf));
+        Assert.AreEqual(2, await sql.InsertAllAsync(ftf, trace: new DiagnosticsTracer()));
 
         var data = (await sql.QueryAllAsync<MorePrimaryKeyTable>()).ToArray();
 

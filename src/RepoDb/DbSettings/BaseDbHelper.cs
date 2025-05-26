@@ -43,6 +43,4 @@ public abstract class BaseDbHelper : IDbHelper
 
     /// <inheritdoc />
     public virtual Func<object?>? PrepareForIdentityOutput(DbCommand command) => null;
-    /// <inheritdoc />
-    public virtual Func<CancellationToken, ValueTask<object?>>? PrepareForIdentityOutputAsync(DbCommand command) => null;
 }

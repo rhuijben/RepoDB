@@ -515,7 +515,7 @@ public static partial class DbConnectionExtension
                     // Set the return value
                     if (returnValue != null)
                     {
-                        context.KeyPropertySetterFunc?.Invoke(entity, returnValue);
+                        context.IdentitySetterFunc?.Invoke(entity, returnValue);
                     }
 
                     // Iterate the result
@@ -524,6 +524,8 @@ public static partial class DbConnectionExtension
             }
             else
             {
+                BaseDbHelper? dbh = null;
+
                 foreach (var batchEntities in entities.AsList().Split(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
@@ -562,6 +564,8 @@ public static partial class DbConnectionExtension
                         AddOrderColumnParameters(command, batchItems);
                     }
 
+                    var fetchIdentity = (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutput(command);
+
                     // Prepare the command
                     if (dbSetting.IsPreparable)
                     {
@@ -569,7 +573,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Actual Execution
-                    if (context.KeyPropertySetterFunc == null)
+                    if (context.IdentitySetterFunc == null || fetchIdentity is { })
                     {
                         // Before Execution
                         var traceResult = Tracer
@@ -583,6 +587,16 @@ public static partial class DbConnectionExtension
 
                         // No identity setters
                         result += command.ExecuteNonQuery();
+
+                        if (context.IdentitySetterFunc is { } && fetchIdentity is { })
+                        {
+                            var position = 0;
+
+                            foreach (var value in fetchIdentity() as System.Collections.IEnumerable ?? Array.Empty<object>())
+                            {
+                                context.IdentitySetterFunc.Invoke(batchItems[position++], value);
+                            }
+                        }
 
                         // After Execution
                         Tracer
@@ -603,7 +617,7 @@ public static partial class DbConnectionExtension
                         {
                             var value = Converter.DbNullToNull(reader.GetValue(0));
                             var index = batchItems.Count > 1 && reader.FieldCount > 1 ? reader.GetInt32(1) : position;
-                            context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
+                            context.IdentitySetterFunc.Invoke(batchItems[index], value);
                             position++;
                         }
 
@@ -701,7 +715,7 @@ public static partial class DbConnectionExtension
                     // Set the values
                     context.SingleDataEntityParametersSetterFunc?.Invoke(command, entity);
 
-                    var fetchIdentity = (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutputAsync(command);
+                    var fetchIdentity = (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutput(command);
 
                     // Prepare the command
                     if (dbSetting.IsPreparable)
@@ -727,7 +741,7 @@ public static partial class DbConnectionExtension
                     else
                     {
                         await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
-                        returnValue = Converter.DbNullToNull(await fetchIdentity(cancellationToken).ConfigureAwait(false));
+                        returnValue = Converter.DbNullToNull(fetchIdentity());
                     }
 
                     // After Execution
@@ -737,7 +751,7 @@ public static partial class DbConnectionExtension
                     // Set the return value
                     if (returnValue != null)
                     {
-                        context.KeyPropertySetterFunc?.Invoke(entity, returnValue);
+                        context.IdentitySetterFunc?.Invoke(entity, returnValue);
                     }
 
                     // Iterate the result
@@ -746,6 +760,7 @@ public static partial class DbConnectionExtension
             }
             else
             {
+                BaseDbHelper? dbh = null;
                 foreach (var batchEntities in entities.AsList().Split(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
@@ -786,13 +801,16 @@ public static partial class DbConnectionExtension
                     }
 
                     // Prepare the command
+
+                    var fetchIdentity = (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutput(command);
+
                     if (dbSetting.IsPreparable)
                     {
                         command.Prepare();
                     }
 
                     // Actual Execution
-                    if (context.KeyPropertySetterFunc == null)
+                    if (context.IdentitySetterFunc == null || fetchIdentity is { })
                     {
                         // Before Execution
                         var traceResult = await Tracer
@@ -806,6 +824,16 @@ public static partial class DbConnectionExtension
 
                         // No identity setters
                         result += await command.ExecuteNonQueryAsync(cancellationToken).ConfigureAwait(false);
+
+                        if (context.IdentitySetterFunc is { } && fetchIdentity is { })
+                        {
+                            var position = 0;
+
+                            foreach (var value in fetchIdentity() as System.Collections.IEnumerable ?? Array.Empty<object>())
+                            {
+                                context.IdentitySetterFunc.Invoke(batchItems[position++], value);
+                            }
+                        }
 
                         // After Execution
                         await Tracer
@@ -826,7 +854,7 @@ public static partial class DbConnectionExtension
                         {
                             var value = Converter.DbNullToNull(reader.GetValue(0));
                             var index = batchItems.Count > 1 && reader.FieldCount > 1 ? reader.GetInt32(1) : position;
-                            context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
+                            context.IdentitySetterFunc.Invoke(batchItems[index], value);
                             position++;
                         }
 
