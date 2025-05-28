@@ -44,13 +44,6 @@ namespace System
             return v.Length > 0 && v[v.Length-1] == value;
         }
 
-        /// <summary>
-        /// Returns a value indicating whether a specified string occurs within this string, using the specified comparison rules.
-        /// </summary>
-        /// <param name="value">The string to be contained.</param>
-        /// <param name="stringToSeek">The string to seek.</param>
-        /// <param name="comparisonType">One of the enumeration values that specifies the rules to use in the comparison.</param>
-        /// <returns>true if the value parameter occurs within this string, or if value is the empty string (""); otherwise, false.</returns>
         public static bool Contains(this string value,
             string stringToSeek,
             StringComparison comparisonType)
@@ -66,10 +59,6 @@ namespace System
 
 namespace System.Diagnostics.CodeAnalysis
 {
-    //
-    // Summary:
-    //     Specifies that when a method returns System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue,
-    //     the parameter will not be null even if the corresponding type allows it.
     [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
     internal sealed class NotNullWhenAttribute : Attribute
     {
@@ -95,6 +84,12 @@ namespace System.Diagnostics.CodeAnalysis
         //     parameter will not be null.
         public bool ReturnValue { get; }
     }
+
+    [AttributeUsage(AttributeTargets.Method, Inherited = false)]
+    internal sealed class DoesNotReturnAttribute : Attribute
+    {
+    }
+
 }
 #endif
 

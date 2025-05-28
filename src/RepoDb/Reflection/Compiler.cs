@@ -455,6 +455,7 @@ internal sealed partial class Compiler
             return null;
     }
 
+    [DoesNotReturn]
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static T ThrowNullableValueIsNull<T>(string expressionDescription)
     {
