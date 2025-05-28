@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Reflection;
 
 namespace RepoDb;
 
@@ -88,7 +89,7 @@ public static class Converter
                         return default!;
                     }
 #else
-                    object r = typeof(Converter).GetMethod(nameof(EnumTryParse)).MakeGenericMethod(type).Invoke(null, new object[] { sv });
+                    object r = typeof(Converter).GetMethod(nameof(EnumTryParse), BindingFlags.Static | BindingFlags.NonPublic).MakeGenericMethod(type).Invoke(null, new object[] { sv });
 
                     if (r is {})
                     {
