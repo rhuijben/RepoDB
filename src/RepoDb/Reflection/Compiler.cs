@@ -294,7 +294,7 @@ internal sealed partial class Compiler
     /// </summary>
     /// <param name="classPropertyParameterInfo"></param>
     /// <returns></returns>
-    private static ParameterInfo GetPropertyHandlerGetParameter(ClassPropertyParameterInfo classPropertyParameterInfo) =>
+    private static ParameterInfo? GetPropertyHandlerGetParameter(ClassPropertyParameterInfo classPropertyParameterInfo) =>
         GetPropertyHandlerGetParameter(classPropertyParameterInfo?.ClassProperty);
 
     /// <summary>
@@ -412,7 +412,7 @@ internal sealed partial class Compiler
         return value;
     }
 
-    static PropertyInfo GetPropertyInfo<TFrom>(Expression<Func<TFrom, object>> expression) => ((MemberExpression)UnwrapUnary(expression.Body)).Member as PropertyInfo;
+    static PropertyInfo GetPropertyInfo<TFrom>(Expression<Func<TFrom, object?>> expression) => (PropertyInfo)((MemberExpression)UnwrapUnary(expression.Body)).Member;
 
     /// <summary>
     ///
@@ -422,13 +422,6 @@ internal sealed partial class Compiler
     private static MethodInfo? GetDbReaderGetValueMethod(Type targetType, Type? readerType) =>
         readerType?.GetMethod(string.Concat("Get", targetType?.Name), new[] { StaticType.Int32 })
         ?? StaticType.DbDataReader.GetMethod(string.Concat("Get", targetType?.Name));
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    private static MethodInfo? GetDbReaderGetValueMethod() =>
-        StaticType.DbDataReader.GetMethod(nameof(DbDataReader.GetValue));
 
     /// <summary>
     ///
@@ -444,76 +437,7 @@ internal sealed partial class Compiler
     /// <param name="targetType"></param>
     /// <returns></returns>
     private static MethodInfo GetDbReaderGetValueOrDefaultMethod(Type targetType, Type readerType) =>
-        GetDbReaderGetValueMethod(targetType, readerType) ?? GetDbReaderGetValueMethod()!;
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    private static MethodInfo GetDbParameterValueSetMethod() =>
-        StaticType.DbParameter.GetProperty(nameof(DbParameter.Value))!.SetMethod!;
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    private static PropertyInfo GetTimeSpanTicksProperty() =>
-        GetPropertyInfo<TimeSpan>(x => x.Ticks);
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    private static MethodInfo GetTimeSpanTicksPropertyGetMethod() =>
-        GetTimeSpanTicksProperty().GetMethod!;
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    private static PropertyInfo GetDateTimeTimeOfDayProperty() =>
-        StaticType.DateTime.GetProperty(nameof(DateTime.TimeOfDay))!;
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    private static MethodInfo GetDateTimeTimeOfDayPropertyGetMethod() =>
-        GetDateTimeTimeOfDayProperty().GetMethod;
-#if NET
-    private static MethodInfo GetDateOnlyFromDateTimeStaticMethod() =>
-        GetMethodInfo(() => DateOnly.FromDateTime(default(DateTime)));
-
-    private static MethodInfo GetDateTimeFromDateOnlyMethod() =>
-        GetMethodInfo<DateOnly>((x) => x.ToDateTime(default(TimeOnly)));
-
-    private static MethodInfo GetTimeOnlyFromTimeSpanMethod() =>
-        GetMethodInfo(() => TimeOnly.FromTimeSpan(default));
-
-    private static MethodInfo GetTimeSpanFromTimeOnlyMethod() =>
-        GetMethodInfo<TimeOnly>((x) => x.ToTimeSpan());
-#endif
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    private static MethodInfo GetEnumGetNameMethod() =>
-        GetMethodInfo<Enum>((x) => Enum.GetName(default!, default!));
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    private static MethodInfo GetEnumIsDefinedMethod() =>
-        GetMethodInfo<Enum>((x) => Enum.IsDefined(default!, default!));
-
-
-    private static MethodInfo GetEnumParseNullMethod() =>
-        GetMethodInfo<Compiler>((x) => Compiler.EnumParseNull<DbType>(default!)).GetGenericMethodDefinition();
-
-    private static MethodInfo GetEnumParseNullDefinedMethod() =>
-        GetMethodInfo<Compiler>((x) => Compiler.EnumParseNullDefined<DbType>(default!)).GetGenericMethodDefinition();
+        GetDbReaderGetValueMethod(targetType, readerType) ?? GetMethodInfo<DbDataReader>((x) => x.GetValue(default(int)));
 
     private static TEnum? EnumParseNull<TEnum>(string value) where TEnum : struct, System.Enum
     {
@@ -610,7 +534,7 @@ internal sealed partial class Compiler
     /// <param name="expression"></param>
     /// <returns></returns>
     private static Expression ConvertExpressionToTimeSpanTicksExpression(Expression expression) =>
-        Expression.Call(expression, GetTimeSpanTicksPropertyGetMethod());
+        Expression.Property(expression, GetPropertyInfo<TimeSpan>(x => x.Ticks));
 
     /// <summary>
     ///
@@ -618,19 +542,19 @@ internal sealed partial class Compiler
     /// <param name="expression"></param>
     /// <returns></returns>
     private static Expression ConvertExpressionToDateTimeToTimeSpan(Expression expression) =>
-        Expression.Call(expression, GetDateTimeTimeOfDayPropertyGetMethod());
+        Expression.Property(expression, GetPropertyInfo<DateTime>(d => d.TimeOfDay));
 #if NET
     private static Expression ConvertExpressionToDateOnlyToDateTime(Expression expression) =>
-        Expression.Call(expression, GetDateTimeFromDateOnlyMethod(), Expression.Constant(default(TimeOnly)));
+        Expression.Call(expression, GetMethodInfo<DateOnly>((x) => x.ToDateTime(default(TimeOnly))), Expression.Constant(default(TimeOnly)));
 
     private static Expression ConvertExpressionToDateTimeToDateOnly(Expression expression) =>
-        Expression.Call(null, GetDateOnlyFromDateTimeStaticMethod(), expression);
+        Expression.Call(null, GetMethodInfo(() => DateOnly.FromDateTime(default(DateTime))), expression);
 
     private static Expression ConvertExpressionToTimeSpanToTimeOnly(Expression expression) =>
-        Expression.Call(null, GetTimeOnlyFromTimeSpanMethod(), expression);
+        Expression.Call(null, GetMethodInfo(() => TimeOnly.FromTimeSpan(default)), expression);
 
     private static Expression ConvertExpressionToTimeOnlyToTimeSpan(Expression expression) =>
-        Expression.Call(expression, GetTimeSpanFromTimeOnlyMethod());
+        Expression.Call(expression, GetMethodInfo<TimeOnly>((x) => x.ToTimeSpan()));
 #endif
     /// <summary>
     ///
@@ -707,7 +631,7 @@ internal sealed partial class Compiler
         }
         else if (underlyingToType == StaticType.DateTimeOffset && underlyingFromType == StaticType.DateTime)
         {
-            result = Expression.New(typeof(DateTimeOffset).GetConstructor([typeof(DateTime)]), [result]);
+            result = Expression.New(typeof(DateTimeOffset).GetConstructor([typeof(DateTime)])!, [result]);
         }
         else if (underlyingToType == StaticType.Boolean && underlyingFromType == StaticType.String)
         {
@@ -750,7 +674,7 @@ internal sealed partial class Compiler
             }
 #endif
             else
-                return null;
+                return result; // Will fail
         }
         else
         {
@@ -907,8 +831,8 @@ internal sealed partial class Compiler
         var options = GlobalConfiguration.Options.EnumHandling;
         var parseMethod = (
             options is InvalidEnumValueHandling.Cast || toEnumType.GetCustomAttribute<FlagsAttribute>() is not null
-                ? GetEnumParseNullMethod()
-                : GetEnumParseNullDefinedMethod()
+                ? GetMethodInfo<Compiler>((x) => Compiler.EnumParseNull<DbType>(default!)).GetGenericMethodDefinition()
+                : GetMethodInfo<Compiler>((x) => Compiler.EnumParseNullDefined<DbType>(default!)).GetGenericMethodDefinition()
         ).MakeGenericMethod(toEnumType);
 
         var parseCall = Expression.Call(parseMethod, expression);
@@ -1106,7 +1030,7 @@ internal sealed partial class Compiler
         if (targetNullableType.IsValueType && (underlyingType == null || underlyingType != targetNullableType))
         {
             var nullableType = StaticType.Nullable.MakeGenericType(targetNullableType);
-            var constructor = nullableType.GetConstructor(new[] { targetNullableType });
+            var constructor = nullableType.GetConstructor(new[] { targetNullableType })!;
             expression = TypeCache.Get(expression.Type).IsNullable() ? expression :
                 Expression.New(constructor, ConvertExpressionToTypeExpression(expression, targetNullableType));
         }
@@ -1370,7 +1294,7 @@ internal sealed partial class Compiler
             Expression.Constant(enumType),
             ConvertExpressionToTypeExpression(expression, StaticType.Object)
         };
-        return Expression.Call(GetEnumIsDefinedMethod(), parameters);
+        return Expression.Call(GetMethodInfo<Enum>((x) => Enum.IsDefined(default!, default!)), parameters);
     }
 
     /// <summary>
@@ -1387,7 +1311,7 @@ internal sealed partial class Compiler
             Expression.Constant(enumType),
             ConvertExpressionToTypeExpression(expression, StaticType.Object)
         };
-        return Expression.Call(GetEnumGetNameMethod(), parameters);
+        return Expression.Call(GetMethodInfo<Enum>((x) => Enum.GetName(default!, default!)), parameters);
     }
 
     /// <summary>
@@ -1974,7 +1898,7 @@ internal sealed partial class Compiler
         }
 
         // Create the method call to set the parameter
-        var setValueCall = Expression.Call(dbParameterExpression, GetDbParameterValueSetMethod(), expression);
+        var setValueCall = Expression.Assign(Expression.Property(dbParameterExpression, GetPropertyInfo<DbParameter>(x => x.Value)), expression);
 
         // Use a static helper to throw the exception (to avoid closure allocation)
         var exceptionHelperMethod = GetMethodInfo(() => ThrowParameterAssignmentException("", default, default!));
@@ -2019,7 +1943,7 @@ internal sealed partial class Compiler
         }
 
         // Set the value
-        return Expression.Call(dbParameterExpression, GetDbParameterValueSetMethod(), expression);
+        return Expression.Assign(Expression.Property(dbParameterExpression, GetPropertyInfo<DbParameter>(x => x.Value)), expression);
     }
 
     /// <summary>
