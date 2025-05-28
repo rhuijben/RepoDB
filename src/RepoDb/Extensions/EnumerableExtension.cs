@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RepoDb.Extensions;
 
@@ -80,7 +81,11 @@ public static class EnumerableExtension
     /// <param name="value">The target type.</param>
     /// <typeparam name="T">The actual enumerable instance.</typeparam>
     /// <returns>A value indicating whether the collection is null or empty.</returns>
-    public static bool IsNullOrEmpty<T>(this IEnumerable<T> value) => !value?.Any() ?? true;
+    public static bool IsNullOrEmpty<T>(
+#if NET
+        [NotNullWhen(true)]
+#endif
+    this IEnumerable<T>? value) => !value?.Any() ?? true;
 
 #if NETSTANDARD
     /// <summary>

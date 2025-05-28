@@ -292,7 +292,7 @@ public static partial class StringExtension
     /// <param name="dbSetting">The <see cref="IDbSetting"/> object to be used.</param>
     /// <returns>The string value represented as database field.</returns>
     public static string AsField(this string value,
-        IDbSetting dbSetting) =>
+        IDbSetting? dbSetting) =>
         AsField(value, null, dbSetting);
 
     /// <summary>
@@ -302,7 +302,7 @@ public static partial class StringExtension
     /// <param name="functionFormat"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    public static string AsField(this string value, string? functionFormat, IDbSetting dbSetting) =>
+    public static string AsField(this string value, string? functionFormat, IDbSetting? dbSetting) =>
         string.IsNullOrWhiteSpace(functionFormat) ? value.AsQuoted(true, true, dbSetting) :
             string.Format(CultureInfo.InvariantCulture, functionFormat, value.AsQuoted(true, true, dbSetting));
 
