@@ -141,48 +141,63 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
 
     #region CreateInsert
 
-    /// <summary>
-    /// Creates a SQL Statement for insert operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="fields">The list of fields to be inserted.</param>
-    /// <param name="primaryField">The primary field from the database.</param>
-    /// <param name="identityField">The identity field from the database.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for insert operation.</returns>
+    /// <inheritdoc />
     public override string CreateInsert(string tableName,
-        IEnumerable<Field> fields,
-        IEnumerable<DbField> keyFields,
+        IEnumerable<Field>? fields,
+        IEnumerable<DbField>? keyFields,
         string? hints = null)
     {
+        // Ensure with guards
+        GuardTableName(tableName);
+        GuardHints(hints);
+
+        // Verify the fields
+        if (fields?.Any() != true)
+        {
+            throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
+        }
+
+        // Primary Key
+        foreach (var keyField in keyFields)
+        {
+            if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable)
+                continue;
+
+            if (fields.GetByName(keyField.Name) is null)
+            {
+                throw new PrimaryFieldNotFoundException($"Primary field '{keyField.Name}' must be present in the field list.");
+            }
+        }
+
+        // Insertable fields
+        var insertableFields = fields
+            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity));
+
+        // Initialize the builder
         var builder = new QueryBuilder();
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
-        // Call the base
-        builder.WriteText(
-            base.CreateInsert(tableName,
-                fields,
-                keyFields,
-                hints));
-
-        // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-        var databaseType = GetDatabaseType(keyColumn);
-
-        // Set the return value
-        var columnName = keyColumn != null ?
-            keyColumn.IsIdentity ?
-                "last_insert_rowid()" : keyColumn.Name.AsParameter(DbSetting) : "NULL";
-        var result = string.IsNullOrWhiteSpace(databaseType) ?
-            columnName : $"CAST({columnName} AS {databaseType})";
+        // Build the query
         builder
-            .Select()
-            .WriteText(result)
-            .As("Result".AsQuoted(DbSetting))
-            .End();
+            .Insert()
+            .Into()
+            .TableNameFrom(tableName, DbSetting)
+            .HintsFrom(hints)
+            .OpenParen()
+            .FieldsFrom(insertableFields, DbSetting)
+            .CloseParen()
+            .Values()
+            .OpenParen()
+            .ParametersFrom(insertableFields, 0, DbSetting)
+            .CloseParen();
 
-        // Return the query
+        if (keyFields?.Any() == true)
+        {
+            builder
+                .Returning()
+                .FieldsFrom(keyFields.AsFields().Take(1), DbSetting);
+        }
+
+        builder.End(DbSetting);
         return builder.GetString();
     }
 
@@ -190,18 +205,9 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
 
     #region CreateInsertAll
 
-    /// <summary>
-    /// Creates a SQL Statement for insert-all operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="fields">The list of fields to be inserted.</param>
-    /// <param name="batchSize">The batch size of the operation.</param>
-    /// <param name="primaryField">The primary field from the database.</param>
-    /// <param name="identityField">The identity field from the database.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for insert operation.</returns>
+    /// <inheritdoc />
     public override string CreateInsertAll(string tableName,
-        IEnumerable<Field> fields,
+        IEnumerable<Field>? fields,
         int batchSize,
         IEnumerable<DbField> keyFields,
         string? hints = null)
@@ -211,8 +217,8 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         GuardHints(hints);
         var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
         var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
-        // Validate the multiple statement execution
-        ValidateMultipleStatementExecution(batchSize);
+        GuardPrimary(primaryField);
+        GuardIdentity(identityField);
 
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
@@ -224,27 +230,26 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         }
 
         // Primary Key
-        if (primaryField != null &&
-            primaryField.HasDefaultValue == false &&
-            !string.Equals(primaryField.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase))
+        foreach (var keyField in keyFields)
         {
-            var isPresent = fields
-                .FirstOrDefault(f =>
-                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
+            if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable)
+                continue;
 
-            if (isPresent == false)
+            if (fields.GetByName(keyField.Name) is null)
             {
-                throw new PrimaryFieldNotFoundException($"As the primary field '{primaryField.Name}' is not an identity nor has a default value, it must be present on the insert operation.");
+                throw new PrimaryFieldNotFoundException($"Primary field '{keyField.Name}' must be present in the field list.");
             }
         }
 
         // Insertable fields
         var insertableFields = fields
-            .Where(f =>
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase));
+            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity));
 
         // Initialize the builder
         var builder = new QueryBuilder();
+
+        // Build the query
+        builder.Clear();
 
         // Compose
         builder
@@ -260,38 +265,29 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         // Iterate the indexes
         for (var index = 0; index < batchSize; index++)
         {
-            builder
-                .OpenParen()
-                .ParametersFrom(insertableFields, index, DbSetting)
-                .CloseParen();
-
-            if (index < batchSize - 1)
+            if (index > 0)
             {
                 builder
                     .WriteText(",");
             }
-        }
 
-        // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-
-        // Set the return value
-        if (keyColumn?.IsIdentity == true)
-        {
-            var dbType = new ClientTypeToDbTypeResolver().Resolve(keyColumn.Type);
-            var databaseType = (dbType != null) ? new DbTypeToSqLiteStringNameResolver().Resolve(dbType.Value) : null;
-            var returnValue = keyColumn == null ? "NULL" :
-                string.IsNullOrWhiteSpace(databaseType) ?
-                    keyColumn.Name.AsQuoted(DbSetting) :
-                        string.Concat("CAST(", keyColumn.Name.AsQuoted(DbSetting), " AS ", databaseType, ")");
             builder
-                .WriteText(
-                    string.Concat("RETURNING ", returnValue, $" AS ", "Result".AsQuoted(DbSetting)));
+                .OpenParen()
+                .ParametersFrom(insertableFields, index, DbSetting)
+                .CloseParen();
         }
+
+        if (keyFields?.Any() == true)
+        {
+            builder
+                .Returning()
+                .FieldsFrom(keyFields.AsFields().Take(1), DbSetting);
+        }
+
+        builder.End(DbSetting);
 
         // Return the query
         return builder
-            .End(DbSetting)
             .GetString();
     }
 

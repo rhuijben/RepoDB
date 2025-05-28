@@ -161,7 +161,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             primaryField: null,
             null);
-        var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT NULL AS [Result] ;";
+        var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -178,7 +178,8 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
-        var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT CAST(@Id AS INT) AS [Result] ;";
+        var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) "
+            + "RETURNING [Id] ;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -195,7 +196,8 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             new DbField("Id", false, true, false, typeof(int), null, null, null, null, false));
-        var expected = "INSERT INTO [Table] ( [Name], [Address] ) VALUES ( @Name, @Address ) ; SELECT CAST(last_insert_rowid() AS INT) AS [Result] ;";
+        var expected = "INSERT INTO [Table] ( [Name], [Address] ) VALUES ( @Name, @Address ) "
+            + "RETURNING [Id] ;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -250,7 +252,8 @@ public class StatementBuilderTest
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
         var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ," +
-            " ( @Id_1, @Name_1, @Address_1 ) , ( @Id_2, @Name_2, @Address_2 ) ;";
+            " ( @Id_1, @Name_1, @Address_1 ) , ( @Id_2, @Name_2, @Address_2 ) " +
+            "RETURNING [Id] ;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -268,7 +271,8 @@ public class StatementBuilderTest
             3,
             null,
             new DbField("Id", false, true, false, typeof(int), null, null, null, null, false));
-        var expected = "INSERT INTO [Table] ( [Name], [Address] ) VALUES ( @Name, @Address ) , ( @Name_1, @Address_1 ) , ( @Name_2, @Address_2 ) RETURNING CAST([Id] AS INT) AS [Result] ;";
+        var expected = "INSERT INTO [Table] ( [Name], [Address] ) VALUES ( @Name, @Address ) , ( @Name_1, @Address_1 ) , ( @Name_2, @Address_2 ) "
+            + "RETURNING [Id] ;";
 
         // Assert
         Assert.AreEqual(expected, query);
