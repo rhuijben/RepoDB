@@ -10,6 +10,23 @@ namespace System.Runtime.CompilerServices
     internal sealed class IsExternalInit : Attribute
     {
     }
+
+    internal sealed class RequiredMemberAttribute : Attribute
+    {
+        public RequiredMemberAttribute()
+        {
+        }
+    }
+
+    internal sealed class CompilerFeatureRequiredAttribute : Attribute
+    {
+        public CompilerFeatureRequiredAttribute(string featureName)
+        {
+            FeatureName = featureName ?? throw new ArgumentNullException(nameof(featureName));
+        }
+
+        public string FeatureName { get; }
+    }
 }
 
 namespace System
