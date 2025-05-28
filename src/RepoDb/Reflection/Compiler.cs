@@ -1905,7 +1905,8 @@ internal sealed partial class Compiler
         var exceptionHelperMethod = GetMethodInfo(() => ThrowParameterAssignmentException("", default, default!));
 
         var ex = Expression.Parameter(typeof(ArgumentException), "ex");
-        return Expression.TryCatch(setValueCall, Expression.Catch(ex,
+        return Expression.TryCatch(
+            Expression.Block(setValueCall, Expression.Empty()), Expression.Catch(ex,
             Expression.Call(exceptionHelperMethod,
                 Expression.Constant(classProperty?.Name ?? dbField?.Name),
                 expression,
