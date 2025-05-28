@@ -577,16 +577,6 @@ public class QueryBuilder
     public QueryBuilder Table() => Append("TABLE");
 
     /// <summary>
-    /// Appends the mapped entity name to the SQL Query Statement.
-    /// </summary>
-    /// <typeparam name="TEntity">The type of data entity object bound for the SQL Statement to be created.</typeparam>
-    /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
-    /// <returns>The current instance.</returns>
-    public QueryBuilder TableNameFrom<TEntity>(IDbSetting dbSetting)
-        where TEntity : class =>
-        TableNameFrom(ClassMappedNameCache.Get<TEntity>(), dbSetting);
-
-    /// <summary>
     /// Appends the target name to the SQL Query Statement.
     /// </summary>
     /// <param name="tableName">The name of the table.</param>
@@ -628,7 +618,7 @@ public class QueryBuilder
         where TEntity : class
     {
         var fields = PropertyCache
-            .Get<TEntity>()?
+            .Get<TEntity>()
             .Select(property => property.AsField());
 
         return ParametersAsFieldsFrom(fields, index, dbSetting);
@@ -1072,4 +1062,6 @@ public class QueryBuilder
     /// </summary>
     /// <returns>The current instance.</returns>
     public QueryBuilder DoUpdate() => Append("DO UPDATE");
+
+    public QueryBuilder Output() => Append("OUTPUT");
 }

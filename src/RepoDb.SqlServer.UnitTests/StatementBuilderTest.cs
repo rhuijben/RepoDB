@@ -528,12 +528,9 @@ public class StatementBuilderTest
             identityField: identityField);
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
-            $"OUTPUT CONVERT(INT, [INSERTED].[Field1]) AS [Result] " +
-            $"SELECT [Field2], [Field3] FROM " +
-            $"( VALUES " +
-            $"( @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) ) AS T " +
-            $"( [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+            $"OUTPUT INSERTED.[Field1] " +
+            $"VALUES " +
+            $"( @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -556,12 +553,9 @@ public class StatementBuilderTest
             identityField: identityField);
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
-            $"OUTPUT CONVERT(BIGINT, [INSERTED].[Field1]) AS [Result] " +
-            $"SELECT [Field2], [Field3] FROM " +
-            $"( VALUES " +
-            $"( @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) ) AS T " +
-            $"( [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+            $"OUTPUT INSERTED.[Field1] " +
+            $"VALUES " +
+            $"( @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -584,12 +578,9 @@ public class StatementBuilderTest
             identityField: identityField);
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field1], [Field3] ) " +
-            $"OUTPUT CONVERT(INT, [INSERTED].[Field2]) AS [Result] " +
-            $"SELECT [Field1], [Field3] FROM " +
-            $"( VALUES " +
-            $"( @Field1, @Field3 , @__RepoDb_OrderColumn_0 ) ) AS T " +
-            $"( [Field1], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+            $"OUTPUT INSERTED.[Field2] " +
+            $"VALUES " +
+            $"( @Field1, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -613,12 +604,9 @@ public class StatementBuilderTest
             identityField: identityField);
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field1], [Field3] ) " +
-            $"OUTPUT CONVERT(BIGINT, [INSERTED].[Field2]) AS [Result] " +
-            $"SELECT [Field1], [Field3] FROM " +
-            $"( VALUES " +
-            $"( @Field1, @Field3 , @__RepoDb_OrderColumn_0 ) ) AS T " +
-            $"( [Field1], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+            $"OUTPUT INSERTED.[Field2] " +
+            $"VALUES " +
+            $"( @Field1, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -641,14 +629,11 @@ public class StatementBuilderTest
             identityField: identityField);
         var expected = $"" +
             $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
-            $"OUTPUT CONVERT(INT, [INSERTED].[Field1]) AS [Result] " +
-            $"SELECT [Field2], [Field3] FROM " +
-            $"( VALUES " +
-            $"( @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) , " +
-            $"( @Field2_1, @Field3_1 , @__RepoDb_OrderColumn_1 ) , " +
-            $"( @Field2_2, @Field3_2 , @__RepoDb_OrderColumn_2 ) ) AS T " +
-            $"( [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+            $"OUTPUT INSERTED.[Field1] " +
+            $"VALUES " +
+            $"( @Field2, @Field3 ) , " +
+            $"( @Field2_1, @Field3_1 ) , " +
+            $"( @Field2_2, @Field3_2 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -672,12 +657,9 @@ public class StatementBuilderTest
             hints: SqlServerTableHints.TabLock);
         var expected = $"" +
             $"INSERT INTO [Table] WITH (TABLOCK) ( [Field2], [Field3] ) " +
-            $"OUTPUT CONVERT(INT, [INSERTED].[Field1]) AS [Result] " +
-            $"SELECT [Field2], [Field3] FROM " +
-            $"( VALUES " +
-            $"( @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) ) AS T " +
-            $"( [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+            $"OUTPUT INSERTED.[Field1] " +
+            $"VALUES " +
+            $"( @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -701,14 +683,11 @@ public class StatementBuilderTest
             hints: SqlServerTableHints.TabLock);
         var expected = $"" +
             $"INSERT INTO [Table] WITH (TABLOCK) ( [Field2], [Field3] ) " +
-            $"OUTPUT CONVERT(INT, [INSERTED].[Field1]) AS [Result] " +
-            $"SELECT [Field2], [Field3] FROM " +
-            $"( VALUES " +
-            $"( @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) , " +
-            $"( @Field2_1, @Field3_1 , @__RepoDb_OrderColumn_1 ) , " +
-            $"( @Field2_2, @Field3_2 , @__RepoDb_OrderColumn_2 ) ) AS T " +
-            $"( [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+            $"OUTPUT INSERTED.[Field1] " +
+            $"VALUES " +
+            $"( @Field2, @Field3 ) , " +
+            $"( @Field2_1, @Field3_1 ) , " +
+            $"( @Field2_2, @Field3_2 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -735,8 +714,7 @@ public class StatementBuilderTest
             $"INSERT INTO [Table] " +
             $"( [Field1], [Field2], [Field3] ) " +
             $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ; " +
-            $"SELECT NULL AS [Result] ;";
+            $"( @Field1, @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -759,8 +737,7 @@ public class StatementBuilderTest
             $"INSERT INTO [dbo].[Table] " +
             $"( [Field1], [Field2], [Field3] ) " +
             $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ; " +
-            $"SELECT NULL AS [Result] ;";
+            $"( @Field1, @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -783,8 +760,7 @@ public class StatementBuilderTest
             $"INSERT INTO [dbo].[Table] " +
             $"( [Field1], [Field2], [Field3] ) " +
             $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ; " +
-            $"SELECT NULL AS [Result] ;";
+            $"( @Field1, @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -807,9 +783,9 @@ public class StatementBuilderTest
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field1], [Field2], [Field3] ) " +
+            $"OUTPUT INSERTED.[Field1] " +
             $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ; " +
-            $"SELECT CONVERT(INT, @Field1) AS [Result] ;";
+            $"( @Field1, @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -832,9 +808,9 @@ public class StatementBuilderTest
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field2], [Field3] ) " +
+            $"OUTPUT INSERTED.[Field1] " +
             $"VALUES " +
-            $"( @Field2, @Field3 ) ; " +
-            $"SELECT CONVERT(INT, SCOPE_IDENTITY()) AS [Result] ;";
+            $"( @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -857,9 +833,9 @@ public class StatementBuilderTest
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field2], [Field3] ) " +
+            $"OUTPUT INSERTED.[Field1] " +
             $"VALUES " +
-            $"( @Field2, @Field3 ) ; " +
-            $"SELECT CONVERT(BIGINT, SCOPE_IDENTITY()) AS [Result] ;";
+            $"( @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -883,9 +859,9 @@ public class StatementBuilderTest
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field1], [Field3] ) " +
+            "OUTPUT INSERTED.[Field2] " +
             $"VALUES " +
-            $"( @Field1, @Field3 ) ; " +
-            $"SELECT CONVERT(INT, SCOPE_IDENTITY()) AS [Result] ;";
+            $"( @Field1, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -909,9 +885,9 @@ public class StatementBuilderTest
         var expected = $"" +
             $"INSERT INTO [Table] " +
             $"( [Field1], [Field3] ) " +
+            $"OUTPUT INSERTED.[Field2] " +
             $"VALUES " +
-            $"( @Field1, @Field3 ) ; " +
-            $"SELECT CONVERT(BIGINT, SCOPE_IDENTITY()) AS [Result] ;";
+            $"( @Field1, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -935,8 +911,7 @@ public class StatementBuilderTest
             $"INSERT INTO [Table] WITH (TABLOCK) " +
             $"( [Field1], [Field2], [Field3] ) " +
             $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ; " +
-            $"SELECT NULL AS [Result] ;";
+            $"( @Field1, @Field2, @Field3 ) ;";
 
         // Assert
         Assert.AreEqual(expected, actual);

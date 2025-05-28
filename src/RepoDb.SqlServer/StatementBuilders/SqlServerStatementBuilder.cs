@@ -198,46 +198,58 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         IEnumerable<DbField> keyFields,
         string? hints = null)
     {
+        // Ensure with guards
+        GuardTableName(tableName);
+        GuardHints(hints);
+
+        // Verify the fields
+        if (fields?.Any() != true)
+        {
+            throw new EmptyException(nameof(fields), $"The list of insertable fields must not be null or empty for '{tableName}'.");
+        }
+
+        foreach (var keyField in keyFields)
+        {
+            if (keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable)
+                continue;
+
+            if (fields.GetByName(keyField.Name) is null)
+            {
+                throw new PrimaryFieldNotFoundException($"Primary field '{keyField.Name}' must be present in the field list.");
+            }
+        }
+
+        // Insertable fields
+        var insertableFields = fields
+            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity));
+
         // Initialize the builder
         var builder = new QueryBuilder();
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
-        // Call the base
+        // Build the query
         builder
-            .WriteText(base.CreateInsert(tableName,
-                fields,
-                keyFields,
-                hints));
+            .Insert()
+            .Into()
+            .TableNameFrom(tableName, DbSetting)
+            .HintsFrom(hints)
+            .OpenParen()
+            .FieldsFrom(insertableFields, DbSetting)
+            .CloseParen();
 
-        // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-        var returnValue = "NULL";
-
-        // Set the return value
-        if (keyColumn != null)
+        if (keyFields?.Any() == true)
         {
-            var dbType = new ClientTypeToDbTypeResolver().Resolve(keyColumn.Type);
-            string? databaseType = null;
-
-            if (dbType != null)
-            {
-                databaseType = new DbTypeToSqlServerStringNameResolver().Resolve(dbType.Value);
-            }
-
-            var keyColumnText = (keyColumn == identityField || string.Equals(keyColumn.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase)) ? "SCOPE_IDENTITY()" :
-                keyColumn.Name.AsParameter(DbSetting);
-            returnValue = keyColumn != null ?
-                string.IsNullOrWhiteSpace(databaseType) ?
-                keyColumnText : string.Concat("CONVERT(", databaseType, ", ", keyColumnText, ")") : "NULL";
+            builder
+                .Output()
+                .AsAliasFieldsFrom(keyFields.AsFields().Take(1), "INSERTED", DbSetting);
         }
-        builder
-            .Select()
-            .WriteText(returnValue)
-            .As("[Result]")
-            .End();
 
-        // Return the query
+        builder
+            .Values()
+            .OpenParen()
+            .ParametersFrom(insertableFields, 0, DbSetting)
+            .CloseParen();
+
+        builder.End(DbSetting);
         return builder.GetString();
     }
 
@@ -261,34 +273,74 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         IEnumerable<DbField> keyFields,
         string? hints = null)
     {
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
+        // Ensure with guards
+        GuardTableName(tableName);
+        GuardHints(hints);
 
-        // Call the base
-        var commandText = base.CreateInsertAll(tableName,
-            fields,
-            batchSize,
-            keyFields,
-            hints);
+        // Validate the multiple statement execution
+        ValidateMultipleStatementExecution(batchSize);
 
-        // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-
-        // Set the return value
-        if (keyColumn?.IsIdentity == true)
+        // Verify the fields
+        if (fields?.Any() != true)
         {
-            var dbType = new ClientTypeToDbTypeResolver().Resolve(keyColumn.Type);
-            var databaseType = (dbType != null) ? new DbTypeToSqlServerStringNameResolver().Resolve(dbType.Value) : null;
-            var returnValue = keyColumn == null ? "NULL" :
-                string.IsNullOrWhiteSpace(databaseType) ?
-                    string.Concat("[INSERTED].", keyColumn.Name.AsQuoted(DbSetting)) :
-                        string.Concat("CONVERT(", databaseType, ", [INSERTED].", keyColumn.Name.AsQuoted(DbSetting), ")");
-            var result = string.Concat("OUTPUT ", returnValue, $" AS [Result] ");
-            commandText = commandText.Insert(commandText.IndexOf("SELECT"), result);
+            throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
         }
 
+        // Primary Key
+        foreach (var keyField in keyFields)
+        {
+            if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable)
+                continue;
+
+            if (fields.GetByName(keyField.Name) is null)
+            {
+                throw new PrimaryFieldNotFoundException($"Primary field '{keyField.Name}' must be present in the field list.");
+            }
+        }
+
+        // Insertable fields
+        var insertableFields = fields
+            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity));
+
+        // Initialize the builder
+        var builder = new QueryBuilder();
+
+        // Build the query
+        builder
+            .Insert()
+            .Into()
+            .TableNameFrom(tableName, DbSetting)
+            .HintsFrom(hints)
+            .OpenParen()
+            .FieldsFrom(insertableFields, DbSetting)
+            .CloseParen();
+
+        if (keyFields?.Any() == true)
+        {
+            builder
+                .Output()
+                .AsAliasFieldsFrom(keyFields.AsFields().Take(1), "INSERTED", DbSetting);
+        }
+
+        builder
+            .Values();
+
+        // Iterate the indexes
+        for (var index = 0; index < batchSize; index++)
+        {
+            if (index > 0)
+                builder.WriteText(",");
+
+            builder
+                .OpenParen()
+                .ParametersFrom(insertableFields, index, DbSetting)
+                .CloseParen();
+        }
+
+        builder.End(DbSetting);
+
         // Return the query
-        return commandText;
+        return builder.GetString();
     }
 
     #endregion
