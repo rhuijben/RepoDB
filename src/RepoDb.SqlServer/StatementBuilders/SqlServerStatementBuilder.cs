@@ -89,7 +89,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
@@ -130,7 +130,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .CountBig(null, DbSetting)
             .WriteText("AS [CountValue]")
@@ -167,7 +167,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .CountBig(null, DbSetting)
             .WriteText("AS [CountValue]")
@@ -373,7 +373,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             // MERGE T USING S
             .Merge()
             .TableNameFrom(tableName, DbSetting)
@@ -517,9 +517,6 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
         var builder = new QueryBuilder();
 
-        // Build the query
-        builder.Clear();
-
         // Iterate the indexes
         for (var index = 0; index < batchSize; index++)
         {
@@ -638,7 +635,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .With()
             .WriteText("CTE")
             .As()

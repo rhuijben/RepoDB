@@ -83,7 +83,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Average(field, DbSetting, ConvertFieldResolver)
             .WriteText($"AS {"AverageValue".AsQuoted(DbSetting)}")
@@ -133,7 +133,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Average(field, DbSetting, ConvertFieldResolver)
             .WriteText($"AS {"AverageValue".AsQuoted(DbSetting)}")
@@ -172,7 +172,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Count(null, DbSetting)
             .WriteText($"AS {"CountValue".AsQuoted(DbSetting)}")
@@ -210,7 +210,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Count(null, DbSetting)
             .WriteText($"AS {"CountValue".AsQuoted(DbSetting)}")
@@ -249,7 +249,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Delete()
             .From()
             .TableNameFrom(tableName, DbSetting)
@@ -285,7 +285,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Delete()
             .From()
             .TableNameFrom(tableName, DbSetting)
@@ -322,7 +322,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .TopFrom(1)
             .WriteText($"1 AS {("ExistsValue").AsQuoted(DbSetting)}")
@@ -392,7 +392,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Insert()
             .Into()
             .TableNameFrom(tableName, DbSetting)
@@ -469,9 +469,6 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
         // Initialize the builder
         var builder = new QueryBuilder();
-
-        // Build the query
-        builder.Clear();
 
         // Compose
         builder
@@ -556,7 +553,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Max(field, DbSetting)
             .WriteText($"AS {"MaxValue".AsQuoted(DbSetting)}")
@@ -602,7 +599,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Max(field, DbSetting)
             .WriteText($"AS {"MaxValue".AsQuoted(DbSetting)}")
@@ -649,7 +646,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Min(field, DbSetting)
             .WriteText($"AS {"MinValue".AsQuoted(DbSetting)}")
@@ -695,7 +692,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Min(field, DbSetting)
             .WriteText($"AS {"MinValue".AsQuoted(DbSetting)}")
@@ -746,7 +743,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .TopFrom(top)
             .FieldsFrom(fields, DbSetting)
@@ -795,7 +792,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
@@ -842,7 +839,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Sum(field, DbSetting)
             .WriteText($"AS {"SumValue".AsQuoted(DbSetting)}")
@@ -888,7 +885,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .Sum(field, DbSetting)
             .WriteText($"AS {"SumValue".AsQuoted(DbSetting)}")
@@ -919,7 +916,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Truncate()
             .Table()
             .TableNameFrom(tableName, DbSetting)
@@ -972,7 +969,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Update()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
@@ -1078,9 +1075,6 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
         // Initialize the builder
         var builder = new QueryBuilder();
-
-        // Build the query
-        builder.Clear();
 
         // Iterate the indexes
         for (var index = 0; index < batchSize; index++)

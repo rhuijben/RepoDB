@@ -93,7 +93,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
@@ -132,7 +132,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .WriteText("1 AS \"ExistsValue\"")
             .From()
@@ -292,9 +292,6 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         // Initialize the builder
         var builder = new QueryBuilder();
 
-        // Build the query
-        builder.Clear();
-
         // Compose
         builder
             .Insert()
@@ -406,7 +403,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
             .AsList();
 
         // Build the query
-        builder.Clear()
+        builder
             .Insert()
             .Into()
             .TableNameFrom(tableName, DbSetting)
@@ -532,9 +529,6 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
                 keyColumn.Name.AsQuoted(DbSetting) : $"CAST({keyColumn.Name.AsQuoted(DbSetting)} AS {databaseType})";
         }
 
-        // Clear the builder
-        builder.Clear();
-
         // Iterate the indexes
         for (var index = 0; index < batchSize; index++)
         {
@@ -617,7 +611,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
@@ -691,7 +685,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
@@ -723,7 +717,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Truncate()
             .Table()
             .TableNameFrom(tableName, DbSetting)

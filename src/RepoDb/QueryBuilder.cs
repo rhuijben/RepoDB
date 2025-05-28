@@ -112,7 +112,7 @@ public class QueryBuilder
     /// <param name="separator"></param>
     /// <param name="spaceBefore"></param>
     /// <returns></returns>
-    private QueryBuilder AppendJoin(IEnumerable<string> values,
+    private QueryBuilder AppendJoin(IEnumerable<string>? values,
         string separator = ", ",
         bool spaceBefore = true)
     {
@@ -122,7 +122,7 @@ public class QueryBuilder
 
         stringBuilder
 #if NET
-            .AppendJoin(separator, values);
+            .AppendJoin(separator, values ?? []);
 #else
             .Append(values.Join(separator));
 #endif
@@ -199,7 +199,7 @@ public class QueryBuilder
     /// <returns>The current instance.</returns>
     public QueryBuilder Min(Field field,
         IDbSetting dbSetting,
-        IResolver<Field, IDbSetting, string> convertResolver)
+        IResolver<Field, IDbSetting, string>? convertResolver)
     {
         var name = convertResolver == null
             ? field.Name.AsField(dbSetting)
@@ -228,7 +228,7 @@ public class QueryBuilder
     /// <returns>The current instance.</returns>
     public QueryBuilder Max(Field field,
         IDbSetting dbSetting,
-        IResolver<Field, IDbSetting, string> convertResolver)
+        IResolver<Field, IDbSetting, string>? convertResolver)
     {
         var name = convertResolver == null
             ? field.Name.AsField(dbSetting)
@@ -257,7 +257,7 @@ public class QueryBuilder
     /// <returns>The current instance.</returns>
     public QueryBuilder Sum(Field field,
         IDbSetting dbSetting,
-        IResolver<Field, IDbSetting, string> convertResolver)
+        IResolver<Field, IDbSetting, string>? convertResolver)
     {
         var name = convertResolver == null
             ? field.Name.AsField(dbSetting)
@@ -316,7 +316,7 @@ public class QueryBuilder
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
     public QueryBuilder FieldFrom(Field field,
-        IDbSetting dbSetting) => Append(field?.Name.AsField(dbSetting));
+        IDbSetting? dbSetting) => Append(field?.Name.AsField(dbSetting));
 
     /// <summary>
     /// Appends a stringified fields to the SQL Query Statement.
@@ -334,7 +334,7 @@ public class QueryBuilder
     /// <param name="fields">The list fields to be stringified.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder FieldsFrom(IEnumerable<Field> fields, IDbSetting dbSetting) =>
+    public QueryBuilder FieldsFrom(IEnumerable<Field>? fields, IDbSetting dbSetting) =>
         AppendJoin(fields?.Select(f => f.Name).AsFields(dbSetting));
 
     /// <summary>
@@ -498,7 +498,7 @@ public class QueryBuilder
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>The current instance.</returns>
     public QueryBuilder OrderByFrom(IEnumerable<OrderField>? orderBy,
-        string alias,
+        string? alias,
         IDbSetting dbSetting)
     {
         if (orderBy.IsNullOrEmpty()) return this;
@@ -518,7 +518,7 @@ public class QueryBuilder
     /// </summary>
     /// <param name="alias">The alias to be prepended.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder As(string alias)
+    public QueryBuilder As(string? alias)
     {
         if (string.IsNullOrWhiteSpace(alias))
         {

@@ -229,7 +229,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
@@ -259,7 +259,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .WriteText($"1 AS {("ExistsValue").AsQuoted(DbSetting)}")
             .From()

@@ -91,7 +91,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
@@ -173,7 +173,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .WriteText($"1 AS {("ExistsValue").AsQuoted(DbSetting)}")
             .From()
@@ -292,9 +292,6 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
 
         // Initialize the builder
         var builder = new QueryBuilder();
-
-        // Build the query
-        builder.Clear();
 
         // Compose
         builder
@@ -445,7 +442,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Insert()
             .Into()
             .TableNameFrom(tableName, DbSetting)
@@ -519,7 +516,6 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
 
         var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
         var builder = new QueryBuilder();
-        builder.Clear();
 
         // Iterate the indexes
         for (var index = 0; index < batchSize; index++)
@@ -645,7 +641,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
@@ -720,7 +716,7 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Build the query
-        builder.Clear()
+        builder
             .Select()
             .FieldsFrom(fields, DbSetting)
             .From()
