@@ -205,11 +205,6 @@ ORDER BY C.COLUMN_ID
     }
     #endregion
 
-    public override T GetScopeIdentity<T>(IDbConnection connection, IDbTransaction? transaction = null)
-    {
-        throw new NotImplementedException();
-    }
-
     public override object? ParameterValueToDb(object? value) => value switch
     {
 #if NET

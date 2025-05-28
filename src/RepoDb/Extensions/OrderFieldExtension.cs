@@ -35,7 +35,7 @@ public static class OrderFieldExtension
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     /// <returns>An enumerable list of fields.</returns>
     public static string AsField(this OrderField orderField,
-        string alias,
+        string? alias,
         IDbSetting dbSetting)
     {
         if (string.IsNullOrWhiteSpace(alias))

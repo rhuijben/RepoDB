@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MySqlConnector;
-using RepoDb.MySqlConnector.IntegrationTests.Models;
 using RepoDb.MySqlConnector.IntegrationTests.Setup;
 
 namespace RepoDb.MySqlConnector.IntegrationTests;
@@ -174,66 +173,6 @@ public class DbHelperTests
             // Assert
             Assert.IsNotNull(primary);
             Assert.AreEqual("Id", primary.Name);
-        }
-    }
-
-    #endregion
-
-    #endregion
-
-    #region GetScopeIdentity
-
-    #region Sync
-
-    [TestMethod]
-    public void TestDbHelperGetScopeIdentity()
-    {
-        using (var connection = new MySqlConnection(Database.ConnectionString))
-        {
-            // Setup
-            var helper = connection.GetDbHelper();
-            var table = Helper.CreateCompleteTables(1).First();
-
-            // Act
-            var insertResult = connection.Insert<CompleteTable, long>(table);
-
-            // Assert
-            Assert.IsTrue(insertResult > 0);
-            Assert.IsTrue(table.Id > 0);
-
-            // Act
-            var result = helper.GetScopeIdentity<long>(connection, null);
-
-            // Assert
-            Assert.AreEqual(insertResult, result);
-        }
-    }
-
-    #endregion
-
-    #region Async
-
-    [TestMethod]
-    public async Task TestDbHelperGetScopeIdentityAsync()
-    {
-        using (var connection = new MySqlConnection(Database.ConnectionString))
-        {
-            // Setup
-            var helper = connection.GetDbHelper();
-            var table = Helper.CreateCompleteTables(1).First();
-
-            // Act
-            var insertResult = connection.Insert<CompleteTable, long>(table);
-
-            // Assert
-            Assert.IsTrue(insertResult > 0);
-            Assert.IsTrue(table.Id > 0);
-
-            // Act
-            var result = await helper.GetScopeIdentityAsync<long>(connection, null);
-
-            // Assert
-            Assert.AreEqual(insertResult, result);
         }
     }
 

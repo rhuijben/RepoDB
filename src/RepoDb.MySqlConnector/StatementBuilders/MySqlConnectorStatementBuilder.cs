@@ -201,11 +201,13 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsert(string tableName,
-        IEnumerable<Field>? fields = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
+
         // Initialize the builder
         var builder = new QueryBuilder();
 
@@ -213,8 +215,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         builder.WriteText(
             base.CreateInsert(tableName,
                 fields,
-                primaryField,
-                identityField,
+                keyFields,
                 hints));
 
         // Variables needed
@@ -249,15 +250,18 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsertAll(string tableName,
-      IEnumerable<Field>? fields = null,
-      int batchSize = 1,
-      DbField? primaryField = null,
-      DbField? identityField = null,
+      IEnumerable<Field>? fields,
+      int batchSize,
+      IEnumerable<DbField> keyFields,
       string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
+
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 
@@ -415,14 +419,17 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     /// <returns>A sql statement for merge operation.</returns>
     public override string CreateMerge(string tableName,
         IEnumerable<Field> fields,
-        IEnumerable<Field>? qualifiers = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field>? qualifiers,
+        IEnumerable<DbField>? dbFields = null,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+
+        var primaryField = dbFields?.FirstOrDefault(f => f.IsPrimary);
+        var identityField = dbFields?.FirstOrDefault(f => f.IsIdentity);
+
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 
@@ -491,14 +498,17 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     public override string CreateMergeAll(string tableName,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
-        int batchSize = 10,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
+
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 

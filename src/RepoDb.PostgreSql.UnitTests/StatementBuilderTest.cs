@@ -236,7 +236,7 @@ public class StatementBuilderTest
         // Act
         var query = builder.CreateInsert("Table",
             Field.From("Id", "Name", "Address"),
-            null,
+            primaryField: null,
             null);
         var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id, @Name, @Address ) RETURNING NULL AS \"Result\" ;";
 
@@ -306,7 +306,7 @@ public class StatementBuilderTest
         var query = builder.CreateInsertAll("Table",
             Field.From("Id", "Name", "Address"),
             3,
-            null,
+            primaryField: null,
             null);
         var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) " +
             "VALUES " +
@@ -616,7 +616,7 @@ public class StatementBuilderTest
         builder.CreateMerge("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            null,
+            primaryField: null,
             null);
     }
 
@@ -630,7 +630,7 @@ public class StatementBuilderTest
         builder.CreateMerge("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            null,
+            primaryField: null,
             null);
     }
 
@@ -727,7 +727,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             3,
-            null,
+            primaryField: null,
             null);
     }
 
@@ -742,7 +742,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             3,
-            null,
+            primaryField: null,
             null);
     }
 

@@ -49,14 +49,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateAverage
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Average' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="field">The field to be averaged.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for average operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateAverage(
         string tableName,
         Field field,
@@ -101,13 +94,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateAverageAll
 
-    /// <summary>
-    /// Creates a SQL Statement for 'AverageAll' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="field">The field to be averaged.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for average-all operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateAverageAll(
         string tableName,
         Field field,
@@ -150,13 +137,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateCount
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Count' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for count operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateCount(
         string tableName,
         QueryGroup? where = null,
@@ -190,12 +171,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateCountAll
 
-    /// <summary>
-    /// Creates a SQL Statement for 'CountAll' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for count-all operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateCountAll(
         string tableName,
         string? hints = null)
@@ -227,13 +203,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateDelete
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Delete' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for delete operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateDelete(
         string tableName,
         QueryGroup? where = null,
@@ -265,12 +235,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateDeleteAll
 
-    /// <summary>
-    /// Creates a SQL Statement for 'DeleteAll' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for delete-all operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateDeleteAll(
         string tableName,
         string? hints = null)
@@ -300,13 +265,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateExists
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Exists' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for exists operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateExists(
         string tableName,
         QueryGroup? where = null,
@@ -340,27 +299,18 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateInsert
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Insert' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="fields">The list of fields to be inserted.</param>
-    /// <param name="primaryField">The primary field from the database.</param>
-    /// <param name="identityField">The identity field from the database.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for insert operation.</returns>
+    ///<inheritdoc/>
     public virtual string CreateInsert(
         string tableName,
-        IEnumerable<Field>? fields = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
         // Verify the fields
         if (fields?.Any() != true)
@@ -414,27 +364,19 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateInsertAll
 
-    /// <summary>
-    /// Creates a SQL Statement for 'InsertAll' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="fields">The list of fields to be inserted.</param>
-    /// <param name="batchSize">The batch size of the operation.</param>
-    /// <param name="primaryField">The primary field from the database.</param>
-    /// <param name="identityField">The identity field from the database.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for insert operation.</returns>
+    /// <inheritdoc/>
     public virtual string CreateInsertAll(
         string tableName,
-        IEnumerable<Field>? fields = null,
-        int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 
@@ -523,14 +465,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateMax
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Max' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="field">The field to be maximized.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for maximum operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateMax(
         string tableName,
         Field field,
@@ -571,13 +506,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateMaxAll
 
-    /// <summary>
-    /// Creates a SQL Statement for 'MaxAll' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="field">The field to be maximized.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for maximum-all operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateMaxAll(
         string tableName,
         Field field,
@@ -616,14 +545,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateMin
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Min' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="field">The field to be minimized.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for minimum operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateMin(
         string tableName,
         Field field,
@@ -664,13 +586,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateMinAll
 
-    /// <summary>
-    /// Creates a SQL Statement for 'MinAll' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="field">The field to be minimized.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for minimum-all operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateMinAll(
         string tableName,
         Field field,
@@ -709,16 +625,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateQuery
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Query' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="fields">The list of fields.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="orderBy">The list of fields for ordering.</param>
-    /// <param name="top">The number of rows to be returned.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for query operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateQuery(
         string tableName,
         IEnumerable<Field> fields,
@@ -762,14 +669,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateQueryAll
 
-    /// <summary>
-    /// Creates a SQL Statement for 'QueryAll' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="fields">The list of fields.</param>
-    /// <param name="orderBy">The list of fields for ordering.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for query operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateQueryAll(
         string tableName,
         IEnumerable<Field> fields,
@@ -809,14 +709,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateSum
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Sum' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="field">The field to be summarized.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for sum operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateSum(
         string tableName,
         Field field,
@@ -857,13 +750,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateSumAll
 
-    /// <summary>
-    /// Creates a SQL Statement for 'SumAll' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="field">The field to be summarized.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for sum-all operation.</returns>
+    /// <inheritdoc />
     public virtual string CreateSumAll(
         string tableName,
         Field field,
@@ -930,27 +817,23 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
     #region CreateUpdate
 
-    /// <summary>
-    /// Creates a SQL Statement for 'Update' operation.
-    /// </summary>
-    /// <param name="tableName">The name of the target table.</param>
-    /// <param name="fields">The list of fields to be updated.</param>
-    /// <param name="where">The query expression.</param>
-    /// <param name="primaryField">The primary field from the database.</param>
-    /// <param name="identityField">The identity field from the database.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <returns>A sql statement for update operation.</returns>
+    /// <inheritdoc/>
     public virtual string CreateUpdate(
         string tableName,
         IEnumerable<Field> fields,
-        QueryGroup? where = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        QueryGroup? where,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+
+        // Gets the updatable fields
+        GuardTableName(tableName);
+        GuardHints(hints);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 
@@ -1001,16 +884,15 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         string tableName,
         IEnumerable<Field> fields,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
@@ -1020,6 +902,8 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         {
             throw new EmptyException(nameof(fields), $"The list of fields cannot be null or empty.");
         }
+
+        qualifiers ??= keyFields.Where(x => x.IsPrimary).AsFields();
 
         // Check the qualifiers
         if (qualifiers?.Any() == true)
@@ -1138,9 +1022,8 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     public abstract string CreateMerge(
         string tableName,
         IEnumerable<Field> fields,
-        IEnumerable<Field>? qualifiers = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> qualifiers,
+        IEnumerable<DbField> keyFields,
         string? hints = null);
 
     #endregion
@@ -1161,10 +1044,9 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     public abstract string CreateMergeAll(
         string tableName,
         IEnumerable<Field> fields,
-        IEnumerable<Field>? qualifiers = null,
-        int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> qualifiers,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null);
 
     #endregion

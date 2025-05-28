@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RepoDb.Sqlite.Microsoft.IntegrationTests.Models;
 using RepoDb.Sqlite.Microsoft.IntegrationTests.Setup;
 
 namespace RepoDb.Sqlite.Microsoft.IntegrationTests;
@@ -280,72 +279,6 @@ public class DbHelperTests
             Assert.IsNotNull(v1Fields.FirstOrDefault(x => x.IsIdentity));
             Assert.IsNotNull(v2Fields.FirstOrDefault(x => x.IsIdentity));
             Assert.IsNotNull(v3Fields.FirstOrDefault(x => x.IsIdentity));
-        }
-    }
-
-    #endregion
-
-    #endregion
-
-    #region GetScopeIdentity
-
-    #region Sync
-
-    [TestMethod]
-    public void TestDbHelperGetScopeIdentity()
-    {
-        using (var connection = new SqliteConnection(Database.ConnectionString))
-        {
-            // Create the tables
-            Database.CreateMdsTables(connection);
-
-            // Setup
-            var helper = connection.GetDbHelper();
-            var table = Helper.CreateMdsCompleteTables(1).First();
-
-            // Act
-            var insertResult = connection.Insert<MdsCompleteTable, long>(table);
-
-            // Assert
-            Assert.IsTrue(insertResult > 0);
-            Assert.IsTrue(table.Id > 0);
-
-            // Act
-            var result = helper.GetScopeIdentity<long>(connection, null);
-
-            // Assert
-            Assert.AreEqual(insertResult, result);
-        }
-    }
-
-    #endregion
-
-    #region Async
-
-    [TestMethod]
-    public async Task TestDbHelperGetScopeIdentityAsync()
-    {
-        using (var connection = new SqliteConnection(Database.ConnectionString))
-        {
-            // Create the tables
-            Database.CreateMdsTables(connection);
-
-            // Setup
-            var helper = connection.GetDbHelper();
-            var table = Helper.CreateMdsCompleteTables(1).First();
-
-            // Act
-            var insertResult = connection.Insert<MdsCompleteTable, long>(table);
-
-            // Assert
-            Assert.IsTrue(insertResult > 0);
-            Assert.IsTrue(table.Id > 0);
-
-            // Act
-            var result = await helper.GetScopeIdentityAsync<long>(connection, null);
-
-            // Assert
-            Assert.AreEqual(insertResult, result);
         }
     }
 

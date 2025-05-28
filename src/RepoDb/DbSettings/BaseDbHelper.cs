@@ -33,12 +33,6 @@ public abstract class BaseDbHelper : IDbHelper
     public virtual ValueTask<IEnumerable<DbSchemaObject>> GetSchemaObjectsAsync(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default) => new(GetSchemaObjects(connection, transaction));
 
     /// <inheritdoc />
-    public virtual T GetScopeIdentity<T>(IDbConnection connection, IDbTransaction? transaction = null) => throw new NotImplementedException();
-
-    /// <inheritdoc />
-    public virtual ValueTask<T> GetScopeIdentityAsync<T>(IDbConnection connection, IDbTransaction? transaction = null, CancellationToken cancellationToken = default) => new(GetScopeIdentity<T>(connection, transaction));
-
-    /// <inheritdoc />
     public virtual object? ParameterValueToDb(object? value) => value;
 
     /// <inheritdoc />

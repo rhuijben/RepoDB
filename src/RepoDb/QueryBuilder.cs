@@ -501,7 +501,8 @@ public class QueryBuilder
         string? alias,
         IDbSetting dbSetting)
     {
-        if (orderBy.IsNullOrEmpty()) return this;
+        if (orderBy?.Any() != true)
+            return this;
 
         return Append("ORDER BY")
             .AppendJoin(orderBy.Select(orderField => orderField.AsField(alias, dbSetting)));
@@ -828,7 +829,7 @@ public class QueryBuilder
         int index,
         IDbSetting dbSetting)
     {
-        if (queryGroup?.GetFields(true).IsNullOrEmpty() == false)
+        if (queryGroup?.GetFields(true)?.Any() == true)
         {
             return Append("WHERE")
                 .Append(queryGroup.GetString(index, dbSetting));

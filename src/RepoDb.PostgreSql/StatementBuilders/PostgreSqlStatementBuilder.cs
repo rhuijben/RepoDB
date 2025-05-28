@@ -160,9 +160,8 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsert(string tableName,
-        IEnumerable<Field>? fields = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Initialize the builder
@@ -172,9 +171,11 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         builder.WriteText(
             base.CreateInsert(tableName,
                 fields,
-                primaryField,
-                identityField,
+                keyFields,
                 hints));
+
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
         // Variables needed
         var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
@@ -214,49 +215,16 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsertAll(string tableName,
-        IEnumerable<Field>? fields = null,
-        int batchSize = 1,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
-        #region Old
-
-        // PGSQL is failing if we are using sub-table expression.
-        // See: https://github.com/mikependon/RepoDB/issues/1143
-
-        //// Call the base
-        //var commandText = base.CreateInsertAll(tableName,
-        //    fields,
-        //    batchSize,
-        //    primaryField,
-        //    identityField,
-        //    hints);
-
-        //// Variables needed
-        //var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-
-        //// Set the return value
-        //if (keyColumn != null)
-        //{
-        //    var dbType = new ClientTypeToDbTypeResolver().Resolve(keyColumn.Type);
-        //    var databaseType = (dbType != null) ? new DbTypeToPostgreSqlStringNameResolver().Resolve(dbType.Value) : null;
-        //    var returnValue = keyColumn == null ? "NULL" :
-        //        string.IsNullOrWhiteSpace(databaseType) ?
-        //            keyColumn.Name.AsQuoted(DbSetting) :
-        //                string.Concat("CAST(", keyColumn.Name.AsQuoted(DbSetting), " AS ", databaseType, ")");
-        //    var result = string.Concat("RETURNING ", returnValue, $" AS ", "Result".AsQuoted(DbSetting), " ");
-        //    commandText = commandText.Insert(commandText.Length - 1, result);
-        //}
-
-        //// Return the query
-        //return commandText;
-
-        #endregion
-
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 
@@ -357,14 +325,15 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
     /// <returns>A sql statement for merge operation.</returns>
     public override string CreateMerge(string tableName,
         IEnumerable<Field> fields,
-        IEnumerable<Field>? qualifiers = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field>? qualifiers,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 
@@ -472,14 +441,15 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
     public override string CreateMergeAll(string tableName,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
-        int batchSize = 10,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 

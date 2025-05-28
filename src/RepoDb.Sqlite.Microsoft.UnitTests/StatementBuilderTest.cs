@@ -159,7 +159,7 @@ public class StatementBuilderTest
         // Act
         var query = builder.CreateInsert("Table",
             Field.From("Id", "Name", "Address"),
-            null,
+            primaryField: null,
             null);
         var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT NULL AS [Result] ;";
 
@@ -229,7 +229,7 @@ public class StatementBuilderTest
         var query = builder.CreateInsertAll("Table",
             Field.From("Id", "Name", "Address"),
             3,
-            null,
+            primaryField: null,
             null);
         var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) , ( @Id_1, @Name_1, @Address_1 ) , ( @Id_2, @Name_2, @Address_2 ) ;";
 

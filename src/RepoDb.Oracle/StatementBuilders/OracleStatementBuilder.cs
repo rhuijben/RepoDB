@@ -40,15 +40,17 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
 
     public override string CreateMerge(string tableName,
                                    IEnumerable<Field> fields,
-                                   IEnumerable<Field>? qualifiers = null,
-                                   DbField? primaryField = null,
-                                   DbField? identityField = null,
+                                   IEnumerable<Field>? qualifiers,
+                                   IEnumerable<DbField> keyFields,
                                    string? hints = null)
     {
         if (tableName == null)
             throw new ArgumentNullException(nameof(tableName));
         if (fields == null)
             throw new ArgumentNullException(nameof(fields));
+
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
         var fieldList = fields.ToList();
         if (fieldList.Count == 0)
@@ -128,7 +130,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         return builder.ToString();
     }
 
-    public override string CreateMergeAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public override string CreateMergeAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers, int batchSize, IEnumerable<DbField> keyFields, string? hints = null)
     {
         throw new NotImplementedException();
     }
@@ -140,9 +142,8 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
 
     /// <inheritdoc cref="BaseStatementBuilder.CreateInsert"/>
     public override string CreateInsert(string tableName,
-     IEnumerable<Field>? fields = null,
-     DbField? primaryField = null,
-     DbField? identityField = null,
+     IEnumerable<Field> fields,
+     IEnumerable<DbField> keyFields,
      string? hints = null)
     {
         // Initialize the builder
@@ -152,9 +153,11 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         builder.WriteText(
             base.CreateInsert(tableName,
                 fields,
-                primaryField,
-                identityField,
+                keyFields,
                 hints));
+
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
         // If an identityField is present, add output handling
         if (identityField is { })
@@ -170,11 +173,15 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         return builder.GetString();
     }
 
-    public override string CreateInsertAll(string tableName, IEnumerable<Field>? fields = null, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public override string CreateInsertAll(string tableName, IEnumerable<Field>? fields, int batchSize, IEnumerable<DbField> keyFields, string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
+
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
+
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 
@@ -202,7 +209,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
             }
         }
 
-        return "/*FORALL*/" + CreateInsert(tableName, fields, primaryField, identityField, hints);
+        return "/*FORALL*/" + CreateInsert(tableName, fields, keyFields, hints);
     }
 
     /// <inheritdoc cref="BaseStatementBuilder.CreateQuery"/>

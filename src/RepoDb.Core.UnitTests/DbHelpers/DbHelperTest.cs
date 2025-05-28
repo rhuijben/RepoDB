@@ -56,12 +56,6 @@ public class DbHelperTest
         {
             throw new NotImplementedException();
         }
-
-        public override T GetScopeIdentity<T>(IDbConnection connection, IDbTransaction? transaction = null)
-        {
-            throw new NotImplementedException();
-        }
-
         private class MyDbResolver : IResolver<string, Type>
         {
             public Type? Resolve(string input)

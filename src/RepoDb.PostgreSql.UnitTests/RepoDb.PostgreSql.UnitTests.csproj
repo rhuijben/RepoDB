@@ -10,7 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RepoDb\RepoDb.csproj" />
-    <ProjectReference Include="..\RepoDb.MySql\RepoDb.MySql.csproj" />
     <ProjectReference Include="..\RepoDb.PostgreSql\RepoDb.PostgreSql.csproj" />
+    <ProjectReference Include="..\RepoDb.TestCore\RepoDb.TestCore.csproj" />
   </ItemGroup>
 </Project>

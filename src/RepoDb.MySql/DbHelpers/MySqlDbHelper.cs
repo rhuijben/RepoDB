@@ -263,38 +263,5 @@ public sealed class MySqlDbHelper : BaseDbHelper
         };
     #endregion
 
-    #region GetScopeIdentity
-
-    /// <summary>
-    /// Gets the newly generated identity from the database.
-    /// </summary>
-    /// <typeparam name="T">The type of newly generated identity.</typeparam>
-    /// <param name="connection">The instance of the connection object.</param>
-    /// <param name="transaction">The transaction object that is currently in used.</param>
-    /// <returns>The newly generated identity from the database.</returns>
-    public override T GetScopeIdentity<T>(IDbConnection connection,
-        IDbTransaction? transaction = null)
-    {
-        return connection.ExecuteScalar<T>("SELECT LAST_INSERT_ID();", transaction: transaction);
-    }
-
-    /// <summary>
-    /// Gets the newly generated identity from the database in an asynchronous way.
-    /// </summary>
-    /// <typeparam name="T">The type of newly generated identity.</typeparam>
-    /// <param name="connection">The instance of the connection object.</param>
-    /// <param name="transaction">The transaction object that is currently in used.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    /// <returns>The newly generated identity from the database.</returns>
-    public override async ValueTask<T> GetScopeIdentityAsync<T>(IDbConnection connection,
-        IDbTransaction? transaction = null,
-        CancellationToken cancellationToken = default)
-    {
-        return await connection.ExecuteScalarAsync<T>("SELECT LAST_INSERT_ID();", transaction: transaction,
-            cancellationToken: cancellationToken);
-    }
-
-    #endregion
-
     #endregion
 }

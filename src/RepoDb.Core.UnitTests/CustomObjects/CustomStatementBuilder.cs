@@ -46,12 +46,12 @@ public class CustomStatementBuilder : IStatementBuilder
         return string.Empty;
     }
 
-    public string CreateInsert(string tableName, IEnumerable<Field>? fields = null, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public string CreateInsert(string tableName, IEnumerable<Field>? fields = null, IEnumerable<DbField>? keyFields = null, string? hints = null)
     {
         return string.Empty;
     }
 
-    public string CreateInsertAll(string tableName, IEnumerable<Field>? fields = null, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public string CreateInsertAll(string tableName, IEnumerable<Field>? fields = null, int batchSize = 10, IEnumerable<DbField>? keyFields = null, string? hints = null)
     {
         return string.Empty;
     }
@@ -66,12 +66,12 @@ public class CustomStatementBuilder : IStatementBuilder
         return string.Empty;
     }
 
-    public string CreateMerge(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public string CreateMerge(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, IEnumerable<DbField>? keyFields = null, string? hints = null)
     {
         return string.Empty;
     }
 
-    public string CreateMergeAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field> qualifiers, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public string CreateMergeAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field> qualifiers, int batchSize = 10, IEnumerable<DbField>? keyFields = null, string? hints = null)
     {
         return string.Empty;
     }
@@ -116,12 +116,12 @@ public class CustomStatementBuilder : IStatementBuilder
         return string.Empty;
     }
 
-    public string CreateUpdate(string tableName, IEnumerable<Field> fields, QueryGroup? where = null, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public string CreateUpdate(string tableName, IEnumerable<Field> fields, QueryGroup? where = null, IEnumerable<DbField>? keyFields = null, string? hints = null)
     {
         return string.Empty;
     }
 
-    public string CreateUpdateAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field> qualifiers, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public string CreateUpdateAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field> qualifiers, int batchSize = 10, IEnumerable<DbField>? keyFields = null, string? hints = null)
     {
         return string.Empty;
     }
@@ -145,19 +145,19 @@ public class CustomBaseStatementBuilder : BaseStatementBuilder
         : base(dbSetting,
               convertFieldResolver,
               averageableClientTypeResolver)
-    {}
+    { }
 
     public override string CreateBatchQuery(string tableName, IEnumerable<Field> fields, int page, int rowsPerBatch, IEnumerable<OrderField>? orderBy = null, QueryGroup? where = null, string? hints = null)
     {
         return string.Empty;
     }
 
-    public override string CreateMerge(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public override string CreateMerge(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, IEnumerable<DbField>? keyFields = null, string? hints = null)
     {
         return string.Empty;
     }
 
-    public override string CreateMergeAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, int batchSize = 10, DbField? primaryField = null, DbField? identityField = null, string? hints = null)
+    public override string CreateMergeAll(string tableName, IEnumerable<Field> fields, IEnumerable<Field>? qualifiers = null, int batchSize = 10, IEnumerable<DbField>? keyFields = null, string? hints = null)
     {
         return string.Empty;
     }

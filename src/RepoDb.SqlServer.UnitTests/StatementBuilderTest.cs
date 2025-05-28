@@ -1204,7 +1204,7 @@ public class StatementBuilderTest
         var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
         var tableName = "Table";
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
-        var primaryField = new DbField("Field1", true, true, false, typeof(int), null, null, null, null);
+        var primaryField = new DbField("Field1", true, isIdentity: false, false, typeof(int), null, null, null, null);
 
         // Act
         var actual = statementBuilder.CreateMergeAll(tableName: tableName,
@@ -1807,7 +1807,7 @@ public class StatementBuilderTest
         var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
         var tableName = "Table";
         var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
-        var primaryField = new DbField("Field1", true, true, false, typeof(int), null, null, null, null);
+        var primaryField = new DbField("Field1", true, isIdentity: false, false, typeof(int), null, null, null, null);
 
         // Act
         var actual = statementBuilder.CreateMerge(tableName: tableName,

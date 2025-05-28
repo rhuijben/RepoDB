@@ -210,5 +210,8 @@ public static class FieldExtension
         string rightAlias,
         IDbSetting dbSetting) =>
         fields.Select(field => field.AsFieldAndAliasField(leftAlias, rightAlias, dbSetting));
+
+    public static Field? GetByName(this IEnumerable<Field> source, string name, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
+        => source?.FirstOrDefault(p => string.Equals(p.Name, name, stringComparison));
 }
 

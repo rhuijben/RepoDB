@@ -505,18 +505,9 @@ public class TypeConversionsTest
             Assert.AreEqual(Direction3.North, data);
             Assert.AreEqual(Direction3.None, data0);
 
-            try
-            {
-                var data10 = connection.ExecuteQuery<Direction3>("SELECT CONVERT(INT, 10) AS Value;").First();
-                Assert.Fail("Should have failed");
-            }
-            catch (InvalidEnumArgumentException e)
-            {
-                Assert.IsTrue(e.Message.Contains(nameof(Direction3)));
-
-                // We are in an EN-US scope so the message should match
-                Assert.AreEqual("The value of argument 'value' (10) is invalid for Enum type 'Direction3'. (Parameter 'value')", e.Message);
-            }
+            Assert.Throws<InvalidEnumArgumentException>(() => connection.ExecuteQuery<Direction3>("SELECT CONVERT(INT, 10) AS Value;"),
+                "The value of argument 'value' (10) is invalid for Enum type 'Direction3'."
+            );
         }
     }
 
@@ -534,18 +525,11 @@ public class TypeConversionsTest
             var data0 = connection.ExecuteQuery<Direction>("SELECT 'None' AS Value;").First();
             var data3 = connection.ExecuteQuery<Direction>("SELECT '3' AS Value;").First();
             var data9 = connection.ExecuteQuery<Direction>("SELECT '9' AS Value;").First();
-            try
-            {
-                var data10 = connection.ExecuteQuery<Direction>("SELECT 'Center' AS Value;").First();
-                Assert.Fail("Should have failed Direction/3");
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Assert.IsTrue(e.Message.Contains(nameof(Direction)));
 
-                // We are in an EN-US scope so the message should match
-                Assert.AreEqual("Invalid value for Direction (Parameter 'value')\nActual value was Center.", e.Message.Replace("\r", ""));
-            }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => connection.ExecuteQuery<Direction>("SELECT 'Center' AS Value;"),
+                "Invalid value for Direction (Parameter 'value')" + Environment.NewLine + "Actual value was Center."
+            );
 
             // Assert
             Assert.AreEqual(Direction.North, data);
@@ -584,31 +568,15 @@ public class TypeConversionsTest
             var data = connection.ExecuteQuery<Direction3>("SELECT 'North' AS Value;").First();
             var data0 = connection.ExecuteQuery<Direction3>("SELECT 'None' AS Value;").First();
 
-            try
-            {
-                var data10 = connection.ExecuteQuery<Direction3>("SELECT 'Center' AS Value;").First();
-                Assert.Fail("Should have failed Direction3/Center");
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Assert.IsTrue(e.Message.Contains(nameof(Direction3)));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => connection.ExecuteQuery<Direction3>("SELECT 'Center' AS Value;"),
+                "Invalid value for Direction3 (Parameter 'value')"
+            );
 
-                // We are in an EN-US scope so the message should match
-                Assert.AreEqual("Invalid value for Direction3 (Parameter 'value')\nActual value was Center.", e.Message.Replace("\r", ""));
-            }
-
-            try
-            {
-                var data9 = connection.ExecuteQuery<Direction3>("SELECT '9' AS Value;").First();
-                Assert.Fail("Should have failed Direction3/9");
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Assert.IsTrue(e.Message.Contains(nameof(Direction3)));
-
-                // We are in an EN-US scope so the message should match
-                Assert.AreEqual("Invalid value for Direction3 (Parameter 'value')\nActual value was 9.", e.Message.Replace("\r", ""));
-            }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => connection.ExecuteQuery<Direction3>("SELECT '9' AS Value;"),
+                "Invalid value for Direction3 (Parameter 'value')"
+            );
 
             // Assert
             Assert.AreEqual(Direction3.North, data);
@@ -623,31 +591,16 @@ public class TypeConversionsTest
             var data = connection.ExecuteQuery<Direction4>("SELECT 'North' AS Value;").First();
             var data0 = connection.ExecuteQuery<Direction4>("SELECT 'None' AS Value;").First();
             var data3 = connection.ExecuteQuery<Direction4>("SELECT '3' AS Value;").First();
-            try
-            {
-                var data10 = connection.ExecuteQuery<Direction4>("SELECT 'Center' AS Value;").First();
-                Assert.Fail("Should have failed Direction/3");
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Assert.IsTrue(e.Message.Contains(nameof(Direction4)));
 
-                // We are in an EN-US scope so the message should match
-                Assert.AreEqual("Invalid value for Direction4 (Parameter 'value')\nActual value was Center.", e.Message.Replace("\r", ""));
-            }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                 () => connection.ExecuteQuery<Direction4>("SELECT 'Center' AS Value;"),
+                "Invalid value for Direction4"
+            );
 
-            try
-            {
-                var data9 = connection.ExecuteQuery<Direction4>("SELECT '9' AS Value;").First();
-                Assert.Fail("Should have failed Direction/9");
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Assert.IsTrue(e.Message.Contains(nameof(Direction4)));
-
-                // We are in an EN-US scope so the message should match
-                Assert.AreEqual("Invalid value for Direction4 (Parameter 'value')\nActual value was 9.", e.Message.Replace("\r", ""));
-            }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => connection.ExecuteQuery<Direction4>("SELECT '9' AS Value;"),
+                "Invalid value for Direction4 (Parameter 'value')"
+                );
 
             // Assert
             Assert.AreEqual(Direction4.North, data);

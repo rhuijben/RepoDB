@@ -82,10 +82,7 @@ public static class EnumerableExtension
     /// <typeparam name="T">The actual enumerable instance.</typeparam>
     /// <returns>A value indicating whether the collection is null or empty.</returns>
     public static bool IsNullOrEmpty<T>(
-#if NET
-        [NotNullWhen(true)]
-#endif
-    this IEnumerable<T>? value) => !value?.Any() ?? true;
+        [NotNullWhen(true)] this IEnumerable<T>? value) => value?.Any() != true;
 
 #if NETSTANDARD
     /// <summary>

@@ -50,32 +50,6 @@ public interface IDbHelper
         CancellationToken cancellationToken = default);
     #endregion
 
-    #region GetScopeIdentity
-
-    /// <summary>
-    /// Gets the newly generated identity from the database.
-    /// </summary>
-    /// <typeparam name="T">The type of newly generated identity.</typeparam>
-    /// <param name="connection">The instance of the connection object.</param>
-    /// <param name="transaction">The transaction object that is currently in used.</param>
-    /// <returns>The newly generated identity from the database.</returns>
-    T GetScopeIdentity<T>(IDbConnection connection,
-        IDbTransaction? transaction = null);
-
-    /// <summary>
-    /// Gets the newly generated identity from the database in an asynchronous way.
-    /// </summary>
-    /// <typeparam name="T">The type of newly generated identity.</typeparam>
-    /// <param name="connection">The instance of the connection object.</param>
-    /// <param name="transaction">The transaction object that is currently in used.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    /// <returns>The newly generated identity from the database.</returns>
-    ValueTask<T> GetScopeIdentityAsync<T>(IDbConnection connection,
-        IDbTransaction? transaction = null,
-        CancellationToken cancellationToken = default);
-
-    #endregion
-
     #region DynamicHandler
 
     /// <summary>

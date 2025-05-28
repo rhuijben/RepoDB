@@ -23,12 +23,6 @@ public class CustomDbHelper : BaseDbHelper
         };
     }
 
-    public override T GetScopeIdentity<T>(IDbConnection connection,
-        IDbTransaction? transaction = null)
-    {
-        return default;
-    }
-
     public override IEnumerable<DbSchemaObject> GetSchemaObjects(IDbConnection connection, IDbTransaction? transaction = null)
     {
         return [];

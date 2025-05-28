@@ -921,8 +921,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -941,8 +940,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -968,8 +966,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -988,8 +985,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1015,8 +1011,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1036,8 +1031,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1069,8 +1063,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1091,8 +1084,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1118,8 +1110,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1138,8 +1129,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1169,8 +1159,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1193,8 +1182,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1224,8 +1212,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1248,8 +1235,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1278,8 +1264,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1302,8 +1287,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1330,8 +1314,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1352,8 +1335,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1615,8 +1597,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1637,8 +1618,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1666,8 +1646,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1688,8 +1667,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1717,8 +1695,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1740,8 +1717,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1776,8 +1752,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1801,8 +1776,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1831,8 +1805,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1854,8 +1827,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1886,8 +1858,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1911,8 +1882,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1941,8 +1911,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -1964,8 +1933,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -1996,8 +1964,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -2022,8 +1989,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -2054,8 +2020,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -2080,8 +2045,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -3052,8 +3016,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -3070,8 +3033,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -3102,8 +3064,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -3127,8 +3088,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -3152,8 +3112,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -3178,8 +3137,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -3214,8 +3172,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -3239,8 +3196,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -3271,8 +3227,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -3296,8 +3251,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -3328,8 +3282,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -3354,8 +3307,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4201,8 +4153,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4221,8 +4172,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4248,8 +4198,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4268,8 +4217,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4295,8 +4243,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4316,8 +4263,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4349,8 +4295,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4371,8 +4316,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4398,8 +4342,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4418,8 +4361,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4449,8 +4391,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4473,8 +4414,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4502,8 +4442,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4524,8 +4463,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4554,8 +4492,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4578,8 +4515,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4606,8 +4542,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4628,8 +4563,7 @@ public class IStatementBuilderForDbConnectionTest
             builder.CreateInsert(
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4891,8 +4825,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4913,8 +4846,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4942,8 +4874,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -4964,8 +4895,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -4993,8 +4923,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -5016,8 +4945,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -5052,8 +4980,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -5078,8 +5005,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -5108,8 +5034,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -5131,8 +5056,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -5163,8 +5087,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -5188,8 +5111,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -5218,8 +5140,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -5241,8 +5162,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -5273,8 +5193,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -5299,8 +5218,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -5331,8 +5249,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -5357,8 +5274,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -6329,8 +6245,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -6347,8 +6262,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntity>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -6379,8 +6293,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -6404,8 +6317,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForTableName>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -6429,8 +6341,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -6455,8 +6366,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.Is<string>(v => v == ClassMappedNameCache.Get<StatementBuilderEntityForCrossCall>()),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<QueryGroup>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -6491,8 +6401,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -6516,8 +6425,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -6548,8 +6456,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -6573,8 +6480,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 
@@ -6605,8 +6511,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(1));
 
         // Prepare
@@ -6631,8 +6536,7 @@ public class IStatementBuilderForDbConnectionTest
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<IEnumerable<Field>>(),
                 It.IsAny<int>(),
-                It.IsAny<DbField>(),
-                It.IsAny<DbField>(),
+                It.IsAny<IEnumerable<DbField>>(),
                 It.IsAny<string>()), Times.Exactly(0));
     }
 

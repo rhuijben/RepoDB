@@ -73,5 +73,10 @@ public static class DbFieldExtension
 
         return item;
     }
+
+    public static DbField? GetByName(this IEnumerable<DbField> dbFields, string name, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
+    {
+        return dbFields.FirstOrDefault(dbField => string.Equals(dbField.Name, name, stringComparison));
+    }
 }
 

@@ -178,9 +178,8 @@ public interface IStatementBuilder
     /// <returns>A sql statement for insert operation.</returns>
     string CreateInsert(
         string tableName,
-        IEnumerable<Field>? fields = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        IEnumerable<DbField> keyFields,
         string? hints = null);
 
     #endregion
@@ -199,10 +198,9 @@ public interface IStatementBuilder
     /// <returns>A sql statement for insert operation.</returns>
     string CreateInsertAll(
         string tableName,
-        IEnumerable<Field>? fields = null,
-        int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null);
 
     #endregion
@@ -256,9 +254,8 @@ public interface IStatementBuilder
     string CreateMerge(
         string tableName,
         IEnumerable<Field> fields,
-        IEnumerable<Field>? qualifiers = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> qualifiers,
+        IEnumerable<DbField> keyFields,
         string? hints = null);
 
     #endregion
@@ -280,9 +277,8 @@ public interface IStatementBuilder
         string tableName,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null);
 
     #endregion
@@ -414,16 +410,14 @@ public interface IStatementBuilder
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="fields">The list of fields to be updated.</param>
     /// <param name="where">The query expression.</param>
-    /// <param name="primaryField">The primary field from the database.</param>
-    /// <param name="identityField">The identity field from the database.</param>
+    /// <param name="keyFields">The list of keyfields.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for update operation.</returns>
     string CreateUpdate(
         string tableName,
         IEnumerable<Field> fields,
-        QueryGroup? where = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        QueryGroup? where,
+        IEnumerable<DbField> keyFields,
         string? hints = null);
 
     #endregion
@@ -437,17 +431,15 @@ public interface IStatementBuilder
     /// <param name="fields">The list of fields to be updated.</param>
     /// <param name="qualifiers">The list of the qualifier <see cref="Field"/> objects.</param>
     /// <param name="batchSize">The batch size of the operation.</param>
-    /// <param name="primaryField">The primary field from the database.</param>
-    /// <param name="identityField">The identity field from the database.</param>
+    /// <param name="keyFields">The list of keyfields.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for update-all operation.</returns>
     string CreateUpdateAll(
         string tableName,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null);
 
     #endregion

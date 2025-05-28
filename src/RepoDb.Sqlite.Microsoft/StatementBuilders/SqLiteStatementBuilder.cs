@@ -151,19 +151,19 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsert(string tableName,
-        IEnumerable<Field>? fields = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         var builder = new QueryBuilder();
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
         // Call the base
         builder.WriteText(
             base.CreateInsert(tableName,
                 fields,
-                primaryField,
-                identityField,
+                keyFields,
                 hints));
 
         // Variables needed
@@ -201,17 +201,18 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsertAll(string tableName,
-        IEnumerable<Field>? fields = null,
-        int batchSize = 1,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> fields,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
+        // Validate the multiple statement execution
+        ValidateMultipleStatementExecution(batchSize);
 
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
@@ -244,9 +245,6 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
 
         // Initialize the builder
         var builder = new QueryBuilder();
-
-        // Build the query
-        builder.Clear();
 
         // Compose
         builder
@@ -293,7 +291,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
 
         // Return the query
         return builder
-            .End()
+            .End(DbSetting)
             .GetString();
     }
 
@@ -313,9 +311,8 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
     /// <returns>A sql statement for merge operation.</returns>
     public override string CreateMerge(string tableName,
         IEnumerable<Field> fields,
-        IEnumerable<Field>? qualifiers = null,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        IEnumerable<Field> qualifiers,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         throw new NotImplementedException("The merge statement is not supported in SQLite. SQLite is using the 'Upsert (Insert/Update)' operation.");
@@ -399,9 +396,8 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
     public override string CreateMergeAll(string tableName,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
-        int batchSize = 10,
-        DbField? primaryField = null,
-        DbField? identityField = null,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         throw new NotImplementedException("The merge statement is not supported in SQLite. SQLite is using the 'Upsert (Insert/Update)' operation.");

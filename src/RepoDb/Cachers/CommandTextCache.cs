@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Data;
+using RepoDb.Enumerations;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -254,9 +255,8 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetInsertTextInternal(request, fields, primaryField, identityField);
+            var keyFields = GetKeyFields(request);
+            commandText = GetInsertTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -278,9 +278,8 @@ public static class CommandTextCache
                 request.Fields,
                 request.Transaction,
                 cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetInsertTextInternal(request, fields, primaryField, identityField);
+            var keyFields = await GetKeyFieldsAsync(request).ConfigureAwait(false);
+            commandText = GetInsertTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -296,14 +295,12 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetInsertTextInternal(InsertRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        IEnumerable<DbField> keyFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateInsert(request.Name,
             fields,
-            primaryField,
-            identityField,
+            keyFields,
             request.Hints);
     }
 
@@ -311,11 +308,6 @@ public static class CommandTextCache
 
     #region GetInsertAllText
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="request"></param>
-    /// <returns></returns>
     internal static string GetInsertAllText(InsertAllRequest request)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -324,20 +316,13 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetInsertAllTextInternal(request, fields, primaryField, identityField);
+            var keyFields = GetKeyFields(request);
+            commandText = GetInsertAllTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     internal static async ValueTask<string> GetInsertAllTextAsync(InsertAllRequest request,
         CancellationToken cancellationToken = default)
     {
@@ -348,33 +333,22 @@ public static class CommandTextCache
                 request.Fields,
                 request.Transaction,
                 cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetInsertAllTextInternal(request, fields, primaryField, identityField);
+            var keyFields = await GetKeyFieldsAsync(request, cancellationToken).ConfigureAwait(false);
+            commandText = GetInsertAllTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="fields"></param>
-    /// <param name="primaryField"></param>
-    /// <param name="identityField"></param>
-    /// <returns></returns>
     private static string GetInsertAllTextInternal(InsertAllRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        IEnumerable<DbField> keyFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateInsertAll(request.Name,
             fields,
             request.BatchSize,
-            primaryField,
-            identityField,
+            keyFields,
             request.Hints);
     }
 
@@ -440,9 +414,8 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetMergeTextInternal(request, fields, primaryField, identityField);
+            var keyFields = GetKeyFields(request);
+            commandText = GetMergeTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -464,9 +437,8 @@ public static class CommandTextCache
                 request.Fields,
                 request.Transaction,
                 cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetMergeTextInternal(request, fields, primaryField, identityField);
+            var keyFields = await GetKeyFieldsAsync(request, cancellationToken).ConfigureAwait(false);
+            commandText = GetMergeTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -482,15 +454,13 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetMergeTextInternal(MergeRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        IEnumerable<DbField> keyFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateMerge(request.Name,
             fields,
             request.Qualifiers,
-            primaryField,
-            identityField,
+            keyFields,
             request.Hints);
     }
 
@@ -511,9 +481,8 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetMergeAllTextInternal(request, fields, primaryField, identityField);
+            var keyFields = GetKeyFields(request);
+            commandText = GetMergeAllTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -535,9 +504,8 @@ public static class CommandTextCache
                 request.Fields,
                 request.Transaction,
                 cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetMergeAllTextInternal(request, fields, primaryField, identityField);
+            var keyFields = await GetKeyFieldsAsync(request, cancellationToken).ConfigureAwait(false);
+            commandText = GetMergeAllTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -553,16 +521,14 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetMergeAllTextInternal(MergeAllRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        IEnumerable<DbField> keyFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateMergeAll(request.Name,
             fields,
             request.Qualifiers,
             request.BatchSize,
-            primaryField,
-            identityField,
+            keyFields,
             request.Hints);
     }
 
@@ -981,9 +947,8 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetUpdateTextInternal(request, fields, primaryField, identityField);
+            var keyFields = GetKeyFields(request);
+            commandText = GetUpdateTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -1005,9 +970,8 @@ public static class CommandTextCache
                 request.Fields,
                 request.Transaction,
                 cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetUpdateTextInternal(request, fields, primaryField, identityField);
+            var keyFields = await GetKeyFieldsAsync(request, cancellationToken).ConfigureAwait(false);
+            commandText = GetUpdateTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
@@ -1023,15 +987,13 @@ public static class CommandTextCache
     /// <returns></returns>
     private static string GetUpdateTextInternal(UpdateRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        IEnumerable<DbField> keyFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateUpdate(request.Name,
             fields,
             request.Where,
-            primaryField,
-            identityField,
+            keyFields,
             request.Hints);
     }
 
@@ -1039,11 +1001,6 @@ public static class CommandTextCache
 
     #region GetUpdateAllText
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="request"></param>
-    /// <returns></returns>
     internal static string GetUpdateAllText(UpdateAllRequest request)
     {
         if (cache.TryGetValue(request, out var commandText) == false)
@@ -1052,20 +1009,13 @@ public static class CommandTextCache
                 request.Name,
                 request.Fields,
                 request.Transaction);
-            var primaryField = GetPrimaryField(request);
-            var identityField = GetIdentityField(request);
-            commandText = GetUpdateAllTextInternal(request, fields, primaryField, identityField);
+            var keyFields = GetKeyFields(request);
+            commandText = GetUpdateAllTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
     internal static async ValueTask<string> GetUpdateAllTextAsync(UpdateAllRequest request,
         CancellationToken cancellationToken = default)
     {
@@ -1076,34 +1026,23 @@ public static class CommandTextCache
                 request.Fields,
                 request.Transaction,
                 cancellationToken).ConfigureAwait(false);
-            var primaryField = await GetPrimaryFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            var identityField = await GetIdentityFieldAsync(request, cancellationToken).ConfigureAwait(false);
-            commandText = GetUpdateAllTextInternal(request, fields, primaryField, identityField);
+            var keyFields = await GetKeyFieldsAsync(request, cancellationToken).ConfigureAwait(false);
+            commandText = GetUpdateAllTextInternal(request, fields, keyFields);
             cache.TryAdd(request, commandText);
         }
         return commandText;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="request"></param>
-    /// <param name="fields"></param>
-    /// <param name="primaryField"></param>
-    /// <param name="identityField"></param>
-    /// <returns></returns>
     private static string GetUpdateAllTextInternal(UpdateAllRequest request,
         IEnumerable<Field> fields,
-        DbField primaryField,
-        DbField identityField)
+        IEnumerable<DbField> keyFields)
     {
         var statementBuilder = EnsureStatementBuilder(request.Connection, request.StatementBuilder);
         return statementBuilder.CreateUpdateAll(request.Name,
             fields,
             request.Qualifiers,
             request.BatchSize,
-            primaryField,
-            identityField,
+            keyFields,
             request.Hints);
     }
 
@@ -1245,10 +1184,10 @@ public static class CommandTextCache
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    private static DbField GetPrimaryField(BaseRequest request)
+    private static IEnumerable<DbField> GetKeyFields(BaseRequest request)
     {
-        var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction);
-        return GetPrimaryField(request, dbFields);
+        var dbFields = DbFieldCache.Get(request.Connection, request.Name, request.Transaction, true);
+        return GetKeyFields(request, dbFields);
     }
 
     /// <summary>
@@ -1257,11 +1196,11 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private static async ValueTask<DbField> GetPrimaryFieldAsync(BaseRequest request,
+    private static async ValueTask<IEnumerable<DbField>> GetKeyFieldsAsync(BaseRequest request,
         CancellationToken cancellationToken = default)
     {
-        var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, cancellationToken).ConfigureAwait(false);
-        return GetPrimaryField(request, dbFields);
+        var dbFields = await DbFieldCache.GetAsync(request.Connection, request.Name, request.Transaction, true, cancellationToken).ConfigureAwait(false);
+        return GetKeyFields(request, dbFields);
     }
 
     /// <summary>
@@ -1270,35 +1209,153 @@ public static class CommandTextCache
     /// <param name="request"></param>
     /// <param name="dbFields"></param>
     /// <returns></returns>
-    private static DbField GetPrimaryField(BaseRequest request,
+    private static IEnumerable<DbField> GetKeyFields(BaseRequest request,
         DbFieldCollection dbFields)
     {
-        var primaryField = GetPrimaryField(request.Type, dbFields);
+        IEnumerable<ClassProperty>? primary;
+        ClassProperty? identity;
 
-        if (primaryField is { })
+        if (request.Type != null && request.Type.IsObjectType() == false)
         {
-            if (dbFields.GetByName(primaryField.Name) is { } dbPrimary)
-            {
-                if (dbPrimary.IsPrimary)
-                    return dbPrimary;
+            primary = PrimaryCache.GetPrimaryKeys(request.Type);
+            identity = IdentityCache.Get(request.Type);
+        }
+        else
+        {
+            primary = null;
+            identity = null;
+        }
 
-                return new DbField(
-                    dbPrimary?.Name ?? primaryField.Name,
-                    isPrimary: true,
-                    dbPrimary.IsIdentity,
-                    dbPrimary.IsNullable,
-                    dbPrimary.Type,
-                    dbPrimary.Size,
-                    dbPrimary.Precision,
-                    dbPrimary.Scale,
-                    dbPrimary.DatabaseType,
-                    dbPrimary.HasDefaultValue,
-                    dbPrimary.IsGenerated,
-                    dbPrimary.Provider);
+        IEnumerable<DbField> list = dbFields;
+        List<DbField>? dbFieldListUpdated = null;
+
+        if (primary?.Any() == true)
+        {
+            foreach (var p in primary)
+            {
+                if (dbFields.GetByName(p.Name) is { } dbPrimary && !dbPrimary.IsPrimary)
+                {
+                    // Attribute-based primary key differs from the database primary key
+
+                    list = dbFieldListUpdated ??= dbFields.ToList();
+
+                    if (dbFieldListUpdated.IndexOf(dbPrimary) is { } ix && ix < 0)
+                        continue;
+
+                    dbFieldListUpdated[ix] = new DbField(
+                        name: dbPrimary.Name,
+                        isPrimary: true,
+                        isIdentity: dbPrimary.IsIdentity || (identity is { } && identity.Name == p.Name),
+                        dbPrimary.IsNullable,
+                        dbPrimary.Type,
+                        dbPrimary.Size,
+                        dbPrimary.Precision,
+                        dbPrimary.Scale,
+                        dbPrimary.DatabaseType,
+                        dbPrimary.HasDefaultValue,
+                        dbPrimary.IsGenerated || (identity is { } && identity.Name == p.Name),
+                        dbPrimary.Provider);
+                }
             }
         }
 
-        return null;
+        if (identity is { } && identity.Name is { } identityName)
+        {
+            if (dbFields.GetByName(identityName) is { } dbIdentity && !dbIdentity.IsIdentity
+                && !list.Any(x => x.Name == identityName && x.IsIdentity))
+            {
+                // Attribute-based identity differs from what is in the database
+                // *and* not already fixed by the primary key loop above
+
+                list = dbFieldListUpdated ??= dbFields.ToList();
+                if (dbFieldListUpdated.IndexOf(dbIdentity) is { } ix && ix < 0)
+                    return list;
+
+                dbFieldListUpdated[ix] = new DbField(
+                    name: dbIdentity.Name,
+                    isPrimary: dbIdentity.IsPrimary,
+                    isIdentity: true,
+                    dbIdentity.IsNullable,
+                    dbIdentity.Type,
+                    dbIdentity.Size,
+                    dbIdentity.Precision,
+                    dbIdentity.Scale,
+                    dbIdentity.DatabaseType,
+                    dbIdentity.HasDefaultValue,
+                    isGenerated: true,
+                    dbIdentity.Provider);
+            }
+        }
+
+        dbFieldListUpdated = list.Where(x => x.IsPrimary || x.IsIdentity).ToList();
+
+        if (dbFieldListUpdated.Count > 1)
+        {
+            switch (GlobalConfiguration.Options.KeyColumnReturnBehavior)
+            {
+                case KeyColumnReturnBehavior.Primary:
+                    {
+                        if (primary is { } && primary.FirstOrDefault() is { } p)
+                            EnsureFirst(p.Name);
+                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsPrimary) is { } p2)
+                            EnsureFirst(p2.Name);
+                        break;
+                    }
+                case KeyColumnReturnBehavior.Identity:
+                    {
+                        if (identity is { })
+                            EnsureFirst(identity.Name);
+                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsIdentity) is { } i2)
+                            EnsureFirst(i2.Name);
+                        break;
+                    }
+                case KeyColumnReturnBehavior.PrimaryOrElseIdentity:
+                    {
+                        if (primary is { } && primary.FirstOrDefault() is { } p)
+                            EnsureFirst(p.Name);
+                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsPrimary) is { } p2)
+                            EnsureFirst(p2.Name);
+                        else if (identity is { })
+                            EnsureFirst(identity.Name);
+                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsIdentity) is { } i2)
+                            EnsureFirst(i2.Name);
+                        break;
+                    }
+                case KeyColumnReturnBehavior.IdentityOrElsePrimary:
+                    {
+                        if (identity is { })
+                            EnsureFirst(identity.Name);
+                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsIdentity) is { } i2)
+                            EnsureFirst(i2.Name);
+                        else if (primary is { } && primary.FirstOrDefault() is { } p)
+                            EnsureFirst(p.Name);
+                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsPrimary) is { } p2)
+                            EnsureFirst(p2.Name);
+                        break;
+                    }
+                default:
+                    throw new NotSupportedException($"The key column return behavior '{GlobalConfiguration.Options.KeyColumnReturnBehavior}' is not supported.");
+            }
+        }
+
+        return dbFieldListUpdated;
+
+        void EnsureFirst(string name)
+        {
+            for (int i = 0; i < dbFieldListUpdated.Count; i++)
+            {
+                if (dbFieldListUpdated[i] is { } move && move.Name == name)
+                {
+                    if (i > 0)
+                    {
+
+                        dbFieldListUpdated.RemoveAt(i);
+                        dbFieldListUpdated.Insert(0, move);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     /// <summary>
