@@ -222,8 +222,8 @@ internal sealed partial class Compiler
     /// </summary>
     /// <param name="handlerInstance"></param>
     /// <returns></returns>
-    private static MethodInfo? GetClassHandlerSetMethod(object handlerInstance) =>
-        handlerInstance.GetType().GetMethod(nameof(IPropertyHandler<object, object>.Set));
+    private static MethodInfo GetClassHandlerSetMethod(object handlerInstance) =>
+        handlerInstance.GetType().GetMethod(nameof(IPropertyHandler<object, object>.Set))!;
 
     /// <summary>
     ///
@@ -1138,7 +1138,7 @@ internal sealed partial class Compiler
         expression = Expression.Call(Expression.Constant(handlerInstance), getMethod, new[]
         {
             ConvertExpressionToTypeExpression(expression, getParameter.ParameterType),
-            CreatePropertyHandlerGetOptionsExpression(readerExpression, classPropertyParameterInfo?.ClassProperty)
+            CreatePropertyHandlerGetOptionsExpression(readerExpression, classPropertyParameterInfo.ClassProperty)
         });
 
         // Convert to the return type
@@ -2007,7 +2007,7 @@ internal sealed partial class Compiler
     /// <param name="dbField"></param>
     /// <param name="entityIndex"></param>
     /// <param name="dbSetting"></param>
-    private static MethodCallExpression GetDbParameterNameAssignmentExpression(Expression dbParameterExpression,
+    private static Expression GetDbParameterNameAssignmentExpression(Expression dbParameterExpression,
         DbField dbField,
         int entityIndex,
         IDbSetting dbSetting)
@@ -2023,7 +2023,7 @@ internal sealed partial class Compiler
     /// </summary>
     /// <param name="dbParameterExpression"></param>
     /// <param name="parameterName"></param>
-    private static MethodCallExpression GetDbParameterNameAssignmentExpression(Expression dbParameterExpression,
+    private static Expression GetDbParameterNameAssignmentExpression(Expression dbParameterExpression,
         string parameterName) =>
         GetDbParameterNameAssignmentExpression(dbParameterExpression, Expression.Constant(parameterName));
 
@@ -2031,12 +2031,13 @@ internal sealed partial class Compiler
     ///
     /// </summary>
     /// <param name="dbParameterExpression"></param>
-    /// <param name="paramaterNameExpression"></param>
-    private static MethodCallExpression GetDbParameterNameAssignmentExpression(Expression dbParameterExpression,
-        Expression paramaterNameExpression)
+    /// <param name="parameterNameExpression"></param>
+    private static Expression GetDbParameterNameAssignmentExpression(Expression dbParameterExpression,
+        Expression parameterNameExpression)
     {
-        var dbParameterValueNameMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.ParameterName)).SetMethod;
-        return Expression.Call(dbParameterExpression, dbParameterValueNameMethod, paramaterNameExpression);
+        return Expression.Block(
+            Expression.Assign(Expression.Property(dbParameterExpression, GetPropertyInfo<DbParameter>(x => x.ParameterName)), parameterNameExpression),
+            Expression.Empty());
     }
 
     /// <summary>
@@ -2045,7 +2046,7 @@ internal sealed partial class Compiler
     /// <param name="dbParameterExpression"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    private static MethodCallExpression GetDbParameterValueAssignmentExpression(Expression dbParameterExpression,
+    private static Expression GetDbParameterValueAssignmentExpression(Expression dbParameterExpression,
         object value) =>
         GetDbParameterValueAssignmentExpression(dbParameterExpression, Expression.Constant(value));
 
@@ -2055,14 +2056,14 @@ internal sealed partial class Compiler
     /// <param name="dbParameterExpression"></param>
     /// <param name="valueExpression"></param>
     /// <returns></returns>
-    private static MethodCallExpression GetDbParameterValueAssignmentExpression(Expression dbParameterExpression,
+    private static Expression GetDbParameterValueAssignmentExpression(Expression dbParameterExpression,
         Expression valueExpression)
     {
         var parameterExpression = ConvertExpressionToTypeExpression(dbParameterExpression, StaticType.DbParameter);
-        var dbParameterValueSetMethod = StaticType.DbParameter.GetProperty(nameof(DbParameter.Value)).SetMethod;
         var convertToDbNullMethod = StaticType.Converter.GetMethod(nameof(Converter.NullToDbNull));
-        return Expression.Call(parameterExpression, dbParameterValueSetMethod,
-            Expression.Call(convertToDbNullMethod, ConvertExpressionToTypeExpression(valueExpression, StaticType.Object)));
+        return Expression.Block(
+            Expression.Assign(Expression.Property(parameterExpression, GetPropertyInfo<DbParameter>(x => x.Value)), ConvertExpressionToTypeExpression(valueExpression, StaticType.Object)),
+            Expression.Empty());
     }
 
     /// <summary>
