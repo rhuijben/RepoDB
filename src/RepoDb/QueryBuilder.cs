@@ -21,6 +21,8 @@ public class QueryBuilder
     private const int INITIAL_STRINGBUILDER_CAPACITY = 256;
     private readonly StringBuilder stringBuilder = new(INITIAL_STRINGBUILDER_CAPACITY);
 
+    bool skipNextSpace;
+
     /// <summary>
     /// Stringify the current object.
     /// </summary>
@@ -84,12 +86,15 @@ public class QueryBuilder
     private QueryBuilder Append(string? value,
         bool spaceBefore = true)
     {
-        if (string.IsNullOrWhiteSpace(value)) return this;
+        if (string.IsNullOrWhiteSpace(value))
+            return this;
 
-        if (spaceBefore) Space();
+        if (spaceBefore && !skipNextSpace)
+            Space();
+
+        skipNextSpace = false;
 
         stringBuilder.Append(value);
-
         return this;
     }
 
@@ -101,6 +106,7 @@ public class QueryBuilder
     private QueryBuilder Append(char value)
     {
         stringBuilder.Append(value);
+        skipNextSpace = false;
 
         return this;
     }
@@ -118,7 +124,10 @@ public class QueryBuilder
     {
         if (values.IsNullOrEmpty()) return this;
 
-        if (spaceBefore) Space();
+        if (spaceBefore && !skipNextSpace)
+            Space();
+
+        skipNextSpace = false;
 
         stringBuilder
 #if NET
@@ -147,7 +156,7 @@ public class QueryBuilder
     public QueryBuilder End(IDbSetting? dbSetting)
     {
         if (dbSetting?.GenerateFinalSemiColon != false)
-            return Append(";");
+            return Append(";", false);
         else
             return this;
     }
@@ -512,14 +521,22 @@ public class QueryBuilder
     /// Appends a word AS to the SQL Query Statement with alias.
     /// </summary>
     /// <returns>The current instance.</returns>
-    public QueryBuilder As() => As(null);
+    public QueryBuilder As() => As(null, null);
 
     /// <summary>
     /// Appends a word AS to the SQL Query Statement with alias.
     /// </summary>
     /// <param name="alias">The alias to be prepended.</param>
     /// <returns>The current instance.</returns>
-    public QueryBuilder As(string? alias)
+    public QueryBuilder As(string? alias) => As(alias, null);
+
+    /// <summary>
+    /// Appends a word AS to the SQL Query Statement with alias.
+    /// </summary>
+    /// <param name="alias"></param>
+    /// <param name="dbSetting"></param>
+    /// <returns></returns>
+    public QueryBuilder As(string? alias, IDbSetting? dbSetting)
     {
         if (string.IsNullOrWhiteSpace(alias))
         {
@@ -527,7 +544,7 @@ public class QueryBuilder
         }
 
         return Append("AS")
-            .Append(alias);
+            .WriteText(alias.AsQuoted(dbSetting));
     }
 
     /// <summary>
@@ -874,13 +891,18 @@ public class QueryBuilder
     /// Appends a character "(" to the SQL Query Statement.
     /// </summary>
     /// <returns>The current instance.</returns>
-    public QueryBuilder OpenParen() => Append("(");
+    public QueryBuilder OpenParen()
+    {
+        Append("(");
+        skipNextSpace = true;
+        return this;
+    }
 
     /// <summary>
     /// Appends a character ")" to the SQL Query Statement.
     /// </summary>
     /// <returns>The current instance.</returns>
-    public QueryBuilder CloseParen() => Append(")");
+    public QueryBuilder CloseParen() => Append(')');
 
     /// <summary>
     /// Appends a word ON to the SQL Query Statement.
@@ -1064,4 +1086,16 @@ public class QueryBuilder
     public QueryBuilder DoUpdate() => Append("DO UPDATE");
 
     public QueryBuilder Output() => Append("OUTPUT");
+
+    /// <summary>
+    /// This method appends a comma to the SQL Query Statement.
+    /// </summary>
+    /// <returns></returns>
+    public QueryBuilder Comma() => Append(',');
+
+    /// <summary>
+    /// This method appends a word ROW to the SQL Query Statement.
+    /// </summary>
+    /// <returns></returns>
+    public QueryBuilder Row() => Append("ROW");
 }

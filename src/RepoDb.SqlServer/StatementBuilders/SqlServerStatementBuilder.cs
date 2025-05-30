@@ -210,7 +210,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
 
         foreach (var keyField in keyFields)
         {
-            if (keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable)
+            if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable || keyField.HasDefaultValue)
                 continue;
 
             if (fields.GetByName(keyField.Name) is null)
@@ -240,7 +240,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         {
             builder
                 .Output()
-                .AsAliasFieldsFrom(keyFields.AsFields().Take(1), "INSERTED", DbSetting);
+                .AsAliasFieldsFrom(keyFields.AsFields(), "INSERTED", DbSetting);
         }
 
         builder
@@ -289,7 +289,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         // Primary Key
         foreach (var keyField in keyFields)
         {
-            if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable)
+            if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable || keyField.HasDefaultValue)
                 continue;
 
             if (fields.GetByName(keyField.Name) is null)
@@ -315,11 +315,20 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
             .FieldsFrom(insertableFields, DbSetting)
             .CloseParen();
 
-        if (keyFields?.Any() == true)
+        if (keyFields.Any() == true)
         {
             builder
                 .Output()
-                .AsAliasFieldsFrom(keyFields.AsFields().Take(1), "INSERTED", DbSetting);
+                .AsAliasFieldsFrom(keyFields.AsFields(), "INSERTED", DbSetting);
+
+            if (batchSize > 1)
+            {
+                builder
+                    .Select()
+                    .AsAliasFieldsFrom(fields, "S", DbSetting)
+                    .From()
+                    .OpenParen();
+            }
         }
 
         builder
@@ -329,12 +338,37 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         for (var index = 0; index < batchSize; index++)
         {
             if (index > 0)
-                builder.WriteText(",");
+                builder.Comma();
 
             builder
                 .OpenParen()
-                .ParametersFrom(insertableFields, index, DbSetting)
+                .ParametersFrom(insertableFields, index, DbSetting);
+
+            if (batchSize > 1 && keyFields.Any())
+            {
+                builder
+                    .Comma()
+                    .WriteText($"{index}");
+            }
+
+            builder
                 .CloseParen();
+        }
+
+        if (batchSize > 1 && keyFields.Any())
+        {
+            builder
+                .CloseParen()
+                .As()
+                .WriteText("S")
+                .OpenParen()
+                .FieldsFrom(fields, DbSetting)
+                .Comma()
+                .WriteText(RepoDbOrderColumn.AsQuoted(DbSetting))
+                .CloseParen()
+                .OrderBy()
+                .WriteText("S.")
+                .WriteQuoted(RepoDbOrderColumn, DbSetting, false);
         }
 
         builder.End(DbSetting);
@@ -476,7 +510,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         {
             builder
                 .WriteText(string.Concat("OUTPUT INSERTED.", keyColumn.Name.AsField(DbSetting)))
-                .As("[Result]");
+                .As("Result", DbSetting);
         }
 
         // End the builder
@@ -573,61 +607,98 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Iterate the indexes
+        // MERGE T USING S
+        builder.Merge()
+            .TableNameFrom(tableName, DbSetting)
+            .HintsFrom(hints)
+            .As("T")
+            .Using()
+            .OpenParen()
+            .Values();
+
         for (var index = 0; index < batchSize; index++)
         {
-            // MERGE T USING S
-            builder.Merge()
-                .TableNameFrom(tableName, DbSetting)
-                .HintsFrom(hints)
-                .As("T")
-                .Using()
-                .OpenParen()
-                .Select()
-                .ParametersAsFieldsFrom(fields, index, DbSetting)
-                .CloseParen()
-                .As("S")
-                // QUALIFIERS
-                .On()
-                .OpenParen()
-                .WriteText(qualifiers?
-                    .Select(
-                        field => field.AsJoinQualifier("S", "T", true, DbSetting))
-                            .Join(" AND "))
-                .CloseParen()
-                // WHEN NOT MATCHED THEN INSERT VALUES
-                .When()
-                .Not()
-                .Matched()
-                .Then()
-                .Insert()
-                .OpenParen()
-                .FieldsFrom(insertableFields, DbSetting)
-                .CloseParen()
-                .Values()
-                .OpenParen()
-                .AsAliasFieldsFrom(insertableFields, "S", DbSetting)
-                .CloseParen()
-                // WHEN MATCHED THEN UPDATE SET
-                .When()
-                .Matched()
-                .Then()
-                .Update()
-                .Set()
-                .FieldsAndAliasFieldsFrom(updateableFields, "T", "S", DbSetting);
+            if (index > 0)
+                builder.Comma();
 
-            // Set the output
-            if (keyColumn != null)
+            builder
+                .OpenParen()
+                .ParametersFrom(fields, index, DbSetting);
+
+            if (batchSize > 1 && keyFields.Any())
             {
                 builder
-                    .WriteText(string.Concat("OUTPUT INSERTED.", keyColumn.Name.AsField(DbSetting)))
-                        .As("[Result],")
-                    .WriteText($"{DbSetting.ParameterPrefix}__RepoDb_OrderColumn_{index}")
-                        .As("[__RepoDb_OrderColumn]");
+                    .Comma()
+                    .WriteText($"{index}");
             }
 
-            // End the builder
-            builder.End();
+            builder
+                .CloseParen();
         }
+
+
+        builder
+            .CloseParen()
+            .As("S")
+            .OpenParen()
+            .FieldsFrom(fields, DbSetting);
+
+        if (batchSize > 1 && keyFields.Any())
+        {
+            builder
+                .Comma()
+                .WriteText(RepoDbOrderColumn.AsQuoted(DbSetting));
+        }
+
+        builder
+            .CloseParen()
+            // QUALIFIERS
+            .On()
+            .OpenParen()
+            .WriteText(qualifiers?
+                .Select(
+                    field => field.AsJoinQualifier("S", "T", true, DbSetting))
+                        .Join(" AND "))
+            .CloseParen()
+            // WHEN NOT MATCHED THEN INSERT VALUES
+            .When()
+            .Not()
+            .Matched()
+            .Then()
+            .Insert()
+            .OpenParen()
+            .FieldsFrom(insertableFields, DbSetting)
+            .CloseParen()
+            .Values()
+            .OpenParen()
+            .AsAliasFieldsFrom(insertableFields, "S", DbSetting)
+            .CloseParen()
+            // WHEN MATCHED THEN UPDATE SET
+            .When()
+            .Matched()
+            .Then()
+            .Update()
+            .Set()
+            .FieldsAndAliasFieldsFrom(updateableFields, "T", "S", DbSetting);
+
+        // Set the output
+        if (keyFields.Any())
+        {
+            builder
+                .Output()
+                .AsAliasFieldsFrom(keyFields.AsFields(), "INSERTED", DbSetting);
+
+            if (batchSize > 1)
+            {
+                builder
+                    .Comma()
+                    .WriteText("S.")
+                    .WriteQuoted(RepoDbOrderColumn, DbSetting, false);
+            }
+        }
+
+        // End the builder
+        builder.End(DbSetting);
 
         // Return the query
         return builder.GetString();

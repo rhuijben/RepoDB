@@ -309,8 +309,6 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
         // Verify the fields
         if (fields?.Any() != true)
@@ -318,25 +316,20 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             throw new EmptyException(nameof(fields), $"The list of insertable fields must not be null or empty for '{tableName}'.");
         }
 
-        // Primary Key
-        if (primaryField != null &&
-            primaryField.HasDefaultValue == false &&
-            !string.Equals(primaryField.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase))
+        foreach (var keyField in keyFields)
         {
-            var isPresent = fields
-                .FirstOrDefault(f =>
-                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
+            if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable)
+                continue;
 
-            if (isPresent == false)
+            if (fields.GetByName(keyField.Name) is null)
             {
-                throw new PrimaryFieldNotFoundException($"Primary field '{primaryField.Name}' must be present from the list.");
+                throw new PrimaryFieldNotFoundException($"Primary field '{keyField.Name}' must be present in the field list.");
             }
         }
 
         // Insertable fields
         var insertableFields = fields
-            .Where(f =>
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase));
+            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity));
 
         // Initialize the builder
         var builder = new QueryBuilder();
@@ -375,10 +368,6 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
 
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
@@ -390,24 +379,20 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         }
 
         // Primary Key
-        if (primaryField != null &&
-            primaryField.HasDefaultValue == false &&
-            !string.Equals(primaryField.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase))
+        foreach (var keyField in keyFields)
         {
-            var isPresent = fields
-                .FirstOrDefault(f =>
-                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
+            if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable)
+                continue;
 
-            if (isPresent == false)
+            if (fields.GetByName(keyField.Name) is null)
             {
-                throw new PrimaryFieldNotFoundException($"As the primary field '{primaryField.Name}' is not an identity nor has a default value, it must be present on the insert operation.");
+                throw new PrimaryFieldNotFoundException($"Primary field '{keyField.Name}' must be present in the field list.");
             }
         }
 
         // Insertable fields
         var insertableFields = fields
-            .Where(f =>
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase));
+            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity));
 
         // Initialize the builder
         var builder = new QueryBuilder();
@@ -430,6 +415,9 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         // Iterate the indexes
         for (var index = 0; index < batchSize; index++)
         {
+            if (index > 0)
+                builder.Comma();
+
             builder
                 .OpenParen()
                 .ParametersFrom(insertableFields, index, DbSetting)
@@ -437,12 +425,6 @@ public abstract class BaseStatementBuilder : IStatementBuilder
                     string.Concat(", ",
                         $"{DbSetting.ParameterPrefix}__RepoDb_OrderColumn_{index}"))
                 .CloseParen();
-
-            if (index < batchSize - 1)
-            {
-                builder
-                    .WriteText(",");
-            }
         }
 
         // Close

@@ -479,7 +479,8 @@ public static partial class SqlConnectionExtension
         if (isReturnIdentity)
         {
             builder.WriteText(", CONVERT(INT, NULL) AS [__RepoDb_OrderColumn]");
-        };
+        }
+        ;
 
         // Continuation
         builder
@@ -690,9 +691,9 @@ public static partial class SqlConnectionExtension
         {
             builder
                 .WriteText(string.Concat("OUTPUT INSERTED.", identityField.Name.AsField(dbSetting)))
-                    .As("[Result],")
-                .WriteText("S.[__RepoDb_OrderColumn]")
-                    .As("[OrderColumn]");
+                    .As("Result", dbSetting)
+                .WriteText(", S.[__RepoDb_OrderColumn]")
+                    .As("OrderColumn", dbSetting);
         }
 
         // End
@@ -846,9 +847,9 @@ public static partial class SqlConnectionExtension
         {
             builder
                 .WriteText(string.Concat("OUTPUT INSERTED.", identityField.Name.AsField(dbSetting)))
-                    .As("[Result],")
-                .WriteText("S.[__RepoDb_OrderColumn]")
-                    .As("[OrderColumn]");
+                    .As("Result", dbSetting)
+                .WriteText(", S.[__RepoDb_OrderColumn]")
+                    .As("OrderColumn", dbSetting);
         }
 
         // End the builder

@@ -1,8 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
-using RepoDb.SqlServer.IntegrationTests.Setup;
 using RepoDb.SqlServer.IntegrationTests.Models;
-using Microsoft.Data.SqlClient;
+using RepoDb.SqlServer.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.SqlServer.IntegrationTests.Operations;
 
@@ -35,7 +36,7 @@ public class MergeAllTest
         using (var connection = new SqlConnection(Database.ConnectionString))
         {
             // Act
-            var result = connection.MergeAll<CompleteTable>(tables);
+            var result = connection.MergeAll<CompleteTable>(tables, trace: new DiagnosticsTracer());
 
             // Assert
             Assert.AreEqual(tables.Count, connection.CountAll<CompleteTable>());

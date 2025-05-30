@@ -34,12 +34,12 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: null);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM [Table] " +
-            $"ORDER BY [Field1] ASC " +
-            $"OFFSET 0 " +
-            $"ROWS FETCH NEXT 10 ROWS ONLY ;";
+        var expected = "" +
+            "SELECT [Field1], [Field2] " +
+            "FROM [Table] " +
+            "ORDER BY [Field1] ASC " +
+            "OFFSET 0 " +
+            "ROWS FETCH NEXT 10 ROWS ONLY;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -61,12 +61,12 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: null);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM [Table] " +
-            $"ORDER BY [Field1] ASC " +
-            $"OFFSET 10 " +
-            $"ROWS FETCH NEXT 10 ROWS ONLY ;";
+        var expected = "" +
+            "SELECT [Field1], [Field2] " +
+            "FROM [Table] " +
+            "ORDER BY [Field1] ASC " +
+            "OFFSET 10 " +
+            "ROWS FETCH NEXT 10 ROWS ONLY;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -89,12 +89,12 @@ public class StatementBuilderTest
             orderBy: orderBy,
             where: null,
             hints: SqlServerTableHints.NoLock);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM [dbo].[Table] WITH (NOLOCK) " +
-            $"ORDER BY [Field1] ASC " +
-            $"OFFSET 0 " +
-            $"ROWS FETCH NEXT 10 ROWS ONLY ;";
+        var expected = "" +
+            "SELECT [Field1], [Field2] " +
+            "FROM [dbo].[Table] WITH (NOLOCK) " +
+            "ORDER BY [Field1] ASC " +
+            "OFFSET 0 " +
+            "ROWS FETCH NEXT 10 ROWS ONLY;";
         // Assert
         Assert.AreEqual(expected, actual);
     }
@@ -115,12 +115,12 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: null);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM [dbo].[Table] " +
-            $"ORDER BY [Field1] ASC " +
-            $"OFFSET 0 " +
-            $"ROWS FETCH NEXT 10 ROWS ONLY ;";
+        var expected = "" +
+            "SELECT [Field1], [Field2] " +
+            "FROM [dbo].[Table] " +
+            "ORDER BY [Field1] ASC " +
+            "OFFSET 0 " +
+            "ROWS FETCH NEXT 10 ROWS ONLY;";
         // Assert
         Assert.AreEqual(expected, actual);
     }
@@ -141,12 +141,12 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: null);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM [dbo].[Table] " +
-            $"ORDER BY [Field1] ASC " +
-            $"OFFSET 0 " +
-            $"ROWS FETCH NEXT 10 ROWS ONLY ;";
+        var expected = "" +
+            "SELECT [Field1], [Field2] " +
+            "FROM [dbo].[Table] " +
+            "ORDER BY [Field1] ASC " +
+            "OFFSET 0 " +
+            "ROWS FETCH NEXT 10 ROWS ONLY;";
         // Assert
         Assert.AreEqual(expected, actual);
     }
@@ -168,13 +168,13 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: where);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM [Table] " +
-            $"WHERE ([Field1] <> @Field1) " +
-            $"ORDER BY [Field1] ASC " +
-            $"OFFSET 10 " +
-            $"ROWS FETCH NEXT 10 ROWS ONLY ;";
+        var expected = "" +
+            "SELECT [Field1], [Field2] " +
+            "FROM [Table] " +
+            "WHERE ([Field1] <> @Field1) " +
+            "ORDER BY [Field1] ASC " +
+            "OFFSET 10 " +
+            "ROWS FETCH NEXT 10 ROWS ONLY;";
         // Assert
         Assert.AreEqual(expected, actual);
     }
@@ -196,13 +196,13 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: where);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] <> @Id) " +
-            $"ORDER BY [Field1] ASC " +
-            $"OFFSET 10 " +
-            $"ROWS FETCH NEXT 10 ROWS ONLY ;";
+        var expected = "" +
+            "SELECT [Field1], [Field2] " +
+            "FROM [Table] " +
+            "WHERE ([Id] <> @Id) " +
+            "ORDER BY [Field1] ASC " +
+            "OFFSET 10 " +
+            "ROWS FETCH NEXT 10 ROWS ONLY;";
         // Assert
         Assert.AreEqual(expected, actual);
     }
@@ -341,7 +341,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCountAll(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [Table] ;";
+        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -358,7 +358,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCountAll(tableName: tableName,
             hints: hints);
-        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -374,7 +374,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCountAll(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -390,7 +390,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCountAll(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -410,7 +410,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCount(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [Table] ;";
+        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -427,10 +427,10 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCount(tableName: tableName,
             where: where);
-        var expected = $"" +
-            $"SELECT COUNT_BIG (*) AS [CountValue] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] = @Id) ;";
+        var expected = "" +
+            "SELECT COUNT_BIG (*) AS [CountValue] " +
+            "FROM [Table] " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -447,7 +447,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCount(tableName: tableName,
             hints: hints);
-        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -466,10 +466,10 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateCount(tableName: tableName,
             where: where,
             hints: hints);
-        var expected = $"" +
-            $"SELECT COUNT_BIG (*) AS [CountValue] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id) ;";
+        var expected = "" +
+            "SELECT COUNT_BIG (*) AS [CountValue] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -485,7 +485,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCount(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -501,7 +501,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCount(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT COUNT_BIG (*) AS [CountValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -526,36 +526,11 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field1] " +
-            $"VALUES " +
-            $"( @Field2, @Field3 ) ;";
-
-        // Assert
-        Assert.AreEqual(expected, actual);
-    }
-
-    [TestMethod]
-    public void TestSqlServerStatementBuilderCreateInsertAllWithIdentityAsBigInt()
-    {
-        // Setup
-        var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
-        var tableName = "Table";
-        var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
-        var identityField = new DbField("Field1", false, true, false, typeof(long), null, null, null, null);
-
-        // Act
-        var actual = statementBuilder.CreateInsertAll(tableName: tableName,
-            fields: fields,
-            batchSize: 1,
-            primaryField: null,
-            identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field1] " +
-            $"VALUES " +
-            $"( @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] ([Field2], [Field3]) " +
+            "OUTPUT INSERTED.[Field1] " +
+            "VALUES " +
+            "(@Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -576,11 +551,11 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] ( [Field1], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field2] " +
-            $"VALUES " +
-            $"( @Field1, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] ([Field1], [Field3]) " +
+            "OUTPUT INSERTED.[Field2] " +
+            "VALUES " +
+            "(@Field1, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -602,11 +577,11 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] ( [Field1], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field2] " +
-            $"VALUES " +
-            $"( @Field1, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] ([Field1], [Field3]) " +
+            "OUTPUT INSERTED.[Field2] " +
+            "VALUES " +
+            "(@Field1, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -627,13 +602,16 @@ public class StatementBuilderTest
             batchSize: 3,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] ( [Field2], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field1] " +
-            $"VALUES " +
-            $"( @Field2, @Field3 ) , " +
-            $"( @Field2_1, @Field3_1 ) , " +
-            $"( @Field2_2, @Field3_2 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] ([Field2], [Field3]) " +
+            "OUTPUT INSERTED.[Field1] " +
+            "SELECT S.[Field1], S.[Field2], S.[Field3] FROM (" +
+            "VALUES " +
+            "(@Field2, @Field3, 0), " +
+            "(@Field2_1, @Field3_1, 1), " +
+            "(@Field2_2, @Field3_2, 2)) " +
+            "AS S ([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+             "ORDER BY S.[__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -655,11 +633,11 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: identityField,
             hints: SqlServerTableHints.TabLock);
-        var expected = $"" +
-            $"INSERT INTO [Table] WITH (TABLOCK) ( [Field2], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field1] " +
-            $"VALUES " +
-            $"( @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] WITH (TABLOCK) ([Field2], [Field3]) " +
+            "OUTPUT INSERTED.[Field1] " +
+            "VALUES " +
+            "(@Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -681,13 +659,16 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: identityField,
             hints: SqlServerTableHints.TabLock);
-        var expected = $"" +
-            $"INSERT INTO [Table] WITH (TABLOCK) ( [Field2], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field1] " +
-            $"VALUES " +
-            $"( @Field2, @Field3 ) , " +
-            $"( @Field2_1, @Field3_1 ) , " +
-            $"( @Field2_2, @Field3_2 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] WITH (TABLOCK) ([Field2], [Field3]) " +
+            "OUTPUT INSERTED.[Field1] " +
+            "SELECT S.[Field1], S.[Field2], S.[Field3] FROM (" +
+            "VALUES " +
+            "(@Field2, @Field3, 0), " +
+            "(@Field2_1, @Field3_1, 1), " +
+            "(@Field2_2, @Field3_2, 2)) " +
+            "AS S ([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+             "ORDER BY S.[__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -710,11 +691,11 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -733,11 +714,11 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [dbo].[Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [dbo].[Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -756,11 +737,11 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [dbo].[Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [dbo].[Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -780,12 +761,12 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field1] " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "OUTPUT INSERTED.[Field1] " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -805,12 +786,12 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field2], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field1] " +
-            $"VALUES " +
-            $"( @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field2], [Field3]) " +
+            "OUTPUT INSERTED.[Field1] " +
+            "VALUES " +
+            "(@Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -830,12 +811,12 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field2], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field1] " +
-            $"VALUES " +
-            $"( @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field2], [Field3]) " +
+            "OUTPUT INSERTED.[Field1] " +
+            "VALUES " +
+            "(@Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -856,12 +837,12 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field3] ) " +
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field3]) " +
             "OUTPUT INSERTED.[Field2] " +
-            $"VALUES " +
-            $"( @Field1, @Field3 ) ;";
+            "VALUES " +
+            "(@Field1, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -882,12 +863,12 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field3] ) " +
-            $"OUTPUT INSERTED.[Field2] " +
-            $"VALUES " +
-            $"( @Field1, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field3]) " +
+            "OUTPUT INSERTED.[Field2] " +
+            "VALUES " +
+            "(@Field1, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -907,11 +888,11 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: null,
             hints: SqlServerTableHints.TabLock);
-        var expected = $"" +
-            $"INSERT INTO [Table] WITH (TABLOCK) " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] WITH (TABLOCK) " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -937,15 +918,16 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -967,15 +949,16 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [dbo].[Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] ;";
+        var expected = "" +
+            "MERGE [dbo].[Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -997,15 +980,16 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [dbo].[Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] ;";
+        var expected = "" +
+            "MERGE [dbo].[Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1028,16 +1012,17 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1061,16 +1046,17 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: primaryField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field2], [Field3]) " +
+            "VALUES (S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1093,16 +1079,17 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Id] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Id];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1125,16 +1112,17 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field2], [Field3]) " +
+            "VALUES (S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1157,16 +1145,17 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Id] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Id];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1188,16 +1177,17 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1220,16 +1210,17 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: identityField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field2] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field2], INSERTED.[Field1];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1252,34 +1243,19 @@ public class StatementBuilderTest
             batchSize: 3,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ; " +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1_1 AS [Field1], @Field2_1 AS [Field2], @Field3_1 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_1 AS [__RepoDb_OrderColumn] ; " +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1_2 AS [Field1], @Field2_2 AS [Field2], @Field3_2 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_2 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+             "USING (VALUES (@Field1, @Field2, @Field3, 0), " +
+             "(@Field1_1, @Field2_1, @Field3_1, 1), " +
+             "(@Field1_2, @Field2_2, @Field3_2, 2)) " +
+            "AS S ([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field2], [Field3]) " +
+            "VALUES (S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1], S.[__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1302,15 +1278,16 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: null,
             hints: SqlServerTableHints.TabLock);
-        var expected = $"" +
-            $"MERGE [Table] WITH (TABLOCK) AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] ;";
+        var expected = "" +
+            "MERGE [Table] WITH (TABLOCK) AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3)) " +
+            "AS S ([Field1], [Field2], [Field3]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1334,34 +1311,19 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: identityField,
             hints: SqlServerTableHints.TabLock);
-        var expected = $"" +
-            $"MERGE [Table] WITH (TABLOCK) AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_0 AS [__RepoDb_OrderColumn] ; " +
-            $"MERGE [Table] WITH (TABLOCK) AS T " +
-            $"USING ( SELECT @Field1_1 AS [Field1], @Field2_1 AS [Field2], @Field3_1 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_1 AS [__RepoDb_OrderColumn] ; " +
-            $"MERGE [Table] WITH (TABLOCK) AS T " +
-            $"USING ( SELECT @Field1_2 AS [Field1], @Field2_2 AS [Field2], @Field3_2 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result], @__RepoDb_OrderColumn_2 AS [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "MERGE [Table] WITH (TABLOCK) AS T " +
+            "USING (VALUES (@Field1, @Field2, @Field3, 0), " +
+             "(@Field1_1, @Field2_1, @Field3_1, 1), " +
+             "(@Field1_2, @Field2_2, @Field3_2, 2)) " +
+            "AS S ([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field2], [Field3]) " +
+            "VALUES (S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1], S.[__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1547,15 +1509,15 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1576,15 +1538,15 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [dbo].[Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] ;";
+        var expected = "" +
+            "MERGE [dbo].[Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1605,15 +1567,15 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [dbo].[Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] ;";
+        var expected = "" +
+            "MERGE [dbo].[Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1635,16 +1597,16 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1] AS [Result];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1667,16 +1629,16 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: primaryField,
             identityField: primaryField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field2], [Field3]) " +
+            "VALUES (S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1] AS [Result];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1698,16 +1660,16 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Id] AS [Result] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Id] AS [Result];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1729,16 +1691,16 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field2], [Field3]) " +
+            "VALUES (S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1] AS [Result];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1760,16 +1722,16 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Id] AS [Result] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Id] AS [Result];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1790,16 +1752,16 @@ public class StatementBuilderTest
             qualifiers: null,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field1] AS [Result] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field1] AS [Result];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1821,16 +1783,16 @@ public class StatementBuilderTest
             qualifiers: null,
             primaryField: primaryField,
             identityField: identityField);
-        var expected = $"" +
-            $"MERGE [Table] AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field3] = S.[Field3] " +
-            $"OUTPUT INSERTED.[Field2] AS [Result] ;";
+        var expected = "" +
+            "MERGE [Table] AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field3] = S.[Field3] " +
+            "OUTPUT INSERTED.[Field2] AS [Result];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -1852,15 +1814,15 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: null,
             hints: SqlServerTableHints.TabLock);
-        var expected = $"" +
-            $"MERGE [Table] WITH (TABLOCK) AS T " +
-            $"USING ( SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3] ) " +
-            $"AS S ON ( (S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL)) ) " +
-            $"WHEN NOT MATCHED THEN " +
-            $"INSERT ( [Field1], [Field2], [Field3] ) " +
-            $"VALUES ( S.[Field1], S.[Field2], S.[Field3] ) " +
-            $"WHEN MATCHED THEN " +
-            $"UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3] ;";
+        var expected = "" +
+            "MERGE [Table] WITH (TABLOCK) AS T " +
+            "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
+            "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
+            "WHEN NOT MATCHED THEN " +
+            "INSERT ([Field1], [Field2], [Field3]) " +
+            "VALUES (S.[Field1], S.[Field2], S.[Field3]) " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field1] = S.[Field1], T.[Field2] = S.[Field2], T.[Field3] = S.[Field3];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -2038,16 +2000,15 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: null);
-        var expected = $"" +
-            $"WITH CTE AS " +
-            $"( " +
-            $"SELECT TOP (10) ROW_NUMBER() OVER ( ORDER BY [Field1] ASC ) AS [RowNumber], [Field1], [Field2] " +
-            $"FROM [Table] " +
-            $"ORDER BY [Field1] ASC " +
-            $") " +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM CTE " +
-            $"WHERE ([RowNumber] BETWEEN 1 AND 10) ;";
+        var expected = "" +
+            "WITH CTE AS " +
+            "(" +
+            "SELECT TOP (10) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
+            "FROM [Table] " +
+            "ORDER BY [Field1] ASC) " +
+            "SELECT [Field1], [Field2] " +
+            "FROM CTE " +
+            "WHERE ([RowNumber] BETWEEN 1 AND 10);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -2069,16 +2030,15 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: null);
-        var expected = $"" +
-            $"WITH CTE AS " +
-            $"( " +
-            $"SELECT TOP (20) ROW_NUMBER() OVER ( ORDER BY [Field1] ASC ) AS [RowNumber], [Field1], [Field2] " +
-            $"FROM [Table] " +
-            $"ORDER BY [Field1] ASC " +
-            $") " +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM CTE " +
-            $"WHERE ([RowNumber] BETWEEN 11 AND 20) ;";
+        var expected = "" +
+            "WITH CTE AS " +
+            "(" +
+            "SELECT TOP (20) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
+            "FROM [Table] " +
+            "ORDER BY [Field1] ASC) " +
+            "SELECT [Field1], [Field2] " +
+            "FROM CTE " +
+            "WHERE ([RowNumber] BETWEEN 11 AND 20);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -2101,16 +2061,15 @@ public class StatementBuilderTest
             orderBy: orderBy,
             where: null,
             hints: SqlServerTableHints.NoLock);
-        var expected = $"" +
-            $"WITH CTE AS " +
-            $"( " +
-            $"SELECT TOP (10) ROW_NUMBER() OVER ( ORDER BY [Field1] ASC ) AS [RowNumber], [Field1], [Field2] " +
-            $"FROM [dbo].[Table] WITH (NOLOCK) " +
-            $"ORDER BY [Field1] ASC " +
-            $") " +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM CTE " +
-            $"WHERE ([RowNumber] BETWEEN 1 AND 10) ;";
+        var expected = "" +
+            "WITH CTE AS " +
+            "(" +
+            "SELECT TOP (10) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
+            "FROM [dbo].[Table] WITH (NOLOCK) " +
+            "ORDER BY [Field1] ASC) " +
+            "SELECT [Field1], [Field2] " +
+            "FROM CTE " +
+            "WHERE ([RowNumber] BETWEEN 1 AND 10);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -2132,16 +2091,15 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: null);
-        var expected = $"" +
-            $"WITH CTE AS " +
-            $"( " +
-            $"SELECT TOP (10) ROW_NUMBER() OVER ( ORDER BY [Field1] ASC ) AS [RowNumber], [Field1], [Field2] " +
-            $"FROM [dbo].[Table] " +
-            $"ORDER BY [Field1] ASC " +
-            $") " +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM CTE " +
-            $"WHERE ([RowNumber] BETWEEN 1 AND 10) ;";
+        var expected = "" +
+            "WITH CTE AS " +
+            "(" +
+            "SELECT TOP (10) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
+            "FROM [dbo].[Table] " +
+            "ORDER BY [Field1] ASC) " +
+            "SELECT [Field1], [Field2] " +
+            "FROM CTE " +
+            "WHERE ([RowNumber] BETWEEN 1 AND 10);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -2163,16 +2121,15 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: null);
-        var expected = $"" +
-            $"WITH CTE AS " +
-            $"( " +
-            $"SELECT TOP (10) ROW_NUMBER() OVER ( ORDER BY [Field1] ASC ) AS [RowNumber], [Field1], [Field2] " +
-            $"FROM [dbo].[Table] " +
-            $"ORDER BY [Field1] ASC " +
-            $") " +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM CTE " +
-            $"WHERE ([RowNumber] BETWEEN 1 AND 10) ;";
+        var expected = "" +
+            "WITH CTE AS " +
+            "(" +
+            "SELECT TOP (10) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
+            "FROM [dbo].[Table] " +
+            "ORDER BY [Field1] ASC) " +
+            "SELECT [Field1], [Field2] " +
+            "FROM CTE " +
+            "WHERE ([RowNumber] BETWEEN 1 AND 10);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -2195,17 +2152,16 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: where);
-        var expected = $"" +
-            $"WITH CTE AS " +
-            $"( " +
-            $"SELECT TOP (20) ROW_NUMBER() OVER ( ORDER BY [Field1] ASC ) AS [RowNumber], [Field1], [Field2] " +
-            $"FROM [Table] " +
-            $"WHERE ([Field1] <> @Field1) " +
-            $"ORDER BY [Field1] ASC " +
-            $") " +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM CTE " +
-            $"WHERE ([RowNumber] BETWEEN 11 AND 20) ;";
+        var expected = "" +
+            "WITH CTE AS " +
+            "(" +
+            "SELECT TOP (20) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
+            "FROM [Table] " +
+            "WHERE ([Field1] <> @Field1) " +
+            "ORDER BY [Field1] ASC) " +
+            "SELECT [Field1], [Field2] " +
+            "FROM CTE " +
+            "WHERE ([RowNumber] BETWEEN 11 AND 20);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -2228,17 +2184,16 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: where);
-        var expected = $"" +
-            $"WITH CTE AS " +
-            $"( " +
-            $"SELECT TOP (20) ROW_NUMBER() OVER ( ORDER BY [Field1] ASC ) AS [RowNumber], [Field1], [Field2] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] <> @Id) " +
-            $"ORDER BY [Field1] ASC " +
-            $") " +
-            $"SELECT [Field1], [Field2] " +
-            $"FROM CTE " +
-            $"WHERE ([RowNumber] BETWEEN 11 AND 20) ;";
+        var expected = "" +
+            "WITH CTE AS " +
+            "(" +
+            "SELECT TOP (20) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
+            "FROM [Table] " +
+            "WHERE ([Id] <> @Id) " +
+            "ORDER BY [Field1] ASC) " +
+            "SELECT [Field1], [Field2] " +
+            "FROM CTE " +
+            "WHERE ([RowNumber] BETWEEN 11 AND 20);";
 
         // Assert
         Assert.AreEqual(expected, actual);

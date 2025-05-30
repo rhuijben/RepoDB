@@ -525,6 +525,7 @@ public static partial class DbConnectionExtension
             else
             {
                 BaseDbHelper? dbh = null;
+                int? positionIndex = null;
 
                 foreach (var batchEntities in entities.AsList().Split(batchSize))
                 {
@@ -613,13 +614,19 @@ public static partial class DbConnectionExtension
 
                         // Get the results
                         var position = 0;
-                        while (reader.Read())
+                        do
                         {
-                            var value = Converter.DbNullToNull(reader.GetValue(0));
-                            var index = batchItems.Count > 1 && reader.FieldCount > 1 ? reader.GetInt32(1) : position;
-                            context.IdentitySetterFunc.Invoke(batchItems[index], value);
-                            position++;
+                            while (position < batchItems.Count && reader.Read())
+                            {
+                                positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
+
+                                var value = Converter.DbNullToNull(reader.GetValue(0));
+                                var index = positionIndex >= 0 ? reader.GetInt32(positionIndex.Value) : position;
+                                context.IdentitySetterFunc.Invoke(batchItems[index], value);
+                                position++;
+                            }
                         }
+                        while (position < batchItems.Count && reader.NextResult());
 
                         // Set the result
                         result += batchItems.Count;
@@ -761,7 +768,8 @@ public static partial class DbConnectionExtension
             else
             {
                 BaseDbHelper? dbh = null;
-                foreach (var batchEntities in entities.AsList().Split(batchSize))
+                int? positionIndex = null;
+                foreach (var batchEntities in entities.Split(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
 
@@ -850,13 +858,19 @@ public static partial class DbConnectionExtension
 
                         // Get the results
                         var position = 0;
-                        while (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                        do
                         {
-                            var value = Converter.DbNullToNull(reader.GetValue(0));
-                            var index = batchItems.Count > 1 && reader.FieldCount > 1 ? reader.GetInt32(1) : position;
-                            context.IdentitySetterFunc.Invoke(batchItems[index], value);
-                            position++;
+                            while (position < batchItems.Count && await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                            {
+                                positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
+
+                                var value = Converter.DbNullToNull(reader.GetValue(0));
+                                var index = positionIndex >= 0 ? reader.GetInt32(positionIndex.Value) : position;
+                                context.IdentitySetterFunc.Invoke(batchItems[index], value);
+                                position++;
+                            }
                         }
+                        while (position < batchItems.Count && await reader.NextResultAsync(cancellationToken));
 
                         // Set the result
                         result += batchItems.Count;

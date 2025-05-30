@@ -1349,8 +1349,9 @@ public static partial class DbConnectionExtension
             }
             else
             {
+                int? positionIndex = null;
                 // Iterate the batches
-                foreach (var batchEntities in entities.AsList().Split(batchSize))
+                foreach (var batchEntities in entities.Split(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
 
@@ -1429,16 +1430,18 @@ public static partial class DbConnectionExtension
                         var position = 0;
                         do
                         {
-                            if (reader.Read())
+                            while (position < batchItems.Count && reader.Read())
                             {
+                                positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
+
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
-                                var index = batchItems.Count > 1 && reader.FieldCount > 1 ? reader.GetInt32(1) : position;
+                                var index = positionIndex > 0 ? reader.GetInt32(positionIndex.Value) : position;
                                 context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
                                 result++;
+                                position++;
                             }
-                            position++;
                         }
-                        while (reader.NextResult());
+                        while (position < batchItems.Count && reader.NextResult());
 
                         // After Execution
                         Tracer
@@ -1674,8 +1677,10 @@ public static partial class DbConnectionExtension
             }
             else
             {
+                int? positionIndex = null;
+
                 // Iterate the batches
-                foreach (var batchEntities in entities.AsList().Split(batchSize))
+                foreach (var batchEntities in entities.Split(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
 
@@ -1751,21 +1756,22 @@ public static partial class DbConnectionExtension
                         // Set the identity back
                         using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
-                        // Get the results
+                        // Get the results.
                         var position = 0;
                         do
                         {
-                            if (await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                            while (position < batchItems.Count && await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                             {
-                                // No need to use async on this level (await reader.GetFieldValueAsync<object>(0, cancellationToken))
+                                positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
+
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
-                                var index = batchItems.Count > 1 && reader.FieldCount > 1 ? reader.GetInt32(1) : position;
+                                var index = positionIndex > 1 ? reader.GetInt32(positionIndex.Value) : position;
                                 context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
                                 result++;
+                                position++;
                             }
-                            position++;
                         }
-                        while (await reader.NextResultAsync(cancellationToken).ConfigureAwait(false));
+                        while (position < batchItems.Count && await reader.NextResultAsync(cancellationToken).ConfigureAwait(false));
 
                         // After Execution
                         await Tracer

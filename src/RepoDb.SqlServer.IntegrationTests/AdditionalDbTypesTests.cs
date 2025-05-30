@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.SqlServer.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.SqlServer.IntegrationTests;
 
@@ -148,7 +149,7 @@ After:
                     DateOnlyNullable = new DateOnly(2026,1,1),
                 }
             },
-            transaction: t);
+            transaction: t, trace: new DiagnosticsTracer());
 
 
         // This one used to fail with NotSupportedException as '!' was not interpreted correctly

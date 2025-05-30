@@ -1258,7 +1258,7 @@ public static partial class DbConnectionExtension
             }
             else
             {
-                foreach (var batchEntities in entities.AsList().Split(batchSize))
+                foreach (var batchEntities in entities.Split(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
 
@@ -1436,7 +1436,7 @@ public static partial class DbConnectionExtension
             }
             else
             {
-                foreach (var batchEntities in entities.AsList().Split(batchSize))
+                foreach (var batchEntities in entities.Split(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
 
