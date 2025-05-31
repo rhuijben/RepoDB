@@ -1435,7 +1435,7 @@ public static partial class DbConnectionExtension
                                 positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
 
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
-                                var index = positionIndex > 0 ? reader.GetInt32(positionIndex.Value) : position;
+                                var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
                                 context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
                                 result++;
                                 position++;
@@ -1765,7 +1765,7 @@ public static partial class DbConnectionExtension
                                 positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
 
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
-                                var index = positionIndex > 1 ? reader.GetInt32(positionIndex.Value) : position;
+                                var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
                                 context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
                                 result++;
                                 position++;

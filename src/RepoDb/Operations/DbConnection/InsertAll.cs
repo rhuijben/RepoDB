@@ -35,7 +35,7 @@ public static partial class DbConnectionExtension
     public static int InsertAll<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -75,7 +75,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of inserted rows in the table.</returns>
     public static int InsertAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -117,7 +117,7 @@ public static partial class DbConnectionExtension
     internal static int InsertAllInternal<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -181,7 +181,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> InsertAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -224,7 +224,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of inserted rows in the table.</returns>
     public static async Task<int> InsertAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -269,7 +269,7 @@ public static partial class DbConnectionExtension
     internal static ValueTask<int> InsertAllAsyncInternal<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -334,7 +334,7 @@ public static partial class DbConnectionExtension
     public static int InsertAll(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -379,7 +379,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> InsertAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -446,7 +446,9 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = (dbSetting.IsMultiStatementExecutable == true) ? Math.Min(batchSize, entities.Count()) : 1;
+        batchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min(batchSize <= 0 ? dbSetting.ParameterBatchCount / fields.Count() : batchSize, entities.Count())
+            : 1;
 
         // Get the context
         var entityType = GetEntityType<TEntity>(entities);
@@ -527,7 +529,7 @@ public static partial class DbConnectionExtension
                 BaseDbHelper? dbh = null;
                 int? positionIndex = null;
 
-                foreach (var batchEntities in entities.AsList().Split(batchSize))
+                foreach (var batchEntities in entities.ChunkOptimally(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
 
@@ -621,7 +623,7 @@ public static partial class DbConnectionExtension
                                 positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
 
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
-                                var index = positionIndex >= 0 ? reader.GetInt32(positionIndex.Value) : position;
+                                var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
                                 context.IdentitySetterFunc.Invoke(batchItems[index], value);
                                 position++;
                             }
@@ -690,7 +692,9 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = (dbSetting.IsMultiStatementExecutable == true) ? Math.Min(batchSize, entities.Count()) : 1;
+        batchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min(batchSize <= 0 ? dbSetting.ParameterBatchCount / fields.Count() : batchSize, entities.Count())
+            : 1;
 
         await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
         using var myTransaction = (transaction is null && Transaction.Current is null) ? await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false) : null;
@@ -769,7 +773,7 @@ public static partial class DbConnectionExtension
             {
                 BaseDbHelper? dbh = null;
                 int? positionIndex = null;
-                foreach (var batchEntities in entities.Split(batchSize))
+                foreach (var batchEntities in entities.ChunkOptimally(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
 
@@ -865,7 +869,7 @@ public static partial class DbConnectionExtension
                                 positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
 
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
-                                var index = positionIndex >= 0 ? reader.GetInt32(positionIndex.Value) : position;
+                                var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
                                 context.IdentitySetterFunc.Invoke(batchItems[index], value);
                                 position++;
                             }

@@ -48,45 +48,59 @@ public static class EnumerableExtension
         this IEnumerable<T> source,
         int maxChunkSize = 2000,
         int minThreshold = 30,
-        int minReductionPercent = 15) // e.g. 15 = 15%
+        int minReductionPercent = 15)
     {
-        if (source is null) throw new ArgumentNullException(nameof(source));
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
 
         var list = source as IList<T> ?? source.ToList();
-        int n = list.Count;
+        int total = list.Count;
 
-        if (n <= minThreshold)
+        if (total <= minThreshold)
         {
             yield return list.ToArray();
             yield break;
         }
 
-        int chunkSize = GetOptimalChunkSize(n, maxChunkSize, minReductionPercent);
+        int index = 0;
+        int remaining = total;
 
-        for (int i = 0; i < n; i += chunkSize)
+        // Reference baseline for comparison
+        const int baseSize = 50;
+        int baseChunks = (total + baseSize - 1) / baseSize;
+
+        // Always treat maxChunkSize as optimal
+        while (remaining >= maxChunkSize)
         {
-            yield return list.Skip(i).Take(chunkSize).ToArray();
+            yield return list.Skip(index).Take(maxChunkSize).ToArray();
+            index += maxChunkSize;
+            remaining -= maxChunkSize;
         }
 
-        static int GetOptimalChunkSize(int n, int maxChunkSize, int minReductionPercent)
+        if (maxChunkSize > 500)
+            maxChunkSize -= maxChunkSize % 100; // Round down to nearest 100 for larger sizes
+        else if (maxChunkSize > 100)
+            maxChunkSize -= maxChunkSize % 25; // Round down to nearest 25
+
+        // Try smaller optimal sizes from largest to smallest
+        for (int size = maxChunkSize - 25; size >= baseSize; size -= 25)
         {
-            int bestSize = 50;
-            int bestChunks = (n + bestSize - 1) / bestSize;
+            int chunks = (total + size - 1) / size;
+            if (chunks * 100 > baseChunks * (100 - minReductionPercent))
+                continue;
 
-            for (int s = 75; s <= maxChunkSize; s += 25)
+            while (remaining >= size)
             {
-                int chunks = (n + s - 1) / s;
-
-                // Gain = (bestChunks - chunks) / bestChunks >= X%
-                // => chunks * 100 ≤ bestChunks * (100 - X)
-                if (chunks * 100 <= bestChunks * (100 - minReductionPercent))
-                {
-                    bestSize = s;
-                    bestChunks = chunks;
-                }
+                yield return list.Skip(index).Take(size).ToArray();
+                index += size;
+                remaining -= size;
             }
+        }
 
-            return bestSize;
+        // Final trailing chunk if it's small enough
+        if (remaining > 0 && remaining <= minThreshold)
+        {
+            yield return list.Skip(index).Take(remaining).ToArray();
         }
     }
 
