@@ -31,7 +31,7 @@ public class BaseStatementBuilderCreateCountAllTest
         // Act
         var actual = statementBuilder.CreateCountAll(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT (*) AS [CountValue] FROM [Table] ;";
+        var expected = "SELECT COUNT (*) AS [CountValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -48,7 +48,7 @@ public class BaseStatementBuilderCreateCountAllTest
         // Act
         var actual = statementBuilder.CreateCountAll(tableName: tableName,
             hints: hints);
-        var expected = "SELECT COUNT (*) AS [CountValue] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT COUNT (*) AS [CountValue] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -64,7 +64,7 @@ public class BaseStatementBuilderCreateCountAllTest
         // Act
         var actual = statementBuilder.CreateCountAll(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT (*) AS [CountValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT COUNT (*) AS [CountValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -80,7 +80,7 @@ public class BaseStatementBuilderCreateCountAllTest
         // Act
         var actual = statementBuilder.CreateCountAll(tableName: tableName,
             hints: null);
-        var expected = "SELECT COUNT (*) AS [CountValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT COUNT (*) AS [CountValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);

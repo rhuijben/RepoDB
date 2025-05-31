@@ -36,7 +36,7 @@ public class BaseStatementBuilderCreateAverageAllTest
         var actual = statementBuilder.CreateAverageAll(field: field,
             tableName: tableName,
             hints: null);
-        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [Table] ;";
+        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -55,7 +55,7 @@ public class BaseStatementBuilderCreateAverageAllTest
         var actual = statementBuilder.CreateAverageAll(tableName: tableName,
             field: field,
             hints: hints);
-        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -73,7 +73,7 @@ public class BaseStatementBuilderCreateAverageAllTest
         var actual = statementBuilder.CreateAverageAll(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -91,7 +91,7 @@ public class BaseStatementBuilderCreateAverageAllTest
         var actual = statementBuilder.CreateAverageAll(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -109,7 +109,7 @@ public class BaseStatementBuilderCreateAverageAllTest
         var actual = statementBuilder.CreateAverageAll(field: field,
             tableName: tableName,
             hints: null);
-        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [Table] ;";
+        var expected = "SELECT AVG ([Value]) AS [AverageValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -127,7 +127,7 @@ public class BaseStatementBuilderCreateAverageAllTest
         var actual = statementBuilder.CreateAverageAll(field: field,
             tableName: tableName,
             hints: null);
-        var expected = "SELECT AVG (CONVERT([FLOAT], [Value])) AS [AverageValue] FROM [Table] ;";
+        var expected = "SELECT AVG (CONVERT([FLOAT], [Value])) AS [AverageValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -145,7 +145,7 @@ public class BaseStatementBuilderCreateAverageAllTest
         var actual = statementBuilder.CreateAverageAll(field: field,
             tableName: tableName,
             hints: null);
-        var expected = "SELECT AVG (CONVERT([NVARCHAR], [Value])) AS [AverageValue] FROM [Table] ;";
+        var expected = "SELECT AVG (CONVERT([NVARCHAR], [Value])) AS [AverageValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);

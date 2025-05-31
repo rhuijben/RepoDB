@@ -1,8 +1,11 @@
-﻿namespace RepoDb;
+﻿using System.Diagnostics;
+
+namespace RepoDb;
 
 /// <summary>
 /// A class the holds the column definition of the table.
 /// </summary>
+[DebuggerDisplay("{DebuggerDisplay, nq}")]
 public sealed class DbField : IEquatable<DbField>
 {
     private int? HashCode { get; set; }
@@ -167,6 +170,17 @@ public sealed class DbField : IEquatable<DbField>
     /// <returns>The string that represents the instance of this <see cref="DbField"/> object.</returns>
     public override string ToString() =>
         string.Concat(Name, ", ", IsPrimary.ToString(), " (", HashCode.ToString(), ")");
+
+    private string DebuggerDisplay
+        => String.Join(" ",
+            new string?[] {
+                $@"""{Name}""",
+                IsPrimary ? "primary" : null,
+                IsIdentity ? "identity" : null,
+                Type?.Name is { } name ? $"type={name}" : null,
+                DatabaseType is { } dbType ? $"dbtype={dbType}" : null
+            }.Where(x => !string.IsNullOrWhiteSpace(x)));
+
 
     #endregion
 

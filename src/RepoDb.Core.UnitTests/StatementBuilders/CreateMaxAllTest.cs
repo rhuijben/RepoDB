@@ -33,7 +33,7 @@ public class BaseStatementBuilderCreateMaxAllTest
         var actual = statementBuilder.CreateMaxAll(field: field,
             tableName: tableName,
             hints: null);
-        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [Table] ;";
+        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -52,7 +52,7 @@ public class BaseStatementBuilderCreateMaxAllTest
         var actual = statementBuilder.CreateMaxAll(tableName: tableName,
             field: field,
             hints: hints);
-        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -70,7 +70,7 @@ public class BaseStatementBuilderCreateMaxAllTest
         var actual = statementBuilder.CreateMaxAll(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -88,7 +88,7 @@ public class BaseStatementBuilderCreateMaxAllTest
         var actual = statementBuilder.CreateMaxAll(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);

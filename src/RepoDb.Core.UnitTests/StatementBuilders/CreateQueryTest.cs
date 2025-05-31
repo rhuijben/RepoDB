@@ -33,7 +33,7 @@ public class BaseStatementBuilderCreateQueryTest
         // Act
         var actual = statementBuilder.CreateQuery(tableName: tableName,
             fields: fields);
-        var expected = "SELECT [Field1], [Field2], [Field3] FROM [Table] ;";
+        var expected = "SELECT [Field1], [Field2], [Field3] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -50,7 +50,7 @@ public class BaseStatementBuilderCreateQueryTest
         // Act
         var actual = statementBuilder.CreateQuery(tableName: tableName,
             fields: fields);
-        var expected = "SELECT [Field1], [Field2], [Field3] FROM [dbo].[Table] ;";
+        var expected = "SELECT [Field1], [Field2], [Field3] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -67,7 +67,7 @@ public class BaseStatementBuilderCreateQueryTest
         // Act
         var actual = statementBuilder.CreateQuery(tableName: tableName,
             fields: fields);
-        var expected = "SELECT [Field1], [Field2], [Field3] FROM [dbo].[Table] ;";
+        var expected = "SELECT [Field1], [Field2], [Field3] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -89,7 +89,7 @@ public class BaseStatementBuilderCreateQueryTest
         var expected = $"" +
             $"SELECT [Field1], [Field2], [Field3] " +
             $"FROM [Table] " +
-            $"WHERE ([Id] = @Id) ;";
+            $"WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -111,7 +111,7 @@ public class BaseStatementBuilderCreateQueryTest
         var expected = $"" +
             $"SELECT [Field1], [Field2], [Field3] " +
             $"FROM [Table] " +
-            $"ORDER BY [Field1] ASC, [Field2] DESC ;";
+            $"ORDER BY [Field1] ASC, [Field2] DESC;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -130,7 +130,7 @@ public class BaseStatementBuilderCreateQueryTest
         var actual = statementBuilder.CreateQuery(tableName: tableName,
             fields: fields,
             top: top);
-        var expected = "SELECT TOP (100) [Field1], [Field2], [Field3] FROM [Table] ;";
+        var expected = "SELECT TOP (100) [Field1], [Field2], [Field3] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -149,7 +149,7 @@ public class BaseStatementBuilderCreateQueryTest
         var actual = statementBuilder.CreateQuery(tableName: tableName,
             fields: fields,
             hints: hints);
-        var expected = "SELECT [Field1], [Field2], [Field3] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT [Field1], [Field2], [Field3] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -178,7 +178,7 @@ public class BaseStatementBuilderCreateQueryTest
             $"SELECT TOP (100) [Field1], [Field2], [Field3] " +
             $"FROM [Table] WITH (NOLOCK) " +
             $"WHERE ([Id] = @Id) " +
-            $"ORDER BY [Field1] ASC, [Field2] DESC ;";
+            $"ORDER BY [Field1] ASC, [Field2] DESC;";
 
         // Assert
         Assert.AreEqual(expected, actual);

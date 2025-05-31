@@ -1,5 +1,5 @@
 ﻿#nullable enable
-using System.Collections;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -9,10 +9,9 @@ namespace RepoDb;
 /// <summary>
 /// A class the holds the collection of column definitions of the table.
 /// </summary>
-public sealed class DbFieldCollection : IReadOnlyList<DbField>
+public sealed class DbFieldCollection : ReadOnlyCollection<DbField>
 {
     private readonly IDbSetting dbSetting;
-    private readonly IReadOnlyList<DbField> dbFields;
     private readonly Lazy<IEnumerable<Field>> lazyFields;
     private readonly Lazy<DbField?> lazyIdentity;
     private readonly Lazy<IReadOnlyList<DbField>?> lazyPrimaryFields;
@@ -20,19 +19,15 @@ public sealed class DbFieldCollection : IReadOnlyList<DbField>
     private readonly Lazy<Dictionary<string, DbField>> lazyMapByUnquotedName;
     private readonly Lazy<DbField?> lazyPrimary;
 
-    public int Count => dbFields.Count;
-
-    public DbField this[int index] => dbFields[index];
-
     /// <summary>
     /// Creates a new instance of <see cref="DbFieldCollection" /> object.
     /// </summary>
     /// <param name="dbFields">A collection of column definitions of the table.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
     public DbFieldCollection(IEnumerable<DbField> dbFields, IDbSetting dbSetting)
+        : base(dbFields.AsList())
     {
         this.dbSetting = dbSetting;
-        this.dbFields = dbFields.AsList();
 
         lazyPrimaryFields = new(GetPrimaryDbFields);
         lazyPrimary = new(GetPrimaryDbField);
@@ -61,7 +56,7 @@ public sealed class DbFieldCollection : IReadOnlyList<DbField>
     /// </summary>
     /// <returns>A column definitions of the table.</returns>
     [Obsolete("Use DbFieldCollection directly")]
-    public IEnumerable<DbField> GetItems() => dbFields;
+    public IEnumerable<DbField> GetItems() => this;
 
     /// <summary>
     /// Get the list of <see cref="DbField" /> objects converted into an <see cref="IReadOnlyList{T}" /> of <see cref="Field" /> objects.
@@ -73,7 +68,7 @@ public sealed class DbFieldCollection : IReadOnlyList<DbField>
     /// Gets a value indicating whether the current column definitions of the table is empty.
     /// </summary>
     /// <returns>A value indicating whether the column definitions of the table is empty.</returns>
-    public bool IsEmpty() => dbFields.Count == 0;
+    public bool IsEmpty() => Count == 0;
 
     /// <summary>
     /// Gets column definition of the table based on the name of the database field.
@@ -100,29 +95,19 @@ public sealed class DbFieldCollection : IReadOnlyList<DbField>
     }
 
     private Dictionary<string, DbField> GetDbFieldsMappedByName() =>
-        dbFields.ToDictionary(df => df.Name, df => df, StringComparer.OrdinalIgnoreCase);
+        this.ToDictionary(df => df.Name, df => df, StringComparer.OrdinalIgnoreCase);
 
     private Dictionary<string, DbField> GetDbFieldsMappedByUnquotedName() =>
-        dbFields.ToDictionary(df => df.Name.AsUnquoted(true, dbSetting), df => df, StringComparer.OrdinalIgnoreCase);
+        this.ToDictionary(df => df.Name.AsUnquoted(true, dbSetting), df => df, StringComparer.OrdinalIgnoreCase);
 
-    private DbField? GetPrimaryDbField() => dbFields.OneOrDefault(df => df.IsPrimary);
+    private DbField? GetPrimaryDbField() => this.OneOrDefault(df => df.IsPrimary);
 
 
-    private IReadOnlyList<DbField>? GetPrimaryDbFields() => dbFields.Where(x => x.IsPrimary) is { } p && p.Any() ? p.ToArray() : null;
+    private IReadOnlyList<DbField>? GetPrimaryDbFields() => this.Where(x => x.IsPrimary) is { } p && p.Any() ? p.ToArray() : null;
 
-    private DbField? GetIdentityDbField() => dbFields.FirstOrDefault(df => df.IsIdentity);
+    private DbField? GetIdentityDbField() => this.FirstOrDefault(df => df.IsIdentity);
 
-    private IEnumerable<Field> GetDbFieldsAsFields() => dbFields.AsFields();
-
-    public IEnumerator<DbField> GetEnumerator()
-    {
-        return dbFields.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return ((IEnumerable)dbFields).GetEnumerator();
-    }
+    private IEnumerable<Field> GetDbFieldsAsFields() => this.AsFields();
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public IEnumerable<Field> GetAsFields() => AsFields();

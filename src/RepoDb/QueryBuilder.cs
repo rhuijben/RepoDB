@@ -77,6 +77,23 @@ public class QueryBuilder
     /// <returns>The current instance.</returns>
     public QueryBuilder WriteText(string? text) => Append(text);
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="dbSetting"></param>
+    /// <param name="spaceBefore"></param>
+    /// <returns></returns>
+    public QueryBuilder WriteQuoted(string? text, IDbSetting? dbSetting, bool spaceBefore = true)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            return this;
+        if (dbSetting == null)
+            return Append(text);
+        return Append(text.AsQuoted(dbSetting), spaceBefore);
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -159,6 +176,28 @@ public class QueryBuilder
             return Append(";", false);
         else
             return this;
+    }
+
+    public QueryBuilder WriteDefinitions(IEnumerable<DbField> fields, IDbSetting dbSetting)
+    {
+        bool first = true;
+        foreach (var f in fields)
+        {
+            if (first)
+                first = false;
+            else
+                Comma();
+
+            WriteQuoted(f.Name, dbSetting);
+            WriteQuoted(f.DatabaseType, dbSetting);
+            if (f.Size is { } size && f.Type == StaticType.String)
+            {
+                OpenParen();
+                Append($"{size}", false);
+                CloseParen();
+            }
+        }
+        return this;
     }
 
     /// <summary>

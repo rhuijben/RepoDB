@@ -6,7 +6,7 @@ namespace RepoDb.DbSettings;
 /// <summary>
 /// A base class to be used when implementing an <see cref="IDbSetting"/>-based object to support a specific RDBMS data provider.
 /// </summary>
-public abstract class BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
+public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
 {
     #region Privates
 
@@ -146,66 +146,6 @@ public abstract class BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
         // Set and return the hashcode
         return this.hashCode ??= hashCode;
     }
-
-    /// <summary>
-    /// Compares the <see cref="BaseDbSetting"/> object equality against the given target object.
-    /// </summary>
-    /// <param name="obj">The object to be compared to the current object.</param>
-    /// <returns>True if the instances are equals.</returns>
-    public override bool Equals(object? obj)
-    {
-        return Equals(obj as BaseDbSetting);
-    }
-
-    /// <summary>
-    /// Compares the <see cref="BaseDbSetting"/> object equality against the given target object.
-    /// </summary>
-    /// <param name="other">The object to be compared to the current object.</param>
-    /// <returns>True if the instances are equal.</returns>
-    public bool Equals(BaseDbSetting? other)
-    {
-        return other is not null
-            && other.AreTableHintsSupported == AreTableHintsSupported
-            && other.ClosingQuote == ClosingQuote
-            && other.AverageableType == AverageableType
-            && other.DefaultSchema == DefaultSchema
-            && other.IsDirectionSupported == IsDirectionSupported
-            && other.IsExecuteReaderDisposable == IsExecuteReaderDisposable
-            && other.IsMultiStatementExecutable == IsMultiStatementExecutable
-            && other.IsPreparable == IsPreparable
-            && other.IsUseUpsert == IsUseUpsert
-            && other.OpeningQuote == OpeningQuote
-            && other.ParameterPrefix == ParameterPrefix
-            && other.ParameterBatchCount == ParameterBatchCount
-            && other.GenerateFinalSemiColon == GenerateFinalSemiColon
-            && other.QuoteParameterNames == QuoteParameterNames;
-    }
-
-    /// <summary>
-    /// Compares the equality of the two <see cref="BaseDbSetting"/> objects.
-    /// </summary>
-    /// <param name="objA">The first <see cref="BaseDbSetting"/> object.</param>
-    /// <param name="objB">The second <see cref="BaseDbSetting"/> object.</param>
-    /// <returns>True if the instances are equal.</returns>
-    public static bool operator ==(BaseDbSetting objA,
-        BaseDbSetting objB)
-    {
-        if (objA is null)
-        {
-            return objB is null;
-        }
-        return objA.Equals(objB);
-    }
-
-    /// <summary>
-    /// Compares the inequality of the two <see cref="BaseDbSetting"/> objects.
-    /// </summary>
-    /// <param name="objA">The first <see cref="BaseDbSetting"/> object.</param>
-    /// <param name="objB">The second <see cref="BaseDbSetting"/> object.</param>
-    /// <returns>True if the instances are not equal.</returns>
-    public static bool operator !=(BaseDbSetting objA,
-        BaseDbSetting objB) =>
-        (objA == objB) == false;
 
     #endregion
 }

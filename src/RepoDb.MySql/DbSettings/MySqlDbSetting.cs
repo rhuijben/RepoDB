@@ -5,7 +5,7 @@ namespace RepoDb.DbSettings;
 /// <summary>
 /// A setting class used for <see cref="MySqlConnection"/> data provider.
 /// </summary>
-public sealed class MySqlDbSetting : BaseDbSetting
+public sealed record MySqlDbSetting : BaseDbSetting
 {
     /// <summary>
     /// Creates a new instance of <see cref="MySqlDbSetting"/> class.

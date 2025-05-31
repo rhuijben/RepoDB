@@ -30,7 +30,7 @@ public class StatementBuilderTest
             0,
             10,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT \"Id\", \"Name\" FROM \"Table\" ORDER BY \"Id\" ASC LIMIT 10 ;";
+        var expected = "SELECT \"Id\", \"Name\" FROM \"Table\" ORDER BY \"Id\" ASC LIMIT 10;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -48,7 +48,7 @@ public class StatementBuilderTest
             3,
             10,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT \"Id\", \"Name\" FROM \"Table\" ORDER BY \"Id\" ASC LIMIT 10 OFFSET 30 ;";
+        var expected = "SELECT \"Id\", \"Name\" FROM \"Table\" ORDER BY \"Id\" ASC LIMIT 10 OFFSET 30;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -140,7 +140,7 @@ public class StatementBuilderTest
         var query = builder.CreateCount("Table",
             null,
             null);
-        var expected = "SELECT COUNT (*) AS \"CountValue\" FROM \"Table\" ;";
+        var expected = "SELECT COUNT (*) AS \"CountValue\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -156,7 +156,7 @@ public class StatementBuilderTest
         var query = builder.CreateCount("Table",
             QueryGroup.Parse(new { Id = 1 }),
             null);
-        var expected = "SELECT COUNT (*) AS \"CountValue\" FROM \"Table\" WHERE (\"Id\" = @Id) ;";
+        var expected = "SELECT COUNT (*) AS \"CountValue\" FROM \"Table\" WHERE (\"Id\" = @Id);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -187,7 +187,7 @@ public class StatementBuilderTest
         // Act
         var query = builder.CreateCountAll("Table",
             null);
-        var expected = "SELECT COUNT (*) AS \"CountValue\" FROM \"Table\" ;";
+        var expected = "SELECT COUNT (*) AS \"CountValue\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -217,7 +217,7 @@ public class StatementBuilderTest
         // Act
         var query = builder.CreateExists("Table",
             QueryGroup.Parse(new { Id = 1 }));
-        var expected = "SELECT 1 AS \"ExistsValue\" FROM \"Table\" WHERE (\"Id\" = @Id) LIMIT 1 ;";
+        var expected = "SELECT 1 AS \"ExistsValue\" FROM \"Table\" WHERE (\"Id\" = @Id) LIMIT 1;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -238,7 +238,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             primaryField: null,
             null);
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id, @Name, @Address ) RETURNING NULL AS \"Result\" ;";
+        var expected = "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id, @Name, @Address);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -255,7 +255,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             new DbField("Id", true, false, false, typeof(int), null, null, null, null),
             null);
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id, @Name, @Address ) RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\" ;";
+        var expected = "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id, @Name, @Address) RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -272,7 +272,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             new DbField("Id", false, true, false, typeof(int), null, null, null, null));
-        var expected = "INSERT INTO \"Table\" ( \"Name\", \"Address\" ) VALUES ( @Name, @Address ) RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\" ;";
+        var expected = "INSERT INTO \"Table\" (\"Name\", \"Address\") VALUES (@Name, @Address) RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -308,11 +308,11 @@ public class StatementBuilderTest
             3,
             primaryField: null,
             null);
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) " +
+        var expected = "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") " +
             "VALUES " +
-            "( @Id, @Name, @Address ) , " +
-            "( @Id_1, @Name_1, @Address_1 ) , " +
-            "( @Id_2, @Name_2, @Address_2 ) ;";
+            "(@Id, @Name, @Address), " +
+            "(@Id_1, @Name_1, @Address_1), " +
+            "(@Id_2, @Name_2, @Address_2);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -330,11 +330,12 @@ public class StatementBuilderTest
             3,
             new DbField("Id", true, false, false, typeof(int), null, null, null, null),
             null);
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) " +
+        var expected = "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") " +
             "VALUES " +
-            "( @Id, @Name, @Address ) , " +
-            "( @Id_1, @Name_1, @Address_1 ) , " +
-            "( @Id_2, @Name_2, @Address_2 ) ;";
+            "(@Id, @Name, @Address), " +
+            "(@Id_1, @Name_1, @Address_1), " +
+            "(@Id_2, @Name_2, @Address_2) " +
+            "RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -352,12 +353,12 @@ public class StatementBuilderTest
             3,
             null,
             new DbField("Id", false, true, false, typeof(int), null, null, null, null));
-        var expected = "INSERT INTO \"Table\" ( \"Name\", \"Address\" ) " +
+        var expected = "INSERT INTO \"Table\" (\"Name\", \"Address\") " +
             "VALUES " +
-            "( @Name, @Address ) , " +
-            "( @Name_1, @Address_1 ) , " +
-            "( @Name_2, @Address_2 ) " +
-            "RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\" ;";
+            "(@Name, @Address), " +
+            "(@Name_1, @Address_1), " +
+            "(@Name_2, @Address_2) " +
+            "RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -393,7 +394,7 @@ public class StatementBuilderTest
             new Field("Field", typeof(int)),
             null,
             null);
-        var expected = "SELECT MAX (\"Field\") AS \"MaxValue\" FROM \"Table\" ;";
+        var expected = "SELECT MAX (\"Field\") AS \"MaxValue\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -410,7 +411,7 @@ public class StatementBuilderTest
             new Field("Field", typeof(int)),
             QueryGroup.Parse(new { Id = 1 }),
             null);
-        var expected = "SELECT MAX (\"Field\") AS \"MaxValue\" FROM \"Table\" WHERE (\"Id\" = @Id) ;";
+        var expected = "SELECT MAX (\"Field\") AS \"MaxValue\" FROM \"Table\" WHERE (\"Id\" = @Id);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -443,7 +444,7 @@ public class StatementBuilderTest
         var query = builder.CreateMaxAll("Table",
             new Field("Field", typeof(int)),
             null);
-        var expected = "SELECT MAX (\"Field\") AS \"MaxValue\" FROM \"Table\" ;";
+        var expected = "SELECT MAX (\"Field\") AS \"MaxValue\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -476,7 +477,7 @@ public class StatementBuilderTest
             new Field("Field", typeof(int)),
             null,
             null);
-        var expected = "SELECT MIN (\"Field\") AS \"MinValue\" FROM \"Table\" ;";
+        var expected = "SELECT MIN (\"Field\") AS \"MinValue\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -493,7 +494,7 @@ public class StatementBuilderTest
             new Field("Field", typeof(int)),
             QueryGroup.Parse(new { Id = 1 }),
             null);
-        var expected = "SELECT MIN (\"Field\") AS \"MinValue\" FROM \"Table\" WHERE (\"Id\" = @Id) ;";
+        var expected = "SELECT MIN (\"Field\") AS \"MinValue\" FROM \"Table\" WHERE (\"Id\" = @Id);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -526,7 +527,7 @@ public class StatementBuilderTest
         var query = builder.CreateMinAll("Table",
             new Field("Field", typeof(int)),
             null);
-        var expected = "SELECT MIN (\"Field\") AS \"MinValue\" FROM \"Table\" ;";
+        var expected = "SELECT MIN (\"Field\") AS \"MinValue\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -560,9 +561,10 @@ public class StatementBuilderTest
             null,
             new DbField("Id", true, false, false, typeof(int), null, null, null, null),
             null);
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id, @Name, @Address ) " +
+        var expected = "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id, @Name, @Address) " +
             "ON CONFLICT (\"Id\") DO " +
-            "UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\" ;";
+            "UPDATE SET \"Name\" = @Name, \"Address\" = @Address " +
+            "RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -580,9 +582,9 @@ public class StatementBuilderTest
             Field.From("Id"),
             new DbField("Id", true, false, false, typeof(int), null, null, null, null),
             null);
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id, @Name, @Address ) " +
-            "ON CONFLICT (\"Id\") DO " +
-            "UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\" ;";
+        var expected = "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") " +
+            "VALUES (@Id, @Name, @Address) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address " +
+            "RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -598,9 +600,11 @@ public class StatementBuilderTest
         var query = builder.CreateMerge("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            new DbField("Id", true, false, false, typeof(int), null, null, null, null),
-            new DbField("Id", false, true, false, typeof(int), null, null, null, null));
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) OVERRIDING SYSTEM VALUE VALUES ( @Id, @Name, @Address ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\" ;";
+            new DbField("Id", true, true, false, typeof(int), null, null, null, null),
+            new DbField("Id", true, true, false, typeof(int), null, null, null, null));
+        var expected = "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") " +
+            "OVERRIDING SYSTEM VALUE VALUES (@Id, @Name, @Address) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address " +
+            "RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -666,9 +670,10 @@ public class StatementBuilderTest
             3,
             new DbField("Id", true, false, false, typeof(int), null, null, null, null),
             null);
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id, @Name, @Address ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_0 AS \"OrderColumn\" ; " +
-            "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id_1, @Name_1, @Address_1 ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_1, \"Address\" = @Address_1 RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_1 AS \"OrderColumn\" ; " +
-            "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id_2, @Name_2, @Address_2 ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_2, \"Address\" = @Address_2 RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_2 AS \"OrderColumn\" ;";
+        var expected =
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id, @Name, @Address) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING \"Id\"; " +
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id_1, @Name_1, @Address_1) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_1, \"Address\" = @Address_1 RETURNING \"Id\"; " +
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id_2, @Name_2, @Address_2) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_2, \"Address\" = @Address_2 RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -687,9 +692,10 @@ public class StatementBuilderTest
             3,
             new DbField("Id", true, false, false, typeof(int), null, null, null, null),
             null);
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id, @Name, @Address ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_0 AS \"OrderColumn\" ; " +
-            "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id_1, @Name_1, @Address_1 ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_1, \"Address\" = @Address_1 RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_1 AS \"OrderColumn\" ; " +
-            "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) VALUES ( @Id_2, @Name_2, @Address_2 ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_2, \"Address\" = @Address_2 RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_2 AS \"OrderColumn\" ;";
+        var expected =
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id, @Name, @Address) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING \"Id\"; " +
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id_1, @Name_1, @Address_1) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_1, \"Address\" = @Address_1 RETURNING \"Id\"; " +
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") VALUES (@Id_2, @Name_2, @Address_2) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_2, \"Address\" = @Address_2 RETURNING \"Id\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -706,11 +712,12 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             3,
-            new DbField("Id", true, false, false, typeof(int), null, null, null, null),
-            new DbField("Id", false, true, false, typeof(int), null, null, null, null));
-        var expected = "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) OVERRIDING SYSTEM VALUE VALUES ( @Id, @Name, @Address ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_0 AS \"OrderColumn\" ; " +
-            "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) OVERRIDING SYSTEM VALUE VALUES ( @Id_1, @Name_1, @Address_1 ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_1, \"Address\" = @Address_1 RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_1 AS \"OrderColumn\" ; " +
-            "INSERT INTO \"Table\" ( \"Id\", \"Name\", \"Address\" ) OVERRIDING SYSTEM VALUE VALUES ( @Id_2, @Name_2, @Address_2 ) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_2, \"Address\" = @Address_2 RETURNING CAST(\"Id\" AS INTEGER) AS \"Result\", @__RepoDb_OrderColumn_2 AS \"OrderColumn\" ;";
+            new DbField("Id", true, true, false, typeof(int), null, null, null, null),
+            new DbField("Id", true, true, false, typeof(int), null, null, null, null));
+        var expected =
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") OVERRIDING SYSTEM VALUE VALUES (@Id, @Name, @Address) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name, \"Address\" = @Address RETURNING \"Id\"; " +
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") OVERRIDING SYSTEM VALUE VALUES (@Id_1, @Name_1, @Address_1) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_1, \"Address\" = @Address_1 RETURNING \"Id\"; " +
+            "INSERT INTO \"Table\" (\"Id\", \"Name\", \"Address\") OVERRIDING SYSTEM VALUE VALUES (@Id_2, @Name_2, @Address_2) ON CONFLICT (\"Id\") DO UPDATE SET \"Name\" = @Name_2, \"Address\" = @Address_2 RETURNING \"Id\";"; ;
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -777,7 +784,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             null);
-        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ;";
+        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -793,7 +800,7 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             QueryGroup.Parse(new { Id = 1, Name = "Michael" }));
-        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" WHERE (\"Id\" = @Id AND \"Name\" = @Name) ;";
+        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" WHERE (\"Id\" = @Id AND \"Name\" = @Name);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -812,7 +819,7 @@ public class StatementBuilderTest
             null,
             10,
             null);
-        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" LIMIT 10 ;";
+        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" LIMIT 10;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -829,7 +836,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" ASC ;";
+        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" ASC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -846,7 +853,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Ascending, Name = Order.Ascending }));
-        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" ASC, \"Name\" ASC ;";
+        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" ASC, \"Name\" ASC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -863,7 +870,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Descending }));
-        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" DESC ;";
+        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" DESC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -880,7 +887,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Descending, Name = Order.Descending }));
-        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" DESC, \"Name\" DESC ;";
+        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" DESC, \"Name\" DESC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -897,7 +904,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Ascending, Name = Order.Descending }));
-        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" ASC, \"Name\" DESC ;";
+        var expected = "SELECT \"Id\", \"Name\", \"Address\" FROM \"Table\" ORDER BY \"Id\" ASC, \"Name\" DESC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -933,7 +940,7 @@ public class StatementBuilderTest
             0,
             10,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT \"Id\", \"Name\" FROM \"Table\" ORDER BY \"Id\" ASC LIMIT 10 ;";
+        var expected = "SELECT \"Id\", \"Name\" FROM \"Table\" ORDER BY \"Id\" ASC LIMIT 10;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -951,7 +958,7 @@ public class StatementBuilderTest
             30,
             10,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT \"Id\", \"Name\" FROM \"Table\" ORDER BY \"Id\" ASC LIMIT 10 OFFSET 30 ;";
+        var expected = "SELECT \"Id\", \"Name\" FROM \"Table\" ORDER BY \"Id\" ASC LIMIT 10 OFFSET 30;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -1044,7 +1051,7 @@ public class StatementBuilderTest
             new Field("Field", typeof(int)),
             null,
             null);
-        var expected = "SELECT SUM (\"Field\") AS \"SumValue\" FROM \"Table\" ;";
+        var expected = "SELECT SUM (\"Field\") AS \"SumValue\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -1061,7 +1068,7 @@ public class StatementBuilderTest
             new Field("Field", typeof(int)),
             QueryGroup.Parse(new { Id = 1 }),
             null);
-        var expected = "SELECT SUM (\"Field\") AS \"SumValue\" FROM \"Table\" WHERE (\"Id\" = @Id) ;";
+        var expected = "SELECT SUM (\"Field\") AS \"SumValue\" FROM \"Table\" WHERE (\"Id\" = @Id);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -1094,7 +1101,7 @@ public class StatementBuilderTest
         var query = builder.CreateSumAll("Table",
             new Field("Field", typeof(int)),
             null);
-        var expected = "SELECT SUM (\"Field\") AS \"SumValue\" FROM \"Table\" ;";
+        var expected = "SELECT SUM (\"Field\") AS \"SumValue\" FROM \"Table\";";
 
         // Assert
         Assert.AreEqual(expected, query);

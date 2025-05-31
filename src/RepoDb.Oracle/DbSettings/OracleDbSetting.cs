@@ -1,6 +1,6 @@
 ﻿namespace RepoDb.DbSettings;
 
-public sealed class OracleDbSetting : BaseDbSetting
+public sealed record OracleDbSetting : BaseDbSetting
 {
     public OracleDbSetting() : base()
     {

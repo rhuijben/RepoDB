@@ -3,7 +3,7 @@
 /// <summary>
 /// A setting class used for SQLite data provider.
 /// </summary>
-public sealed class SqLiteDbSetting : BaseDbSetting
+public sealed record SqLiteDbSetting : BaseDbSetting
 {
     /// <summary>
     /// Creates a new instance of <see cref="SqLiteDbSetting"/> class.

@@ -32,11 +32,11 @@ public class BaseStatementBuilderCreateInsertTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -55,11 +55,11 @@ public class BaseStatementBuilderCreateInsertTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [dbo].[Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [dbo].[Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -78,11 +78,11 @@ public class BaseStatementBuilderCreateInsertTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [dbo].[Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [dbo].[Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -102,11 +102,11 @@ public class BaseStatementBuilderCreateInsertTest
             fields: fields,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -126,11 +126,11 @@ public class BaseStatementBuilderCreateInsertTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -151,11 +151,11 @@ public class BaseStatementBuilderCreateInsertTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -175,11 +175,11 @@ public class BaseStatementBuilderCreateInsertTest
             primaryField: null,
             identityField: null,
             hints: "WITH (TABLOCK)");
-        var expected = $"" +
-            $"INSERT INTO [Table] WITH (TABLOCK) " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 ) ;";
+        var expected = "" +
+            "INSERT INTO [Table] WITH (TABLOCK) " +
+            "([Field1], [Field2], [Field3]) " +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3);";
 
         // Assert
         Assert.AreEqual(expected, actual);

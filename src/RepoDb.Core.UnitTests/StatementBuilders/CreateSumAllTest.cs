@@ -33,7 +33,7 @@ public class BaseStatementBuilderCreateSumAllTest
         var actual = statementBuilder.CreateSumAll(field: field,
             tableName: tableName,
             hints: null);
-        var expected = "SELECT SUM ([Value]) AS [SumValue] FROM [Table] ;";
+        var expected = "SELECT SUM ([Value]) AS [SumValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -52,7 +52,7 @@ public class BaseStatementBuilderCreateSumAllTest
         var actual = statementBuilder.CreateSumAll(tableName: tableName,
             field: field,
             hints: hints);
-        var expected = "SELECT SUM ([Value]) AS [SumValue] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT SUM ([Value]) AS [SumValue] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -70,7 +70,7 @@ public class BaseStatementBuilderCreateSumAllTest
         var actual = statementBuilder.CreateSumAll(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT SUM ([Value]) AS [SumValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT SUM ([Value]) AS [SumValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -88,7 +88,7 @@ public class BaseStatementBuilderCreateSumAllTest
         var actual = statementBuilder.CreateSumAll(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT SUM ([Value]) AS [SumValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT SUM ([Value]) AS [SumValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);

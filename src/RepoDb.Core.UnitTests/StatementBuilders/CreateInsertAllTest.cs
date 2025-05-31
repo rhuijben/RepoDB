@@ -36,15 +36,15 @@ public class BaseStatementBuilderCreateInsertAllTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM ( " +
-            $"VALUES ( @Field1, @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) " +
-            $") AS T " +
-            $"( [Field1], [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM (" +
+            "VALUES (@Field1, @Field2, @Field3, 0)" +
+            ") AS T " +
+            "([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ORDER BY [__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -64,16 +64,16 @@ public class BaseStatementBuilderCreateInsertAllTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [dbo].[Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM " +
-            $"( " +
-            $"VALUES ( @Field1, @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) " +
-            $") AS T " +
-            $"( [Field1], [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "INSERT INTO [dbo].[Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM " +
+            "(" +
+            "VALUES (@Field1, @Field2, @Field3, 0)" +
+            ") AS T " +
+            "([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ORDER BY [__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -93,17 +93,17 @@ public class BaseStatementBuilderCreateInsertAllTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [dbo].[Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM " +
-            $"( " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) " +
-            $") AS T " +
-            $"( [Field1], [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "INSERT INTO [dbo].[Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM " +
+            "(" +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3, 0)" +
+            ") AS T " +
+            "([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ORDER BY [__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -124,17 +124,17 @@ public class BaseStatementBuilderCreateInsertAllTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: null);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM " +
-            $"( " +
-            $"VALUES " +
-            $"( @Field1, @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) " +
-            $") AS T " +
-            $"( [Field1], [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field1], [Field2], [Field3]) " +
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM " +
+            "(" +
+            "VALUES " +
+            "(@Field1, @Field2, @Field3, 0)" +
+            ") AS T " +
+            "([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ORDER BY [__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -155,18 +155,18 @@ public class BaseStatementBuilderCreateInsertAllTest
             batchSize: 3,
             primaryField: null,
             identityField: identityField);
-        var expected = $"" +
-            $"INSERT INTO [Table] " +
-            $"( [Field2], [Field3] ) " +
-            $"SELECT [Field2], [Field3] " +
-            $"FROM ( " +
-            $"VALUES " +
-            $"( @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) , " +
-            $"( @Field2_1, @Field3_1 , @__RepoDb_OrderColumn_1 ) , " +
-            $"( @Field2_2, @Field3_2 , @__RepoDb_OrderColumn_2 ) " +
-            $") AS T " +
-            $"( [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "INSERT INTO [Table] " +
+            "([Field2], [Field3]) " +
+            "SELECT [Field2], [Field3] " +
+            "FROM (" +
+            "VALUES " +
+            "(@Field2, @Field3, 0), " +
+            "(@Field2_1, @Field3_1, 1), " +
+            "(@Field2_2, @Field3_2, 2)" +
+            ") AS T " +
+            "([Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ORDER BY [__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -187,17 +187,17 @@ public class BaseStatementBuilderCreateInsertAllTest
             primaryField: null,
             identityField: null,
             hints: "WITH (TABLOCK)");
-        var expected = $"" +
-            $"INSERT INTO [Table] WITH (TABLOCK) " +
-            $"( [Field1], [Field2], [Field3] ) " +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM ( " +
-            $"VALUES " +
-            $"( " +
-            $"@Field1, @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) " +
-            $") AS T " +
-            $"( [Field1], [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "INSERT INTO [Table] WITH (TABLOCK) " +
+            "([Field1], [Field2], [Field3]) " +
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM (" +
+            "VALUES " +
+            "(" +
+            "@Field1, @Field2, @Field3, 0)" +
+            ") AS T " +
+            "([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ORDER BY [__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -219,18 +219,18 @@ public class BaseStatementBuilderCreateInsertAllTest
             primaryField: null,
             identityField: identityField,
             hints: "WITH (TABLOCK)");
-        var expected = $"" +
-            $"INSERT INTO [Table] WITH (TABLOCK) " +
-            $"( [Field2], [Field3] ) " +
-            $"SELECT [Field2], [Field3] " +
-            $"FROM ( " +
-            $"VALUES " +
-            $"( @Field2, @Field3 , @__RepoDb_OrderColumn_0 ) , " +
-            $"( @Field2_1, @Field3_1 , @__RepoDb_OrderColumn_1 ) , " +
-            $"( @Field2_2, @Field3_2 , @__RepoDb_OrderColumn_2 ) " +
-            $") AS T " +
-            $"( [Field2], [Field3] , [__RepoDb_OrderColumn] ) " +
-            $"ORDER BY [__RepoDb_OrderColumn] ;";
+        var expected = "" +
+            "INSERT INTO [Table] WITH (TABLOCK) " +
+            "([Field2], [Field3]) " +
+            "SELECT [Field2], [Field3] " +
+            "FROM (" +
+            "VALUES " +
+            "(@Field2, @Field3, 0), " +
+            "(@Field2_1, @Field3_1, 1), " +
+            "(@Field2_2, @Field3_2, 2)" +
+            ") AS T " +
+            "([Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ORDER BY [__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);

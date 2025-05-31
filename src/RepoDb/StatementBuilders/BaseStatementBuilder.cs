@@ -11,6 +11,8 @@ namespace RepoDb.StatementBuilders;
 /// </summary>
 public abstract class BaseStatementBuilder : IStatementBuilder
 {
+    public const string RepoDbOrderColumn = "__RepoDb_OrderColumn";
+
     /// <summary>
     /// Creates a new instance of <see cref="BaseStatementBuilder"/> class.
     /// </summary>
@@ -421,9 +423,8 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             builder
                 .OpenParen()
                 .ParametersFrom(insertableFields, index, DbSetting)
-                .WriteText(
-                    string.Concat(", ",
-                        $"{DbSetting.ParameterPrefix}__RepoDb_OrderColumn_{index}"))
+                .Comma()
+                .WriteText($"{index}")
                 .CloseParen();
         }
 
@@ -433,10 +434,11 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .As("T")
             .OpenParen()
             .FieldsFrom(insertableFields, DbSetting)
-            .WriteText(string.Concat(", ", "__RepoDb_OrderColumn".AsQuoted(DbSetting)))
+            .Comma()
+            .WriteText(RepoDbOrderColumn.AsQuoted(DbSetting))
             .CloseParen()
             .OrderBy()
-            .WriteText("__RepoDb_OrderColumn".AsQuoted(DbSetting))
+            .WriteText(RepoDbOrderColumn.AsQuoted(DbSetting))
             .End(DbSetting);
 
         // Return the query
@@ -1118,7 +1120,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
     /// </summary>
     /// <param name="batchSize"></param>
     /// <exception cref="NotSupportedException"></exception>
-    protected void ValidateMultipleStatementExecution(int batchSize = Constant.DefaultBatchOperationSize)
+    protected void ValidateMultipleStatementExecution(int batchSize)
     {
         if (DbSetting.IsMultiStatementExecutable == false && batchSize > 1)
         {

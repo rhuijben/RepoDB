@@ -22,7 +22,7 @@ public static class TestExtensions
     this IStatementBuilder sb,
     string tableName,
     IEnumerable<Field>? fields = null,
-    int batchSize = Constant.DefaultBatchOperationSize,
+    int batchSize = 0,
     DbField? primaryField = null,
     DbField? identityField = null,
     string? hints = null)
@@ -50,7 +50,7 @@ public static class TestExtensions
         string tableName,
         IEnumerable<Field> fields,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         DbField? primaryField = null,
         DbField? identityField = null,
         string? hints = null)

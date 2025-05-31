@@ -33,7 +33,7 @@ public class BaseStatementBuilderCreateMaxTest
         var actual = statementBuilder.CreateMax(field: field,
             tableName: tableName,
             hints: null);
-        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [Table] ;";
+        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -55,7 +55,7 @@ public class BaseStatementBuilderCreateMaxTest
         var expected = $"" +
             $"SELECT MAX ([Value]) AS [MaxValue] " +
             $"FROM [Table] " +
-            $"WHERE ([Id] = @Id) ;";
+            $"WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -74,7 +74,7 @@ public class BaseStatementBuilderCreateMaxTest
         var actual = statementBuilder.CreateMax(tableName: tableName,
             field: field,
             hints: hints);
-        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -98,7 +98,7 @@ public class BaseStatementBuilderCreateMaxTest
         var expected = $"" +
             $"SELECT MAX ([Value]) AS [MaxValue] " +
             $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id) ;";
+            $"WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -116,7 +116,7 @@ public class BaseStatementBuilderCreateMaxTest
         var actual = statementBuilder.CreateMax(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -134,7 +134,7 @@ public class BaseStatementBuilderCreateMaxTest
         var actual = statementBuilder.CreateMax(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT MAX ([Value]) AS [MaxValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);

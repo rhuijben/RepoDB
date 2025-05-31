@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Common;
 using RepoDb.Extensions;
+using RepoDb.StatementBuilders;
 
 namespace RepoDb;
 
@@ -452,7 +453,7 @@ public class DataEntityDataReader<TEntity> : DbDataReader
         ThrowExceptionIfNotAvailable();
         if (i == Properties.Count)
         {
-            return "__RepoDb_OrderColumn";
+            return BaseStatementBuilder.RepoDbOrderColumn;
         }
         return Properties[i].GetMappedName();
     }
@@ -467,7 +468,7 @@ public class DataEntityDataReader<TEntity> : DbDataReader
         ThrowExceptionIfNotAvailable();
         if (i == Fields.Count)
         {
-            return "__RepoDb_OrderColumn";
+            return BaseStatementBuilder.RepoDbOrderColumn;
         }
         return Fields[i].Name;
     }
@@ -488,7 +489,7 @@ public class DataEntityDataReader<TEntity> : DbDataReader
     private int GetOrdinalForEntities(string name)
     {
         ThrowExceptionIfNotAvailable();
-        if (HasOrderingColumn && string.Equals(name, "__RepoDb_OrderColumn", StringComparison.OrdinalIgnoreCase))
+        if (HasOrderingColumn && string.Equals(name, BaseStatementBuilder.RepoDbOrderColumn, StringComparison.OrdinalIgnoreCase))
         {
             return Properties.Count;
         }
@@ -507,7 +508,7 @@ public class DataEntityDataReader<TEntity> : DbDataReader
     private int GetOrdinalForDictionaryStringObject(string name)
     {
         ThrowExceptionIfNotAvailable();
-        if (HasOrderingColumn && string.Equals(name, "__RepoDb_OrderColumn", StringComparison.OrdinalIgnoreCase))
+        if (HasOrderingColumn && string.Equals(name, BaseStatementBuilder.RepoDbOrderColumn, StringComparison.OrdinalIgnoreCase))
         {
             return Fields.Count;
         }

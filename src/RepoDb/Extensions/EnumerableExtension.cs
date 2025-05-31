@@ -44,6 +44,52 @@ public static class EnumerableExtension
 #endif
     }
 
+    public static IEnumerable<T[]> ChunkOptimally<T>(
+        this IEnumerable<T> source,
+        int maxChunkSize = 2000,
+        int minThreshold = 30,
+        int minReductionPercent = 15) // e.g. 15 = 15%
+    {
+        if (source is null) throw new ArgumentNullException(nameof(source));
+
+        var list = source as IList<T> ?? source.ToList();
+        int n = list.Count;
+
+        if (n <= minThreshold)
+        {
+            yield return list.ToArray();
+            yield break;
+        }
+
+        int chunkSize = GetOptimalChunkSize(n, maxChunkSize, minReductionPercent);
+
+        for (int i = 0; i < n; i += chunkSize)
+        {
+            yield return list.Skip(i).Take(chunkSize).ToArray();
+        }
+
+        static int GetOptimalChunkSize(int n, int maxChunkSize, int minReductionPercent)
+        {
+            int bestSize = 50;
+            int bestChunks = (n + bestSize - 1) / bestSize;
+
+            for (int s = 75; s <= maxChunkSize; s += 25)
+            {
+                int chunks = (n + s - 1) / s;
+
+                // Gain = (bestChunks - chunks) / bestChunks >= X%
+                // => chunks * 100 ≤ bestChunks * (100 - X)
+                if (chunks * 100 <= bestChunks * (100 - minReductionPercent))
+                {
+                    bestSize = s;
+                    bestChunks = chunks;
+                }
+            }
+
+            return bestSize;
+        }
+    }
+
     /// <summary>
     /// Checks whether the instance of <see cref="IEnumerable"/> is of type <see cref="IEnumerable{T}"/>, then casts it, otherwise, 
     /// returns the instance of <see cref="IEnumerable{T}"/> with the specified items. The items that are not of type <typeparamref name="T"/> will be

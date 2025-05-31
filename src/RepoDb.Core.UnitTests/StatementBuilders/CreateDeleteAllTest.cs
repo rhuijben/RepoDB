@@ -27,7 +27,7 @@ public class BaseStatementBuilderCreateDeleteAllTest
 
         // Act
         var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
-        var expected = "DELETE FROM [Table] ;";
+        var expected = "DELETE FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -42,7 +42,7 @@ public class BaseStatementBuilderCreateDeleteAllTest
 
         // Act
         var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
-        var expected = "DELETE FROM [dbo].[Table] ;";
+        var expected = "DELETE FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -57,7 +57,7 @@ public class BaseStatementBuilderCreateDeleteAllTest
 
         // Act
         var actual = statementBuilder.CreateDeleteAll(tableName: tableName);
-        var expected = "DELETE FROM [dbo].[Table] ;";
+        var expected = "DELETE FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -73,7 +73,7 @@ public class BaseStatementBuilderCreateDeleteAllTest
         // Act
         var actual = statementBuilder.CreateDeleteAll(tableName: tableName,
             hints: "WITH (TABLOCK)");
-        var expected = "DELETE FROM [Table] WITH (TABLOCK) ;";
+        var expected = "DELETE FROM [Table] WITH (TABLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);

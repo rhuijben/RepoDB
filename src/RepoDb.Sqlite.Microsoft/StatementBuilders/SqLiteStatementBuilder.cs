@@ -266,10 +266,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         for (var index = 0; index < batchSize; index++)
         {
             if (index > 0)
-            {
-                builder
-                    .WriteText(",");
-            }
+                builder.Comma();
 
             builder
                 .OpenParen()

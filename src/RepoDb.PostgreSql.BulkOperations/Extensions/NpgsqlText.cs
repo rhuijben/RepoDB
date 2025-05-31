@@ -84,10 +84,10 @@ public static partial class NpgsqlConnectionExtension
             builder
                 .Returning()
                 .WriteText("-1")
-                .As("Index".AsQuoted(true, dbSetting))
+                .As("Index", dbSetting)
                 .WriteText(", ")
                 .WriteText(identityField.Name.AsQuoted(true, dbSetting))
-                .As("Identity".AsQuoted(true, dbSetting));
+                .As("Identity", dbSetting);
         }
 
         // Extract the command text

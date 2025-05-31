@@ -576,9 +576,6 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
         // More smoke tests // TODO: Create separate tests
         Assert.IsTrue(sql.Exists<MorePrimaryKeyTable>(where: x => x.ID == "A" && x.ID2 == data[0].ID2));
 
-        if (sql.GetType().Name.ToUpper().Contains("MYSQL"))
-            return; // Mysql statement generator doesn't like multikey primarykey yet
-
         await sql.MergeAsync(ftf[0]);
     }
 }

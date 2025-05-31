@@ -27,7 +27,7 @@ public class BaseStatementBuilderCreateTruncateTest
 
         // Act
         var actual = statementBuilder.CreateTruncate(tableName: tableName);
-        var expected = "TRUNCATE TABLE [Table] ;";
+        var expected = "TRUNCATE TABLE [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -42,7 +42,7 @@ public class BaseStatementBuilderCreateTruncateTest
 
         // Act
         var actual = statementBuilder.CreateTruncate(tableName: tableName);
-        var expected = "TRUNCATE TABLE [dbo].[Table] ;";
+        var expected = "TRUNCATE TABLE [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -57,7 +57,7 @@ public class BaseStatementBuilderCreateTruncateTest
 
         // Act
         var actual = statementBuilder.CreateTruncate(tableName: tableName);
-        var expected = "TRUNCATE TABLE [dbo].[Table] ;";
+        var expected = "TRUNCATE TABLE [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);

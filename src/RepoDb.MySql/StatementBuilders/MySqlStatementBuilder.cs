@@ -175,7 +175,8 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         // Build the query
         builder
             .Select()
-            .WriteText($"1 AS {("ExistsValue").AsQuoted(DbSetting)}")
+            .WriteText("1")
+            .As("ExistsValue", DbSetting)
             .From()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
@@ -215,21 +216,14 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
                 keyFields,
                 hints));
 
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
-
-        // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-        var returnValue = keyColumn != null ?
-            keyColumn.IsIdentity ? "LAST_INSERT_ID()" :
-                keyColumn.Name.AsParameter(DbSetting) : "NULL";
-
-        // Set the return value
-        builder
-            .Select()
-            .WriteText(returnValue)
-            .As("Result".AsQuoted(DbSetting))
-            .End();
+        if (keyFields.FirstOrDefault() is { IsIdentity: true } returnColumn)
+        {
+            builder
+                .Select()
+                .WriteText("LAST_INSERT_ID()")
+                .As(returnColumn.Name, DbSetting)
+                .End(DbSetting);
+        }
 
         // Return the query
         return builder.GetString();
@@ -309,44 +303,50 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         // Iterate the indexes
         for (var index = 0; index < batchSize; index++)
         {
+            if (index > 0)
+                builder.Comma();
+
             builder
-                .WriteText("ROW")
+                .Row()
                 .OpenParen()
                 .ParametersFrom(insertableFields, index, DbSetting)
                 .CloseParen();
-
-            if (index < batchSize - 1)
-            {
-                builder
-                    .WriteText(",");
-            }
         }
 
         // Close
         builder
             .End();
 
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-
-        if (keyColumn?.IsIdentity == true)
+        if (keyFields.FirstOrDefault() is { IsIdentity: true } returnColumn)
         {
             builder
-            .Values();
+                .Select()
+                .WriteText("*")
+                .From()
+                .OpenParen()
+                .Values();
 
             for (var index = 0; index < batchSize; index++)
             {
                 if (index > 0)
-                    builder.WriteText(",");
+                    builder.Comma();
 
                 builder
-                    .WriteText("ROW")
+                    .Row()
                     .OpenParen()
                     .WriteText("LAST_INSERT_ID() +")
                     .WriteText($"{index}")
                     .CloseParen();
             }
 
-            builder.End();
+            builder
+                .CloseParen()
+                .As()
+                .WriteText("RESULT")
+                .OpenParen()
+                .FieldFrom(returnColumn.AsField(), DbSetting)
+                .CloseParen()
+                .End();
         }
 
         return builder.GetString();
@@ -459,22 +459,26 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
             .ParametersFrom(fields, 0, DbSetting)
             .CloseParen()
             .WriteText("ON DUPLICATE KEY")
-            .Update()
-            .FieldsAndParametersFrom(fields, 0, DbSetting)
+            .Update();
+
+        IdentityFieldsAndParametersFrom(builder, fields, 0, keyFields.FirstOrDefault(x => x.IsIdentity));
+        builder
             .End();
 
         // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-        var returnValue = keyColumn != null ? keyColumn.Name.AsParameter(DbSetting) : "NULL";
+        if (keyFields.FirstOrDefault() is { IsIdentity: true } key)
+        {
+            // Set the return value
+            builder
+                .Select()
+                    .WriteText("LAST_INSERT_ID()")
+                    .As(key.Name, DbSetting)
+                    .End(DbSetting);
 
-        // Set the return value
-        builder
-            .Select()
-            .WriteText($"COALESCE({returnValue}, LAST_INSERT_ID())")
-            .As("Result".AsQuoted(DbSetting))
-            .End();
+            // Return the query
+            return builder.GetString();
+        }
 
-        // Return the query
         return builder.GetString();
     }
 
@@ -504,25 +508,12 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
         GuardTableName(tableName);
         GuardHints(hints);
 
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
-
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
-
         // Verify the fields
         if (fields?.Any() != true)
         {
             throw new ArgumentNullException($"The list of fields cannot be null or empty.");
         }
 
-        // Validate the Primary Key
-        if (primaryField == null)
-        {
-            throw new PrimaryFieldNotFoundException($"The is no primary field from the table '{tableName}'.");
-        }
-
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
         var builder = new QueryBuilder();
 
         // Iterate the indexes
@@ -541,26 +532,50 @@ public sealed class MySqlStatementBuilder : BaseStatementBuilder
                 .ParametersFrom(fields, index, DbSetting)
                 .CloseParen()
                 .WriteText("ON DUPLICATE KEY")
-                .Update()
-                .FieldsAndParametersFrom(fields, index, DbSetting)
-                .End();
+                .Update();
 
-            // Set the return value
-            var returnValue = keyColumn != null ? keyColumn.Name.AsParameter(index, DbSetting) : "NULL";
-            builder
-                .Select()
-                    .WriteText(
-                        string.Concat($"COALESCE({returnValue}, LAST_INSERT_ID())", " AS ", "Result".AsQuoted(DbSetting), ","))
-                    .WriteText(
-                        string.Concat($"{DbSetting.ParameterPrefix}__RepoDb_OrderColumn_{index}", " AS ", "OrderColumn".AsQuoted(DbSetting)));
+            IdentityFieldsAndParametersFrom(builder, fields, index, keyFields.FirstOrDefault(x => x.IsIdentity));
 
-            // End the builder
             builder
-                .End();
+                .End(DbSetting);
+
+            if (keyFields.FirstOrDefault() is { IsIdentity: true } key)
+            {
+                builder
+                    .Select()
+                    .WriteText("LAST_INSERT_ID()")
+                    .As(key.Name, DbSetting)
+                    .End(DbSetting);
+            }
         }
 
         // Return the query
         return builder.GetString();
+    }
+
+    private void IdentityFieldsAndParametersFrom(QueryBuilder builder, IEnumerable<Field> fields, int index, DbField? identityField)
+    {
+        if (identityField is null || !fields.Any(x => string.Equals(x.Name, identityField.Name, StringComparison.OrdinalIgnoreCase)))
+        {
+            builder.FieldsAndParametersFrom(fields, index, DbSetting);
+        }
+        else
+        {
+            var id = identityField.AsField();
+            // We want to have the LAST_INSERT_ID, and we have to set it ourselves here
+
+            builder.FieldFrom(id, DbSetting);
+            builder.WriteText("= LAST_INSERT_ID(");
+            builder.WriteText(id.Name.AsParameter(index, DbSetting));
+            builder.CloseParen();
+
+            var filteredFields = fields.Where(x => !string.Equals(x.Name, id.Name, StringComparison.OrdinalIgnoreCase));
+            if (filteredFields.Any())
+            {
+                builder.Comma();
+                builder.FieldsAndParametersFrom(filteredFields, index, DbSetting);
+            }
+        }
     }
 
     #endregion

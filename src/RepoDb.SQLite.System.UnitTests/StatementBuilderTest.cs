@@ -30,7 +30,7 @@ public class StatementBuilderTest
             0,
             10,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT [Id], [Name] FROM [Table] ORDER BY [Id] ASC LIMIT 10 ;";
+        var expected = "SELECT [Id], [Name] FROM [Table] ORDER BY [Id] ASC LIMIT 10;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -48,7 +48,7 @@ public class StatementBuilderTest
             3,
             10,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT [Id], [Name] FROM [Table] ORDER BY [Id] ASC LIMIT 30, 10 ;";
+        var expected = "SELECT [Id], [Name] FROM [Table] ORDER BY [Id] ASC LIMIT 30, 10;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -139,7 +139,7 @@ public class StatementBuilderTest
         // Act
         var query = builder.CreateExists("Table",
             QueryGroup.Parse(new { Id = 1 }));
-        var expected = "SELECT 1 AS [ExistsValue] FROM [Table] WHERE ([Id] = @Id) LIMIT 1 ;";
+        var expected = "SELECT 1 AS [ExistsValue] FROM [Table] WHERE ([Id] = @Id) LIMIT 1;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -160,7 +160,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             primaryField: null,
             null);
-        var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ;";
+        var expected = "INSERT INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -177,8 +177,8 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
-        var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) "
-            + "RETURNING [Id] ;";
+        var expected = "INSERT INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address) "
+            + "RETURNING [Id];";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -195,8 +195,8 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             new DbField("Id", false, true, false, typeof(int), null, null, null, null, false));
-        var expected = "INSERT INTO [Table] ( [Name], [Address] ) VALUES ( @Name, @Address ) "
-            + "RETURNING [Id] ;";
+        var expected = "INSERT INTO [Table] ([Name], [Address]) VALUES (@Name, @Address) "
+            + "RETURNING [Id];";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -232,8 +232,8 @@ public class StatementBuilderTest
             3,
             primaryField: null,
             null);
-        var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) , "
-            + "( @Id_1, @Name_1, @Address_1 ) , ( @Id_2, @Name_2, @Address_2 ) ;";
+        var expected = "INSERT INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address), "
+            + "(@Id_1, @Name_1, @Address_1), (@Id_2, @Name_2, @Address_2);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -251,9 +251,9 @@ public class StatementBuilderTest
             3,
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
-        var expected = "INSERT INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ," +
-            " ( @Id_1, @Name_1, @Address_1 ) , ( @Id_2, @Name_2, @Address_2 ) " +
-            "RETURNING [Id] ;";
+        var expected = "INSERT INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address)," +
+            " (@Id_1, @Name_1, @Address_1), (@Id_2, @Name_2, @Address_2) " +
+            "RETURNING [Id];";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -271,7 +271,7 @@ public class StatementBuilderTest
             3,
             null,
             new DbField("Id", false, true, false, typeof(int), null, null, null, null, false));
-        var expected = "INSERT INTO [Table] ( [Name], [Address] ) VALUES ( @Name, @Address ) , ( @Name_1, @Address_1 ) , ( @Name_2, @Address_2 ) RETURNING [Id] ;";
+        var expected = "INSERT INTO [Table] ([Name], [Address]) VALUES (@Name, @Address), (@Name_1, @Address_1), (@Name_2, @Address_2) RETURNING [Id];";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -309,7 +309,7 @@ public class StatementBuilderTest
     //        null,
     //        new DbField("Id", true, false, false, typeof(int), null, null, null, null),
     //        null);
-    //    var expected = "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT CAST(@Id AS BIGINT) AS [Result] ;";
+    //    var expected = "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address ) ; SELECT CAST(@Id AS BIGINT) AS [Result];";
 
     //    // Assert
     //    Assert.AreEqual(expected, query);
@@ -328,7 +328,7 @@ public class StatementBuilderTest
     //        Field.From("Id"),
     //        new DbField("Id", true, false, false, typeof(int), null, null, null, null),
     //        null);
-    //    var expected = "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT CAST(@Id AS BIGINT) AS [Result] ;";
+    //    var expected = "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address ) ; SELECT CAST(@Id AS BIGINT) AS [Result];";
 
     //    // Assert
     //    Assert.AreEqual(expected, query);
@@ -347,7 +347,7 @@ public class StatementBuilderTest
     //        null,
     //        new DbField("Id", true, false, false, typeof(int), null, null, null, null),
     //        new DbField("Id", false, true, false, typeof(int), null, null, null, null));
-    //    var expected = "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT CAST(COALESCE(last_insert_rowid(), @Id) AS BIGINT) AS [Result] ;";
+    //    var expected = "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address ) ; SELECT CAST(COALESCE(last_insert_rowid(), @Id) AS BIGINT) AS [Result];";
 
     //    // Assert
     //    Assert.AreEqual(expected, query);
@@ -432,9 +432,9 @@ public class StatementBuilderTest
     //        3,
     //        new DbField("Id", true, false, false, typeof(int), null, null, null, null),
     //        null);
-    //    var expected = "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT CAST(@Id AS BIGINT) AS [Result] ; " +
-    //        "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id_1, @Name_1, @Address_1 ) ; SELECT CAST(@Id_1 AS BIGINT) AS [Result] ; " +
-    //        "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id_2, @Name_2, @Address_2 ) ; SELECT CAST(@Id_2 AS BIGINT) AS [Result] ;";
+    //    var expected = "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address ) ; SELECT CAST(@Id AS BIGINT) AS [Result] ; " +
+    //        "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id_1, @Name_1, @Address_1 ) ; SELECT CAST(@Id_1 AS BIGINT) AS [Result] ; " +
+    //        "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id_2, @Name_2, @Address_2 ) ; SELECT CAST(@Id_2 AS BIGINT) AS [Result];";
 
     //    // Assert
     //    Assert.AreEqual(expected, query);
@@ -454,9 +454,9 @@ public class StatementBuilderTest
     //        3,
     //        new DbField("Id", true, false, false, typeof(int), null, null, null, null),
     //        null);
-    //    var expected = "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT CAST(@Id AS BIGINT) AS [Result] ; " +
-    //        "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id_1, @Name_1, @Address_1 ) ; SELECT CAST(@Id_1 AS BIGINT) AS [Result] ; " +
-    //        "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id_2, @Name_2, @Address_2 ) ; SELECT CAST(@Id_2 AS BIGINT) AS [Result] ;";
+    //    var expected = "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address ) ; SELECT CAST(@Id AS BIGINT) AS [Result] ; " +
+    //        "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id_1, @Name_1, @Address_1 ) ; SELECT CAST(@Id_1 AS BIGINT) AS [Result] ; " +
+    //        "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id_2, @Name_2, @Address_2 ) ; SELECT CAST(@Id_2 AS BIGINT) AS [Result];";
 
     //    // Assert
     //    Assert.AreEqual(expected, query);
@@ -476,9 +476,9 @@ public class StatementBuilderTest
     //        3,
     //        new DbField("Id", true, false, false, typeof(int), null, null, null, null),
     //        new DbField("Id", false, true, false, typeof(int), null, null, null, null));
-    //    var expected = "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id, @Name, @Address ) ; SELECT CAST(COALESCE(last_insert_rowid(), @Id) AS INT) AS [Result] ; " +
-    //        "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id_1, @Name_1, @Address_1 ) ; SELECT CAST(COALESCE(last_insert_rowid(), @Id_1) AS INT) AS [Result] ; " +
-    //        "INSERT OR REPLACE INTO [Table] ( [Id], [Name], [Address] ) VALUES ( @Id_2, @Name_2, @Address_2 ) ; SELECT CAST(COALESCE(last_insert_rowid(), @Id_2) AS INT) AS [Result] ;";
+    //    var expected = "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id, @Name, @Address ) ; SELECT CAST(COALESCE(last_insert_rowid(), @Id) AS INT) AS [Result] ; " +
+    //        "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id_1, @Name_1, @Address_1 ) ; SELECT CAST(COALESCE(last_insert_rowid(), @Id_1) AS INT) AS [Result] ; " +
+    //        "INSERT OR REPLACE INTO [Table] ([Id], [Name], [Address]) VALUES (@Id_2, @Name_2, @Address_2 ) ; SELECT CAST(COALESCE(last_insert_rowid(), @Id_2) AS INT) AS [Result];";
 
     //    // Assert
     //    Assert.AreEqual(expected, query);
@@ -564,7 +564,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             null);
-        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ;";
+        var expected = "SELECT [Id], [Name], [Address] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -580,7 +580,7 @@ public class StatementBuilderTest
         var query = builder.CreateQuery("Table",
             Field.From("Id", "Name", "Address"),
             QueryGroup.Parse(new { Id = 1, Name = "Michael" }));
-        var expected = "SELECT [Id], [Name], [Address] FROM [Table] WHERE ([Id] = @Id AND [Name] = @Name) ;";
+        var expected = "SELECT [Id], [Name], [Address] FROM [Table] WHERE ([Id] = @Id AND [Name] = @Name);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -599,7 +599,7 @@ public class StatementBuilderTest
             null,
             10,
             null);
-        var expected = "SELECT [Id], [Name], [Address] FROM [Table] LIMIT 10 ;";
+        var expected = "SELECT [Id], [Name], [Address] FROM [Table] LIMIT 10;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -616,7 +616,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC ;";
+        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -633,7 +633,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Ascending, Name = Order.Ascending }));
-        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC, [Name] ASC ;";
+        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC, [Name] ASC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -650,7 +650,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Descending }));
-        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] DESC ;";
+        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] DESC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -667,7 +667,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Descending, Name = Order.Descending }));
-        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] DESC, [Name] DESC ;";
+        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] DESC, [Name] DESC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -684,7 +684,7 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             OrderField.Parse(new { Id = Order.Ascending, Name = Order.Descending }));
-        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC, [Name] DESC ;";
+        var expected = "SELECT [Id], [Name], [Address] FROM [Table] ORDER BY [Id] ASC, [Name] DESC;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -720,7 +720,7 @@ public class StatementBuilderTest
             0,
             10,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT [Id], [Name] FROM [Table] ORDER BY [Id] ASC LIMIT 10 ;";
+        var expected = "SELECT [Id], [Name] FROM [Table] ORDER BY [Id] ASC LIMIT 10;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -738,7 +738,7 @@ public class StatementBuilderTest
             30,
             10,
             OrderField.Parse(new { Id = Order.Ascending }));
-        var expected = "SELECT [Id], [Name] FROM [Table] ORDER BY [Id] ASC LIMIT 30, 10 ;";
+        var expected = "SELECT [Id], [Name] FROM [Table] ORDER BY [Id] ASC LIMIT 30, 10;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -828,7 +828,7 @@ public class StatementBuilderTest
 
         // Act
         var query = builder.CreateTruncate("Table");
-        var expected = "DELETE FROM [Table] ; VACUUM ;";
+        var expected = "DELETE FROM [Table]; VACUUM;";
 
         // Assert
         Assert.AreEqual(expected, query);

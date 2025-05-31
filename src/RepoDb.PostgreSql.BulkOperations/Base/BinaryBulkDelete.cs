@@ -1,9 +1,8 @@
-﻿using Npgsql;
-using RepoDb.Enumerations.PostgreSql;
-using RepoDb.Extensions;
-using RepoDb.PostgreSql.BulkOperations;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
+using Npgsql;
+using RepoDb.Enumerations.PostgreSql;
+using RepoDb.PostgreSql.BulkOperations;
 
 namespace RepoDb;
 

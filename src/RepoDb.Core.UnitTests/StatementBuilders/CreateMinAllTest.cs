@@ -33,7 +33,7 @@ public class BaseStatementBuilderCreateMinAllTest
         var actual = statementBuilder.CreateMinAll(field: field,
             tableName: tableName,
             hints: null);
-        var expected = "SELECT MIN ([Value]) AS [MinValue] FROM [Table] ;";
+        var expected = "SELECT MIN ([Value]) AS [MinValue] FROM [Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -52,7 +52,7 @@ public class BaseStatementBuilderCreateMinAllTest
         var actual = statementBuilder.CreateMinAll(tableName: tableName,
             field: field,
             hints: hints);
-        var expected = "SELECT MIN ([Value]) AS [MinValue] FROM [Table] WITH (NOLOCK) ;";
+        var expected = "SELECT MIN ([Value]) AS [MinValue] FROM [Table] WITH (NOLOCK);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -70,7 +70,7 @@ public class BaseStatementBuilderCreateMinAllTest
         var actual = statementBuilder.CreateMinAll(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT MIN ([Value]) AS [MinValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT MIN ([Value]) AS [MinValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -88,7 +88,7 @@ public class BaseStatementBuilderCreateMinAllTest
         var actual = statementBuilder.CreateMinAll(tableName: tableName,
             field: field,
             hints: null);
-        var expected = "SELECT MIN ([Value]) AS [MinValue] FROM [dbo].[Table] ;";
+        var expected = "SELECT MIN ([Value]) AS [MinValue] FROM [dbo].[Table];";
 
         // Assert
         Assert.AreEqual(expected, actual);

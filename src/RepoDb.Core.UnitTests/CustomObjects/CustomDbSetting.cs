@@ -2,7 +2,7 @@
 
 namespace RepoDb.UnitTests.CustomObjects;
 
-public class CustomDbSetting : BaseDbSetting
+public sealed record CustomDbSetting : BaseDbSetting
 {
     public CustomDbSetting()
     {
@@ -20,7 +20,7 @@ public class CustomDbSetting : BaseDbSetting
     }
 }
 
-public class CustomNonHintsSupportingDbSetting : BaseDbSetting
+public sealed record CustomNonHintsSupportingDbSetting : BaseDbSetting
 {
     public CustomNonHintsSupportingDbSetting()
     {
@@ -39,7 +39,7 @@ public class CustomNonHintsSupportingDbSetting : BaseDbSetting
     }
 }
 
-public class CustomSingleStatementSupportDbSetting : BaseDbSetting
+public sealed record CustomSingleStatementSupportDbSetting : BaseDbSetting
 {
     public CustomSingleStatementSupportDbSetting()
     {

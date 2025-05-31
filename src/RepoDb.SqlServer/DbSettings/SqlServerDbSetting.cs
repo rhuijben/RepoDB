@@ -3,7 +3,7 @@
 /// <summary>
 /// A setting class used for SQL Server data provider.
 /// </summary>
-public sealed class SqlServerDbSetting : BaseDbSetting
+public sealed record SqlServerDbSetting : BaseDbSetting
 {
     /// <summary>
     /// Creates a new instance of <see cref="SqlServerDbSetting"/> class.

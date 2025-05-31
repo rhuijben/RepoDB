@@ -11,7 +11,7 @@ namespace RepoDb.StatementBuilders;
 public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
 {
     /// <summary>
-    /// Creates a new instance of <see cref="MySqlConnectorStatementBuilder"/> object.
+    /// Creates a new instance of <see cref="MySqlStatementBuilder"/> object.
     /// </summary>
     public MySqlConnectorStatementBuilder()
         : this(DbSettingMapper.Get<MySqlConnection>(),
@@ -69,7 +69,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         // Validate order by
         if (orderBy == null || orderBy.Any() != true)
         {
-            throw new EmptyException("The argument 'orderBy' is required.");
+            throw new EmptyException(nameof(orderBy), "The argument 'orderBy' is required.");
         }
 
         // Validate the page
@@ -175,7 +175,8 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         // Build the query
         builder
             .Select()
-            .WriteText($"1 AS {("ExistsValue").AsQuoted(DbSetting)}")
+            .WriteText("1")
+            .As("ExistsValue", DbSetting)
             .From()
             .TableNameFrom(tableName, DbSetting)
             .HintsFrom(hints)
@@ -205,9 +206,6 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         IEnumerable<DbField> keyFields,
         string? hints = null)
     {
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
-
         // Initialize the builder
         var builder = new QueryBuilder();
 
@@ -218,18 +216,14 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
                 keyFields,
                 hints));
 
-        // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-        var returnValue = keyColumn != null ?
-            keyColumn.IsIdentity ? "LAST_INSERT_ID()" :
-                keyColumn.Name.AsParameter(DbSetting) : "NULL";
-
-        // Set the return value
-        builder
-            .Select()
-            .WriteText(returnValue)
-            .As("Result".AsQuoted(DbSetting))
-            .End();
+        if (keyFields.FirstOrDefault() is { IsIdentity: true } returnColumn)
+        {
+            builder
+                .Select()
+                .WriteText("LAST_INSERT_ID()")
+                .As(returnColumn.Name, DbSetting)
+                .End(DbSetting);
+        }
 
         // Return the query
         return builder.GetString();
@@ -250,18 +244,16 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for insert operation.</returns>
     public override string CreateInsertAll(string tableName,
-      IEnumerable<Field>? fields,
-      int batchSize,
-      IEnumerable<DbField> keyFields,
-      string? hints = null)
+        IEnumerable<Field>? fields,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
+        string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-
         var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
         var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
-
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
 
@@ -271,7 +263,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         // Verify the fields
         if (fields?.Any() != true)
         {
-            throw new EmptyException("The list of fields cannot be null or empty.");
+            throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
         }
 
         // Primary Key
@@ -311,44 +303,50 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         // Iterate the indexes
         for (var index = 0; index < batchSize; index++)
         {
+            if (index > 0)
+                builder.Comma();
+
             builder
-                .WriteText("ROW")
+                .Row()
                 .OpenParen()
                 .ParametersFrom(insertableFields, index, DbSetting)
                 .CloseParen();
-
-            if (index < batchSize - 1)
-            {
-                builder
-                    .WriteText(",");
-            }
         }
 
         // Close
         builder
             .End();
 
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-
-        if (keyColumn?.IsIdentity == true)
+        if (keyFields.FirstOrDefault() is { IsIdentity: true } returnColumn)
         {
             builder
-            .Values();
+                .Select()
+                .WriteText("*")
+                .From()
+                .OpenParen()
+                .Values();
 
             for (var index = 0; index < batchSize; index++)
             {
                 if (index > 0)
-                    builder.WriteText(",");
+                    builder.Comma();
 
                 builder
-                    .WriteText("ROW")
+                    .Row()
                     .OpenParen()
                     .WriteText("LAST_INSERT_ID() +")
                     .WriteText($"{index}")
                     .CloseParen();
             }
 
-            builder.End();
+            builder
+                .CloseParen()
+                .As()
+                .WriteText("RESULT")
+                .OpenParen()
+                .FieldFrom(returnColumn.AsField(), DbSetting)
+                .CloseParen()
+                .End();
         }
 
         return builder.GetString();
@@ -420,15 +418,15 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
     public override string CreateMerge(string tableName,
         IEnumerable<Field> fields,
         IEnumerable<Field>? qualifiers,
-        IEnumerable<DbField>? dbFields = null,
+        IEnumerable<DbField> keyFields,
         string? hints = null)
     {
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
 
-        var primaryField = dbFields?.FirstOrDefault(f => f.IsPrimary);
-        var identityField = dbFields?.FirstOrDefault(f => f.IsIdentity);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
 
         GuardPrimary(primaryField);
         GuardIdentity(identityField);
@@ -461,22 +459,26 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             .ParametersFrom(fields, 0, DbSetting)
             .CloseParen()
             .WriteText("ON DUPLICATE KEY")
-            .Update()
-            .FieldsAndParametersFrom(fields, 0, DbSetting)
+            .Update();
+
+        IdentityFieldsAndParametersFrom(builder, fields, 0, keyFields.FirstOrDefault(x => x.IsIdentity));
+        builder
             .End();
 
         // Variables needed
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
-        var returnValue = keyColumn != null ? keyColumn.Name.AsParameter(DbSetting) : "NULL";
+        if (keyFields.FirstOrDefault() is { IsIdentity: true } key)
+        {
+            // Set the return value
+            builder
+                .Select()
+                    .WriteText("LAST_INSERT_ID()")
+                    .As(key.Name, DbSetting)
+                    .End(DbSetting);
 
-        // Set the return value
-        builder
-            .Select()
-            .WriteText($"COALESCE({returnValue}, LAST_INSERT_ID())")
-            .As("Result".AsQuoted(DbSetting))
-            .End();
+            // Return the query
+            return builder.GetString();
+        }
 
-        // Return the query
         return builder.GetString();
     }
 
@@ -506,25 +508,12 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         GuardTableName(tableName);
         GuardHints(hints);
 
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
-
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
-
         // Verify the fields
         if (fields?.Any() != true)
         {
             throw new ArgumentNullException($"The list of fields cannot be null or empty.");
         }
 
-        // Validate the Primary Key
-        if (primaryField == null)
-        {
-            throw new PrimaryFieldNotFoundException($"The is no primary field from the table '{tableName}'.");
-        }
-
-        var keyColumn = GetReturnKeyColumnAsDbField(primaryField, identityField);
         var builder = new QueryBuilder();
 
         // Iterate the indexes
@@ -543,26 +532,50 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
                 .ParametersFrom(fields, index, DbSetting)
                 .CloseParen()
                 .WriteText("ON DUPLICATE KEY")
-                .Update()
-                .FieldsAndParametersFrom(fields, index, DbSetting)
-                .End();
+                .Update();
 
-            // Set the return value
-            var returnValue = keyColumn != null ? keyColumn.Name.AsParameter(index, DbSetting) : "NULL";
-            builder
-                .Select()
-                    .WriteText(
-                        string.Concat($"COALESCE({returnValue}, LAST_INSERT_ID())", " AS ", "Result".AsQuoted(DbSetting), ","))
-                    .WriteText(
-                        string.Concat($"{DbSetting.ParameterPrefix}__RepoDb_OrderColumn_{index}", " AS ", "OrderColumn".AsQuoted(DbSetting)));
+            IdentityFieldsAndParametersFrom(builder, fields, index, keyFields.FirstOrDefault(x => x.IsIdentity));
 
-            // End the builder
             builder
-                .End();
+                .End(DbSetting);
+
+            if (keyFields.FirstOrDefault() is { IsIdentity: true } key)
+            {
+                builder
+                    .Select()
+                    .WriteText("LAST_INSERT_ID()")
+                    .As(key.Name, DbSetting)
+                    .End(DbSetting);
+            }
         }
 
         // Return the query
         return builder.GetString();
+    }
+
+    private void IdentityFieldsAndParametersFrom(QueryBuilder builder, IEnumerable<Field> fields, int index, DbField? identityField)
+    {
+        if (identityField is null || !fields.Any(x => string.Equals(x.Name, identityField.Name, StringComparison.OrdinalIgnoreCase)))
+        {
+            builder.FieldsAndParametersFrom(fields, index, DbSetting);
+        }
+        else
+        {
+            var id = identityField.AsField();
+            // We want to have the LAST_INSERT_ID, and we have to set it ourselves here
+
+            builder.FieldFrom(id, DbSetting);
+            builder.WriteText("= LAST_INSERT_ID(");
+            builder.WriteText(id.Name.AsParameter(index, DbSetting));
+            builder.CloseParen();
+
+            var filteredFields = fields.Where(x => !string.Equals(x.Name, id.Name, StringComparison.OrdinalIgnoreCase));
+            if (filteredFields.Any())
+            {
+                builder.Comma();
+                builder.FieldsAndParametersFrom(filteredFields, index, DbSetting);
+            }
+        }
     }
 
     #endregion
@@ -671,13 +684,13 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
 
     #endregion
 
-    #region CreateBatchQuery
+    #region CreateSkipQuery
 
     /// <summary>
-    /// Creates a SQL Statement for batch query operation.
+    /// Creates a SQL Statement for 'BatchQuery' operation.
     /// </summary>
     /// <param name="tableName">The name of the target table.</param>
-    /// <param name="fields">The list of fields to be queried.</param>
+    /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="skip">The number of rows to skip.</param>
     /// <param name="take">The number of rows to take.</param>
     /// <param name="orderBy">The list of fields for ordering.</param>
@@ -707,7 +720,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         // Validate order by
         if (orderBy == null || orderBy.Any() != true)
         {
-            throw new EmptyException("The argument 'orderBy' is required.");
+            throw new EmptyException(nameof(orderBy), "The argument 'orderBy' is required.");
         }
 
         // Validate the skip
