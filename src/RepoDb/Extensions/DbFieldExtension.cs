@@ -32,13 +32,7 @@ public static class DbFieldExtension
     /// </summary>
     /// <param name="dbFields">The <see cref="DbField"/> to be converted.</param>
     /// <returns>An <see cref="IEnumerable{T}"/> list of <see cref="Field"/> object.</returns>
-    public static IEnumerable<Field> AsFields(this IEnumerable<DbField> dbFields)
-    {
-        foreach (var dbField in dbFields)
-        {
-            yield return dbField.AsField();
-        }
-    }
+    public static IEnumerable<Field> AsFields(this IEnumerable<DbField> dbFields) => dbFields.Select(x => x.AsField());
 
     /// <summary>
     /// Converts the list of <see cref="DbField"/> objects into an <see cref="IReadOnlyList{T}"/> of <see cref="Field"/> objects.
@@ -48,8 +42,6 @@ public static class DbFieldExtension
 #if NET
     [return: NotNullIfNotNull(nameof(source))]
 #endif
-    public static IEnumerable<Field>? AsFields(this IReadOnlyList<DbField>? source)
-        => source?.Select(x => x.AsField());
 
     public static TItem? OneOrDefault<TItem>(this IEnumerable<TItem> source)
     {

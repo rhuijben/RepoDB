@@ -107,7 +107,7 @@ public sealed class DbFieldCollection : ReadOnlyCollection<DbField>
 
     private DbField? GetIdentityDbField() => this.FirstOrDefault(df => df.IsIdentity);
 
-    private IEnumerable<Field> GetDbFieldsAsFields() => this.AsFields();
+    private IEnumerable<Field> GetDbFieldsAsFields() => this.Select(f => f.AsField()).ToList().AsReadOnly();
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public IEnumerable<Field> GetAsFields() => AsFields();
