@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace RepoDb.Extensions;
@@ -83,7 +84,7 @@ public static class EnumerableExtension
             maxChunkSize -= maxChunkSize % 25; // Round down to nearest 25
 
         // Try smaller optimal sizes from largest to smallest
-        for (int size = maxChunkSize - 25; size >= baseSize; size -= 25)
+        for (int size = maxChunkSize - 25; size > minThreshold; size -= 25)
         {
             int chunks = (total + size - 1) / size;
             if (chunks * 100 > baseChunks * (100 - minReductionPercent))
@@ -98,10 +99,15 @@ public static class EnumerableExtension
         }
 
         // Final trailing chunk if it's small enough
-        if (remaining > 0 && remaining <= minThreshold)
+        while (remaining > 0)
         {
-            yield return list.Skip(index).Take(remaining).ToArray();
+            int size = Math.Min(remaining, minThreshold);
+            yield return list.Skip(index).Take(size).ToArray();
+            index += size;
+            remaining -= size;
         }
+
+        Debug.Assert(remaining == 0);
     }
 
     /// <summary>

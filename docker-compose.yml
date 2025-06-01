@@ -15,7 +15,6 @@ services:
     environment:
       ORACLE_PASSWORD: "oracle"
       ORACLE_ALLOW_REMOTE: "true"
-    restart: unless-stopped
     shm_size: '1gb'
 
   postgresql:
