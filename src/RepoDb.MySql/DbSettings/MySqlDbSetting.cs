@@ -20,6 +20,7 @@ public sealed record MySqlDbSetting : BaseDbSetting
         IsExecuteReaderDisposable = false;
         IsMultiStatementExecutable = true;
         IsPreparable = false;
+        IsUseUpsert = false;
         OpeningQuote = "`";
         ParameterPrefix = "@";
     }

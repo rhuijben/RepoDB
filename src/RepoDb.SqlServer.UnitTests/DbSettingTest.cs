@@ -85,6 +85,16 @@ public class DbSettingTest
     }
 
     [TestMethod]
+    public void TestSqlServerDbSettingIsUseUpsertProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SqlConnection>();
+
+        // Assert
+        Assert.IsFalse(setting.IsUseUpsert);
+    }
+
+    [TestMethod]
     public void TestSqlServerDbSettingOpeningQuoteProperty()
     {
         // Setup

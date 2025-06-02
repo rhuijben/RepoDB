@@ -1,5 +1,5 @@
-﻿using System.Data.SQLite;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Data.SQLite;
 
 namespace RepoDb.SQLite.System.UnitTests;
 
@@ -84,6 +84,16 @@ public class DbSettingTest
 
         // Assert
         Assert.IsTrue(setting.IsMultiStatementExecutable);
+    }
+
+    [TestMethod]
+    public void TestSdsSqLiteDbSettingIsUseUpsertProperty()
+    {
+        // Setup
+        var setting = DbSettingMapper.Get<SQLiteConnection>();
+
+        // Assert
+        Assert.IsTrue(setting.IsUseUpsert);
     }
 
     [TestMethod]
