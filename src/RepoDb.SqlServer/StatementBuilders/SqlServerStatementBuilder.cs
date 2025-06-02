@@ -102,7 +102,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -141,7 +141,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -177,7 +177,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -250,7 +250,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
             .CloseParen();
 
         builder.End(DbSetting);
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -280,13 +280,12 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
 
-        // Verify the fields
         if (fields?.Any() != true)
         {
             throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
         }
 
-        // Primary Key
+        // Validate primary key presence
         foreach (var keyField in keyFields)
         {
             if (!keyField.IsPrimary || keyField.IsGenerated || keyField.IsIdentity || keyField.IsNullable || keyField.HasDefaultValue)
@@ -298,83 +297,104 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
             }
         }
 
-        // Insertable fields
+        // Determine insertable fields (excluding identity/generated)
         var insertableFields = fields
-            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity));
+            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity))
+            .ToArray();
 
-        // Initialize the builder
         var builder = new QueryBuilder();
 
-        // Build the query
-        builder
-            .Insert()
-            .Into()
-            .TableNameFrom(tableName, DbSetting)
-            .HintsFrom(hints)
-            .OpenParen()
-            .FieldsFrom(insertableFields, DbSetting)
-            .CloseParen();
-
-        if (keyFields.Any() == true)
+        // CASE A: Super efficient. No output or batch small enough to avoid parallelism issues.
+        if (!keyFields.Any() || batchSize < 4)
         {
             builder
-                .Output()
-                .AsAliasFieldsFrom(keyFields.AsFields(), "INSERTED", DbSetting);
-
-            if (batchSize > 1)
-            {
-                builder
-                    .Select()
-                    .AsAliasFieldsFrom(fields, "S", DbSetting)
-                    .From()
-                    .OpenParen();
-            }
-        }
-
-        builder
-            .Values();
-
-        // Iterate the indexes
-        for (var index = 0; index < batchSize; index++)
-        {
-            if (index > 0)
-                builder.Comma();
-
-            builder
+                .Insert()
+                .Into()
+                .TableNameFrom(tableName, DbSetting)
+                .HintsFrom(hints)
                 .OpenParen()
-                .ParametersFrom(insertableFields, index, DbSetting);
+                .FieldsFrom(insertableFields, DbSetting)
+                .CloseParen();
 
-            if (batchSize > 1 && keyFields.Any())
+            if (keyFields.Any())
             {
                 builder
-                    .Comma()
-                    .WriteText($"{index}");
+                    .Output()
+                    .AsAliasFieldsFrom(keyFields.AsFields(), "INSERTED", DbSetting);
             }
 
             builder
-                .CloseParen();
-        }
+                .WriteText("VALUES");
 
-        if (batchSize > 1 && keyFields.Any())
+            for (var index = 0; index < batchSize; index++)
+            {
+                if (index > 0)
+                    builder.Comma();
+
+                builder
+                    .OpenParen()
+                    .ParametersFrom(insertableFields, index, DbSetting)
+                    .CloseParen();
+            }
+
+            builder.End(DbSetting);
+        }
+        // CASE B: Use a merge which guarantees output ordering via added column
+        else
         {
+            builder
+                .Merge().Into()
+                .TableNameFrom(tableName, DbSetting)
+                .As().WriteText("T")
+                .Using().OpenParen().Values();
+
+            for (var index = 0; index < batchSize; index++)
+            {
+                if (index > 0)
+                    builder.Comma();
+
+                builder
+                    .OpenParen()
+                    .ParametersFrom(insertableFields, index, DbSetting)
+                    .Comma()
+                    .WriteText(index.ToString())
+                    .CloseParen();
+            }
+
             builder
                 .CloseParen()
                 .As()
                 .WriteText("S")
                 .OpenParen()
-                .FieldsFrom(fields, DbSetting)
+                .FieldsFrom(insertableFields, DbSetting)
                 .Comma()
-                .WriteText(RepoDbOrderColumn.AsQuoted(DbSetting))
+                .WriteQuoted(RepoDbOrderColumn, DbSetting)
                 .CloseParen()
-                .OrderBy()
-                .WriteText("S.")
-                .WriteQuoted(RepoDbOrderColumn, DbSetting, false);
+                .On().WriteText("1=0") // always insert
+                .When().Not().Matched().Then()
+                .Insert()
+                .OpenParen()
+                .FieldsFrom(insertableFields, DbSetting)
+                .CloseParen()
+                .Values()
+                .OpenParen()
+                .AsAliasFieldsFrom(insertableFields, "S", DbSetting)
+                .CloseParen();
+
+            if (keyFields.Any())
+            {
+                builder
+                    .WriteText("OUTPUT")
+                    .AsAliasFieldsFrom(keyFields.AsFields(), "INSERTED", DbSetting)
+                    .Comma()
+                    .WriteText("S.")
+                    .WriteQuoted(RepoDbOrderColumn, DbSetting, false);
+            }
+
+            builder.End(DbSetting);
         }
 
-        builder.End(DbSetting);
-
-        // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -517,7 +537,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         builder.End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -701,7 +721,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         builder.End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -789,7 +809,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion

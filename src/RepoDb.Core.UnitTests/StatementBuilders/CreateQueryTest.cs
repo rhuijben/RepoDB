@@ -86,10 +86,10 @@ public class BaseStatementBuilderCreateQueryTest
         var actual = statementBuilder.CreateQuery(tableName: tableName,
             fields: fields,
             where: where);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM [Table] " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -108,10 +108,10 @@ public class BaseStatementBuilderCreateQueryTest
         var actual = statementBuilder.CreateQuery(tableName: tableName,
             fields: fields,
             orderBy: orderBy);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM [Table] " +
-            $"ORDER BY [Field1] ASC, [Field2] DESC;";
+        var expected =
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM [Table] " +
+            "ORDER BY [Field1] ASC, [Field2] DESC;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -174,11 +174,11 @@ public class BaseStatementBuilderCreateQueryTest
             orderBy: orderBy,
             top: top,
             hints: hints);
-        var expected = $"" +
-            $"SELECT TOP (100) [Field1], [Field2], [Field3] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id) " +
-            $"ORDER BY [Field1] ASC, [Field2] DESC;";
+        var expected =
+            "SELECT TOP (100) [Field1], [Field2], [Field3] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "WHERE ([Id] = @Id) " +
+            "ORDER BY [Field1] ASC, [Field2] DESC;";
 
         // Assert
         Assert.AreEqual(expected, actual);

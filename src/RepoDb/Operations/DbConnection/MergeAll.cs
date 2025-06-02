@@ -4,9 +4,9 @@ using System.Data.Common;
 using System.Linq.Expressions;
 using System.Transactions;
 using RepoDb.Contexts.Providers;
-using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
+using RepoDb.StatementBuilders;
 
 namespace RepoDb;
 
@@ -36,7 +36,7 @@ public static partial class DbConnectionExtension
     public static int MergeAll<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -81,7 +81,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -126,7 +126,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -171,7 +171,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -212,7 +212,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of affected rows during the merge process.</returns>
     public static int MergeAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -255,7 +255,7 @@ public static partial class DbConnectionExtension
     public static int MergeAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -298,7 +298,7 @@ public static partial class DbConnectionExtension
     public static int MergeAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -341,7 +341,7 @@ public static partial class DbConnectionExtension
     public static int MergeAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -386,7 +386,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -408,69 +408,35 @@ public static partial class DbConnectionExtension
         var setting = connection.GetDbSetting();
 
         // Return the result
-        if (setting.IsUseUpsert == false)
+        if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
         {
-            if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
-            {
-                return MergeAllInternalBase<IDictionary<string, object>>(connection: connection,
-                    tableName: tableName,
-                    entities: entities.WithType<IDictionary<string, object>>(),
-                    qualifiers: qualifiers,
-                    batchSize: batchSize,
-                    fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-                    traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder);
-            }
-            else
-            {
-                return MergeAllInternalBase<TEntity>(connection: connection,
-                    tableName: tableName,
-                    entities: entities,
-                    qualifiers: qualifiers,
-                    batchSize: batchSize,
-                    fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-                    traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder);
-            }
+            return MergeAllInternalBase<IDictionary<string, object>>(connection: connection,
+                tableName: tableName,
+                entities: entities.WithType<IDictionary<string, object>>(),
+                qualifiers: qualifiers,
+                batchSize: batchSize,
+                fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                hints: hints,
+                commandTimeout: commandTimeout,
+                traceKey: traceKey,
+                transaction: transaction,
+                trace: trace,
+                statementBuilder: statementBuilder);
         }
         else
         {
-            if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
-            {
-                return UpsertAllInternalBase<IDictionary<string, object>>(connection: connection,
-                    tableName: tableName,
-                    entities: entities.WithType<IDictionary<string, object>>(),
-                    qualifiers: qualifiers,
-                    fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-                    traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder);
-            }
-            else
-            {
-                return UpsertAllInternalBase<TEntity>(connection: connection,
-                    tableName: tableName,
-                    entities: entities,
-                    qualifiers: qualifiers,
-                    fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-                    traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder);
-            }
+            return MergeAllInternalBase<TEntity>(connection: connection,
+                tableName: tableName,
+                entities: entities,
+                qualifiers: qualifiers,
+                batchSize: batchSize,
+                fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                hints: hints,
+                commandTimeout: commandTimeout,
+                traceKey: traceKey,
+                transaction: transaction,
+                trace: trace,
+                statementBuilder: statementBuilder);
         }
     }
 
@@ -498,7 +464,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -546,7 +512,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -594,7 +560,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -642,7 +608,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -686,7 +652,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of affected rows during the merge process.</returns>
     public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -732,7 +698,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -778,7 +744,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -824,7 +790,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> MergeAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -872,7 +838,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -895,73 +861,37 @@ public static partial class DbConnectionExtension
         var setting = connection.GetDbSetting();
 
         // Return the result
-        if (setting.IsUseUpsert == false)
+        if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
         {
-            if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
-            {
-                return await MergeAllAsyncInternalBase(connection: connection,
-                    tableName: tableName,
-                    entities: entities.WithType<IDictionary<string, object>>(),
-                    qualifiers: qualifiers,
-                    batchSize: batchSize,
-                    fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-                    traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            else
-            {
-                return await MergeAllAsyncInternalBase(connection: connection,
-                    tableName: tableName,
-                    entities: entities,
-                    qualifiers: qualifiers,
-                    batchSize: batchSize,
-                    fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-                    traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
+            return await MergeAllAsyncInternalBase(connection: connection,
+                tableName: tableName,
+                entities: entities.WithType<IDictionary<string, object>>(),
+                qualifiers: qualifiers,
+                batchSize: batchSize,
+                fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
+                hints: hints,
+                commandTimeout: commandTimeout,
+                traceKey: traceKey,
+                transaction: transaction,
+                trace: trace,
+                statementBuilder: statementBuilder,
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
         else
         {
-            if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
-            {
-                return await UpsertAllAsyncInternalBase(connection: connection,
-                    tableName: tableName,
-                    entities: entities.WithType<IDictionary<string, object>>(),
-                    qualifiers: qualifiers,
-                    fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-            traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
-            else
-            {
-                return await UpsertAllAsyncInternalBase(connection: connection,
-                    tableName: tableName,
-                    entities: entities,
-                    qualifiers: qualifiers,
-                    fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
-                    hints: hints,
-                    commandTimeout: commandTimeout,
-            traceKey: traceKey,
-                    transaction: transaction,
-                    trace: trace,
-                    statementBuilder: statementBuilder,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
-            }
+            return await MergeAllAsyncInternalBase(connection: connection,
+                tableName: tableName,
+                entities: entities,
+                qualifiers: qualifiers,
+                batchSize: batchSize,
+                fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
+                hints: hints,
+                commandTimeout: commandTimeout,
+                traceKey: traceKey,
+                transaction: transaction,
+                trace: trace,
+                statementBuilder: statementBuilder,
+                cancellationToken: cancellationToken).ConfigureAwait(false);
         }
     }
 
@@ -987,7 +917,7 @@ public static partial class DbConnectionExtension
     public static int MergeAll(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1030,7 +960,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<object> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1073,7 +1003,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<object> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1119,7 +1049,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> MergeAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1165,7 +1095,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<object> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1211,7 +1141,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<object> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1281,7 +1211,12 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = Math.Min(batchSize, entities.Count());
+        // Validate the batch size
+        batchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min(batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize, entities.Count())
+            : 1;
+
+        batchSize = Math.Min(batchSize, dbSetting.MaxQueriesInBatchCount);
 
         // Get the context
         var entityType = GetEntityType<TEntity>(entities);
@@ -1290,7 +1225,7 @@ public static partial class DbConnectionExtension
             entities,
             tableName,
             qualifiers,
-            batchSize,
+            1,
             fields,
             hints,
             transaction,
@@ -1351,18 +1286,11 @@ public static partial class DbConnectionExtension
             {
                 int? positionIndex = null;
                 // Iterate the batches
-                foreach (var batchEntities in entities.Split(batchSize))
+                foreach (var batchItems in entities.Split(batchSize))
                 {
-                    var batchItems = batchEntities.AsList();
-
-                    // Break if there is no more records
-                    if (batchItems.Count <= 0)
-                    {
-                        break;
-                    }
-
+                    bool doPrepare = false;
                     // Check if the batch size has changed (probably the last batch on the enumerables)
-                    if (batchItems.Count != batchSize)
+                    if (batchItems.Length != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = MergeAllExecutionContextProvider.Create(entityType,
@@ -1370,7 +1298,7 @@ public static partial class DbConnectionExtension
                             batchItems,
                             tableName,
                             qualifiers,
-                            batchItems.Count,
+                            batchItems.Length,
                             fields,
                             hints,
                             transaction,
@@ -1378,21 +1306,21 @@ public static partial class DbConnectionExtension
 
                         // Set the command properties
                         command.CommandText = context.CommandText;
+                        doPrepare = dbSetting.IsPreparable;
                     }
 
                     // Set the values
-                    if (batchItems.Count == 1)
+                    if (batchItems.Length == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
                     else
                     {
                         context.MultipleDataEntitiesParametersSetterFunc?.Invoke(command, batchItems.OfType<object>().AsList());
-                        AddOrderColumnParameters(command, batchItems);
                     }
 
                     // Prepare the command
-                    if (dbSetting.IsPreparable)
+                    if (doPrepare)
                     {
                         command.Prepare();
                     }
@@ -1411,7 +1339,6 @@ public static partial class DbConnectionExtension
                         }
 
                         // No identity setters
-                        result += command.ExecuteNonQuery();
 
                         // After Execution
                         Tracer
@@ -1430,130 +1357,31 @@ public static partial class DbConnectionExtension
                         var position = 0;
                         do
                         {
-                            while (position < batchItems.Count && reader.Read())
+                            while (position < batchItems.Length && reader.Read())
                             {
-                                positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
-
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
-                                var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
-                                context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
-                                result++;
+                                if (value != null)
+                                {
+                                    positionIndex ??= (reader.FieldCount > 1) && string.Equals(BaseStatementBuilder.RepoDbOrderColumn, reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
+
+                                    var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
+                                    context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
+                                }
                                 position++;
                             }
                         }
-                        while (position < batchItems.Count && reader.NextResult());
+                        while (position < batchItems.Length && reader.NextResult());
 
                         // After Execution
                         Tracer
                             .InvokeAfterExecution(traceResult, trace, result);
                     }
+
+                    result += batchItems.Length;
                 }
             }
         }
 
-        myTransaction?.Commit();
-
-        // Return the result
-        return result;
-    }
-
-    #endregion
-
-    #region UpsertAllInternalBase<TEntity>
-
-    /// <summary>
-    /// Upserts the multiple data entity or dynamic objects into the database.
-    /// </summary>
-    /// <typeparam name="TEntity">The type of the object (whether a data entity or a dynamic).</typeparam>
-    /// <param name="connection">The connection object to be used.</param>
-    /// <param name="tableName">The name of the target table to be used.</param>
-    /// <param name="entities">The data entity or dynamic object to be merged.</param>
-    /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <param name="traceKey">The tracing key to be used.</param>
-    /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
-    /// <param name="transaction">The transaction to be used.</param>
-    /// <param name="trace">The trace object to be used.</param>
-    /// <param name="statementBuilder">The statement builder object to be used.</param>
-    /// <returns>The number of affected rows during the merge process.</returns>
-    internal static int UpsertAllInternalBase<TEntity>(this IDbConnection connection,
-        string tableName,
-        IEnumerable<TEntity> entities,
-        IEnumerable<Field>? qualifiers,
-        IEnumerable<Field> fields,
-        string? hints = null,
-        int commandTimeout = 0,
-        string? traceKey = TraceKeys.MergeAll,
-        IDbTransaction? transaction = null,
-        ITrace? trace = null,
-        IStatementBuilder? statementBuilder = null)
-        where TEntity : class
-    {
-        // Variables needed
-        var type = GetEntityType<TEntity>(entities);
-        var dbFields = DbFieldCache.Get(connection, tableName, transaction);
-        var primary = dbFields?.GetPrimary();
-        IEnumerable<ClassProperty>? properties = null;
-        ClassProperty? primaryKey = null;
-
-        // Get the properties
-        if (type.IsGenericType == true)
-        {
-            properties = type.GetClassProperties();
-        }
-        else
-        {
-            properties = PropertyCache.Get(type);
-        }
-
-        // Check the qualifiers
-        if (qualifiers?.Any() != true)
-        {
-            // Throw if there is no primary
-            if (primary == null)
-            {
-                throw new PrimaryFieldNotFoundException($"There is no primary found for '{tableName}'.");
-            }
-
-            // Set the primary as the qualifier
-            qualifiers = primary.AsField().AsEnumerable();
-        }
-
-        // Set the primary key
-        primaryKey = properties?.FirstOrDefault(p =>
-            string.Equals(primary?.Name, p.GetMappedName(), StringComparison.OrdinalIgnoreCase));
-
-        // Execution variables
-        var result = 0;
-
-        // Make sure to create transaction if there is no passed one
-        connection.EnsureOpen();
-        using var myTransaction = (transaction is null && Transaction.Current is null) ? connection.BeginTransaction() : null;
-        transaction ??= myTransaction;
-
-        // Iterate the entities
-        var immutableFields = fields.AsList(); // Fix for the IDictionary<string, object> object
-        foreach (var entity in entities.AsList())
-        {
-            // Call the upsert
-            var upsertResult = connection.UpsertInternalBase<TEntity, object>(tableName,
-                entity,
-                qualifiers,
-                immutableFields,
-                hints,
-                commandTimeout,
-                traceKey: traceKey,
-                transaction,
-                trace,
-                statementBuilder);
-
-            // Iterate the result
-            if (Converter.DbNullToNull(upsertResult) != null)
-            {
-                result++;
-            }
-        }
         myTransaction?.Commit();
 
         // Return the result
@@ -1607,7 +1435,11 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = Math.Min(batchSize, entities.Count());
+        batchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min(batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize, entities.Count())
+            : 1;
+
+        batchSize = Math.Min(batchSize, dbSetting.MaxQueriesInBatchCount);
 
         // Get the context
         var entityType = GetEntityType<TEntity>(entities);
@@ -1616,7 +1448,7 @@ public static partial class DbConnectionExtension
             entities,
             tableName,
             qualifiers,
-            batchSize,
+            1,
             fields,
             hints,
             transaction,
@@ -1680,26 +1512,19 @@ public static partial class DbConnectionExtension
                 int? positionIndex = null;
 
                 // Iterate the batches
-                foreach (var batchEntities in entities.Split(batchSize))
+                foreach (var batchItems in entities.Split(batchSize))
                 {
-                    var batchItems = batchEntities.AsList();
-
-                    // Break if there is no more records
-                    if (batchItems.Count <= 0)
-                    {
-                        break;
-                    }
-
                     // Check if the batch size has changed (probably the last batch on the enumerables)
-                    if (batchItems.Count != batchSize)
+                    bool doPrepare = false;
+                    if (batchItems.Length != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = await MergeAllExecutionContextProvider.CreateAsync(entityType,
                             connection,
-                            batchItems,
+                            entities,
                             tableName,
                             qualifiers,
-                            batchItems.Count,
+                            batchItems.Length,
                             fields,
                             hints,
                             transaction,
@@ -1708,21 +1533,21 @@ public static partial class DbConnectionExtension
 
                         // Set the command properties
                         command.CommandText = context.CommandText;
+                        doPrepare = dbSetting.IsPreparable;
                     }
 
                     // Set the values
-                    if (batchItems.Count == 1)
+                    if (batchItems.Length == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
                     else
                     {
                         context.MultipleDataEntitiesParametersSetterFunc?.Invoke(command, batchItems.OfType<object>().AsList());
-                        AddOrderColumnParameters<TEntity>(command, batchItems);
                     }
 
                     // Prepare the command
-                    if (dbSetting.IsPreparable)
+                    if (doPrepare)
                     {
                         command.Prepare();
                     }
@@ -1754,138 +1579,36 @@ public static partial class DbConnectionExtension
                             .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
                         // Set the identity back
+#if NET
+                        await
+#endif
                         using var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
                         // Get the results.
                         var position = 0;
                         do
                         {
-                            while (position < batchItems.Count && await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                            while (position < batchItems.Length && await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                             {
-                                positionIndex ??= (reader.FieldCount > 1) && string.Equals("__RepoDb_OrderColumn", reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
-
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
-                                var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
-                                context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
-                                result++;
+                                if (value != null)
+                                {
+                                    positionIndex ??= (reader.FieldCount > 1) && string.Equals(BaseStatementBuilder.RepoDbOrderColumn, reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
+                                    var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
+                                    context.KeyPropertySetterFunc.Invoke(batchItems[index], value);
+                                }
                                 position++;
                             }
                         }
-                        while (position < batchItems.Count && await reader.NextResultAsync(cancellationToken).ConfigureAwait(false));
+                        while (position < batchItems.Length && await reader.NextResultAsync(cancellationToken).ConfigureAwait(false));
+
+                        result += batchItems.Length;
 
                         // After Execution
                         await Tracer
                             .InvokeAfterExecutionAsync(traceResult, trace, result, cancellationToken).ConfigureAwait(false);
                     }
                 }
-            }
-        }
-
-        if (myTransaction is { })
-            await myTransaction.CommitAsync(cancellationToken).ConfigureAwait(false);
-
-        // Return the result
-        return result;
-    }
-
-    #endregion
-
-    #region UpsertAllInternalBase<TEntity>
-
-    /// <summary>
-    /// Upserts the multiple data entity or dynamic objects into the database in an asynchronous way.
-    /// </summary>
-    /// <typeparam name="TEntity">The type of the object (whether a data entity or a dynamic).</typeparam>
-    /// <param name="connection">The connection object to be used.</param>
-    /// <param name="tableName">The name of the target table to be used.</param>
-    /// <param name="entities">The data entity or dynamic object to be merged.</param>
-    /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
-    /// <param name="hints">The table hints to be used.</param>
-    /// <param name="traceKey">The tracing key to be used.</param>
-    /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
-    /// <param name="transaction">The transaction to be used.</param>
-    /// <param name="trace">The trace object to be used.</param>
-    /// <param name="statementBuilder">The statement builder object to be used.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
-    /// <returns>The number of affected rows during the merge process.</returns>
-    internal static async ValueTask<int> UpsertAllAsyncInternalBase<TEntity>(this IDbConnection connection,
-        string tableName,
-        IEnumerable<TEntity> entities,
-        IEnumerable<Field>? qualifiers,
-        IEnumerable<Field> fields,
-        string? hints = null,
-        int commandTimeout = 0,
-        string? traceKey = TraceKeys.MergeAll,
-        IDbTransaction? transaction = null,
-        ITrace? trace = null,
-        IStatementBuilder? statementBuilder = null,
-        CancellationToken cancellationToken = default)
-        where TEntity : class
-    {
-        // Variables needed
-        var type = GetEntityType<TEntity>(entities);
-        var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
-        var primary = dbFields?.GetPrimary();
-        IEnumerable<ClassProperty>? properties = null;
-        ClassProperty? primaryKey = null;
-
-        // Get the properties
-        if (type.IsGenericType == true)
-        {
-            properties = type.GetClassProperties();
-        }
-        else
-        {
-            properties = PropertyCache.Get(type);
-        }
-
-        // Check the qualifiers
-        if (qualifiers?.Any() != true)
-        {
-            // Throw if there is no primary
-            if (primary == null)
-            {
-                throw new PrimaryFieldNotFoundException($"There is no primary found for '{tableName}'.");
-            }
-
-            // Set the primary as the qualifier
-            qualifiers = primary.AsField().AsEnumerable();
-        }
-
-        // Set the primary key
-        primaryKey = properties?.FirstOrDefault(p =>
-            string.Equals(primary?.Name, p.GetMappedName(), StringComparison.OrdinalIgnoreCase));
-
-        // Execution variables
-        var result = 0;
-
-        await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
-        using var myTransaction = (transaction is null && Transaction.Current is null) ? await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false) : null;
-        transaction ??= myTransaction;
-
-
-        // Iterate the entities
-        var immutableFields = fields.AsList(); // Fix for the IDictionary<string, object> object
-        foreach (var entity in entities.AsList())
-        {
-            // Call the upsert
-            var upsertResult = await connection.UpsertAsyncInternalBase<TEntity, object>(tableName,
-                entity,
-                qualifiers,
-                immutableFields,
-                hints,
-                commandTimeout,
-                traceKey,
-                transaction,
-                trace,
-                statementBuilder,
-                cancellationToken: cancellationToken).ConfigureAwait(false);
-
-            // Iterate the result
-            if (Converter.DbNullToNull(upsertResult) != null)
-            {
-                result++;
             }
         }
 

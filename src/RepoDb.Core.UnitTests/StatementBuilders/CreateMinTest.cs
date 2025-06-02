@@ -52,10 +52,10 @@ public class BaseStatementBuilderCreateMinTest
         var actual = statementBuilder.CreateMin(tableName: tableName,
             field: field,
             where: where);
-        var expected = $"" +
-            $"SELECT MIN ([Value]) AS [MinValue] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT MIN ([Value]) AS [MinValue] " +
+            "FROM [Table] " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -95,10 +95,10 @@ public class BaseStatementBuilderCreateMinTest
             field: field,
             where: where,
             hints: hints);
-        var expected = $"" +
-            $"SELECT MIN ([Value]) AS [MinValue] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT MIN ([Value]) AS [MinValue] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);

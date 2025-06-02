@@ -20196,7 +20196,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -20208,7 +20211,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -20936,7 +20939,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -20948,7 +20954,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -21848,7 +21854,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -21860,7 +21869,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -22926,7 +22935,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -22938,7 +22950,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -24170,7 +24182,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -24182,7 +24197,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -25580,7 +25595,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -25592,7 +25610,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -26130,7 +26148,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -26142,7 +26163,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -26737,7 +26758,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -26749,7 +26773,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -27482,7 +27506,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -27494,7 +27521,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -28360,7 +28387,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -28372,7 +28402,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -29371,7 +29401,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -29383,7 +29416,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -30515,7 +30548,10 @@ public static partial class DbConnectionExtension
                 .InvokeBeforeExecutionAsync(traceKey, trace, command, cancellationToken).ConfigureAwait(false);
 
         // Actual Execution
-        using (var reader = (DbDataReader)(await ExecuteReaderAsyncInternal(connection: connection,
+#if NET
+        await
+#endif
+        using (var reader = await ExecuteReaderAsyncInternal(connection: connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -30527,7 +30563,7 @@ public static partial class DbConnectionExtension
             dbFields: null,
             skipCommandArrayParametersCheck: true,
             beforeExecutionCallbackAsync: beforeExecutionCallbackAsync,
-            cancellationToken: cancellationToken).ConfigureAwait(false)))
+            cancellationToken: cancellationToken).ConfigureAwait(false))
         {
             // Silent cancellation
             if (traceResult?.CancellableTraceLog?.IsCancelled == true)
@@ -30764,7 +30800,7 @@ public static partial class DbConnectionExtension
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            item = (await (cache.GetAsync<IEnumerable<T>>(cacheKey, false, cancellationToken)).ConfigureAwait(false))?.Value;
+            item = (await cache.GetAsync<IEnumerable<T>>(cacheKey, false, cancellationToken).ConfigureAwait(false))?.Value;
         }
 
         if (item == null)
@@ -30794,7 +30830,7 @@ public static partial class DbConnectionExtension
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            item = (await (cache.GetAsync<IEnumerable<dynamic>>(cacheKey, false, cancellationToken)).ConfigureAwait(false))?.Value;
+            item = (await cache.GetAsync<IEnumerable<dynamic>>(cacheKey, false, cancellationToken).ConfigureAwait(false))?.Value;
         }
 
         if (item == null)
@@ -30844,7 +30880,7 @@ public static partial class DbConnectionExtension
 
         if (cache != null && string.IsNullOrEmpty(cacheKey))
         {
-            await (cache.AddAsync(cacheKey, items, cacheItemExpiration, false, cancellationToken)).ConfigureAwait(false);
+            await cache.AddAsync(cacheKey, items, cacheItemExpiration, false, cancellationToken).ConfigureAwait(false);
         }
 
         return items;

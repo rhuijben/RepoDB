@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.IntegrationTests.Models;
 using RepoDb.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.IntegrationTests;
 
@@ -104,7 +105,7 @@ public class BaseEnferredInheritanceTest
         using (var connection = new SqlConnection(Database.ConnectionStringForRepoDb))
         {
             // Act
-            var insertAllResult = connection.InsertAll<Entity<InheritedIdentityTable>>(entities);
+            var insertAllResult = connection.InsertAll<Entity<InheritedIdentityTable>>(entities, trace: new DiagnosticsTracer());
 
             // Assert
             Assert.AreEqual(entities.Count, insertAllResult);

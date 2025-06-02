@@ -588,7 +588,7 @@ public class StatementBuilderTest
     }
 
     [TestMethod]
-    public void TestSqlServerStatementBuilderCreateInsertAllWithIdentityForThreeBatches()
+    public void TestSqlServerStatementBuilderCreateInsertAllWithIdentityFor3Batches()
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
@@ -605,13 +605,40 @@ public class StatementBuilderTest
         var expected = "" +
             "INSERT INTO [Table] ([Field2], [Field3]) " +
             "OUTPUT INSERTED.[Field1] " +
-            "SELECT S.[Field1], S.[Field2], S.[Field3] FROM (" +
             "VALUES " +
+            "(@Field2, @Field3), " +
+            "(@Field2_1, @Field3_1), " +
+            "(@Field2_2, @Field3_2);";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestSqlServerStatementBuilderCreateInsertAllWithIdentityFor5Batches()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
+        var identityField = new DbField("Field1", false, true, false, typeof(int), null, null, null, null);
+
+        // Act
+        var actual = statementBuilder.CreateInsertAll(tableName: tableName,
+            fields: fields,
+            batchSize: 5,
+            primaryField: null,
+            identityField: identityField);
+        var expected =
+            "MERGE INTO [Table] AS T USING (VALUES " +
             "(@Field2, @Field3, 0), " +
             "(@Field2_1, @Field3_1, 1), " +
-            "(@Field2_2, @Field3_2, 2)) " +
-            "AS S ([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
-             "ORDER BY S.[__RepoDb_OrderColumn];";
+            "(@Field2_2, @Field3_2, 2), " +
+            "(@Field2_3, @Field3_3, 3), " +
+            "(@Field2_4, @Field3_4, 4)" +
+            ") AS S ([Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ON 1=0 WHEN NOT MATCHED THEN INSERT ([Field2], [Field3]) VALUES (S.[Field2], S.[Field3]) " +
+            "OUTPUT INSERTED.[Field1], S.[__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -644,7 +671,7 @@ public class StatementBuilderTest
     }
 
     [TestMethod]
-    public void TestSqlServerStatementBuilderCreateInsertAllWithIdentityForThreeBatchesWithHints()
+    public void TestSqlServerStatementBuilderCreateInsertAllWithIdentityFor3BatchesWithHints()
     {
         // Setup
         var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
@@ -659,16 +686,42 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: identityField,
             hints: SqlServerTableHints.TabLock);
-        var expected = "" +
-            "INSERT INTO [Table] WITH (TABLOCK) ([Field2], [Field3]) " +
+        var expected =
+            "INSERT INTO [Table] WITH (TABLOCK) " +
+            "([Field2], [Field3]) " +
             "OUTPUT INSERTED.[Field1] " +
-            "SELECT S.[Field1], S.[Field2], S.[Field3] FROM (" +
-            "VALUES " +
-            "(@Field2, @Field3, 0), " +
+            "VALUES (@Field2, @Field3), (@Field2_1, @Field3_1), (@Field2_2, @Field3_2);";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestSqlServerStatementBuilderCreateInsertAllWithIdentityFor5BatchesWithHints()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2", "Field3" });
+        var identityField = new DbField("Field1", false, true, false, typeof(int), null, null, null, null);
+
+        // Act
+        var actual = statementBuilder.CreateInsertAll(tableName: tableName,
+            fields: fields,
+            batchSize: 5,
+            primaryField: null,
+            identityField: identityField,
+            hints: SqlServerTableHints.TabLock);
+        var expected = "" +
+            "MERGE INTO [Table] AS T " +
+            "USING (VALUES (@Field2, @Field3, 0), " +
             "(@Field2_1, @Field3_1, 1), " +
-            "(@Field2_2, @Field3_2, 2)) " +
-            "AS S ([Field1], [Field2], [Field3], [__RepoDb_OrderColumn]) " +
-             "ORDER BY S.[__RepoDb_OrderColumn];";
+            "(@Field2_2, @Field3_2, 2), " +
+            "(@Field2_3, @Field3_3, 3), " +
+            "(@Field2_4, @Field3_4, 4)) " +
+            "AS S ([Field2], [Field3], [__RepoDb_OrderColumn]) " +
+            "ON 1=0 WHEN NOT MATCHED THEN INSERT ([Field2], [Field3]) VALUES (S.[Field2], S.[Field3]) " +
+            "OUTPUT INSERTED.[Field1], S.[__RepoDb_OrderColumn];";
 
         // Assert
         Assert.AreEqual(expected, actual);

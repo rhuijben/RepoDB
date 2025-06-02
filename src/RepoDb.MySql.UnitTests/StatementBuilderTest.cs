@@ -255,7 +255,8 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
-        var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address);";
+        var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address); " +
+            "SELECT @Id AS `Id`;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -308,8 +309,8 @@ public class StatementBuilderTest
             3,
             primaryField: null,
             null);
-        var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES ROW (@Id, @Name, @Address)," +
-            " ROW (@Id_1, @Name_1, @Address_1), ROW (@Id_2, @Name_2, @Address_2);";
+        var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES ROW (@Id, @Name, @Address), " +
+            "ROW (@Id_1, @Name_1, @Address_1), ROW (@Id_2, @Name_2, @Address_2);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -327,8 +328,9 @@ public class StatementBuilderTest
             3,
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
-        var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES ROW (@Id, @Name, @Address), ROW (@Id_1, @Name_1, @Address_1)," +
-            " ROW (@Id_2, @Name_2, @Address_2);";
+        var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES ROW (@Id, @Name, @Address), ROW (@Id_1, @Name_1, @Address_1), " +
+            "ROW (@Id_2, @Name_2, @Address_2); " +
+            "SELECT * FROM (VALUES ROW (@Id), ROW (@Id_1), ROW (@Id_2)) AS RESULT (`Id`);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -346,11 +348,11 @@ public class StatementBuilderTest
             3,
             null,
             new DbField("Id", false, true, false, typeof(int), null, null, null, null, false));
-        var expected = "INSERT INTO `Table` (`Name`, `Address`) VALUES ROW (@Name, @Address), " +
-            "ROW (@Name_1, @Address_1), ROW (@Name_2, @Address_2); " +
-            "SELECT * FROM (VALUES ROW (LAST_INSERT_ID() + 0)" +
-            ", ROW (LAST_INSERT_ID() + 1), ROW (LAST_INSERT_ID() + 2)) " +
-            "AS RESULT (`Id`);";
+        var expected = "INSERT INTO `Table` (`Name`, `Address`) VALUES ROW (@Name, @Address), ROW (@Name_1, @Address_1), " +
+            "ROW (@Name_2, @Address_2); " +
+            "SELECT * FROM (" +
+            "VALUES ROW (LAST_INSERT_ID() + 0), ROW (LAST_INSERT_ID() + 1), ROW (LAST_INSERT_ID() + 2)" +
+            ") AS RESULT (`Id`);";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -554,7 +556,8 @@ public class StatementBuilderTest
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
         var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY " +
-            "UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address;";
+            "UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address; " +
+            "SELECT @Id AS `Id`;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -573,7 +576,8 @@ public class StatementBuilderTest
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
         var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY " +
-            "UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address;";
+            "UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address; " +
+            "SELECT @Id AS `Id`;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -589,10 +593,10 @@ public class StatementBuilderTest
         var query = builder.CreateMerge("Table",
             Field.From("Id", "Name", "Address"),
             null,
-            new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
-            new DbField("Id", false, true, false, typeof(int), null, null, null, null, false));
+            new DbField("Id", true, true, false, typeof(int), null, null, null, null, false),
+            new DbField("Id", true, true, false, typeof(int), null, null, null, null, false));
         var expected = "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY " +
-            "UPDATE `Id` = LAST_INSERT_ID( @Id), `Name` = @Name, `Address` = @Address; SELECT LAST_INSERT_ID() AS `Id`;";
+            "UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address; SELECT @Id AS `Id`;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -659,9 +663,9 @@ public class StatementBuilderTest
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
         var expected =
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address; " +
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_1, @Name_1, @Address_1) ON DUPLICATE KEY UPDATE `Id` = @Id_1, `Name` = @Name_1, `Address` = @Address_1; " +
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_2, @Name_2, @Address_2) ON DUPLICATE KEY UPDATE `Id` = @Id_2, `Name` = @Name_2, `Address` = @Address_2;";
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address; SELECT @Id AS `Id`; " +
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_1, @Name_1, @Address_1) ON DUPLICATE KEY UPDATE `Id` = @Id_1, `Name` = @Name_1, `Address` = @Address_1; SELECT @Id_1 AS `Id`; " +
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_2, @Name_2, @Address_2) ON DUPLICATE KEY UPDATE `Id` = @Id_2, `Name` = @Name_2, `Address` = @Address_2; SELECT @Id_2 AS `Id`;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -681,9 +685,9 @@ public class StatementBuilderTest
             new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
             null);
         var expected =
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address; " +
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_1, @Name_1, @Address_1) ON DUPLICATE KEY UPDATE `Id` = @Id_1, `Name` = @Name_1, `Address` = @Address_1; " +
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_2, @Name_2, @Address_2) ON DUPLICATE KEY UPDATE `Id` = @Id_2, `Name` = @Name_2, `Address` = @Address_2;";
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY UPDATE `Id` = @Id, `Name` = @Name, `Address` = @Address; SELECT @Id AS `Id`; " +
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_1, @Name_1, @Address_1) ON DUPLICATE KEY UPDATE `Id` = @Id_1, `Name` = @Name_1, `Address` = @Address_1; SELECT @Id_1 AS `Id`; " +
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_2, @Name_2, @Address_2) ON DUPLICATE KEY UPDATE `Id` = @Id_2, `Name` = @Name_2, `Address` = @Address_2; SELECT @Id_2 AS `Id`;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -700,12 +704,12 @@ public class StatementBuilderTest
             Field.From("Id", "Name", "Address"),
             null,
             3,
-            new DbField("Id", true, false, false, typeof(int), null, null, null, null, false),
-            new DbField("Id", false, true, false, typeof(int), null, null, null, null, false));
+            new DbField("Id", true, true, false, typeof(int), null, null, null, null, false),
+            new DbField("Id", true, true, false, typeof(int), null, null, null, null, false));
         var expected =
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY UPDATE `Id` = LAST_INSERT_ID( @Id), `Name` = @Name, `Address` = @Address; SELECT LAST_INSERT_ID() AS `Id`; " +
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_1, @Name_1, @Address_1) ON DUPLICATE KEY UPDATE `Id` = LAST_INSERT_ID( @Id_1), `Name` = @Name_1, `Address` = @Address_1; SELECT LAST_INSERT_ID() AS `Id`; " +
-            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_2, @Name_2, @Address_2) ON DUPLICATE KEY UPDATE `Id` = LAST_INSERT_ID( @Id_2), `Name` = @Name_2, `Address` = @Address_2; SELECT LAST_INSERT_ID() AS `Id`;";
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id, @Name, @Address) ON DUPLICATE KEY UPDATE `Id` = LAST_INSERT_ID( @Id), `Name` = @Name, `Address` = @Address; SELECT COALESCE (@Id, LAST_INSERT_ID()) AS `Id`; " +
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_1, @Name_1, @Address_1) ON DUPLICATE KEY UPDATE `Id` = LAST_INSERT_ID( @Id_1), `Name` = @Name_1, `Address` = @Address_1; SELECT COALESCE (@Id_1, LAST_INSERT_ID()) AS `Id`; " +
+            "INSERT INTO `Table` (`Id`, `Name`, `Address`) VALUES (@Id_2, @Name_2, @Address_2) ON DUPLICATE KEY UPDATE `Id` = LAST_INSERT_ID( @Id_2), `Name` = @Name_2, `Address` = @Address_2; SELECT COALESCE (@Id_2, LAST_INSERT_ID()) AS `Id`;";
 
         // Assert
         Assert.AreEqual(expected, query);
@@ -739,7 +743,9 @@ public class StatementBuilderTest
 
         // Act
         var query = builder.CreateQuery("Table",
-            Field.From("Id", "Name", "Address"));
+            Field.From("Id", "Name", "Address"),
+            null,
+            null);
         var expected = "SELECT `Id`, `Name`, `Address` FROM `Table`;";
 
         // Assert

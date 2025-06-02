@@ -20,7 +20,6 @@ public sealed record PostgreSqlDbSetting : BaseDbSetting
         IsExecuteReaderDisposable = true;
         IsMultiStatementExecutable = true;
         IsPreparable = true;
-        IsUseUpsert = false;
         OpeningQuote = "\"";
         ParameterPrefix = "@";
     }

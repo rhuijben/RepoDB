@@ -170,7 +170,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
                 .WriteText(":RepoDb_Result");
         }
 
-        return builder.GetString();
+        return builder.ToString();
     }
 
     public override string CreateInsertAll(string tableName, IEnumerable<Field>? fields, int batchSize, IEnumerable<DbField> keyFields, string? hints = null)
@@ -251,7 +251,7 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
         }
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     public override string CreateExists(string tableName, QueryGroup? where = null, string? hints = null)
@@ -276,6 +276,6 @@ public sealed class OracleStatementBuilder : BaseStatementBuilder
             .FetchFirstRowsOnly(1);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 }

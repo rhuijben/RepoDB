@@ -48,10 +48,10 @@ public class BaseStatementBuilderCreateExistsTest
         // Act
         var actual = statementBuilder.CreateExists(tableName: tableName,
             where: where);
-        var expected = $"" +
-            $"SELECT TOP (1) 1 AS [ExistsValue] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT TOP (1) 1 AS [ExistsValue] " +
+            "FROM [Table] " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -87,10 +87,10 @@ public class BaseStatementBuilderCreateExistsTest
         var actual = statementBuilder.CreateExists(tableName: tableName,
             where: where,
             hints: hints);
-        var expected = $"" +
-            $"SELECT TOP (1) 1 AS [ExistsValue] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT TOP (1) 1 AS [ExistsValue] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);

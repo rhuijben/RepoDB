@@ -52,10 +52,10 @@ public class BaseStatementBuilderCreateSumTest
         var actual = statementBuilder.CreateSum(tableName: tableName,
             field: field,
             where: where);
-        var expected = $"" +
-            $"SELECT SUM ([Value]) AS [SumValue] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT SUM ([Value]) AS [SumValue] " +
+            "FROM [Table] " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -95,10 +95,10 @@ public class BaseStatementBuilderCreateSumTest
             field: field,
             where: where,
             hints: hints);
-        var expected = $"" +
-            $"SELECT SUM ([Value]) AS [SumValue] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT SUM ([Value]) AS [SumValue] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);

@@ -85,16 +85,6 @@ public class DbSettingTest
     }
 
     [TestMethod]
-    public void TestPostgreSqlDbSettingIsUseUpsertProperty()
-    {
-        // Setup
-        var setting = DbSettingMapper.Get<NpgsqlConnection>();
-
-        // Assert
-        Assert.IsFalse(setting.IsUseUpsert);
-    }
-
-    [TestMethod]
     public void TestPostgreSqlDbSettingOpeningQuoteProperty()
     {
         // Setup

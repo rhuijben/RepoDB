@@ -38,10 +38,10 @@ public class BaseStatementBuilderCreateUpdateAllTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"UPDATE [Table] " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1);";
+        var expected =
+            "UPDATE [Table] " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -63,10 +63,10 @@ public class BaseStatementBuilderCreateUpdateAllTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"UPDATE [Table] " +
-            $"SET [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1 AND [Field2] = @Field2);";
+        var expected =
+            "UPDATE [Table] " +
+            "SET [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1 AND [Field2] = @Field2);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -88,10 +88,10 @@ public class BaseStatementBuilderCreateUpdateAllTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"UPDATE [dbo].[Table] " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1);";
+        var expected =
+            "UPDATE [dbo].[Table] " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -113,10 +113,10 @@ public class BaseStatementBuilderCreateUpdateAllTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"UPDATE [dbo].[Table] " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1);";
+        var expected =
+            "UPDATE [dbo].[Table] " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -138,10 +138,10 @@ public class BaseStatementBuilderCreateUpdateAllTest
             batchSize: 1,
             primaryField: field,
             identityField: null);
-        var expected = $"" +
-            $"UPDATE [Table] " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1);";
+        var expected =
+            "UPDATE [Table] " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -164,10 +164,10 @@ public class BaseStatementBuilderCreateUpdateAllTest
             batchSize: 1,
             primaryField: null,
             identityField: field);
-        var expected = $"" +
-            $"UPDATE [Table] " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1);";
+        var expected =
+            "UPDATE [Table] " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -190,10 +190,10 @@ public class BaseStatementBuilderCreateUpdateAllTest
             batchSize: 1,
             primaryField: field,
             identityField: field);
-        var expected = $"" +
-            $"UPDATE [Table] " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1);";
+        var expected =
+            "UPDATE [Table] " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -215,16 +215,16 @@ public class BaseStatementBuilderCreateUpdateAllTest
             batchSize: 3,
             primaryField: null,
             identityField: null);
-        var expected = $"" +
-            $"UPDATE [Table] " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1); " +
-            $"UPDATE [Table] " +
-            $"SET [Field2] = @Field2_1, [Field3] = @Field3_1 " +
-            $"WHERE ([Field1] = @Field1_1); " +
-            $"UPDATE [Table] " +
-            $"SET [Field2] = @Field2_2, [Field3] = @Field3_2 " +
-            $"WHERE ([Field1] = @Field1_2);";
+        var expected =
+            "UPDATE [Table] " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1); " +
+            "UPDATE [Table] " +
+            "SET [Field2] = @Field2_1, [Field3] = @Field3_1 " +
+            "WHERE ([Field1] = @Field1_1); " +
+            "UPDATE [Table] " +
+            "SET [Field2] = @Field2_2, [Field3] = @Field3_2 " +
+            "WHERE ([Field1] = @Field1_2);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -247,10 +247,10 @@ public class BaseStatementBuilderCreateUpdateAllTest
             primaryField: null,
             identityField: null,
             hints: "WITH (TABLOCK)");
-        var expected = $"" +
-            $"UPDATE [Table] WITH (TABLOCK) " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1);";
+        var expected =
+            "UPDATE [Table] WITH (TABLOCK) " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -273,16 +273,16 @@ public class BaseStatementBuilderCreateUpdateAllTest
             primaryField: null,
             identityField: null,
             hints: "WITH (TABLOCK)");
-        var expected = $"" +
-            $"UPDATE [Table] WITH (TABLOCK) " +
-            $"SET [Field2] = @Field2, [Field3] = @Field3 " +
-            $"WHERE ([Field1] = @Field1); " +
-            $"UPDATE [Table] WITH (TABLOCK) " +
-            $"SET [Field2] = @Field2_1, [Field3] = @Field3_1 " +
-            $"WHERE ([Field1] = @Field1_1); " +
-            $"UPDATE [Table] WITH (TABLOCK) " +
-            $"SET [Field2] = @Field2_2, [Field3] = @Field3_2 " +
-            $"WHERE ([Field1] = @Field1_2);";
+        var expected =
+            "UPDATE [Table] WITH (TABLOCK) " +
+            "SET [Field2] = @Field2, [Field3] = @Field3 " +
+            "WHERE ([Field1] = @Field1); " +
+            "UPDATE [Table] WITH (TABLOCK) " +
+            "SET [Field2] = @Field2_1, [Field3] = @Field3_1 " +
+            "WHERE ([Field1] = @Field1_1); " +
+            "UPDATE [Table] WITH (TABLOCK) " +
+            "SET [Field2] = @Field2_2, [Field3] = @Field3_2 " +
+            "WHERE ([Field1] = @Field1_2);";
 
         // Assert
         Assert.AreEqual(expected, actual);

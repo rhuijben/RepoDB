@@ -52,10 +52,10 @@ public class BaseStatementBuilderCreateMaxTest
         var actual = statementBuilder.CreateMax(tableName: tableName,
             field: field,
             where: where);
-        var expected = $"" +
-            $"SELECT MAX ([Value]) AS [MaxValue] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT MAX ([Value]) AS [MaxValue] " +
+            "FROM [Table] " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -95,10 +95,10 @@ public class BaseStatementBuilderCreateMaxTest
             field: field,
             where: where,
             hints: hints);
-        var expected = $"" +
-            $"SELECT MAX ([Value]) AS [MaxValue] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT MAX ([Value]) AS [MaxValue] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);

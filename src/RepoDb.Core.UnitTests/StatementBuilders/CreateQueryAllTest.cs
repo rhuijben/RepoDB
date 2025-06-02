@@ -86,10 +86,10 @@ public class BaseStatementBuilderCreateQueryAllTest
         var actual = statementBuilder.CreateQueryAll(tableName: tableName,
             fields: fields,
             orderBy: orderBy);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM [Table] " +
-            $"ORDER BY [Field1] ASC, [Field2] DESC;";
+        var expected =
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM [Table] " +
+            "ORDER BY [Field1] ASC, [Field2] DESC;";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -129,10 +129,10 @@ public class BaseStatementBuilderCreateQueryAllTest
             fields: fields,
             orderBy: orderBy,
             hints: hints);
-        var expected = $"" +
-            $"SELECT [Field1], [Field2], [Field3] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"ORDER BY [Field1] ASC, [Field2] DESC;";
+        var expected =
+            "SELECT [Field1], [Field2], [Field3] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "ORDER BY [Field1] ASC, [Field2] DESC;";
 
         // Assert
         Assert.AreEqual(expected, actual);

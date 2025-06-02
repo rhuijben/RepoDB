@@ -87,16 +87,6 @@ public class DbSettingTest
     }
 
     [TestMethod]
-    public void TestMdsSqLiteDbSettingIsUseUpsertProperty()
-    {
-        // Setup
-        var setting = DbSettingMapper.Get<SqliteConnection>();
-
-        // Assert
-        Assert.IsTrue(setting.IsUseUpsert);
-    }
-
-    [TestMethod]
     public void TestMdsSqLiteDbSettingOpeningQuoteProperty()
     {
         // Setup

@@ -104,7 +104,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -143,7 +143,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -216,7 +216,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         builder
             .End(DbSetting);
 
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -312,7 +312,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         // Return the query
         return builder
             .End()
-            .GetString();
+            .ToString();
     }
 
     #endregion
@@ -372,9 +372,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Remove the qualifiers from the fields
-        var updatableFields = fields
-            .Where(f =>
-                qualifiers?.Any(qf => string.Equals(qf.Name, f.Name, StringComparison.OrdinalIgnoreCase)) != true)
+        var updatableFields = fields.Where(f => qualifiers.GetByName(f.Name) is null)
             .AsList();
 
         // Build the query
@@ -414,7 +412,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         builder.End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -476,9 +474,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         var builder = new QueryBuilder();
 
         // Remove the qualifiers from the fields
-        var updatableFields = fields
-            .Where(f =>
-                qualifiers?.Any(qf => string.Equals(qf.Name, f.Name, StringComparison.OrdinalIgnoreCase)) != true)
+        var updatableFields = fields.Where(f => qualifiers.GetByName(f.Name) is null)
             .AsList();
 
         // Iterate the indexes
@@ -522,7 +518,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         }
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -576,7 +572,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
         builder.End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -647,7 +643,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -676,7 +672,7 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion

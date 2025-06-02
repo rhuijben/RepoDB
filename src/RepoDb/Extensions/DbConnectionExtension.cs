@@ -366,6 +366,9 @@ public static partial class DbConnectionExtension
         }
 
         // Execute
+#if NET
+        await
+#endif
         using (var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false))
         {
             result = await DataReader.ToEnumerableAsync(reader, dbFields, connection.GetDbSetting(), cancellationToken)
@@ -980,6 +983,9 @@ public static partial class DbConnectionExtension
         }
 
         // Execute
+#if NET
+        await
+#endif
         using (var reader = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false))
         {
             result = await DataReader.ToEnumerableAsync<TResult>(reader, dbFields, connection.GetDbSetting(), cancellationToken)
@@ -1193,7 +1199,7 @@ public static partial class DbConnectionExtension
         bool isDisposeConnection = false,
         CancellationToken cancellationToken = default)
     {
-        IDataReader? reader = null;
+        DbDataReader? reader = null;
 
         // Get Cache
         if (cacheKey == null || cache?.Contains(cacheKey) != true)
@@ -1413,7 +1419,7 @@ public static partial class DbConnectionExtension
     /// <param name="beforeExecutionCallbackAsync"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async ValueTask<IDataReader> ExecuteReaderAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<DbDataReader> ExecuteReaderAsyncInternal(this IDbConnection connection,
         string commandText,
         object? param,
         CommandType commandType,
@@ -2284,33 +2290,6 @@ public static partial class DbConnectionExtension
             return;
         }
         queryField.Parameter.SetValue(queryField.GetValue());
-    }
-
-    #endregion
-
-    #region Order Columns
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <param name="command"></param>
-    /// <param name="entities"></param>
-    private static void AddOrderColumnParameters<TEntity>(DbCommand command,
-        IEnumerable<TEntity> entities)
-        where TEntity : class
-    {
-        var index = 0;
-        foreach (var item in entities)
-        {
-            var parameter = command.CreateParameter($"__RepoDb_OrderColumn_{index}", index, DbType.Int32);
-            parameter.Direction = ParameterDirection.Input;
-            parameter.Size = 4;
-            parameter.Precision = 10;
-            parameter.Scale = 0;
-            command.Parameters.Add(parameter);
-            index++;
-        }
     }
 
     #endregion

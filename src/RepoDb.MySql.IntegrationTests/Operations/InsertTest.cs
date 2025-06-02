@@ -190,7 +190,7 @@ public class InsertTest
     {
         // Setup
         var table = Helper.CreateCompleteTablesAsExpandoObjects(1).First();
-        
+
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
             // Act

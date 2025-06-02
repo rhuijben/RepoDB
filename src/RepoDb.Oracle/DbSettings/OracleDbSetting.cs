@@ -13,7 +13,6 @@ public sealed record OracleDbSetting : BaseDbSetting
         IsExecuteReaderDisposable = false;
         IsMultiStatementExecutable = true;
         IsPreparable = true;
-        IsUseUpsert = false;
         ParameterPrefix = ":";
         ForceAutomaticConversions = false; // Yes — Oracle returns untyped `NUMBER`, `DATE`, etc., requiring conversion
         MaxParameterCount = 32766;

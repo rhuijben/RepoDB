@@ -48,10 +48,10 @@ public class BaseStatementBuilderCreateCountTest
         // Act
         var actual = statementBuilder.CreateCount(tableName: tableName,
             where: where);
-        var expected = $"" +
-            $"SELECT COUNT (*) AS [CountValue] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT COUNT (*) AS [CountValue] " +
+            "FROM [Table] " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -87,10 +87,10 @@ public class BaseStatementBuilderCreateCountTest
         var actual = statementBuilder.CreateCount(tableName: tableName,
             where: where,
             hints: hints);
-        var expected = $"" +
-            $"SELECT COUNT (*) AS [CountValue] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT COUNT (*) AS [CountValue] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);

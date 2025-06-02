@@ -89,7 +89,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -132,7 +132,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -166,7 +166,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -198,7 +198,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -230,7 +230,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -260,7 +260,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -294,7 +294,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -352,7 +352,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -442,7 +442,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -483,7 +483,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -522,7 +522,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -563,7 +563,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -602,7 +602,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -646,7 +646,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -686,7 +686,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -727,7 +727,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -766,7 +766,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -794,7 +794,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -846,7 +846,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
             .End(DbSetting);
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -958,7 +958,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         }
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion

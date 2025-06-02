@@ -400,9 +400,11 @@ public class MergeAllTest
 
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
+            Assert.IsTrue(tables.All(table => ((dynamic)table).Id > 0));
             // Act
             var result = connection.MergeAll(ClassMappedNameCache.Get<CompleteTable>(),
-                tables);
+                tables,
+                trace: new DiagnosticsTracer());
 
             // Assert
             Assert.AreEqual(tables.Count, connection.CountAll<CompleteTable>());

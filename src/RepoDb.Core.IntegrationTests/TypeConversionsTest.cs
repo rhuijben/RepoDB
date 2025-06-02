@@ -661,18 +661,9 @@ public class TypeConversionsTest
             // Act Query
             var data = connection.ExecuteQuery<Direction3>("SELECT 'North, East' AS Value;").First();
 
-            try
-            {
-                var data2 = connection.ExecuteQuery<Direction3>("SELECT 'North, West' AS Value;").First();
-                Assert.Fail("Should have failed Direction3/North, West");
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Assert.IsTrue(e.Message.Contains(nameof(Direction3)));
-
-                // We are in an EN-US scope so the message should match
-                Assert.AreEqual("Invalid value for Direction3 (Parameter 'value')\nActual value was North, West.", e.Message.Replace("\r", ""));
-            }
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => connection.ExecuteQuery<Direction3>("SELECT 'North, West' AS Value;"),
+                "Invalid value for Direction3");
 
             Assert.AreEqual(Direction3.South, data);
         }

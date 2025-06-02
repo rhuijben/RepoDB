@@ -94,7 +94,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -134,7 +134,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -198,7 +198,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         }
 
         builder.End(DbSetting);
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -285,7 +285,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
 
         // Return the query
         return builder
-            .GetString();
+            .ToString();
     }
 
     #endregion
@@ -308,7 +308,84 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         IEnumerable<DbField> keyFields,
         string? hints = null)
     {
-        throw new NotImplementedException("The merge statement is not supported in SQLite. SQLite is using the 'Upsert (Insert/Update)' operation.");
+        // Ensure with guards
+        GuardTableName(tableName);
+        GuardHints(hints);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
+        GuardPrimary(primaryField);
+        GuardIdentity(identityField);
+
+        // Verify the fields
+        if (fields?.Any() != true)
+        {
+            throw new EmptyException($"The list of fields cannot be null or empty.");
+        }
+
+        // Set the qualifiers
+        if (qualifiers?.Any() != true && primaryField != null)
+        {
+            qualifiers = primaryField.AsField().AsEnumerable();
+        }
+
+        // Validate the qualifiers
+        if (qualifiers?.Any() != true)
+        {
+            if (primaryField == null)
+            {
+                throw new PrimaryFieldNotFoundException($"The is no primary field from the table '{tableName}' that can be used as qualifier.");
+            }
+            else
+            {
+                throw new InvalidQualifiersException($"There are no defined qualifier fields.");
+            }
+        }
+
+        // Initialize the builder
+        var builder = new QueryBuilder();
+
+        // Remove the qualifiers from the fields
+        var updatableFields = fields.Where(f => qualifiers.GetByName(f.Name) is null)
+            .AsList();
+
+        // Build the query
+        builder
+            .Insert()
+            .Into()
+            .TableNameFrom(tableName, DbSetting)
+            .OpenParen()
+            .FieldsFrom(fields, DbSetting)
+            .CloseParen();
+
+        //// Override the system value
+        //if (identityField != null)
+        //{
+        //    builder.WriteText("OVERRIDING SYSTEM VALUE");
+        //}
+
+        // Continue
+        builder
+            .Values()
+            .OpenParen()
+            .ParametersFrom(fields, 0, DbSetting)
+            .CloseParen()
+            .OnConflict(qualifiers, DbSetting)
+            .DoUpdate()
+            .Set()
+            .FieldsAndParametersFrom(updatableFields, 0, DbSetting);
+
+        if (keyFields.Any())
+        {
+            builder
+                .Returning()
+                .FieldsFrom(keyFields.AsFields(), DbSetting);
+        }
+
+        // End the builder
+        builder.End();
+
+        // Return the query
+        return builder.ToString();
     }
 
     #endregion
@@ -333,7 +410,88 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         IEnumerable<DbField> keyFields,
         string? hints = null)
     {
-        throw new NotImplementedException("The merge statement is not supported in SQLite. SQLite is using the 'Upsert (Insert/Update)' operation.");
+        // Ensure with guards
+        GuardTableName(tableName);
+        GuardHints(hints);
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
+        GuardPrimary(primaryField);
+        GuardIdentity(identityField);
+
+        // Verify the fields
+        if (fields?.Any() != true)
+        {
+            throw new EmptyException($"The list of fields cannot be null or empty.");
+        }
+
+        // Set the qualifiers
+        if (qualifiers?.Any() != true && primaryField != null)
+        {
+            qualifiers = primaryField.AsField().AsEnumerable();
+        }
+
+        // Validate the qualifiers
+        if (qualifiers?.Any() != true)
+        {
+            if (primaryField == null)
+            {
+                throw new PrimaryFieldNotFoundException($"The is no primary field from the table '{tableName}' that can be used as qualifier.");
+            }
+            else
+            {
+                throw new InvalidQualifiersException($"There are no defined qualifier fields.");
+            }
+        }
+
+        // Initialize the builder
+        var builder = new QueryBuilder();
+
+        // Remove the qualifiers from the fields
+        var updatableFields = fields.Where(f => qualifiers.GetByName(f.Name) is null)
+            .AsList();
+
+        // Iterate the indexes
+        for (var index = 0; index < batchSize; index++)
+        {
+            // Build the query
+            builder
+                .Insert()
+                .Into()
+                .TableNameFrom(tableName, DbSetting)
+                .OpenParen()
+                .FieldsFrom(fields, DbSetting)
+                .CloseParen();
+
+            // Override the system value
+            //if (identityField != null)
+            //{
+            //    builder.WriteText("OVERRIDING SYSTEM VALUE");
+            //}
+
+            // Continue
+            builder
+                .Values()
+                .OpenParen()
+                .ParametersFrom(fields, index, DbSetting)
+                .CloseParen()
+                .OnConflict(qualifiers, DbSetting)
+                .DoUpdate()
+                .Set()
+                .FieldsAndParametersFrom(updatableFields, index, DbSetting);
+
+            if (keyFields.Any())
+            {
+                builder
+                    .Returning()
+                    .FieldsFrom(keyFields.AsFields(), DbSetting);
+            }
+
+            // End the builder
+            builder.End();
+        }
+
+        // Return the query
+        return builder.ToString();
     }
 
     #endregion
@@ -388,7 +546,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
         builder.End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -460,7 +618,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -490,7 +648,7 @@ public sealed class SqLiteStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion

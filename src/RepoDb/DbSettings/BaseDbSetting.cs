@@ -29,7 +29,6 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
         IsExecuteReaderDisposable = true;
         IsMultiStatementExecutable = true;
         IsPreparable = true;
-        IsUseUpsert = false;
         OpeningQuote = "[";
         ParameterPrefix = "@";
         GenerateFinalSemiColon = true;
@@ -62,9 +61,6 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
 
     /// <inheritdoc />
     public bool IsPreparable { get; protected init; }
-
-    /// <inheritdoc />
-    public bool IsUseUpsert { get; protected init; }
 
     /// <inheritdoc />
     public string OpeningQuote { get; protected init; }
@@ -128,9 +124,6 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
 
         // IsDirectionSupported
         hashCode = HashCode.Combine(hashCode, IsDirectionSupported, IsExecuteReaderDisposable, IsMultiStatementExecutable, IsPreparable);
-
-        // IsUseUpsert
-        hashCode = HashCode.Combine(hashCode, IsUseUpsert);
 
         // OpeningQuote
         if (!string.IsNullOrWhiteSpace(OpeningQuote))

@@ -665,7 +665,6 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         var result = default(TResult)!;
-        bool resultFromEntity = false;
 
         using (var command = (DbCommand)connection.EnsureOpen().CreateCommand(context.CommandText,
             CommandType.Text, commandTimeout, transaction))
@@ -693,8 +692,6 @@ public static partial class DbConnectionExtension
                 {
                     result = Converter.ToType<TResult>(rdr.GetValue(0))!;
                 }
-                else
-                    resultFromEntity = true;
             }
             else
             {
@@ -710,15 +707,6 @@ public static partial class DbConnectionExtension
             {
                 context.IdentitySetterFunc?.Invoke(entity, result);
             }
-        }
-
-        if (resultFromEntity
-            && connection.GetDbFields(tableName, transaction).GetKeyColumnReturn(GlobalConfiguration.Options.KeyColumnReturnBehavior) is { } returnField)
-        {
-            var pc = PropertyCache.Get(entityType, returnField.Name);
-
-            if (pc?.PropertyInfo is { } pi)
-                result = Converter.ToType<TResult>(pi.GetValue(entity))!;
         }
 
         // Return the result
@@ -774,7 +762,6 @@ public static partial class DbConnectionExtension
             cancellationToken).ConfigureAwait(false);
 
         var result = default(TResult)!;
-        bool resultFromEntity = false;
 
         using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).CreateCommand(context.CommandText,
             CommandType.Text, commandTimeout, transaction))
@@ -804,14 +791,15 @@ public static partial class DbConnectionExtension
             }
             else
             {
+#if NET
+                await
+#endif
                 using var rdr = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
 
                 if (rdr.Read())
                 {
                     result = Converter.ToType<TResult>(rdr.GetValue(0))!;
                 }
-                else
-                    resultFromEntity = true;
             }
 
             // After Execution
@@ -823,15 +811,6 @@ public static partial class DbConnectionExtension
             {
                 context.IdentitySetterFunc?.Invoke(entity, result);
             }
-        }
-
-        if (resultFromEntity
-            && connection.GetDbFields(tableName, transaction).GetKeyColumnReturn(GlobalConfiguration.Options.KeyColumnReturnBehavior) is { } returnField)
-        {
-            var pc = PropertyCache.Get(entityType, returnField.Name);
-
-            if (pc?.PropertyInfo is { } pi)
-                result = Converter.ToType<TResult>(pi.GetValue(entity))!;
         }
 
         // Return the result

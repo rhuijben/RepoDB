@@ -25,7 +25,6 @@ public sealed record SqLiteDbSetting : BaseDbSetting
         IsExecuteReaderDisposable = isExecuteReaderDisposable;
         IsMultiStatementExecutable = true;
         IsPreparable = true;
-        IsUseUpsert = true;
         OpeningQuote = "[";
         ParameterPrefix = "@";
         ForceAutomaticConversions = true;

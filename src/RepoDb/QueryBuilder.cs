@@ -9,7 +9,7 @@ namespace RepoDb;
 /// <summary>
 /// A class used to compose a SQL Query Statement.
 /// </summary>
-public class QueryBuilder
+public sealed class QueryBuilder
 {
     // A StringBuilder's capacity grows dynamically as required (e.g. during append operations), but there's a 
     // performance penalty to be paid every time this happens (memory allocation + copy). The initial capacity
@@ -27,10 +27,13 @@ public class QueryBuilder
     /// Stringify the current object.
     /// </summary>
     /// <returns>
-    /// Returns a string that corresponds to the composed SQL Query Statement. It uses the <see cref="GetString"/>
+    /// Returns a string that corresponds to the composed SQL Query Statement. It uses the <see cref="ToString"/>
     /// method as its underlying method call.
     /// </returns>
-    public override string ToString() => GetString();
+    public override string ToString()
+    {
+        return stringBuilder.Length > 0 ? stringBuilder.ToString(1, stringBuilder.Length - 1) : "";
+    }
 
     // Custom Methods
 
@@ -39,10 +42,9 @@ public class QueryBuilder
     /// Starts at index 1 to drop the leading space.
     /// </summary>
     /// <returns>The current instance.</returns>
-    public string GetString()
-    {
-        return stringBuilder.Length > 0 ? stringBuilder.ToString(1, stringBuilder.Length - 1) : "";
-    }
+    [Obsolete("Use .ToString()")]
+    public string GetString() => ToString();
+
 
     /// <summary>
     /// Clears the current composed SQL Query Statement.

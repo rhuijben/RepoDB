@@ -85,16 +85,6 @@ public class DbSettingTest
     }
 
     [TestMethod]
-    public void TestMySqlDbSettingIsUseUpsertProperty()
-    {
-        // Setup
-        var setting = DbSettingMapper.Get<MySqlConnection>();
-
-        // Assert
-        Assert.IsFalse(setting.IsUseUpsert);
-    }
-
-    [TestMethod]
     public void TestMySqlDbSettingOpeningQuoteProperty()
     {
         // Setup

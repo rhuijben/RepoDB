@@ -55,10 +55,10 @@ public class BaseStatementBuilderCreateAverageTest
         var actual = statementBuilder.CreateAverage(tableName: tableName,
             field: field,
             where: where);
-        var expected = $"" +
-            $"SELECT AVG ([Value]) AS [AverageValue] " +
-            $"FROM [Table] " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT AVG ([Value]) AS [AverageValue] " +
+            "FROM [Table] " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -98,10 +98,10 @@ public class BaseStatementBuilderCreateAverageTest
             field: field,
             where: where,
             hints: hints);
-        var expected = $"" +
-            $"SELECT AVG ([Value]) AS [AverageValue] " +
-            $"FROM [Table] WITH (NOLOCK) " +
-            $"WHERE ([Id] = @Id);";
+        var expected =
+            "SELECT AVG ([Value]) AS [AverageValue] " +
+            "FROM [Table] WITH (NOLOCK) " +
+            "WHERE ([Id] = @Id);";
 
         // Assert
         Assert.AreEqual(expected, actual);

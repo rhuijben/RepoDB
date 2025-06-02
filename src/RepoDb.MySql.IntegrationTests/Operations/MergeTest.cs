@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using RepoDb.MySql.IntegrationTests.Models;
 using RepoDb.MySql.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.MySql.IntegrationTests.Operations;
 
@@ -328,9 +329,11 @@ public class MergeTest
 
         using (var connection = new MySqlConnection(Database.ConnectionString))
         {
+            Assert.AreEqual(0, connection.CountAll<CompleteTable>());
+
             // Act
             var result = connection.Merge(ClassMappedNameCache.Get<CompleteTable>(),
-                (object)table);
+                (object)table, trace: new DiagnosticsTracer());
 
             // Assert
             Assert.AreEqual(1, connection.CountAll<CompleteTable>());

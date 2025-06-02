@@ -102,7 +102,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -185,7 +185,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -216,17 +216,38 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
                 keyFields,
                 hints));
 
-        if (keyFields.FirstOrDefault() is { IsIdentity: true } returnColumn)
+        if (keyFields.Any())
         {
             builder
-                .Select()
-                .WriteText("LAST_INSERT_ID()")
-                .As(returnColumn.Name, DbSetting)
+                .Select();
+
+            bool firstField = true;
+            foreach (var kf in keyFields)
+            {
+                if (firstField)
+                    firstField = false;
+                else
+                    builder.Comma();
+
+                if (kf.IsIdentity)
+                {
+                    builder
+                        .WriteText("LAST_INSERT_ID()");
+                }
+                else
+                {
+                    builder
+                        .WriteText(kf.Name.AsParameter(DbSetting));
+                }
+
+                builder.As(kf.Name, DbSetting);
+            }
+            builder
                 .End(DbSetting);
         }
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -252,10 +273,6 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         // Ensure with guards
         GuardTableName(tableName);
         GuardHints(hints);
-        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
-        var identityField = keyFields.FirstOrDefault(f => f.IsIdentity);
-        GuardPrimary(primaryField);
-        GuardIdentity(identityField);
 
         // Validate the multiple statement execution
         ValidateMultipleStatementExecution(batchSize);
@@ -266,25 +283,9 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
         }
 
-        // Primary Key
-        if (primaryField != null &&
-            primaryField.HasDefaultValue == false &&
-            !string.Equals(primaryField.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase))
-        {
-            var isPresent = fields
-                .FirstOrDefault(f =>
-                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase)) != null;
-
-            if (isPresent == false)
-            {
-                throw new PrimaryFieldNotFoundException($"As the primary field '{primaryField.Name}' is not an identity nor has a default value, it must be present on the insert operation.");
-            }
-        }
-
         // Insertable fields
         var insertableFields = fields
-            .Where(f =>
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase));
+            .Where(f => keyFields.GetByName(f.Name) is not { } x || !(x.IsGenerated || x.IsIdentity));
 
         // Initialize the builder
         var builder = new QueryBuilder();
@@ -317,7 +318,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         builder
             .End();
 
-        if (keyFields.FirstOrDefault() is { IsIdentity: true } returnColumn)
+        if (keyFields.Any())
         {
             builder
                 .Select()
@@ -333,10 +334,30 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
 
                 builder
                     .Row()
-                    .OpenParen()
-                    .WriteText("LAST_INSERT_ID() +")
-                    .WriteText($"{index}")
-                    .CloseParen();
+                    .OpenParen();
+
+                bool firstField = true;
+                foreach (var kf in keyFields)
+                {
+                    if (firstField)
+                        firstField = false;
+                    else
+                        builder.Comma();
+
+                    if (kf.IsIdentity)
+                    {
+                        builder
+                            .WriteText("LAST_INSERT_ID() +")
+                            .WriteText($"{index}");
+                    }
+                    else
+                    {
+                        builder
+                            .WriteText(kf.Name.AsParameter(index, DbSetting));
+                    }
+                }
+
+                builder.CloseParen();
             }
 
             builder
@@ -344,12 +365,12 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
                 .As()
                 .WriteText("RESULT")
                 .OpenParen()
-                .FieldFrom(returnColumn.AsField(), DbSetting)
+                .FieldsFrom(keyFields.AsFields(), DbSetting)
                 .CloseParen()
                 .End();
         }
 
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -461,25 +482,41 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             .WriteText("ON DUPLICATE KEY")
             .Update();
 
-        IdentityFieldsAndParametersFrom(builder, fields, 0, keyFields.FirstOrDefault(x => x.IsIdentity));
+        IdentityFieldsAndParametersFrom(builder, fields, 0, keyFields.FirstOrDefault(x => x.IsIdentity && fields.GetByName(x.Name) is null));
         builder
             .End();
 
-        // Variables needed
-        if (keyFields.FirstOrDefault() is { IsIdentity: true } key)
+        if (keyFields.Any())
         {
-            // Set the return value
             builder
-                .Select()
-                    .WriteText("LAST_INSERT_ID()")
-                    .As(key.Name, DbSetting)
-                    .End(DbSetting);
+                .Select();
 
-            // Return the query
-            return builder.GetString();
+            bool firstField = true;
+            foreach (var kf in keyFields)
+            {
+                if (firstField)
+                    firstField = false;
+                else
+                    builder.Comma();
+
+                if (kf.IsIdentity && fields.GetByName(kf.Name) is null)
+                {
+                    builder
+                        .WriteText("LAST_INSERT_ID()");
+                }
+                else
+                {
+                    builder
+                        .WriteText(kf.Name.AsParameter(DbSetting));
+                }
+
+                builder.As(kf.Name, DbSetting);
+            }
+            builder
+                .End(DbSetting);
         }
 
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -539,23 +576,46 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             builder
                 .End(DbSetting);
 
-            if (keyFields.FirstOrDefault() is { IsIdentity: true } key)
+            if (keyFields.Any())
             {
                 builder
-                    .Select()
-                    .WriteText("LAST_INSERT_ID()")
-                    .As(key.Name, DbSetting)
-                    .End(DbSetting);
+                    .Select();
+                bool first = true;
+
+                foreach (var kf in keyFields)
+                {
+                    if (first)
+                        first = false;
+                    else
+                        builder.Comma();
+
+                    if (kf.IsIdentity)
+                    {
+                        builder
+                            .WriteText("COALESCE")
+                            .OpenParen()
+                            .WriteText(kf.Name.AsParameter(index, DbSetting))
+                            .Comma()
+                            .WriteText("LAST_INSERT_ID()")
+                            .CloseParen();
+                    }
+                    else
+                    {
+                        builder.WriteText(kf.Name.AsParameter(index, DbSetting));
+                    }
+                    builder.As(kf.Name, DbSetting);
+                }
+                builder.End();
             }
         }
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     private void IdentityFieldsAndParametersFrom(QueryBuilder builder, IEnumerable<Field> fields, int index, DbField? identityField)
     {
-        if (identityField is null || !fields.Any(x => string.Equals(x.Name, identityField.Name, StringComparison.OrdinalIgnoreCase)))
+        if (identityField is null || fields.GetByName(identityField.Name) is null)
         {
             builder.FieldsAndParametersFrom(fields, index, DbSetting);
         }
@@ -679,7 +739,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
         builder.End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
@@ -750,7 +810,7 @@ public sealed class MySqlConnectorStatementBuilder : BaseStatementBuilder
             .End();
 
         // Return the query
-        return builder.GetString();
+        return builder.ToString();
     }
 
     #endregion
