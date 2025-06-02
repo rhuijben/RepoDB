@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 
@@ -111,4 +112,13 @@ public sealed class DbFieldCollection : ReadOnlyCollection<DbField>
 
     [EditorBrowsable(EditorBrowsableState.Never)]
     public IEnumerable<Field> GetAsFields() => AsFields();
+
+    internal DbField? GetKeyColumnReturn(KeyColumnReturnBehavior keyColumnReturnBehavior) => GlobalConfiguration.Options.KeyColumnReturnBehavior switch
+    {
+        KeyColumnReturnBehavior.Primary => GetPrimaryFields()?[0],
+        KeyColumnReturnBehavior.Identity => GetIdentity(),
+        KeyColumnReturnBehavior.PrimaryOrElseIdentity => GetPrimaryFields()?[0] ?? GetIdentity(),
+        KeyColumnReturnBehavior.IdentityOrElsePrimary => GetIdentity() ?? GetPrimaryFields()?[0],
+        _ => throw new NotSupportedException($"The key column return behavior '{GlobalConfiguration.Options.KeyColumnReturnBehavior}' is not supported."),
+    };
 }

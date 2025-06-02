@@ -447,8 +447,10 @@ public static partial class DbConnectionExtension
 
         // Validate the batch size
         batchSize = (dbSetting.IsMultiStatementExecutable == true)
-            ? Math.Min(batchSize <= 0 ? dbSetting.ParameterBatchCount / fields.Count() : batchSize, entities.Count())
+            ? Math.Min(batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize, entities.Count())
             : 1;
+
+        batchSize = Math.Min(batchSize, dbSetting.MaxQueriesInBatchCount);
 
         // Get the context
         var entityType = GetEntityType<TEntity>(entities);
@@ -540,7 +542,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Check if the batch size has changed (probably the last batch on the enumerables)
-                    if (batchItems.Count != batchSize)
+                    if (batchItems.Count != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = InsertAllExecutionContextProvider.Create(entityType,
@@ -693,8 +695,10 @@ public static partial class DbConnectionExtension
 
         // Validate the batch size
         batchSize = (dbSetting.IsMultiStatementExecutable == true)
-            ? Math.Min(batchSize <= 0 ? dbSetting.ParameterBatchCount / fields.Count() : batchSize, entities.Count())
+            ? Math.Min(batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize, entities.Count())
             : 1;
+
+        batchSize = Math.Min(batchSize, dbSetting.MaxQueriesInBatchCount);
 
         await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
         using var myTransaction = (transaction is null && Transaction.Current is null) ? await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false) : null;
@@ -773,6 +777,7 @@ public static partial class DbConnectionExtension
             {
                 BaseDbHelper? dbh = null;
                 int? positionIndex = null;
+                int lastBatchSize = -1;
                 foreach (var batchEntities in entities.ChunkOptimally(batchSize))
                 {
                     var batchItems = batchEntities.AsList();
@@ -784,7 +789,8 @@ public static partial class DbConnectionExtension
                     }
 
                     // Check if the batch size has changed (probably the last batch on the enumerables)
-                    if (batchItems.Count != batchSize)
+                    bool doPrepare = false;
+                    if (batchItems.Count != lastBatchSize)
                     {
                         // Get a new execution context from cache
                         context = await InsertAllExecutionContextProvider.CreateAsync(entityType,
@@ -799,6 +805,7 @@ public static partial class DbConnectionExtension
 
                         // Set the command properties
                         command.CommandText = context.CommandText;
+                        doPrepare = dbSetting.IsPreparable;
                     }
 
                     // Set the values
@@ -816,7 +823,7 @@ public static partial class DbConnectionExtension
 
                     var fetchIdentity = (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutput(command);
 
-                    if (dbSetting.IsPreparable)
+                    if (doPrepare)
                     {
                         command.Prepare();
                     }

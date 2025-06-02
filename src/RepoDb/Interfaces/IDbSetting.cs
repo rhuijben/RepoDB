@@ -72,7 +72,12 @@ public interface IDbSetting
     /// This database provider supports a maximum of this number of parameters
     /// </summary>
     /// <remarks>SqlServer supports 2100-2 = 2098 parameters</remarks>
-    int ParameterBatchCount { get; }
+    int MaxParameterCount { get; }
+
+    /// <summary>
+    /// This database provider supports a maximum of this number of item in a batch operation
+    /// </summary>
+    int MaxQueriesInBatchCount { get; }
 
     /// <summary>
     /// This database provider allows a final semicolon in the command text

@@ -76,7 +76,10 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
     public bool ForceAutomaticConversions { get; protected init; }
 
     /// <inheritdoc />
-    public int ParameterBatchCount { get; protected init; } = 2100 - 2;
+    public int MaxParameterCount { get; protected init; } = 2100 - 2;
+
+    /// <inheritdoc />
+    public int MaxQueriesInBatchCount { get; protected init; } = 1000;
 
     /// <inheritdoc />
     public bool GenerateFinalSemiColon { get; protected init; }
@@ -141,7 +144,7 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
             hashCode = HashCode.Combine(hashCode, ParameterPrefix);
         }
 
-        hashCode = HashCode.Combine(hashCode, ParameterBatchCount, GenerateFinalSemiColon, QuoteParameterNames);
+        hashCode = HashCode.Combine(hashCode, MaxParameterCount, GenerateFinalSemiColon, QuoteParameterNames);
 
         // Set and return the hashcode
         return this.hashCode ??= hashCode;

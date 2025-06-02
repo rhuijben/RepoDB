@@ -711,36 +711,6 @@ public class StatementBuilderTest
         Assert.AreEqual(expected, query);
     }
 
-    [TestMethod, ExpectedException(typeof(PrimaryFieldNotFoundException))]
-    public void ThrowExceptionOnMySqlStatementBuilderCreateMergeAllIfThereIsNoPrimary()
-    {
-        // Setup
-        var builder = StatementBuilderMapper.Get<MySqlConnection>();
-
-        // Act
-        builder.CreateMergeAll("Table",
-            Field.From("Id", "Name", "Address"),
-            null,
-            3,
-            primaryField: null,
-            null);
-    }
-
-    [TestMethod, ExpectedException(typeof(PrimaryFieldNotFoundException))]
-    public void ThrowExceptionOnMySqlStatementBuilderCreateMergeAllIfThereAreNoFields()
-    {
-        // Setup
-        var builder = StatementBuilderMapper.Get<MySqlConnection>();
-
-        // Act
-        builder.CreateMergeAll("Table",
-            Field.From("Id", "Name", "Address"),
-            null,
-            3,
-            primaryField: null,
-            null);
-    }
-
     [TestMethod, ExpectedException(typeof(NotSupportedException))]
     public void ThrowExceptionOnMySqlStatementBuilderCreateMergeAllIfThereAreHints()
     {

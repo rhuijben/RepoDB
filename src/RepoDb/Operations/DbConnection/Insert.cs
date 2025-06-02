@@ -663,9 +663,10 @@ public static partial class DbConnectionExtension
             hints,
             transaction,
             statementBuilder);
-        var result = default(TResult)!;
 
-        // Create the command
+        var result = default(TResult)!;
+        bool resultFromEntity = false;
+
         using (var command = (DbCommand)connection.EnsureOpen().CreateCommand(context.CommandText,
             CommandType.Text, commandTimeout, transaction))
         {
@@ -686,7 +687,14 @@ public static partial class DbConnectionExtension
             var fetch = ((BaseDbHelper)GetDbHelper(connection)).PrepareForIdentityOutput(command);
             if (fetch is not { })
             {
-                result = Converter.ToType<TResult>(command.ExecuteScalar())!;
+                using var rdr = command.ExecuteReader();
+
+                if (rdr.Read())
+                {
+                    result = Converter.ToType<TResult>(rdr.GetValue(0))!;
+                }
+                else
+                    resultFromEntity = true;
             }
             else
             {
@@ -702,6 +710,15 @@ public static partial class DbConnectionExtension
             {
                 context.IdentitySetterFunc?.Invoke(entity, result);
             }
+        }
+
+        if (resultFromEntity
+            && connection.GetDbFields(tableName, transaction).GetKeyColumnReturn(GlobalConfiguration.Options.KeyColumnReturnBehavior) is { } returnField)
+        {
+            var pc = PropertyCache.Get(entityType, returnField.Name);
+
+            if (pc?.PropertyInfo is { } pi)
+                result = Converter.ToType<TResult>(pi.GetValue(entity))!;
         }
 
         // Return the result
@@ -755,9 +772,10 @@ public static partial class DbConnectionExtension
             transaction,
             statementBuilder,
             cancellationToken).ConfigureAwait(false);
-        var result = default(TResult)!;
 
-        // Create the command
+        var result = default(TResult)!;
+        bool resultFromEntity = false;
+
         using (var command = (DbCommand)(await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false)).CreateCommand(context.CommandText,
             CommandType.Text, commandTimeout, transaction))
         {
@@ -786,7 +804,14 @@ public static partial class DbConnectionExtension
             }
             else
             {
-                result = Converter.ToType<TResult>(await command.ExecuteScalarAsync(cancellationToken).ConfigureAwait(false))!;
+                using var rdr = await command.ExecuteReaderAsync(cancellationToken).ConfigureAwait(false);
+
+                if (rdr.Read())
+                {
+                    result = Converter.ToType<TResult>(rdr.GetValue(0))!;
+                }
+                else
+                    resultFromEntity = true;
             }
 
             // After Execution
@@ -798,6 +823,15 @@ public static partial class DbConnectionExtension
             {
                 context.IdentitySetterFunc?.Invoke(entity, result);
             }
+        }
+
+        if (resultFromEntity
+            && connection.GetDbFields(tableName, transaction).GetKeyColumnReturn(GlobalConfiguration.Options.KeyColumnReturnBehavior) is { } returnField)
+        {
+            var pc = PropertyCache.Get(entityType, returnField.Name);
+
+            if (pc?.PropertyInfo is { } pi)
+                result = Converter.ToType<TResult>(pi.GetValue(entity))!;
         }
 
         // Return the result

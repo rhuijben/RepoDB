@@ -140,9 +140,9 @@ public static class DbCommandExtension
         DbType? dbType,
         IDbSetting dbSetting)
     {
-        var values = commandArrayParameter.Values.AsArray();
+        var values = commandArrayParameter.Values.AsList();
 
-        if (values.Length == 0)
+        if (values.Count == 0)
         {
             command.Parameters.Add(
                 command.CreateParameter(
@@ -150,7 +150,7 @@ public static class DbCommandExtension
         }
         else
         {
-            for (var i = 0; i < values.Length; i++)
+            for (var i = 0; i < values.Count; i++)
             {
                 var name = string.Concat(commandArrayParameter.ParameterName, i.ToString(CultureInfo.InvariantCulture)).AsParameter(dbSetting);
                 var value = values[i];

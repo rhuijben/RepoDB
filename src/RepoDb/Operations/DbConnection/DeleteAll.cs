@@ -57,7 +57,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            int chunkSize = connection.GetDbSetting().ParameterBatchCount / key.Count();
+            int chunkSize = connection.GetDbSetting().MaxParameterCount / key.Count();
             using var myTransaction = transaction is null && chunkSize < entities.Count() ? connection.EnsureOpen().BeginTransaction() : null;
             transaction ??= myTransaction;
             int deleted = 0;
@@ -199,7 +199,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            int chunkSize = connection.GetDbSetting().ParameterBatchCount / key.Count();
+            int chunkSize = connection.GetDbSetting().MaxParameterCount / key.Count();
             using var myTransaction = transaction is null && chunkSize < entities.Count() ? connection.EnsureOpen().BeginTransaction() : null;
             transaction ??= myTransaction;
             int deleted = 0;
@@ -413,7 +413,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            int chunkSize = connection.GetDbSetting().ParameterBatchCount / key.Count();
+            int chunkSize = connection.GetDbSetting().MaxParameterCount / key.Count();
 
             await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
             using var myTransaction = transaction is null && chunkSize < entities.Count() ? await connection.BeginTransactionAsync(cancellationToken) : null;
@@ -571,7 +571,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            int chunkSize = connection.GetDbSetting().ParameterBatchCount / key.Count();
+            int chunkSize = connection.GetDbSetting().MaxParameterCount / key.Count();
 
             await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
             using var myTransaction = transaction is null && chunkSize < entities.Count() ? await connection.BeginTransactionAsync(cancellationToken) : null;
@@ -888,7 +888,7 @@ public static partial class DbConnectionExtension
         var count = keys?.AsList()?.Count;
         var deletedRows = 0;
 
-        var parameterBatchCount = connection.GetDbSetting().ParameterBatchCount;
+        var parameterBatchCount = connection.GetDbSetting().MaxParameterCount;
 
         using var myTransaction = transaction is null && count > parameterBatchCount ? connection.EnsureOpen().BeginTransaction() : null;
         transaction ??= myTransaction;
@@ -1067,7 +1067,7 @@ public static partial class DbConnectionExtension
         var deletedRows = 0;
 
         await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
-        var parameterBatchCount = connection.GetDbSetting().ParameterBatchCount;
+        var parameterBatchCount = connection.GetDbSetting().MaxParameterCount;
         using var myTransaction = transaction is null && count > parameterBatchCount ? await connection.BeginTransactionAsync(cancellationToken) : null;
         transaction ??= myTransaction;
 

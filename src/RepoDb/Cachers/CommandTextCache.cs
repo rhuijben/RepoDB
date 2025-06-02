@@ -1,6 +1,5 @@
 ﻿using System.Collections.Concurrent;
 using System.Data;
-using RepoDb.Enumerations;
 using RepoDb.Exceptions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -1289,62 +1288,12 @@ public static class CommandTextCache
 
         dbFieldListUpdated = list.Where(x => x.IsPrimary || x.IsIdentity).ToList();
 
-        if (dbFieldListUpdated.Count > 1)
-        {
-            switch (GlobalConfiguration.Options.KeyColumnReturnBehavior)
-            {
-                case KeyColumnReturnBehavior.Primary:
-                    {
-                        if (primary is { } && primary.FirstOrDefault() is { } p)
-                            EnsureFirst(p.Name);
-                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsPrimary) is { } p2)
-                            EnsureFirst(p2.Name);
-                        break;
-                    }
-                case KeyColumnReturnBehavior.Identity:
-                    {
-                        if (identity is { })
-                            EnsureFirst(identity.Name);
-                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsIdentity) is { } i2)
-                            EnsureFirst(i2.Name);
-                        break;
-                    }
-                case KeyColumnReturnBehavior.PrimaryOrElseIdentity:
-                    {
-                        if (primary is { } && primary.FirstOrDefault() is { } p)
-                            EnsureFirst(p.Name);
-                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsPrimary) is { } p2)
-                            EnsureFirst(p2.Name);
-                        else if (identity is { })
-                            EnsureFirst(identity.Name);
-                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsIdentity) is { } i2)
-                            EnsureFirst(i2.Name);
-                        break;
-                    }
-                case KeyColumnReturnBehavior.IdentityOrElsePrimary:
-                    {
-                        if (identity is { })
-                            EnsureFirst(identity.Name);
-                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsIdentity) is { } i2)
-                            EnsureFirst(i2.Name);
-                        else if (primary is { } && primary.FirstOrDefault() is { } p)
-                            EnsureFirst(p.Name);
-                        else if (dbFieldListUpdated.FirstOrDefault(x => x.IsPrimary) is { } p2)
-                            EnsureFirst(p2.Name);
-                        break;
-                    }
-                default:
-                    throw new NotSupportedException($"The key column return behavior '{GlobalConfiguration.Options.KeyColumnReturnBehavior}' is not supported.");
-            }
-        }
-
-        return dbFieldListUpdated;
-
-        void EnsureFirst(string name)
+        if (dbFieldListUpdated.Count > 1
+            && dbFields.GetKeyColumnReturn(GlobalConfiguration.Options.KeyColumnReturnBehavior) is { } returnField)
         {
             for (int i = 0; i < dbFieldListUpdated.Count; i++)
             {
-                if (dbFieldListUpdated[i] is { } move && move.Name == name)
+                if (dbFieldListUpdated[i] is { } move && move.Name == returnField.Name)
                 {
                     if (i > 0)
                     {
@@ -1356,6 +1305,8 @@ public static class CommandTextCache
                 }
             }
         }
+
+        return dbFieldListUpdated;
     }
 
     /// <summary>
