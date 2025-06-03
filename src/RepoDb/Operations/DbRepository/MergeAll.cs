@@ -36,7 +36,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.MergeAll<TEntity>(tableName: tableName,
+            return connection.MergeAll(tableName: tableName,
                 entities: entities,
                 batchSize: batchSize,
                 fields: fields,
@@ -83,7 +83,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.MergeAll<TEntity>(tableName: tableName,
+            return connection.MergeAll(tableName: tableName,
                 entities: entities,
                 qualifiers: qualifiers,
                 batchSize: batchSize,
@@ -131,7 +131,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.MergeAll<TEntity>(tableName: tableName,
+            return connection.MergeAll(tableName: tableName,
                 entities: entities,
                 qualifiers: qualifiers,
                 batchSize: batchSize,
@@ -175,7 +175,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.MergeAll<TEntity>(entities: entities,
+            return connection.MergeAll(entities: entities,
                 batchSize: batchSize,
                 fields: fields,
                 hints: hints,
@@ -219,7 +219,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.MergeAll<TEntity>(entities: entities,
+            return connection.MergeAll(entities: entities,
                 qualifiers: qualifiers,
                 batchSize: batchSize,
                 fields: fields,
@@ -264,7 +264,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.MergeAll<TEntity>(entities: entities,
+            return connection.MergeAll(entities: entities,
                 qualifiers: qualifiers,
                 batchSize: batchSize,
                 fields: fields,

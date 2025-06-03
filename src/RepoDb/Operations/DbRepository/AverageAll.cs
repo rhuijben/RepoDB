@@ -66,7 +66,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.AverageAll<TEntity>(field: field,
+            return connection.AverageAll(field: field,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
@@ -140,7 +140,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.AverageAll<TEntity, TResult>(field: field,
+            return connection.AverageAll(field: field,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,

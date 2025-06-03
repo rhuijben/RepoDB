@@ -210,7 +210,7 @@ public static partial class StringExtension
     private static string AsQuotedForDatabaseSchemaTableInternal(this string value, IDbSetting dbSetting)
     {
         // TODO: Refactor this method
-        var splitted = value.Split('.');
+        var splitted = value.Split('.', 3);
         if (splitted.Length > 2)
         {
             var list = new List<string>(splitted.Length);
@@ -226,23 +226,20 @@ public static partial class StringExtension
                         current = null;
                     }
                 }
-                else
+                else if (item.StartsWith(dbSetting.OpeningQuote, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (item.StartsWith(dbSetting.OpeningQuote, StringComparison.OrdinalIgnoreCase))
-                    {
-                        if (item.EndsWith(dbSetting.ClosingQuote, StringComparison.OrdinalIgnoreCase))
-                        {
-                            list.Add(item.AsQuotedInternal(dbSetting));
-                        }
-                        else
-                        {
-                            current = item;
-                        }
-                    }
-                    else
+                    if (item.EndsWith(dbSetting.ClosingQuote, StringComparison.OrdinalIgnoreCase))
                     {
                         list.Add(item.AsQuotedInternal(dbSetting));
                     }
+                    else
+                    {
+                        current = item;
+                    }
+                }
+                else
+                {
+                    list.Add(item.AsQuotedInternal(dbSetting));
                 }
             }
             if (current != null)

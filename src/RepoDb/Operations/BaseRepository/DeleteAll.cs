@@ -19,7 +19,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.DeleteAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.DeleteAll<TEntity>(entities: entities,
+        return DbRepository.DeleteAll(entities: entities,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -99,7 +99,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.DeleteAllAsync<TEntity>(entities: entities,
+        return DbRepository.DeleteAllAsync(entities: entities,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,

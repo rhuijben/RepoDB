@@ -157,7 +157,7 @@ public static class TypeMapper
     public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         DbType? dbType)
         where TEntity : class =>
-        Add<TEntity>(expression ?? throw new ArgumentNullException(nameof(expression)), dbType, false);
+        Add(expression ?? throw new ArgumentNullException(nameof(expression)), dbType, false);
 
     /// <summary>
     /// Property Level: Adds a mapping between a class property and a <see cref="DbType"/> object (via expression).
@@ -170,7 +170,7 @@ public static class TypeMapper
         DbType? dbType,
         bool force)
         where TEntity : class =>
-        Add<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression), dbType, force);
+        Add<TEntity>(ExpressionExtension.GetProperty(expression), dbType, force);
 
     /// <summary>
     /// Property Level: Adds a mapping between a class property and a <see cref="DbType"/> object (via property name).
@@ -305,7 +305,7 @@ public static class TypeMapper
     /// <returns>The mapped <see cref="DbType"/> object of the property.</returns>
     public static DbType? Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Get(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
+        Get(typeof(TEntity), ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Property Level: Get the existing mapped <see cref="DbType"/> object of the class property (via property name).
@@ -364,7 +364,7 @@ public static class TypeMapper
     /// <param name="expression">The property expression.</param>
     public static void Remove<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Remove(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
+        Remove(typeof(TEntity), ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Property Level: Remove the existing mapped <see cref="DbType"/> from the class property (via property name).

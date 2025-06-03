@@ -53,6 +53,14 @@ namespace System
             else
                 return value.IndexOf(stringToSeek, comparisonType) >= 0;
         }
+
+        public static string[] Split(this string value,
+            char separator,
+            int count,
+            StringSplitOptions options = StringSplitOptions.None)
+        {
+            return value.Split([separator], count, options);
+        }
     }
 
 }

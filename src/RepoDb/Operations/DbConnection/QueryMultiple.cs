@@ -9524,7 +9524,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = QueryMultipleInternal<T1>(connection,
+            item1 = QueryMultipleInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -9535,7 +9535,7 @@ public static partial class DbConnectionExtension
                 false);
 
             // T2
-            item2 = QueryMultipleInternal<T2>(connection,
+            item2 = QueryMultipleInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -10241,7 +10241,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = QueryMultipleInternal<T1>(connection,
+            item1 = QueryMultipleInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -10252,7 +10252,7 @@ public static partial class DbConnectionExtension
                 false);
 
             // T2
-            item2 = QueryMultipleInternal<T2>(connection,
+            item2 = QueryMultipleInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -10263,7 +10263,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T3
-            item3 = QueryMultipleInternal<T3>(connection,
+            item3 = QueryMultipleInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -11129,7 +11129,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = QueryMultipleInternal<T1>(connection,
+            item1 = QueryMultipleInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -11140,7 +11140,7 @@ public static partial class DbConnectionExtension
                 false);
 
             // T2
-            item2 = QueryMultipleInternal<T2>(connection,
+            item2 = QueryMultipleInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -11151,7 +11151,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T3
-            item3 = QueryMultipleInternal<T3>(connection,
+            item3 = QueryMultipleInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -11163,7 +11163,7 @@ public static partial class DbConnectionExtension
 
 
             // T4
-            item4 = QueryMultipleInternal<T4>(connection,
+            item4 = QueryMultipleInternal(connection,
                 reader,
                 item4,
                 cacheKey4,
@@ -12181,7 +12181,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = QueryMultipleInternal<T1>(connection,
+            item1 = QueryMultipleInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -12192,7 +12192,7 @@ public static partial class DbConnectionExtension
                 false);
 
             // T2
-            item2 = QueryMultipleInternal<T2>(connection,
+            item2 = QueryMultipleInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -12203,7 +12203,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T3
-            item3 = QueryMultipleInternal<T3>(connection,
+            item3 = QueryMultipleInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -12215,7 +12215,7 @@ public static partial class DbConnectionExtension
 
 
             // T4
-            item4 = QueryMultipleInternal<T4>(connection,
+            item4 = QueryMultipleInternal(connection,
                 reader,
                 item4,
                 cacheKey4,
@@ -12226,7 +12226,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T5
-            item5 = QueryMultipleInternal<T5>(connection,
+            item5 = QueryMultipleInternal(connection,
                 reader,
                 item5,
                 cacheKey5,
@@ -13397,7 +13397,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = QueryMultipleInternal<T1>(connection,
+            item1 = QueryMultipleInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -13408,7 +13408,7 @@ public static partial class DbConnectionExtension
                 false);
 
             // T2
-            item2 = QueryMultipleInternal<T2>(connection,
+            item2 = QueryMultipleInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -13419,7 +13419,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T3
-            item3 = QueryMultipleInternal<T3>(connection,
+            item3 = QueryMultipleInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -13431,7 +13431,7 @@ public static partial class DbConnectionExtension
 
 
             // T4
-            item4 = QueryMultipleInternal<T4>(connection,
+            item4 = QueryMultipleInternal(connection,
                 reader,
                 item4,
                 cacheKey4,
@@ -13442,7 +13442,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T5
-            item5 = QueryMultipleInternal<T5>(connection,
+            item5 = QueryMultipleInternal(connection,
                 reader,
                 item5,
                 cacheKey5,
@@ -13453,7 +13453,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T6
-            item6 = QueryMultipleInternal<T6>(connection,
+            item6 = QueryMultipleInternal(connection,
                 reader,
                 item6,
                 cacheKey6,
@@ -14777,7 +14777,7 @@ public static partial class DbConnectionExtension
             var dbSetting = connection.GetDbSetting();
 
             // T1
-            item1 = QueryMultipleInternal<T1>(connection,
+            item1 = QueryMultipleInternal(connection,
                 reader,
                 item1,
                 cacheKey1,
@@ -14788,7 +14788,7 @@ public static partial class DbConnectionExtension
                 false);
 
             // T2
-            item2 = QueryMultipleInternal<T2>(connection,
+            item2 = QueryMultipleInternal(connection,
                 reader,
                 item2,
                 cacheKey2,
@@ -14799,7 +14799,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T3
-            item3 = QueryMultipleInternal<T3>(connection,
+            item3 = QueryMultipleInternal(connection,
                 reader,
                 item3,
                 cacheKey3,
@@ -14811,7 +14811,7 @@ public static partial class DbConnectionExtension
 
 
             // T4
-            item4 = QueryMultipleInternal<T4>(connection,
+            item4 = QueryMultipleInternal(connection,
                 reader,
                 item4,
                 cacheKey4,
@@ -14822,7 +14822,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T5
-            item5 = QueryMultipleInternal<T5>(connection,
+            item5 = QueryMultipleInternal(connection,
                 reader,
                 item5,
                 cacheKey5,
@@ -14833,7 +14833,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T6
-            item6 = QueryMultipleInternal<T6>(connection,
+            item6 = QueryMultipleInternal(connection,
                 reader,
                 item6,
                 cacheKey6,
@@ -14844,7 +14844,7 @@ public static partial class DbConnectionExtension
                 true);
 
             // T7
-            item7 = QueryMultipleInternal<T7>(connection,
+            item7 = QueryMultipleInternal(connection,
                 reader,
                 item7,
                 cacheKey7,

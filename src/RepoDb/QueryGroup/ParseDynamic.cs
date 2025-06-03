@@ -10,7 +10,7 @@ public partial class QueryGroup
     /// <param name="obj">The instance of the object to be parsed.</param>
     /// <returns>An instance of the <see cref="QueryGroup"/> with parsed properties and values.</returns>
     public static QueryGroup Parse<T>(T obj) =>
-        Parse<T>(obj, true);
+        Parse(obj, true);
 
     /// <summary>
     /// Parses an object and convert back the result to an instance of <see cref="QueryGroup"/> object.

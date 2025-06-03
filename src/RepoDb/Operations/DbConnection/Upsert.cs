@@ -104,7 +104,7 @@ public static partial class DbConnectionExtension
         if (exists == true)
         {
             // Call the update operation
-            var updateResult = connection.Update<TEntity>(tableName,
+            var updateResult = connection.Update(tableName,
                 entity,
                 where,
                 fields: fields,

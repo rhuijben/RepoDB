@@ -137,7 +137,7 @@ public sealed class QueryBuilder
     /// <param name="separator"></param>
     /// <param name="spaceBefore"></param>
     /// <returns></returns>
-    private QueryBuilder AppendJoin(IEnumerable<string>? values,
+    public QueryBuilder AppendJoin(IEnumerable<string>? values,
         string separator = ", ",
         bool spaceBefore = true)
     {

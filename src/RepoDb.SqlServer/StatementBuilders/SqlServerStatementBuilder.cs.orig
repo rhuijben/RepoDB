@@ -877,7 +877,11 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         }
 
         var updateFields = fields
+<<<<<<< HEAD
+            .Where(f => keyFields.GetByName(f.Name) is null)
+=======
             .Where(f => keyFields.GetByName(f.Name) is null && qualifiers.GetByName(f.Name) is null)
+>>>>>>> cca4fcf2 (Optimize UpdateAll for SqlServer as well)
             .ToArray();
 
         if (!updateFields.Any())

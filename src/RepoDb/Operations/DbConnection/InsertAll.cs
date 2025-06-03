@@ -87,7 +87,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return InsertAllInternal<TEntity>(connection: connection,
+        return InsertAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             batchSize: batchSize,
@@ -131,11 +131,11 @@ public static partial class DbConnectionExtension
     {
         if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
         {
-            return InsertAllInternalBase<IDictionary<string, object>>(connection: connection,
+            return InsertAllInternalBase(connection: connection,
                 tableName: tableName,
                 entities: entities.WithType<IDictionary<string, object>>(),
                 batchSize: batchSize,
-                fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -145,11 +145,11 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            return InsertAllInternalBase<TEntity>(connection: connection,
+            return InsertAllInternalBase(connection: connection,
                 tableName: tableName,
                 entities: entities,
                 batchSize: batchSize,
-                fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -237,7 +237,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await InsertAllAsyncInternal<TEntity>(connection: connection,
+        return await InsertAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             batchSize: batchSize,
@@ -284,11 +284,11 @@ public static partial class DbConnectionExtension
     {
         if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
         {
-            return InsertAllAsyncInternalBase<IDictionary<string, object>>(connection: connection,
+            return InsertAllAsyncInternalBase(connection: connection,
                 tableName: tableName,
                 entities: entities.WithType<IDictionary<string, object>>(),
                 batchSize: batchSize,
-                fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -299,11 +299,11 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            return InsertAllAsyncInternalBase<TEntity>(connection: connection,
+            return InsertAllAsyncInternalBase(connection: connection,
                 tableName: tableName,
                 entities: entities,
                 batchSize: batchSize,
-                fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                 hints: hints,
                 commandTimeout: commandTimeout,
                 traceKey: traceKey,
@@ -345,7 +345,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return InsertAllInternal<object>(connection: connection,
+        return InsertAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             batchSize: batchSize,
@@ -391,7 +391,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await InsertAllAsyncInternal<object>(connection: connection,
+        return await InsertAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             batchSize: batchSize,
@@ -448,18 +448,17 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = (dbSetting.IsMultiStatementExecutable == true)
-            ? Math.Min(batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize, entities.Count())
+        int maxBatchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min((batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize), dbSetting.MaxQueriesInBatchCount)
             : 1;
-
-        batchSize = Math.Min(batchSize, dbSetting.MaxQueriesInBatchCount);
+        batchSize = Math.Min(batchSize <= 0 ? Constant.DefaultBatchOperationSize : batchSize, entities.Count());
 
         // Get the context
-        var entityType = GetEntityType<TEntity>(entities);
+        var entityType = GetEntityType(entities);
         InsertAllExecutionContext context = InsertAllExecutionContextProvider.Create(entityType,
             connection,
             tableName,
-            1,
+            batchSize,
             fields,
             hints,
             transaction,
@@ -532,10 +531,10 @@ public static partial class DbConnectionExtension
             {
                 BaseDbHelper? dbh = null;
                 int? positionIndex = null;
+                bool doPrepare = dbSetting.IsPreparable;
 
-                foreach (var batchItems in entities.ChunkOptimally(batchSize))
+                foreach (var batchItems in entities.ChunkOptimally(maxBatchSize))
                 {
-                    // Check if the batch size has changed (probably the last batch on the enumerables)
                     if (batchItems.Length != context.BatchSize)
                     {
                         // Get a new execution context from cache
@@ -550,6 +549,7 @@ public static partial class DbConnectionExtension
 
                         // Set the command properties
                         command.CommandText = context.CommandText;
+                        doPrepare = dbSetting.IsPreparable;
                     }
 
                     // Set the values
@@ -565,9 +565,10 @@ public static partial class DbConnectionExtension
                     var fetchIdentity = (dbh ??= (BaseDbHelper)GetDbHelper(command.Connection!)).PrepareForIdentityOutput(command);
 
                     // Prepare the command
-                    if (dbSetting.IsPreparable)
+                    if (doPrepare)
                     {
                         command.Prepare();
+                        doPrepare = false;
                     }
 
                     // Actual Execution
@@ -689,22 +690,21 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = (dbSetting.IsMultiStatementExecutable == true)
-            ? Math.Min(batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize, entities.Count())
+        int maxBatchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min((batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize), dbSetting.MaxQueriesInBatchCount)
             : 1;
-
-        batchSize = Math.Min(batchSize, dbSetting.MaxQueriesInBatchCount);
+        batchSize = Math.Min(batchSize <= 0 ? Constant.DefaultBatchOperationSize : batchSize, entities.Count());
 
         await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
         using var myTransaction = (transaction is null && Transaction.Current is null) ? await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false) : null;
         transaction ??= myTransaction;
 
         // Get the context
-        var entityType = GetEntityType<TEntity>(entities);
+        var entityType = GetEntityType(entities);
         var context = await InsertAllExecutionContextProvider.CreateAsync(entityType,
             connection,
             tableName,
-            1,
+            batchSize,
             fields,
             hints,
             transaction,
@@ -772,11 +772,10 @@ public static partial class DbConnectionExtension
             {
                 BaseDbHelper? dbh = null;
                 int? positionIndex = null;
+                bool doPrepare = dbSetting.IsPreparable;
 
-                foreach (var batchItems in entities.ChunkOptimally(batchSize))
+                foreach (var batchItems in entities.ChunkOptimally(maxBatchSize))
                 {
-                    // Check if the batch size has changed (probably the last batch on the enumerables)
-                    bool doPrepare = false;
                     if (batchItems.Length != context.BatchSize)
                     {
                         // Get a new execution context from cache
@@ -792,7 +791,6 @@ public static partial class DbConnectionExtension
 
                         // Set the command properties
                         command.CommandText = context.CommandText;
-                        doPrepare = dbSetting.IsPreparable;
                     }
 
                     // Set the values
@@ -812,6 +810,7 @@ public static partial class DbConnectionExtension
                     if (doPrepare)
                     {
                         command.Prepare();
+                        doPrepare = false;
                     }
 
                     // Actual Execution

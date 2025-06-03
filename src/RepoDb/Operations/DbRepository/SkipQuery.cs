@@ -140,7 +140,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.SkipQuery<TEntity>(tableName: tableName,
+            return connection.SkipQuery(tableName: tableName,
                 skip: skip,
                 rowsPerBatch: rowsPerBatch,
                 orderBy: orderBy,
@@ -435,7 +435,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.SkipQuery<TEntity>(skip: skip,
+            return connection.SkipQuery(skip: skip,
                 rowsPerBatch: rowsPerBatch,
                 orderBy: orderBy,
                 where: where,

@@ -95,7 +95,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.BatchQuery<TEntity>(tableName: tableName,
+        return DbRepository.BatchQuery(tableName: tableName,
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -287,7 +287,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.BatchQuery,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.BatchQuery<TEntity>(page: page,
+        return DbRepository.BatchQuery(page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
             where: where,
@@ -490,7 +490,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.BatchQueryAsync<TEntity>(tableName: tableName,
+        return DbRepository.BatchQueryAsync(tableName: tableName,
             page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -701,7 +701,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.BatchQueryAsync<TEntity>(page: page,
+        return DbRepository.BatchQueryAsync(page: page,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
             where: where,

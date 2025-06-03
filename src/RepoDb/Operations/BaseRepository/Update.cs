@@ -22,7 +22,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Update<TEntity>(entity: entity,
+        return DbRepository.Update(entity: entity,
             fields: fields,
             hints: hints,
             traceKey: traceKey,
@@ -47,7 +47,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Update<TEntity, TWhat>(entity: entity,
+        return DbRepository.Update(entity: entity,
             what: what,
             fields: fields,
             hints: hints,
@@ -72,7 +72,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Update<TEntity>(entity: entity,
+        return DbRepository.Update(entity: entity,
             what: what,
             fields: fields,
             hints: hints,
@@ -97,7 +97,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Update<TEntity>(entity: entity,
+        return DbRepository.Update(entity: entity,
             where: where,
             fields: fields,
             hints: hints,
@@ -122,7 +122,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Update<TEntity>(entity: entity,
+        return DbRepository.Update(entity: entity,
             where: where,
             fields: fields,
             hints: hints,
@@ -147,7 +147,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Update<TEntity>(entity: entity,
+        return DbRepository.Update(entity: entity,
             where: where,
             fields: fields,
             hints: hints,
@@ -172,7 +172,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Update<TEntity>(entity: entity,
+        return DbRepository.Update(entity: entity,
             where: where,
             fields: fields,
             hints: hints,
@@ -201,7 +201,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAsync<TEntity>(entity: entity,
+        return DbRepository.UpdateAsync(entity: entity,
             fields: fields,
             hints: hints,
             traceKey: traceKey,
@@ -229,7 +229,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAsync<TEntity, TWhat>(entity: entity,
+        return DbRepository.UpdateAsync(entity: entity,
             what: what,
             fields: fields,
             hints: hints,
@@ -257,7 +257,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAsync<TEntity>(entity: entity,
+        return DbRepository.UpdateAsync(entity: entity,
             what: what,
             fields: fields,
             hints: hints,
@@ -285,7 +285,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAsync<TEntity>(entity: entity,
+        return DbRepository.UpdateAsync(entity: entity,
             where: where,
             fields: fields,
             hints: hints,
@@ -313,7 +313,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAsync<TEntity>(entity: entity,
+        return DbRepository.UpdateAsync(entity: entity,
             where: where,
             fields: fields,
             hints: hints,
@@ -341,7 +341,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAsync<TEntity>(entity: entity,
+        return DbRepository.UpdateAsync(entity: entity,
             where: where,
             fields: fields,
             hints: hints,
@@ -369,7 +369,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAsync<TEntity>(entity: entity,
+        return DbRepository.UpdateAsync(entity: entity,
             where: where,
             fields: fields,
             hints: hints,

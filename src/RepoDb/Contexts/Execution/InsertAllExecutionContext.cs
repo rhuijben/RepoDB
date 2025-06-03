@@ -5,7 +5,7 @@ namespace RepoDb.Contexts.Execution;
 /// <summary>
 /// 
 /// </summary>
-internal class InsertAllExecutionContext
+internal sealed record InsertAllExecutionContext
 {
     /// <summary>
     /// 

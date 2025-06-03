@@ -931,7 +931,11 @@ public abstract class BaseStatementBuilder : IStatementBuilder
 
         // Gets the updatable fields
         var updateFields = fields
+<<<<<<< HEAD
+            .Where(f => keyFields.GetByName(f.Name) is null);
+=======
             .Where(f => keyFields.GetByName(f.Name) is null && qualifiers.GetByName(f.Name) is null);
+>>>>>>> cca4fcf2 (Optimize UpdateAll for SqlServer as well)
 
         // Check if there are updatable fields
         if (updateFields.Any() != true)

@@ -66,7 +66,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Count<TEntity>(where: where,
+            return connection.Count(where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,

@@ -39,7 +39,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Count,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Count<TEntity>(where: where,
+        return DbRepository.Count(where: where,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -143,7 +143,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.CountAsync<TEntity>(where: where,
+        return DbRepository.CountAsync(where: where,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,

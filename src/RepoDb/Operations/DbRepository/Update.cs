@@ -34,7 +34,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(tableName: tableName,
+            return connection.Update(tableName: tableName,
                 entity: entity,
                 fields: fields,
                 hints: hints,
@@ -79,7 +79,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity, TWhat>(tableName: tableName,
+            return connection.Update(tableName: tableName,
                 entity: entity,
                 what: what,
                 fields: fields,
@@ -124,7 +124,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(tableName: tableName,
+            return connection.Update(tableName: tableName,
                 entity: entity,
                 what: what,
                 fields: fields,
@@ -169,7 +169,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(tableName: tableName,
+            return connection.Update(tableName: tableName,
                 entity: entity,
                 where: where,
                 fields: fields,
@@ -214,7 +214,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(tableName: tableName,
+            return connection.Update(tableName: tableName,
                 entity: entity,
                 where: where,
                 fields: fields,
@@ -259,7 +259,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(tableName: tableName,
+            return connection.Update(tableName: tableName,
                 entity: entity,
                 where: where,
                 fields: fields,
@@ -304,7 +304,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(tableName: tableName,
+            return connection.Update(tableName: tableName,
                 entity: entity,
                 where: where,
                 fields: fields,
@@ -345,7 +345,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(entity: entity,
+            return connection.Update(entity: entity,
                 fields: fields,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -387,7 +387,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity, TWhat>(entity: entity,
+            return connection.Update(entity: entity,
                 what: what,
                 fields: fields,
                 hints: hints,
@@ -429,7 +429,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(entity: entity,
+            return connection.Update(entity: entity,
                 what: what,
                 fields: fields,
                 hints: hints,
@@ -471,7 +471,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(entity: entity,
+            return connection.Update(entity: entity,
                 where: where,
                 fields: fields,
                 hints: hints,
@@ -513,7 +513,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(entity: entity,
+            return connection.Update(entity: entity,
                 where: where,
                 fields: fields,
                 hints: hints,
@@ -555,7 +555,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(entity: entity,
+            return connection.Update(entity: entity,
                 where: where,
                 fields: fields,
                 hints: hints,
@@ -597,7 +597,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Update<TEntity>(entity: entity,
+            return connection.Update(entity: entity,
                 where: where,
                 fields: fields,
                 hints: hints,

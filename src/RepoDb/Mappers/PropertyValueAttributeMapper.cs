@@ -36,7 +36,7 @@ public static class PropertyValueAttributeMapper
     public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         PropertyValueAttribute attribute)
         where TEntity : class =>
-        Add<TEntity>(expression, attribute, false);
+        Add(expression, attribute, false);
 
     /// <summary>
     /// Property Level: Adds a mapping between a class property and an instance of <see cref="PropertyValueAttribute"/> object (via expression).
@@ -49,7 +49,7 @@ public static class PropertyValueAttributeMapper
         PropertyValueAttribute attribute,
         bool force)
         where TEntity : class =>
-        Add<TEntity>(expression, new[] { attribute }, force);
+        Add(expression, new[] { attribute }, force);
 
     /// <summary>
     /// Property Level: Adds a mapping between a class property and a list of <see cref="PropertyValueAttribute"/> object (via expression).
@@ -60,7 +60,7 @@ public static class PropertyValueAttributeMapper
     public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression,
         IEnumerable<PropertyValueAttribute> attributes)
         where TEntity : class =>
-        Add<TEntity>(expression, attributes, false);
+        Add(expression, attributes, false);
 
     /// <summary>
     /// Property Level: Adds a mapping between a class property and a list of <see cref="PropertyValueAttribute"/> object (via expression).
@@ -73,7 +73,7 @@ public static class PropertyValueAttributeMapper
         IEnumerable<PropertyValueAttribute> attributes,
         bool force)
         where TEntity : class =>
-        Add(ExpressionExtension.GetProperty<TEntity>(expression), attributes, force);
+        Add(ExpressionExtension.GetProperty(expression), attributes, force);
 
     /// <summary>
     /// Property Level: Adds a mapping between a class property and an instance of <see cref="PropertyValueAttribute"/> object (property name).
@@ -307,7 +307,7 @@ public static class PropertyValueAttributeMapper
     /// <returns>The list of mapped <see cref="PropertyValueAttribute"/> objects.</returns>
     public static IEnumerable<PropertyValueAttribute>? Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Get(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
+        Get(typeof(TEntity), ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Get the list of mapped <see cref="PropertyValueAttribute"/> objects of the class property (via property name).
@@ -370,7 +370,7 @@ public static class PropertyValueAttributeMapper
     /// <param name="expression">The property expression.</param>
     public static void Remove<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Remove(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression));
+        Remove(typeof(TEntity), ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Removes the existing mapped <see cref="PropertyValueAttribute"/> objects of the class property (via property name).

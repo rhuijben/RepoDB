@@ -71,7 +71,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -227,7 +227,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -266,7 +266,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -305,7 +305,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -344,7 +344,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -383,7 +383,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -623,7 +623,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity, TResult>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -663,7 +663,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity, TResult>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -703,7 +703,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity, TResult>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -743,7 +743,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity, TResult>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
@@ -783,7 +783,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Max<TEntity, TResult>(field: field,
+            return connection.Max(field: field,
                 where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,

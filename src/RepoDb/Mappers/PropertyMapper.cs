@@ -46,7 +46,7 @@ public static class PropertyMapper
         string columnName,
         bool force)
         where TEntity : class =>
-        Add<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression), columnName, force);
+        Add<TEntity>(ExpressionExtension.GetProperty(expression), columnName, force);
 
     /// <summary>
     /// Adds a mapping between a class property and a database column (via property name).
@@ -185,7 +185,7 @@ public static class PropertyMapper
     /// <returns>The mapped name of the property.</returns>
     public static string Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Get<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
+        Get<TEntity>(ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Gets the mapped database column of the property (via property name).
@@ -259,7 +259,7 @@ public static class PropertyMapper
     /// <param name="expression">The expression to be parsed.</param>
     public static void Remove<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Remove<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
+        Remove<TEntity>(ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Removes the mapping between the class property and database column (via property name).

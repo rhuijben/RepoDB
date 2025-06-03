@@ -140,7 +140,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.BatchQuery<TEntity>(tableName: tableName,
+            return connection.BatchQuery(tableName: tableName,
                 page: page,
                 rowsPerBatch: rowsPerBatch,
                 orderBy: orderBy,
@@ -435,7 +435,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.BatchQuery<TEntity>(page: page,
+            return connection.BatchQuery(page: page,
                 rowsPerBatch: rowsPerBatch,
                 orderBy: orderBy,
                 where: where,

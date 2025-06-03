@@ -220,7 +220,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -256,7 +256,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -292,7 +292,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -328,7 +328,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -364,7 +364,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: where,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -637,7 +637,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -674,7 +674,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -711,7 +711,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -748,7 +748,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -785,7 +785,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return SumInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: where,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1074,7 +1074,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1113,7 +1113,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1152,7 +1152,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1191,7 +1191,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1230,7 +1230,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             where: where,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1524,7 +1524,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1564,7 +1564,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: connection.ToQueryGroup(where, transaction),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1604,7 +1604,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1644,7 +1644,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: ToQueryGroup(where),
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1684,7 +1684,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await SumAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             where: where,
             hints: hints,
             commandTimeout: commandTimeout,

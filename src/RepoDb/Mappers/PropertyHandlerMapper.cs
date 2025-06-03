@@ -210,7 +210,7 @@ public static class PropertyHandlerMapper
         TPropertyHandler propertyHandler,
         bool force)
         where TEntity : class =>
-        Add<TEntity, TPropertyHandler>(ExpressionExtension.GetProperty<TEntity>(expression), propertyHandler, force);
+        Add<TEntity, TPropertyHandler>(ExpressionExtension.GetProperty(expression), propertyHandler, force);
 
     /// <summary>
     /// Property Level: Adds a property handler mapping into a data entity type property (via property name). It uses the <see cref="Activator.CreateInstance(Type)"/> method to create the instance of target property handler.
@@ -378,7 +378,7 @@ public static class PropertyHandlerMapper
         TPropertyHandler propertyHandler,
         bool force)
         where TEntity : class =>
-        Add<TPropertyHandler>(typeof(TEntity), propertyInfo, propertyHandler, force);
+        Add(typeof(TEntity), propertyInfo, propertyHandler, force);
 
 
     /// <summary>
@@ -447,7 +447,7 @@ public static class PropertyHandlerMapper
     /// <returns>The mapped property handler object of the property.</returns>
     public static TPropertyHandler? Get<TEntity, TPropertyHandler>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Get<TEntity, TPropertyHandler>(ExpressionExtension.GetProperty<TEntity>(expression));
+        Get<TEntity, TPropertyHandler>(ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Property Level: Gets the mapped property handler object of the data entity type property (via property name).
@@ -520,7 +520,7 @@ public static class PropertyHandlerMapper
     /// <param name="expression">The expression to be parsed.</param>
     public static void Remove<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Remove<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
+        Remove<TEntity>(ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Property Level: Removes the existing mapped property handler from a data entity type property (via property name).

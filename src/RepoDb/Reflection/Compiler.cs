@@ -439,7 +439,7 @@ internal sealed partial class Compiler
     private static MethodInfo GetDbReaderGetValueOrDefaultMethod(Type targetType, Type readerType) =>
         GetDbReaderGetValueMethod(targetType, readerType) ?? GetMethodInfo<DbDataReader>((x) => x.GetValue(default(int)));
 
-    private static TEnum? EnumParseNull<TEnum>(string value) where TEnum : struct, System.Enum
+    private static TEnum? EnumParseNull<TEnum>(string value) where TEnum : struct, Enum
     {
         if (Enum.TryParse<TEnum>(value, true, out var r))
             return r;
@@ -447,7 +447,7 @@ internal sealed partial class Compiler
             return null;
     }
 
-    private static TEnum? EnumParseNullDefined<TEnum>(string value) where TEnum : struct, System.Enum
+    private static TEnum? EnumParseNullDefined<TEnum>(string value) where TEnum : struct, Enum
     {
         if (Enum.TryParse<TEnum>(value, true, out var r) && Enum.IsDefined(typeof(TEnum), r))
             return r;

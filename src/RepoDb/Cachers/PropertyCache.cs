@@ -23,7 +23,7 @@ public static class PropertyCache
     /// <returns>The instance of cached <see cref="ClassProperty"/> object.</returns>
     public static ClassProperty? Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Get(typeof(TEntity), ExpressionExtension.GetProperty<TEntity>(expression), false);
+        Get(typeof(TEntity), ExpressionExtension.GetProperty(expression), false);
 
     /// <summary>
     /// Gets the cached <see cref="ClassProperty"/> object of the data entity (via property name).

@@ -212,8 +212,7 @@ internal static class UpdateAllExecutionContextProvider
 
         // Filter the actual properties for input fields
         inputFields = dbFields
-            .Where(dbField =>
-                fields.FirstOrDefault(field => string.Equals(field.Name.AsUnquoted(true, dbSetting), dbField.Name, StringComparison.OrdinalIgnoreCase)) != null)
+            .Where(dbField => fields.GetByName(dbField.Name) != null || fields.GetByNameUnquoted(dbField.Name, dbSetting) != null)
             .AsList();
 
         // Exclude the fields not on the actual entity
@@ -256,6 +255,7 @@ internal static class UpdateAllExecutionContextProvider
         {
             CommandText = commandText,
             InputFields = inputFields,
+            BatchSize = batchSize,
             SingleDataEntityParametersSetterFunc = singleEntityParametersSetterFunc,
             MultipleDataEntitiesParametersSetterFunc = multipleEntitiesParametersSetterFunc
         };

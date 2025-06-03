@@ -34,7 +34,7 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: null);
-        var expected = "" +
+        var expected =
             "SELECT [Field1], [Field2] " +
             "FROM [Table] " +
             "ORDER BY [Field1] ASC " +
@@ -61,7 +61,7 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: null);
-        var expected = "" +
+        var expected =
             "SELECT [Field1], [Field2] " +
             "FROM [Table] " +
             "ORDER BY [Field1] ASC " +
@@ -89,7 +89,7 @@ public class StatementBuilderTest
             orderBy: orderBy,
             where: null,
             hints: SqlServerTableHints.NoLock);
-        var expected = "" +
+        var expected =
             "SELECT [Field1], [Field2] " +
             "FROM [dbo].[Table] WITH (NOLOCK) " +
             "ORDER BY [Field1] ASC " +
@@ -115,7 +115,7 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: null);
-        var expected = "" +
+        var expected =
             "SELECT [Field1], [Field2] " +
             "FROM [dbo].[Table] " +
             "ORDER BY [Field1] ASC " +
@@ -141,7 +141,7 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: null);
-        var expected = "" +
+        var expected =
             "SELECT [Field1], [Field2] " +
             "FROM [dbo].[Table] " +
             "ORDER BY [Field1] ASC " +
@@ -168,7 +168,7 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: where);
-        var expected = "" +
+        var expected =
             "SELECT [Field1], [Field2] " +
             "FROM [Table] " +
             "WHERE ([Field1] <> @Field1) " +
@@ -196,7 +196,7 @@ public class StatementBuilderTest
             rowsPerBatch: 10,
             orderBy: orderBy,
             where: where);
-        var expected = "" +
+        var expected =
             "SELECT [Field1], [Field2] " +
             "FROM [Table] " +
             "WHERE ([Id] <> @Id) " +
@@ -427,7 +427,7 @@ public class StatementBuilderTest
         // Act
         var actual = statementBuilder.CreateCount(tableName: tableName,
             where: where);
-        var expected = "" +
+        var expected =
             "SELECT COUNT_BIG (*) AS [CountValue] " +
             "FROM [Table] " +
             "WHERE ([Id] = @Id);";
@@ -466,7 +466,7 @@ public class StatementBuilderTest
         var actual = statementBuilder.CreateCount(tableName: tableName,
             where: where,
             hints: hints);
-        var expected = "" +
+        var expected =
             "SELECT COUNT_BIG (*) AS [CountValue] " +
             "FROM [Table] WITH (NOLOCK) " +
             "WHERE ([Id] = @Id);";
@@ -526,7 +526,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] ([Field2], [Field3]) " +
             "OUTPUT INSERTED.[Field1] " +
             "VALUES " +
@@ -551,7 +551,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] ([Field1], [Field3]) " +
             "OUTPUT INSERTED.[Field2] " +
             "VALUES " +
@@ -577,7 +577,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] ([Field1], [Field3]) " +
             "OUTPUT INSERTED.[Field2] " +
             "VALUES " +
@@ -602,7 +602,7 @@ public class StatementBuilderTest
             batchSize: 3,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] ([Field2], [Field3]) " +
             "OUTPUT INSERTED.[Field1] " +
             "VALUES " +
@@ -660,7 +660,7 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: identityField,
             hints: SqlServerTableHints.TabLock);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] WITH (TABLOCK) ([Field2], [Field3]) " +
             "OUTPUT INSERTED.[Field1] " +
             "VALUES " +
@@ -712,7 +712,7 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: identityField,
             hints: SqlServerTableHints.TabLock);
-        var expected = "" +
+        var expected =
             "MERGE INTO [Table] AS T " +
             "USING (VALUES (@Field2, @Field3, 0), " +
             "(@Field2_1, @Field3_1, 1), " +
@@ -744,7 +744,7 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] " +
             "([Field1], [Field2], [Field3]) " +
             "VALUES " +
@@ -767,7 +767,7 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "INSERT INTO [dbo].[Table] " +
             "([Field1], [Field2], [Field3]) " +
             "VALUES " +
@@ -790,7 +790,7 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "INSERT INTO [dbo].[Table] " +
             "([Field1], [Field2], [Field3]) " +
             "VALUES " +
@@ -814,7 +814,7 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: primaryField,
             identityField: null);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] " +
             "([Field1], [Field2], [Field3]) " +
             "OUTPUT INSERTED.[Field1] " +
@@ -839,7 +839,7 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] " +
             "([Field2], [Field3]) " +
             "OUTPUT INSERTED.[Field1] " +
@@ -864,7 +864,7 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] " +
             "([Field2], [Field3]) " +
             "OUTPUT INSERTED.[Field1] " +
@@ -890,7 +890,7 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] " +
             "([Field1], [Field3]) " +
             "OUTPUT INSERTED.[Field2] " +
@@ -916,7 +916,7 @@ public class StatementBuilderTest
             fields: fields,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] " +
             "([Field1], [Field3]) " +
             "OUTPUT INSERTED.[Field2] " +
@@ -941,7 +941,7 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: null,
             hints: SqlServerTableHints.TabLock);
-        var expected = "" +
+        var expected =
             "INSERT INTO [Table] WITH (TABLOCK) " +
             "([Field1], [Field2], [Field3]) " +
             "VALUES " +
@@ -971,7 +971,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1002,7 +1002,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [dbo].[Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1033,7 +1033,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [dbo].[Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1065,7 +1065,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1099,7 +1099,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: primaryField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1132,7 +1132,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1165,7 +1165,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1198,7 +1198,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1230,7 +1230,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1263,7 +1263,7 @@ public class StatementBuilderTest
             batchSize: 1,
             primaryField: primaryField,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1296,7 +1296,7 @@ public class StatementBuilderTest
             batchSize: 3,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
              "USING (VALUES (@Field1, @Field2, @Field3, 0), " +
              "(@Field1_1, @Field2_1, @Field3_1, 1), " +
@@ -1331,7 +1331,7 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: null,
             hints: SqlServerTableHints.TabLock);
-        var expected = "" +
+        var expected =
             "MERGE [Table] WITH (TABLOCK) AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3)) " +
             "AS S ([Field1], [Field2], [Field3]) " +
@@ -1364,7 +1364,7 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: identityField,
             hints: SqlServerTableHints.TabLock);
-        var expected = "" +
+        var expected =
             "MERGE [Table] WITH (TABLOCK) AS T " +
             "USING (VALUES (@Field1, @Field2, @Field3, 0), " +
              "(@Field1_1, @Field2_1, @Field3_1, 1), " +
@@ -1562,7 +1562,7 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1591,7 +1591,7 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [dbo].[Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1620,7 +1620,7 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [dbo].[Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1650,7 +1650,7 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: primaryField,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1682,7 +1682,7 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: primaryField,
             identityField: primaryField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1713,7 +1713,7 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: primaryField,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1744,7 +1744,7 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1775,7 +1775,7 @@ public class StatementBuilderTest
             qualifiers: qualifiers,
             primaryField: null,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1805,7 +1805,7 @@ public class StatementBuilderTest
             qualifiers: null,
             primaryField: primaryField,
             identityField: null);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1836,7 +1836,7 @@ public class StatementBuilderTest
             qualifiers: null,
             primaryField: primaryField,
             identityField: identityField);
-        var expected = "" +
+        var expected =
             "MERGE [Table] AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -1867,7 +1867,7 @@ public class StatementBuilderTest
             primaryField: null,
             identityField: null,
             hints: SqlServerTableHints.TabLock);
-        var expected = "" +
+        var expected =
             "MERGE [Table] WITH (TABLOCK) AS T " +
             "USING (SELECT @Field1 AS [Field1], @Field2 AS [Field2], @Field3 AS [Field3]) " +
             "AS S ON ((S.[Field1] = T.[Field1] OR (S.[Field1] IS NULL AND T.[Field1] IS NULL))) " +
@@ -2053,7 +2053,7 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: null);
-        var expected = "" +
+        var expected =
             "WITH CTE AS " +
             "(" +
             "SELECT TOP (10) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
@@ -2083,7 +2083,7 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: null);
-        var expected = "" +
+        var expected =
             "WITH CTE AS " +
             "(" +
             "SELECT TOP (20) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
@@ -2114,7 +2114,7 @@ public class StatementBuilderTest
             orderBy: orderBy,
             where: null,
             hints: SqlServerTableHints.NoLock);
-        var expected = "" +
+        var expected =
             "WITH CTE AS " +
             "(" +
             "SELECT TOP (10) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
@@ -2144,7 +2144,7 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: null);
-        var expected = "" +
+        var expected =
             "WITH CTE AS " +
             "(" +
             "SELECT TOP (10) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
@@ -2174,7 +2174,7 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: null);
-        var expected = "" +
+        var expected =
             "WITH CTE AS " +
             "(" +
             "SELECT TOP (10) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
@@ -2205,7 +2205,7 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: where);
-        var expected = "" +
+        var expected =
             "WITH CTE AS " +
             "(" +
             "SELECT TOP (20) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
@@ -2237,7 +2237,7 @@ public class StatementBuilderTest
             take: 10,
             orderBy: orderBy,
             where: where);
-        var expected = "" +
+        var expected =
             "WITH CTE AS " +
             "(" +
             "SELECT TOP (20) ROW_NUMBER() OVER (ORDER BY [Field1] ASC) AS [RowNumber], [Field1], [Field2] " +
@@ -2371,6 +2371,90 @@ public class StatementBuilderTest
             take: 0,
             orderBy: orderBy,
             where: null);
+    }
+    #endregion
+
+    #region CreateUpdate
+    [TestMethod]
+    public void TestSqlServerStatementBuilderCreateUpdate()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2" });
+        var primaryField = new DbField("Field1", true, false, false, typeof(int), null, null, null, null);
+
+        // Act
+        var actual = statementBuilder.CreateUpdate(tableName: tableName,
+            fields: fields,
+            where: null,
+            primaryField,
+            identityField: null,
+            hints: null);
+        var expected =
+            "UPDATE [Table] SET [Field2] = @Field2;";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+    #endregion
+
+    #region CreateUpdateAll
+    [TestMethod]
+    public void TestSqlServerStatementBuilderCreateUpdateAll()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2" });
+        var primaryField = new DbField("Field1", true, false, false, typeof(int), null, null, null, null);
+        var qualifiers = Field.From("Field1");
+
+        // Act
+        var actual = statementBuilder.CreateUpdateAll(tableName: tableName,
+            fields: fields,
+            qualifiers: qualifiers,
+            primaryField: primaryField,
+            batchSize: 1,
+            hints: null);
+        var expected =
+            "UPDATE [Table] SET [Field2] = @Field2 WHERE ([Field1] = @Field1);";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestSqlServerStatementBuilderCreateUpdateAllForThreeBatches()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<SqlConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2" });
+        var primaryField = new DbField("Field1", true, false, false, typeof(int), null, null, null, null);
+        var qualifiers = Field.From("Field1");
+
+        // Act
+        var actual = statementBuilder.CreateUpdateAll(tableName: tableName,
+            fields: fields,
+            qualifiers: qualifiers,
+            primaryField: primaryField,
+            batchSize: 3,
+            hints: null);
+        var expected =
+            "MERGE INTO [Table] AS T USING (" +
+            "VALUES " +
+            "(@Field1, @Field2), " +
+            "(@Field1_1, @Field2_1), " +
+            "(@Field1_2, @Field2_2)" +
+            ") " +
+            "AS S ([Field1], [Field2]) ON " +
+            "T.[Field1] = S.[Field1] " +
+            "WHEN MATCHED THEN " +
+            "UPDATE SET T.[Field2] = S.[Field2];";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
     }
     #endregion
 }

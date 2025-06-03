@@ -34,7 +34,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Merge<TEntity>(tableName: tableName,
+            return connection.Merge(tableName: tableName,
                 entity: entity,
                 fields: fields,
                 hints: hints,
@@ -77,7 +77,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Merge<TEntity>(tableName: tableName,
+            return connection.Merge(tableName: tableName,
                 entity: entity,
                 qualifier: qualifier,
                 fields: fields,
@@ -122,7 +122,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Merge<TEntity>(tableName: tableName,
+            return connection.Merge(tableName: tableName,
                 entity: entity,
                 qualifiers: qualifiers,
                 fields: fields,
@@ -167,7 +167,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Merge<TEntity>(tableName: tableName,
+            return connection.Merge(tableName: tableName,
                 entity: entity,
                 qualifiers: qualifiers,
                 fields: fields,
@@ -389,7 +389,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Merge<TEntity>(entity: entity,
+            return connection.Merge(entity: entity,
                 fields: fields,
                 hints: hints,
                 traceKey: traceKey,
@@ -429,7 +429,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Merge<TEntity>(entity: entity,
+            return connection.Merge(entity: entity,
                 qualifier: qualifier,
                 fields: fields,
                 hints: hints,
@@ -471,7 +471,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Merge<TEntity>(entity: entity,
+            return connection.Merge(entity: entity,
                 qualifiers: qualifiers,
                 fields: fields,
                 hints: hints,
@@ -513,7 +513,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Merge<TEntity>(entity: entity,
+            return connection.Merge(entity: entity,
                 qualifiers: qualifiers,
                 fields: fields,
                 hints: hints,
