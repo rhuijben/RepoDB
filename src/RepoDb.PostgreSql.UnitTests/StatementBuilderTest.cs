@@ -1120,4 +1120,83 @@ public class StatementBuilderTest
     }
 
     #endregion
+
+    #region CreateUpdate
+    [TestMethod]
+    public void TestPostgreSqlStatementBuilderCreateUpdate()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<NpgsqlConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2" });
+        var primaryField = new DbField("Field1", true, false, false, typeof(int), null, null, null, null);
+
+        // Act
+        var actual = statementBuilder.CreateUpdate(tableName: tableName,
+            fields: fields,
+            where: null,
+            primaryField,
+            identityField: null,
+            hints: null);
+        var expected =
+            "UPDATE \"Table\" SET \"Field2\" = @Field2;";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+    #endregion
+
+    #region CreateUpdateAll
+    [TestMethod]
+    public void TestPostgreSqlStatementBuilderCreateUpdateAll()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<NpgsqlConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2" });
+        var primaryField = new DbField("Field1", true, false, false, typeof(int), null, null, null, null);
+        var qualifiers = Field.From("Field1");
+
+        // Act
+        var actual = statementBuilder.CreateUpdateAll(tableName: tableName,
+            fields: fields,
+            qualifiers: qualifiers,
+            primaryField: primaryField,
+            batchSize: 1,
+            hints: null);
+        var expected =
+            "UPDATE \"Table\" SET \"Field2\" = @Field2 WHERE (\"Field1\" = @Field1);";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+
+    [TestMethod]
+    public void TestPostgreSqlStatementBuilderCreateUpdateAllForThreeBatches()
+    {
+        // Setup
+        var statementBuilder = StatementBuilderMapper.Get<NpgsqlConnection>();
+        var tableName = "Table";
+        var fields = Field.From(new[] { "Field1", "Field2" });
+        var primaryField = new DbField("Field1", true, false, false, typeof(int), null, null, null, null);
+        var qualifiers = Field.From("Field1");
+
+        // Act
+        var actual = statementBuilder.CreateUpdateAll(tableName: tableName,
+            fields: fields,
+            qualifiers: qualifiers,
+            primaryField: primaryField,
+            batchSize: 3,
+            hints: null);
+        var expected =
+            "UPDATE \"Table\" AS T " +
+            "SET \"Field2\" = S.\"Field2\" FROM (" +
+            "VALUES (@Field1, @Field2), (@Field1_1, @Field2_1), (@Field1_2, @Field2_2)" + "" +
+            ") AS S (\"Field1\", \"Field2\") " +
+            "WHERE T.\"Field1\" = S.\"Field1\";";
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
+    #endregion
 }

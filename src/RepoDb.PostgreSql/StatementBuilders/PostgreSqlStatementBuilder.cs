@@ -677,6 +677,123 @@ public sealed class PostgreSqlStatementBuilder : BaseStatementBuilder
 
     #endregion
 
+    #region CreateUpdateAll
+    /// <inheritdoc/>
+    public override string CreateUpdateAll(
+        string tableName,
+        IEnumerable<Field> fields,
+        IEnumerable<Field>? qualifiers,
+        int batchSize,
+        IEnumerable<DbField> keyFields,
+        string? hints = null)
+    {
+        // Use base implementation for batch size 1
+        if (batchSize == 1)
+        {
+            return base.CreateUpdateAll(tableName, fields, qualifiers, batchSize, keyFields, hints);
+        }
+
+        GuardTableName(tableName);
+        GuardHints(hints);
+
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+
+        ValidateMultipleStatementExecution(batchSize);
+
+        if (fields?.Any() != true)
+        {
+            throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
+        }
+
+        qualifiers ??= keyFields.Where(x => x.IsPrimary).AsFields();
+
+        if (qualifiers?.Any() == true)
+        {
+            var unmatchedQualifiers = qualifiers.Where(field =>
+                fields.FirstOrDefault(f =>
+                    string.Equals(field.Name, f.Name, StringComparison.OrdinalIgnoreCase)) == null);
+
+            if (unmatchedQualifiers.Any())
+            {
+                throw new InvalidQualifiersException($"The qualifiers '{unmatchedQualifiers.Select(f => f.Name).Join(", ")}' are not " +
+                    $"present in the given fields '{fields.Select(f => f.Name).Join(", ")}'.");
+            }
+        }
+        else
+        {
+            if (primaryField != null)
+            {
+                var isPresent = fields.Any(f =>
+                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase));
+
+                if (!isPresent)
+                {
+                    throw new InvalidQualifiersException($"There are no qualifier fields found for '{tableName}'. Ensure that the " +
+                        $"primary field is present in the given fields '{fields.Select(f => f.Name).Join(", ")}'.");
+                }
+
+                qualifiers = keyFields.AsFields();
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(qualifiers), $"There are no qualifier fields found for '{tableName}'.");
+            }
+        }
+
+        var updateFields = fields
+            .Where(f => keyFields.GetByName(f.Name) is null && qualifiers.GetByName(f.Name) is null)
+            .ToArray();
+
+        if (!updateFields.Any())
+        {
+            throw new EmptyException(nameof(fields), "The list of updatable fields cannot be null or empty.");
+        }
+
+        var builder = new QueryBuilder();
+
+        // UPDATE table AS T
+        builder.Update()
+               .TableNameFrom(tableName, DbSetting)
+               .As("T")
+               .Set();
+
+        // SET field1 = S.field1, ...
+        builder.AppendJoin(updateFields.Select(f =>
+            $"{f.Name.AsField(DbSetting)} = S.{f.Name.AsField(DbSetting)}"), ", ");
+
+        // FROM (VALUES (...), (...)) AS S(field1, field2, ...)
+        builder.From()
+               .OpenParen()
+               .WriteText("VALUES");
+
+        for (var i = 0; i < batchSize; i++)
+        {
+            if (i > 0)
+                builder.Comma();
+
+            builder
+                .OpenParen()
+                .ParametersFrom(fields, i, DbSetting)
+                .CloseParen();
+        }
+
+        builder
+            .CloseParen()
+            .WriteText("AS S")
+            .OpenParen()
+            .FieldsFrom(fields, DbSetting)
+            .CloseParen();
+
+        // WHERE T.qualifier = S.qualifier AND ...
+        builder
+            .Where()
+            .AppendJoin(qualifiers.Select(q => $"T.{q.Name.AsField(DbSetting)} = S.{q.Name.AsField(DbSetting)}"), " AND ")
+            .End(DbSetting);
+
+        return builder.ToString();
+    }
+    #endregion
+
     #region Helpers
 
     private string GetDatabaseType(DbField dbField)
