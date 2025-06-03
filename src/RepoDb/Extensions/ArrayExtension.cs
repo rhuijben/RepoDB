@@ -1,7 +1,7 @@
 ﻿namespace RepoDb.Extensions;
 
 /// <summary>
-/// Contains the extension methods for <see cref="System.Array"/> object.
+/// Contains the extension methods for <see cref="Array"/> object.
 /// </summary>
 public static class ArrayExtension
 {

@@ -920,7 +920,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
                 }
 
                 // The primary is present, use it as a default if there are no qualifiers given
-                qualifiers = primaryField.AsField().AsEnumerable();
+                qualifiers = keyFields.AsFields();
             }
             else
             {
@@ -930,13 +930,11 @@ public abstract class BaseStatementBuilder : IStatementBuilder
         }
 
         // Gets the updatable fields
-        fields = fields
-            .Where(f => !string.Equals(f.Name, primaryField?.Name, StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(f.Name, identityField?.Name, StringComparison.OrdinalIgnoreCase) &&
-                qualifiers.FirstOrDefault(q => string.Equals(q.Name, f.Name, StringComparison.OrdinalIgnoreCase)) == null);
+        var updateFields = fields
+            .Where(f => keyFields.GetByName(f.Name) is null && qualifiers.GetByName(f.Name) is null);
 
         // Check if there are updatable fields
-        if (fields.Any() != true)
+        if (updateFields.Any() != true)
         {
             throw new EmptyException(nameof(fields), "The list of updatable fields cannot be null or empty.");
         }
@@ -952,7 +950,7 @@ public abstract class BaseStatementBuilder : IStatementBuilder
                 .TableNameFrom(tableName, DbSetting)
                 .HintsFrom(hints)
                 .Set()
-                .FieldsAndParametersFrom(fields, index, DbSetting)
+                .FieldsAndParametersFrom(updateFields, index, DbSetting)
                 .WhereFrom(qualifiers, index, DbSetting)
                 .End(DbSetting);
         }

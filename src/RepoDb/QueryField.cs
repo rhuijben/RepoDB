@@ -189,7 +189,7 @@ public partial class QueryField : IEquatable<QueryField>
 
     /// <summary>
     /// Returns the value of the <see cref="Parameter"/> object currently in used. However, if this instance of object has already been used as a database parameter 
-    /// with <see cref="DbParameter.Direction"/> equals to <see cref="System.Data.ParameterDirection.Output"/> via <see cref="DirectionalQueryField"/> 
+    /// with <see cref="DbParameter.Direction"/> equals to <see cref="ParameterDirection.Output"/> via <see cref="DirectionalQueryField"/> 
     /// object, then the value of the in-used <see cref="IDbDataParameter"/> object will be returned.
     /// </summary>
     /// <returns>The value of the <see cref="Parameter"/> object.</returns>
@@ -198,7 +198,7 @@ public partial class QueryField : IEquatable<QueryField>
 
     /// <summary>
     /// Returns the value of the <see cref="Parameter"/> object currently in used. However, if this instance of object has already been used as a database parameter 
-    /// with <see cref="DbParameter.Direction"/> equals to <see cref="System.Data.ParameterDirection.Output"/> via <see cref="DirectionalQueryField"/> 
+    /// with <see cref="DbParameter.Direction"/> equals to <see cref="ParameterDirection.Output"/> via <see cref="DirectionalQueryField"/> 
     /// object, then the value of the in-used <see cref="IDbDataParameter"/> object will be returned.
     /// </summary>
     /// <typeparam name="T"></typeparam>

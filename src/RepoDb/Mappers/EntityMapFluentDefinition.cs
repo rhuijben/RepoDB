@@ -74,7 +74,7 @@ public class EntityMapFluentDefinition<TEntity>
         string columnName,
         bool force)
     {
-        PropertyMapper.Add<TEntity>(expression, columnName, force);
+        PropertyMapper.Add(expression, columnName, force);
         return this;
     }
 
@@ -161,7 +161,7 @@ public class EntityMapFluentDefinition<TEntity>
     public EntityMapFluentDefinition<TEntity> Primary(Expression<Func<TEntity, object?>> expression,
         bool force)
     {
-        PrimaryMapper.Add<TEntity>(expression, force);
+        PrimaryMapper.Add(expression, force);
         return this;
     }
 
@@ -240,7 +240,7 @@ public class EntityMapFluentDefinition<TEntity>
     public EntityMapFluentDefinition<TEntity> Identity(Expression<Func<TEntity, object?>> expression,
         bool force)
     {
-        IdentityMapper.Add<TEntity>(expression, force);
+        IdentityMapper.Add(expression, force);
         return this;
     }
 
@@ -323,7 +323,7 @@ public class EntityMapFluentDefinition<TEntity>
         DbType? dbType,
         bool force)
     {
-        TypeMapper.Add<TEntity>(expression, dbType, force);
+        TypeMapper.Add(expression, dbType, force);
         return this;
     }
 
@@ -418,7 +418,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <param name="classHandler">The instance of the <see cref="IClassHandler{TEntity}"/>.</param>
     /// <returns>The current instance.</returns>
     public EntityMapFluentDefinition<TEntity> ClassHandler<TClassHandler>(TClassHandler classHandler) =>
-        ClassHandler<TClassHandler>(classHandler, false);
+        ClassHandler(classHandler, false);
 
     /// <summary>
     /// Defines a mapping between a class and a <see cref="IClassHandler{TEntity}"/> object.
@@ -475,7 +475,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <returns>The current instance.</returns>
     public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Expression<Func<TEntity, object?>> expression,
         TPropertyHandler propertyHandler) =>
-        PropertyHandler<TPropertyHandler>(expression, propertyHandler, false);
+        PropertyHandler(expression, propertyHandler, false);
 
     /// <summary>
     /// Defines a mapping between a class property and a <see cref="IPropertyHandler{TInput, TResult}"/> object.
@@ -489,7 +489,7 @@ public class EntityMapFluentDefinition<TEntity>
         TPropertyHandler propertyHandler,
         bool force)
     {
-        PropertyHandlerMapper.Add<TEntity, TPropertyHandler>(expression, propertyHandler, force);
+        PropertyHandlerMapper.Add(expression, propertyHandler, force);
         return this;
     }
 
@@ -517,7 +517,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <returns>The current instance.</returns>
     public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(string propertyName,
         TPropertyHandler propertyHandler) =>
-        PropertyHandler<TPropertyHandler>(propertyName, propertyHandler, false);
+        PropertyHandler(propertyName, propertyHandler, false);
 
     /// <summary>
     /// Adds a <see cref="IPropertyHandler{TInput, TResult}"/> mapping into a class property (via property name).
@@ -559,7 +559,7 @@ public class EntityMapFluentDefinition<TEntity>
     /// <returns>The current instance.</returns>
     public EntityMapFluentDefinition<TEntity> PropertyHandler<TPropertyHandler>(Field field,
         TPropertyHandler propertyHandler) =>
-        PropertyHandler<TPropertyHandler>(field, propertyHandler, false);
+        PropertyHandler(field, propertyHandler, false);
 
     /// <summary>
     /// Adds a <see cref="IPropertyHandler{TInput, TResult}"/> mapping into a class property (via <see cref="Field"/> object).
@@ -606,7 +606,7 @@ public class EntityMapFluentDefinition<TEntity>
         IEnumerable<PropertyValueAttribute> attributes,
         bool force)
     {
-        PropertyValueAttributeMapper.Add<TEntity>(expression, attributes, force);
+        PropertyValueAttributeMapper.Add(expression, attributes, force);
         return this;
     }
 

@@ -30,7 +30,7 @@ public static class IdentityMapper
     /// <param name="expression">The expression to be parsed.</param>
     public static void Add<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Add<TEntity>(expression, false);
+        Add(expression, false);
 
     /// <summary>
     /// Adds an identity property mapping into a target class (via expression).
@@ -46,7 +46,7 @@ public static class IdentityMapper
         ObjectExtension.ThrowIfNull(expression, "Expression");
 
         // Get the property
-        var property = ExpressionExtension.GetProperty<TEntity>(expression);
+        var property = ExpressionExtension.GetProperty(expression);
 
         // Add to the mapping
         Add<TEntity>(DataEntityExtension.GetClassPropertyOrThrow<TEntity>(property?.Name), force);

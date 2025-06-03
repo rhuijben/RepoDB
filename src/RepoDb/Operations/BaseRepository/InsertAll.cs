@@ -23,7 +23,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.InsertAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.InsertAll<TEntity>(entities: entities,
+        return DbRepository.InsertAll(entities: entities,
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -54,7 +54,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.InsertAllAsync<TEntity>(entities: entities,
+        return DbRepository.InsertAllAsync(entities: entities,
             batchSize: batchSize,
             fields: fields,
             hints: hints,

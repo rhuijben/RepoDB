@@ -39,7 +39,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.MinAll<TEntity>(field: field,
+        return DbRepository.MinAll(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -79,7 +79,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.MinAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.MinAll<TEntity, TResult>(field: field,
+        return DbRepository.MinAll(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -126,7 +126,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.MinAllAsync<TEntity>(field: field,
+        return DbRepository.MinAllAsync(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,
@@ -172,7 +172,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.MinAllAsync<TEntity, TResult>(field: field,
+        return DbRepository.MinAllAsync(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,

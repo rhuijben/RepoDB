@@ -36,7 +36,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.UpdateAll<TEntity>(tableName: tableName,
+            return connection.UpdateAll(tableName: tableName,
                 entities: entities,
                 batchSize: batchSize,
                 fields: fields,
@@ -83,7 +83,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.UpdateAll<TEntity>(tableName: tableName,
+            return connection.UpdateAll(tableName: tableName,
                 entities: entities,
                 qualifiers: qualifiers,
                 batchSize: batchSize,
@@ -131,7 +131,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.UpdateAll<TEntity>(tableName: tableName,
+            return connection.UpdateAll(tableName: tableName,
                 entities: entities,
                 qualifiers: qualifiers,
                 batchSize: batchSize,
@@ -175,7 +175,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.UpdateAll<TEntity>(entities: entities,
+            return connection.UpdateAll(entities: entities,
                 batchSize: batchSize,
                 fields: fields,
                 hints: hints,
@@ -219,7 +219,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.UpdateAll<TEntity>(entities: entities,
+            return connection.UpdateAll(entities: entities,
                 qualifiers: qualifiers,
                 batchSize: batchSize,
                 fields: fields,
@@ -264,7 +264,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.UpdateAll<TEntity>(entities: entities,
+            return connection.UpdateAll(entities: entities,
                 qualifiers: qualifiers,
                 batchSize: batchSize,
                 fields: fields,

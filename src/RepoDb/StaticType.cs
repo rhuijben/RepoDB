@@ -82,7 +82,7 @@ internal static class StaticType
     /// <summary>
     /// Gets a type of the <see cref="System.Data.DataTable"/> .NET CLR type.
     /// </summary>
-    public static Type DataTable => typeof(System.Data.DataTable);
+    public static Type DataTable => typeof(DataTable);
 
     /// <summary>
     /// Gets a type of the <see cref="System.DateTime"/> .NET CLR type.
@@ -198,7 +198,7 @@ internal static class StaticType
     /// <summary>
     /// Gets a type of the <see cref="Nullable{T}"/> (of type <see cref="System.Data.DbType"/>) .NET CLR type.
     /// </summary>
-    public static Type DbTypeNullable => typeof(Nullable<DbType>);
+    public static Type DbTypeNullable => typeof(DbType?);
 
     /// <summary>
     /// Gets a type of the <see cref="Attributes.IdentityAttribute"/> .NET CLR type.
@@ -291,7 +291,7 @@ internal static class StaticType
     public static Type PropertyHandlerSetOptions => typeof(PropertyHandlerSetOptions);
 
     /// <summary>
-    /// Gets a type of the <see cref="RepoDb.Attributes.Parameter.PropertyValueAttribute"/> .NET CLR type.
+    /// Gets a type of the <see cref="Attributes.Parameter.PropertyValueAttribute"/> .NET CLR type.
     /// </summary>
     public static Type PropertyValueAttribute => typeof(PropertyValueAttribute);
 

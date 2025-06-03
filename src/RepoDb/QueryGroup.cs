@@ -767,7 +767,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
 
     /// <summary>
     /// Gets the stringified query expression format of the current instance. A formatted string for field-operation-parameter will be
-    /// conjuncted by the value of the <see cref="RepoDb.Enumerations.Conjunction"/> property.
+    /// conjuncted by the value of the <see cref="Enumerations.Conjunction"/> property.
     /// </summary>
     /// <param name="index">The parameter index for batch operation.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>

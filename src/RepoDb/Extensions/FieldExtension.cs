@@ -213,5 +213,8 @@ public static class FieldExtension
 
     public static Field? GetByName(this IEnumerable<Field> source, string name, StringComparison stringComparison = StringComparison.OrdinalIgnoreCase)
         => source?.FirstOrDefault(p => string.Equals(p.Name, name, stringComparison));
+
+    internal static Field? GetByNameUnquoted(this IEnumerable<Field> source, string name, IDbSetting dbSetting)
+        => source?.FirstOrDefault(p => string.Equals(name, p.Name.AsUnquoted(true, dbSetting), StringComparison.OrdinalIgnoreCase));
 }
 

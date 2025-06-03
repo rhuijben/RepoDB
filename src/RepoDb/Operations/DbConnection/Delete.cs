@@ -37,9 +37,9 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        var key = GetAndGuardPrimaryKeyOrIdentityKey(GetEntityType<TEntity>(entity), connection, transaction);
+        var key = GetAndGuardPrimaryKeyOrIdentityKey(GetEntityType(entity), connection, transaction);
         return DeleteInternal<TEntity>(connection: connection,
-            where: ToQueryGroup<TEntity>(key, entity),
+            where: ToQueryGroup(key, entity),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,

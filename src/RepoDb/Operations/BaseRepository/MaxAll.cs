@@ -39,7 +39,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.MaxAll<TEntity>(field: field,
+        return DbRepository.MaxAll(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -79,7 +79,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.MaxAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.MaxAll<TEntity, TResult>(field: field,
+        return DbRepository.MaxAll(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -126,7 +126,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.MaxAllAsync<TEntity>(field: field,
+        return DbRepository.MaxAllAsync(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,
@@ -172,7 +172,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.MaxAllAsync<TEntity, TResult>(field: field,
+        return DbRepository.MaxAllAsync(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,

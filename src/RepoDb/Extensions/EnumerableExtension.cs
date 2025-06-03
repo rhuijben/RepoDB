@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace RepoDb.Extensions;
@@ -45,69 +44,118 @@ public static class EnumerableExtension
 #endif
     }
 
+    /// <summary>
+    /// Splits a collection into optimally-sized chunks to minimize cached database plan overhead.
+    /// Uses a small set of standard chunk sizes to maximize cache reuse while maintaining efficiency.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the source collection.</typeparam>
+    /// <param name="source">The source collection to chunk.</param>
+    /// <param name="maxChunkSize">The maximum size for any single chunk. Defaults to 2000.</param>
+    /// <returns>
+    /// An enumerable of arrays, where each array represents a chunk of the original collection.
+    /// Small collections (≤10 items) are returned as-is without chunking.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="source"/> is null.</exception>
+    /// <remarks>
+    /// <para>
+    /// This method optimizes for database operations that cache execution plans based on parameter count.
+    /// By using a limited set of standard chunk sizes (20, 50, 100, 200, 500, etc.), it minimizes
+    /// the number of cached plans while maintaining good performance characteristics.
+    /// </para>
+    /// <para>
+    /// Chunking strategy:
+    /// <list type="bullet">
+    /// <item><description>Collections with ≤10 items: No chunking (returned as single chunk)</description></item>
+    /// <item><description>Larger collections: Uses standard sizes progressing through 20, 50, 100, 200, 500, 1000, 2000, 5000...</description></item>
+    /// <item><description>Always includes the specified <paramref name="maxChunkSize"/> for optimal large dataset handling</description></item>
+    /// <item><description>Automatically drops standard sizes that are too close to the maximum (within 20%) to avoid redundancy</description></item>
+    /// </list>
+    /// </para>
+    /// <para>
+    /// Performance characteristics:
+    /// <list type="bullet">
+    /// <item><description>Memory efficient: Copies source once, then uses array slicing</description></item>
+    /// <item><description>Cache friendly: Typically generates only 5-8 different chunk sizes total</description></item>
+    /// <item><description>Large dataset optimized: Always uses maximum chunk size when beneficial</description></item>
+    /// </list>
+    /// </para>
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// var items = Enumerable.Range(1, 2500);
+    /// 
+    /// // Creates chunks of sizes: 2000, 500 (2 different cached plans)
+    /// var chunks = items.ChunkOptimally(maxChunkSize: 2000);
+    /// 
+    /// // Small collection optimization
+    /// var smallItems = Enumerable.Range(1, 8);
+    /// var smallChunks = smallItems.ChunkOptimally(); // Returns single chunk of 8 items
+    /// </code>
+    /// </example>
     public static IEnumerable<T[]> ChunkOptimally<T>(
         this IEnumerable<T> source,
-        int maxChunkSize = 2000,
-        int minThreshold = 30,
-        int minReductionPercent = 15)
+        int maxChunkSize = 2000)
     {
         if (source is null)
             throw new ArgumentNullException(nameof(source));
+        else if (maxChunkSize < 1)
+            throw new ArgumentOutOfRangeException(nameof(maxChunkSize));
 
-        var list = source as IList<T> ?? source.ToList();
-        int total = list.Count;
+        var array = source as T[] ?? source.ToArray();
 
-        if (total <= minThreshold)
+        if (array.Length == 0)
+            yield break;
+
+        if (array.Length <= 10)
         {
-            yield return list.ToArray();
+            yield return array;
             yield break;
         }
 
-        int index = 0;
-        int remaining = total;
+        var standardSizes = GetStandardSizes(maxChunkSize);
 
-        // Reference baseline for comparison
-        const int baseSize = 50;
-        int baseChunks = (total + baseSize - 1) / baseSize;
-
-        // Always treat maxChunkSize as optimal
-        while (remaining >= maxChunkSize)
+        for (int i = 0; i < array.Length;)
         {
-            yield return list.Skip(index).Take(maxChunkSize).ToArray();
-            index += maxChunkSize;
-            remaining -= maxChunkSize;
+            var remaining = array.Length - i;
+            var chunkSize = SelectOptimalSize(remaining, standardSizes);
+
+            yield return array.AsSpan(i, chunkSize).ToArray();
+            i += chunkSize;
         }
 
-        if (maxChunkSize > 500)
-            maxChunkSize -= maxChunkSize % 100; // Round down to nearest 100 for larger sizes
-        else if (maxChunkSize > 100)
-            maxChunkSize -= maxChunkSize % 25; // Round down to nearest 25
-
-        // Try smaller optimal sizes from largest to smallest
-        for (int size = maxChunkSize - 25; size > minThreshold; size -= 25)
+        static int[] GetStandardSizes(int maxChunkSize)
         {
-            int chunks = (total + size - 1) / size;
-            if (chunks * 100 > baseChunks * (100 - minReductionPercent))
-                continue;
+            var baseSizes = new[] { 20, 50, 100, 200, 500, 1000, 2000, 5000 };
+            var validSizes = new List<int>();
 
-            while (remaining >= size)
+            foreach (var size in baseSizes)
             {
-                yield return list.Skip(index).Take(size).ToArray();
-                index += size;
-                remaining -= size;
+                if (size >= maxChunkSize) break;
+
+                // Skip if too close to max (within 20% difference)
+                if (size > maxChunkSize * 0.8) continue;
+
+                validSizes.Add(size);
             }
+
+            // Always include the provided maximum
+            validSizes.Add(maxChunkSize);
+
+            return validSizes.ToArray();
         }
 
-        // Final trailing chunk if it's small enough
-        while (remaining > 0)
+        static int SelectOptimalSize(int remaining, int[] standardSizes)
         {
-            int size = Math.Min(remaining, minThreshold);
-            yield return list.Skip(index).Take(size).ToArray();
-            index += size;
-            remaining -= size;
-        }
+            // Find the largest standard size that fits
+            for (int i = standardSizes.Length - 1; i >= 0; i--)
+            {
+                if (remaining >= standardSizes[i])
+                    return standardSizes[i];
+            }
 
-        Debug.Assert(remaining == 0);
+            // Fallback to remaining (shouldn't happen with our logic)
+            return remaining;
+        }
     }
 
     /// <summary>

@@ -147,7 +147,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Query<TEntity>(tableName,
+            return connection.Query(tableName,
                 where: where,
                 fields: fields,
                 orderBy: orderBy,
@@ -458,7 +458,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Query<TEntity>(where: where,
+            return connection.Query(where: where,
                 fields: fields,
                 orderBy: orderBy,
                 top: top,
@@ -1322,7 +1322,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Query<TWhat>(tableName: tableName,
+            return connection.Query(tableName: tableName,
                 what: what,
                 fields: fields,
                 orderBy: orderBy,

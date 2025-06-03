@@ -24,7 +24,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.UpdateAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.UpdateAll<TEntity>(entities: entities,
+        return DbRepository.UpdateAll(entities: entities,
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -51,7 +51,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.UpdateAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.UpdateAll<TEntity>(entities: entities,
+        return DbRepository.UpdateAll(entities: entities,
             qualifiers: qualifiers,
             batchSize: batchSize,
             fields: fields,
@@ -79,7 +79,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.UpdateAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.UpdateAll<TEntity>(entities: entities,
+        return DbRepository.UpdateAll(entities: entities,
             qualifiers: qualifiers,
             batchSize: batchSize,
             fields: fields,
@@ -111,7 +111,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAllAsync<TEntity>(entities: entities,
+        return DbRepository.UpdateAllAsync(entities: entities,
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -141,7 +141,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAllAsync<TEntity>(entities: entities,
+        return DbRepository.UpdateAllAsync(entities: entities,
             qualifiers: qualifiers,
             batchSize: batchSize,
             fields: fields,
@@ -172,7 +172,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.UpdateAllAsync<TEntity>(entities: entities,
+        return DbRepository.UpdateAllAsync(entities: entities,
             qualifiers: qualifiers,
             batchSize: batchSize,
             fields: fields,

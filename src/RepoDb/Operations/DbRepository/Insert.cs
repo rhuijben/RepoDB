@@ -33,7 +33,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Insert<TEntity>(tableName: tableName,
+            return connection.Insert(tableName: tableName,
                 entity: entity,
                 fields: fields,
                 hints: hints,
@@ -116,7 +116,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Insert<TEntity>(entity: entity,
+            return connection.Insert(entity: entity,
                 fields: fields,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,

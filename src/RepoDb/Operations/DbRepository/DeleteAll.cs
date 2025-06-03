@@ -147,7 +147,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.DeleteAll<TEntity>(entities: entities,
+            return connection.DeleteAll(entities: entities,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,

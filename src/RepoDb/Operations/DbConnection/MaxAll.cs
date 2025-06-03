@@ -70,7 +70,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return MaxAllInternal<TEntity, object>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -138,7 +138,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return MaxAllInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -256,7 +256,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MaxAllAsyncInternal<TEntity, object>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -330,7 +330,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await MaxAllAsyncInternal<TEntity, TResult>(connection: connection,
-            field: Field.Parse<TEntity, TResult>(field).First(),
+            field: Field.Parse(field).First(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,

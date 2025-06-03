@@ -63,7 +63,7 @@ public static class TypeMapCache
     /// <returns>The mapped <see cref="DbType"/> object of the property.</returns>
     public static DbType? Get<TEntity>(Expression<Func<TEntity, object?>> expression)
         where TEntity : class =>
-        Get<TEntity>(ExpressionExtension.GetProperty<TEntity>(expression));
+        Get<TEntity>(ExpressionExtension.GetProperty(expression));
 
     /// <summary>
     /// Property Level: Gets the cached <see cref="DbType"/> object that is being mapped on a specific class property (via property name).

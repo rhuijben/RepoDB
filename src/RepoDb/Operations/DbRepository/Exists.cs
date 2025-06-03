@@ -103,7 +103,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Exists<TEntity>(where: where,
+            return connection.Exists(where: where,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,
                 traceKey: traceKey,
@@ -491,7 +491,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.Exists<TWhat>(tableName: tableName,
+            return connection.Exists(tableName: tableName,
                 what: what,
                 hints: hints,
                 commandTimeout: CommandTimeout ?? 0,

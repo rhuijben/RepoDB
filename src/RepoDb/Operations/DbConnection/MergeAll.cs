@@ -47,7 +47,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return MergeAllInternal<TEntity>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -92,7 +92,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return MergeAllInternal<TEntity>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier.AsEnumerable(),
@@ -137,7 +137,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return MergeAllInternal<TEntity>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -182,10 +182,10 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return MergeAllInternal<TEntity>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
-            qualifiers: Field.Parse<TEntity>(qualifiers),
+            qualifiers: Field.Parse(qualifiers),
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -223,7 +223,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return MergeAllInternal<TEntity>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: null,
@@ -266,7 +266,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return MergeAllInternal<TEntity>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifier.AsEnumerable(),
@@ -309,7 +309,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return MergeAllInternal<TEntity>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifiers,
@@ -352,10 +352,10 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return MergeAllInternal<TEntity>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
-            qualifiers: Field.Parse<TEntity>(qualifiers),
+            qualifiers: Field.Parse(qualifiers),
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -401,7 +401,7 @@ public static partial class DbConnectionExtension
         if (qualifiers?.Any() != true)
         {
             var keys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
-                GetEntityType<TEntity>(entities));
+                GetEntityType(entities));
             qualifiers = keys;
         }
 
@@ -413,12 +413,12 @@ public static partial class DbConnectionExtension
         {
             if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
             {
-                return MergeAllInternalBase<IDictionary<string, object>>(connection: connection,
+                return MergeAllInternalBase(connection: connection,
                     tableName: tableName,
                     entities: entities.WithType<IDictionary<string, object>>(),
                     qualifiers: qualifiers,
                     batchSize: batchSize,
-                    fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                    fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
                     traceKey: traceKey,
@@ -428,12 +428,12 @@ public static partial class DbConnectionExtension
             }
             else
             {
-                return MergeAllInternalBase<TEntity>(connection: connection,
+                return MergeAllInternalBase(connection: connection,
                     tableName: tableName,
                     entities: entities,
                     qualifiers: qualifiers,
                     batchSize: batchSize,
-                    fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                    fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
                     traceKey: traceKey,
@@ -446,11 +446,11 @@ public static partial class DbConnectionExtension
         {
             if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
             {
-                return UpsertAllInternalBase<IDictionary<string, object>>(connection: connection,
+                return UpsertAllInternalBase(connection: connection,
                     tableName: tableName,
                     entities: entities.WithType<IDictionary<string, object>>(),
                     qualifiers: qualifiers,
-                    fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                    fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
                     traceKey: traceKey,
@@ -460,11 +460,11 @@ public static partial class DbConnectionExtension
             }
             else
             {
-                return UpsertAllInternalBase<TEntity>(connection: connection,
+                return UpsertAllInternalBase(connection: connection,
                     tableName: tableName,
                     entities: entities,
                     qualifiers: qualifiers,
-                    fields: fields ?? GetQualifiedFields<TEntity>(entities?.FirstOrDefault()),
+                    fields: fields ?? GetQualifiedFields(entities?.FirstOrDefault()),
                     hints: hints,
                     commandTimeout: commandTimeout,
                     traceKey: traceKey,
@@ -510,7 +510,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -558,7 +558,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier.AsEnumerable(),
@@ -606,7 +606,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -654,10 +654,10 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
-            qualifiers: Field.Parse<TEntity>(qualifiers),
+            qualifiers: Field.Parse(qualifiers),
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -698,7 +698,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: null,
@@ -744,7 +744,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifier.AsEnumerable(),
@@ -790,7 +790,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifiers,
@@ -836,10 +836,10 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await MergeAllAsyncInternal<TEntity>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
-            qualifiers: Field.Parse<TEntity>(qualifiers),
+            qualifiers: Field.Parse(qualifiers),
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -997,7 +997,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return MergeAllInternal<object>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -1040,7 +1040,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return MergeAllInternal<object>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1083,7 +1083,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return MergeAllInternal<object>(connection: connection,
+        return MergeAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -1130,7 +1130,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await MergeAllAsyncInternal<object>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -1176,7 +1176,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await MergeAllAsyncInternal<object>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1222,7 +1222,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await MergeAllAsyncInternal<object>(connection: connection,
+        return await MergeAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -1282,21 +1282,19 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        // Validate the batch size
-        batchSize = (dbSetting.IsMultiStatementExecutable == true)
-            ? Math.Min(batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize, entities.Count())
+        int maxBatchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min((batchSize <= 0 ? dbSetting.MaxParameterCount / (fields.Concat(qualifiers ?? []).Select(x => x.Name).Distinct().Count()) : batchSize), dbSetting.MaxQueriesInBatchCount)
             : 1;
-
-        batchSize = Math.Min(batchSize, dbSetting.MaxQueriesInBatchCount);
+        batchSize = Math.Min(batchSize <= 0 ? Constant.DefaultBatchOperationSize : batchSize, entities.Count());
 
         // Get the context
-        var entityType = GetEntityType<TEntity>(entities);
+        var entityType = GetEntityType(entities);
         var context = MergeAllExecutionContextProvider.Create(entityType,
             connection,
             entities,
             tableName,
             qualifiers,
-            1,
+            batchSize,
             fields,
             hints,
             transaction,
@@ -1356,11 +1354,10 @@ public static partial class DbConnectionExtension
             else
             {
                 int? positionIndex = null;
-                // Iterate the batches
-                foreach (var batchItems in entities.Split(batchSize))
+                bool doPrepare = dbSetting.IsPreparable;
+
+                foreach (var batchItems in entities.Split(maxBatchSize))
                 {
-                    bool doPrepare = false;
-                    // Check if the batch size has changed (probably the last batch on the enumerables)
                     if (batchItems.Length != context.BatchSize)
                     {
                         // Get a new execution context from cache
@@ -1507,20 +1504,19 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = (dbSetting.IsMultiStatementExecutable == true)
-            ? Math.Min(batchSize <= 0 ? dbSetting.MaxParameterCount / fields.Count() : batchSize, entities.Count())
+        int maxBatchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min((batchSize <= 0 ? dbSetting.MaxParameterCount / (fields.Concat(qualifiers ?? []).Select(x => x.Name).Distinct().Count()) : batchSize), dbSetting.MaxQueriesInBatchCount)
             : 1;
-
-        batchSize = Math.Min(batchSize, dbSetting.MaxQueriesInBatchCount);
+        batchSize = Math.Min(batchSize <= 0 ? Constant.DefaultBatchOperationSize : batchSize, entities.Count());
 
         // Get the context
-        var entityType = GetEntityType<TEntity>(entities);
+        var entityType = GetEntityType(entities);
         var context = await MergeAllExecutionContextProvider.CreateAsync(entityType,
             connection,
             entities,
             tableName,
             qualifiers,
-            1,
+            Math.Min(maxBatchSize, entities.Count()),
             fields,
             hints,
             transaction,
@@ -1582,12 +1578,11 @@ public static partial class DbConnectionExtension
             else
             {
                 int? positionIndex = null;
+                bool doPrepare = dbSetting.IsPreparable;
 
                 // Iterate the batches
                 foreach (var batchItems in entities.Split(batchSize))
                 {
-                    // Check if the batch size has changed (probably the last batch on the enumerables)
-                    bool doPrepare = false;
                     if (batchItems.Length != context.BatchSize)
                     {
                         // Get a new execution context from cache
@@ -1622,6 +1617,7 @@ public static partial class DbConnectionExtension
                     if (doPrepare)
                     {
                         command.Prepare();
+                        doPrepare = false;
                     }
 
                     // Actual Execution
@@ -1725,7 +1721,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         // Variables needed
-        var type = GetEntityType<TEntity>(entities);
+        var type = GetEntityType(entities);
         var dbFields = DbFieldCache.Get(connection, tableName, transaction);
         var primary = dbFields?.GetPrimary();
         IEnumerable<ClassProperty>? properties = null;
@@ -1830,7 +1826,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         // Variables needed
-        var type = GetEntityType<TEntity>(entities);
+        var type = GetEntityType(entities);
         var dbFields = await DbFieldCache.GetAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var primary = dbFields?.GetPrimary();
         IEnumerable<ClassProperty>? properties = null;

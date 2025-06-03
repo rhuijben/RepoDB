@@ -95,7 +95,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.SkipQuery,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.SkipQuery<TEntity>(tableName: tableName,
+        return DbRepository.SkipQuery(tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -287,7 +287,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.SkipQuery,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.SkipQuery<TEntity>(skip: skip,
+        return DbRepository.SkipQuery(skip: skip,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
             where: where,
@@ -490,7 +490,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SkipQueryAsync<TEntity>(tableName: tableName,
+        return DbRepository.SkipQueryAsync(tableName: tableName,
             skip: skip,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
@@ -701,7 +701,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SkipQueryAsync<TEntity>(skip: skip,
+        return DbRepository.SkipQueryAsync(skip: skip,
             rowsPerBatch: rowsPerBatch,
             orderBy: orderBy,
             where: where,

@@ -35,7 +35,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.InsertAll<TEntity>(tableName,
+            return connection.InsertAll(tableName,
                 entities: entities,
                 batchSize: batchSize,
                 fields: fields,
@@ -78,7 +78,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         try
         {
             // Call the method
-            return connection.InsertAll<TEntity>(entities: entities,
+            return connection.InsertAll(entities: entities,
                 batchSize: batchSize,
                 fields: fields,
                 hints: hints,

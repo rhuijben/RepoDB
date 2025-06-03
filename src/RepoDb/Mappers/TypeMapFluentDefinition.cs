@@ -74,7 +74,7 @@ public class TypeMapFluentDefinition<TType>
     /// <param name="propertyHandler">The instance of the property handler. The type must implement the <see cref="IPropertyHandler{TInput, TResult}"/> interface.</param>
     /// <returns>The current instance.</returns>
     public TypeMapFluentDefinition<TType> PropertyHandler<TPropertyHandler>(TPropertyHandler propertyHandler) =>
-        PropertyHandler<TPropertyHandler>(propertyHandler, false);
+        PropertyHandler(propertyHandler, false);
 
     /// <summary>
     /// Defines a mapping between a .NET CLR type and a <see cref="IPropertyHandler{TInput, TResult}"/> object.

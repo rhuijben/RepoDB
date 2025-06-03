@@ -22,7 +22,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Merge<TEntity>(entity: entity,
+        return DbRepository.Merge(entity: entity,
             fields: fields,
             hints: hints,
             traceKey: traceKey,
@@ -46,7 +46,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Merge<TEntity>(entity: entity,
+        return DbRepository.Merge(entity: entity,
             qualifier: qualifier,
             fields: fields,
             hints: hints,
@@ -71,7 +71,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Merge<TEntity>(entity: entity,
+        return DbRepository.Merge(entity: entity,
             qualifiers: qualifiers,
             fields: fields,
             hints: hints,
@@ -96,7 +96,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Merge<TEntity>(entity: entity,
+        return DbRepository.Merge(entity: entity,
             qualifiers: qualifiers,
             fields: fields,
             hints: hints,
@@ -226,7 +226,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.MergeAsync<TEntity>(entity: entity,
+        return DbRepository.MergeAsync(entity: entity,
             fields: fields,
             hints: hints,
             traceKey: traceKey,
@@ -253,7 +253,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.MergeAsync<TEntity>(entity: entity,
+        return DbRepository.MergeAsync(entity: entity,
             qualifier: qualifier,
             fields: fields,
             hints: hints,
@@ -281,7 +281,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.MergeAsync<TEntity>(entity: entity,
+        return DbRepository.MergeAsync(entity: entity,
             qualifiers: qualifiers,
             fields: fields,
             hints: hints,
@@ -309,7 +309,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.MergeAsync<TEntity>(entity: entity,
+        return DbRepository.MergeAsync(entity: entity,
             qualifiers: qualifiers,
             fields: fields,
             hints: hints,

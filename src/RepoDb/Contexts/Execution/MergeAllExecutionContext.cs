@@ -5,7 +5,7 @@ namespace RepoDb.Contexts.Execution;
 /// <summary>
 /// 
 /// </summary>
-internal class MergeAllExecutionContext
+internal sealed record MergeAllExecutionContext
 {
     /// <summary>
     /// 

@@ -70,7 +70,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return AverageAllInternal<TEntity, object>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -256,7 +256,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await AverageAllAsyncInternal<TEntity, object>(connection: connection,
-            field: Field.Parse<TEntity>(field).First(),
+            field: Field.Parse(field).First(),
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,

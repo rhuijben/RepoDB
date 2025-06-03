@@ -5,7 +5,7 @@ namespace RepoDb.Contexts.Execution;
 /// <summary>
 /// 
 /// </summary>
-internal class UpdateExecutionContext
+internal sealed record UpdateExecutionContext
 {
     /// <summary>
     /// The execution command text.

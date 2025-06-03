@@ -44,7 +44,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -132,7 +132,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -154,7 +154,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -176,7 +176,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             traceKey: traceKey,
             transaction: transaction,
@@ -198,7 +198,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -220,7 +220,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -352,7 +352,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity, TResult>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -374,7 +374,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity, TResult>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -396,7 +396,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity, TResult>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             traceKey: traceKey,
             transaction: transaction,
@@ -418,7 +418,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity, TResult>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -440,7 +440,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Sum,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Sum<TEntity, TResult>(field: field,
+        return DbRepository.Sum(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -493,7 +493,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -593,7 +593,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -618,7 +618,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -643,7 +643,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -668,7 +668,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -693,7 +693,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -843,7 +843,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity, TResult>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -868,7 +868,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity, TResult>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -893,7 +893,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity, TResult>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -918,7 +918,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity, TResult>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,
@@ -943,7 +943,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAsync<TEntity, TResult>(field: field,
+        return DbRepository.SumAsync(field: field,
             where: where,
             hints: hints,
             traceKey: traceKey,

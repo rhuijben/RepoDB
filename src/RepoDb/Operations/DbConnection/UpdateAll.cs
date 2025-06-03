@@ -35,7 +35,7 @@ public static partial class DbConnectionExtension
     public static int UpdateAll<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -45,7 +45,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return UpdateAllInternal<TEntity>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -80,7 +80,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -90,7 +90,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return UpdateAllInternal<TEntity>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -125,7 +125,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -135,7 +135,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return UpdateAllInternal<TEntity>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -170,7 +170,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -180,10 +180,10 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return UpdateAllInternal<TEntity>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
-            qualifiers: Field.Parse<TEntity>(qualifiers),
+            qualifiers: Field.Parse(qualifiers),
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -211,7 +211,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of affected rows during the update process.</returns>
     public static int UpdateAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -221,7 +221,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return UpdateAllInternal<TEntity>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: null,
@@ -254,7 +254,7 @@ public static partial class DbConnectionExtension
     public static int UpdateAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -264,7 +264,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return UpdateAllInternal<TEntity>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -297,7 +297,7 @@ public static partial class DbConnectionExtension
     public static int UpdateAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -307,7 +307,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return UpdateAllInternal<TEntity>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifiers,
@@ -340,7 +340,7 @@ public static partial class DbConnectionExtension
     public static int UpdateAll<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -350,10 +350,10 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return UpdateAllInternal<TEntity>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
-            qualifiers: Field.Parse<TEntity>(qualifiers),
+            qualifiers: Field.Parse(qualifiers),
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -385,7 +385,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -397,13 +397,12 @@ public static partial class DbConnectionExtension
     {
         if (qualifiers?.Any() != true)
         {
-            var keys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
-                GetEntityType<TEntity>(entities));
-            qualifiers = keys;
+            qualifiers = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction,
+                GetEntityType(entities));
         }
         if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
         {
-            return UpdateAllInternalBase<IDictionary<string, object>>(connection: connection,
+            return UpdateAllInternalBase(connection: connection,
                 tableName: tableName,
                 entities: entities.WithType<IDictionary<string, object>>(),
                 batchSize: batchSize,
@@ -418,7 +417,7 @@ public static partial class DbConnectionExtension
         }
         else
         {
-            return UpdateAllInternalBase<TEntity>(connection: connection,
+            return UpdateAllInternalBase(connection: connection,
                 tableName: tableName,
                 entities: entities,
                 batchSize: batchSize,
@@ -457,7 +456,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -468,7 +467,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -505,7 +504,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -516,7 +515,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -553,7 +552,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -564,7 +563,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -601,7 +600,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -612,7 +611,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: fields,
@@ -645,7 +644,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of affected rows during the update process.</returns>
     public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -656,7 +655,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: null,
@@ -691,7 +690,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -702,7 +701,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -737,7 +736,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -748,7 +747,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
             qualifiers: qualifiers,
@@ -783,7 +782,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> UpdateAllAsync<TEntity>(this IDbConnection connection,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -794,10 +793,10 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await UpdateAllAsyncInternal<TEntity>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: GetMappedName(entities),
             entities: entities,
-            qualifiers: Field.Parse<TEntity>(qualifiers),
+            qualifiers: Field.Parse(qualifiers),
             batchSize: batchSize,
             fields: fields,
             hints: hints,
@@ -831,7 +830,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -844,9 +843,8 @@ public static partial class DbConnectionExtension
     {
         if (qualifiers?.Any() != true)
         {
-            var keys = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
+            qualifiers = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction,
                 GetEntityType(entities), cancellationToken).ConfigureAwait(false);
-            qualifiers = keys;
         }
         if (TypeCache.Get(GetEntityType(entities)).IsDictionaryStringObject())
         {
@@ -904,7 +902,7 @@ public static partial class DbConnectionExtension
     public static int UpdateAll(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -913,7 +911,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return UpdateAllInternal<object>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -947,7 +945,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<object> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -956,7 +954,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return UpdateAllInternal<object>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -990,7 +988,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<object> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -999,7 +997,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return UpdateAllInternal<object>(connection: connection,
+        return UpdateAllInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -1036,7 +1034,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> UpdateAllAsync(this IDbConnection connection,
         string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1046,7 +1044,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await UpdateAllAsyncInternal<object>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: null,
@@ -1082,7 +1080,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<object> entities,
         Field qualifier,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1092,7 +1090,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await UpdateAllAsyncInternal<object>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifier?.AsEnumerable(),
@@ -1128,7 +1126,7 @@ public static partial class DbConnectionExtension
         string tableName,
         IEnumerable<object> entities,
         IEnumerable<Field>? qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
@@ -1138,7 +1136,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await UpdateAllAsyncInternal<object>(connection: connection,
+        return await UpdateAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
             qualifiers: qualifiers,
@@ -1198,10 +1196,13 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = (dbSetting.IsMultiStatementExecutable == true) ? Math.Min(batchSize, entities.Count()) : 1;
+        int maxBatchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min((batchSize <= 0 ? dbSetting.MaxParameterCount / (fields.Concat(qualifiers ?? []).Select(x => x.Name).Distinct().Count()) : batchSize), dbSetting.MaxQueriesInBatchCount)
+            : 1;
+        batchSize = Math.Min(batchSize <= 0 ? Constant.DefaultBatchOperationSize : batchSize, entities.Count());
 
         // Get the context
-        var entityType = GetEntityType<TEntity>(entities);
+        var entityType = GetEntityType(entities);
         var context = UpdateAllExecutionContextProvider.Create(entityType,
             connection,
             tableName,
@@ -1217,7 +1218,6 @@ public static partial class DbConnectionExtension
         connection.EnsureOpen();
         using var myTransaction = (transaction is null && Transaction.Current is null) ? connection.BeginTransaction() : null;
         transaction ??= myTransaction;
-
 
         // Create the command
         using (var command = (DbCommand)connection.CreateCommand(context.CommandText,
@@ -1258,18 +1258,11 @@ public static partial class DbConnectionExtension
             }
             else
             {
-                foreach (var batchEntities in entities.Split(batchSize))
+                bool doPrepare = dbSetting.IsPreparable;
+
+                foreach (var batchItems in entities.ChunkOptimally(maxBatchSize))
                 {
-                    var batchItems = batchEntities.AsList();
-
-                    // Break if there is no more records
-                    if (batchItems.Count <= 0)
-                    {
-                        break;
-                    }
-
-                    // Check if the batch size has changed (probably the last batch on the enumerables)
-                    if (batchItems.Count != batchSize)
+                    if (batchItems.Length != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = UpdateAllExecutionContextProvider.Create(entityType,
@@ -1277,7 +1270,7 @@ public static partial class DbConnectionExtension
                             tableName,
                             batchItems,
                             qualifiers,
-                            batchItems.Count,
+                            batchItems.Length,
                             fields,
                             hints,
                             transaction,
@@ -1285,10 +1278,11 @@ public static partial class DbConnectionExtension
 
                         // Set the command properties
                         command.CommandText = context.CommandText;
+                        doPrepare = dbSetting.IsPreparable;
                     }
 
                     // Set the values
-                    if (batchItems.Count == 1)
+                    if (batchItems.Length == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -1298,9 +1292,10 @@ public static partial class DbConnectionExtension
                     }
 
                     // Prepare the command
-                    if (dbSetting.IsPreparable)
+                    if (doPrepare)
                     {
                         command.Prepare();
+                        doPrepare = false;
                     }
 
                     // Before Execution
@@ -1376,14 +1371,17 @@ public static partial class DbConnectionExtension
         }
 
         // Validate the batch size
-        batchSize = (dbSetting.IsMultiStatementExecutable == true) ? Math.Min(batchSize, entities.Count()) : 1;
+        int maxBatchSize = (dbSetting.IsMultiStatementExecutable == true)
+            ? Math.Min((batchSize <= 0 ? dbSetting.MaxParameterCount / (fields.Concat(qualifiers ?? []).Select(x => x.Name).Distinct().Count()) : batchSize), dbSetting.MaxQueriesInBatchCount)
+            : 1;
+        batchSize = Math.Min(batchSize <= 0 ? Constant.DefaultBatchOperationSize : batchSize, entities.Count());
 
         await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
         using var myTransaction = (transaction is null && Transaction.Current is null) ? await connection.BeginTransactionAsync(cancellationToken).ConfigureAwait(false) : null;
         transaction ??= myTransaction;
 
         // Get the context
-        var entityType = GetEntityType<TEntity>(entities);
+        var entityType = GetEntityType(entities);
         var context = await UpdateAllExecutionContextProvider.CreateAsync(entityType,
             connection,
             tableName,
@@ -1405,7 +1403,7 @@ public static partial class DbConnectionExtension
             if (batchSize == 1)
             {
                 // Much better to use the actual single-based setter (performance)
-                foreach (var entity in entities.AsList())
+                foreach (var entity in entities)
                 {
                     // Set the values
                     context.SingleDataEntityParametersSetterFunc?.Invoke(command, entity);
@@ -1436,18 +1434,10 @@ public static partial class DbConnectionExtension
             }
             else
             {
-                foreach (var batchEntities in entities.Split(batchSize))
+                bool doPrepare = dbSetting.IsPreparable;
+                foreach (var batchItems in entities.ChunkOptimally(maxBatchSize))
                 {
-                    var batchItems = batchEntities.AsList();
-
-                    // Break if there is no more records
-                    if (batchItems.Count <= 0)
-                    {
-                        break;
-                    }
-
-                    // Check if the batch size has changed (probably the last batch on the enumerables)
-                    if (batchItems.Count != batchSize)
+                    if (batchItems.Length != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = await UpdateAllExecutionContextProvider.CreateAsync(entityType,
@@ -1455,7 +1445,7 @@ public static partial class DbConnectionExtension
                             tableName,
                             batchItems,
                             qualifiers,
-                            batchItems.Count,
+                            batchItems.Length,
                             fields,
                             hints,
                             transaction,
@@ -1467,7 +1457,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems.Count == 1)
+                    if (batchItems.Length == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -1477,9 +1467,10 @@ public static partial class DbConnectionExtension
                     }
 
                     // Prepare the command
-                    if (dbSetting.IsPreparable)
+                    if (doPrepare)
                     {
                         command.Prepare();
+                        doPrepare = false;
                     }
 
                     // Before Execution

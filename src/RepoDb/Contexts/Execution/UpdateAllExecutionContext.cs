@@ -5,7 +5,7 @@ namespace RepoDb.Contexts.Execution;
 /// <summary>
 /// 
 /// </summary>
-internal class UpdateAllExecutionContext
+internal sealed record UpdateAllExecutionContext
 {
     /// <summary>
     /// 
@@ -16,6 +16,11 @@ internal class UpdateAllExecutionContext
     /// 
     /// </summary>
     public IEnumerable<DbField> InputFields { get; init; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int BatchSize { get; init; }
 
     /// <summary>
     /// 

@@ -39,7 +39,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.Exists<TEntity>(where: where,
+        return DbRepository.Exists(where: where,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -166,7 +166,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.ExistsAsync<TEntity>(where: where,
+        return DbRepository.ExistsAsync(where: where,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,

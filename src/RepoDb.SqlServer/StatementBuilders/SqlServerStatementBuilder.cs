@@ -667,7 +667,7 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
         {
             builder
                 .Comma()
-                .WriteText(RepoDbOrderColumn.AsQuoted(DbSetting));
+                .WriteText(RepoDbOrderColumn.AsField(DbSetting));
         }
 
         builder
@@ -813,4 +813,117 @@ public sealed class SqlServerStatementBuilder : BaseStatementBuilder
     }
 
     #endregion
+
+    /// <inheritdoc />
+    public override string CreateUpdateAll(
+    string tableName,
+    IEnumerable<Field> fields,
+    IEnumerable<Field>? qualifiers,
+    int batchSize,
+    IEnumerable<DbField> keyFields,
+    string? hints = null)
+    {
+        // Use base implementation for batch size 1
+        if (batchSize == 1)
+        {
+            return base.CreateUpdateAll(tableName, fields, qualifiers, batchSize, keyFields, hints);
+        }
+
+        GuardTableName(tableName);
+        GuardHints(hints);
+
+        var primaryField = keyFields.FirstOrDefault(f => f.IsPrimary);
+
+        ValidateMultipleStatementExecution(batchSize);
+
+        if (fields?.Any() != true)
+        {
+            throw new EmptyException(nameof(fields), "The list of fields cannot be null or empty.");
+        }
+
+        qualifiers ??= keyFields.Where(x => x.IsPrimary).AsFields();
+
+        if (qualifiers?.Any() == true)
+        {
+            var unmatchedQualifiers = qualifiers.Where(field =>
+                fields.FirstOrDefault(f =>
+                    string.Equals(field.Name, f.Name, StringComparison.OrdinalIgnoreCase)) == null);
+
+            if (unmatchedQualifiers.Any())
+            {
+                throw new InvalidQualifiersException($"The qualifiers '{unmatchedQualifiers.Select(f => f.Name).Join(", ")}' are not " +
+                    $"present in the given fields '{fields.Select(f => f.Name).Join(", ")}'.");
+            }
+        }
+        else
+        {
+            if (primaryField != null)
+            {
+                var isPresent = fields.Any(f =>
+                    string.Equals(f.Name, primaryField.Name, StringComparison.OrdinalIgnoreCase));
+
+                if (!isPresent)
+                {
+                    throw new InvalidQualifiersException($"There are no qualifier fields found for '{tableName}'. Ensure that the " +
+                        $"primary field is present in the given fields '{fields.Select(f => f.Name).Join(", ")}'.");
+                }
+
+                qualifiers = keyFields.AsFields();
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(qualifiers), $"There are no qualifier fields found for '{tableName}'.");
+            }
+        }
+
+        var updateFields = fields
+            .Where(f => keyFields.GetByName(f.Name) is null && qualifiers.GetByName(f.Name) is null)
+            .ToArray();
+
+        if (!updateFields.Any())
+        {
+            throw new EmptyException(nameof(fields), "The list of updatable fields cannot be null or empty.");
+        }
+
+        var builder = new QueryBuilder();
+
+        builder
+            .Merge().Into()
+            .TableNameFrom(tableName, DbSetting)
+            .WriteText("AS T")
+            .Using().OpenParen().Values();
+
+        for (var index = 0; index < batchSize; index++)
+        {
+            if (index > 0)
+                builder.Comma();
+
+            builder
+                .OpenParen()
+                .ParametersFrom(fields, index, DbSetting)
+                .CloseParen();
+        }
+
+        builder
+            .CloseParen()
+            .As()
+            .WriteText("S")
+            .OpenParen()
+            .FieldsFrom(fields, DbSetting)
+            .CloseParen()
+            .On()
+            .AppendJoin(qualifiers.Select(q =>
+                $"T.{q.Name.AsField(DbSetting)} = S.{q.Name.AsField(DbSetting)}"), " AND ");
+
+        // No WHEN NOT MATCHED clause: unmatched rows are ignored (no update, no insert)
+        builder
+            .When().Matched().Then()
+            .Update().Set()
+            .AppendJoin(updateFields.Select(q =>
+                $"T.{q.Name.AsField(DbSetting)} = S.{q.Name.AsField(DbSetting)}"), ", ")
+            .End(DbSetting);
+
+        return builder.ToString();
+    }
+
 }

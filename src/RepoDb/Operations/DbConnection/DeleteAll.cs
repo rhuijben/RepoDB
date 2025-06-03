@@ -39,11 +39,11 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction, GetEntityType<TEntity>(entities));
+        var key = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction, GetEntityType(entities));
 
         if (key.OneOrDefault() is { } one)
         {
-            var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
+            var keys = ExtractPropertyValues(entities, one).AsList();
 
             return DeleteAllInternal(connection: connection,
                 tableName: tableName,
@@ -62,12 +62,9 @@ public static partial class DbConnectionExtension
             transaction ??= myTransaction;
             int deleted = 0;
 
-            foreach (var group in entities.Split(chunkSize))
+            foreach (var group in entities.ChunkOptimally(chunkSize))
             {
-                if (!group.Any())
-                    continue;
-
-                var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
+                var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
                 deleted += DeleteInternal(
                     connection: connection,
@@ -182,10 +179,10 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        var key = GetAndGuardPrimaryKeyOrIdentityKey(GetEntityType<TEntity>(entities), connection, transaction);
+        var key = GetAndGuardPrimaryKeyOrIdentityKey(GetEntityType(entities), connection, transaction);
         if (key.OneOrDefault() is { } one)
         {
-            var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
+            var keys = ExtractPropertyValues(entities, one).AsList();
 
             return DeleteAllInternal(connection: connection,
             tableName: GetMappedName(entities),
@@ -204,12 +201,9 @@ public static partial class DbConnectionExtension
             transaction ??= myTransaction;
             int deleted = 0;
 
-            foreach (var group in entities.Split(chunkSize))
+            foreach (var group in entities.ChunkOptimally(chunkSize))
             {
-                if (!group.Any())
-                    continue;
-
-                var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
+                var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
                 deleted += DeleteInternal(
                     connection: connection,
@@ -398,7 +392,7 @@ public static partial class DbConnectionExtension
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, GetEntityType(entities), cancellationToken).ConfigureAwait(false);
         if (key.OneOrDefault() is { } one)
         {
-            var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
+            var keys = ExtractPropertyValues(entities, one).AsList();
 
             return await DeleteAllAsyncInternal(connection: connection,
             tableName: tableName,
@@ -421,12 +415,9 @@ public static partial class DbConnectionExtension
             transaction ??= myTransaction;
             int deleted = 0;
 
-            foreach (var group in entities.Split(chunkSize))
+            foreach (var group in entities.ChunkOptimally(chunkSize))
             {
-                if (!group.Any())
-                    continue;
-
-                var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
+                var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
                 deleted += await DeleteAsyncInternal(
                     connection: connection,
@@ -556,7 +547,7 @@ public static partial class DbConnectionExtension
         var key = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(GetEntityType(entities), connection, transaction, cancellationToken).ConfigureAwait(false);
         if (key.OneOrDefault() is { } one)
         {
-            var keys = ExtractPropertyValues<TEntity>(entities, one).AsList();
+            var keys = ExtractPropertyValues(entities, one).AsList();
 
             return await DeleteAllAsyncInternal(connection: connection,
                 tableName: tableName,
@@ -579,12 +570,9 @@ public static partial class DbConnectionExtension
             transaction ??= myTransaction;
             int deleted = 0;
 
-            foreach (var group in entities.Split(chunkSize))
+            foreach (var group in entities.ChunkOptimally(chunkSize))
             {
-                if (!group.Any())
-                    continue;
-
-                var where = new QueryGroup(group.Select(entity => ToQueryGroup<TEntity>(key, entity)), Conjunction.Or);
+                var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
                 deleted += await DeleteAsyncInternal(
                     connection: connection,
@@ -1072,11 +1060,8 @@ public static partial class DbConnectionExtension
         transaction ??= myTransaction;
 
         // Call the underlying method
-        foreach (var keyValues in keys?.Split(parameterBatchCount) ?? [])
+        foreach (var keyValues in keys?.ChunkOptimally(parameterBatchCount) ?? [])
         {
-            if (!keyValues.Any())
-                continue;
-
             var where = new QueryGroup(
                 pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
                 Conjunction.And);

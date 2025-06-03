@@ -39,7 +39,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.SumAll<TEntity>(field: field,
+        return DbRepository.SumAll(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -79,7 +79,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.SumAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.SumAll<TEntity, TResult>(field: field,
+        return DbRepository.SumAll(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -126,7 +126,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAllAsync<TEntity>(field: field,
+        return DbRepository.SumAllAsync(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,
@@ -172,7 +172,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.SumAllAsync<TEntity, TResult>(field: field,
+        return DbRepository.SumAllAsync(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,

@@ -39,7 +39,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.AverageAll<TEntity>(field: field,
+        return DbRepository.AverageAll(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -79,7 +79,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         string? traceKey = TraceKeys.AverageAll,
         IDbTransaction? transaction = null)
     {
-        return DbRepository.AverageAll<TEntity, TResult>(field: field,
+        return DbRepository.AverageAll(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction);
@@ -126,7 +126,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.AverageAllAsync<TEntity>(field: field,
+        return DbRepository.AverageAllAsync(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,
@@ -172,7 +172,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
-        return DbRepository.AverageAllAsync<TEntity, TResult>(field: field,
+        return DbRepository.AverageAllAsync(field: field,
             hints: hints,
             traceKey: traceKey,
             transaction: transaction,
