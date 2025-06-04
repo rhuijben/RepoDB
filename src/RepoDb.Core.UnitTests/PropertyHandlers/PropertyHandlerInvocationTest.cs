@@ -1,11 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Data;
+using System.Data.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
 using RepoDb.Options;
 using RepoDb.UnitTests.CustomObjects;
-using System.Data;
-using System.Data.Common;
 
 namespace RepoDb.UnitTests.PropertyHandlers;
 
@@ -32,12 +32,17 @@ public class PropertyHandlerInvocationTest
     {
         protected override DbCommand CreateDbCommand()
         {
-            return new PropertyHandlerDbCommand();
+            return new PropertyHandlerDbCommand(this);
         }
     }
 
     private class PropertyHandlerDbCommand : CustomDbCommand
     {
+        public PropertyHandlerDbCommand(PropertyHandlerConnection connection)
+        {
+            Connection = connection;
+        }
+
         protected override DbDataReader ExecuteDbDataReader(CommandBehavior behavior)
         {
             var reader = new DataEntityDataReader<PropertyHandlerQueryTestClass>(new[]
