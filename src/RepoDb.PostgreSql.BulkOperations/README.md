@@ -51,7 +51,7 @@ During the operation, the process ignores the audit, logs, constraints and any o
 At the Package Manager Console, write the command below.
 
 ```csharp
-> Install-Package RepoDb.PostgreSql.BulkOperations
+> Install-Package AmpScm.RepoDb.PostgreSql.BulkOperations
 ```
 
 Then call the bootstrapper once.

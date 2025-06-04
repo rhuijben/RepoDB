@@ -6,7 +6,7 @@
     <Product>RepoDb</Product>
     <Version Condition="'$(Version)' == ''">0.0.1-dev</Version>
     <LangVersion>default</LangVersion>
-    <Copyright>Copyright © 2020-2024</Copyright>
+    <Copyright>Copyright © 2020-2025</Copyright>
     <PackageProjectUrl>https://repodb.net/</PackageProjectUrl>
     <RepositoryType>Github</RepositoryType>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

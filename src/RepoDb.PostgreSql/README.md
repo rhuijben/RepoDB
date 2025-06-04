@@ -35,7 +35,7 @@ RepoDB is an open-source .NET ORM library that bridges the gaps of micro-ORMs an
 At the Package Manager Console, write the command below.
 
 ```csharp
-> Install-Package RepoDb.PostgreSql
+> Install-Package AmpScm.RepoDb.PostgreSql
 ```
 
 Or, visit our [installation](https://repodb.net/tutorial/installation) page for more information.

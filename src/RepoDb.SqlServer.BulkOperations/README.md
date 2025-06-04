@@ -48,7 +48,7 @@ The bulk operations can hugely improve the performance by more than 90% when pro
 At the Package Manager Console, write the command below.
 
 ```csharp
-> Install-Package RepoDb.SqlServer.BulkOperations
+> Install-Package AmpScm.RepoDb.SqlServer.BulkOperations
 ```
 
 Then call the bootstrapper once.
