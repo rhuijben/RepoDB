@@ -614,7 +614,7 @@ public static partial class DbConnectionExtension
         return await UpdateAllAsyncInternal(connection: connection,
             tableName: tableName,
             entities: entities,
-            qualifiers: fields,
+            qualifiers: Field.Parse(qualifiers),
             batchSize: batchSize,
             fields: fields,
             hints: hints,
