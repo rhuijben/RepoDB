@@ -31,7 +31,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -56,7 +56,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -81,7 +81,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -106,7 +106,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -136,7 +136,7 @@ public class UpdateTest
             new QueryField("ColumnInteger", table.ColumnInteger)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -167,7 +167,7 @@ public class UpdateTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -196,7 +196,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -221,7 +221,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -246,7 +246,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -271,7 +271,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -301,7 +301,7 @@ public class UpdateTest
             new QueryField("ColumnInteger", table.ColumnInteger)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -332,7 +332,7 @@ public class UpdateTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -365,7 +365,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = Helper.CreateCompleteTablesAsExpandoObjects(1).First();
@@ -392,7 +392,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -418,7 +418,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -445,7 +445,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -477,7 +477,7 @@ public class UpdateTest
             new QueryField("ColumnInteger", table.ColumnInteger)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -510,7 +510,7 @@ public class UpdateTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -541,7 +541,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = Helper.CreateCompleteTablesAsExpandoObjects(1).First();
@@ -568,7 +568,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -593,7 +593,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -618,7 +618,7 @@ public class UpdateTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -648,7 +648,7 @@ public class UpdateTest
             new QueryField("ColumnInteger", table.ColumnInteger)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -679,7 +679,7 @@ public class UpdateTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);

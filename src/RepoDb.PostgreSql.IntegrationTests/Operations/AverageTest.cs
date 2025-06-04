@@ -32,7 +32,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Average<CompleteTable>(e => e.ColumnInteger,
@@ -49,7 +49,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var ids = new[] { tables.First().Id, tables.Last().Id };
@@ -67,7 +67,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Average<CompleteTable>(e => e.ColumnInteger,
@@ -86,7 +86,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.AverageAsync<CompleteTable>(e => e.ColumnInteger,
@@ -103,7 +103,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var ids = new[] { tables.First().Id, tables.Last().Id };
@@ -121,7 +121,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.AverageAsync<CompleteTable>(e => e.ColumnInteger,
@@ -144,7 +144,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Average(ClassMappedNameCache.Get<CompleteTable>(),
@@ -162,7 +162,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var ids = new[] { tables.First().Id, tables.Last().Id };
@@ -181,7 +181,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Average(ClassMappedNameCache.Get<CompleteTable>(),
@@ -201,7 +201,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.AverageAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -219,7 +219,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var ids = new[] { tables.First().Id, tables.Last().Id };
@@ -238,7 +238,7 @@ public class AverageTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.AverageAsync(ClassMappedNameCache.Get<CompleteTable>(),

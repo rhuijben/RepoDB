@@ -32,7 +32,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInteger,
@@ -50,7 +50,7 @@ public class MinTest
         var tables = Database.CreateCompleteTables(10);
         var ids = new[] { tables.First().Id, tables.Last().Id };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInteger,
@@ -67,7 +67,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInteger,
@@ -84,7 +84,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInteger,
@@ -106,7 +106,7 @@ public class MinTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInteger,
@@ -129,7 +129,7 @@ public class MinTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min<CompleteTable>(e => e.ColumnInteger,
@@ -146,7 +146,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Min<CompleteTable>(e => e.ColumnInteger,
@@ -165,7 +165,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
@@ -183,7 +183,7 @@ public class MinTest
         var tables = Database.CreateCompleteTables(10);
         var ids = new[] { tables.First().Id, tables.Last().Id };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
@@ -200,7 +200,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
@@ -217,7 +217,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
@@ -239,7 +239,7 @@ public class MinTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
@@ -262,7 +262,7 @@ public class MinTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
@@ -279,7 +279,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.MinAsync<CompleteTable>(e => e.ColumnInteger,
@@ -302,7 +302,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
@@ -320,7 +320,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
@@ -338,7 +338,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
@@ -361,7 +361,7 @@ public class MinTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
@@ -385,7 +385,7 @@ public class MinTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
@@ -403,7 +403,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Min(ClassMappedNameCache.Get<CompleteTable>(),
@@ -423,7 +423,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -441,7 +441,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -459,7 +459,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -482,7 +482,7 @@ public class MinTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -506,7 +506,7 @@ public class MinTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -524,7 +524,7 @@ public class MinTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.MinAsync(ClassMappedNameCache.Get<CompleteTable>(),

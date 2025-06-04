@@ -30,7 +30,7 @@ public class ExecuteQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.ExecuteQuery<CompleteTable>("SELECT * FROM \"CompleteTable\";");
@@ -47,7 +47,7 @@ public class ExecuteQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.ExecuteQuery<CompleteTable>("SELECT * FROM \"CompleteTable\" WHERE \"Id\" = @Id;",
@@ -69,7 +69,7 @@ public class ExecuteQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExecuteQueryAsync<CompleteTable>("SELECT * FROM \"CompleteTable\";");
@@ -86,7 +86,7 @@ public class ExecuteQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExecuteQueryAsync<CompleteTable>("SELECT * FROM \"CompleteTable\" WHERE \"Id\" = @Id;",

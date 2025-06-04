@@ -32,7 +32,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query<CompleteTable>(table.Id).First();
@@ -48,7 +48,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query<CompleteTable>(e => e.Id == table.Id).First();
@@ -64,7 +64,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query<CompleteTable>(new { table.Id }).First();
@@ -80,7 +80,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query<CompleteTable>(new QueryField("Id", table.Id)).First();
@@ -101,7 +101,7 @@ public class QueryTest
             new QueryField("ColumnInteger", table.ColumnInteger)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query<CompleteTable>(queryFields).First();
@@ -123,7 +123,7 @@ public class QueryTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query<CompleteTable>(queryGroup).First();
@@ -139,7 +139,7 @@ public class QueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query<CompleteTable>((object?)null,
@@ -157,7 +157,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Query<CompleteTable>((object?)null,
@@ -175,7 +175,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync<CompleteTable>(table.Id)).First();
@@ -191,7 +191,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync<CompleteTable>(e => e.Id == table.Id)).First();
@@ -207,7 +207,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync<CompleteTable>(new { table.Id })).First();
@@ -223,7 +223,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync<CompleteTable>(new QueryField("Id", table.Id))).First();
@@ -244,7 +244,7 @@ public class QueryTest
             new QueryField("ColumnInteger", table.ColumnInteger)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync<CompleteTable>(queryFields)).First();
@@ -266,7 +266,7 @@ public class QueryTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync<CompleteTable>(queryGroup)).First();
@@ -282,7 +282,7 @@ public class QueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.QueryAsync<CompleteTable>((object?)null,
@@ -300,7 +300,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.QueryAsync<CompleteTable>((object?)null,
@@ -322,7 +322,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<CompleteTable>(), table.Id).First();
@@ -338,7 +338,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<CompleteTable>(), new { table.Id }).First();
@@ -354,7 +354,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<CompleteTable>(), new QueryField("Id", table.Id)).First();
@@ -375,7 +375,7 @@ public class QueryTest
             new QueryField("ColumnInteger", table.ColumnInteger)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<CompleteTable>(), queryFields).First();
@@ -397,7 +397,7 @@ public class QueryTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<CompleteTable>(), queryGroup).First();
@@ -413,7 +413,7 @@ public class QueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Query(ClassMappedNameCache.Get<CompleteTable>(),
@@ -432,7 +432,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Query(ClassMappedNameCache.Get<CompleteTable>(),
@@ -451,7 +451,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(), table.Id)).First();
@@ -467,7 +467,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(), new { table.Id })).First();
@@ -483,7 +483,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(), new QueryField("Id", table.Id))).First();
@@ -504,7 +504,7 @@ public class QueryTest
             new QueryField("ColumnInteger", table.ColumnInteger)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(), queryFields)).First();
@@ -526,7 +526,7 @@ public class QueryTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = (await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(), queryGroup)).First();
@@ -542,7 +542,7 @@ public class QueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -561,7 +561,7 @@ public class QueryTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.QueryAsync(ClassMappedNameCache.Get<CompleteTable>(),

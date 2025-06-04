@@ -31,7 +31,7 @@ public class TruncateTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Truncate<CompleteTable>();
@@ -52,7 +52,7 @@ public class TruncateTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.TruncateAsync<CompleteTable>();
@@ -77,7 +77,7 @@ public class TruncateTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Truncate(ClassMappedNameCache.Get<CompleteTable>());
@@ -98,7 +98,7 @@ public class TruncateTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.TruncateAsync(ClassMappedNameCache.Get<CompleteTable>());

@@ -32,7 +32,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>((object?)null);
@@ -48,7 +48,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>(tables.First().Id);
@@ -64,7 +64,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>(tables.First());
@@ -80,7 +80,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>(e => e.Id == tables.First().Id);
@@ -96,7 +96,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>(new { Id = tables.First().Id });
@@ -112,7 +112,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>(new QueryField("Id", tables.First().Id));
@@ -133,7 +133,7 @@ public class DeleteTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>(queryFields);
@@ -155,7 +155,7 @@ public class DeleteTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>(queryGroup);
@@ -175,7 +175,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>((object?)null);
@@ -191,7 +191,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>(tables.First().Id);
@@ -207,7 +207,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>(tables.First());
@@ -223,7 +223,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>(e => e.Id == tables.First().Id);
@@ -239,7 +239,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>(new { Id = tables.First().Id });
@@ -255,7 +255,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>(new QueryField("Id", tables.First().Id));
@@ -276,7 +276,7 @@ public class DeleteTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>(queryFields);
@@ -298,7 +298,7 @@ public class DeleteTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>(queryGroup);
@@ -322,7 +322,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete(ClassMappedNameCache.Get<CompleteTable>(), (object?)null);
@@ -338,7 +338,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete<CompleteTable>(tables.First().Id);
@@ -354,7 +354,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete(ClassMappedNameCache.Get<CompleteTable>(), new { Id = tables.First().Id });
@@ -370,7 +370,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete(ClassMappedNameCache.Get<CompleteTable>(), new QueryField("Id", tables.First().Id));
@@ -391,7 +391,7 @@ public class DeleteTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete(ClassMappedNameCache.Get<CompleteTable>(), queryFields);
@@ -413,7 +413,7 @@ public class DeleteTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Delete(ClassMappedNameCache.Get<CompleteTable>(), queryGroup);
@@ -433,7 +433,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync(ClassMappedNameCache.Get<CompleteTable>(), (object?)null);
@@ -449,7 +449,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync<CompleteTable>(tables.First().Id);
@@ -465,7 +465,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync(ClassMappedNameCache.Get<CompleteTable>(), new { Id = tables.First().Id });
@@ -481,7 +481,7 @@ public class DeleteTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync(ClassMappedNameCache.Get<CompleteTable>(), new QueryField("Id", tables.First().Id));
@@ -502,7 +502,7 @@ public class DeleteTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync(ClassMappedNameCache.Get<CompleteTable>(), queryFields);
@@ -524,7 +524,7 @@ public class DeleteTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAsync(ClassMappedNameCache.Get<CompleteTable>(), queryGroup);

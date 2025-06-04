@@ -75,7 +75,7 @@ public class AttributeTest
         // Setup
         var table = CreateAttributeTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Insert<AttributeTable>(table);
@@ -97,7 +97,7 @@ public class AttributeTest
         // Setup
         var tables = CreateAttributeTables(10).AsList();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.InsertAll<AttributeTable>(tables);
@@ -119,7 +119,7 @@ public class AttributeTest
         // Setup
         var table = CreateAttributeTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var id = connection.Insert<AttributeTable>(table);
@@ -138,7 +138,7 @@ public class AttributeTest
         // Setup
         var tables = CreateAttributeTables(10).AsList();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.InsertAll<AttributeTable>(tables);

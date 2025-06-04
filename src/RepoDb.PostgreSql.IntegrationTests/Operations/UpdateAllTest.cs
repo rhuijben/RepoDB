@@ -32,7 +32,7 @@ public class UpdateAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             tables.AsList().ForEach(table => Helper.UpdateCompleteTableProperties(table));
@@ -62,7 +62,7 @@ public class UpdateAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             tables.AsList().ForEach(table => Helper.UpdateCompleteTableProperties(table));
@@ -96,7 +96,7 @@ public class UpdateAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             tables.AsList().ForEach(table => Helper.UpdateCompleteTableProperties(table));
@@ -122,7 +122,7 @@ public class UpdateAllTest
         // Setup
         var entities = Database.CreateCompleteTables(10).AsList();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var tables = Helper.CreateCompleteTablesAsExpandoObjects(10).AsList();
@@ -154,7 +154,7 @@ public class UpdateAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             tables.AsList().ForEach(table => Helper.UpdateCompleteTableProperties(table));
@@ -180,7 +180,7 @@ public class UpdateAllTest
         // Setup
         var entities = Database.CreateCompleteTables(10).AsList();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var tables = Helper.CreateCompleteTablesAsExpandoObjects(10).AsList();

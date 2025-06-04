@@ -32,7 +32,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists<CompleteTable>((object?)null);
@@ -49,7 +49,7 @@ public class ExistsTest
         var tables = Database.CreateCompleteTables(10);
         var ids = new[] { tables.First().Id, tables.Last().Id };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists<CompleteTable>(e => ids.Contains(e.Id));
@@ -65,7 +65,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists<CompleteTable>(new { tables.First().Id });
@@ -81,7 +81,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists<CompleteTable>(new QueryField("Id", tables.First().Id));
@@ -102,7 +102,7 @@ public class ExistsTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists<CompleteTable>(queryFields);
@@ -124,7 +124,7 @@ public class ExistsTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists<CompleteTable>(queryGroup);
@@ -140,7 +140,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Exists<CompleteTable>((object?)null,
@@ -158,7 +158,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync<CompleteTable>((object?)null);
@@ -175,7 +175,7 @@ public class ExistsTest
         var tables = Database.CreateCompleteTables(10);
         var ids = new[] { tables.First().Id, tables.Last().Id };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync<CompleteTable>(e => ids.Contains(e.Id));
@@ -191,7 +191,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync<CompleteTable>(new { tables.First().Id });
@@ -207,7 +207,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync<CompleteTable>(new QueryField("Id", tables.First().Id));
@@ -228,7 +228,7 @@ public class ExistsTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync<CompleteTable>(queryFields);
@@ -250,7 +250,7 @@ public class ExistsTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync<CompleteTable>(queryGroup);
@@ -266,7 +266,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.ExistsAsync<CompleteTable>((object?)null,
@@ -288,7 +288,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
@@ -305,7 +305,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
@@ -322,7 +322,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
@@ -344,7 +344,7 @@ public class ExistsTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
@@ -367,7 +367,7 @@ public class ExistsTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
@@ -384,7 +384,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.Exists(ClassMappedNameCache.Get<CompleteTable>(),
@@ -403,7 +403,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -420,7 +420,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -437,7 +437,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -459,7 +459,7 @@ public class ExistsTest
             new QueryField("Id", Operation.LessThan, tables.Last().Id)
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -482,7 +482,7 @@ public class ExistsTest
         };
         var queryGroup = new QueryGroup(queryFields);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -499,7 +499,7 @@ public class ExistsTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.ExistsAsync(ClassMappedNameCache.Get<CompleteTable>(),

@@ -31,7 +31,7 @@ public class MergeTest
         // Setup
         var table = Helper.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Merge<CompleteTable>(table);
@@ -49,7 +49,7 @@ public class MergeTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -79,7 +79,7 @@ public class MergeTest
             new Field("Id", typeof(long))
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -112,7 +112,7 @@ public class MergeTest
         // Setup
         var table = Helper.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MergeAsync<CompleteTable>(table);
@@ -130,7 +130,7 @@ public class MergeTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -160,7 +160,7 @@ public class MergeTest
             new Field("Id", typeof(long))
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -197,7 +197,7 @@ public class MergeTest
         // Setup
         var table = Helper.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Merge(ClassMappedNameCache.Get<CompleteTable>(),
@@ -216,7 +216,7 @@ public class MergeTest
         // Setup
         var table = Helper.CreateCompleteTablesAsExpandoObjects(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Merge(ClassMappedNameCache.Get<CompleteTable>(),
@@ -236,7 +236,7 @@ public class MergeTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -263,7 +263,7 @@ public class MergeTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = Helper.CreateCompleteTablesAsExpandoObjects(1).First();
@@ -295,7 +295,7 @@ public class MergeTest
             new Field("Id", typeof(long))
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -325,7 +325,7 @@ public class MergeTest
         // Setup
         var table = Helper.CreateCompleteTablesAsDynamics(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.Merge(ClassMappedNameCache.Get<CompleteTable>(),
@@ -349,7 +349,7 @@ public class MergeTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -380,7 +380,7 @@ public class MergeTest
             new Field("Id", typeof(long))
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -412,7 +412,7 @@ public class MergeTest
         // Setup
         var table = Helper.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MergeAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -431,7 +431,7 @@ public class MergeTest
         // Setup
         var table = Helper.CreateCompleteTablesAsExpandoObjects(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MergeAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -451,7 +451,7 @@ public class MergeTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -478,7 +478,7 @@ public class MergeTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = Helper.CreateCompleteTablesAsExpandoObjects(1).First();
@@ -510,7 +510,7 @@ public class MergeTest
             new Field("Id", typeof(long))
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -538,7 +538,7 @@ public class MergeTest
         // Setup
         var table = Helper.CreateCompleteTablesAsDynamics(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.MergeAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -562,7 +562,7 @@ public class MergeTest
         // Setup
         var table = Database.CreateCompleteTables(1).First();
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);
@@ -593,7 +593,7 @@ public class MergeTest
             new Field("Id", typeof(long))
         };
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             Helper.UpdateCompleteTableProperties(table);

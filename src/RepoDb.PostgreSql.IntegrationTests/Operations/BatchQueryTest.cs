@@ -32,7 +32,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.BatchQuery<CompleteTable>(0,
@@ -52,7 +52,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.BatchQuery<CompleteTable>(0,
@@ -72,7 +72,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.BatchQuery<CompleteTable>(2,
@@ -92,7 +92,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.BatchQuery<CompleteTable>(2,
@@ -112,7 +112,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.BatchQuery<CompleteTable>(0,
@@ -133,7 +133,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.BatchQueryAsync<CompleteTable>(0,
@@ -153,7 +153,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.BatchQueryAsync<CompleteTable>(0,
@@ -173,7 +173,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.BatchQueryAsync<CompleteTable>(2,
@@ -193,7 +193,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.BatchQueryAsync<CompleteTable>(2,
@@ -213,7 +213,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.BatchQueryAsync<CompleteTable>(0,
@@ -238,7 +238,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.BatchQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -259,7 +259,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.BatchQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -280,7 +280,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.BatchQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -301,7 +301,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.BatchQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -322,7 +322,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.BatchQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -344,7 +344,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.BatchQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -365,7 +365,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.BatchQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -386,7 +386,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.BatchQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -407,7 +407,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.BatchQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -428,7 +428,7 @@ public class BatchQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.BatchQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),

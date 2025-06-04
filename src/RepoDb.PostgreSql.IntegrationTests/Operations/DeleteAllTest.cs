@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Npgsql;
 using RepoDb.PostgreSql.IntegrationTests.Models;
 using RepoDb.PostgreSql.IntegrationTests.Setup;
 
@@ -31,7 +30,7 @@ public class DeleteAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.DeleteAll<CompleteTable>();
@@ -48,7 +47,7 @@ public class DeleteAllTest
         var tables = Database.CreateCompleteTables(10);
         var primaryKeys = ClassExpression.GetEntitiesPropertyValues<CompleteTable, object>(tables, e => e.Id);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString).EnsureOpen())
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.DeleteAll<CompleteTable>(primaryKeys);
@@ -65,7 +64,7 @@ public class DeleteAllTest
         var tables = Database.CreateCompleteTables(5000);
         var primaryKeys = ClassExpression.GetEntitiesPropertyValues<CompleteTable, object>(tables, e => e.Id);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString).EnsureOpen())
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.DeleteAll<CompleteTable>(primaryKeys);
@@ -85,7 +84,7 @@ public class DeleteAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAllAsync<CompleteTable>();
@@ -102,7 +101,7 @@ public class DeleteAllTest
         var tables = Database.CreateCompleteTables(10);
         var primaryKeys = ClassExpression.GetEntitiesPropertyValues<CompleteTable, object>(tables, e => e.Id);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString).EnsureOpen())
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAllAsync<CompleteTable>(primaryKeys);
@@ -119,7 +118,7 @@ public class DeleteAllTest
         var tables = Database.CreateCompleteTables(5000);
         var primaryKeys = ClassExpression.GetEntitiesPropertyValues<CompleteTable, object>(tables, e => e.Id);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString).EnsureOpen())
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAllAsync<CompleteTable>(primaryKeys);
@@ -143,7 +142,7 @@ public class DeleteAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.DeleteAll(ClassMappedNameCache.Get<CompleteTable>());
@@ -160,7 +159,7 @@ public class DeleteAllTest
         var tables = Database.CreateCompleteTables(10);
         var primaryKeys = ClassExpression.GetEntitiesPropertyValues<CompleteTable, object>(tables, e => e.Id);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString).EnsureOpen())
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.DeleteAll(ClassMappedNameCache.Get<CompleteTable>(), primaryKeys);
@@ -177,7 +176,7 @@ public class DeleteAllTest
         var tables = Database.CreateCompleteTables(5000);
         var primaryKeys = ClassExpression.GetEntitiesPropertyValues<CompleteTable, object>(tables, e => e.Id);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString).EnsureOpen())
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.DeleteAll(ClassMappedNameCache.Get<CompleteTable>(), primaryKeys);
@@ -197,7 +196,7 @@ public class DeleteAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAllAsync(ClassMappedNameCache.Get<CompleteTable>());
@@ -214,7 +213,7 @@ public class DeleteAllTest
         var tables = Database.CreateCompleteTables(10);
         var primaryKeys = ClassExpression.GetEntitiesPropertyValues<CompleteTable, object>(tables, e => e.Id);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString).EnsureOpen())
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAllAsync(ClassMappedNameCache.Get<CompleteTable>(), primaryKeys);
@@ -231,7 +230,7 @@ public class DeleteAllTest
         var tables = Database.CreateCompleteTables(5000);
         var primaryKeys = ClassExpression.GetEntitiesPropertyValues<CompleteTable, object>(tables, e => e.Id);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString).EnsureOpen())
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.DeleteAllAsync(ClassMappedNameCache.Get<CompleteTable>(), primaryKeys);

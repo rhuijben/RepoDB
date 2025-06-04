@@ -28,7 +28,7 @@ public class ExecuteScalarTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.ExecuteScalar("SELECT COUNT(*) FROM \"CompleteTable\";");
@@ -44,7 +44,7 @@ public class ExecuteScalarTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM \"CompleteTable\";");
@@ -64,7 +64,7 @@ public class ExecuteScalarTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExecuteScalarAsync("SELECT COUNT(*) FROM \"CompleteTable\";");
@@ -80,7 +80,7 @@ public class ExecuteScalarTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM \"CompleteTable\";");

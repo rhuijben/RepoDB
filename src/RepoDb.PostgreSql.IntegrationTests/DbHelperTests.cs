@@ -27,7 +27,7 @@ public class DbHelperTests
     [TestMethod]
     public void TestDbHelperGetFields()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -64,7 +64,7 @@ public class DbHelperTests
     [TestMethod]
     public void TestDbHelperGetFieldsPrimary()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -82,7 +82,7 @@ public class DbHelperTests
     [TestMethod]
     public void TestDbHelperGetFieldsIdentity()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -104,7 +104,7 @@ public class DbHelperTests
     [TestMethod]
     public async Task TestDbHelperGetFieldsAsync()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -141,7 +141,7 @@ public class DbHelperTests
     [TestMethod]
     public async Task TestDbHelperGetFieldsAsyncPrimary()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var helper = connection.GetDbHelper();
@@ -159,7 +159,7 @@ public class DbHelperTests
     [TestMethod]
     public async Task TestDbHelperGetFieldsAsyncIdentity()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var helper = connection.GetDbHelper();

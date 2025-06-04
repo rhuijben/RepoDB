@@ -81,7 +81,7 @@ public class NpgsqlDbTypeTests
     [TestMethod]
     public void TestInsertAndQueryForJson()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = GetCompleteTableForJsons(1).First();
@@ -100,7 +100,7 @@ public class NpgsqlDbTypeTests
     [TestMethod]
     public void TestInsertAndQueryForJsons()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entities = GetCompleteTableForJsons(10).AsList();
@@ -124,7 +124,7 @@ public class NpgsqlDbTypeTests
     [TestMethod]
     public void TestInsertAndQueryForDateTime()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = GetCompleteTableForDateTimes(1).First();
@@ -143,7 +143,7 @@ public class NpgsqlDbTypeTests
     [TestMethod]
     public void TestInsertAndQueryForDateTimes()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entities = GetCompleteTableForDateTimes(10).AsList();
@@ -163,7 +163,7 @@ public class NpgsqlDbTypeTests
     [TestMethod]
     public void TestInsertAndQueryForDateTimeAsWhereExpression()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = GetCompleteTableForDateTimes(1).First();
@@ -187,7 +187,7 @@ public class NpgsqlDbTypeTests
     [TestMethod]
     public void TestInsertAndQueryForDateTimeAsWhereExpressionFromVariable()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = GetCompleteTableForDateTimes(1).First();
@@ -211,7 +211,7 @@ public class NpgsqlDbTypeTests
     [TestMethod]
     public void TestInsertAndQueryForDateTimeAsWhereExpressionWithAutomaticConversion()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = GetCompleteTableForDateTimes(1).First();
@@ -235,7 +235,7 @@ public class NpgsqlDbTypeTests
     [TestMethod]
     public void TestInsertAndQueryForDateTimeAsWhereExpressionFromVariableWithAutomaticConversion()
     {
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Setup
             var entity = GetCompleteTableForDateTimes(1).First();

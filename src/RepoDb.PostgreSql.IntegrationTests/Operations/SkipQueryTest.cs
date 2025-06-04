@@ -32,7 +32,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.SkipQuery<CompleteTable>(
@@ -53,7 +53,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.SkipQuery<CompleteTable>(
@@ -74,7 +74,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.SkipQuery<CompleteTable>(
@@ -95,7 +95,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.SkipQuery<CompleteTable>(
@@ -116,7 +116,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.SkipQuery<CompleteTable>(
@@ -138,7 +138,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.SkipQueryAsync<CompleteTable>(
@@ -159,7 +159,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.SkipQueryAsync<CompleteTable>(
@@ -180,7 +180,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.SkipQueryAsync<CompleteTable>(
@@ -201,7 +201,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.SkipQueryAsync<CompleteTable>(
@@ -222,7 +222,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.SkipQueryAsync<CompleteTable>(
@@ -248,7 +248,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.SkipQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -269,7 +269,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.SkipQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -290,7 +290,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.SkipQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -311,7 +311,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.SkipQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -332,7 +332,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.SkipQuery(ClassMappedNameCache.Get<CompleteTable>(),
@@ -354,7 +354,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.SkipQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -375,7 +375,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.SkipQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -396,7 +396,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.SkipQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -417,7 +417,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.SkipQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),
@@ -438,7 +438,7 @@ public class SkipQueryTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.SkipQueryAsync(ClassMappedNameCache.Get<CompleteTable>(),

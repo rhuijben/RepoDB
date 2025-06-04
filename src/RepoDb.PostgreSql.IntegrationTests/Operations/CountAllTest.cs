@@ -31,7 +31,7 @@ public class CountAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.CountAll<CompleteTable>();
@@ -47,7 +47,7 @@ public class CountAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.CountAll<CompleteTable>(hints: "WhatEver");
@@ -64,7 +64,7 @@ public class CountAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.CountAllAsync<CompleteTable>();
@@ -80,7 +80,7 @@ public class CountAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.CountAllAsync<CompleteTable>(hints: "WhatEver");
@@ -101,7 +101,7 @@ public class CountAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = connection.CountAll(ClassMappedNameCache.Get<CompleteTable>());
@@ -117,7 +117,7 @@ public class CountAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             connection.CountAll(ClassMappedNameCache.Get<CompleteTable>(),
@@ -135,7 +135,7 @@ public class CountAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             var result = await connection.CountAllAsync(ClassMappedNameCache.Get<CompleteTable>());
@@ -151,7 +151,7 @@ public class CountAllTest
         // Setup
         var tables = Database.CreateCompleteTables(10);
 
-        using (var connection = new NpgsqlConnection(Database.ConnectionString))
+        using (var connection = this.CreateTestConnection())
         {
             // Act
             await connection.CountAllAsync(ClassMappedNameCache.Get<CompleteTable>(),
