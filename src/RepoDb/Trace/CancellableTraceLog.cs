@@ -75,7 +75,7 @@ public class CancellableTraceLog : TraceLog
         $"Key: {Key}\n" +
         $"Statement: {Statement}\n" +
         $"StartTime (Ticks): {StartTime.Ticks}\n" +
-        $"Parameters: {(Parameters?.Any() == true ? string.Join(", ", Parameters.ToArray().Select(param => $"({param.ParameterName}={(param.Value is DBNull ? "DBNull" : param.Value)})")) : "No Parameters")}";
+        $"Parameters: {(Parameters?.Any() == true ? string.Join(", ", Parameters.Select(param => $"({param.ParameterName}={(param.Value is DBNull ? "DBNull" : param.Value)})")) : "No Parameters")}";
 
     #endregion
 }

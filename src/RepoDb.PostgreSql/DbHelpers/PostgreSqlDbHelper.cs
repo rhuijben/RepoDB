@@ -2,7 +2,6 @@ using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
 using Npgsql;
-using NpgsqlTypes;
 using RepoDb.DbSettings;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
@@ -294,9 +293,10 @@ public sealed class PostgreSqlDbHelper : BaseDbHelper
     public override void DynamicHandler<TEventInstance>(TEventInstance instance,
         string key)
     {
-        if (key == "RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]")
+        if (key == "RepoDb.Internal.Compiler.Events[AfterCreateDbParameter]"
+            && instance is NpgsqlParameter parameter)
         {
-            HandleDbParameterPostCreation(instance as NpgsqlParameter);
+            HandleDbParameterPostCreation(parameter);
         }
     }
 
@@ -308,9 +308,9 @@ public sealed class PostgreSqlDbHelper : BaseDbHelper
     /// <param name="parameter"></param>
     private void HandleDbParameterPostCreation(NpgsqlParameter parameter)
     {
-        if (parameter?.Value is Enum)
+        if (parameter.Value is Enum)
         {
-            parameter.NpgsqlDbType = NpgsqlDbType.Unknown;
+            parameter.DbType = DbType.Object;
         }
     }
 

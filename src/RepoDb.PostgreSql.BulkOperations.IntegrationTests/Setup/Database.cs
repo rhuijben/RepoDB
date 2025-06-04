@@ -110,7 +110,7 @@ public static class Database
                     DO $$
                     BEGIN
                         IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'hand') THEN
-                            CREATE TYPE hand AS ENUM ('Unidentified', 'Left', 'Right');
+                            CREATE TYPE hand AS ENUM ('unidentified', 'left', 'right');
                         END IF;
                     END
                     $$;

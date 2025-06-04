@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Npgsql;
 using RepoDb.Attributes;
-using RepoDb.Attributes.Parameter.Npgsql;
 using RepoDb.Extensions;
+using RepoDb.PostgreSql.IntegrationTests.Enumerations;
 using RepoDb.PostgreSql.IntegrationTests.Setup;
 using RepoDb.Trace;
 
@@ -26,13 +25,6 @@ public class EnumTests
 
     #region Enumerations
 
-    public enum Hands
-    {
-        Unidentified,
-        Left,
-        Right
-    }
-
     #endregion
 
     #region SubClasses
@@ -41,6 +33,8 @@ public class EnumTests
     public class PersonWithText
     {
         public System.Int64 Id { get; set; }
+        //[NpgsqlDbType(NpgsqlDbType.Varchar)]
+
         public Hands? ColumnText { get; set; }
     }
 
@@ -63,7 +57,6 @@ public class EnumTests
     public class PersonWithEnum
     {
         public System.Int64 Id { get; set; }
-        [NpgsqlDbType(NpgsqlTypes.NpgsqlDbType.Unknown)]
         public Hands ColumnEnumHand { get; set; }
     }
 
@@ -71,7 +64,6 @@ public class EnumTests
     public class PersonWithNullableEnum
     {
         public System.Int64 Id { get; set; }
-        [NpgsqlDbType(NpgsqlTypes.NpgsqlDbType.Unknown)]
         public Hands? ColumnEnumHand { get; set; }
     }
 
@@ -326,7 +318,7 @@ public class EnumTests
             var person = GetPersonWithEnum(1).First();
 
             // Act
-            connection.Insert(person);
+            connection.Insert(person, trace: new DiagnosticsTracer());
 
             // Query
             connection.ReloadTypes();

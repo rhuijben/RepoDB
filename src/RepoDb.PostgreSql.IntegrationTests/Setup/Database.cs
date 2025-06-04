@@ -162,8 +162,8 @@ public static class Database
                         --""ColumnRegProcAsArray"" regproc[],
                         --""ColumnRegProcedure"" regprocedure,
                         --""ColumnRegProcedureAsArray"" regprocedure[],
-                        ""ColumnRegRole"" regrole,
-                        ""ColumnRegRoleAsArray"" regrole[],
+                        --""ColumnRegRole"" regrole,
+                        --""ColumnRegRoleAsArray"" regrole[],
                         ""ColumnRegType"" regtype,
                         ""ColumnRegTypeAsArray"" regtype[],
                         ""ColumnSerial"" integer,
@@ -172,8 +172,8 @@ public static class Database
                         ""ColumnSmallSerial"" smallint,
                         ""ColumnText"" text COLLATE pg_catalog.""default"",
                         ""ColumnTextAsArray"" text[] COLLATE pg_catalog.""default"",
-                        ""ColumnTId"" tid,
-                        ""ColumnTidAsArray"" tid[],
+                        --""ColumnTId"" tid,
+                        --""ColumnTidAsArray"" tid[],
                         ""ColumnTimeWithTimeZoneAsArray"" time with time zone[],
                         ""ColumnTimeWithTimeZone"" time with time zone,
                         ""ColumnTimeWithoutTimeZone"" time without time zone,
@@ -327,8 +327,8 @@ public static class Database
                         ""ColumnSmallSerial"" smallint,
                         ""ColumnText"" text COLLATE pg_catalog.""default"",
                         ""ColumnTextAsArray"" text[] COLLATE pg_catalog.""default"",
-                        ""ColumnTId"" tid,
-                        ""ColumnTidAsArray"" tid[],
+                        --""ColumnTId"" tid,
+                        --""ColumnTidAsArray"" tid[],
                         ""ColumnTimeWithTimeZoneAsArray"" time with time zone[],
                         ""ColumnTimeWithTimeZone"" time with time zone,
                         ""ColumnTimeWithoutTimeZone"" time without time zone,
@@ -403,7 +403,7 @@ public static class Database
                     DO $$
                     BEGIN
                         IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'hand') THEN
-                            CREATE TYPE hand AS ENUM ('Unidentified', 'Left', 'Right');
+                            CREATE TYPE hand AS ENUM ('unidentified', 'left', 'right');
                         END IF;
                     END
                     $$;
