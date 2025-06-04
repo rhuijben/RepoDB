@@ -26,7 +26,7 @@ public class EnumTest
     #region Methods
 
     private NpgsqlConnection GetConnection() =>
-        (NpgsqlConnection)(new NpgsqlConnection(Database.ConnectionStringForRepoDb).EnsureOpen());
+        this.CreateTestConnection().EnsureOpen();
 
     public static List<EnumTable> CreateEnumTablesWithNullValues(int count,
         bool hasId = false,

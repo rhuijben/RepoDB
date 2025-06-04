@@ -144,14 +144,14 @@ internal static class Compiler
             {
                 var entityPropertyExpression = GetEntityPropertyExpression(entityExpression, entityType, mapping);
                 var propertyExpression = Expression.Convert(entityPropertyExpression, typeof(object));
-                var parameters = mapping.NpgsqlDbType.HasValue ?
+                var parameters = mapping.NpgsqlDbType is not null and not NpgsqlDbType.Unknown ?
                     new Expression[]
                     {
                         propertyExpression,
-                        Expression.Constant(mapping.NpgsqlDbType)
+                        Expression.Constant(mapping.NpgsqlDbType.Value)
                     } :
                     new[] { propertyExpression };
-                var writeMethod = mapping.NpgsqlDbType.HasValue ?
+                var writeMethod = mapping.NpgsqlDbType is not null and not NpgsqlDbType.Unknown ?
                     GetNpgsqlBinaryImporterWriteWithNpgsqlDbTypeMethod() : GetNpgsqlBinaryImporterWriteMethod();
 
                 expressions.Add(Expression.Call(importerParameterExpression, writeMethod.MakeGenericMethod(new[] { typeof(object) }), parameters));
@@ -317,10 +317,10 @@ internal static class Compiler
             {
                 var entityPropertyExpression = GetEntityPropertyExpression(entityExpression, entityType, mapping);
                 var propertyExpression = Expression.Convert(entityPropertyExpression, typeof(object));
-                var parameters = mapping.NpgsqlDbType.HasValue ?
+                var parameters = mapping.NpgsqlDbType is not null and not NpgsqlDbType.Unknown ?
                     new Expression[] { propertyExpression, Expression.Constant(mapping.NpgsqlDbType), cancellationTokenExpression } :
                     new Expression[] { propertyExpression, cancellationTokenExpression };
-                var writeMethod = mapping.NpgsqlDbType.HasValue ?
+                var writeMethod = mapping.NpgsqlDbType is not null and not NpgsqlDbType.Unknown ?
                     GetNpgsqlBinaryImporterWriteAsyncWithNpgsqlDbTypeMethod() : GetNpgsqlBinaryImporterWriteAsyncMethod();
 
                 expressions.Add(Expression.Call(importerParameterExpression, writeMethod.MakeGenericMethod(new[] { typeof(object) }), parameters));

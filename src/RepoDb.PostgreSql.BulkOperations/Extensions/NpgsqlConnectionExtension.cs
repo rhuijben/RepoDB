@@ -208,7 +208,7 @@ public static partial class NpgsqlConnectionExtension
         }
         else
         {
-            if (npgsqlDbType != null)
+            if (npgsqlDbType is not null and not NpgsqlDbType.Unknown)
             {
                 if (data is Enum)
                 {
@@ -472,7 +472,7 @@ public static partial class NpgsqlConnectionExtension
         }
         else
         {
-            if (npgsqlDbType != null)
+            if (npgsqlDbType is not null and not NpgsqlDbType.Unknown)
             {
                 await importer.WriteAsync(data, npgsqlDbType.Value, cancellationToken);
             }

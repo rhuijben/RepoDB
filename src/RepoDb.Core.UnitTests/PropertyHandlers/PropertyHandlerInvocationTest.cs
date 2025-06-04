@@ -38,7 +38,7 @@ public class PropertyHandlerInvocationTest
 
     private class PropertyHandlerDbCommand : CustomDbCommand
     {
-        public PropertyHandlerDbCommand(PropertyHandlerConnection connection)
+        public PropertyHandlerDbCommand(PropertyHandlerConnection? connection)
         {
             Connection = connection;
         }
