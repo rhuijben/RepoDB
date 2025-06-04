@@ -70,6 +70,20 @@ public static partial class DbConnectionExtension
     }
 
     /// <summary>
+    /// Ensures the connection object is open.
+    /// </summary>
+    /// <param name="connection">The connection to be opened.</param>
+    /// <returns>The instance of the current connection object.</returns>
+    public static TDbConnection EnsureOpen<TDbConnection>(this TDbConnection connection) where TDbConnection : IDbConnection
+    {
+        if (connection.State != ConnectionState.Open)
+        {
+            connection.Open();
+        }
+        return connection;
+    }
+
+    /// <summary>
     /// Ensures the connection object is open in an asynchronous way.
     /// </summary>
     /// <param name="connection">The connection to be opened.</param>
@@ -84,6 +98,24 @@ public static partial class DbConnectionExtension
         }
         return connection;
     }
+
+    /// <summary>
+    /// Ensures the connection object is open in an asynchronous way.
+    /// </summary>
+    /// <param name="connection">The connection to be opened.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
+    /// <returns>The instance of the current connection object.</returns>
+    public static async ValueTask<TDbConnection> EnsureOpenAsync<TDbConnection>(this TDbConnection connection,
+        CancellationToken cancellationToken = default) where TDbConnection : DbConnection
+    {
+        if (connection.State != ConnectionState.Open)
+        {
+            await connection.OpenAsync(cancellationToken).ConfigureAwait(false);
+        }
+        return connection;
+    }
+
+
 
     #endregion
 
