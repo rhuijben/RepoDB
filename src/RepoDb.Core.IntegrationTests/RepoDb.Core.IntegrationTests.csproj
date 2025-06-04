@@ -5,6 +5,9 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <NoWarn>$(NoWarn);REPDB002;REPDB003</NoWarn>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.SqlServer.Types" />
     <PackageReference Include="MSTest" />
