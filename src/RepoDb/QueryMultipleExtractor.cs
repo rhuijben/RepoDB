@@ -8,7 +8,7 @@ namespace RepoDb;
 /// <summary>
 /// A class that is being used to extract the multiple resultsets of the 'ExecuteQueryMultiple' operation.
 /// </summary>
-public sealed class QueryMultipleExtractor : IDisposable
+public sealed class QueryMultipleExtractor : IDisposable, IAsyncDisposable
 {
     /*
      * TODO: The extraction within this class does not use the DbFieldCache.Get() operation, therefore,
@@ -71,6 +71,26 @@ public sealed class QueryMultipleExtractor : IDisposable
 
         // Set the output parameters
         DbConnectionExtension.SetOutputParameters(_param);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+#if !NET
+        Dispose();
+#else
+        // Reader
+        if (_reader is { })
+            await _reader.DisposeAsync().ConfigureAwait(false);
+
+        // Connection
+        if (_isDisposeConnection == true && _connection is { })
+        {
+            await _connection.DisposeAsync();
+        }
+
+        // Set the output parameters
+        DbConnectionExtension.SetOutputParameters(_param);
+#endif
     }
 
     #region Properties
@@ -173,23 +193,26 @@ public sealed class QueryMultipleExtractor : IDisposable
     /// <typeparam name="TEntity">The type of data entity to be extracted.</typeparam>
     /// <param name="isMoveToNextResult">A flag to use whether the operation would call the <see cref="System.Data.IDataReader.NextResult()"/> method.</param>
     /// <returns>An enumerable of extracted data entity.</returns>
-    public async Task<IEnumerable<TEntity>> ExtractAsync<TEntity>(bool isMoveToNextResult = true)
+    public async Task<IEnumerable<TEntity>> ExtractAsync<TEntity>(bool isMoveToNextResult = true, CancellationToken cancellationToken = default)
     {
         if (GetCacheItem<IEnumerable<TEntity>>(out var result) == false)
         {
             result = await DataReader
-                .ToEnumerableAsync<TEntity>(_reader, dbSetting: _connection?.GetDbSetting(), cancellationToken: CancellationToken)
+                .ToEnumerableAsync<TEntity>(_reader, dbSetting: _connection?.GetDbSetting(), cancellationToken: cancellationToken)
                 .ToListAsync(CancellationToken).ConfigureAwait(false);
             AddToCache(result);
         }
 
         if (isMoveToNextResult)
         {
-            await NextResultAsync().ConfigureAwait(false);
+            await NextResultAsync(cancellationToken).ConfigureAwait(false);
         }
 
         return result;
     }
+
+    public Task<IEnumerable<TEntity>> ExtractAsync<TEntity>(bool isMoveToNextResult)
+        => this.ExtractAsync<TEntity>(isMoveToNextResult, this.CancellationToken);
 
     #endregion
 
@@ -334,6 +357,10 @@ public sealed class QueryMultipleExtractor : IDisposable
     /// </summary>
     public async Task<bool> NextResultAsync() =>
         (Position = await _reader.NextResultAsync(CancellationToken).ConfigureAwait(false) ? Position + 1 : -1) >= 0;
+
+
+    public async Task<bool> NextResultAsync(CancellationToken? cancellationToken) =>
+        (Position = await _reader.NextResultAsync(cancellationToken ?? CancellationToken).ConfigureAwait(false) ? Position + 1 : -1) >= 0;
 
     #endregion
 }
