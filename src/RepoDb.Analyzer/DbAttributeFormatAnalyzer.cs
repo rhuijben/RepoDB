@@ -13,11 +13,11 @@ public class DbAttributeFormatAnalyzer : DiagnosticAnalyzer
     private static readonly DiagnosticDescriptor EscapedIdentifierRule = new DiagnosticDescriptor(
         "REPDB002",
         "Escaped identifier in attribute",
-        "Avoid using square-bracket escaping in '{0}' attribute: '{1}'",
+        "Avoid using escaping in '{0}' attribute: '{1}'",
         "Usage",
         DiagnosticSeverity.Warning,
         isEnabledByDefault: true,
-        description: "Square brackets in Table or Column attributes are not recommended and may cause portability or readability issues.");
+        description: "Escaping in Table, Column and Map attributes is not recommended and may cause portability issues.");
 
     private static readonly DiagnosticDescriptor TableSchemaFormatRule = new DiagnosticDescriptor(
         "REPDB003",
