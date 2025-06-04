@@ -1,5 +1,6 @@
 #nullable enable
 using System.Data;
+using System.Data.Common;
 using System.Globalization;
 using RepoDb.Attributes.Parameter;
 using RepoDb.DbSettings;
@@ -112,7 +113,7 @@ public static class DbCommandExtension
     /// </summary>
     /// <param name="command"></param>
     /// <param name="commandArrayParametersText"></param>
-    internal static void CreateParametersFromArray(this IDbCommand command,
+    internal static void CreateParametersFromArray(this DbCommand command,
         CommandArrayParametersText commandArrayParametersText)
     {
         if (commandArrayParametersText?.CommandArrayParameters?.Any() != true)
@@ -135,7 +136,7 @@ public static class DbCommandExtension
     /// <param name="commandArrayParameter"></param>
     /// <param name="dbType"></param>
     /// <param name="dbSetting"></param>
-    private static void CreateParametersFromArray(this IDbCommand command,
+    private static void CreateParametersFromArray(this DbCommand command,
         CommandArrayParameter commandArrayParameter,
         DbType? dbType,
         IDbSetting dbSetting)
@@ -202,33 +203,31 @@ public static class DbCommandExtension
         }
 
         // IDictionary<string, object>
-        if (param is IDictionary<string, object> objects)
+        switch (param)
         {
-            CreateParameters(command, objects, propertiesToSkip, dbFields);
-        }
+            case IDictionary<string, object> objects:
+                CreateParameters(command, objects, propertiesToSkip, dbFields);
+                break;
 
-        // QueryField
-        else if (param is QueryField field)
-        {
-            CreateParameters(command, field, propertiesToSkip, entityType, dbFields);
-        }
+            // QueryField
+            case QueryField field:
+                command.CreateParameters(field, propertiesToSkip, entityType, dbFields);
+                break;
 
-        // IEnumerable<QueryField>
-        else if (param is IEnumerable<QueryField> fields)
-        {
-            CreateParameters(command, fields, propertiesToSkip, entityType, dbFields);
-        }
+            // IEnumerable<QueryField>
+            case IEnumerable<QueryField> fields:
+                command.CreateParameters(fields, propertiesToSkip, entityType, dbFields);
+                break;
 
-        // QueryGroup
-        else if (param is QueryGroup group)
-        {
-            CreateParameters(command, group, propertiesToSkip, entityType, dbFields);
-        }
+            // QueryGroup
+            case QueryGroup group:
+                CreateParameters(command, group, propertiesToSkip, entityType, dbFields);
+                break;
 
-        // Other
-        else
-        {
-            CreateParametersInternal(command, param, propertiesToSkip, entityType, dbFields);
+            // Other
+            default:
+                CreateParametersInternal(command, param, propertiesToSkip, entityType, dbFields);
+                break;
         }
     }
 

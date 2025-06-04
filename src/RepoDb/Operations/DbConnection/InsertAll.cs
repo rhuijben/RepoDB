@@ -730,7 +730,7 @@ public static partial class DbConnectionExtension
                     // Prepare the command
                     if (dbSetting.IsPreparable)
                     {
-                        command.Prepare();
+                        await command.PrepareAsync(cancellationToken).ConfigureAwait(false);
                     }
 
                     // Before Execution
@@ -809,7 +809,7 @@ public static partial class DbConnectionExtension
 
                     if (doPrepare)
                     {
-                        command.Prepare();
+                        await command.PrepareAsync(cancellationToken).ConfigureAwait(false);
                         doPrepare = false;
                     }
 

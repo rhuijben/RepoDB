@@ -130,6 +130,16 @@ namespace RepoDb
                 dbTransaction.Commit();
         }
 
+#if !NET
+        public static Task PrepareAsync(this DbCommand dbCommand, CancellationToken cancellationToken = default)
+        {
+            dbCommand.Prepare();
+            // PrepareAsync is not available in netstandard2.0
+            // This is a no-op to maintain compatibility
+            return Task.CompletedTask;
+        }
+#endif
+
 
 #if NETSTANDARD
     /// <summary>

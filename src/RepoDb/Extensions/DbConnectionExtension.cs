@@ -2242,17 +2242,20 @@ public static partial class DbConnectionExtension
     /// <param name="param"></param>
     internal static void SetOutputParameters(object? param)
     {
-        if (param is QueryGroup group)
+        switch (param)
         {
-            SetOutputParameters(group);
-        }
-        else if (param is IEnumerable<QueryField> fields)
-        {
-            SetOutputParameters(fields);
-        }
-        else if (param is QueryField field)
-        {
-            SetOutputParameter(field);
+            case QueryGroup group:
+                SetOutputParameters(group);
+                break;
+            case IEnumerable<QueryField> fields:
+                SetOutputParameters(fields);
+                break;
+            case QueryField field:
+                SetOutputParameter(field);
+                break;
+            default:
+                // Do nothing
+                break;
         }
     }
 
@@ -2767,31 +2770,15 @@ public static partial class DbConnectionExtension
     /// <returns></returns>
     internal static QueryGroup? WhatToQueryGroup<T>(T what)
     {
-        if (what == null)
+        return what switch
         {
-            return null;
-        }
-        else if (what is QueryField field)
-        {
-            return ToQueryGroup(field);
-        }
-        else if (what is IEnumerable<QueryField> fields)
-        {
-            return ToQueryGroup(fields);
-        }
-        else if (what is QueryGroup group)
-        {
-            return group;
-        }
-        else
-        {
-            var type = TypeCache.Get(typeof(T)).GetUnderlyingType();
-            if (TypeCache.Get(type).IsAnonymousType() || type == StaticType.Object)
-            {
-                return QueryGroup.Parse(what, false);
-            }
-        }
-        return null;
+            null => null,
+            QueryField field => ToQueryGroup(field),
+            IEnumerable<QueryField> fields => ToQueryGroup(fields),
+            QueryGroup group => group,
+            _ when (TypeCache.Get(typeof(T)).GetUnderlyingType() is { } type && (TypeCache.Get(type).IsAnonymousType() || type == StaticType.Object)) => QueryGroup.Parse(what, false),
+            _ => null,
+        };
     }
 
     #endregion
@@ -3018,10 +3005,7 @@ public static partial class DbConnectionExtension
         var queryFields = new List<QueryField>();
         foreach (var field in qualifiers)
         {
-            var property = properties?.FirstOrDefault(
-                p => string.Equals(p.GetMappedName(), field.Name, StringComparison.OrdinalIgnoreCase));
-
-            if (property != null)
+            if (properties.GetByMappedName(field.Name) is { } property)
             {
                 queryFields.Add(new QueryField(field.Name, property.PropertyInfo.GetValue(entity)));
             }
@@ -3251,7 +3235,7 @@ public static partial class DbConnectionExtension
         bool skipCommandArrayParametersCheck = true)
     {
         // Command
-        var command = connection
+        var command = (DbCommand)connection
             .CreateCommand(commandText, commandType, commandTimeout, transaction);
 
         // Func
@@ -3260,7 +3244,7 @@ public static partial class DbConnectionExtension
             var func = FunctionCache.GetPlainTypeToDbParametersCompiledFunction(param.GetType(), entityType, dbFields);
             if (func != null)
             {
-                var cmd = (DbCommand)command;
+                var cmd = command;
                 func(cmd, param);
                 return cmd;
             }
@@ -3296,7 +3280,7 @@ public static partial class DbConnectionExtension
         }
 
         // Return the command
-        return (DbCommand)command;
+        return command;
     }
 
     #endregion
@@ -3314,40 +3298,15 @@ public static partial class DbConnectionExtension
         object param,
         IDbSetting? dbSetting)
     {
-        if (param == null)
+        return param switch
         {
-            return null;
-        }
-
-        // ExpandoObject
-        if (param is IDictionary<string, object> objects)
-        {
-            return GetCommandArrayParametersText(commandText, objects, dbSetting);
-        }
-
-        // QueryField
-        else if (param is QueryField field)
-        {
-            return GetCommandArrayParametersText(commandText, field, dbSetting);
-        }
-
-        // QueryFields
-        else if (param is IEnumerable<QueryField> fields)
-        {
-            return GetCommandArrayParametersText(commandText, fields, dbSetting);
-        }
-
-        // QueryGroup
-        else if (param is QueryGroup group)
-        {
-            return GetCommandArrayParametersText(commandText, group, dbSetting);
-        }
-
-        // Others
-        else
-        {
-            return GetCommandArrayParametersTextInternal(commandText, param, dbSetting);
-        }
+            null => null,
+            IDictionary<string, object> objects => GetCommandArrayParametersText(commandText, objects, dbSetting),
+            QueryField field => GetCommandArrayParametersText(commandText, field, dbSetting),
+            IEnumerable<QueryField> fields => GetCommandArrayParametersText(commandText, fields, dbSetting),
+            QueryGroup group => GetCommandArrayParametersText(commandText, group, dbSetting),
+            _ => GetCommandArrayParametersTextInternal(commandText, param, dbSetting)
+        };
     }
 
     /// <summary>

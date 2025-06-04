@@ -13,5 +13,6 @@
     <ProjectReference Include="..\RepoDb\RepoDb.csproj" />
     <ProjectReference Include="..\RepoDb.SqlServer\RepoDb.SqlServer.csproj" />
     <ProjectReference Include="..\RepoDb.TestCore\RepoDb.TestCore.csproj" />
+    <ProjectReference Include="..\RepoDb.Analyzer\RepoDb.Analyzer.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>
