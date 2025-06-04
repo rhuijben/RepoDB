@@ -11,7 +11,7 @@ partial class Compiler
     /// </summary>
     /// <param name="entityType"></param>
     /// <param name="inputFields"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="dbSetting"></param>
     /// <param name="dbHelper"></param>
     /// <returns></returns>

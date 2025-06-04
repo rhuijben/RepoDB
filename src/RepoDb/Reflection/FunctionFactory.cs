@@ -70,7 +70,7 @@ internal static class FunctionFactory
     /// <param name="entityType"></param>
     /// <param name="inputFields"></param>
     /// <param name="outputFields"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="dbSetting"></param>
     /// <param name="dbHelper"></param>
     /// <returns></returns>
@@ -109,7 +109,7 @@ internal static class FunctionFactory
     /// </summary>
     /// <param name="entityType"></param>
     /// <param name="inputFields"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="dbSetting"></param>
     /// <param name="dbHelper"></param>
     /// <returns></returns>

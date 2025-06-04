@@ -21,7 +21,7 @@ internal static class MergeAllExecutionContextProvider
     /// <param name="tableName"></param>
     /// <param name="qualifiers"></param>
     /// <param name="fields"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints"></param>
     /// <returns></returns>
     private static string GetKey(Type entityType,
@@ -52,7 +52,7 @@ internal static class MergeAllExecutionContextProvider
     /// <param name="entities"></param>
     /// <param name="tableName"></param>
     /// <param name="qualifiers"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields"></param>
     /// <param name="hints"></param>
     /// <param name="transaction"></param>
@@ -139,7 +139,7 @@ internal static class MergeAllExecutionContextProvider
     /// <param name="entities"></param>
     /// <param name="tableName"></param>
     /// <param name="qualifiers"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields"></param>
     /// <param name="hints"></param>
     /// <param name="transaction"></param>
@@ -229,7 +229,7 @@ internal static class MergeAllExecutionContextProvider
     /// <param name="dbFields"></param>
     /// <param name="tableName"></param>
     /// <param name="qualifiers"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields"></param>
     /// <param name="commandText"></param>
     /// <returns></returns>

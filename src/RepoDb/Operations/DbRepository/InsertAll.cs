@@ -14,7 +14,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The data entity objects to be inserted.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -22,7 +22,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of inserted rows in the table.</returns>
     public int InsertAll<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.InsertAll,
@@ -58,14 +58,14 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="entities">The data entity objects to be inserted.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The number of inserted rows in the table.</returns>
     public int InsertAll<TEntity>(IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.InsertAll,
@@ -105,7 +105,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The data entity objects to be inserted.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -114,7 +114,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of inserted rows in the table.</returns>
     public async Task<int> InsertAllAsync<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.InsertAll,
@@ -152,7 +152,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="entities">The data entity objects to be inserted.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -160,7 +160,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of inserted rows in the table.</returns>
     public async Task<int> InsertAllAsync<TEntity>(IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.InsertAll,
@@ -201,7 +201,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The dynamic objects to be inserted.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -209,7 +209,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of inserted rows in the table.</returns>
     public int InsertAll(string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.InsertAll,
@@ -248,7 +248,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The dynamic objects to be inserted.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -257,7 +257,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of inserted rows in the table.</returns>
     public async Task<int> InsertAllAsync(string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.InsertAll,

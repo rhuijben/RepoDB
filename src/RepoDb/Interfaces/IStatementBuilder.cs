@@ -191,7 +191,7 @@ public interface IStatementBuilder
     /// </summary>
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="fields">The list of fields to be inserted.</param>
-    /// <param name="batchSize">The batch size of the operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="primaryField">The primary field from the database.</param>
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
@@ -268,7 +268,7 @@ public interface IStatementBuilder
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="fields">The list of fields to be updated.</param>
     /// <param name="qualifiers">The list of the qualifier <see cref="Field"/> objects.</param>
-    /// <param name="batchSize">The batch size of the operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="primaryField">The primary field from the database.</param>
     /// <param name="identityField">The identity field from the database.</param>
     /// <param name="hints">The table hints to be used.</param>
@@ -430,7 +430,7 @@ public interface IStatementBuilder
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="fields">The list of fields to be updated.</param>
     /// <param name="qualifiers">The list of the qualifier <see cref="Field"/> objects.</param>
-    /// <param name="batchSize">The batch size of the operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="keyFields">The list of keyfields.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <returns>A sql statement for update-all operation.</returns>

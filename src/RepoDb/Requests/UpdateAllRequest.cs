@@ -17,7 +17,7 @@ internal sealed class UpdateAllRequest : BaseRequest
     /// <param name="transaction">The transaction object.</param>
     /// <param name="fields">The list of the target fields.</param>
     /// <param name="qualifiers">The list of the qualifier <see cref="Field"/> objects.</param>
-    /// <param name="batchSize">The batch size of the update operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
     public UpdateAllRequest(Type type,
@@ -48,7 +48,7 @@ internal sealed class UpdateAllRequest : BaseRequest
     /// <param name="transaction">The transaction object.</param>
     /// <param name="fields">The list of the target fields.</param>
     /// <param name="qualifiers">The list of the qualifier <see cref="Field"/> objects.</param>
-    /// <param name="batchSize">The batch size of the update operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
     public UpdateAllRequest(string name,

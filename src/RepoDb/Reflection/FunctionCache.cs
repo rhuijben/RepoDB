@@ -245,7 +245,7 @@ internal static class FunctionCache
     /// <param name="cacheKey"></param>
     /// <param name="inputFields"></param>
     /// <param name="outputFields"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="dbSetting"></param>
     /// <param name="dbHelper"></param>
     /// <returns></returns>
@@ -274,7 +274,7 @@ internal static class FunctionCache
         /// <param name="cacheKey"></param>
         /// <param name="inputFields"></param>
         /// <param name="outputFields"></param>
-        /// <param name="batchSize"></param>
+        /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
         /// <param name="dbSetting"></param>
         /// <param name="dbHelper"></param>
         /// <returns></returns>
@@ -310,7 +310,7 @@ internal static class FunctionCache
         /// <param name="cacheKey"></param>
         /// <param name="inputFields"></param>
         /// <param name="outputFields"></param>
-        /// <param name="batchSize"></param>
+        /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
         /// <returns></returns>
         private static long GetKey(Type entityType,
             string cacheKey,

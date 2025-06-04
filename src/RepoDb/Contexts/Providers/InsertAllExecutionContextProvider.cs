@@ -20,7 +20,7 @@ internal static class InsertAllExecutionContextProvider
     /// <param name="entityType"></param>
     /// <param name="tableName"></param>
     /// <param name="fields"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints"></param>
     /// <returns></returns>
     private static string GetKey(Type entityType,
@@ -46,7 +46,7 @@ internal static class InsertAllExecutionContextProvider
     /// <param name="entityType"></param>
     /// <param name="connection"></param>
     /// <param name="tableName"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields"></param>
     /// <param name="hints"></param>
     /// <param name="transaction"></param>
@@ -126,7 +126,7 @@ internal static class InsertAllExecutionContextProvider
     /// <param name="entityType"></param>
     /// <param name="connection"></param>
     /// <param name="tableName"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields"></param>
     /// <param name="hints"></param>
     /// <param name="transaction"></param>
@@ -207,7 +207,7 @@ internal static class InsertAllExecutionContextProvider
     /// <param name="connection"></param>
     /// <param name="tableName"></param>
     /// <param name="dbFields"></param>
-    /// <param name="batchSize"></param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields"></param>
     /// <param name="commandText"></param>
     /// <returns></returns>

@@ -17,7 +17,7 @@ internal class MergeAllRequest : BaseRequest
     /// <param name="transaction">The transaction object.</param>
     /// <param name="fields">The list of the target fields.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
     public MergeAllRequest(Type type,
@@ -47,7 +47,7 @@ internal class MergeAllRequest : BaseRequest
     /// <param name="transaction">The transaction object.</param>
     /// <param name="fields">The list of the target fields.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
     public MergeAllRequest(string name,
@@ -78,7 +78,7 @@ internal class MergeAllRequest : BaseRequest
     /// <param name="transaction">The transaction object.</param>
     /// <param name="fields">The list of the target fields.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
     public MergeAllRequest(Type type,

@@ -25,7 +25,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -69,7 +69,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifier">The qualifier field to be used during merge operation.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -114,7 +114,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -159,7 +159,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The expression for the qualifier fields.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -202,7 +202,7 @@ public static partial class DbConnectionExtension
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -244,7 +244,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifier">The qualifier field to be used during merge operation.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -287,7 +287,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -330,7 +330,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The expression for the qualifier fields.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -374,7 +374,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -486,7 +486,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -533,7 +533,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifier">The field to be used during merge operation.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -581,7 +581,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -629,7 +629,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The expression for the qualifier fields.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -676,7 +676,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="commandTimeout">The command timeout in seconds to be used.</param>
@@ -720,7 +720,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifier">The field to be used during merge operation.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -766,7 +766,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -812,7 +812,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The expression for the qualifier fields.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -859,7 +859,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -976,7 +976,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -1018,7 +1018,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
     /// <param name="qualifier">The qualifier field to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -1061,7 +1061,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
     /// <param name="qualifiers">The qualifier <see cref="Field"/> objects to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -1107,7 +1107,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -1152,7 +1152,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
     /// <param name="qualifier">The qualifier field to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -1198,7 +1198,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
     /// <param name="qualifiers">The qualifier <see cref="Field"/> objects to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -1248,7 +1248,7 @@ public static partial class DbConnectionExtension
     /// <param name="connection">The connection object to be used.</param>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The data entity or dynamic object to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="qualifiers">The list of qualifier fields to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
@@ -1469,7 +1469,7 @@ public static partial class DbConnectionExtension
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The data entity or dynamic object to be merged.</param>
     /// <param name="qualifiers">The list of qualifier fields to be used.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>

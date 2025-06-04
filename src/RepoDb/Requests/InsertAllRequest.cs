@@ -16,7 +16,7 @@ internal sealed class InsertAllRequest : BaseRequest
     /// <param name="connection">The connection object.</param>
     /// <param name="transaction">The transaction object.</param>
     /// <param name="fields">The list of the target fields.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
     public InsertAllRequest(Type type,
@@ -43,7 +43,7 @@ internal sealed class InsertAllRequest : BaseRequest
     /// <param name="connection">The connection object.</param>
     /// <param name="transaction">The transaction object.</param>
     /// <param name="fields">The list of the target fields.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
     public InsertAllRequest(string name,
@@ -71,7 +71,7 @@ internal sealed class InsertAllRequest : BaseRequest
     /// <param name="connection">The connection object.</param>
     /// <param name="transaction">The transaction object.</param>
     /// <param name="fields">The list of the target fields.</param>
-    /// <param name="batchSize">The batch size of the insertion.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="hints">The hints for the table.</param>
     /// <param name="statementBuilder">The statement builder.</param>
     public InsertAllRequest(Type type,

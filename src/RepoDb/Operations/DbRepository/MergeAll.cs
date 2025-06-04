@@ -15,7 +15,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -23,7 +23,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of affected rows during the merge process.</returns>
     public int MergeAll<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -61,7 +61,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -70,7 +70,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public int MergeAll<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -109,7 +109,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The expression for the qualifier fields.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -118,7 +118,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public int MergeAll<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -155,14 +155,14 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="entities">The list of data entity objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
     /// <param name="transaction">The transaction to be used.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
     public int MergeAll<TEntity>(IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -198,7 +198,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -206,7 +206,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of affected rows during the merge process.</returns>
     public int MergeAll<TEntity>(IEnumerable<TEntity> entities,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -243,7 +243,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The expression for the qualifier fields.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -251,7 +251,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of affected rows during the merge process.</returns>
     public int MergeAll<TEntity>(IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -292,7 +292,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -301,7 +301,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of affected rows during the merge process.</returns>
     public async Task<int> MergeAllAsync<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -341,7 +341,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -351,7 +351,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<int> MergeAllAsync<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -392,7 +392,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="tableName">The name of the target table to be used.</param>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The expression for the qualifier fields.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -402,7 +402,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<int> MergeAllAsync<TEntity>(string tableName,
         IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -441,7 +441,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="entities">The list of data entity objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -449,7 +449,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> object to be used during the asynchronous operation.</param>
     /// <returns>The number of affected rows during the merge process.</returns>
     public async Task<int> MergeAllAsync<TEntity>(IEnumerable<TEntity> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -487,7 +487,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -496,7 +496,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of affected rows during the merge process.</returns>
     public async Task<int> MergeAllAsync<TEntity>(IEnumerable<TEntity> entities,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -535,7 +535,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <typeparam name="TEntity">The type of the data entity.</typeparam>
     /// <param name="entities">The list of data entity objects to be merged.</param>
     /// <param name="qualifiers">The expression for the qualifier fields.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -544,7 +544,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of affected rows during the merge process.</returns>
     public async Task<int> MergeAllAsync<TEntity>(IEnumerable<TEntity> entities,
         Expression<Func<TEntity, object?>> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -586,7 +586,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -594,7 +594,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of affected rows during the merge process.</returns>
     public int MergeAll(string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -630,7 +630,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -639,7 +639,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public int MergeAll(string tableName,
         IEnumerable<object> entities,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -679,7 +679,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// </summary>
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -688,7 +688,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>The number of affected rows during the merge process.</returns>
     public async Task<int> MergeAllAsync(string tableName,
         IEnumerable<object> entities,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
@@ -726,7 +726,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <param name="tableName">The name of the target table.</param>
     /// <param name="entities">The list of dynamic objects to be merged.</param>
     /// <param name="qualifiers">The list of qualifier <see cref="Field"/> objects to be merged.</param>
-    /// <param name="batchSize">The batch size of the merge operation.</param>
+    /// <param name="batchSize">The batch to use. Use 0 for auto-chunking.</param>
     /// <param name="fields">The mapping list of <see cref="Field"/> objects to be used.</param>
     /// <param name="hints">The table hints to be used.</param>
     /// <param name="traceKey">The tracing key to be used.</param>
@@ -736,7 +736,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<int> MergeAllAsync(string tableName,
         IEnumerable<object> entities,
         IEnumerable<Field> qualifiers,
-        int batchSize = Constant.DefaultBatchOperationSize,
+        int batchSize = 0,
         IEnumerable<Field>? fields = null,
         string? hints = null,
         string? traceKey = TraceKeys.MergeAll,
