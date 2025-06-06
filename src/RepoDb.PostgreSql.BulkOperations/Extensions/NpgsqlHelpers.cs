@@ -34,7 +34,7 @@ public static partial class NpgsqlConnectionExtension
         var matchedProperties = properties?
             .Where(property =>
             {
-                var dbField = dbFields?.GetByUnquotedName(property.GetMappedName().AsUnquoted(true, dbSetting));
+                var dbField = dbFields?.GetByName(property.GetMappedName().AsUnquoted(true, dbSetting));
 
                 return (dbField != null && dbField.IsPrimary == false && dbField.IsIdentity == false) ||
                        (includePrimary && dbField?.IsPrimary == true) ||
@@ -111,7 +111,7 @@ public static partial class NpgsqlConnectionExtension
         IDbSetting dbSetting)
     {
         // Get
-        var dbField = dbFields?.GetByUnquotedName(name.AsUnquoted(true, dbSetting));
+        var dbField = dbFields?.GetByName(name.AsUnquoted(true, dbSetting));
 
         // Check
         if (dbField == null)

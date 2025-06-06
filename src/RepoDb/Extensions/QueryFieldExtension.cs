@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Globalization;
+using System.Text;
 using RepoDb.Interfaces;
 
 namespace RepoDb.Extensions;
@@ -109,13 +110,16 @@ public static class QueryFieldExtension
     internal static string AsBetweenParameter(this QueryField queryField,
         int index,
         string? functionFormat,
-        IDbSetting dbSetting) =>
+        IDbSetting dbSetting,
+        bool quote = false) =>
         string.IsNullOrWhiteSpace(functionFormat) ?
-            string.Concat(queryField.Parameter.Name.AsParameter(index, dbSetting), "_Left AND ", queryField.Parameter.Name.AsParameter(index, dbSetting), "_Right") :
             string.Concat(
-                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting), "_Left")),
+                queryField.Parameter.Name.AsParameter(index, quote, dbSetting, suffix: "_Left"), " AND ", queryField.Parameter.Name.AsParameter(index, quote, dbSetting, suffix: "_Right")) :
+            string.Concat(
+                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting, "_Left"))),
                 " AND ",
-                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting), "_Right")));
+                string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting, "_Right"))));
+
 
     /// <summary>
     /// 
@@ -123,35 +127,51 @@ public static class QueryFieldExtension
     /// <param name="queryField"></param>
     /// <param name="index"></param>
     /// <param name="dbSetting"></param>
-    /// <returns></returns>
-    internal static string AsInParameter(this QueryField queryField,
-        int index,
-        IDbSetting dbSetting) =>
-        AsInParameter(queryField, index, null, dbSetting);
-
-    /// <summary>
     /// 
-    /// </summary>
-    /// <param name="queryField"></param>
-    /// <param name="index"></param>
-    /// <param name="functionFormat"></param>
-    /// <param name="dbSetting"></param>
     /// <returns></returns>
     internal static string AsInParameter(this QueryField queryField,
         int index,
-        string? functionFormat,
         IDbSetting dbSetting)
     {
-        var enumerable = (System.Collections.IEnumerable)queryField.Parameter.Value!;
+        var enumerable = ((System.Collections.IEnumerable)queryField.Parameter.Value!).AsTypedEnumerableSet();
 
-        var values = enumerable
-            .OfType<object>()
-            .Select((_, valueIndex) =>
-                string.IsNullOrWhiteSpace(functionFormat) ?
-                    string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting), "_In_", valueIndex.ToString(CultureInfo.InvariantCulture)) :
-                    string.Format(CultureInfo.InvariantCulture, functionFormat, string.Concat(queryField.Parameter.Name.AsParameter(index, true, dbSetting), "_In_", valueIndex.ToString(CultureInfo.InvariantCulture))))
-            .Join(", ");
-        return string.Concat("(", values, ")");
+        if (enumerable.Count > dbSetting.UseArrayParameterTreshold
+            && dbSetting is IDbRuntimeSetting dbr && false /*&& dbr.CanCreateArrayParameter(enumerable)*/)
+        {
+            return default!;
+        }
+        else if (enumerable.Count > dbSetting.UseInValuesTreshold)
+        {
+            queryField.SetNormalizeCount();
+            StringBuilder sb = new();
+
+            queryField.SetNormalizeCount();
+            var createVals = QueryField.RoundUpInLength(enumerable.Count);
+
+            sb.Append("(SELECT val FROM (VALUES ");
+
+            for (int valueIndex = 0; valueIndex < createVals; valueIndex++)
+            {
+                if (valueIndex > 0)
+                {
+                    sb.Append(", ");
+                }
+                sb.Append('(');
+                sb.Append($"{queryField.Parameter.Name}{(index > 0 ? index.ToString(CultureInfo.InvariantCulture) : "")}_In_{valueIndex.ToString(CultureInfo.InvariantCulture)}".AsParameter(dbSetting));
+                sb.Append(')');
+            }
+            sb.Append(") AS v(val) WHERE val IS NOT NULL)");
+            return sb.ToString();
+        }
+        else
+        {
+            var values = enumerable
+                .OfType<object>()
+                .Select((_, valueIndex) =>
+                        string.Concat(queryField.Parameter.Name, index > 0 ? index.ToString(CultureInfo.InvariantCulture) : "", "_In_", valueIndex.ToString(CultureInfo.InvariantCulture)).AsParameter(true, dbSetting))
+                .Join(", ");
+            return string.Concat("(", values, ")");
+        }
     }
 
     /// <summary>
@@ -178,7 +198,8 @@ public static class QueryFieldExtension
         int index,
         string functionFormat,
         IDbSetting dbSetting) =>
-        string.Concat(queryField.AsField(functionFormat, dbSetting), " ", queryField.Operation.GetText(), " ", queryField.AsBetweenParameter(index /*, functionFormat */, dbSetting));
+        string.Concat(queryField.AsField(functionFormat, dbSetting), " ",
+            queryField.Operation.GetText(), " ", queryField.AsBetweenParameter(index /*, functionFormat */, dbSetting));
 
     /// <summary>
     /// 

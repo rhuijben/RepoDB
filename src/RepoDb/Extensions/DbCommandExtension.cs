@@ -148,29 +148,30 @@ public static class DbCommandExtension
         DbType? dbType,
         IDbSetting dbSetting)
     {
-        var values = commandArrayParameter.Values.WithType<object>().AsList();
+        var values = commandArrayParameter.Values.AsTypedEnumerableSet();
 
         if (values.Count == 0)
         {
             command.Parameters.Add(
-                command.CreateParameter(
-                    commandArrayParameter.ParameterName.AsParameter(dbSetting), null, dbType));
+                command.CreateParameter(commandArrayParameter.ParameterName, null, dbType));
         }
         else if (values.Count > 5 && command.Connection?.GetDbSetting().UseArrayParameterTreshold < values.Count
             && command.Connection.GetDbHelper().CreateTableParameter(connection, transaction, dbType,
-            values, commandArrayParameter.ParameterName.AsParameter(dbSetting)) is { } tableParameter)
+            values, commandArrayParameter.ParameterName) is { } tableParameter)
         {
             command.Parameters.Add(tableParameter);
         }
         else
         {
-            for (var i = 0; i < values.Count; i++)
+            int i = 0;
+            foreach (var value in values)
             {
-                var name = string.Concat(commandArrayParameter.ParameterName, i.ToString(CultureInfo.InvariantCulture)).AsParameter(dbSetting);
-                var value = values[i];
+                var name = string.Concat(commandArrayParameter.ParameterName, i.ToString(CultureInfo.InvariantCulture));
                 dbType ??= value?.GetType().GetDbType();
                 command.Parameters.Add(
                     command.CreateParameter(name, value, dbType));
+
+                i++;
             }
         }
     }
@@ -195,19 +196,13 @@ public static class DbCommandExtension
         Type? entityType) =>
         CreateParameters(command, param, null, entityType, null);
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="command"></param>
-    /// <param name="param"></param>
-    /// <param name="propertiesToSkip"></param>
-    /// <param name="entityType"></param>
-    /// <param name="dbFields"></param>
     internal static void CreateParameters(this IDbCommand command,
         object? param,
         HashSet<string>? propertiesToSkip,
         Type? entityType,
-        DbFieldCollection? dbFields = null)
+        DbFieldCollection? dbFields = null,
+        DbConnection? connection = null,
+        IDbTransaction? transaction = null)
     {
         // Check
         if (param == null)
@@ -668,17 +663,16 @@ public static class DbCommandExtension
         QueryField queryField,
         DbField? dbField = null)
     {
-        var values = (queryField?.Parameter.Value as System.Collections.IEnumerable)?
-                    .WithType<object>()
-                    .AsList();
+        var values = (queryField?.Parameter.Value as System.Collections.IEnumerable)?.AsTypedEnumerableSet();
         if (values?.Count > 0)
         {
-            for (var i = 0; i < values.Count; i++)
+            int i = 0;
+            foreach (var value in values)
             {
                 var name = string.Concat(queryField!.Parameter.Name, "_In_", i.ToString(CultureInfo.InvariantCulture));
                 var parameter = CreateParameter(command,
                     name,
-                    values[i],
+                    values,
                     dbField?.Size,
                     null,
                     dbField,
@@ -686,6 +680,26 @@ public static class DbCommandExtension
                     queryField.Parameter.DbType,
                     null);
                 command.Parameters.Add(parameter);
+                i++;
+            }
+
+            if (queryField!.MoreParams() is { } mp)
+            {
+                while (i < mp)
+                {
+                    var name = string.Concat(queryField!.Parameter.Name, "_In_", i.ToString(CultureInfo.InvariantCulture));
+                    var parameter = CreateParameter(command,
+                        name,
+                        values,
+                        dbField?.Size,
+                        null,
+                        dbField,
+                        null,
+                        queryField.Parameter.DbType,
+                        null);
+                    command.Parameters.Add(parameter);
+                    i++;
+                }
             }
         }
     }
@@ -700,9 +714,8 @@ public static class DbCommandExtension
         QueryField queryField,
         DbField? dbField = null)
     {
-        var values = (queryField?.Parameter.Value as System.Collections.IEnumerable)?
-                    .WithType<object>()
-                    .AsList();
+        var values = (queryField?.Parameter.Value as System.Collections.IEnumerable)?.WithType<object>().ToList();
+
         if (values?.Count == 2)
         {
             // Left

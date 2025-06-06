@@ -376,7 +376,7 @@ internal sealed partial class Compiler
                 Name = name,
                 Ordinal = ordinal,
                 Type = reader.GetFieldType(ordinal) ?? StaticType.Object,
-                DbField = dbFields?.GetByUnquotedName(name.AsUnquoted(true, dbSetting))
+                DbField = dbFields?.GetByName(name.AsUnquoted(true, dbSetting))
             });
     }
 

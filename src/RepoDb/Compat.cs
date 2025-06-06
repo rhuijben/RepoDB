@@ -27,6 +27,8 @@ namespace System.Runtime.CompilerServices
 
         public string FeatureName { get; }
     }
+
+
 }
 
 namespace System
@@ -95,6 +97,11 @@ namespace System.Diagnostics.CodeAnalysis
 
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     internal sealed class DoesNotReturnAttribute : Attribute
+    {
+    }
+
+    [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = false)]
+    public sealed class SetsRequiredMembersAttribute : Attribute
     {
     }
 

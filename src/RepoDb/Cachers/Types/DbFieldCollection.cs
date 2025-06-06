@@ -12,12 +12,10 @@ namespace RepoDb;
 /// </summary>
 public sealed class DbFieldCollection : ReadOnlyCollection<DbField>
 {
-    private readonly IDbSetting dbSetting;
     private readonly Lazy<IEnumerable<Field>> lazyFields;
     private readonly Lazy<DbField?> lazyIdentity;
     private readonly Lazy<IReadOnlyList<DbField>?> lazyPrimaryFields;
     private readonly Lazy<Dictionary<string, DbField>> lazyMapByName;
-    private readonly Lazy<Dictionary<string, DbField>> lazyMapByUnquotedName;
     private readonly Lazy<DbField?> lazyPrimary;
 
     /// <summary>
@@ -25,18 +23,20 @@ public sealed class DbFieldCollection : ReadOnlyCollection<DbField>
     /// </summary>
     /// <param name="dbFields">A collection of column definitions of the table.</param>
     /// <param name="dbSetting">The currently in used <see cref="IDbSetting"/> object.</param>
-    public DbFieldCollection(IEnumerable<DbField> dbFields, IDbSetting dbSetting)
+    internal DbFieldCollection(IEnumerable<DbField> dbFields)
         : base(dbFields.AsList())
     {
-        this.dbSetting = dbSetting;
-
         lazyPrimaryFields = new(GetPrimaryDbFields);
         lazyPrimary = new(GetPrimaryDbField);
         lazyIdentity = new(GetIdentityDbField);
         lazyMapByName = new(GetDbFieldsMappedByName);
-        lazyMapByUnquotedName = new(GetDbFieldsMappedByUnquotedName);
         lazyFields = new(GetDbFieldsAsFields);
     }
+
+    [Obsolete]
+    public DbFieldCollection(IEnumerable<DbField> dbFields, IDbSetting dbSetting)
+        : this(dbFields)
+    { }
 
     /// <summary>
     /// Gets the column of the primary key if there is a single column primary key
@@ -88,18 +88,11 @@ public sealed class DbFieldCollection : ReadOnlyCollection<DbField>
     /// </summary>
     /// <param name="name">The name of the mapping that is equivalent to the column definition of the table.</param>
     /// <returns>A column definition of table.</returns>
-    public DbField? GetByUnquotedName(string name)
-    {
-        lazyMapByUnquotedName.Value.TryGetValue(name, out var dbField);
-
-        return dbField;
-    }
+    [Obsolete("We assume that DbField instances are normalized, as we get them from the database")]
+    public DbField? GetByUnquotedName(string name) => GetByName(name);
 
     private Dictionary<string, DbField> GetDbFieldsMappedByName() =>
         this.ToDictionary(df => df.Name, df => df, StringComparer.OrdinalIgnoreCase);
-
-    private Dictionary<string, DbField> GetDbFieldsMappedByUnquotedName() =>
-        this.ToDictionary(df => df.Name.AsUnquoted(true, dbSetting), df => df, StringComparer.OrdinalIgnoreCase);
 
     private DbField? GetPrimaryDbField() => this.OneOrDefault(df => df.IsPrimary);
 

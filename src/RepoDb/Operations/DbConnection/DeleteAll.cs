@@ -63,7 +63,7 @@ public static partial class DbConnectionExtension
             transaction ??= myTransaction;
             int deleted = 0;
 
-            foreach (var group in entities.ChunkOptimally(chunkSize))
+            foreach (var group in entities.Split(chunkSize))
             {
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
@@ -202,7 +202,7 @@ public static partial class DbConnectionExtension
             transaction ??= myTransaction;
             int deleted = 0;
 
-            foreach (var group in entities.ChunkOptimally(chunkSize))
+            foreach (var group in entities.Split(chunkSize))
             {
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
@@ -416,7 +416,7 @@ public static partial class DbConnectionExtension
             transaction ??= myTransaction;
             int deleted = 0;
 
-            foreach (var group in entities.ChunkOptimally(chunkSize))
+            foreach (var group in entities.Split(chunkSize))
             {
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
@@ -571,7 +571,7 @@ public static partial class DbConnectionExtension
             transaction ??= myTransaction;
             int deleted = 0;
 
-            foreach (var group in entities.ChunkOptimally(chunkSize))
+            foreach (var group in entities.Split(chunkSize))
             {
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
@@ -874,7 +874,7 @@ public static partial class DbConnectionExtension
     {
         var pkeys = GetAndGuardPrimaryKeyOrIdentityKey(connection, tableName, transaction);
         var dbSetting = connection.GetDbSetting();
-        var count = keys?.AsList()?.Count;
+        var count = keys.Count();
         var deletedRows = 0;
 
         var parameterBatchCount = connection.GetDbSetting().MaxParameterCount;
@@ -883,13 +883,13 @@ public static partial class DbConnectionExtension
         transaction ??= myTransaction;
 
         // Call the underlying method
-        foreach (var keyValues in keys?.Split(parameterBatchCount) ?? [])
+        foreach (var keyValues in keys.Split(parameterBatchCount) ?? [])
         {
             if (!keyValues.Any())
                 continue;
 
             var where = new QueryGroup(
-                pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
+                pkeys.Select(key => new QueryGroup(new QueryField(key.Name, Operation.In, keyValues.AsList(), null, false))),
                 Conjunction.And);
             deletedRows += DeleteInternal(connection: (DbConnection)connection,
                 tableName: tableName,
@@ -1052,7 +1052,7 @@ public static partial class DbConnectionExtension
     {
         var pkeys = await GetAndGuardPrimaryKeyOrIdentityKeyAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false);
         var dbSetting = connection.GetDbSetting();
-        var count = keys?.AsList()?.Count;
+        var count = keys.Count();
         var deletedRows = 0;
 
         await connection.EnsureOpenAsync(cancellationToken).ConfigureAwait(false);
@@ -1061,10 +1061,10 @@ public static partial class DbConnectionExtension
         transaction ??= myTransaction;
 
         // Call the underlying method
-        foreach (var keyValues in keys?.ChunkOptimally(parameterBatchCount) ?? [])
+        foreach (var keyValues in keys.Split(parameterBatchCount) ?? [])
         {
             var where = new QueryGroup(
-                pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
+                pkeys.Select(key => new QueryGroup(new QueryField(key.Name, Operation.In, keyValues.AsList(), null, false))),
                 Conjunction.And);
 
             deletedRows += await DeleteAsyncInternal(connection: (DbConnection)connection,

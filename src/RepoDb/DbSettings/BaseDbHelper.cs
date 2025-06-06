@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Collections;
 using System.Data;
 using System.Data.Common;
 using RepoDb.Interfaces;
@@ -16,17 +17,17 @@ public abstract class BaseDbHelper : IDbHelper
 
     public IResolver<string, Type> DbTypeResolver { get; protected init; }
 
-    public virtual DbParameter? CreateTableParameter(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName)
+    public virtual DbParameter? CreateTableParameter(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable values, string parameterName)
     {
         return null;
     }
 
-    public ValueTask<DbParameter?> CreateTableParameterAsync(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName, CancellationToken cancellationToken = default)
+    public ValueTask<DbParameter?> CreateTableParameterAsync(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable values, string parameterName, CancellationToken cancellationToken = default)
     {
         return new(CreateTableParameter(connection, transaction, dbType, values, parameterName));
     }
 
-    public virtual string? CreateTableParameterText(DbConnection connection, IDbTransaction? transaction, string parameterName, IEnumerable<object> values)
+    public virtual string? CreateTableParameterText(DbConnection connection, IDbTransaction? transaction, string parameterName, IEnumerable values)
     {
         return null;
     }
@@ -37,7 +38,10 @@ public abstract class BaseDbHelper : IDbHelper
 
     public virtual DbConnectionRuntimeInformation GetDbConnectionRuntimeInformation(IDbConnection connection, IDbTransaction transaction)
     {
-        return new();
+        return new()
+        {
+            DbSetting = connection.GetDbSetting()
+        };
     }
 
     public virtual ValueTask<DbConnectionRuntimeInformation> GetDbConnectionRuntimeInformationAsync(IDbConnection connection, IDbTransaction transaction, CancellationToken cancellationToken)

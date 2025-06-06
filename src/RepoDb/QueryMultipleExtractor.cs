@@ -73,11 +73,15 @@ public sealed class QueryMultipleExtractor : IDisposable, IAsyncDisposable
         DbConnectionExtension.SetOutputParameters(_param);
     }
 
+#if !NET
+    public ValueTask DisposeAsync()
+    {
+        Dispose();
+        return new();
+    }
+#else
     public async ValueTask DisposeAsync()
     {
-#if !NET
-        Dispose();
-#else
         // Reader
         if (_reader is { })
             await _reader.DisposeAsync().ConfigureAwait(false);
@@ -90,8 +94,8 @@ public sealed class QueryMultipleExtractor : IDisposable, IAsyncDisposable
 
         // Set the output parameters
         DbConnectionExtension.SetOutputParameters(_param);
-#endif
     }
+#endif
 
     #region Properties
 

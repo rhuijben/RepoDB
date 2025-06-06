@@ -165,6 +165,28 @@ public partial class QueryGroup
                 dictionary.Add(parameterName, values[i]);
             }
         }
+
+        if (queryField.MoreParams() is { } mp)
+        {
+            for (int i = values.Count; i < mp; i++)
+            {
+                var parameterName = string.Concat(queryField.Parameter.Name, "_In_", i.ToString(CultureInfo.InvariantCulture));
+                if (dictionary.ContainsKey(parameterName))
+                {
+                    continue;
+                }
+
+                if (queryGroupTypeMap.MappedType != null)
+                {
+                    dictionary.Add(parameterName,
+                        new CommandParameter(queryField.Field, null, queryGroupTypeMap.MappedType));
+                }
+                else
+                {
+                    dictionary.Add(parameterName, null);
+                }
+            }
+        }
     }
 
     /// <summary>

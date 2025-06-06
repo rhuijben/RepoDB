@@ -29,5 +29,6 @@ public sealed record SqlServerDbSetting : BaseDbSetting
          */
         MaxParameterCount = 2100 - 2;
         UseArrayParameterTreshold = 15;
+        UseInValuesTreshold = 5;
     }
 }

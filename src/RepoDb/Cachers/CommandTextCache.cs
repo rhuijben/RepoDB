@@ -1109,7 +1109,7 @@ public static class CommandTextCache
         var unmatchesOrderFields = dbFields?.IsEmpty() == false ?
             orderFields
                 .Where(of =>
-                    dbFields.GetByUnquotedName(of.Name.AsUnquoted(true, dbSetting)) == null) : null;
+                    dbFields.GetByName(of.Name.AsUnquoted(true, dbSetting)) == null) : null;
         if (unmatchesOrderFields?.Any() == true)
         {
             throw new MissingFieldsException($"The order fields '{unmatchesOrderFields.Select(of => of.Name).Join(", ")}' are not present from the actual table.");
@@ -1174,7 +1174,7 @@ public static class CommandTextCache
         return dbFields?.IsEmpty() == false ?
             fields
                 .Where(f =>
-                    dbFields.GetByUnquotedName(f.Name.AsUnquoted(true, dbSetting)) != null) :
+                    dbFields.GetByName(f.Name.AsUnquoted(true, dbSetting)) != null) :
             fields;
     }
 

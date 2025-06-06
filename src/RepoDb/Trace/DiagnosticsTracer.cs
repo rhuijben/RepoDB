@@ -9,7 +9,7 @@ namespace RepoDb.Trace;
 /// </summary>
 public sealed class DiagnosticsTracer : ITrace
 {
-
+    Dictionary<long, DateTime> _timeMap = new();
     /// <summary>
     /// 
     /// </summary>
@@ -17,7 +17,14 @@ public sealed class DiagnosticsTracer : ITrace
     /// <param name="log"></param>
     public void AfterExecution<TResult>(ResultTraceLog<TResult> log)
     {
+        if (_timeMap.TryGetValue(log.SessionId, out var startTime))
+        {
+            _timeMap.Remove(log.SessionId);
 
+            var executionTime = DateTime.UtcNow - startTime;
+
+            SystemDiagnosticsTrace.WriteLine($"Session {log.SessionId} completed in {executionTime.TotalMilliseconds} ms");
+        }
     }
 
     /// <summary>
@@ -30,6 +37,14 @@ public sealed class DiagnosticsTracer : ITrace
     /// <exception cref="NotImplementedException"></exception>
     public ValueTask AfterExecutionAsync<TResult>(ResultTraceLog<TResult> log, CancellationToken cancellationToken = default)
     {
+        if (_timeMap.TryGetValue(log.SessionId, out var startTime))
+        {
+            _timeMap.Remove(log.SessionId);
+
+            var executionTime = DateTime.UtcNow - startTime;
+
+            SystemDiagnosticsTrace.WriteLine($"Session {log.SessionId} completed in {executionTime.TotalMilliseconds} ms");
+        }
         return new();
     }
 
@@ -39,6 +54,8 @@ public sealed class DiagnosticsTracer : ITrace
     /// <param name="log"></param>
     public void BeforeExecution(CancellableTraceLog log)
     {
+        _timeMap[log.SessionId] = log.StartTime;
+        SystemDiagnosticsTrace.Write("- ");
         SystemDiagnosticsTrace.WriteLine(log);
     }
 
@@ -50,6 +67,8 @@ public sealed class DiagnosticsTracer : ITrace
     /// <returns></returns>
     public ValueTask BeforeExecutionAsync(CancellableTraceLog log, CancellationToken cancellationToken = default)
     {
+        _timeMap[log.SessionId] = log.StartTime;
+        SystemDiagnosticsTrace.Write("- ");
         SystemDiagnosticsTrace.WriteLine(log);
 
         return new();

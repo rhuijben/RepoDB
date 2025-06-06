@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿#nullable enable
+using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace RepoDb.Extensions;
@@ -19,7 +21,7 @@ public static class EnumerableExtension
     public static IEnumerable<T[]> Split<T>(this IEnumerable<T> value,
         int sizePerSplit)
     {
-        var count = value?.Count() ?? 0;
+        var count = value.Count();
         if (sizePerSplit <= 0 || count <= sizePerSplit)
         {
             return new[] { value.ToArray() };
@@ -169,7 +171,123 @@ public static class EnumerableExtension
     /// <param name="value">The actual enumerable instance.</param>
     /// <returns>The converted <see cref="IList{T}"/> object.</returns>
     public static List<T> AsList<T>(this IEnumerable<T> value) =>
-        value as List<T> ?? value?.ToList();
+        value as List<T> ?? value.ToList();
+
+    private static MethodInfo? _distinctMethod;
+    private static MethodInfo? _toListMethod;
+
+    public static ICollection AsTypedEnumerableSet(this IEnumerable value, bool distinct = false)
+    {
+        if (value.GetEnumerableElementType() is not Type elementType)
+        {
+            Type? p = null;
+            foreach (var v in value)
+            {
+                if (v is null)
+                {
+                    continue;
+                }
+                var vt = v.GetType();
+
+                if (p is null)
+                    p = vt;
+
+                while (!p.IsAssignableFrom(vt))
+                    p = p.BaseType;
+
+                if (p is null || p == StaticType.Object)
+                    break;
+            }
+            elementType = p ?? StaticType.Object;
+
+            var newValue = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType))!;
+
+            foreach (var v in value)
+            {
+                if (v is not null)
+                {
+                    newValue.Add(v);
+                }
+            }
+            value = newValue;
+        }
+
+        if (distinct)
+        {
+            _distinctMethod = typeof(Enumerable).GetMethods(BindingFlags.Public | BindingFlags.Static).Single(m => m.Name == nameof(Enumerable.Distinct) && m.IsGenericMethodDefinition
+                && m.GetParameters() is { } p && p.Length == 1 && p[0].ParameterType is { } pt && pt.IsGenericType && pt.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+
+            value = (IEnumerable)_distinctMethod.MakeGenericMethod([elementType]).Invoke(null, [value])!;
+        }
+
+        if (value is not ICollection collection)
+        {
+            _toListMethod ??= typeof(Enumerable).GetMethods(BindingFlags.Public | BindingFlags.Static).Single(m => m.Name == nameof(Enumerable.ToList) && m.IsGenericMethodDefinition
+                && m.GetParameters() is { } p && p.Length == 1 && p[0].ParameterType is { } pt && pt.IsGenericType && pt.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+
+            collection = (ICollection)_toListMethod.MakeGenericMethod([elementType]).Invoke(null, [value])!;
+        }
+
+        return collection;
+    }
+
+    public static Type GetElementType(this IEnumerable enumerable)
+    {
+        if (enumerable is null)
+        {
+            throw new ArgumentNullException(nameof(enumerable));
+        }
+        var elementType = enumerable.GetEnumerableElementType();
+
+        if (elementType is null)
+        {
+            Type? p = null;
+            foreach (var v in enumerable)
+            {
+                if (v is null)
+                {
+                    continue;
+                }
+                var vt = v.GetType();
+
+                if (p is null)
+                    p = vt;
+
+                while (!p.IsAssignableFrom(vt))
+                    p = p.BaseType;
+
+                if (p is null || p == StaticType.Object)
+                    break;
+            }
+            elementType = p ?? StaticType.Object;
+        }
+
+        return elementType;
+    }
+
+    internal static Type? GetEnumerableElementType(this IEnumerable enumerable)
+    {
+        if (enumerable is null)
+        {
+            throw new ArgumentNullException(nameof(enumerable));
+        }
+
+        var enumerableType = enumerable.GetType();
+        if (enumerableType.IsArray)
+        {
+            return enumerableType.GetElementType() ?? typeof(object);
+        }
+        else if (enumerableType.IsGenericType && enumerableType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+        {
+            return enumerableType.GetGenericArguments()[0];
+        }
+        else if (enumerableType.GetInterfaces().FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>)) is Type interfaceType)
+        {
+            return interfaceType.GetGenericArguments()[0];
+        }
+
+        return null;
+    }
 
     /// <summary>
     /// Checks whether the instance of <see cref="IEnumerable{T}"/> is an array of <typeparamref name="T"/>, then casts it, otherwise, converts it.
@@ -179,7 +297,7 @@ public static class EnumerableExtension
     /// <param name="value">The actual enumerable instance.</param>
     /// <returns>The converted <see cref="Array"/> object.</returns>
     public static T[] AsArray<T>(this IEnumerable<T> value) =>
-        value as T[] ?? value?.ToArray();
+        value as T[] ?? value.ToArray();
 
     /// <summary>
     /// Gets a value indicating whether the current collection is null or empty.
@@ -187,7 +305,7 @@ public static class EnumerableExtension
     /// <param name="value">The target type.</param>
     /// <typeparam name="T">The actual enumerable instance.</typeparam>
     /// <returns>A value indicating whether the collection is null or empty.</returns>
-    public static bool IsNullOrEmpty<T>(
+    internal static bool IsNullOrEmpty<T>(
         [NotNullWhen(true)] this IEnumerable<T>? value) => value?.Any() != true;
 
 #if NETSTANDARD

@@ -279,18 +279,14 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        object? param = null;
 
         // Converts to property mapped object
-        if (where != null)
-        {
-            param = QueryGroup.AsMappedObject(new[] { where.MapTo<TEntity>() });
-        }
+        Func<object?> makeParam = () => (where != null) ? QueryGroup.AsMappedObject(new[] { where.MapTo<TEntity>() }) : null;
 
         // Return the result
         return DeleteInternalBase(connection: connection,
             request: request,
-            param: param,
+            makeParam: makeParam,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -588,18 +584,14 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        object? param = null;
 
-        // Converts to property mapped object
-        if (where != null)
-        {
-            param = QueryGroup.AsMappedObject(new[] { where.MapTo<TEntity>() });
-        }
+        // Converts to property mapped object. Do this after calculating text
+        Func<object?> makeParam = () => (where != null) ? QueryGroup.AsMappedObject(new[] { where.MapTo<TEntity>() }) : null;
 
         // Return the result
         return DeleteAsyncInternalBase(connection: connection,
             request: request,
-            param: param,
+            makeParam: makeParam,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -813,18 +805,15 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        object? param = null;
 
-        // Converts to property mapped object
-        if (where != null)
-        {
-            param = QueryGroup.AsMappedObject(new[] { where.MapTo(null) });
-        }
+        // Converts to property mapped object. Do this after creating text
+        Func<object?> makeParam = () => (where != null) ? QueryGroup.AsMappedObject(new[] { where.MapTo(null) }) : null;
 
         // Return the result
-        return DeleteInternalBase(connection: connection,
+        return DeleteInternalBase(
+            connection: connection,
             request: request,
-            param: param,
+            makeParam: makeParam,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -1054,18 +1043,15 @@ public static partial class DbConnectionExtension
             where,
             hints,
             statementBuilder);
-        object? param = null;
 
         // Converts to property mapped object
-        if (where != null)
-        {
-            param = QueryGroup.AsMappedObject(new[] { where.MapTo(null) });
-        }
+        Func<object?> makeParam = () => (where != null) ? QueryGroup.AsMappedObject(new[] { where.MapTo(null) }) : null;
 
         // Return the result
-        return DeleteAsyncInternalBase(connection: connection,
+        return DeleteAsyncInternalBase(
+            connection: connection,
             request: request,
-            param: param,
+            makeParam: makeParam,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -1090,7 +1076,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows that has been deleted from the table.</returns>
     internal static int DeleteInternalBase(this IDbConnection connection,
         DeleteRequest request,
-        object? param,
+        Func<object?> makeParam,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
@@ -1103,7 +1089,7 @@ public static partial class DbConnectionExtension
         // Actual Execution
         var result = ExecuteNonQueryInternal(connection: connection,
             commandText: commandText,
-            param: param,
+            param: makeParam(),
             commandType: commandType,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -1135,7 +1121,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows that has been deleted from the table.</returns>
     internal static async ValueTask<int> DeleteAsyncInternalBase(this IDbConnection connection,
         DeleteRequest request,
-        object? param,
+        Func<object?> makeParam,
         int commandTimeout = 0,
         string? traceKey = TraceKeys.Delete,
         IDbTransaction? transaction = null,
@@ -1149,7 +1135,7 @@ public static partial class DbConnectionExtension
         // Actual Execution
         var result = await ExecuteNonQueryAsyncInternal(connection: (DbConnection)connection,
             commandText: commandText,
-            param: param,
+            param: makeParam(),
             commandType: commandType,
             commandTimeout: commandTimeout,
             traceKey: traceKey,

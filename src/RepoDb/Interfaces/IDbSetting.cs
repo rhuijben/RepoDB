@@ -89,6 +89,8 @@ public interface IDbSetting
     /// </summary>
     bool QuoteParameterNames { get; }
 
+    public int? UseInValuesTreshold { get; }
+
     /// <summary>
     /// Gets or initializes the threshold value that determines when table parameters should be used.
     /// </summary>

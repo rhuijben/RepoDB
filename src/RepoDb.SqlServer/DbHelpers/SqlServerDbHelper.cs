@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Data;
 using System.Data.Common;
 using System.Text.RegularExpressions;
 using Microsoft.Data.SqlClient;
@@ -247,7 +248,7 @@ public sealed class SqlServerDbHelper : BaseDbHelper
     #endregion
 
     private const string DbRuntimeInfoQuery = @"
-   SELECT 
+    SELECT 
         SERVERPROPERTY('ProductVersion') AS SqlServerVersion,
         compatibility_level AS CompatibilityLevel
     FROM 
@@ -263,11 +264,16 @@ public sealed class SqlServerDbHelper : BaseDbHelper
             c.name AS ColumnName,
             c.max_length,
             c.is_nullable,
+            -- Detect if this column is part of the primary key
+            COALESCE(i.is_primary_key, 0) AS HasPrimaryKey,
             ROW_NUMBER() OVER (
                 PARTITION BY t.name, c.is_nullable 
                 ORDER BY 
+                    -- Prefer TVPs with a PK
+                    CASE WHEN i.is_primary_key = 1 THEN 0 ELSE 1 END,
+                    -- Then prefer varchar with longer length
                     CASE 
-                        WHEN t.name = 'varchar' THEN c.max_length 
+                        WHEN t.name = 'varchar' THEN c.max_length
                         ELSE 0 
                     END DESC
             ) AS rn
@@ -279,18 +285,23 @@ public sealed class SqlServerDbHelper : BaseDbHelper
             sys.columns c ON c.object_id = tt.type_table_object_id
         JOIN 
             sys.types t ON c.user_type_id = t.user_type_id
+        LEFT JOIN 
+            sys.index_columns ic ON ic.object_id = tt.type_table_object_id AND ic.column_id = c.column_id
+        LEFT JOIN 
+            sys.indexes i ON i.object_id = tt.type_table_object_id AND i.index_id = ic.index_id AND i.is_primary_key = 1
         WHERE 
             (SELECT COUNT(*) 
              FROM sys.columns c2 
              WHERE c2.object_id = tt.type_table_object_id) = 1
-            AND t.name IN ('int', 'bigint', 'tinyint', 'bit', 'varchar')
+            AND t.name IN ('int', 'bigint', 'tinyint', 'varchar', 'uniqueidentifier', 'bit')
     )
     SELECT 
         ColumnType,
         TVPName,
         SchemaName,
         ColumnName,
-        is_nullable
+        is_nullable,
+        HasPrimaryKey
     FROM 
         TypeCandidates
     WHERE 
@@ -319,7 +330,8 @@ public sealed class SqlServerDbHelper : BaseDbHelper
                     TVPName = rdr.GetString(1),
                     SchemaName = rdr.GetString(2),
                     ColumnName = rdr.GetString(3),
-                    isNullable = rdr.GetBoolean(4)
+                    isNullable = rdr.GetBoolean(4),
+                    RequiresDistinct = rdr.GetInt32(5) != 0
                 };
 
                 var type = DbTypeResolver.Resolve(info.ColumnType);
@@ -328,22 +340,23 @@ public sealed class SqlServerDbHelper : BaseDbHelper
                 {
                     var nullableType = typeof(Nullable<>).MakeGenericType(type);
 
-                    typeMap[nullableType] = new(nullableType, info.TVPName, info.SchemaName, info.ColumnName);
+                    typeMap[nullableType] = new(nullableType, info.TVPName, info.SchemaName, info.ColumnName, !info.isNullable, info.RequiresDistinct);
 
                     if (!typeMap.ContainsKey(type))
                     {
-                        typeMap[type] = new(nullableType, info.TVPName, info.SchemaName, info.ColumnName);
+                        typeMap[type] = new(nullableType, info.TVPName, info.SchemaName, info.ColumnName, !info.isNullable, info.RequiresDistinct);
                     }
                 }
                 else
                 {
-                    typeMap[type] = new(type, info.TVPName, info.SchemaName, info.ColumnName);
+                    typeMap[type] = new(type, info.TVPName, info.SchemaName, info.ColumnName, !info.isNullable, info.RequiresDistinct);
                 }
             }
         }
 
         return new()
         {
+            DbSetting = connection.GetDbSetting(),
             EngineName = "MSSQL",
             EngineVersion = Version.Parse(Regex.Replace(ver.serverVersion, "^.*?([0-9]+(\\.[0-9]+)*).*?$", "$1") ?? "0.0"),
             CompatibilityVersion = ver.compatibilityLevel is { } c ? new(c / 10, c % 10) : default,
@@ -351,17 +364,22 @@ public sealed class SqlServerDbHelper : BaseDbHelper
         };
     }
 
-    public override DbParameter? CreateTableParameter(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName)
+    public override DbParameter? CreateTableParameter(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable values, string parameterName)
     {
         var info = DbConnectionRuntimeInformationCache.Get(connection, transaction);
 
-        if (info?.ParameterTypeMap is { } pm && values.First().GetType() is { } elementType && pm.TryGetValue(elementType, out var mapping))
+        if (info?.ParameterTypeMap is { } pm
+            && values.GetElementType() is { } elementType
+            && pm.TryGetValue(elementType, out var mapping))
         {
             var dt = new DataTable();
             dt.Columns.Add(mapping.ColumnName, elementType);
 
-            foreach (var v in values)
+            foreach (var v in values.AsTypedEnumerableSet(mapping.RequiresDistinct)) //
             {
+                if (v is null && mapping.NoNull)
+                    continue;
+
                 dt.Rows.Add(v);
             }
 
@@ -375,11 +393,13 @@ public sealed class SqlServerDbHelper : BaseDbHelper
         return null;
     }
 
-    public override string? CreateTableParameterText(DbConnection connection, IDbTransaction? transaction, string parameterName, IEnumerable<object> values)
+    public override string? CreateTableParameterText(DbConnection connection, IDbTransaction? transaction, string parameterName, IEnumerable values)
     {
         var info = DbConnectionRuntimeInformationCache.Get(connection, transaction);
 
-        if (info?.ParameterTypeMap is { } pm && values.First().GetType() is { } elementType && pm.TryGetValue(elementType, out var mapping))
+        if (info?.ParameterTypeMap is { } pm
+            && values.GetElementType() is { } elementType
+            && pm.TryGetValue(elementType, out var mapping))
         {
             return $"SELECT {mapping.ColumnName} FROM {parameterName}";
         }

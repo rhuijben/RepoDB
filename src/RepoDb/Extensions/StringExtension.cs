@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -338,21 +339,22 @@ public static partial class StringExtension
     public static string AsParameter(this string value,
         int index,
         bool quote,
-        IDbSetting? dbSetting)
+        IDbSetting? dbSetting,
+        string? suffix = null)
     {
+        Debug.Assert(!value.Contains("@"));
         var parameterPrefix = dbSetting?.ParameterPrefix ?? "@";
         quote = quote && dbSetting?.QuoteParameterNames == true;
 
         if (quote)
             parameterPrefix += dbSetting!.OpeningQuote;
 
-        value = string.Concat(parameterPrefix,
-            (value.StartsWith(parameterPrefix, StringComparison.OrdinalIgnoreCase) ? value.Substring(1) : value)
-            .AsUnquoted(true, dbSetting).AsAlphaNumeric());
-        value = index > 0 ? string.Concat(value, "_", index.ToString(CultureInfo.InvariantCulture)) : value;
-
-        if (quote)
-            value += dbSetting!.ClosingQuote;
+        value = string.Concat(
+            parameterPrefix,
+            value,
+            index > 0 ? "_" + index.ToString(CultureInfo.InvariantCulture) : "",
+            suffix,
+            quote ? dbSetting!.ClosingQuote : "");
 
         return value;
     }

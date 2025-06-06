@@ -609,9 +609,62 @@ public class QueryTest
             {
                 Ids = values
             }, trace: new DiagnosticsTracer());
+
+
+        Assert.AreEqual(1, items.Count());
     }
+
+    [TestMethod]
+    public void TestValuesSupport()
+    {
+        var table = Database.CreateCompleteTables(1).First();
+        using var connection = new SqlConnection(Database.ConnectionString).EnsureOpen();
+
+        var info = DbConnectionRuntimeInformationCache.Get(connection, null);
+
+        Assert.IsNotNull(info);
+        Assert.IsTrue(info.ParameterTypeMap.ContainsKey(typeof(int)), "INT TVP defined");
+        Assert.IsTrue(info.ParameterTypeMap.ContainsKey(typeof(int?)), "INT? TVP defined");
+
+        var values = Enumerable.Range(0, 30).Concat([table.Id]);
+
+        var items = connection.Query<CompleteTable>(where: x => values.Contains(x.Id), fields: Field.Parse<CompleteTable>(x => x.ColumnDate), trace: new DiagnosticsTracer());
+
+        Assert.AreEqual(1, items.Count());
+    }
+
     #endregion
     #region Async
+    [TestMethod]
+    public async Task TestTVPSupportAsync()
+    {
+        var table = Database.CreateCompleteTables(1).First();
+        using var connection = new SqlConnection(Database.ConnectionString).EnsureOpen();
+
+        var values = Enumerable.Range(0, 100).Concat([table.Id]);
+
+        var items = await connection.ExecuteQueryAsync<CompleteTable>(
+            "SELECT * FROM [dbo].[CompleteTable] WHERE Id IN (@Ids)",
+            new
+            {
+                Ids = values
+            }, trace: new DiagnosticsTracer());
+
+        Assert.AreEqual(1, items.Count());
+    }
+
+    [TestMethod]
+    public async Task TestValuesSupportAsync()
+    {
+        var table = Database.CreateCompleteTables(1).First();
+        using var connection = new SqlConnection(Database.ConnectionString).EnsureOpen();
+
+        var values = Enumerable.Range(0, 30).Concat([table.Id]);
+
+        var items = await connection.QueryAsync<CompleteTable>(where: x => values.Contains(x.Id), fields: Field.Parse<CompleteTable>(x => x.ColumnDate), trace: new DiagnosticsTracer());
+
+        Assert.AreEqual(1, items.Count());
+    }
     #endregion
     #endregion
 }

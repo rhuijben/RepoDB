@@ -19,13 +19,13 @@ public static class TestExtensions
     }
 
     public static string CreateInsertAll(
-    this IStatementBuilder sb,
-    string tableName,
-    IEnumerable<Field>? fields = null,
-    int batchSize = 0,
-    DbField? primaryField = null,
-    DbField? identityField = null,
-    string? hints = null)
+        this IStatementBuilder sb,
+        string tableName,
+        IEnumerable<Field> fields,
+        int batchSize = 0,
+        DbField? primaryField = null,
+        DbField? identityField = null,
+        string? hints = null)
     {
         IEnumerable<DbField> keyFields = MakeKeyFields(fields, primaryField, identityField);
 

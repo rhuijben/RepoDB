@@ -19,6 +19,7 @@ public partial class QueryField : IEquatable<QueryField>
     // For boolean handling
     internal bool canSkip;
     internal bool skip;
+    private byte sizeMode;
 
     #region Constructors
 
@@ -266,7 +267,12 @@ public partial class QueryField : IEquatable<QueryField>
         else if (Operation is Operation.In or Operation.NotIn &&
             Parameter.Value is IEnumerable enumerable)
         {
-            hashCode = HashCode.Combine(hashCode, enumerable.WithType<object>().Count());
+            hashCode = sizeMode switch
+            {
+                1 => HashCode.Combine(hashCode, 1), // TVP mode
+                2 => HashCode.Combine(hashCode, 2, RoundUpInLength(enumerable.WithType<object>().Count())),
+                _ => HashCode.Combine(hashCode, 0, enumerable.WithType<object>().Count())
+            };
         }
         // The string representation affects the collision
         // var objA = QueryGroup.Parse<EntityClass>(c => c.Id == 1 && c.Value != 1);
@@ -332,6 +338,78 @@ public partial class QueryField : IEquatable<QueryField>
     public static bool operator !=(QueryField? objA,
         QueryField? objB) =>
         (objA == objB) == false;
+
+    #endregion
+
+    #region Specialized IN handling
+    internal void SetNormalizeCount()
+    {
+        sizeMode = 2;
+        hashCode = null;
+    }
+
+    internal void SetTVPCount()
+    {
+        sizeMode = 1;
+        hashCode = null;
+    }
+
+    /// <summary>
+    /// Rounds up the specified size to the next threshold value using a custom progression pattern.
+    /// For sizes ≤ 10, returns the original size. For larger sizes, rounds up to values following
+    /// the pattern: 20, 50, 100, 200, 500, 1000, 2000, etc.
+    /// </summary>
+    /// <param name="size">The input size value to be rounded up. Must be non-negative.</param>
+    /// <returns>
+    /// The next threshold value that is greater than or equal to the input size.
+    /// Returns the original size if it's ≤ 10.
+    /// </returns>
+    /// <remarks>
+    /// The algorithm uses alternating multipliers of ×2.5 and ×2 to generate threshold values:
+    /// - 20 → 50 (×2.5) → 100 (×2) → 200 (×2) → 500 (×2.5) → 1000 (×2) → etc.
+    /// This creates a logarithmic progression suitable for scaling operations.
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// int result1 = RoundUpInLength(5);    // Returns: 5
+    /// int result2 = RoundUpInLength(15);   // Returns: 20
+    /// int result3 = RoundUpInLength(35);   // Returns: 50
+    /// int result4 = RoundUpInLength(150);  // Returns: 200
+    /// </code>
+    /// </example>
+    public static int RoundUpInLength(int size)
+    {
+        if (size <= 10 || size >= 2000) // 2098 is sqlserver max params. Issues ahead if we go beyond that
+            return size;
+
+        int threshold = 20;
+        int multiplierIndex = 2;
+
+        while (size >= threshold)
+        {
+            threshold = multiplierIndex switch
+            {
+                2 => (threshold / 2) * 5,  // Multiply by 2.5
+                _ => threshold * 2         // Multiply by 2
+            };
+
+            multiplierIndex = (multiplierIndex % 3) + 1;  // Cycle: 2→3→1→2...
+        }
+
+        return threshold;
+    }
+
+    internal int? MoreParams()
+    {
+        if (Operation is Operation.In or Operation.NotIn && (sizeMode == 2)
+            && Parameter.Value is IEnumerable enumerable)
+        {
+            return RoundUpInLength(enumerable.WithType<object>().Count());
+        }
+
+        return null;
+    }
+
 
     #endregion
 }

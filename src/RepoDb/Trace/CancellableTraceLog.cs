@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Text;
 
 namespace RepoDb;
 
@@ -75,7 +76,57 @@ public class CancellableTraceLog : TraceLog
         $"Key: {Key}\n" +
         $"Statement: {Statement}\n" +
         $"StartTime (Ticks): {StartTime.Ticks}\n" +
-        $"Parameters: {(Parameters?.Any() == true ? string.Join(", ", Parameters.Select(param => $"({param.ParameterName}={(param.Value is DBNull ? "DBNull" : param.Value)})")) : "No Parameters")}";
+        $"Parameters: {(Parameters?.Any() == true ? string.Join(", ", Parameters.Select(param => $"({param.ParameterName}={ParamValueToString(param.Value)})")) : "No Parameters")}";
+
+    private string ParamValueToString(object value)
+    {
+        if (value is null or DBNull)
+            return "DBNull";
+        else if (value is DataTable dt)
+        {
+            StringBuilder sb = new();
+            sb.Append("DataTable[");
+            bool first = true;
+            foreach (DataRow row in dt.Rows)
+            {
+                if (first)
+                    first = false;
+                else
+                    sb.Append(", ");
+
+                if (dt.Columns.Count == 1)
+                    sb.Append(ParamValueToString(row[0]));
+                else
+                    sb.Append(ParamValueToString(row));
+            }
+
+            sb.Append(']');
+
+            return sb.ToString();
+        }
+        else if (value is DataRow row)
+        {
+            StringBuilder sb = new();
+            sb.Append("DataRow[");
+            bool first = true;
+            foreach (DataColumn column in row.Table.Columns)
+            {
+                if (first)
+                    first = false;
+                else
+                    sb.Append(", ");
+                sb.Append($"{column.ColumnName}={ParamValueToString(row[column])}");
+            }
+            sb.Append(']');
+            return sb.ToString();
+        }
+        else if (value is string)
+        {
+            return $"\"{value}\"";
+        }
+        else
+            return value.ToString();
+    }
 
     #endregion
 }

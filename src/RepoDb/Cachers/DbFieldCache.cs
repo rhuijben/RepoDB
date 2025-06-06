@@ -86,8 +86,7 @@ public static class DbFieldCache
 
         var result = cache.GetOrAdd(key,
             (_) => new DbFieldCollection(connection.GetDbHelper()
-                .GetFields(connection, tableName, transaction),
-                connection.GetDbSetting()));
+                .GetFields(connection, tableName, transaction)));
 
         // Validate
         if (enableValidation)
@@ -158,8 +157,7 @@ public static class DbFieldCache
             // Get from DB
             result = new DbFieldCollection(await connection
                 .GetDbHelper()
-                .GetFieldsAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false),
-                connection.GetDbSetting());
+                .GetFieldsAsync(connection, tableName, transaction, cancellationToken).ConfigureAwait(false));
 
             // Add to cache
             cache.TryAdd(key, result);

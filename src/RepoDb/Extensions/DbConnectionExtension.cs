@@ -1518,7 +1518,7 @@ public static partial class DbConnectionExtension
                 .Select(cap => cap.ParameterName)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-            command.CreateParameters(param, propertiesToSkip, entityType, dbFields);
+            command.CreateParameters(param, propertiesToSkip, entityType, dbFields, connection, transaction);
         }
 
         // Return the command
@@ -1860,7 +1860,7 @@ public static partial class DbConnectionExtension
         }
 
         // Items
-        var items = values.WithType<object>().ToList();
+        var items = values.AsTypedEnumerableSet();
         var parameter = parameterName.AsParameter(dbSetting);
         if (items.Count == 0)
         {
@@ -1874,7 +1874,7 @@ public static partial class DbConnectionExtension
         else
         {
             // Get the variables needed
-            var parameters = items.Select((_, index) =>
+            var parameters = items.WithType<object>().Select((_, index) =>
                 string.Concat(parameterName, index.ToString(CultureInfo.InvariantCulture)).AsParameter(dbSetting));
 
             // Replace the target parameter when used as parameter. (Not as prefix of longer parameter)

@@ -1,6 +1,5 @@
 ﻿#nullable enable
-
-#nullable enable
+using System.Collections;
 using System.Data;
 using System.Data.Common;
 
@@ -65,10 +64,10 @@ public interface IDbHelper
         string key);
     DbConnectionRuntimeInformation GetDbConnectionRuntimeInformation(IDbConnection connection, IDbTransaction transaction);
     ValueTask<DbConnectionRuntimeInformation> GetDbConnectionRuntimeInformationAsync(IDbConnection connection, IDbTransaction transaction, CancellationToken cancellationToken);
-    DbParameter? CreateTableParameter(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName);
+    DbParameter? CreateTableParameter(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable values, string parameterName);
 
-    ValueTask<DbParameter?> CreateTableParameterAsync(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName, CancellationToken cancellationToken = default);
-    string? CreateTableParameterText(DbConnection connection, IDbTransaction? transaction, string parameterName, IEnumerable<object> values);
+    ValueTask<DbParameter?> CreateTableParameterAsync(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable values, string parameterName, CancellationToken cancellationToken = default);
+    string? CreateTableParameterText(DbConnection connection, IDbTransaction? transaction, string parameterName, IEnumerable values);
 
     #endregion
 }

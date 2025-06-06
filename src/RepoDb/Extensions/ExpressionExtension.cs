@@ -495,19 +495,19 @@ public static class ExpressionExtension
         }
         else if (expression.Test.NodeType > ExpressionType.GreaterThan)
         {
-            return test?.ToNumber() > trueValue?.ToNumber() ? trueValue : expression.IfFalse.GetValue();
+            return ToNumber(test) > ToNumber(trueValue) ? trueValue : expression.IfFalse.GetValue();
         }
         else if (expression.Test.NodeType > ExpressionType.GreaterThanOrEqual)
         {
-            return test?.ToNumber() >= trueValue?.ToNumber() ? trueValue : expression.IfFalse.GetValue();
+            return ToNumber(test) >= ToNumber(trueValue) ? trueValue : expression.IfFalse.GetValue();
         }
         else if (expression.Test.NodeType > ExpressionType.LessThan)
         {
-            return test?.ToNumber() < trueValue?.ToNumber() ? trueValue : expression.IfFalse.GetValue();
+            return ToNumber(test) < ToNumber(trueValue) ? trueValue : expression.IfFalse.GetValue();
         }
         else if (expression.Test.NodeType > ExpressionType.LessThanOrEqual)
         {
-            return test?.ToNumber() <= trueValue?.ToNumber() ? trueValue : expression.IfFalse.GetValue();
+            return ToNumber(test) <= ToNumber(trueValue) ? trueValue : expression.IfFalse.GetValue();
         }
         throw new NotSupportedException($"The operation '{expression.NodeType}' at expression '{expression}' is currently not supported.");
     }
@@ -623,4 +623,12 @@ public static class ExpressionExtension
     }
 
     #endregion
+
+    private static long? ToNumber(object? value)
+    {
+        if (value is null)
+            return null;
+
+        return Convert.ToInt64(value, CultureInfo.InvariantCulture);
+    }
 }

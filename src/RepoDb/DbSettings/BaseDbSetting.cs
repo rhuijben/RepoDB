@@ -90,6 +90,9 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
     /// <inheritdoc />
     public int? UseArrayParameterTreshold { get; protected init; }
 
+    /// <inheritdoc />
+    public int? UseInValuesTreshold { get; protected init; }
+
     #endregion
 
     #region Equality and comparers
@@ -109,45 +112,30 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
         var hashCode = 0;
 
         // AreTableHintsSupported
-        hashCode = HashCode.Combine(hashCode, AreTableHintsSupported);
-
-        // ClosingQuote
-        if (!string.IsNullOrWhiteSpace(ClosingQuote))
-        {
-            hashCode = HashCode.Combine(hashCode, ClosingQuote);
-        }
-
-        // DefaultAverageableType
-        if (AverageableType != null)
-        {
-            hashCode = HashCode.Combine(hashCode, AverageableType);
-        }
-
-        // DefaultSchema
-        if (!string.IsNullOrWhiteSpace(DefaultSchema))
-        {
-            hashCode = HashCode.Combine(hashCode, DefaultSchema);
-        }
+        hashCode = HashCode.Combine(hashCode,
+            AreTableHintsSupported,
+            OpeningQuote,
+            ClosingQuote,
+            ParameterPrefix,
+            AverageableType,
+            DefaultSchema);
 
         // IsDirectionSupported
-        hashCode = HashCode.Combine(hashCode, IsDirectionSupported, IsExecuteReaderDisposable, IsMultiStatementExecutable, IsPreparable);
+        hashCode = HashCode.Combine(hashCode,
+            IsDirectionSupported,
+            IsExecuteReaderDisposable,
+            IsMultiStatementExecutable,
+            IsPreparable,
+            IsUseUpsert,
+            ForceAutomaticConversions);
 
-        // IsUseUpsert
-        hashCode = HashCode.Combine(hashCode, IsUseUpsert);
-
-        // OpeningQuote
-        if (!string.IsNullOrWhiteSpace(OpeningQuote))
-        {
-            hashCode = HashCode.Combine(hashCode, OpeningQuote);
-        }
-
-        // ParameterPrefix
-        if (!string.IsNullOrWhiteSpace(ParameterPrefix))
-        {
-            hashCode = HashCode.Combine(hashCode, ParameterPrefix);
-        }
-
-        hashCode = HashCode.Combine(hashCode, MaxParameterCount, GenerateFinalSemiColon, QuoteParameterNames);
+        hashCode = HashCode.Combine(hashCode,
+            MaxParameterCount,
+            GenerateFinalSemiColon,
+            QuoteParameterNames,
+            MaxQueriesInBatchCount,
+            UseArrayParameterTreshold,
+            UseInValuesTreshold);
 
         // Set and return the hashcode
         return this.hashCode ??= hashCode;

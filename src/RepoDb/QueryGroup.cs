@@ -1,3 +1,4 @@
+#nullable enable
 using System.Data;
 using System.Globalization;
 using RepoDb.Enumerations;
@@ -14,7 +15,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
 {
     private bool isFixed = false;
     private int? hashCode = null;
-    private List<QueryField> traversedQueryFields;
+    private List<QueryField>? traversedQueryFields;
 
     #region Constructors
 
@@ -473,13 +474,13 @@ public partial class QueryGroup : IEquatable<QueryGroup>
     /// <param name="conjunction">The conjunction to be used for every group separation.</param>
     /// <param name="isNot">The prefix to be added whether the field value is in opposite state.</param>
     public QueryGroup(IEnumerable<QueryField> queryFields,
-        IEnumerable<QueryGroup> queryGroups,
+        IEnumerable<QueryGroup>? queryGroups,
         Conjunction conjunction,
         bool isNot)
     {
         Conjunction = conjunction;
         QueryFields = queryFields?.AsList();
-        QueryGroups = queryGroups.AsList();
+        QueryGroups = queryGroups?.AsList();
         IsNot = isNot;
     }
 
@@ -495,12 +496,12 @@ public partial class QueryGroup : IEquatable<QueryGroup>
     /// <summary>
     /// Gets the list of child <see cref="QueryField"/> objects.
     /// </summary>
-    public IReadOnlyList<QueryField> QueryFields { get; }
+    public IReadOnlyList<QueryField>? QueryFields { get; }
 
     /// <summary>
     /// Gets the list of child <see cref="QueryGroup"/> objects.
     /// </summary>
-    public IReadOnlyList<QueryGroup> QueryGroups { get; }
+    public IReadOnlyList<QueryGroup>? QueryGroups { get; }
 
     /// <summary>
     /// Gets the value whether the grouping is in opposite field-value state.
@@ -811,7 +812,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
     /// </summary>
     /// <param name="traverse">Identify whether to explore all the children of the child <see cref="QueryGroup"/> objects.</param>
     /// <returns>An enumerable list of <see cref="QueryField"/> objects.</returns>
-    public IEnumerable<QueryField> GetFields(bool traverse)
+    public IEnumerable<QueryField>? GetFields(bool traverse)
     {
         if (!traverse)
         {
@@ -903,7 +904,7 @@ public partial class QueryGroup : IEquatable<QueryGroup>
     /// </summary>
     /// <param name="obj">The object to be compared to the current object.</param>
     /// <returns>True if the instances are equals.</returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return Equals(obj as QueryGroup);
     }
@@ -913,15 +914,15 @@ public partial class QueryGroup : IEquatable<QueryGroup>
     /// </summary>
     /// <param name="other">The object to be compared to the current object.</param>
     /// <returns>True if the instances are equal.</returns>
-    public bool Equals(QueryGroup other)
+    public bool Equals(QueryGroup? other)
     {
         return other is not null
             && other.QueryFields?.Count() == QueryFields?.Count()
             && other.QueryGroups?.Count() == QueryGroups?.Count()
             && other.Conjunction == Conjunction
             && other.IsNot == IsNot
-            && ((other.QueryFields == null && QueryFields == null) || other.QueryFields.Zip(QueryFields, Equals).All(v => v))
-            && ((other.QueryGroups == null && QueryGroups == null) || other.QueryGroups.Zip(QueryGroups, Equals).All(v => v)); ;
+            && ((other.QueryFields == null && QueryFields == null) || (other.QueryFields is { } q1 && QueryFields is { } q2 && q1.Count == q2.Count && q1.Zip(q2, Equals).All(v => v)))
+            && ((other.QueryGroups == null && QueryGroups == null) || (other.QueryGroups is { } g1 && QueryGroups is { } g2 && g1.Count == g2.Count && g1.Zip(g2, Equals).All(v => v)));
     }
 
     /// <summary>
