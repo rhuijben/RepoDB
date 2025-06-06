@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Data;
+using System.Data.Common;
 using RepoDb.Enumerations;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -45,7 +46,7 @@ public static partial class DbConnectionExtension
         {
             var keys = ExtractPropertyValues(entities, one).AsList();
 
-            return DeleteAllInternal(connection: connection,
+            return DeleteAllInternal(connection: (DbConnection)connection,
                 tableName: tableName,
                 keys: keys,
                 hints: hints,
@@ -67,7 +68,7 @@ public static partial class DbConnectionExtension
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
                 deleted += DeleteInternal(
-                    connection: connection,
+                    connection: (DbConnection)connection,
                     tableName: tableName,
                     where: where,
                     hints: hints,
@@ -109,7 +110,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return DeleteAllInternal(connection: connection,
+        return DeleteAllInternal(connection: (DbConnection)connection,
             tableName: tableName,
             keys: keys.WithType<object>(),
             hints: hints,
@@ -145,7 +146,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return DeleteAllInternal(connection: connection,
+        return DeleteAllInternal(connection: (DbConnection)connection,
             tableName: tableName,
             keys: keys,
             hints: hints,
@@ -184,7 +185,7 @@ public static partial class DbConnectionExtension
         {
             var keys = ExtractPropertyValues(entities, one).AsList();
 
-            return DeleteAllInternal(connection: connection,
+            return DeleteAllInternal(connection: (DbConnection)connection,
             tableName: GetMappedName(entities),
             keys: keys.WithType<object>(),
             hints: hints,
@@ -206,7 +207,7 @@ public static partial class DbConnectionExtension
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
                 deleted += DeleteInternal(
-                    connection: connection,
+                    connection: (DbConnection)connection,
                     tableName: GetMappedName(entities),
                     where: where,
                     hints: hints,
@@ -246,7 +247,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return DeleteAllInternal(connection: connection,
+        return DeleteAllInternal(connection: (DbConnection)connection,
             tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             keys: keys.WithType<object>(),
             hints: hints,
@@ -280,7 +281,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return DeleteAllInternal(connection: connection,
+        return DeleteAllInternal(connection: (DbConnection)connection,
             tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             keys: keys,
             hints: hints,
@@ -312,7 +313,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return DeleteAllInternal<TEntity>(connection: connection,
+        return DeleteAllInternal<TEntity>(connection: (DbConnection)connection,
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -350,7 +351,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         // Return the result
-        return DeleteAllInternalBase(connection: connection,
+        return DeleteAllInternalBase(connection: (DbConnection)connection,
             request: request,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -394,7 +395,7 @@ public static partial class DbConnectionExtension
         {
             var keys = ExtractPropertyValues(entities, one).AsList();
 
-            return await DeleteAllAsyncInternal(connection: connection,
+            return await DeleteAllAsyncInternal(connection: (DbConnection)connection,
             tableName: tableName,
             keys: keys,
             hints: hints,
@@ -420,7 +421,7 @@ public static partial class DbConnectionExtension
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
                 deleted += await DeleteAsyncInternal(
-                    connection: connection,
+                    connection: (DbConnection)connection,
                     tableName: tableName,
                     where: where,
                     hints: hints,
@@ -467,7 +468,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: (DbConnection)connection,
             tableName: tableName,
             keys: keys.WithType<object>(),
             hints: hints,
@@ -506,7 +507,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: (DbConnection)connection,
             tableName: tableName,
             keys: keys,
             hints: hints,
@@ -549,7 +550,7 @@ public static partial class DbConnectionExtension
         {
             var keys = ExtractPropertyValues(entities, one).AsList();
 
-            return await DeleteAllAsyncInternal(connection: connection,
+            return await DeleteAllAsyncInternal(connection: (DbConnection)connection,
                 tableName: tableName,
                 keys: keys.WithType<object>(),
                 hints: hints,
@@ -575,7 +576,7 @@ public static partial class DbConnectionExtension
                 var where = new QueryGroup(group.Select(entity => ToQueryGroup(key, entity)), Conjunction.Or);
 
                 deleted += await DeleteAsyncInternal(
-                    connection: connection,
+                    connection: (DbConnection)connection,
                     tableName: tableName,
                     where: where,
                     hints: hints,
@@ -620,7 +621,7 @@ public static partial class DbConnectionExtension
         where TEntity : class
     {
         return await DeleteAllAsyncInternal(
-            connection: connection,
+            connection: (DbConnection)connection,
             tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             keys: keys.WithType<object>(),
             hints: hints,
@@ -657,7 +658,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: (DbConnection)connection,
             tableName: ClassMappedNameCache.Get<TEntity>() ?? throw new ArgumentException($"Can't map {typeof(TEntity)} to tablename"),
             keys: keys,
             hints: hints,
@@ -692,7 +693,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await DeleteAllAsyncInternal<TEntity>(connection: connection,
+        return await DeleteAllAsyncInternal<TEntity>(connection: (DbConnection)connection,
             hints: hints,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -733,7 +734,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         // Return the result
-        return DeleteAllAsyncInternalBase(connection: connection,
+        return DeleteAllAsyncInternalBase(connection: (DbConnection)connection,
             request: request,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -769,7 +770,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return DeleteAllInternal(connection: connection,
+        return DeleteAllInternal(connection: (DbConnection)connection,
             tableName: tableName,
             keys: keys,
             hints: hints,
@@ -801,7 +802,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return DeleteAllInternal(connection: connection,
+        return DeleteAllInternal(connection: (DbConnection)connection,
             tableName: tableName,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -840,7 +841,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         // Return the result
-        return DeleteAllInternalBase(connection: connection,
+        return DeleteAllInternalBase(connection: (DbConnection)connection,
             request: request,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -890,7 +891,7 @@ public static partial class DbConnectionExtension
             var where = new QueryGroup(
                 pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
                 Conjunction.And);
-            deletedRows += DeleteInternal(connection: connection,
+            deletedRows += DeleteInternal(connection: (DbConnection)connection,
                 tableName: tableName,
                 where: where,
                 hints: hints,
@@ -938,7 +939,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: (DbConnection)connection,
             tableName: tableName,
             keys: keys,
             hints: hints,
@@ -973,7 +974,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await DeleteAllAsyncInternal(connection: connection,
+        return await DeleteAllAsyncInternal(connection: (DbConnection)connection,
             tableName: tableName,
             hints: hints,
             commandTimeout: commandTimeout,
@@ -1015,7 +1016,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         // Return the result
-        return DeleteAllAsyncInternalBase(connection: connection,
+        return DeleteAllAsyncInternalBase(connection: (DbConnection)connection,
             request: request,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -1066,7 +1067,7 @@ public static partial class DbConnectionExtension
                 pkeys.Select(key => new QueryGroup(new QueryField(key.Name.AsQuoted(dbSetting), Operation.In, keyValues.AsList(), null, false))),
                 Conjunction.And);
 
-            deletedRows += await DeleteAsyncInternal(connection: connection,
+            deletedRows += await DeleteAsyncInternal(connection: (DbConnection)connection,
                 tableName: tableName,
                 where: where,
                 hints: hints,
@@ -1111,7 +1112,7 @@ public static partial class DbConnectionExtension
         var commandText = CommandTextCache.GetDeleteAllText(request);
 
         // Actual Execution
-        var result = ExecuteNonQueryInternal(connection: connection,
+        var result = ExecuteNonQueryInternal(connection: (DbConnection)connection,
             commandText: commandText,
             param: null,
             commandType: commandType,
@@ -1155,7 +1156,7 @@ public static partial class DbConnectionExtension
         var commandText = CommandTextCache.GetDeleteAllText(request);
 
         // Actual Execution
-        var result = await ExecuteNonQueryAsyncInternal(connection: connection,
+        var result = await ExecuteNonQueryAsyncInternal(connection: (DbConnection)connection,
             commandText: commandText,
             param: null,
             commandType: commandType,

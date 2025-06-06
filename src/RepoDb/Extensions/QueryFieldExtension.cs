@@ -143,6 +143,7 @@ public static class QueryFieldExtension
         IDbSetting dbSetting)
     {
         var enumerable = (System.Collections.IEnumerable)queryField.Parameter.Value!;
+
         var values = enumerable
             .OfType<object>()
             .Select((_, valueIndex) =>

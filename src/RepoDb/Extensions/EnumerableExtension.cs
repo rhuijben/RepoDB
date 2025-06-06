@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace RepoDb.Extensions;
 
@@ -43,6 +44,9 @@ public static class EnumerableExtension
         return value.Chunk(sizePerSplit);
 #endif
     }
+
+    private const uint MinOptimalChunkSize = 10;
+    private static readonly uint[] DefaultChunkSizes = [100000, 50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, MinOptimalChunkSize];
 
     /// <summary>
     /// Splits a collection into optimally-sized chunks to minimize cached database plan overhead.
@@ -92,7 +96,7 @@ public static class EnumerableExtension
     /// var smallChunks = smallItems.ChunkOptimally(); // Returns single chunk of 8 items
     /// </code>
     /// </example>
-    public static IEnumerable<T[]> ChunkOptimally<T>(
+    public static IEnumerable<ArraySegment<T>> ChunkOptimally<T>(
         this IEnumerable<T> source,
         int maxChunkSize = 2000)
     {
@@ -106,55 +110,43 @@ public static class EnumerableExtension
         if (array.Length == 0)
             yield break;
 
-        if (array.Length <= 10)
+        if (array.Length <= MinOptimalChunkSize)
         {
-            yield return array;
+            yield return new ArraySegment<T>(array);
             yield break;
         }
 
-        var standardSizes = GetStandardSizes(maxChunkSize);
-
-        for (int i = 0; i < array.Length;)
+        int i = 0;
+        foreach (var chunkSize in OptimalChunkSizes(array.Length, maxChunkSize))
         {
-            var remaining = array.Length - i;
-            var chunkSize = SelectOptimalSize(remaining, standardSizes);
-
-            yield return array.AsSpan(i, chunkSize).ToArray();
-            i += chunkSize;
+            while (i + chunkSize <= array.Length)
+            {
+                yield return new ArraySegment<T>(array, i, chunkSize);
+                i += chunkSize;
+            }
         }
 
-        static int[] GetStandardSizes(int maxChunkSize)
+        if (i < array.Length)
         {
-            var baseSizes = new[] { 20, 50, 100, 200, 500, 1000, 2000, 5000 };
-            var validSizes = new List<int>();
-
-            foreach (var size in baseSizes)
-            {
-                if (size >= maxChunkSize) break;
-
-                // Skip if too close to max (within 20% difference)
-                if (size > maxChunkSize * 0.8) continue;
-
-                validSizes.Add(size);
-            }
-
-            // Always include the provided maximum
-            validSizes.Add(maxChunkSize);
-
-            return validSizes.ToArray();
+            yield return new ArraySegment<T>(array, i, array.Length - i);
         }
 
-        static int SelectOptimalSize(int remaining, int[] standardSizes)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static IEnumerable<int> OptimalChunkSizes(int elementCount, int maxChunkSize)
         {
-            // Find the largest standard size that fits
-            for (int i = standardSizes.Length - 1; i >= 0; i--)
+            if (maxChunkSize >= elementCount)
             {
-                if (remaining >= standardSizes[i])
-                    return standardSizes[i];
+                yield return elementCount;
+                yield break;
             }
 
-            // Fallback to remaining (shouldn't happen with our logic)
-            return remaining;
+            yield return maxChunkSize;
+
+            foreach (var c in DefaultChunkSizes)
+            {
+                if (c <= elementCount && c < maxChunkSize)
+                    yield return (int)c;
+            }
         }
     }
 

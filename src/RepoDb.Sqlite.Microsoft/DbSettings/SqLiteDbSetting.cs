@@ -29,5 +29,6 @@ public sealed record SqLiteDbSetting : BaseDbSetting
         OpeningQuote = "[";
         ParameterPrefix = "@";
         ForceAutomaticConversions = true;
+        MaxQueriesInBatchCount = 10; // No need to optimize using higher value as there is no network latency in SQLite
     }
 }

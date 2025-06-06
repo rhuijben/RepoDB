@@ -23,5 +23,8 @@ public sealed record MySqlDbSetting : BaseDbSetting
         IsUseUpsert = false;
         OpeningQuote = "`";
         ParameterPrefix = "@";
+        // MySql doesn't have a max size, but needs the query including parameters needs to fit 4MB
+        // MaxParameterCount = base.MaxParameterCount;
+        // MaxQueriesInBatchCount = base.MaxQueriesInBatchCount;
     }
 }

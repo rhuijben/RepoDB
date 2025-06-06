@@ -16,9 +16,34 @@ public abstract class BaseDbHelper : IDbHelper
 
     public IResolver<string, Type> DbTypeResolver { get; protected init; }
 
+    public virtual DbParameter? CreateTableParameter(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName)
+    {
+        return null;
+    }
+
+    public ValueTask<DbParameter?> CreateTableParameterAsync(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName, CancellationToken cancellationToken = default)
+    {
+        return new(CreateTableParameter(connection, transaction, dbType, values, parameterName));
+    }
+
+    public virtual string? CreateTableParameterText(DbConnection connection, IDbTransaction? transaction, string parameterName, IEnumerable<object> values)
+    {
+        return null;
+    }
+
     /// <inheritdoc />
     public virtual void DynamicHandler<TEventInstance>(TEventInstance instance, string key)
     { }
+
+    public virtual DbConnectionRuntimeInformation GetDbConnectionRuntimeInformation(IDbConnection connection, IDbTransaction transaction)
+    {
+        return new();
+    }
+
+    public virtual ValueTask<DbConnectionRuntimeInformation> GetDbConnectionRuntimeInformationAsync(IDbConnection connection, IDbTransaction transaction, CancellationToken cancellationToken)
+    {
+        return new(GetDbConnectionRuntimeInformation(connection, transaction));
+    }
 
     /// <inheritdoc />
     public abstract IEnumerable<DbField> GetFields(IDbConnection connection, string tableName, IDbTransaction? transaction = null);

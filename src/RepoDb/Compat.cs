@@ -199,5 +199,19 @@ namespace RepoDb
                 return list;
             }
         }
+
+        // TODO: Migrate to Extension Members when C# 14 is available
+        internal static T GetAt<T>(this ArraySegment<T> segment, int index)
+        {
+#if NET
+            return segment[index];
+#else
+        if (index < 0 || index >= segment.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(index), "Index is out of range of the segment.");
+        }
+        return segment.Array![segment.Offset + index];
+#endif
+        }
     }
 }

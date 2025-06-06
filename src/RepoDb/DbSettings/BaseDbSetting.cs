@@ -76,7 +76,7 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
     public bool ForceAutomaticConversions { get; protected init; }
 
     /// <inheritdoc />
-    public int MaxParameterCount { get; protected init; } = 2100 - 2;
+    public int MaxParameterCount { get; protected init; } = 2100 - 2; // SqlServer supports 2100 parameters, but Microsoft.Data.SqlServer and System.Data.SqlClient reserve 2 for internal use
 
     /// <inheritdoc />
     public int MaxQueriesInBatchCount { get; protected init; } = 1000;
@@ -86,6 +86,9 @@ public abstract record BaseDbSetting : IDbSetting, IEquatable<BaseDbSetting>
 
     /// <inheritdoc />
     public bool QuoteParameterNames { get; protected init; }
+
+    /// <inheritdoc />
+    public int? UseArrayParameterTreshold { get; protected init; }
 
     #endregion
 

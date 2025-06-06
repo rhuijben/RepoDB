@@ -535,13 +535,13 @@ public static partial class DbConnectionExtension
 
                 foreach (var batchItems in entities.ChunkOptimally(maxBatchSize))
                 {
-                    if (batchItems.Length != context.BatchSize)
+                    if (batchItems.Count != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = InsertAllExecutionContextProvider.Create(entityType,
                             connection,
                             tableName,
-                            batchItems.Length,
+                            batchItems.Count,
                             fields,
                             hints,
                             transaction,
@@ -553,7 +553,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems.Length == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -593,7 +593,7 @@ public static partial class DbConnectionExtension
 
                             foreach (var value in fetchIdentity() as System.Collections.IEnumerable ?? Array.Empty<object>())
                             {
-                                context.IdentitySetterFunc.Invoke(batchItems[position++], value);
+                                context.IdentitySetterFunc.Invoke(batchItems.GetAt(position++), value);
                             }
                         }
 
@@ -614,22 +614,22 @@ public static partial class DbConnectionExtension
                         var position = 0;
                         do
                         {
-                            while (position < batchItems.Length && reader.Read())
+                            while (position < batchItems.Count && reader.Read())
                             {
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
                                 if (value is { })
                                 {
                                     positionIndex ??= (reader.FieldCount > 1) && string.Equals(BaseStatementBuilder.RepoDbOrderColumn, reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
                                     var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
-                                    context.IdentitySetterFunc.Invoke(batchItems[index], value);
+                                    context.IdentitySetterFunc.Invoke(batchItems.GetAt(index), value);
                                 }
                                 position++;
                             }
                         }
-                        while (position < batchItems.Length && reader.NextResult());
+                        while (position < batchItems.Count && reader.NextResult());
 
                         // Set the result
-                        result += batchItems.Length;
+                        result += batchItems.Count;
 
                         // After Execution
                         Tracer
@@ -776,13 +776,13 @@ public static partial class DbConnectionExtension
 
                 foreach (var batchItems in entities.ChunkOptimally(maxBatchSize))
                 {
-                    if (batchItems.Length != context.BatchSize)
+                    if (batchItems.Count != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = await InsertAllExecutionContextProvider.CreateAsync(entityType,
                             connection,
                             tableName,
-                            batchItems.Length,
+                            batchItems.Count,
                             fields,
                             hints,
                             transaction,
@@ -794,7 +794,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems.Length == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -835,7 +835,7 @@ public static partial class DbConnectionExtension
 
                             foreach (var value in fetchIdentity() as System.Collections.IEnumerable ?? Array.Empty<object>())
                             {
-                                context.IdentitySetterFunc.Invoke(batchItems[position++], value);
+                                context.IdentitySetterFunc.Invoke(batchItems.GetAt(position++), value);
                             }
                         }
 
@@ -859,22 +859,22 @@ public static partial class DbConnectionExtension
                         var position = 0;
                         do
                         {
-                            while (position < batchItems.Length && await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
+                            while (position < batchItems.Count && await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                             {
                                 var value = Converter.DbNullToNull(reader.GetValue(0));
                                 if (value is { })
                                 {
                                     positionIndex ??= (reader.FieldCount > 1) && string.Equals(BaseStatementBuilder.RepoDbOrderColumn, reader.GetName(reader.FieldCount - 1)) ? reader.FieldCount - 1 : -1;
                                     var index = positionIndex >= 0 && positionIndex < reader.FieldCount ? reader.GetInt32(positionIndex.Value) : position;
-                                    context.IdentitySetterFunc.Invoke(batchItems[index], value);
+                                    context.IdentitySetterFunc.Invoke(batchItems.GetAt(index), value);
                                 }
                                 position++;
                             }
                         }
-                        while (position < batchItems.Length && await reader.NextResultAsync(cancellationToken));
+                        while (position < batchItems.Count && await reader.NextResultAsync(cancellationToken));
 
                         // Set the result
-                        result += batchItems.Length;
+                        result += batchItems.Count;
 
                         // After Execution
                         await Tracer

@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Data;
+using System.Data.Common;
 using RepoDb.Interfaces;
 using RepoDb.Requests;
 
@@ -31,7 +32,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null)
         where TEntity : class
     {
-        return TruncateInternal<TEntity>(connection: connection,
+        return TruncateInternal<TEntity>(connection: (DbConnection)connection,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -65,7 +66,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         // Return the result
-        return TruncateInternalBase(connection: connection,
+        return TruncateInternalBase(connection: (DbConnection)connection,
             request: request,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -98,7 +99,7 @@ public static partial class DbConnectionExtension
         CancellationToken cancellationToken = default)
         where TEntity : class
     {
-        return await TruncateAsyncInternal<TEntity>(connection: connection,
+        return await TruncateAsyncInternal<TEntity>(connection: (DbConnection)connection,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
             transaction: transaction,
@@ -135,7 +136,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         // Return the result
-        return TruncateAsyncInternalBase(connection: connection,
+        return TruncateAsyncInternalBase(connection: (DbConnection)connection,
             request: request,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -167,7 +168,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
     {
-        return TruncateInternal(connection: connection,
+        return TruncateInternal(connection: (DbConnection)connection,
             tableName: tableName,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -202,7 +203,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         // Return the result
-        return TruncateInternalBase(connection: connection,
+        return TruncateInternalBase(connection: (DbConnection)connection,
             request: request,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -235,7 +236,7 @@ public static partial class DbConnectionExtension
         IStatementBuilder? statementBuilder = null,
         CancellationToken cancellationToken = default)
     {
-        return await TruncateAsyncInternal(connection: connection,
+        return await TruncateAsyncInternal(connection: (DbConnection)connection,
             tableName: tableName,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -273,7 +274,7 @@ public static partial class DbConnectionExtension
             statementBuilder);
 
         // Return the result
-        return TruncateAsyncInternalBase(connection: connection,
+        return TruncateAsyncInternalBase(connection: (DbConnection)connection,
             request: request,
             commandTimeout: commandTimeout,
             traceKey: traceKey,
@@ -308,7 +309,7 @@ public static partial class DbConnectionExtension
         var commandText = CommandTextCache.GetTruncateText(request);
 
         // Actual Execution
-        var result = ExecuteNonQueryInternal(connection: connection,
+        var result = ExecuteNonQueryInternal(connection: (DbConnection)connection,
             commandText: commandText,
             param: null,
             commandType: commandType,
@@ -352,7 +353,7 @@ public static partial class DbConnectionExtension
         var commandText = CommandTextCache.GetTruncateText(request);
 
         // Actual Execution
-        var result = await ExecuteNonQueryAsyncInternal(connection: connection,
+        var result = await ExecuteNonQueryAsyncInternal(connection: (DbConnection)connection,
             commandText: commandText,
             param: null,
             commandType: commandType,

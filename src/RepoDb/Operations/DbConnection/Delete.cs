@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Data;
+using System.Data.Common;
 using System.Linq.Expressions;
 using RepoDb.Extensions;
 using RepoDb.Interfaces;
@@ -1146,7 +1147,7 @@ public static partial class DbConnectionExtension
         var commandText = CommandTextCache.GetDeleteText(request);
 
         // Actual Execution
-        var result = await ExecuteNonQueryAsyncInternal(connection: connection,
+        var result = await ExecuteNonQueryAsyncInternal(connection: (DbConnection)connection,
             commandText: commandText,
             param: param,
             commandType: commandType,

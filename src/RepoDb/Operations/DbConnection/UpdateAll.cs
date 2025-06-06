@@ -1262,7 +1262,7 @@ public static partial class DbConnectionExtension
 
                 foreach (var batchItems in entities.ChunkOptimally(maxBatchSize))
                 {
-                    if (batchItems.Length != context.BatchSize)
+                    if (batchItems.Count != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = UpdateAllExecutionContextProvider.Create(entityType,
@@ -1270,7 +1270,7 @@ public static partial class DbConnectionExtension
                             tableName,
                             batchItems,
                             qualifiers,
-                            batchItems.Length,
+                            batchItems.Count,
                             fields,
                             hints,
                             transaction,
@@ -1282,7 +1282,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems.Length == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }
@@ -1437,7 +1437,7 @@ public static partial class DbConnectionExtension
                 bool doPrepare = dbSetting.IsPreparable;
                 foreach (var batchItems in entities.ChunkOptimally(maxBatchSize))
                 {
-                    if (batchItems.Length != context.BatchSize)
+                    if (batchItems.Count != context.BatchSize)
                     {
                         // Get a new execution context from cache
                         context = await UpdateAllExecutionContextProvider.CreateAsync(entityType,
@@ -1445,7 +1445,7 @@ public static partial class DbConnectionExtension
                             tableName,
                             batchItems,
                             qualifiers,
-                            batchItems.Length,
+                            batchItems.Count,
                             fields,
                             hints,
                             transaction,
@@ -1457,7 +1457,7 @@ public static partial class DbConnectionExtension
                     }
 
                     // Set the values
-                    if (batchItems.Length == 1)
+                    if (batchItems.Count == 1)
                     {
                         context.SingleDataEntityParametersSetterFunc?.Invoke(command, batchItems.First());
                     }

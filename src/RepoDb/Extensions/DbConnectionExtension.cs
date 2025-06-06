@@ -271,7 +271,7 @@ public static partial class DbConnectionExtension
         ITrace? trace = null,
         CancellationToken cancellationToken = default)
     {
-        return await ExecuteNonQueryAsyncInternal(connection: connection,
+        return await ExecuteNonQueryAsyncInternal(connection: (DbConnection)connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -301,7 +301,7 @@ public static partial class DbConnectionExtension
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async ValueTask<int> ExecuteNonQueryAsyncInternal(this IDbConnection connection,
+    internal static async ValueTask<int> ExecuteNonQueryAsyncInternal(this DbConnection connection,
         string commandText,
         object? param,
         CommandType commandType,
@@ -1400,7 +1400,7 @@ public static partial class DbConnectionExtension
         connection.EnsureOpen();
 
         // Call
-        return CreateDbCommandForExecutionInternal(connection: connection,
+        return CreateDbCommandForExecutionInternal(connection: (DbConnection)connection,
             commandText: commandText,
             param: param,
             commandType: commandType,
@@ -1425,7 +1425,7 @@ public static partial class DbConnectionExtension
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    internal static async ValueTask<DbCommand> CreateDbCommandForExecutionAsync(this IDbConnection connection,
+    internal static async ValueTask<DbCommand> CreateDbCommandForExecutionAsync(this DbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1467,7 +1467,7 @@ public static partial class DbConnectionExtension
     /// <param name="dbFields"></param>
     /// <param name="skipCommandArrayParametersCheck"></param>
     /// <returns></returns>
-    private static DbCommand CreateDbCommandForExecutionInternal(this IDbConnection connection,
+    private static DbCommand CreateDbCommandForExecutionInternal(this DbConnection connection,
         string commandText,
         object? param = null,
         CommandType commandType = default,
@@ -1478,8 +1478,8 @@ public static partial class DbConnectionExtension
         bool skipCommandArrayParametersCheck = true)
     {
         // Command
-        var command = (DbCommand)connection
-            .CreateCommand(commandText, commandType, commandTimeout, transaction);
+        var command = connection
+            .CreateCommand(commandText, commandType, commandTimeout, (DbTransaction?)transaction);
 
         // Func
         if (param != null)
@@ -1497,9 +1497,8 @@ public static partial class DbConnectionExtension
         CommandArrayParametersText? commandArrayParametersText = null;
         if (param != null && skipCommandArrayParametersCheck == false)
         {
-            commandArrayParametersText = GetCommandArrayParametersText(commandText,
-               param,
-               DbSettingMapper.Get(connection));
+            commandArrayParametersText = GetCommandArrayParametersText(command, connection, transaction,
+                param);
         }
 
         // Check
@@ -1509,7 +1508,7 @@ public static partial class DbConnectionExtension
             command.CommandText = commandArrayParametersText.CommandText;
 
             // Array parameters
-            command.CreateParametersFromArray(commandArrayParametersText);
+            command.CreateParametersFromArray(connection, transaction, commandArrayParametersText);
         }
 
         // Normal parameters
@@ -1537,36 +1536,36 @@ public static partial class DbConnectionExtension
     /// <param name="param"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    internal static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
-        object param,
-        IDbSetting? dbSetting)
+    internal static CommandArrayParametersText? GetCommandArrayParametersText(
+        DbCommand command,
+        DbConnection connection,
+        IDbTransaction? transaction,
+        object param)
     {
         return param switch
         {
             null => null,
-            IDictionary<string, object> objects => GetCommandArrayParametersText(commandText, objects, dbSetting),
-            QueryField field => GetCommandArrayParametersText(commandText, field, dbSetting),
-            IEnumerable<QueryField> fields => GetCommandArrayParametersText(commandText, fields, dbSetting),
-            QueryGroup group => GetCommandArrayParametersText(commandText, group, dbSetting),
-            _ => GetCommandArrayParametersTextInternal(commandText, param, dbSetting)
+            IDictionary<string, object> objects => GetCommandArrayParametersText(command, connection, transaction, objects),
+            QueryField field => GetCommandArrayParametersText(command, connection, transaction, field),
+            IEnumerable<QueryField> fields => GetCommandArrayParametersText(command, connection, transaction, fields),
+            QueryGroup group => GetCommandArrayParametersText(command, connection, transaction, group),
+            _ => GetCommandArrayParametersTextInternal(command, connection, transaction, param)
         };
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="commandText"></param>
-    /// <param name="param"></param>
-    /// <param name="dbSetting"></param>
-    /// <returns></returns>
-    private static CommandArrayParametersText? GetCommandArrayParametersTextInternal(string commandText,
-        object param,
-        IDbSetting? dbSetting)
+    private static CommandArrayParametersText? GetCommandArrayParametersTextInternal(
+        DbCommand command,
+        DbConnection connection,
+        IDbTransaction? transaction,
+        object param)
     {
         if (param == null)
         {
             return null;
         }
+
+        var commandText = command.CommandText;
+        var dbSetting = GetDbSetting(connection);
 
         // Variables
         CommandArrayParametersText? commandArrayParametersText = null;
@@ -1584,6 +1583,7 @@ public static partial class DbConnectionExtension
 
             // Get
             var commandArrayParameter = GetCommandArrayParameter(
+                command,
                 property.Name,
                 property.GetValue(param));
 
@@ -1598,6 +1598,7 @@ public static partial class DbConnectionExtension
 
             // CommandText
             commandText = GetRawSqlText(commandText,
+                connection, transaction,
                 property.Name,
                 commandArrayParameter.Values,
                 dbSetting);
@@ -1616,21 +1617,15 @@ public static partial class DbConnectionExtension
         return commandArrayParametersText;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="commandText"></param>
-    /// <param name="dictionary"></param>
-    /// <param name="dbSetting"></param>
-    /// <returns></returns>
-    private static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
-        IDictionary<string, object> dictionary,
-        IDbSetting? dbSetting)
+    private static CommandArrayParametersText? GetCommandArrayParametersText(DbCommand command, DbConnection connection, IDbTransaction? transaction, IDictionary<string, object> dictionary)
     {
         if (dictionary == null)
         {
             return null;
         }
+
+        var commandText = command.CommandText;
+        var dbSetting = GetDbSetting(command.Connection!);
 
         // Variables
         CommandArrayParametersText? commandArrayParametersText = null;
@@ -1640,6 +1635,7 @@ public static partial class DbConnectionExtension
         {
             // Get
             var commandArrayParameter = GetCommandArrayParameter(
+                command,
                 kvp.Key,
                 kvp.Value);
 
@@ -1654,6 +1650,7 @@ public static partial class DbConnectionExtension
 
             // CommandText
             commandText = GetRawSqlText(commandText,
+                connection, transaction,
                 kvp.Key,
                 commandArrayParameter.Values,
                 dbSetting);
@@ -1679,14 +1676,15 @@ public static partial class DbConnectionExtension
     /// <param name="queryField"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    private static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
-        QueryField queryField,
-        IDbSetting? dbSetting)
+    private static CommandArrayParametersText? GetCommandArrayParametersText(DbCommand command, DbConnection dbConnection, IDbTransaction? transaction, QueryField queryField)
     {
         if (queryField == null)
         {
             return null;
         }
+
+        var commandText = command.CommandText;
+        var dbSetting = GetDbSetting(command.Connection!);
 
         // Skip
         if (IsPreConstructed(commandText, queryField))
@@ -1696,6 +1694,7 @@ public static partial class DbConnectionExtension
 
         // Get
         var commandArrayParameter = GetCommandArrayParameter(
+            command,
             queryField.Field.Name,
             queryField.Parameter.Value);
 
@@ -1709,6 +1708,7 @@ public static partial class DbConnectionExtension
         var commandArrayParametersText = new CommandArrayParametersText
         {
             CommandText = GetRawSqlText(commandText,
+                dbConnection, transaction,
                 queryField.Field.Name,
                 commandArrayParameter.Values,
                 dbSetting),
@@ -1729,14 +1729,19 @@ public static partial class DbConnectionExtension
     /// <param name="queryFields"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    private static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
-        IEnumerable<QueryField> queryFields,
-        IDbSetting? dbSetting)
+    private static CommandArrayParametersText? GetCommandArrayParametersText(
+        DbCommand command,
+        DbConnection dbConnection,
+        IDbTransaction? transaction,
+        IEnumerable<QueryField> queryFields)
     {
         if (queryFields == null)
         {
             return null;
         }
+
+        var commandText = command.CommandText;
+        var dbSetting = GetDbSetting(command.Connection!);
 
         // Variables
         CommandArrayParametersText? commandArrayParametersText = null;
@@ -1752,6 +1757,7 @@ public static partial class DbConnectionExtension
 
             // Get
             var commandArrayParameter = GetCommandArrayParameter(
+                command,
                 queryField.Field.Name,
                 queryField.Parameter.Value);
 
@@ -1770,6 +1776,7 @@ public static partial class DbConnectionExtension
 
             // CommandText
             commandText = GetRawSqlText(commandText,
+                dbConnection, transaction,
                 queryField.Field.Name,
                 commandArrayParameter.Values,
                 dbSetting);
@@ -1795,10 +1802,11 @@ public static partial class DbConnectionExtension
     /// <param name="queryGroup"></param>
     /// <param name="dbSetting"></param>
     /// <returns></returns>
-    private static CommandArrayParametersText? GetCommandArrayParametersText(string commandText,
-        QueryGroup queryGroup,
-        IDbSetting? dbSetting) =>
-        GetCommandArrayParametersText(commandText, queryGroup.GetFields(true), dbSetting);
+    private static CommandArrayParametersText? GetCommandArrayParametersText(DbCommand command,
+        DbConnection connection,
+        IDbTransaction? transaction,
+        QueryGroup queryGroup) =>
+        GetCommandArrayParametersText(command, connection, transaction, queryGroup.GetFields(true));
 
     /// <summary>
     ///
@@ -1806,7 +1814,9 @@ public static partial class DbConnectionExtension
     /// <param name="parameterName"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    private static CommandArrayParameter? GetCommandArrayParameter(string parameterName,
+    private static CommandArrayParameter? GetCommandArrayParameter(
+        DbCommand command,
+        string parameterName,
         object? value)
     {
         var valueType = value?.GetType();
@@ -1821,7 +1831,12 @@ public static partial class DbConnectionExtension
         }
 
         // Return
-        return new CommandArrayParameter(parameterName, values.WithType<object>());
+        return new CommandArrayParameter
+        {
+            Command = command,
+            ParameterName = parameterName,
+            Values = values
+        };
     }
 
     /// <summary>
@@ -1833,6 +1848,8 @@ public static partial class DbConnectionExtension
     /// <param name="dbSetting"></param>
     /// <returns></returns>
     internal static string GetRawSqlText(string commandText,
+        DbConnection connection,
+        IDbTransaction? transaction,
         string parameterName,
         IEnumerable values,
         IDbSetting? dbSetting)
@@ -1843,19 +1860,26 @@ public static partial class DbConnectionExtension
         }
 
         // Items
-        var items = values.WithType<object>();
-        if (items.Any() != true)
+        var items = values.WithType<object>().ToList();
+        var parameter = parameterName.AsParameter(dbSetting);
+        if (items.Count == 0)
         {
-            var parameter = parameterName.AsParameter(dbSetting);
-            return commandText.Replace(parameter, string.Concat("(SELECT ", parameter, " WHERE 1 = 0)"));
+            return Regex.Replace(commandText, Regex.Escape(parameter) + "\\b", string.Concat("(SELECT ", parameter, " WHERE 1 = 0)"));
         }
+        else if (items.Count > 5 && connection.GetDbSetting().UseArrayParameterTreshold < items.Count
+            && connection.GetDbHelper().CreateTableParameterText(connection, transaction, parameter, items) is { } txt)
+        {
+            return Regex.Replace(commandText, Regex.Escape(parameter) + "\\b", txt);
+        }
+        else
+        {
+            // Get the variables needed
+            var parameters = items.Select((_, index) =>
+                string.Concat(parameterName, index.ToString(CultureInfo.InvariantCulture)).AsParameter(dbSetting));
 
-        // Get the variables needed
-        var parameters = items.Select((_, index) =>
-            string.Concat(parameterName, index.ToString(CultureInfo.InvariantCulture)).AsParameter(dbSetting));
-
-        // Replace the target parameter when used as parameter. (Not as prefix of longer parameter)
-        return Regex.Replace(commandText, Regex.Escape(parameterName.AsParameter(dbSetting)) + "\\b", parameters.Join(", "));
+            // Replace the target parameter when used as parameter. (Not as prefix of longer parameter)
+            return Regex.Replace(commandText, Regex.Escape(parameter) + "\\b", parameters.Join(", "));
+        }
     }
 
     /// <summary>

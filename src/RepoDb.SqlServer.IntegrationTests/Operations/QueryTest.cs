@@ -1,8 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RepoDb.Extensions;
 using RepoDb.SqlServer.IntegrationTests.Models;
 using RepoDb.SqlServer.IntegrationTests.Setup;
+using RepoDb.Trace;
 
 namespace RepoDb.SqlServer.IntegrationTests.Operations;
 
@@ -584,5 +585,33 @@ public class QueryTest
 
     #endregion
 
+    #endregion
+
+    #region TVP
+    #region Sync
+    [TestMethod]
+    public void TestTVPSupport()
+    {
+        var table = Database.CreateCompleteTables(1).First();
+        using var connection = new SqlConnection(Database.ConnectionString).EnsureOpen();
+
+        var info = DbConnectionRuntimeInformationCache.Get(connection, null);
+
+        Assert.IsNotNull(info);
+        Assert.IsTrue(info.ParameterTypeMap.ContainsKey(typeof(int)), "INT TVP defined");
+        Assert.IsTrue(info.ParameterTypeMap.ContainsKey(typeof(int?)), "INT? TVP defined");
+
+        var values = Enumerable.Range(0, 100).Concat([table.Id]);
+
+        var items = connection.ExecuteQuery<CompleteTable>(
+            "SELECT * FROM [dbo].[CompleteTable] WHERE Id IN (@Ids)",
+            new
+            {
+                Ids = values
+            }, trace: new DiagnosticsTracer());
+    }
+    #endregion
+    #region Async
+    #endregion
     #endregion
 }

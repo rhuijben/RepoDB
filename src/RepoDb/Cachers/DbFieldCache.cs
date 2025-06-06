@@ -81,19 +81,8 @@ public static class DbFieldCache
         bool enableValidation)
         where TDbConnection : IDbConnection
     {
-        var key = connection.GetType().GetHashCode();
-
         // Note: For SqlConnection, the ConnectionString is changing if the (Integrated Security=False). Actually for this isolation, the database name is enough.
-        if (!string.IsNullOrWhiteSpace(connection.Database))
-        {
-            key = HashCode.Combine(key, connection.Database.GetHashCode());
-        }
-
-        // Add the hashcode of the table name
-        if (string.IsNullOrWhiteSpace(tableName) == false)
-        {
-            key = HashCode.Combine(key, tableName.GetHashCode());
-        }
+        var key = HashCode.Combine(connection.GetType(), connection.Database, tableName);
 
         var result = cache.GetOrAdd(key,
             (_) => new DbFieldCollection(connection.GetDbHelper()
@@ -160,19 +149,8 @@ public static class DbFieldCache
         CancellationToken cancellationToken = default)
         where TDbConnection : IDbConnection
     {
-        var key = connection.GetType().GetHashCode();
-
         // Note: For SqlConnection, the ConnectionString is changing if the (Integrated Security=False). Actually for this isolation, the database name is enough.
-        if (!string.IsNullOrWhiteSpace(connection.Database))
-        {
-            key = HashCode.Combine(key, connection.Database.GetHashCode());
-        }
-
-        // Add the hashcode of the table name
-        if (string.IsNullOrWhiteSpace(tableName) == false)
-        {
-            key = HashCode.Combine(key, tableName.GetHashCode());
-        }
+        var key = HashCode.Combine(connection.GetType(), connection.Database, tableName);
 
         // Try get the value
         if (cache.TryGetValue(key, out var result) == false)

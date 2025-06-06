@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Data;
+using System.Data.Common;
 using RepoDb.Interfaces;
 
 namespace RepoDb;
@@ -361,7 +362,7 @@ public static partial class DbConnectionExtension
 #if NET
         await
 #endif
-            using var command = await CreateDbCommandForExecutionAsync(connection: connection,
+            using var command = await CreateDbCommandForExecutionAsync(connection: (DbConnection)connection,
             commandText: commandText,
             param: param,
             commandType: commandType,

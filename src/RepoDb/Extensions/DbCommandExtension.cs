@@ -113,7 +113,10 @@ public static class DbCommandExtension
     /// </summary>
     /// <param name="command"></param>
     /// <param name="commandArrayParametersText"></param>
-    internal static void CreateParametersFromArray(this DbCommand command,
+    internal static void CreateParametersFromArray(
+        this DbCommand command,
+        DbConnection connection,
+        IDbTransaction? transaction,
         CommandArrayParametersText commandArrayParametersText)
     {
         if (commandArrayParametersText?.CommandArrayParameters?.Any() != true)
@@ -124,6 +127,8 @@ public static class DbCommandExtension
         foreach (var commandArrayParameter in commandArrayParametersText.CommandArrayParameters)
         {
             CreateParametersFromArray(command,
+                connection,
+                transaction,
                 commandArrayParameter,
                 commandArrayParametersText.DbType, dbSetting);
         }
@@ -137,17 +142,25 @@ public static class DbCommandExtension
     /// <param name="dbType"></param>
     /// <param name="dbSetting"></param>
     private static void CreateParametersFromArray(this DbCommand command,
+        DbConnection connection,
+        IDbTransaction? transaction,
         CommandArrayParameter commandArrayParameter,
         DbType? dbType,
         IDbSetting dbSetting)
     {
-        var values = commandArrayParameter.Values.AsList();
+        var values = commandArrayParameter.Values.WithType<object>().AsList();
 
         if (values.Count == 0)
         {
             command.Parameters.Add(
                 command.CreateParameter(
                     commandArrayParameter.ParameterName.AsParameter(dbSetting), null, dbType));
+        }
+        else if (values.Count > 5 && command.Connection?.GetDbSetting().UseArrayParameterTreshold < values.Count
+            && command.Connection.GetDbHelper().CreateTableParameter(connection, transaction, dbType,
+            values, commandArrayParameter.ParameterName.AsParameter(dbSetting)) is { } tableParameter)
+        {
+            command.Parameters.Add(tableParameter);
         }
         else
         {

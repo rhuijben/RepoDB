@@ -28,5 +28,6 @@ public sealed record SqlServerDbSetting : BaseDbSetting
          * Link: https://github.com/dotnet/SqlClient/issues/531
          */
         MaxParameterCount = 2100 - 2;
+        UseArrayParameterTreshold = 15;
     }
 }

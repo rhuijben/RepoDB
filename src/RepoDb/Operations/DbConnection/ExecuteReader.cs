@@ -209,7 +209,7 @@ public static partial class DbConnectionExtension
     {
         // Variables
         var setting = connection.GetDbSetting();
-        var command = await CreateDbCommandForExecutionAsync(connection: connection,
+        var command = await CreateDbCommandForExecutionAsync(connection: (DbConnection)connection,
             commandText: commandText,
             param: param,
             commandType: commandType,

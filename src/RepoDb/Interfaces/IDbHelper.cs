@@ -1,5 +1,8 @@
 ﻿#nullable enable
+
+#nullable enable
 using System.Data;
+using System.Data.Common;
 
 namespace RepoDb.Interfaces;
 
@@ -60,6 +63,12 @@ public interface IDbHelper
     /// <param name="key">The key of the event to handle.</param>
     void DynamicHandler<TEventInstance>(TEventInstance instance,
         string key);
+    DbConnectionRuntimeInformation GetDbConnectionRuntimeInformation(IDbConnection connection, IDbTransaction transaction);
+    ValueTask<DbConnectionRuntimeInformation> GetDbConnectionRuntimeInformationAsync(IDbConnection connection, IDbTransaction transaction, CancellationToken cancellationToken);
+    DbParameter? CreateTableParameter(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName);
+
+    ValueTask<DbParameter?> CreateTableParameterAsync(DbConnection connection, IDbTransaction? transaction, DbType? dbType, IEnumerable<object> values, string parameterName, CancellationToken cancellationToken = default);
+    string? CreateTableParameterText(DbConnection connection, IDbTransaction? transaction, string parameterName, IEnumerable<object> values);
 
     #endregion
 }
