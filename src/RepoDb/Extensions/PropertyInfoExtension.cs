@@ -46,6 +46,19 @@ public static class PropertyInfoExtension
             GetCustomAttribute<ColumnAttribute>(property)?.Name ??
             GetCustomAttribute<NameAttribute>(property)?.Name;
 
+        if (mappedName is { })
+        {
+            if (mappedName.StartsWith('[') && mappedName.EndsWith(']'))
+            {
+                var nn = mappedName.Substring(1, mappedName.Length - 2);
+
+                if (nn.IndexOfAny(['[', ']']) < 0)
+                    mappedName = nn; ;
+            }
+            else if (mappedName.Contains('`'))
+                mappedName = mappedName.Replace("`", "");
+        }
+
         return mappedName ??
             PropertyMapper.Get(declaringType, property) ??
             GetPropertyValueAttribute<NameAttribute>(property, declaringType)?.Name ??
