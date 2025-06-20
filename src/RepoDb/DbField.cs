@@ -266,14 +266,8 @@ public sealed class DbField : Field, IEquatable<DbField>
 
     private sealed class DbFieldNameEqualityComparer : IEqualityComparer<DbField>
     {
-        public bool Equals(DbField? x, DbField? y)
-        {
-            return StringComparer.OrdinalIgnoreCase.Equals(x?.Name, y?.Name);
-        }
+        public bool Equals(DbField? x, DbField? y) => StringComparer.OrdinalIgnoreCase.Equals(x?.Name, y?.Name);
 
-        public int GetHashCode([DisallowNull] DbField obj)
-        {
-            return StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Name);
-        }
+        public int GetHashCode([DisallowNull] DbField obj) => StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Name);
     }
 }

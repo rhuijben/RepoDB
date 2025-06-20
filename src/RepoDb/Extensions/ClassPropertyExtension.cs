@@ -16,7 +16,7 @@ public static class ClassPropertyExtension
     [return: NotNullIfNotNull(nameof(properties))]
 #endif
     public static FieldSet? AsFields(this IEnumerable<ClassProperty>? properties)
-        => properties is { } pp ? new FieldSet(pp.Select(p => p.AsField())) : null;
+        => properties is { } pp ? new FieldSet(pp) : null;
 
     /// <summary>
     /// Retrieves the first ClassProperty from a collection that matches a specified mapped name using the specified comparison (case-insensitive by default)

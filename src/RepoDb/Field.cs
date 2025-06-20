@@ -319,15 +319,7 @@ public class Field : IEquatable<Field>
     /// <param name="objA">The first <see cref="Field"/> object.</param>
     /// <param name="objB">The second <see cref="Field"/> object.</param>
     /// <returns>True if the instances are equal.</returns>
-    public static bool operator ==(Field? objA,
-        Field? objB)
-    {
-        if (objA is null)
-        {
-            return objB is null;
-        }
-        return objA.Equals(objB);
-    }
+    public static bool operator ==(Field? objA, Field? objB) => objA is null ? objB is null : objA.Equals(objB);
 
     /// <summary>
     /// Compares the inequality of the two <see cref="Field"/> objects.
@@ -335,24 +327,16 @@ public class Field : IEquatable<Field>
     /// <param name="objA">The first <see cref="Field"/> object.</param>
     /// <param name="objB">The second <see cref="Field"/> object.</param>
     /// <returns>True if the instances are not equal.</returns>
-    public static bool operator !=(Field? objA,
-        Field? objB) =>
-        (objA == objB) == false;
+    public static bool operator !=(Field? objA, Field? objB) => (objA == objB) == false;
 
     #endregion
 
     internal static IEqualityComparer<Field> CompareByName { get; } = new FieldNameComparer();
 
-    private class FieldNameComparer : IEqualityComparer<Field>
+    private sealed class FieldNameComparer : IEqualityComparer<Field>
     {
-        public bool Equals(Field? x, Field? y)
-        {
-            return StringComparer.OrdinalIgnoreCase.Equals(x?.Name, y?.Name);
-        }
+        public bool Equals(Field? x, Field? y) => StringComparer.OrdinalIgnoreCase.Equals(x?.Name, y?.Name);
 
-        public int GetHashCode([DisallowNull] Field obj)
-        {
-            return StringComparer.OrdinalIgnoreCase.GetHashCode(obj?.Name ?? "");
-        }
+        public int GetHashCode([DisallowNull] Field obj) => StringComparer.OrdinalIgnoreCase.GetHashCode(obj?.Name ?? "");
     }
 }

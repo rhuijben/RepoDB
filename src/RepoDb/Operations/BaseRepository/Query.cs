@@ -27,7 +27,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query<TEntity>(tableName: tableName,
@@ -62,7 +62,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
         where TWhat : notnull
     {
@@ -97,7 +97,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query(tableName: tableName,
@@ -131,7 +131,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query<TEntity>(tableName: tableName,
@@ -165,7 +165,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query<TEntity>(tableName: tableName,
@@ -199,7 +199,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query<TEntity>(tableName: tableName,
@@ -231,7 +231,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query<TEntity>(what: what,
@@ -263,7 +263,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
         where TWhat : notnull
     {
@@ -295,7 +295,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query(where: where,
@@ -326,7 +326,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query<TEntity>(where: where,
@@ -357,7 +357,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query<TEntity>(where: where,
@@ -388,7 +388,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null)
     {
         return DbRepository.Query<TEntity>(where: where,
@@ -426,7 +426,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -464,7 +464,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TWhat : notnull
@@ -502,7 +502,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -539,7 +539,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -576,7 +576,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -613,7 +613,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -648,7 +648,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -683,7 +683,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TWhat : notnull
@@ -718,7 +718,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -752,7 +752,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -786,7 +786,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -820,7 +820,7 @@ public abstract partial class BaseRepository<TEntity, TDbConnection> : IDisposab
         int top = 0,
         string? hints = null,
         string? cacheKey = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

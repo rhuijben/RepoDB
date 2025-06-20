@@ -130,12 +130,6 @@ namespace RepoDb
 {
     internal static class NetCompatExtensions
     {
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="dbConnection"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
 #pragma warning disable CS1998 // Async function should await
         public static async ValueTask<IDbTransaction> BeginTransactionAsync(this IDbConnection dbConnection, CancellationToken cancellationToken = default)
 #pragma warning restore CS1998 // Async function should await
@@ -145,6 +139,30 @@ namespace RepoDb
                 return await dbc.BeginTransactionAsync(cancellationToken);
 #endif
             return dbConnection.BeginTransaction();
+        }
+
+#pragma warning disable CS1998 // Async function should await
+        public static async ValueTask<IDbTransaction> BeginTransactionAsync(this IDbConnection dbConnection, IsolationLevel isolationLevel, CancellationToken cancellationToken = default)
+#pragma warning restore CS1998 // Async function should await
+        {
+#if NET
+            if (dbConnection is DbConnection dbc)
+                return await dbc.BeginTransactionAsync(isolationLevel, cancellationToken);
+#endif
+            return dbConnection.BeginTransaction();
+        }
+
+
+#pragma warning disable CS1998 // Async function should await
+        public static async ValueTask RollbackAsync(this IDbTransaction dbTransaction, CancellationToken cancellationToken = default)
+#pragma warning restore CS1998 // Async function should await
+        {
+#if NET
+            if (dbTransaction is DbTransaction dbt)
+                await dbt.RollbackAsync(cancellationToken);
+            else
+#endif
+                dbTransaction.Rollback();
         }
 
         public static async ValueTask CommitAsync(this IDbTransaction dbTransaction, CancellationToken cancellationToken = default)
