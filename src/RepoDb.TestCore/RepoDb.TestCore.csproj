@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
     <IsTestProject>false</IsTestProject>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

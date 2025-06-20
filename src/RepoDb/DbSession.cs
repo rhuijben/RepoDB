@@ -2,6 +2,11 @@
 
 namespace RepoDb;
 
+/// <summary>
+/// Keeps a database session: a <see cref="DbConnection"/> + optionally a <see cref="DbTransaction"/>
+/// </summary>
+/// <remarks>The session optionally has ownership of the transaction *or* the database (never both). This ownership is passed
+/// when the struct is passed, so only the creator should dispose the session. Typically via an (await) using pattern</remarks>
 public readonly struct DbSession : IAsyncDisposable, IDisposable
 {
     private readonly object _value; // Either DbConnection or DbTransaction
@@ -29,6 +34,16 @@ public readonly struct DbSession : IAsyncDisposable, IDisposable
 #endif
         _value = transaction;
         _owns = ownsTransaction;
+    }
+
+    /// <summary>
+    /// Creates a copy of the session, without ownership
+    /// </summary>
+    /// <param name="session"></param>
+    public DbSession(in DbSession session)
+    {
+        _value = session._value;
+        _owns = false; // Copying a session does not transfer ownership
     }
 
     public DbConnection Connection =>
@@ -66,4 +81,15 @@ public readonly struct DbSession : IAsyncDisposable, IDisposable
         return new();
     }
 #endif
+
+    public void Deconstruct(out DbConnection Connection, out DbTransaction? Transaction)
+    {
+        Connection = this.Connection;
+        Transaction = this.Transaction;
+    }
+}
+
+public interface IDbSessionFactory
+{
+    ValueTask<DbSession> CreateOpenSessionAsync(CancellationToken cancellationToken = default);
 }

@@ -769,4 +769,17 @@ public abstract partial class NullTestsBase<TDbInstance> : DbTestBase<TDbInstanc
             GlobalConfiguration.Setup(GlobalConfiguration.Options with { SqlServerIdentityInsert = false });
         }
     }
+
+    [TestMethod]
+    public async Task SessionOne(CancellationToken cancellationToken)
+    {
+        using var sql = CreateOpenConnection();
+        var sess = sql.AsDbSession(null);
+
+        await sess.InsertAsyncQ<EnumNullTestData>(new EnumNullTestData(),
+            fields: x => [],
+            config: default,
+            cancellationToken: cancellationToken);
+
+    }
 }

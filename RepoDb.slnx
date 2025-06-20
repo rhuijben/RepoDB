@@ -36,4 +36,5 @@
     <Project Path="src/RepoDb.Benchmarks.PostgreSql/RepoDb.Benchmarks.PostgreSql.csproj" />
   </Folder>
   <Folder Name="/Z-DirectoryFiles/" />
+  <Project Path="src/FindDependencies/FindDependencies.csproj" Id="d2a45845-6764-48f7-be95-265321779742" />
 </Solution>

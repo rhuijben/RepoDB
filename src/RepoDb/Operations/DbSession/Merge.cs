@@ -5,10 +5,12 @@ namespace RepoDb;
 
 public static partial class DbSessionExtension
 {
-    public static async ValueTask<TResult> InsertAsync<TEntity, TResult>(
+    public static async ValueTask<TResult> MergeAsync<TEntity, TResult>(
         this DbSession session,
         TEntity entity,
         FieldSetBuilder<TEntity> fields = default,
+        QualifierSetBuilder<TEntity> qualifiers = default,
+        UpdateFieldSetBuilder<TEntity> updateFields = default,
         ConfigureArgumentBuilder config = default,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -19,16 +21,19 @@ public static partial class DbSessionExtension
         if (entity is null)
             throw new ArgumentNullException(nameof(entity));
 #endif
-
         var c = config.Build(entity);
 
-        return await session.Connection.InsertAsyncInternal<TEntity, TResult>(
+        var flds = fields.AsEnumerable(session, c);
+
+        return await session.Connection.MergeAsyncInternal<TEntity, TResult>(
             c.TableName,
             entity,
-            fields.AsEnumerable(session, c),
+            qualifiers.AsEnumerable(flds, session, c),
+            flds,
+            updateFields.AsEnumerable(flds, session, c),
             c.Hints,
             c.CommandTimeout,
-            TraceKeys.Insert,
+            TraceKeys.Merge,
             session.Transaction,
             c.trace,
             c.StatementBuilder,
@@ -36,10 +41,12 @@ public static partial class DbSessionExtension
         .ConfigureAwait(false);
     }
 
-    public static async ValueTask<TEntity> InsertAsyncQ<TEntity>(
+    public static async ValueTask<TEntity> MergeAsync<TEntity>(
         this DbSession session,
         TEntity entity,
         FieldSetBuilder<TEntity> fields = default,
+        QualifierSetBuilder<TEntity> qualifiers = default,
+        UpdateFieldSetBuilder<TEntity> updateFields = default,
         ConfigureArgumentBuilder config = default,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -53,15 +60,17 @@ public static partial class DbSessionExtension
 
         var c = config.Build(entity);
 
-        // TODO: Make insert handle proper identity return for multikeys and switch to .Insert here
-        await session.Connection.InsertAllAsyncInternal<TEntity>(
+        var flds = fields.AsEnumerable(session, c);
+
+        await session.Connection.MergeAsyncInternal<TEntity, object>(
             c.TableName,
-            [entity],
-            batchSize: 0,
-            fields.AsEnumerable(session, c),
+            entity,
+            qualifiers.AsEnumerable(flds, session, c),
+            flds,
+            updateFields.AsEnumerable(flds, session, c),
             c.Hints,
             c.CommandTimeout,
-            TraceKeys.InsertAll,
+            TraceKeys.Merge,
             session.Transaction,
             c.trace,
             c.StatementBuilder,
@@ -71,10 +80,12 @@ public static partial class DbSessionExtension
         return entity;
     }
 
-    public static async ValueTask<IEnumerable<TEntity>> InsertAsync<TEntity>(
+    public static async ValueTask<IEnumerable<TEntity>> MergeAsync<TEntity>(
         this DbSession session,
         IEnumerable<TEntity> entities,
         FieldSetBuilder<TEntity> fields = default,
+        QualifierSetBuilder<TEntity> qualifiers = default,
+        UpdateFieldSetBuilder<TEntity> updateFields = default,
         ConfigureArgumentBuilder config = default,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -89,14 +100,18 @@ public static partial class DbSessionExtension
 
         var c = config.Build(entities.FirstOrDefault());
 
-        await session.Connection.InsertAllAsyncInternal<TEntity>(
+        var flds = fields.AsEnumerable(session, c);
+
+        await session.Connection.MergeAllAsyncInternal<TEntity>(
             c.TableName,
             entities,
+            qualifiers.AsEnumerable(flds, session, c),
+            updateFields.AsEnumerable(flds, session, c),
             batchSize: 0,
-            fields.AsEnumerable(session, c),
+            flds,
             c.Hints,
             c.CommandTimeout,
-            TraceKeys.InsertAll,
+            TraceKeys.MergeAll,
             session.Transaction,
             c.trace,
             c.StatementBuilder,
