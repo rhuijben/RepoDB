@@ -32,7 +32,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Merge,
+        string traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -182,7 +182,7 @@ public static partial class DbConnectionExtension
         IEnumerable<Field>? fields = null,
         string? hints = null,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Merge,
+        string traceKey = TraceKeys.Merge,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,

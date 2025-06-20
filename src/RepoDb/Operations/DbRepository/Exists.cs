@@ -20,7 +20,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public bool Exists<TEntity>(object? what,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -57,7 +57,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public bool Exists<TEntity, TWhat>(TWhat what,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
         where TEntity : class
         where TWhat : notnull
@@ -94,7 +94,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public bool Exists<TEntity>(Expression<Func<TEntity, bool>> where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -130,7 +130,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public bool Exists<TEntity>(QueryField where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -166,7 +166,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public bool Exists<TEntity>(IEnumerable<QueryField> where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -202,7 +202,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public bool Exists<TEntity>(QueryGroup where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -243,7 +243,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public async Task<bool> ExistsAsync<TEntity>(object what,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -283,7 +283,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public async Task<bool> ExistsAsync<TEntity, TWhat>(TWhat what,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -323,7 +323,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public async Task<bool> ExistsAsync<TEntity>(Expression<Func<TEntity, bool>> where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -362,7 +362,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public async Task<bool> ExistsAsync<TEntity>(QueryField where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -401,7 +401,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public async Task<bool> ExistsAsync<TEntity>(IEnumerable<QueryField> where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -440,7 +440,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     /// <returns>A boolean value that indicates whether the rows are existing in the table.</returns>
     public async Task<bool> ExistsAsync<TEntity>(QueryGroup where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -484,7 +484,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public bool Exists<TWhat>(string tableName,
         TWhat what,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
         where TWhat : notnull
     {
@@ -522,7 +522,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public bool Exists(string tableName,
         object what,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -559,7 +559,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public bool Exists(string tableName,
         QueryField where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -596,7 +596,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public bool Exists(string tableName,
         IEnumerable<QueryField> where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -633,7 +633,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public bool Exists(string tableName,
         QueryGroup where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -676,7 +676,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<bool> ExistsAsync<TWhat>(string tableName,
         TWhat what,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TWhat : notnull
@@ -717,7 +717,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<bool> ExistsAsync(string tableName,
         object what,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -757,7 +757,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<bool> ExistsAsync(string tableName,
         QueryField where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -797,7 +797,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<bool> ExistsAsync(string tableName,
         IEnumerable<QueryField> where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -837,7 +837,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<bool> ExistsAsync(string tableName,
         QueryGroup where,
         string? hints = null,
-        string? traceKey = TraceKeys.Exists,
+        string traceKey = TraceKeys.Exists,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

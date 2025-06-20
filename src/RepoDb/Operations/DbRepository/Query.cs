@@ -29,7 +29,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -83,7 +83,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -137,7 +137,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -190,7 +190,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -243,7 +243,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -296,7 +296,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -347,7 +347,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -398,7 +398,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -449,7 +449,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -499,7 +499,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null, IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -548,7 +548,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -598,7 +598,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TEntity : class
@@ -655,7 +655,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -712,7 +712,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -769,7 +769,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -825,7 +825,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -881,7 +881,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -937,7 +937,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -991,7 +991,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1045,7 +1045,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1099,7 +1099,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1152,7 +1152,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1205,7 +1205,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1258,7 +1258,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1316,7 +1316,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
         where TWhat : notnull
@@ -1368,7 +1368,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
     {
@@ -1419,7 +1419,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null, IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1469,7 +1469,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
     {
@@ -1520,7 +1520,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null)
     {
@@ -1577,7 +1577,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1632,7 +1632,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1686,7 +1686,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1740,7 +1740,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
@@ -1794,7 +1794,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<OrderField>? orderBy = null,
         int top = 0,
         string? hints = null,
-        string? traceKey = TraceKeys.Query,
+        string traceKey = TraceKeys.Query,
         string? cacheKey = null,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)

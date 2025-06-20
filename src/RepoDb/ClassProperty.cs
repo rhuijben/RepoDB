@@ -11,7 +11,7 @@ namespace RepoDb;
 /// <summary>
 /// A class that wraps the <see cref="PropertyInfo"/> object. This class is used to extract the information from the <see cref="System.Reflection.PropertyInfo"/> object in a fast and efficient manner.
 /// </summary>
-public sealed class ClassProperty : IEquatable<ClassProperty>
+public sealed class ClassProperty : Field, IEquatable<ClassProperty>
 {
     /// <summary>
     /// Creates a new instance of <see cref="ClassProperty"/> object.
@@ -28,6 +28,7 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// <param name="property">The wrapped property.</param>
     public ClassProperty(Type parentType,
         PropertyInfo property)
+        : base(property.Name, property.PropertyType)
     {
         DeclaringType = parentType;
         PropertyInfo = property;
@@ -50,12 +51,6 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// Gets the wrapped property of this object.
     /// </summary>
     public PropertyInfo PropertyInfo { get; }
-
-
-    /// <summary>
-    /// Gets the propertyname via <see cref="PropertyInfo"/>
-    /// </summary>
-    public string Name => PropertyInfo.Name;
 
     #endregion
 
@@ -84,20 +79,11 @@ public sealed class ClassProperty : IEquatable<ClassProperty>
     /// <returns>The declaring type.</returns>
     public Type DeclaringType { get; }
 
-    /*
-     * AsField
-     */
-
-    private Field? field;
-
     /// <summary>
     /// Convert the <see cref="ClassProperty"/> into a <see cref="Field"/> objects.
     /// </summary>
     /// <returns>An instance of <see cref="string"/> object.</returns>
-    public Field AsField()
-    {
-        return field ??= new Field(GetMappedName(), PropertyInfo.PropertyType);
-    }
+    public Field AsField() => this;
 
     /*
      * GetPrimaryAttribute

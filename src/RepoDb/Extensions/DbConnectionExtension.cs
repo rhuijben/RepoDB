@@ -160,7 +160,7 @@ public static partial class DbConnectionExtension
         string commandText,
         object? param = null,
         CommandType commandType = default,
-        string? traceKey = TraceKeys.ExecuteNonQuery,
+        string traceKey = TraceKeys.ExecuteNonQuery,
         int commandTimeout = 0,
         IDbTransaction? transaction = null,
         ITrace? trace = null)
@@ -264,7 +264,7 @@ public static partial class DbConnectionExtension
         string commandText,
         object? param = null,
         CommandType commandType = default,
-        string? traceKey = TraceKeys.ExecuteNonQuery,
+        string traceKey = TraceKeys.ExecuteNonQuery,
         int commandTimeout = 0,
         IDbTransaction? transaction = null,
         ITrace? trace = null,

@@ -24,7 +24,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -69,7 +69,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TWhat what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
         where TWhat : notnull
@@ -115,7 +115,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -160,7 +160,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, bool>> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -205,7 +205,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryField where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -250,7 +250,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -295,7 +295,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryGroup where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -336,7 +336,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public int Update<TEntity>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -378,7 +378,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TWhat what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
         where TWhat : notnull
@@ -421,7 +421,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -463,7 +463,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, bool>> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -505,7 +505,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryField where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -547,7 +547,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -589,7 +589,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryGroup where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
         where TEntity : class
     {
@@ -636,7 +636,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -684,7 +684,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TWhat what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -733,7 +733,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -781,7 +781,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, bool>> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -829,7 +829,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryField where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -877,7 +877,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -925,7 +925,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryGroup where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -969,7 +969,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
     public async Task<int> UpdateAsync<TEntity>(TEntity entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1014,7 +1014,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         TWhat what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1060,7 +1060,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object what,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1105,7 +1105,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         Expression<Func<TEntity, bool>> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1150,7 +1150,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryField where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1195,7 +1195,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1240,7 +1240,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryGroup where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
         where TEntity : class
@@ -1287,7 +1287,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1329,7 +1329,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1372,7 +1372,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryField where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1415,7 +1415,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1458,7 +1458,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryGroup where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null)
     {
         // Create a connection
@@ -1504,7 +1504,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object entity,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1549,7 +1549,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         object where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1595,7 +1595,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryField where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1641,7 +1641,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         IEnumerable<QueryField> where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {
@@ -1687,7 +1687,7 @@ public partial class DbRepository<TDbConnection> : IDisposable
         QueryGroup where,
         IEnumerable<Field>? fields = null,
         string? hints = null,
-        string? traceKey = TraceKeys.Update,
+        string traceKey = TraceKeys.Update,
         IDbTransaction? transaction = null,
         CancellationToken cancellationToken = default)
     {

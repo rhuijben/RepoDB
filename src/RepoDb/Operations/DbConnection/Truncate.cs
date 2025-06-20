@@ -25,7 +25,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows affected.</returns>
     public static int Truncate<TEntity>(this IDbConnection connection,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -52,7 +52,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows affected.</returns>
     internal static int TruncateInternal<TEntity>(this IDbConnection connection,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -91,7 +91,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows affected.</returns>
     public static async Task<int> TruncateAsync<TEntity>(this IDbConnection connection,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -121,7 +121,7 @@ public static partial class DbConnectionExtension
     /// <returns>The number of rows affected.</returns>
     internal static ValueTask<int> TruncateAsyncInternal<TEntity>(this IDbConnection connection,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -162,7 +162,7 @@ public static partial class DbConnectionExtension
     public static int Truncate(this IDbConnection connection,
         string tableName,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -190,7 +190,7 @@ public static partial class DbConnectionExtension
     internal static int TruncateInternal(this IDbConnection connection,
         string tableName,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null)
@@ -229,7 +229,7 @@ public static partial class DbConnectionExtension
     public static async Task<int> TruncateAsync(this IDbConnection connection,
         string tableName,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -260,7 +260,7 @@ public static partial class DbConnectionExtension
     internal static ValueTask<int> TruncateAsyncInternal(this IDbConnection connection,
         string tableName,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         IStatementBuilder? statementBuilder = null,
@@ -299,7 +299,7 @@ public static partial class DbConnectionExtension
     internal static int TruncateInternalBase(this IDbConnection connection,
         TruncateRequest request,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null)
     {
@@ -342,7 +342,7 @@ public static partial class DbConnectionExtension
     internal static async ValueTask<int> TruncateAsyncInternalBase(this IDbConnection connection,
         TruncateRequest request,
         int commandTimeout = 0,
-        string? traceKey = TraceKeys.Truncate,
+        string traceKey = TraceKeys.Truncate,
         IDbTransaction? transaction = null,
         ITrace? trace = null,
         CancellationToken cancellationToken = default)
